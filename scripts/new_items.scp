@@ -1,0 +1,594 @@
+
+|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|
+|_¸.-~¤=º*˜`¯\/ Bart Amara Scripts (Scripts pour Sphere) \/¯`˜*º=¤~-.¸_|
+|______________________________________________________________________|
+|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|
+|________¸.-~¤=º*˜`¯\/ Merci de laisser l'entête \/¯`˜*º=¤~-.¸_________|
+|______________________________________________________________________|
+
+[ITEMDEF 02A9A]
+DEFNAME=bureau_apocalyptique_1
+NAME=Bureau apocalyptique
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bureau apocalyptique
+
+[ITEMDEF 02A9B]
+DEFNAME=bureau_apocalyptique_2
+NAME=Bureau apocalyptique
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bureau apocalyptique
+
+[ITEMDEF 02A9C]
+DEFNAME=bureau_apocalyptique_3
+NAME=Bureau apocalyptique
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bureau apocalyptique
+
+[ITEMDEF 02A9D]
+DEFNAME=bureau_apocalyptique_4
+NAME=Bureau apocalyptique
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bureau apocalyptique
+
+[ITEMDEF 02A98]
+DEFNAME=skelette_panneau__1
+NAME=skelette panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=skelette panneau
+
+
+[ITEMDEF 02A7B]
+DEFNAME=skelette_panneau__2
+NAME=skelette panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=skelette panneau
+
+[ITEMDEF 02A7C]
+DEFNAME=skelette_panneau__3
+NAME=skelette panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=skelette panneau
+
+[ITEMDEF 02A7D]
+DEFNAME=skelette_panneau__4
+NAME=skelette panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=skelette panneau
+
+[ITEMDEF 02A7E]
+DEFNAME=skelette_panneau__5
+NAME=skelette panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=skelette panneau
+
+[ITEMDEF 02A71]
+DEFNAME=fee_panneau__1
+NAME=fee panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=fee panneau
+
+[ITEMDEF 02A72]
+DEFNAME=fee_panneau__2
+NAME=fee panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=fee panneau
+
+[ITEMDEF 02A73]
+DEFNAME=fee_panneau__3
+NAME=fee panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=fee panneau
+
+[ITEMDEF 02A74]
+DEFNAME=fee_panneau__4
+NAME=fee panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=fee panneau
+
+[ITEMDEF 02A75]
+DEFNAME=fee_panneau__5
+NAME=fee panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=fee panneau
+
+[ITEMDEF 02A76]
+DEFNAME=fee_panneau__6
+NAME=fee panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=fee panneau
+
+[ITEMDEF 02A77]
+DEFNAME=fee_panneau__7
+NAME=fee panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=fee panneau
+
+[ITEMDEF 02A78]
+DEFNAME=fee_panneau__8
+NAME=fee panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=fee panneau
+
+[ITEMDEF 02A79]
+DEFNAME=fee_panneau__9
+NAME=fee panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=fee panneau
+
+[ITEMDEF 02A7A]
+DEFNAME=fee_panneau__10
+NAME=fee panneau
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=fee panneau
+
+[ITEMDEF 029A0]
+DEFNAME=fenetre_1
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029A1]
+DEFNAME=fenetre_2
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029A2]
+DEFNAME=fenetre_3
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029A3]
+DEFNAME=fenetre_4
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029A4]
+DEFNAME=fenetre_5
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029A5]
+DEFNAME=fenetre_6
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029A6]
+DEFNAME=fenetre_7
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029A7]
+DEFNAME=fenetre_9
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029A8]
+DEFNAME=fenetre_10
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029A9]
+DEFNAME=fenetre_11
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029AA]
+DEFNAME=fenetre_12
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029AB]
+DEFNAME=fenetre_13
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029AC]
+DEFNAME=fenetre_14
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029AD]
+DEFNAME=fenetre_15
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029AE]
+DEFNAME=fenetre_16
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029AF]
+DEFNAME=fenetre_17
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029B0]
+DEFNAME=fenetre_18
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029B1]
+DEFNAME=fenetre_19
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029B2]
+DEFNAME=fenetre_20
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029B3]
+DEFNAME=fenetre_21
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029B4]
+DEFNAME=fenetre_22
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029B5]
+DEFNAME=fenetre_23
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029B6]
+DEFNAME=fenetre_24
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029B7]
+DEFNAME=fenetre_25
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029B8]
+DEFNAME=fenetre_26
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029B9]
+DEFNAME=fenetre_27
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029BA]
+DEFNAME=fenetre_28
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029BB]
+DEFNAME=fenetre_29
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029BC]
+DEFNAME=fenetre_30
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029BD]
+DEFNAME=fenetre_31
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029BE]
+DEFNAME=fenetre_32
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 029BF]
+DEFNAME=fenetre_33
+NAME=Fenetre
+
+CATEGORY=Nouveauté
+SUBSECTION=Murs
+DESCRIPTION=fenetre
+
+[ITEMDEF 028DC]
+DEFNAME=bonzai_1
+NAME=Bonzai
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bonzai
+
+[ITEMDEF 028DD]
+DEFNAME=bonzai_2
+NAME=Bonzai
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bonzai
+
+[ITEMDEF 028DE]
+DEFNAME=bonzai_3
+NAME=Bonzai
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bonzai
+
+[ITEMDEF 028DF]
+DEFNAME=bonzai_4
+NAME=Bonzai
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bonzai
+
+[ITEMDEF 028E0]
+DEFNAME=bonzai_5
+NAME=Bonzai
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bonzai
+
+[ITEMDEF 028E1]
+DEFNAME=bonzai_6
+NAME=Bonzai
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bonzai
+
+[ITEMDEF 028E2]
+DEFNAME=bonzai_7
+NAME=Bonzai
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bonzai
+
+[ITEMDEF 028E3]
+DEFNAME=bonzai_8
+NAME=Bonzai
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Bonzai
+
+[ITEMDEF 024BB]
+DEFNAME=SUSPENTE_1
+NAME=Suspente lumineuse
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024BC]
+DEFNAME=SUSPENTE_2
+NAME=Suspente lumineuse
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024BD]
+DEFNAME=SUSPENTE_3
+NAME=Suspente lumineuse
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024BE]
+DEFNAME=SUSPENTE_4
+NAME=Suspente lumineuse
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024BF]
+DEFNAME=SUSPENTE_5
+NAME=Suspente lumineuse
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024C0]
+DEFNAME=SUSPENTE_6
+NAME=Suspente lumineuse
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024C1]
+DEFNAME=SUSPENTE_SUR_PIED_1
+NAME=Suspente lumineuse sur pied
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024C2]
+DEFNAME=SUSPENTE_SUR_PIED_2
+NAME=Suspente lumineuse sur pied
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024C3]
+DEFNAME=SUSPENTE_SUR_PIED_3
+NAME=Suspente lumineuse sur pied
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024C4]
+DEFNAME=SUSPENTE_SUR_PIED_4
+NAME=Suspente lumineuse sur pied
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024C5]
+DEFNAME=SUSPENTE_SUR_PIED_5
+NAME=Suspente lumineuse sur pied
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024BB]
+DEFNAME=SUSPENTE_SUR_PIED_6
+NAME=Suspente lumineuse sur pied
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024C6]
+DEFNAME=SUSPENTE_7
+NAME=Suspente lumineuse
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[ITEMDEF 024C7]
+DEFNAME=SUSPENTE_8
+NAME=Suspente lumineuse
+
+CATEGORY=Nouveauté
+SUBSECTION=Decorations
+DESCRIPTION=Suspente lumineuse
+
+[EOF]

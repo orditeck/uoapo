@@ -1,0 +1,454 @@
+//DEFAULT : ITEM QUESTIONNEUR
+[FUNCTION RESOLVEUR_ENIGMES]
+IF <TYPE> != t_enigme
+	RETURN 0
+ENDIF
+
+IF !(STRCMPI("<TAG.BONNE_REPONSE1>","<TAG.MA_REPONSE>")) || !(STRCMPI("<TAG.BONNE_REPONSE2>","<TAG.MA_REPONSE>")) || !(STRCMPI("<TAG.BONNE_REPONSE3>","<TAG.MA_REPONSE>")) || !(STRCMPI("<TAG.BONNE_REPONSE4>","<TAG.MA_REPONSE>"))
+	ARGS = 1
+ENDIF
+
+//*** ARGS = 1 ==> BONNE REPONSE ***
+
+IF <BASEID> == m_enigme_dongeon_humain_1
+	CONSEQUENCE_ENIGME_DONGEON_HUMAIN_1 <ARGS>
+ELSE
+	IF <ARGS> == 1
+		TRYP 0 UID.<TAG.UIDNPC>.SAY Bravo, vous avez eu la bonne reponse !
+	ELSE
+		TRYP 0 UID.<TAG.UIDNPC>.SAY Malheureusement, votre reponse est erronee!
+	ENDIF
+ENDIF
+REMOVE
+RETURN 1
+
+//DEFAULT : ITEM QUESTIONNEUR
+[FUNCTION OPEN_ENIGME_DIALOG]
+IF !(STRCMPI("<TAG.TYPE_ENIGME>","developpement"))
+	DIALOG D_ENIGME_DEVELOPPEMENT
+ELSEIF !(STRCMPI("<TAG.TYPE_ENIGME>","choix"))
+	DIALOG D_ENIGME_CHOIX
+ELSEIF !(STRCMPI("<TAG.TYPE_ENIGME>","chiffre"))
+	DIALOG D_ENIGME_CHIFFRE
+ELSE
+	RETURN 0
+ENDIF
+RETURN 1
+
+//**********************************
+//**************CHIFFRE*************
+//**********************************
+
+[DIALOG D_ENIGME_CHIFFRE]
+0,0
+
+page 0
+resizepic 0 0 2620 350 360
+
+page 1
+text 100 20 1152 1//<TITRE>
+text 10 50 1152 2//<LIGNE1>
+text 10 70 1152 3//<LIGNE2>
+text 10 90 1152 4//<LIGNE3>
+text 10 110 1152 5//<LIGNE4>
+text 10 130 1152 6//<LIGNE5>
+text 10 150 1152 7//<LIGNE6>
+text 10 170 1152 8//<LIGNE7>
+text 10 190 1152 9//<LIGNE8>
+text 150 250 1152 10//reponse
+button 70 250 56 56 1 0 1//-1000
+button 90 250 56 56 1 0 2//-100
+button 110 250 56 56 1 0 3//-10
+button 130 250 56 56 1 0 4//-1
+button 190 250 55 55 1 0 5//+1
+button 210 250 55 55 1 0 6//+10
+button 230 250 55 55 1 0 7//+100
+button 250 250 55 55 1 0 8//+1000
+button 140 290 249 248 1 0 100//OK
+button 300 20 1150 1151 1 0 101//Cancel
+
+[DIALOG D_ENIGME_CHIFFRE TEXT]
+<VAR.BLANKLINE>
+<TAG.TITRE>
+<TAG.LIGNE1>
+<TAG.LIGNE2>
+<TAG.LIGNE3>
+<TAG.LIGNE4>
+<TAG.LIGNE5>
+<TAG.LIGNE6>
+<TAG.LIGNE7>
+<TAG.LIGNE8>
+<EVAL <TAG.MA_REPONSE>>
+
+[DIALOG D_ENIGME_CHIFFRE BUTTON]
+ONBUTTON=1
+IF <TAG.MA_REPONSE> > 1000
+	TAG.MA_REPONSE = <EVAL <TAG.MA_REPONSE> - 1000>
+ELSE
+	TAG.MA_REPONSE = 0
+ENDIF
+DIALOG D_ENIGME_CHIFFRE
+RETURN 1
+
+ONBUTTON=2
+IF <TAG.MA_REPONSE> > 100
+	TAG.MA_REPONSE = <EVAL <TAG.MA_REPONSE> - 100>
+ELSE
+	TAG.MA_REPONSE = 0
+ENDIF
+DIALOG D_ENIGME_CHIFFRE
+RETURN 1
+
+ONBUTTON=3
+IF <TAG.MA_REPONSE> > 10
+	TAG.MA_REPONSE = <EVAL <TAG.MA_REPONSE> - 10>
+ELSE
+	TAG.MA_REPONSE = 0
+ENDIF
+DIALOG D_ENIGME_CHIFFRE
+RETURN 1
+
+ONBUTTON=4
+IF <TAG.MA_REPONSE> > 1
+	TAG.MA_REPONSE = <EVAL <TAG.MA_REPONSE> - 1>
+ELSE
+	TAG.MA_REPONSE = 0
+ENDIF
+DIALOG D_ENIGME_CHIFFRE
+RETURN 1
+
+ONBUTTON=5
+TAG.MA_REPONSE = <EVAL <TAG.MA_REPONSE> + 1>
+IF <TAG.MA_REPONSE> > 9999
+	TAG.MA_REPONSE = 9999
+ENDIF
+DIALOG D_ENIGME_CHIFFRE
+RETURN 1
+
+ONBUTTON=6
+TAG.MA_REPONSE = <EVAL <TAG.MA_REPONSE> + 10>
+IF <TAG.MA_REPONSE> > 9999
+	TAG.MA_REPONSE = 9999
+ENDIF
+DIALOG D_ENIGME_CHIFFRE
+RETURN 1
+
+ONBUTTON=7
+TAG.MA_REPONSE = <EVAL <TAG.MA_REPONSE> + 100>
+IF <TAG.MA_REPONSE> > 9999
+	TAG.MA_REPONSE = 9999
+ENDIF
+DIALOG D_ENIGME_CHIFFRE
+RETURN 1
+
+ONBUTTON=8
+TAG.MA_REPONSE = <EVAL <TAG.MA_REPONSE> + 1000>
+IF <TAG.MA_REPONSE> > 9999
+	TAG.MA_REPONSE = 9999
+ENDIF
+DIALOG D_ENIGME_CHIFFRE
+RETURN 1
+
+ONBUTTON=100
+RESOLVEUR_ENIGMES
+RETURN 1
+
+ONBUTTON=101
+RETURN 1
+
+
+//**************************************
+//************CHOIX REPONSE*************
+//**************************************
+
+
+[DIALOG D_ENIGME_CHOIX]
+0,0
+
+page 0
+resizepic 0 0 2620 350 400
+
+page 1
+text 100 20 1152 1//<TITRE>
+text 10 50 1152 2//<LIGNE1>
+text 10 70 1152 3//<LIGNE2>
+text 10 90 1152 4//<LIGNE3>
+text 10 110 1152 5//<LIGNE4>
+text 10 130 1152 6//<LIGNE5>
+text 10 150 1152 7//<LIGNE6>
+text 10 170 1152 8//<LIGNE7>
+text 10 190 1152 9//<LIGNE8>
+text 40 250 1152 10//reponse1
+text 40 270 1152 11//reponse2
+text 40 290 1152 12//reponse3
+text 40 310 1152 13//reponse4
+text 40 330 1152 14//reponse5
+button 20 255 2103 2104 1 0 1//REPONSE1
+button 20 275 2103 2104 1 0 2//REPONSE2
+button 20 295 2103 2104 1 0 3//REPONSE3
+button 20 315 2103 2104 1 0 4//REPONSE4
+button 20 335 2103 2104 1 0 5//REPONSE5
+button 300 20 1150 1151 1 0 101//Cancel
+
+[DIALOG D_ENIGME_CHOIX TEXT]
+<VAR.BLANKLINE>
+<TAG.TITRE>
+<TAG.LIGNE1>
+<TAG.LIGNE2>
+<TAG.LIGNE3>
+<TAG.LIGNE4>
+<TAG.LIGNE5>
+<TAG.LIGNE6>
+<TAG.LIGNE7>
+<TAG.LIGNE8>
+<TAG.REPONSE1>
+<TAG.REPONSE2>
+<TAG.REPONSE3>
+<TAG.REPONSE4>
+<TAG.REPONSE5>
+
+[DIALOG D_ENIGME_CHOIX BUTTON]
+ONBUTTON=1
+TAG.MA_REPONSE=1
+RESOLVEUR_ENIGMES
+RETURN 1
+
+ONBUTTON=2
+TAG.MA_REPONSE=2
+RESOLVEUR_ENIGMES
+RETURN 1
+
+ONBUTTON=3
+TAG.MA_REPONSE=3
+RESOLVEUR_ENIGMES
+RETURN 1
+
+ONBUTTON=4
+TAG.MA_REPONSE=4
+RESOLVEUR_ENIGMES
+RETURN 1
+
+ONBUTTON=5
+TAG.MA_REPONSE=5
+RESOLVEUR_ENIGMES
+RETURN 1
+
+ONBUTTON=101
+RETURN 1
+
+
+//************************************
+//***********DEVELOPPEMENT************
+//************************************
+
+[DIALOG D_ENIGME_DEVELOPPEMENT]
+0,0
+
+page 0
+resizepic 0 0 2620 350 260
+
+page 1
+text 120 20 1152 1//<TITRE>
+text 10 50 1152 2//<LIGNE1>
+text 10 70 1152 3//<LIGNE2>
+text 10 90 1152 4//<LIGNE3>
+text 10 110 1152 5//<LIGNE4>
+text 10 130 1152 6//<LIGNE5>
+text 10 150 1152 7//<LIGNE6>
+text 10 170 1152 8//<LIGNE7>
+text 10 190 1152 9//<LIGNE8>
+resizepic 50 215 2620 190 30
+textentry 55 221 180 20 1152 1 0
+button 250 220 249 248 1 0 100//OKAY
+button 300 20 1150 1151 1 0 101//Cancel
+
+[DIALOG D_ENIGME_DEVELOPPEMENT TEXT]
+<VAR.BLANKLINE>
+<TAG.TITRE>
+<TAG.LIGNE1>
+<TAG.LIGNE2>
+<TAG.LIGNE3>
+<TAG.LIGNE4>
+<TAG.LIGNE5>
+<TAG.LIGNE6>
+<TAG.LIGNE7>
+<TAG.LIGNE8>
+
+
+[DIALOG D_ENIGME_DEVELOPPEMENT BUTTON]
+ONBUTTON=100
+IF !(STRCMPI("<ARGTXT[1]>",""))
+	SRC.SYSMESSAGEUA 0481 1 1 0 Il faut entrer quelque chose!
+	DIALOG D_ENIGME_DEVELOPPEMENT
+ELSE
+	TAG.MA_REPONSE = <ARGTXT[1]>
+	RESOLVEUR_ENIGMES
+ENDIF
+RETURN 1
+
+ONBUTTON=101
+RETURN 1
+
+
+//******************************************
+//*********ENIGMES DONGEON HUMAIN***********
+//******************************************
+
+
+//DONGEON HUMAIN 3
+[FUNCTION ENIGME_1]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="Si je sais que je l'ai et qu'on me dit que
+	TAG.LIGNE2="je ne l'ai pas, alors je risque de la"
+	TAG.LIGNE3=" perdre... Qu'est ce ?"
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=raison
+	TAG.BONNE_REPONSE2=la raison
+	TAG.TYPE_ENIGME="developpement"
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DONGEON HUMAIN 1
+[FUNCTION ENIGME_2]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="L'etre humain en a 23 paires, que sont-ils?"
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=les chromosomes
+	TAG.BONNE_REPONSE2=chromosomes
+	TAG.TYPE_ENIGME="developpement"
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DONGEON HUMAIN 2
+[FUNCTION ENIGME_3]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="Lorsque je vis je mange tout et quand je bois,"
+	TAG.LIGNE2="je meurs. Qui suis-je?"
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=le feu
+	TAG.BONNE_REPONSE2=feu
+	TAG.TYPE_ENIGME="developpement"
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DONGEON HUMAIN 2
+[FUNCTION ENIGME_4]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="Donnez les 5 prochaines lettres de cette suite :"
+	TAG.LIGNE2="UDTQCSSH..."
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=NDODT
+	TAG.TYPE_ENIGME="developpement"
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DONGEON HUMAIN 1
+[FUNCTION ENIGME_5]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="Element de pilosite humaine poussant au sommet
+	TAG.LIGNE2="de la tete."
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=cheveu
+	TAG.TYPE_ENIGME="developpement"
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DONGEON HUMAIN 3
+[FUNCTION ENIGME_6]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="Bob dit a Percephone : Dans 6 ans, vous aurez le double de l'âge que"
+	TAG.LIGNE2="j'aurai alors que, il y a 6 ans vous aviez 3/5 de l'âge que j'avais"
+	TAG.LIGNE3="de plus que le double de l'âge que j'avais. Quel age Bob a-t-il?"
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=26
+	TAG.TYPE_ENIGME="chiffre"
+	TAG.MA_REPONSE=0
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DONGEON HUMAIN 1
+[FUNCTION ENIGME_7]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="Un commercant vend 1000po une bouteille de"
+	TAG.LIGNE2="potion divine. La potion vaut 800po de plus"
+	TAG.LIGNE3="que la bouteille, combien vaut la bouteille?"
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=100
+	TAG.TYPE_ENIGME="chiffre"
+	TAG.MA_REPONSE=0
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DONGEON HUMAIN 3
+[FUNCTION ENIGME_8]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="Un meurtrier tue 31 victimes en 5 ans. Chaque annee, il fait davantage"
+	TAG.LIGNE2="de meurtres que l'annee precedente. La cinquieme annee, il tue trois"
+	TAG.LIGNE3="fois plus de personnes que la première année. Combien de meurtres a-t-il"
+	TAG.LIGNE4="commis la cinquieme annee?"
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=9
+	TAG.TYPE_ENIGME="chiffre"
+	TAG.MA_REPONSE=0
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DONGEON HUMAIN 2
+[FUNCTION ENIGME_9]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="Un groupe d'aventuriers doit être reparti dans une auberge. A raison de deux"
+	TAG.LIGNE2="aventuriers par chambre, il reste deux aventuriers sans chambre. Par contre"
+	TAG.LIGNE3="si 3 aventuriers sont places dans chaque chambre, il reste 2 chambres libres."
+	TAG.LIGNE4="Combien y a-t-il de chambres dans cette auberge?"
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=8
+	TAG.TYPE_ENIGME="chiffre"
+	TAG.MA_REPONSE=0
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DONGEON HUMAIN 2
+[FUNCTION ENIGME_10]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="Mon premier a plusieurs faces"
+	TAG.LIGNE2="Mon second est un outil utilise en agriculture et en jardinage"
+	TAG.LIGNE3="Mon tout est une deviation par rapport a l'ideal"
+	TAG.LIGNE4="Qui suis-je?"
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=defaut
+	TAG.TYPE_ENIGME="developpement"
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DONGEON HUMAIN 3
+[FUNCTION ENIGME_11]
+IF <TYPE> == t_enigme
+	TAG.LIGNE1="Dans ce monde, le quart des personnages n'utilise pas de potion, le tiers"
+	TAG.LIGNE2="n'utilise pas de baguette, 300 utilisent les deux, et un douzieme aucune"
+	TAG.LIGNE3="des deux. Combien de personnages utilisent seulement des potions?"
+	TAG.TITRE="Enigme"
+	TAG.BONNE_REPONSE1=150
+	TAG.TYPE_ENIGME="chiffre"
+	TAG.MA_REPONSE=0
+	RETURN 1
+ENDIF
+RETURN 0
+
+
+[TYPEDEF t_enigme]
+ON=@EQUIP
+SRC.SYSMESSAGE test
+TYPE=t_eq_script
+EQUIP
+TYPE=t_enigme
+RETURN 0

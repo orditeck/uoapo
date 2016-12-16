@@ -1,0 +1,199 @@
+[SPEECH spk_fille_de_joie]
+ON=*Bonjour*
+IF <SRC.BODY> == c_man
+DORAND 2
+SAY Bonjour <SRC.NAME>, tu viens me faire un petit calin ?
+SAY Ah <SRC.NAME> ! Tu viens pour ton petit calin ...
+ENDDO
+ELSEIF <SRC.BODY> == c_woman
+DORAND 2
+Say <SRC.NAME> ne tentes pas de me voler ma clientele !
+Say <SRC.NAME> fiche le camp  ! Tu me fais concurrence !
+ENDDO
+ELSE
+DORAND 2
+SAY Urgh ... Bonjour ... vous etes tres ... ehm vous voulez un petit calin ?
+SAY Quelle horr... beaute ! vous me faites un calin ?
+ENDDO
+ENDIF
+ON=*calin*
+IF <SRC.BODY> == c_woman
+SAY Je n'aurai jamais d'affection pour une femme me faisant concurrence ...
+RETURN 1
+ELSEIF <SRC.RESTEST 500 i_gold>
+SRC.CONSUME 500 i_gold	
+IF 0<SRC.TAG.COUCHER> <1
+SRC.TAG.COUCHER=1
+SRC.DESHABILLER
+SRC.ANIM 6
+SRC.EMOTE prendre du plaisir
+ELSE
+SRC.TAG.COUCHER=<SRC.TAG.COUCHER> + 1
+SRC.DESHABILLER
+SRC.ANIM 6
+SRC.EMOTE prendre du plaisir
+IF <EVAL <SRC.TAG.COUCHER>> == 1
+SAY Que tu es timide ... c'est toujours comme ca la premiere fois ...
+SRC.EMOTE se sentir gener
+ELSEIF <EVAL <SRC.TAG.COUCHER>> == 10
+Say <SRC.NAME> en partant ... n'oublie pas tes affaires ...
+ELSEIF <EVAL <SRC.TAG.COUCHER>> == 20
+Say Chaque jour mes clients oublient de reprendre toute sorte d'objets ...
+ELSEIF <EVAL <SRC.TAG.COUCHER>> == 40
+Say Regarde <SRC.NAME>, un aventurier a oublie ca ici :
+EMOTE Tendre une fiole verte a <SRC.NAME>
+SRC.NEWITEM i_fiole_de_quete
+SRC.ACT.BOUNCE
+ELSE
+Say Mon cheri c'est deja la <EVAL <SRC.TAG.COUCHER>> eme fois que tu viens me voir et ca me fait toujours autant plaisir ... 
+ENDIF
+ENDIF
+ELSE
+SAY Tu n'a pas assez d'argent mon cheri ... je ne peux rien faire pour toi ...
+ENDIF
+
+[CHARDEF c_fille_de_joie_tatyana]
+DEFNAME=c_fille_de_joie_tatyana
+NAME=Tatyana
+ID=C_WOMAN
+
+TSPEECH=spk_fille_de_joie
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR=9999
+DEX=9999
+INT=9999
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_fishing_pole
+COLOR=01
+ITEMNEWBIE=i_kilt
+COLOR=01
+ITEMNEWBIE=i_shirt_plain
+COLOR=0481
+ITEMNEWBIE=i_sandals
+COLOR=026
+
+ON=@NPCSeeNewPlayer
+IF <SRC.BODY> == c_woman
+EMOTE ignorer <SRC.NAME>
+ELSE
+SRC.EMOTE regarder envieusement Tatyana 
+EMOTE faire un petit signe a <SRC.NAME>
+ENDIF
+
+ON=@PersonalSpace
+IF <SRC.BODY> == c_woman
+SAY Hey ! Vous pouvez pas faire attention.
+ELSE
+SAY <SRC.NAME> que vous allez vite en besogne !
+ENDIF
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+IF <SRC.BODY> == c_woman
+DORAND 4
+SAY Espece de malotrue !
+SAY Vieille vache !
+SAY Espece de morue !
+SAY Jalouse !
+ENDDO
+ELSE
+SAY <SRC.NAME> je prefere les calins !
+ENDIF
+RETURN 1
+
+ON=@SPELLEFFECT
+IF <SRC.BODY> == c_woman
+DORAND 4
+SAY Espece de malotrue !
+SAY Vieille vache !
+SAY Espece de morue !
+SAY Jalouse !
+ENDDO
+ELSE
+SAY <SRC.NAME> je prefere les calins !
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Quete
+DESCRIPTION=Tatyana - Fille de joie
+
+[CHARDEF c_fille_de_joie_cam]
+DEFNAME=c_fille_de_joie_cam
+NAME=Cam
+ID=C_WOMAN
+
+TSPEECH=spk_fille_de_joie
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR=9999
+DEX=9999
+INT=9999
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_fishing_pole
+COLOR=01
+ITEMNEWBIE=i_kilt
+COLOR=01
+ITEMNEWBIE=i_shirt_plain
+COLOR=0481
+ITEMNEWBIE=i_sandals
+COLOR=026
+
+ON=@NPCSeeNewPlayer
+IF <SRC.BODY> == c_woman
+EMOTE ignorer <SRC.NAME>
+ELSE
+SRC.EMOTE regarder envieusement Cam 
+EMOTE faire un petit signe a <SRC.NAME>
+ENDIF
+
+ON=@PersonalSpace
+IF <SRC.BODY> == c_woman
+SAY Hey ! Vous pouvez pas faire attention.
+ELSE
+SAY <SRC.NAME> que vous allez vite en besogne !
+ENDIF
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+IF <SRC.BODY> == c_woman
+DORAND 4
+SAY Espece de malotrue !
+SAY Vieille vache !
+SAY Espece de morue !
+SAY Jalouse !
+ENDDO
+ELSE
+SAY <SRC.NAME> je prefere les calins !
+ENDIF
+RETURN 1
+
+ON=@SPELLEFFECT
+IF <SRC.BODY> == c_woman
+DORAND 4
+SAY Espece de malotrue !
+SAY Vieille vache !
+SAY Espece de morue !
+SAY Jalouse !
+ENDDO
+ELSE
+SAY <SRC.NAME> je prefere les calins !
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Quete
+DESCRIPTION=Cam - Fille de joie

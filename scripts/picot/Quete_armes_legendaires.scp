@@ -1,0 +1,621 @@
+[CHARDEF c_horreur_tentaculaire]
+NAME=Horreur tentaculaire
+ID=c_corpser
+CAN=MT_WALK
+
+ON=@Create
+COLOR=0b33
+STR=1500
+DEX=700
+INT=1500
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=21000
+TAG.XPCOUP=<EVAL (RAND(875,1750))>
+TAG.TAPER=12
+TAG.NIVEAU=90
+
+KARMA=-9999
+
+TACTICS=1125.0
+WRESTLING=1125.0
+MAGERY=1200.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=020000000
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 150 i_perle_enchantement 1}
+
+ON=@DEATH
+IF !<SRC.ACT.BRAIN>
+	IF <SRC.ACT.FINDID.m_compteur_kills_legendaire>
+		IF <EVAL <SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.TENTACULAIRE>> < 50
+			SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.TENTACULAIRE = <EVAL <SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.TENTACULAIRE> + 1>
+			SRC.ACT.EMOTE sectionner une tentacule
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Quete legendaire
+DESCRIPTION=Horreur tentaculaire
+
+[CHARDEF c_horreur_ectoplasmique]
+NAME=Horreur ectoplasmique
+ID=039
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0b33
+STR=1200
+DEX=1200
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=23520
+TAG.XPCOUP=<EVAL (RAND(980,1960))>
+TAG.TAPER=12
+TAG.NIVEAU=90
+
+KARMA=-9999
+
+TACTICS=1050.0
+WRESTLING=1050.0
+
+NPC=BRAIN_MONSTER
+
+ON=@GETHIT
+IF <EVAL(RAND(8))>==0
+	IF !<SRC.FINDID.i_rune_horreur_ectoplasmique>
+		SRC.EFFECT 3,i_fx_curse,0,15
+		SRC.NEWITEM i_rune_horreur_ectoplasmique
+		SRC.ACT.LINK=<UID>
+		SRC.ACT.EQUIP
+		ANIM 17
+	ENDIF
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF (<EVAL(RAND(7))>=0)
+	IF !<SRC.FINDID.i_rune_horreur_ectoplasmique>
+		SRC.EFFECT 3,i_fx_curse,0,15
+		SRC.NEWITEM i_rune_horreur_ectoplasmique
+		SRC.ACT.LINK=<UID>
+		SRC.ACT.EQUIP
+		ANIM 17
+	ENDIF
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 150 i_perle_enchantement 1}
+
+ON=@DEATH
+IF !<SRC.ACT.BRAIN>
+	IF <SRC.ACT.FINDID.m_compteur_kills_legendaire>
+		IF <EVAL <SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.ECTOPLASMIQUE>> < 50
+			SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.ECTOPLASMIQUE = <EVAL <SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.ECTOPLASMIQUE> + 1>
+			SRC.ACT.EMOTE extirper le coeur de l'ectoplasme
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Quete legendaire
+DESCRIPTION=Horreur ectoplasmique
+
+[ITEMDEF i_rune_horreur_ectoplasmique]
+NAME=Rune horreur ectoplasmique
+ID=i_rune_curse
+TYPE=t_spell
+LAYER=32
+
+ON=@Create
+TIMER=-1
+MORE2=01
+MOREX=01b
+MOREY={700.0 1200.0}
+ATTR=026
+
+[CHARDEF c_horreur_arachnoidienne]
+NAME=Horreur arachnoidienne
+ID=01c
+
+ON=@Create
+COLOR=0b33
+STR=2200
+DEX=2200
+INT=2200
+MAXHITS=2300
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=32200
+TAG.XPCOUP=<EVAL (RAND(1341,2683))>
+TAG.TAPER=12
+TAG.NIVEAU=90
+
+MAGERY=500.0
+TACTICS=1300.0
+WRESTLING=1300.0
+NPC=BRAIN_MONSTER
+
+KARMA=-9999
+
+ITEMNEWBIE=i_spellbook
+MORE1=00080000
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 150 i_perle_enchantement 1}
+
+ON=@DEATH
+IF !<SRC.ACT.BRAIN>
+	IF <SRC.ACT.FINDID.m_compteur_kills_legendaire>
+		IF <EVAL <SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.ARACHNOIDIENNE>> < 50
+			SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.ARACHNOIDIENNE = <EVAL <SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.ARACHNOIDIENNE> + 1>
+			SRC.ACT.EMOTE couper une patte d'araignee
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Quete legendaire
+DESCRIPTION=Horreur arachnoidienne
+
+[CHARDEF c_horreur_squelettique]
+NAME=Horreur squelettique
+ID=032
+
+ON=@Create
+COLOR=0b33
+STR=1500
+DEX=1500
+INT=1500
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=21000
+TAG.XPCOUP=<EVAL (RAND(875,1750))>
+TAG.TAPER=12
+TAG.NIVEAU=90
+
+KARMA=-9999
+
+TACTICS=1125.0
+WRESTLING=1125.0
+MAGERY=1100.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000800
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 150 i_perle_enchantement 1}
+
+ON=@DEATH
+IF !<SRC.ACT.BRAIN>
+	IF <SRC.ACT.FINDID.m_compteur_kills_legendaire>
+		IF <EVAL <SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.SQUELETTIQUE>> < 50
+			SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.SQUELETTIQUE = <EVAL <SRC.ACT.FINDID.m_compteur_kills_legendaire.TAG.SQUELETTIQUE> + 1>
+			SRC.ACT.EMOTE arracher un os du squelette
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 0
+	
+
+CATEGORY=Monstres
+SUBSECTION=Quete legendaire
+DESCRIPTION=Horreur squelettique
+
+[ITEMDEF m_compteur_kills_legendaire]
+ID=i_memory
+NAME=Compteur kills legend
+TYPE=t_eq_script
+
+ON=@CREATE
+TAG.SQUELETTIQUE=0
+TAG.ARACHNOIDIENNE=0
+TAG.ECTOPLASMIQUE=0
+TAG.TENTACULAIRE=0
+
+ON=@TIMER
+TIMER=-1
+RETURN 1
+
+
+
+[CHARDEF C_QUETE_ARMES_LEGENDAIRES]
+NAME=Craig
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_CRAIG
+
+ON=@GETHIT
+HITS=9999
+FOOD=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR=200
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+TITLE=Gardien de la grotte
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCSEENEWPLAYER
+DORAND 3
+	SAY A quelle horreur ai-je l'honneur?
+	SAY Approchez, approchez, la solitude est une horreur!
+	SAY Venez, J'ai si peu de compagnie dans ce tombeau d'horreur!
+ENDDO
+
+ON=@NPCHearUnknown
+IF 0<SRC.TAG.CRAIG> < 2
+	IF (<EVAL(RAND(15))>=0)
+		SAY Il est vrai que me donner un peu d'aide pourra vous horrifier
+	ELSE
+		DORAND 3
+			SAY J'ai horreur qu'on me demande d'entrer
+			SAY Nul ne passera sans me donner l'horreur que je souhaite
+			SAY Continuez d'insister et votre vie deviendra un conte d'horreur
+		ENDDO
+	ENDIF
+ELSEIF <SRC.TAG.CRAIG> == 2
+	SAY Par horreur hasard, pourriez-vous m'aider a nouveau?
+ELSEIF <SRC.TAG.CRAIG> == 3
+	SAY Par un horreur hasard, auriez vous fini votre quete que je vous avais demande?
+ELSE
+	SAY Quelle horreur dites-vous?
+ENDIF
+
+ON=@NPCRestock
+ITEMNEWBIE=i_plastron_morbide_anim
+COLOR=0b33
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b33
+ITEMNEWBIE=i_pantalon
+COLOR=0b33
+ITEMNEWBIE=i_heaume_morbide_anim
+COLOR=0b33
+ITEMNEWBIE=i_petites_bottes
+COLOR=0b28
+ITEMNEWBIE=i_brassieres_en_cuir
+COLOR=0b33
+
+
+CATEGORY=PNJ
+SUBSECTION=Quete legendaire
+DESCRIPTION=Craig
+
+[SPEECH SPEECH_CRAIG]
+on=aide
+IF 0<SRC.TAG.CRAIG> < 3
+	SAY La quete sera ardue, etes-vous sur de vouloir vous horrifier pour moi?
+	SRC.TAG.CRAIG=1
+ELSE
+	SAY 
+ENDIF
+
+ON=oui
+IF 0<SRC.TAG.CRAIG> == 1
+	IF !<FINDID.m_dialogue_craig>
+		IF !<SRC.FINDID.m_compteur_kills_legendaire>
+			SRC.NEWITEM m_compteur_kills_legendaire
+			SRC.ACT.CONT=<SRC.UID>
+		ENDIF
+		SRC.TAG.CRAIG=3
+		EMOTE reflechir
+		NEWITEM m_dialogue_craig
+		ACT.CONT=<UID>
+	ELSE
+		SAY Vous ne voyez pas que j'ai horreur de parler a deux personnes en meme temps?
+	ENDIF
+ELSEIF 0<SRC.TAG.CRAIG> == 2
+	IF !<SRC.FINDID.m_compteur_kills_legendaire>
+		SRC.NEWITEM m_compteur_kills_legendaire
+		SRC.ACT.CONT=<SRC.UID>
+	ENDIF
+	SRC.TAG.CRAIG=3
+	SAY Tuez ces horreurs, apportez moi des preuves de vos actes et je vous laisserai entrer!
+ELSEIF 0<SRC.TAG.CRAIG> == 3
+	IF !<SRC.FINDID.m_compteur_kills_legendaire>
+		SRC.NEWITEM m_compteur_kills_legendaire
+		SRC.ACT.CONT=<SRC.UID>
+	ENDIF
+	IF (<EVAL <SRC.FINDID.m_compteur_kills_legendaire.TAG.SQUELETTIQUE>> > 49 )
+		IF (<EVAL <SRC.FINDID.m_compteur_kills_legendaire.TAG.ARACHNOIDIENNE>> > 49 )
+			IF (<EVAL <SRC.FINDID.m_compteur_kills_legendaire.TAG.ECTOPLASMIQUE>> > 49 )
+				IF (<EVAL <SRC.FINDID.m_compteur_kills_legendaire.TAG.TENTACULAIRE>> > 49 )
+					SAY Mais quelle horreur! Vous les avez horrifiees! Je crois que vous etes digne d'entrer dans ce trou!
+					SRC.FINDID.m_compteur_kills_legendaire.REMOVE
+					SRC.TAG.CRAIG=4
+				ELSE
+					SAY Vous n'avez pas suffisamment tue d'horreurs tentaculaires a mon gout!
+				ENDIF
+			ELSE
+				SAY Vous n'avez pas suffisamment tue d'horreurs ectoplasmiques a mon gout!
+			ENDIF
+		ELSE
+			SAY Vous n'avez pas suffisamment tue d'horreurs arachnoidiennes a mon gout!
+		ENDIF
+	ELSE
+		SAY Vous n'avez pas suffisamment tue d'horreurs squelettiques a mon gout!
+	ENDIF
+ELSEIF 0<SRC.TAG.CRAIG> == 5
+	IF !<SRC.FINDLAYER.25>
+		SAY Que l'horreur soit avec vous!
+		SRC.TAG.CRAIG=2
+		SRC.EVENTS +e_anti_mark_recall
+		IF <SRC.FINDLAYER.40>
+			SRC.FINDLAYER.40.REMOVE
+		ENDIF
+		IF (<SRC.FLAGS>&statf_hidden)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+		ENDIF
+		IF (<SRC.FLAGS>&statf_invisible)
+			SRC.FLAGS=<SRC.FLAGS>&~invisible
+		ENDIF
+		IF (<SRC.FLAGS>&statf_insubstantial)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+		SRC.TAG.anti_mark_recall=1
+		SRC.TAG.INSIDE_Q_LEGENDAIRE=1
+		SRC.P=5211,1761
+		SRC.UPDATE
+	ELSE
+		SAY Par quelle horreur pensez-vous faire entrer cette monture dans un si petit trou?
+	ENDIF
+ELSE
+	SAY oui? oui quoi, horreur a deux pattes?
+ENDIF
+
+ON=entrer
+IF 0<SRC.TAG.CRAIG> >= 4
+	SAY Tous ceux qui y sont entres n'en sont jamais ressortis, avez-vous l'horreur necessaire pour y entrer?
+	SRC.TAG.CRAIG = 5
+ELSE
+	SAY Faites moi l'horreur de partir sur le champs!
+ENDIF
+
+ON=*horreur*
+SAY Quoi? des horreurs? ou ca les horreurs? ou?
+EMOTE paniquer
+
+on=non
+IF 0<SRC.TAG.CRAIG> == 1
+	SAY Alors faites moi l'horreur de deguerpir!
+ELSEIF 0<SRC.TAG.CRAIG> == 2
+	SAY Allez donc horrifier quelqu'un d'autre alors cette fois ci!
+ELSE
+	SAY Cet horreur tenait en son bec un fromage, alors l'horreur... quoi vous etes encore la?
+ENDIF
+
+ON=*histoire*
+SAY C'est l'histoire d'une horreur qui dit a une autre horreur, horreriez vous... l'honneur...
+EMOTE etre crampe de rire!
+ANIM 16
+
+
+[ITEMDEF m_dialogue_craig]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=2
+MOREX=0
+
+ON=@TIMER
+IF <MOREX> == 0
+	TIMER=8
+	MOREX=1
+	CONT.SAY Il y a plusieurs annees, j'etais commandant de la plus puissante armee de britannia...
+ELSEIF <MOREX> == 1
+	TIMER=8
+	MOREX=2
+	CONT.SAY Nous avions eu connaissance de quelques mysterieuses disparitions de commercants...
+	CONT.EMOTE prendre une grande respiration
+ELSEIF <MOREX> == 2
+	TIMER=8
+	MOREX=3
+	CONT.SAY Nous avons suivi des traces etranges entre Vesper et Britain, sans trop me rappeler ou c'etait...
+ELSEIF <MOREX> == 3
+	TIMER=5
+	MOREX=4
+	CONT.SAY C'est a ce moment que... quelle horreur...!
+	CONT.EMOTE devenir tres nerveux
+ELSEIF <MOREX> == 4
+	TIMER=8
+	MOREX=5
+	CONT.SAY D'immenses tentacules, de grosses araignees et une armee de squelettes nous ont surpris par derriere...
+ELSEIF <MOREX> == 5
+	TIMER=8
+	MOREX=6
+	CONT.SAY Je me suis cache dans un tronc d'arbre, je fus l'unique survivant humain de ce massacre. Je les appelle depuis ce temps, les horreurs!
+ELSE
+	CONT.SAY Tuez ces horreurs, apportez moi des preuves de vos actes et je vous laisserai entrer!
+	REMOVE
+ENDIF
+RETURN 1
+
+//MORE1==> 0==>monstre 1==>feu >=2==>rien
+[ITEMDEF i_dalle_teleport_legendaire]
+NAME=Dalle de teleport [Legendaire seulement]
+ID=049b
+
+ON=@CREATE
+COLOR=0b7b
+ATTR=08090
+MORE1=0
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	MORE1=<EVAL(RAND(6))>
+	IF <MORE1>==0
+		SRC.NEWITEM m_retour_teleport_legendaire
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.ACT.MOREP = <MOREP>
+		IF <EVAL(RAND(2))> == 0
+			SRC.NEWNPC c_horreur_tentaculaire
+			SRC.ACT.P=5235,1727,1
+			SRC.ACT.NEWITEM m_temps_avant_remove
+			SRC.ACT.ACT.CONT=<SRC.ACT.UID>
+			SRC.ACT.ACT.TIMER=30
+		ENDIF
+		IF <EVAL(RAND(2))> == 0
+			SRC.NEWNPC c_horreur_ectoplasmique
+			SRC.ACT.P=5235,1735,1
+			SRC.ACT.NEWITEM m_temps_avant_remove
+			SRC.ACT.ACT.CONT=<SRC.ACT.UID>
+			SRC.ACT.ACT.TIMER=30
+		ENDIF
+		IF <EVAL(RAND(2))> == 0
+			SRC.NEWNPC c_horreur_arachnoidienne
+			SRC.ACT.P=5243,1735,1
+			SRC.ACT.NEWITEM m_temps_avant_remove
+			SRC.ACT.ACT.CONT=<SRC.ACT.UID>
+			SRC.ACT.ACT.TIMER=30
+		ENDIF
+		IF <EVAL(RAND(2))> == 0
+			SRC.NEWNPC c_horreur_squelettique
+			SRC.ACT.P=5243,1727,1
+			SRC.ACT.NEWITEM m_temps_avant_remove
+			SRC.ACT.ACT.CONT=<SRC.ACT.UID>
+			SRC.ACT.ACT.TIMER=30
+		ENDIF
+		SRC.GO 5239,1731,1
+	ELSEIF <MORE1>==1
+		SRC.GO <MOREP>
+		SRC.NEWITEM i_flamme_dalle_piegee_d5_1
+		SRC.ACT.COLOR=0afb
+		SRC.ACT.P=<SRC.P>
+		SRC.DAMAGE 200 0008
+	ELSE
+		SRC.GO <MOREP>
+	ENDIF
+ENDIF
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 5
+	MOREP=<SRC.P>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Coordonnee enregistree pour teleportation
+	RETURN 1
+ENDIF
+RETURN 0
+
+[ITEMDEF m_retour_teleport_legendaire]
+NAME=retour teleport legendaire
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=30
+
+ON=@TIMER
+IF <CONT.TAG.anti_mark_recall>==1
+	CONT.GO <MOREP>
+ENDIF
+REMOVE
+RETURN 1
+
+[ITEMDEF i_coffre_legendaire]
+NAME=Coffre legendaire
+ID=0e43
+TYPE=t_normal
+
+ON=@CREATE
+ATTR=08010
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> < 3
+	IF <EVAL <SRC.TAG.anti_mark_recall>> == 1
+		IF <EVAL 0<SRC.TAG.INSIDE_Q_LEGENDAIRE>> == 0
+			SRC.TAG.TRICHEUR_LEGENDAIRE = <EVAL 0<SRC.TAG.TRICHEUR_LEGENDAIRE> + 1 >
+		ENDIF
+		SRC.TAG.INSIDE_Q_LEGENDAIRE
+		SRC.EVENTS -e_anti_mark_recall
+		SRC.TAG.anti_mark_recall=0
+		SRC.NEWITEM i_scroll_legendaire
+		SRC.ACT.BOUNCE
+		SRC.NEWITEM m_sortie_quete_legendaire
+		SRC.ACT.CONT = <SRC.UID>
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TIMER=-1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quete legendaire
+DESCRIPTION=Coffre legendaire
+
+[ITEMDEF i_scroll_legendaire]
+NAME=Parchemin legendaire
+ID=i_scroll_clumsy
+VALUE=150000
+
+ON=@Create
+COLOR=0bb5
+
+CATEGORY=Genese
+SUBSECTION=Scroll - Exceptional
+DESCRIPTION=Scroll legendaire
+
+[ITEMDEF m_sortie_quete_legendaire]
+NAME=retour teleport legendaire
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+MORE1=0
+TIMER=1
+
+ON=@TIMER
+IF <MORE1> == 0
+	TIMER=1
+	MORE1=1
+	CONT.NEWITEM i_flamme_dalle_piegee_d6_1
+	CONT.ACT.COLOR=0bb5
+	CONT.ACT.P = <CONT.P>
+ELSEIF <MORE1> == 1
+	TIMER=1
+	MORE1=2
+	CONT.ANIM 21
+ELSE
+	CONT.GO nujel'm
+	CONT.EMOTE se relever avec un mal de crane
+	REMOVE
+ENDIF
+RETURN 1

@@ -1,0 +1,553 @@
+[EVENTS e_colisee]
+
+ON=@DEATH
+SRC.EVENTS -e_colisee
+SRC.TAG.anti_mark_recall=0
+RETURN 0
+
+ON=@LOGOUT
+IF <SRC.FINDID.m_temps_sortir_coco>
+	SRC.FINDID.m_temps_sortir_coco.REMOVE
+ENDIF
+SRC.TAG.LOGOUTGREENACRES=4596,3628,30
+SRC.EVENTS -e_colisee
+SRC.TAG.anti_mark_recall=0
+SRC.EVENTS -e_anti_mark_recall
+RETURN 0
+
+ON=@SPELLCAST
+IF ( <ARGN> == 22 ) || ( <ARGN> == 24 ) || ( <ARGN> == 32 ) || ( <ARGN> == 45 ) || ( <ARGN> == 52 ) || ( <ARGN> == 40 ) || ( <ARGN> == 7 )
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas lancer ce sortilege en ces lieux !
+	RETURN 1
+ENDIF
+
+[SPEECH spk_un_homme_vetu_richement]
+on=*Bonjour*
+SAY Buongiorno mon <SRC.SEX ami/amie> que me vaut votre visite ?
+
+on=*entrer*
+IF !<SRC.FINDLAYER.25>
+	IF 0<SRC.TAG.HOMMEVETURICHEMENT>==0
+		EMOTE sursauter
+		SAY Mama mia ... Vous etes <SRC.SEX sur/sure> de vouloir finir en charpie ?
+		SRC.TAG.HOMMEVETURICHEMENT=1
+		SRC.TAG.NIVEAUCOLYSEE=10
+		SRC.TAG.NIVEAUDIFFICULTE=10
+	ELSE
+		SAY Que ye soui heureux de vous revoir <SRC.NAME> ! Alors vous etes revenus pour entrer dans mon Coliseeum aujourd'hui ?
+	ENDIF
+ELSE
+	SAY Ma que c'est oune coliseeum pas oune hypodrome, descendez de cheval avant d'entrer !
+ENDIF
+
+on=*oui*
+IF !<SRC.FINDID.m_ban_coco>
+	IF <EVAL <SRC.TAG.LEVEL>> >99
+		IF !<SRC.FINDLAYER.25>
+			IF (<SRC.FLAGS>&statf_hidden)
+				SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+			ENDIF
+			IF (<SRC.FLAGS>&statf_invisible)
+				SRC.FLAGS=<SRC.FLAGS>&~statf_invisible
+			ENDIF
+			IF (<SRC.FLAGS>&statf_insubstantial)
+				SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+			ENDIF
+			IF <SRC.FINDID.i_rune_delay_g>
+				SRC.FINDID.i_rune_delay_g.REMOVE
+				SRC.EFFECT 3,i_fx_smoke_small,0,60
+				SRC.SFX 01ed
+				SRC.EVENTS -e_casse_gate
+			ENDIF
+			SRC.ACTION=-1
+			SRC.EVENTS +e_anti_mark_recall
+			SRC.TAG.anti_mark_recall=1
+			EMOTE rire
+			SAY Ravi de vous avoir connu !
+			SRC.EVENTS +e_colisee
+			SRC.P=4592,3567,30
+			SRC.FIX
+			SRC.NEWITEM m_temps_sortir_coco
+			SRC.ACT.CONT = <SRC.UID>
+		ELSE
+			SAY Ma que c'est oune coliseeum pas oune hypodrome, descendez de cheval avant d'entrer !
+		ENDIF
+	ELSE
+		SAY Ma vous etes frele comme oune moustique, vous n'esperiez quand meme pas que z'allais vous laisser entrer !
+	ENDIF
+ELSE
+	SAY Vous etes banni du coliseeum zusqu'a ce que ze change d'avis!
+ENDIF
+
+[CHARDEF c_un_homme_vetu_richement]
+DEFNAME=c_un_homme_vetu_richement
+NAME=Un homme vetu richement
+ID=c_man
+ 
+TSPEECH=spk_un_homme_vetu_richement
+
+ON=@create
+TAG.COMBATTANT=0
+COLOR=083ea
+FOOD=9999 
+SPEECHCOLOR=0b7b
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Proprietaire du colisee
+
+ITEMNEWBIE=i_robe
+NAME=Robe de soie
+COLOR=0b7b
+ITEMNEWBIE=i_hat_feather
+NAME=Borsalino a plume
+COLOR=0b7b
+ITEMNEWBIE=i_boot_thigh
+NAME=Bottes
+COLOR=0b7b
+
+ON=@NPCHearUnknown
+IF <EVAL <TAG.COMBATTANT>>==0
+	SAY Je ne comprends pas ce que vous dites ... Peut etre voulez vous entrer dans mon Coliseeum ?
+ELSEIF <EVAL <TAG.COMBATTANT>>==1
+	SAY Je ne comprends pas ce que vous dites ... Peut etre voulez vous rejoindre le combattant se trouvant dans le Coliseeum ?
+ELSEIF <EVAL <TAG.COMBATTANT>> > 5
+	SAY Je suis desole je suis deja assez occupe avec les 6 combattants se trouvant dans le Coliseeum
+ELSE
+	SAY Je ne comprends pas ce que vous dites ... Peut etre voulez vous rejoindre les <EVAL <TAG.COMBATTANT>> combattants se trouvant dans le Coliseeum ?
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Colisee
+DESCRIPTION=Un homme vetu richement
+
+[SPEECH spk_gardien_du_colysee]
+
+ON=*sortir*
+IF <SRC.FINDID.m_temps_sortir_coco>
+	SAY Votre temps ici n'est pas encore termine
+	RETURN 1
+ELSE
+	DORAND 10
+		SAY Pour savoir ce qu'il y apres la mort, il suffit de savoir ce qu'il y a avant la vie
+		SAY Croyez moi : la mort nous suit a toute heure, a tout pas
+		SAY Chaque souffle nous rapproche de la mort
+		SAY La mort n'est que la derniere nuance de la vie
+		SAY La mort, c'est le debut de l'extase ou l'ame ravie entrevoit la vision beatifique
+		SAY La mort est un monstre qui chasse du grand theatre un spectateur attentif, avant qu'une piece qui l'interesse infiniment finisse
+		SAY Pourquoi donc n'est-il pas possible qu'apres la mort nous gardions l'apparence parfaite des vivants, si les vivants peuvent dans le sommeil se faire semblables aux lugubres morts ?
+		SAY Nous faisons notre vie de la mort d'autrui.
+		SAY La mort, si elle nous voyait pleurer, elle se tordrait.
+		SAY C'est encore devant la mort que nous nous sentons le plus livresques.
+	ENDDO
+	SRC.EVENTS -e_colisee
+	SRC.TAG.anti_mark_recall=0
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.P=4597,3631,30
+	SRC.FIX
+	RETURN 1
+ENDIF
+
+ON=*combattre*
+SAY Votre niveau de difficulte actuel est <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> souhaitez vous l'ameliorer, le diminuer, ou lancer le combat tel quel ?
+
+ON=*ameliorer*
+IF <EVAL <SRC.TAG.NIVEAUCOLYSEE>> > <EVAL <SRC.TAG.NIVEAUDIFFICULTE>>
+	SRC.TAG.NIVEAUDIFFICULTE=<EVAL <SRC.TAG.NIVEAUDIFFICULTE> + 10>
+	SAY Votre niveau de difficulte est maintenant de <EVAL <SRC.TAG.NIVEAUDIFFICULTE>>
+ELSE
+	SAY Vous n'avez pas remporte le combat de niveau <EVAL <SRC.TAG.NIVEAUDIFFICULTE>>, vous ne pouvez donc pas ameliorer votre niveau de difficulte
+ENDIF
+
+ON=*diminuer*
+IF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> >10
+	SRC.TAG.NIVEAUDIFFICULTE=<EVAL <SRC.TAG.NIVEAUDIFFICULTE> - 10>
+	SAY Votre niveau de difficulte est maintenant de <EVAL <SRC.TAG.NIVEAUDIFFICULTE>>
+ENDIF
+
+ON=*lancer*
+IF <EVAL <TAG.MONSTRELANCE>> >0
+	SAY Je ne lancerai aucune autre creature tant que le combat precedent n'est pas termine !
+ELSE
+	IF <FINDID.m_timer_lancer_coco>
+		IF <FINDID.m_timer_lancer_coco.MORE1> == 0
+			SAY Je ne peux pas lancer de monstre avant <EVAL <FINDID.m_timer_lancer_coco.TIMER>> secondes !
+			FINDID.m_timer_lancer_coco.MORE1 = 1
+		ELSEIF <FINDID.m_timer_lancer_coco.MORE1> == 1
+			SAY J'ai dit que je ne pouvais pas lancer de monstre avant au moins <EVAL <FINDID.m_timer_lancer_coco.TIMER>> secondes !
+			FINDID.m_timer_lancer_coco.MORE1 = 2
+		ELSEIF <FINDID.m_timer_lancer_coco.MORE1> == 2
+			SAY Dois-je encore le repeter? Pas avant <EVAL <FINDID.m_timer_lancer_coco.TIMER>> secondes !
+			FINDID.m_timer_lancer_coco.MORE1 = 3
+		ELSEIF <FINDID.m_timer_lancer_coco.MORE1> == 3
+			SAY Vous commencez a me les chauffer, pas avant <EVAL <FINDID.m_timer_lancer_coco.TIMER>> secondes !
+			FINDID.m_timer_lancer_coco.MORE1 = 4
+		ELSEIF <FINDID.m_timer_lancer_coco.MORE1> == 4
+			SAY Pas avant <EVAL <FINDID.m_timer_lancer_coco.TIMER>> secondes bordel !
+			FINDID.m_timer_lancer_coco.MORE1 = 5
+		ELSEIF <FINDID.m_timer_lancer_coco.MORE1> == 5
+			SAY Cessez de m'importuner ou fichez moi le camp d'ici!
+			FINDID.m_timer_lancer_coco.MORE1 = 6
+		ELSEIF <FINDID.m_timer_lancer_coco.MORE1> == 6
+			SAY Attendez <EVAL <FINDID.m_timer_lancer_coco.TIMER>> secondes ou je vous jure que vous le regretterai !
+			FINDID.m_timer_lancer_coco.MORE1 = 7
+		ELSEIF <FINDID.m_timer_lancer_coco.MORE1> == 7
+			SAY C'est votre derniere chance !
+			EMOTE etre tres en colere !
+			FINDID.m_timer_lancer_coco.MORE1 = 8
+		ELSE
+			FINDID.m_timer_lancer_coco.REMOVE
+			SAY Et que je ne vous revoie plus !
+			SRC.NEWITEM m_ban_coco
+			SRC.ACT.TIMER = 86400
+			SRC.ACT.EQUIP
+			SRC.EVENTS -e_colisee
+			SRC.TAG.anti_mark_recall=0
+			SRC.EVENTS -e_anti_mark_recall
+			SRC.P=4597,3631,30
+			SRC.UPDATE
+			RETURN 1
+		ENDIF
+	ELSE
+		NEWITEM m_timer_lancer_coco
+		ACT.CONT = <UID>
+		IF (<EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 0) || (<EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 10)
+			TAG.MONSTRELANCE=1
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_myopotame
+			PLACER_MONSTRE_COCO 11
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 20
+			TAG.MONSTRELANCE=2
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_myopotame
+			PLACER_MONSTRE_COCO 21
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_myopotame
+			PLACER_MONSTRE_COCO 21
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 30
+			TAG.MONSTRELANCE=3
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_myopotame
+			PLACER_MONSTRE_COCO 31
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_myopotame
+			PLACER_MONSTRE_COCO 31
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_myopotame
+			PLACER_MONSTRE_COCO 31
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 40
+			TAG.MONSTRELANCE=1
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_megachiroptere
+			PLACER_MONSTRE_COCO 41
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 50
+			TAG.MONSTRELANCE=2
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_megachiroptere
+			PLACER_MONSTRE_COCO 51
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_megachiroptere
+			PLACER_MONSTRE_COCO 51
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 60
+			TAG.MONSTRELANCE=3
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_megachiroptere
+			PLACER_MONSTRE_COCO 61
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_megachiroptere
+			PLACER_MONSTRE_COCO 61
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_megachiroptere
+			PLACER_MONSTRE_COCO 61
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 70
+			TAG.MONSTRELANCE=1
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_ectoplasme
+			PLACER_MONSTRE_COCO 71
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 80
+			TAG.MONSTRELANCE=2
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_ectoplasme
+			PLACER_MONSTRE_COCO 81
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_ectoplasme
+			PLACER_MONSTRE_COCO 81
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 90
+			TAG.MONSTRELANCE=3
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_ectoplasme
+			PLACER_MONSTRE_COCO 91
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_ectoplasme
+			PLACER_MONSTRE_COCO 91
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_ectoplasme
+			PLACER_MONSTRE_COCO 91
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 100
+			TAG.MONSTRELANCE=1
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hobgobelin
+			PLACER_MONSTRE_COCO 101
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 110
+			TAG.MONSTRELANCE=2
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hobgobelin
+			PLACER_MONSTRE_COCO 111
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hobgobelin
+			PLACER_MONSTRE_COCO 111
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 120
+			TAG.MONSTRELANCE=3
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hobgobelin
+			PLACER_MONSTRE_COCO 121
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hobgobelin
+			PLACER_MONSTRE_COCO 121
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hobgobelin
+			PLACER_MONSTRE_COCO 121
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 130
+			TAG.MONSTRELANCE=1
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Hydrophis_Belcheris
+			PLACER_MONSTRE_COCO 131
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 140
+			TAG.MONSTRELANCE=2
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Hydrophis_Belcheris
+			PLACER_MONSTRE_COCO 141
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Hydrophis_Belcheris
+			PLACER_MONSTRE_COCO 141
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 150
+			TAG.MONSTRELANCE=3
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Hydrophis_Belcheris
+			PLACER_MONSTRE_COCO 151
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Hydrophis_Belcheris
+			PLACER_MONSTRE_COCO 151
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Hydrophis_Belcheris
+			PLACER_MONSTRE_COCO 151
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 160
+			TAG.MONSTRELANCE=1
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Latrodecte
+			PLACER_MONSTRE_COCO 161
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 170
+			TAG.MONSTRELANCE=2
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Latrodecte
+			PLACER_MONSTRE_COCO 171
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Latrodecte
+			PLACER_MONSTRE_COCO 171
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 180
+			TAG.MONSTRELANCE=3
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Latrodecte
+			PLACER_MONSTRE_COCO 181
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Latrodecte
+			PLACER_MONSTRE_COCO 181
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_Latrodecte
+			PLACER_MONSTRE_COCO 181
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 190
+			TAG.MONSTRELANCE=1
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_emanation_putride
+			PLACER_MONSTRE_COCO 191
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 200
+			TAG.MONSTRELANCE=2
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_emanation_putride
+			PLACER_MONSTRE_COCO 201
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_emanation_putride
+			PLACER_MONSTRE_COCO 201
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 210
+			TAG.MONSTRELANCE=3
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_emanation_putride
+			PLACER_MONSTRE_COCO 211
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_emanation_putride
+			PLACER_MONSTRE_COCO 211
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_emanation_putride
+			PLACER_MONSTRE_COCO 211
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 220
+			TAG.MONSTRELANCE=1
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hexapode
+			PLACER_MONSTRE_COCO 221
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 230
+			TAG.MONSTRELANCE=2
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hexapode
+			PLACER_MONSTRE_COCO 231
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hexapode
+			PLACER_MONSTRE_COCO 231
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 240
+			TAG.MONSTRELANCE=3
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hexapode
+			PLACER_MONSTRE_COCO 241
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hexapode
+			PLACER_MONSTRE_COCO 241
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_hexapode
+			PLACER_MONSTRE_COCO 241
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 250
+			TAG.MONSTRELANCE=1
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_urgal
+			PLACER_MONSTRE_COCO 251
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 260
+			TAG.MONSTRELANCE=2
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_urgal
+			PLACER_MONSTRE_COCO 261
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_urgal
+			PLACER_MONSTRE_COCO 261
+		ELSEIF <EVAL <SRC.TAG.NIVEAUDIFFICULTE>> == 270
+			TAG.MONSTRELANCE=3
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_urgal
+			PLACER_MONSTRE_COCO 271
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_urgal
+			PLACER_MONSTRE_COCO 271
+			SET_RANDOM_COCO
+			UID.09903F.NEWNPC c_urgal
+			PLACER_MONSTRE_COCO 271
+		ELSE
+			SAY Je ne possede pas de monstre de cette puissance pour le moment, vous devez diminuer votre niveau de difficulte
+		ENDIF
+	ENDIF
+ENDIF
+
+[CHARDEF c_gardien_du_colysee]
+DEFNAME=c_gardien_du_colysee
+NAME=Une ombre
+ID=c_man
+ 
+TSPEECH=spk_gardien_du_colysee
+
+ON=@create
+COLOR=07fff
+FOOD=9999 
+SPEECHCOLOR=0ac9
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Gardien du colysee
+
+ITEMNEWBIE=i_war_fork
+NAME=Faucheuse
+COLOR=0ac9
+
+ITEMNEWBIE=i_robe
+NAME=Robe poussiereuse
+COLOR=0ac9
+DISPID=i_deathshroud
+
+ON=@NPCHearUnknown
+SAY Allons allons cessez de vous extenuer pour rien ... Si vous desirez combattre mes creatures il suffit de me le demander !
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Colisee
+DESCRIPTION=Gardien du colysee
+
+[ITEMDEF m_jeton_niveau_arene]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+LINK=04c37f
+LINK.TAG.MONSTRELANCE=<EVAL <LINK.TAG.MONSTRELANCE>-1>
+TOPOBJ.REMOVE
+RETURN 1
+
+
+//TEMPS POUR AVOIR LE DROIT DE SORTIR DU COCO
+[ITEMDEF m_temps_sortir_coco]
+ID=i_memory
+NAME=temps sortir coco
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER={30 60}
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//TEMPS BANNI DU COCO
+[ITEMDEF m_ban_coco]
+ID=i_memory
+NAME=temps ban coco
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=60
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//TEMPS AVANT DE LANCER UN AUTRE MONSTRE
+[ITEMDEF m_timer_lancer_coco]
+ID=i_memory
+NAME=temps lancer coco
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=<EVAL RAND(15,25)>
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//SORTIE : VAR.COORDRANDOMCOCO ==> COORD DU MONSTRE AU COCO
+[FUNCTION SET_RANDOM_COCO]
+IF <EVAL RAND(15)> == 1
+	IF <EVAL RAND(3)> == 1
+		VAR.COORDRANDOMCOCO=<EVAL RAND(4583, 4588)>,<EVAL RAND(3562, 3566)>,30
+	ELSE
+		VAR.COORDRANDOMCOCO=<EVAL RAND(4598, 4608)>,<EVAL RAND(3562, 3566)>,30
+	ENDIF
+ELSE
+	VAR.COORDRANDOMCOCO=<EVAL RAND(4582, 4608)>,<EVAL RAND(3566, 3581)>,30
+ENDIF
+
+//<ARGS> = DIFFICULTE
+[FUNCTION PLACER_MONSTRE_COCO]
+UID.09903F.ACT.P=<VAR.COORDRANDOMCOCO>
+UID.09903F.ACT.UPDATE
+UID.09903F.ACT.NEWITEM m_jeton_niveau_arene
+UID.09903F.ACT.ACT.LINK=<SRC.UID>
+UID.09903F.ACT.ACT.TAG.NIVEAUDIFFICULTE=<ARGS>
+UID.09903F.ACT.ACT.CONT=<UID.09903F.ACT.UID>
+RETURN 1

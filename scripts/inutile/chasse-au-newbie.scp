@@ -1,0 +1,71 @@
+[ITEMDEF i_gate_chasse_nbg]
+DEFNAME=i_gate_chasse_nbg
+NAME=[ Participer a la chasse aux newbies ]
+ID=i_moongate_red
+TYPE=t_eq_script
+
+ON=@CREATE
+TAG.NEWBIES=0
+
+ON=@STEP
+IF (<EVAL <SRC.TAG.LEVEL>>==1) && (<EVAL 0<SRC.TAG.XP>>==0) && (<EVAL 0<SRC.TAG.gate_chasse_nbg>>==0)
+TAG.NEWBIES=<EVAL 0<TAG.NEWBIES>+1>
+SRC.NAME=Dossard <EVAL <TAG.NEWBIES>>
+SRC.EVENTS +e_anti_mark_recall
+SRC.TAG.anti_mark_recall=1
+SRC.TAG.gate_chasse_nbg=1
+SERV.B Chasse aux newbies : <EVAL <TAG.NEWBIES>> participants
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Afin de pouvoir participer il vous faut creer un nouveau personnage
+ENDIF
+RETURN 1
+
+CATEGORY=Anims
+SUBSECTION=Chasse aux newbies
+DESCRIPTION=Gate newbies depart
+
+[ITEMDEF i_gate_chasse_nbg_arrivee]
+DEFNAME=i_gate_chasse_nbg_arrivee
+NAME=[ Arrivee a la chasse aux newbies ]
+ID=i_moongate_red
+TYPE=t_eq_script
+
+ON=@STEP
+IF (<EVAL <SRC.TAG.gate_chasse_nbg>>==1)
+SRC.TAG.anti_mark_recall=0
+SRC.TAG.gate_chasse_nbg=0
+SRC.EVENTS -e_anti_mark_recall
+SERV.B Felicitation au <SRC.NAME> qui arrive premier de cette manche de la chasse aux newbies
+SRC.NEWITEM i_chaussures_d_athlete
+SRC.ACT.EQUIP
+REMOVE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne participez pas a la chasse aux newbies !
+ENDIF
+RETURN 1
+
+CATEGORY=Anims
+SUBSECTION=Chasse aux newbies
+DESCRIPTION=Gate newbies arrivee
+
+[ITEMDEF i_chaussures_d_athlete]
+DEFNAME=i_chaussures_d_athlete
+NAME=Chaussures d'athlete
+ID=0170f
+REQSTR=0
+DYE=0
+WEIGHT=2
+
+ON=@Create
+HITPOINTS=5000
+COLOR=0481
+
+ON=@EQUIP
+SRC.DEX=<EVAL <SRC.DEX>+5>
+
+ON=@UNEQUIP
+SRC.DEX=<EVAL <SRC.DEX>-5>
+
+CATEGORY=Anims
+SUBSECTION=Chasse aux newbies
+DESCRIPTION=Chaussures d'athlete

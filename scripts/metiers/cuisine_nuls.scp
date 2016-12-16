@@ -1,0 +1,257 @@
+//*************************************************
+//***************RECETTES NULLES*******************
+//*************************************************
+
+[ITEMDEF i_preparation_a_pain]
+NAME=Preparation a pain
+ID=i_flour_bowl
+TYPE=t_normal
+RESOURCES=1 m_sac_de_farine, 1 i_levure
+SKILLMAKE=TINKERING 30.0, COOKING 30.0, i_livre_de_recettes_1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Preparation a pain
+
+[ITEMDEF i_muffin_avec_coquilles_d_oeuf]
+NAME=Muffin avec coquilles d'oeuf
+ID=i_muffin
+TYPE=t_nourriture_crue
+RESOURCES=1 m_cruche_d_eau, 1 i_preparation_a_pain, 1 i_eggs_fresh, 1 m_sac_de_sel
+SKILLMAKE=TINKERING 30.0, COOKING 30.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=1
+MORE2=1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Muffin avec coquilles d'oeuf
+
+[ITEMDEF i_tranche_de_bacon_crue]
+NAME=Tranche de bacon crue
+ID=i_bacon_slice
+TYPE=t_nourriture_crue
+RESOURCES=1 m_sac_de_sel, 1 i_ribs_raw
+SKILLMAKE=TINKERING 30.0, COOKING 30.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=i_tranche_de_bacon
+MORE2=30.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Tranche de bacon crue
+
+[ITEMDEF i_tranche_de_bacon]
+NAME=Tranche de bacon
+ID=i_bacon_slice
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=2
+MORE2=1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Tranche de bacon
+
+[ITEMDEF i_baguette_de_pain_crue]
+NAME=Baguette de pain crue
+ID=i_bread_french
+TYPE=t_nourriture_crue
+RESOURCES=1 m_cruche_d_eau, 1 i_preparation_a_pain, 1 m_sac_de_sel
+SKILLMAKE=TINKERING 30.0, COOKING 32.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=i_baguette_de_pain
+MORE2=32.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Baguette de pain crue
+
+[ITEMDEF i_baguette_de_pain]
+NAME=Baguette de pain
+ID=i_bread_french
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=1
+MORE2=1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Baguette de pain
+
+[ITEMDEF i_bol_de_soupe_au_poulet_froid]
+NAME=Bol de soupe au poulet froid
+ID=i_bowl_pewter_potatoes
+TYPE=t_nourriture_crue
+RESOURCES=1 m_cruche_d_eau, 1 i_bird_raw, 1 m_sac_de_sel
+SKILLMAKE=TINKERING 30.0, COOKING 34.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=i_bol_de_soupe_au_poulet
+MORE2=34.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Bol de soupe au poulet froid
+
+[ITEMDEF i_bol_de_soupe_au_poulet]
+NAME=Bol de soupe au poulet
+ID=i_bowl_pewter_potatoes
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=1
+MORE2=1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Bol de soupe au poulet
+
+[ITEMDEF i_assiette_de_viande_crue]
+NAME=Assiette de viande crue
+ID=i_plate_food
+TYPE=t_nourriture_crue
+RESOURCES=1 i_ribs_raw, 1 m_sac_de_sel
+SKILLMAKE=TINKERING 30.0, COOKING 35.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=i_assiette_de_viande
+MORE2=35.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Assiette de viande crue
+
+[ITEMDEF i_assiette_de_viande]
+NAME=Assiette de viande
+ID=i_plate_food
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=1
+MORE2=1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Assiette de viande
+
+[ITEMDEF i_bol_de_poisson_a_l_oignon_cru]
+NAME=Bol de poisson a l'oignon cru
+ID=i_bowl_pewter_potatoes
+TYPE=t_nourriture_crue
+RESOURCES=1 i_fruit_onion, 1 m_sac_de_sel, 2 i_fish_cut_raw
+SKILLMAKE=TINKERING 30.0, COOKING 36.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=i_bol_de_poisson_a_l_oignon
+MORE2=36.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Bol de poisson a l'oignon cru
+
+[ITEMDEF i_bol_de_poisson_a_l_oignon]
+NAME=Bol de poisson a l'oignon
+ID=i_bowl_pewter_potatoes
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=2
+MORE2=1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Bol de poisson a l'oignon
+
+[ITEMDEF i_beignet_a_la_farine_cru]
+NAME=Beignet a la farine cru
+ID=i_donuts
+TYPE=t_nourriture_crue
+RESOURCES=1 i_preparation_a_pain, 1 m_sac_de_farine, 1 m_sac_de_sucre
+SKILLMAKE=TINKERING 30.0, COOKING 37.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=i_beignet_a_la_farine
+MORE2=37.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Beignet a la farine cru
+
+[ITEMDEF i_beignet_a_la_farine]
+NAME=Beignet a la farine
+ID=i_donuts
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=1
+MORE2=1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Beignet a la farine
+
+[ITEMDEF i_gateau_a_la_creme]
+NAME=Gateau a la creme
+ID=i_cake
+TYPE=t_nourriture
+RESOURCES=1 m_cruche_d_eau, 1 i_preparation_a_pain, 1 m_sac_de_sucre, 1 m_cruche_de_creme
+SKILLMAKE=TINKERING 30.0, COOKING 38.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=1
+MORE2=1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Gateau a la creme
+
+[ITEMDEF i_bol_de_pates_fraiches]
+NAME=Bol de pates fraiches
+ID=i_bowl_pewter_potatoes
+TYPE=t_nourriture
+RESOURCES=1 m_cruche_d_eau, 3 i_eggs_fresh, 1 m_sac_de_farine
+SKILLMAKE=TINKERING 30.0, COOKING 40.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=1
+MORE2=1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Bol de pates fraiches
+
+[ITEMDEF i_assiette_de_fruits]
+NAME=Assiette de fruits
+ID=i_plate_food
+TYPE=t_nourriture
+RESOURCES=1 i_fruit_peach, 1 i_fruit_pear, 1 i_fruit_apple, 1 i_fruit_honeydewmelon, 1 i_fruit_banana, 1 i_fruit_grapes
+SKILLMAKE=TINKERING 40.0, COOKING 40.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=1
+MORE2=2
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Assiette de fruits
+
+[ITEMDEF i_bol_de_sauce_tomate]
+NAME=Bol de sauce tomate
+ID=i_bowl_tomato_soup
+TYPE=t_nourriture
+RESOURCES=3 i_tomate, 1 m_sac_de_sel
+SKILLMAKE=TINKERING 30.0, COOKING 46.0, i_livre_de_recettes_1
+
+ON=@CREATE
+MORE1=1
+MORE2=1
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Bol de sauce tomate

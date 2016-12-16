@@ -1,0 +1,576 @@
+[AREA Minoc]
+CLASS=48
+RECT=2388,609,2464,375
+RECT=2464,688,2632,348
+P=2464,514,15
+DEFNAME=a_townMinoc
+GROUP=Minoc
+TITLE=the town of
+TAG.GUARDOWNER=the town
+
+//********************************************
+//**DÉBUT DES MAISONS AU SUD DU MUR DE MINOC**
+//********************************************
+
+[AREA MAISON_MINOC1]
+CLASS=11
+RECT=2522,675,2531,658
+RECT=2515,666,2522,658
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC2]
+CLASS=11
+RECT=2536,679,2545,665
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC3]
+CLASS=11
+RECT=2547,679,2556,665
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC4
+CLASS=11
+RECT=,,,
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC5]
+CLASS=11
+RECT=2547,660,2556,647
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC6]
+CLASS=11
+RECT=2536,660,2545,647
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC7]
+CLASS=11
+RECT=2517,642,2530,634
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC8]
+CLASS=11
+RECT=2537,642,2551,634
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+//****************************************
+//**MAISONS AU SUD DE LA BANQUE DE MINOC**
+//****************************************
+
+[AREA MAISON_MINOC9]
+CLASS=11
+RECT=2498,623,2512,608
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC10]
+CLASS=11
+RECT=2505,599,2514,591
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC11]
+CLASS=11
+RECT=2494,599,2503,591
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC12]
+CLASS=11
+RECT=2474,599,2486,591
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC13]
+CLASS=11
+RECT=2477,583,2483,576
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC14]
+CLASS=11
+RECT=2465,568,2481,561
+RECT=2465,561,2473,553
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC15]
+CLASS=11
+RECT=2528,560,2536,544
+RECT=2520,552,2528,544
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC16]
+CLASS=11
+RECT=2524,579,2538,570
+RECT=2530,584,2538,578
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC17]
+CLASS=11
+RECT=2522,599,2542,590
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC18]
+CLASS=11
+RECT=2522,617,2542,606
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC19]
+CLASS=11
+RECT=2549,617,2568,606
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC20]
+CLASS=11
+RECT=2549,599,2568,590
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC21]
+CLASS=11
+RECT=2593,617,2602,609
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC22]
+CLASS=11
+RECT=2593,631,2602,623
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC23]
+CLASS=11
+RECT=2589,644,2601,634
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+//***************************
+//**TENTES A L'EST DE MINOC**
+//***************************
+
+[AREA MAISON_MINOC24]
+CLASS=11
+RECT=2587,541,2593,533
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC25]
+CLASS=11
+RECT=2591,528,2597,520
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC26]
+CLASS=11
+RECT=2580,525,2586,517
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC27]
+CLASS=11
+RECT=2574,538,2580,530
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC28]
+CLASS=11
+RECT=2563,529,2569,521
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+//*****************************
+//**TEMPLE ET BANQUE DE MINOC**
+//*****************************
+
+[AREA TEMPLE_MINOC]
+CLASS=11
+RECT=2454,533,2476,503
+DEFNAME=temple_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA BANQUE_MINOC]
+CLASS=11
+RECT=2496,559,2512,544
+DEFNAME=temple_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+//***********************************************
+//**MAISONS ENTRE LE PONT DE MINOC ET LA BANQUE**
+//***********************************************
+
+[AREA MAISON_MINOC29]
+CLASS=11
+RECT=2521,535,2528,521
+RECT=2513,527,2521,521
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC30]
+CLASS=11
+RECT=2416,535,2439,520
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC31]
+CLASS=11
+RECT=2416,560,2432,544
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+//**************************************
+//**MAISONS DE LA RUE DU PONT DE MINOC**
+//**************************************
+
+[AREA MAISON_MINOC32]
+CLASS=11
+RECT=2512,497,2522,489
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC33]
+CLASS=11
+RECT=2494,497,2505,489
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC34]
+CLASS=11
+RECT=2460,497,2486,489
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC35]
+CLASS=11
+RECT=2446,497,2458,489
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC36]
+CLASS=11
+RECT=2432,497,2444,489
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+//**************************************
+//**MAISONS DU BORD DE L'EAU A L'OUEST**
+//**************************************
+
+[AREA MAISON_MINOC37]
+CLASS=11
+RECT=2416,502,2425,493
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC38]
+CLASS=11
+RECT=2416,489,2425,480
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC39]
+CLASS=11
+RECT=2416,476,2425,467
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC40]
+CLASS=11
+RECT=2416,463,2425,453
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+//*******************************************
+//**MAISONS ENTRE L'HOTEL ET LA RUE DU PONT**
+//*******************************************
+
+[AREA MAISON_MINOC41]
+CLASS=11
+RECT=2506,481,2522,474
+RECT=2506,474,2514,466
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC42]
+CLASS=11
+RECT=2504,457,2527,449
+RECT=2519,449,2527,440
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC43]
+CLASS=11
+RECT=2483,481,2497,474
+RECT=2489,474,2497,464
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC44]
+CLASS=11
+RECT=2486,457,2491,454
+RECT=2480,454,2497,449
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC45]
+CLASS=11
+RECT=2472,481,2481,471
+RECT=2472,471,2487,464
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC46]
+CLASS=11
+RECT=2458,466,2466,458
+RECT=2450,458,2458,450
+RECT=2458,458,2474,450
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC47]
+CLASS=11
+RECT=2446,481,2459,474
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC48]
+CLASS=11
+RECT=2432,481,2444,474
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+//********************************
+//**MAISONS DE LA RUE DE L'HOTEL**
+//********************************
+
+[AREA MAISON_MINOC49]
+CLASS=11
+RECT=2496,442,2501,437
+RECT=2507,442,2512,437
+RECT=2496,437,2512,424
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC50]
+CLASS=11
+RECT=2480,440,2488,424
+RECT=2471,432,2480,424
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+//HOTEL
+[AREA MAISON_MINOC51]
+CLASS=11
+RECT=2449,442,2465,422
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC52]
+CLASS=11
+RECT=2427,443,2443,435
+RECT=2427,435,2435,427
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+//******************************
+//**MAISONS AU NORD DE L'HOTEL**
+//******************************
+
+[AREA MAISON_MINOC53]
+CLASS=11
+RECT=2432,416,2448,408
+RECT=2432,408,2440,400
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC54]
+CLASS=11
+RECT=2457,405,2465,397
+RECT=2465,413,2473,405
+RECT=2481,411,2489,405
+RECT=2465,405,2497,397
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC55]
+CLASS=11
+RECT=2485,388,2498,374
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC56]
+CLASS=11
+RECT=2516,411,2529,403
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC57]
+CLASS=11
+RECT=2555,377,2577,368
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC58]
+CLASS=11
+RECT=2555,361,2563,355
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC59]
+CLASS=11
+RECT=2565,361,2573,355
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC60]
+CLASS=11
+RECT=2575,361,2583,355
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_MINOC61]
+CLASS=11
+RECT=2588,344,2599,335
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA SALLE_TELEPORTATION]
+CLASS=11
+RECT=2432,471,2449,450
+DEFNAME=maison_minoc
+GROUP=Minoc
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA Montagne Kendall]
+CLASS=11
+RECT=2555,503,2616,440
+RECT=2572,505,2582,499
+P=2593,477,60
+GROUP=Minoc
+
+[ROOM Mine]
+CLASS=11
+RECT=2556,501,2562,504
+RECT=2556,474,2582,501
+P=2558,499
+GROUP=Mines & Caves
+
+[AREA Minoc Cave1]
+FLAGS=0880
+RECT=2406,168,2428,184
+P=2426,177
+GROUP=Mines & Caves
+
+[AREA Minoc Cave2]
+FLAGS=0880
+RECT=2418,81,2442,113
+P=2440,94
+GROUP=Mines & Caves
+
+[AREA Minoc Cave3]
+FLAGS=0880
+RECT=2447,39,2489,67
+P=2471,64
+GROUP=Mines & Caves
+
+[AREA sous-sol de la mine de Minoc]
+CLASS=11
+RECT=5520,1433,5561,1488
+P=5527,1479,1
+RESOURCES=r_default_rock
+GROUP=Other Dungeons
+
+[AREA Entrance from N of Minoc]
+FLAGS=0880
+RECT=2394,192,2409,219
+RECT=5710,412,5770,470
+P=2400,200
+GROUP=T2A Entrances & Exits
+
+[AREA Kendall Island]
+RECT=2600,372,2617,403
+P=2607,387
+GROUP=Minoc
+
+[ROOM Passage from N Minoc]
+FLAGS=0880
+RECT=5706,408,5776,473
+P=5753,435,77
+GROUP=T2A Entrances & Exits
+

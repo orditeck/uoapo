@@ -1,0 +1,441 @@
+[ITEMDEF 04039]
+DEFNAME=i_peau_ours_sud
+NAME=peau d'ours sud
+TYPE=T_NORMAL
+VALUE=1500
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=peau d'ours sud
+
+[ITEMDEF i_deed_peau_ours_sud]
+NAME=Peau d'ours (sud)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=1 i_masque_d_ours, 5 i_hide
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_peau_ours_sud
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de peau d'ours sud
+
+[ITEMDEF 0403A]
+DEFNAME=i_peau_ours_est
+NAME=peau d'ours est
+TYPE=T_NORMAL
+VALUE=1500
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=peau d'ours est
+
+[ITEMDEF i_deed_peau_ours_est]
+NAME=Peau d'ours (est)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=1 i_masque_d_ours, 5 i_hide
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_peau_ours_est
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de peau d'ours est
+
+[ITEMDEF 0403B]
+DEFNAME=i_tapis_bleu_sud
+NAME=tapis bleu sud
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis bleu sud
+
+[ITEMDEF i_deed_tapis_bleu_sud]
+NAME=Tapis bleu (sud)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_bleu_sud
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis bleu sud
+
+[ITEMDEF 0403C]
+DEFNAME=i_tapis_bleu_est
+NAME=tapis bleu est
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis bleu est
+
+[ITEMDEF i_deed_tapis_bleu_est]
+NAME=Tapis bleu (est)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_bleu_est
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis bleu est
+
+[ITEMDEF 0403D]
+DEFNAME=i_tapis_rouge_nord
+NAME=tapis rouge nord
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis rouge nord
+
+[ITEMDEF i_deed_tapis_rouge_nord]
+NAME=Tapis rouge (sud)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_rouge_nord
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis rouge nord
+
+[ITEMDEF 0403E]
+DEFNAME=i_tapis_rouge_ouest
+NAME=tapis_rouge_ouest
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis rouge ouest
+
+[ITEMDEF i_deed_tapis_rouge_ouest]
+NAME=Tapis rouge (est)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_rouge_ouest
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis rouge ouest
+
+[ITEMDEF 0403F]
+DEFNAME=i_tapis_bleudore_nord
+NAME=tapis bleudore nord
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis bleudore nord
+
+[ITEMDEF i_deed_tapis_bleudore_nord]
+NAME=Tapis bleu orne d'or (sud)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_bleudore_nord
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis bleudore nord
+
+[ITEMDEF 04040]
+DEFNAME=i_tapis_bleudore_ouest
+NAME=tapis_bleudore_ouest
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis_bleudore_ouest
+
+[ITEMDEF i_deed_tapis_bleudore_ouest]
+NAME=Tapis bleu orne d'or (est)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_bleudore_ouest
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis bleudore ouest
+
+[ITEMDEF 04041]
+DEFNAME=i_tapis_marron_ouest
+NAME=tapis_marron_ouest
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis marron ouest
+
+[ITEMDEF i_deed_tapis_marron_ouest]
+NAME=Deed to a tapis_marron_ouest
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_marron_ouest
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis marron ouest
+
+[ITEMDEF 04043]
+DEFNAME=i_tapis_marronorange_ouest
+NAME=tapis marronorange ouest
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis marronorange ouest
+
+[ITEMDEF i_deed_tapis_marronorange_ouest]
+NAME=Tapis marron brode d'orange (est)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_marronorange_ouest
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis marronorange ouest
+
+[ITEMDEF 04044]
+DEFNAME=i_tapis_marronorange_nord
+NAME=tapis_marronorange_nord
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis marronorange nord
+
+[ITEMDEF i_deed_tapis_marronorange_nord]
+NAME=Tapis marron brode d'orange (nord)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_marronorange_nord
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis marronorange nord
+
+[ITEMDEF 04045]
+DEFNAME=i_tapis_bleuorange_nord
+NAME=tapis bleuorange nord
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis bleuorange nord
+
+[ITEMDEF i_deed_tapis_bleuorange_nord]
+NAME=Tapis bleu brode d'orange (nord)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_bleuorange_nord
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis bleuorange nord
+
+[ITEMDEF 04046]
+DEFNAME=i_tapis_bleuorange_ouest
+NAME=tapis bleuorange ouest
+TYPE=T_NORMAL
+VALUE=5000
+
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=tapis_bleuorange_ouest
+
+[ITEMDEF i_deed_tapis_bleuorange_ouest]
+NAME=Tapis bleu brode d'orange (est)
+ID=i_Deed
+TYPE=T_SCRIPT
+RESOURCES=12 i_cloth, 1 i_dyes
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@DCLICK
+IF <EVAL 0<TAG.AVERTISSEMENT>>==0
+	SRC.SYSMESSAGEUA 025 1 1 0 Attention : Avant de proceder a la pose de ce deed veuillez vous assurer que vous vous trouvez dans un batiment dont vous etes le proprietaire.
+	SRC.SYSMESSAGEUA 025 1 1 0 Pour poser le deed, veuillez double cliquer a nouveau sur celui-ci. Il se deployera alors a la position ou vous vous situez actuellement.
+	TAG.AVERTISSEMENT=1
+ELSE
+	SRC.NEWITEM=i_tapis_bleuorange_ouest
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	REMOVE 
+ENDIF
+RETURN 1
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed de tapis bleuorange ouest

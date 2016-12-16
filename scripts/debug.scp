@@ -1,0 +1,112 @@
+[FUNCTION debogage]
+SRC.debogage_nosrc
+
+[FUNCTION debogage_nosrc]
+IF <FINDID.i_rune_paralyze>
+	SYSMESSAGEUA 025 1 1 0 Vous en pouvez pas faire vous debogger quand vous etes paralyse !
+	RETURN 0
+ENDIF
+RESURRECT
+DESHABILLER
+DEBUG_RUNES
+DEBUG_AURA
+DEBUG_STATS
+DEBUG_VENDEUR
+RETURN 1
+
+
+//DEFAULT : JOUEUR
+[FUNCTION DEBUG_RUNES]
+IF <FINDID.i_rune_d_instinct_de_combat_mineur>
+	FINDID.i_rune_d_instinct_de_combat_mineur.REMOVE
+ENDIF
+IF <FINDID.i_rune_d_instinct_de_combat_majeur>
+	FINDID.i_rune_d_instinct_de_combat_majeur.REMOVE
+ENDIF
+IF <FINDID.i_rune_d_accroissement_magique>
+	FINDID.i_rune_d_accroissement_magique.REMOVE
+ENDIF
+IF <FINDID.i_rune_force>
+	FINDID.i_rune_force.REMOVE
+ENDIF
+IF <FINDID.i_rune_dexterite>
+	FINDID.i_rune_dexterite.REMOVE
+ENDIF
+IF <FINDID.i_rune_clairvoyance>
+	FINDID.i_rune_clairvoyance.REMOVE
+ENDIF
+IF <FINDID.i_rune_de_peau_de_fer>
+	FINDID.i_rune_de_peau_de_fer.REMOVE
+ENDIF
+IF <FINDID.i_rune_de_peau_de_pierre>
+	FINDID.i_rune_de_peau_de_pierre.REMOVE
+ENDIF
+IF <FINDID.i_rune_de_bouclier_de_mana>
+	FINDID.i_rune_de_bouclier_de_mana.REMOVE
+ENDIF
+IF <FINDID.i_rune_protection>
+	FINDID.i_rune_protection.REMOVE
+ENDIF
+IF <FINDID.i_rune_night_sight>
+	FINDID.i_rune_night_sight.REMOVE
+ENDIF
+IF <FINDID.m_clumsy_mangeur_inferieur>
+	FINDID.m_clumsy_mangeur_inferieur.REMOVE
+ENDIF
+IF <FINDID.m_bonus_oeuf_paques>
+	FINDID.m_bonus_oeuf_paques.REMOVE
+ENDIF
+IF <FINDID.m_anti_popotage>
+	FINDID.m_anti_popotage.REMOVE
+ENDIF
+FINDLAYER.32.REMOVE
+FINDLAYER.40.REMOVE
+RETURN 1
+
+
+//DEFAULT : JOUEUR
+[FUNCTION DEBUG_STATS]
+MAGERY=<EVAL <TAG.MAGIEPURE>*10>
+TACTICS=<EVAL <TAG.TACTICSPURE>*10>
+FENCING=<EVAL <TAG.FENCINGPURE>*10>
+MACEFIGHTING=<EVAL <TAG.MACEFIGHTINGPURE>*10>
+SWORDSMANSHIP=<EVAL <TAG.SWORDSMANSHIPPURE>*10>
+PARRYING=<EVAL <TAG.PARRYINGPURE>*10>
+HEALING=<EVAL <TAG.HEALINGPURE>*10>
+WRESTLING=<EVAL <TAG.WRESTLINGPURE>*10>
+MEDITATION=<EVAL <TAG.MEDITATIONPURE>*10>
+MAGICRESISTANCE=<EVAL <TAG.MAGICRESISTANCEPURE>*10>
+ARCHERY=<EVAL <TAG.ARCHERYPURE>*10>
+ANATOMY=<EVAL <TAG.ANATOMYPURE>*10>
+EvaluatingIntel=<EVAL <TAG.EvaluatingIntelPURE>*10>
+STR=<EVAL <TAG.FORPURE>>
+DEX=<EVAL <TAG.DEXPURE>>
+INT=<EVAL <TAG.INTPURE>>
+MAXMANA
+MAXSTAM
+MAXHITS
+RETURN 1
+
+
+//DEFAULT : JOUEUR
+[FUNCTION DEBUG_VENDEUR]
+IF 0<TAG.VENDEUR> == 1
+	IF 0<TAG.VENDOR>
+		UID.09903F.ACT = <TAG.VENDOR>
+		IF ((<UID.09903F.ACT.BASEID> != c_house_vendor) && (<UID.09903F.ACT.BASEID> != c_house_vendor_f))
+			TAG.VENDOR
+			TAG.VENDEUR
+		ENDIF
+	ELSE
+		TAG.VENDOR
+		TAG.VENDEUR
+	ENDIF
+ENDIF
+RETURN 1
+
+//DEFAULT : JOUEUR
+[FUNCTION DEBUG_AURA]
+IF <FINDID.m_aura_timer>
+	FINDID.m_aura_timer.REMOVE
+ENDIF
+RETURN 1

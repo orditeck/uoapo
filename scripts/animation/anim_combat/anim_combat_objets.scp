@@ -1,0 +1,556 @@
+//TEMPS AVANT DE RESSUSCITER
+[ITEMDEF i_temps_resurrect]
+ID=i_memory
+NAME=Temps resurrect combat
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=30
+
+ON=@TIMER
+IF ( <EVAL <TOPOBJ.TAG.EQUIPE>> == 1 )
+	TOPOBJ.GO 5299 1483
+ELSE
+	TOPOBJ.GO 5156 1508
+ENDIF
+REMOVE
+RETURN 1
+
+[ITEMDEF i_temps_skill]
+ID=i_memory
+NAME=Temps skill combat
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=3
+
+ON=@TIMER
+IF <TOPOBJ.FINDID.m_effaceur_perso_rebour>
+	IF <MORE2> == 1
+		TOPOBJ.EMOTE pratiquer le bricolage
+		TOPOBJ.Tinkering = <TOPOBJ.Tinkering> + 5
+	ELSEIF <MORE2> == 2
+		TOPOBJ.EMOTE pratiquer l'alchimie
+		TOPOBJ.Alchemy = <TOPOBJ.Alchemy> + 5
+	ELSEIF <MORE2> == 3
+		TOPOBJ.EMOTE pratiquer la ferronnerie
+		TOPOBJ.Blacksmithing = <TOPOBJ.Blacksmithing> + 5
+	ELSEIF <MORE2> == 4
+		TOPOBJ.EMOTE pratiquer la fabrication d'arcs
+		TOPOBJ.Bowcraft = <TOPOBJ.Bowcraft> + 5
+	ELSEIF <MORE2> == 5
+		TOPOBJ.EMOTE pratiquer la menuiserie
+		TOPOBJ.Carpentry = <TOPOBJ.Carpentry> + 5
+	ELSEIF <MORE2> == 6
+		TOPOBJ.EMOTE pratiquer la transcription
+		TOPOBJ.Inscription = <TOPOBJ.Inscription> + 5
+	ELSE
+		TOPOBJ.EMOTE pratiquer la couture
+		TOPOBJ.Tailoring = <TOPOBJ.Tailoring> + 5
+	ENDIF
+	TOPOBJ.TAG.GAINSKILL_ANIMCOMBAT=<EVAL 0<TOPOBJ.TAG.GAINSKILL_ANIMCOMBAT> + 5>
+ENDIF
+REMOVE
+RETURN 1
+
+[ITEMDEF i_kit_couture_combat]
+ID=i_sewing_kit
+NAME=Entrainement de couture
+TYPE=t_normal
+
+ON=@DCLICK
+IF !<SRC.FINDID.i_temps_skill>
+	SRC.NEWITEM i_temps_skill
+	SRC.ACT.EQUIP
+	SRC.ACT.MORE2=7
+ELSE
+	SRC.FINDID.i_temps_skill.REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_marteau_de_forgeron_combat]
+ID=i_hammer_sledge
+NAME=Entrainement de ferronnerie
+TYPE=t_normal
+
+ON=@DCLICK
+IF !<SRC.FINDID.i_temps_skill>
+	SRC.NEWITEM i_temps_skill
+	SRC.ACT.EQUIP
+	SRC.ACT.MORE2=3
+ELSE
+	SRC.FINDID.i_temps_skill.REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_dagger_combat]
+ID=i_dagger
+NAME=Entrainement de fabrication d'arc
+TYPE=t_normal
+
+ON=@DCLICK
+IF !<SRC.FINDID.i_temps_skill>
+	SRC.NEWITEM i_temps_skill
+	SRC.ACT.EQUIP
+	SRC.ACT.MORE2=4
+ELSE
+	SRC.FINDID.i_temps_skill.REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_mortar_pestle_combat]
+ID=i_mortar_pestle
+NAME=Entrainement d'alchimie
+TYPE=t_normal
+
+ON=@DCLICK
+IF !<SRC.FINDID.i_temps_skill>
+	SRC.NEWITEM i_temps_skill
+	SRC.ACT.EQUIP
+	SRC.ACT.MORE2=2
+ELSE
+	SRC.FINDID.i_temps_skill.REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_outils_de_bricoleur_combat]
+ID=i_tinker_tools
+NAME=Entrainement de bricolage
+TYPE=t_normal
+
+ON=@DCLICK
+IF !<SRC.FINDID.i_temps_skill>
+	SRC.NEWITEM i_temps_skill
+	SRC.ACT.EQUIP
+	SRC.ACT.MORE2=1
+ELSE
+	SRC.FINDID.i_temps_skill.REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_rabot_a_replanir_combat]
+ID=i_plane_jointing
+NAME=Entrainement de menuiserie
+TYPE=t_normal
+
+ON=@DCLICK
+IF !<SRC.FINDID.i_temps_skill>
+	SRC.NEWITEM i_temps_skill
+	SRC.ACT.EQUIP
+	SRC.ACT.MORE2=5
+ELSE
+	SRC.FINDID.i_temps_skill.REMOVE
+ENDIF
+RETURN 1
+
+
+[ITEMDEF i_livre_ouvert_combat]
+ID=i_book_open
+NAME=Entrainement de transcription
+TYPE=t_normal
+
+ON=@DCLICK
+IF !<SRC.FINDID.i_temps_skill>
+	SRC.NEWITEM i_temps_skill
+	SRC.ACT.EQUIP
+	SRC.ACT.MORE2=6
+ELSE
+	SRC.FINDID.i_temps_skill.REMOVE
+ENDIF
+RETURN 1
+
+[CHARDEF C_GASTON_BARBEROUGE]
+DEFNAME=C_GASTON_BARBEROUGE
+NAME=Gaston Barberouge
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=job_gaston_barberouge
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+TAG.PEUTCOMMENCER=0
+
+NPC=BRAIN_VENDOR
+NEED=i_gold
+
+ITEMNEWBIE=random_facial_hair
+COLOR=025
+
+ON=@NPCRestock
+ITEMNEWBIE=i_casque_ferme
+COLOR=03e9
+ITEMNEWBIE=i_armure_maille
+COLOR=0482
+ITEMNEWBIE=i_jambiere_maille
+COLOR=03e9
+ITEMNEWBIE=i_bouclier
+COLOR=0b10
+ITEMNEWBIE=i_epee_longue
+COLOR=0b10
+
+
+ON=@NPCHearUnknown
+SAY Vous pouvez me demander l'index de ce que je suis apte a faire
+
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Barberouge
+
+[SPEECH job_gaston_barberouge]
+ON=*index*
+SAY Je dis le temps qu'il reste, mon role, le but du jeux, les reglements et je peux faire entrer les debutants
+
+ON=*temps*
+IF <FINDID.i_liste_joueurs_anim>
+	IF <FINDID.i_liste_joueurs_anim.TIMER> > 0
+		SAY Il reste : <EVAL <FINDID.i_liste_joueurs_anim.TIMER> / 60> minutes
+		SAY Equipe 1 : <EVAL <FINDID.i_liste_joueurs_anim.TAG.POINTS_EQUIPE_1>> : Equipe 2 : <EVAL <FINDID.i_liste_joueurs_anim.TAG.POINTS_EQUIPE_2>>
+	ELSE
+		SAY La partie n'est pas commencee
+	ENDIF
+ELSE
+	SAY La partie n'est pas commencee
+ENDIF
+
+ON=*role*
+ON=*quete*
+SAY Je suis le gardien de l'entree et j'empeche tous les joueurs d'experience d'y penetrer
+
+ON=*but*
+SAY L'equipe qui tue le plus de joueurs de l'equipe adverse gagne
+
+ON=*regle*
+EMOTE ricaner
+SAY Des regles? Vous voulez rire... Tuez vous du mieux que vous pouvez!
+
+ON=*entrer*
+IF ( <EVAL 0<SRC.TAG.LEVEL>> == 1 ) && ( <EVAL 0<SRC.TAG.RENAISSANCE>> == 0 )
+	SAY Vous perderez votre personnage une fois l'anim terminee
+	SAY Si vous voulez entrer malgre tout, dites moi que vous voulez participer malgre tout
+ELSE
+	SAY Vous devez etre nouveau pour jouer a ce jeu
+ENDIF
+
+ON=set
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	IF <TAG.PEUTCOMMENCER> == 1
+		TAG.PEUTCOMMENCER = 0
+		SAY Nouvelle partie desactivee
+	ELSE
+		TAG.PEUTCOMMENCER = 1
+		SAY Nouvelle partie activee
+	ENDIF
+ELSE
+	SAY set? set?
+ENDIF
+	
+
+ON=je veux participer malgre tout
+//ON AJOUTE LE MEMORY S'IL N'EXISTE PAS
+IF ( <EVAL 0<SRC.TAG.LEVEL>> == 1 ) && ( <EVAL 0<SRC.TAG.RENAISSANCE>> == 0 )
+	IF (!<FINDID.i_liste_joueurs_anim>) && (<TAG.PEUTCOMMENCER> == 1)
+		NEWITEM i_liste_joueurs_anim
+		ACT.CONT = <UID>
+		TAG.PEUTCOMMENCER = 0
+	ELSEIF (!<FINDID.i_liste_joueurs_anim>) && (<TAG.PEUTCOMMENCER> == 0)
+		SAY Un maitre de jeu doit activer le jeu pour qu'il puisse avoir lieu
+	ENDIF
+	IF <FINDID.i_liste_joueurs_anim>
+		IF <FINDID.i_liste_joueurs_anim.TAG.ID0> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID0 = <SRC.UID>
+			SRC.TAG.EQUIPE=1
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID1> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID1 = <SRC.UID>
+			SRC.TAG.EQUIPE=2
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID2> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID2 = <SRC.UID>
+			SRC.TAG.EQUIPE=1
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID3> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID3 = <SRC.UID>
+			SRC.TAG.EQUIPE=2
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID4> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID4 = <SRC.UID>
+			SRC.TAG.EQUIPE=1
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID5> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID5 = <SRC.UID>
+			SRC.TAG.EQUIPE=2
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID6> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID6 = <SRC.UID>
+			SRC.TAG.EQUIPE=1
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID7> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID7 = <SRC.UID>
+			SRC.TAG.EQUIPE=2
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID8> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID8 = <SRC.UID>
+			SRC.TAG.EQUIPE=1
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID9> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID9 = <SRC.UID>
+			SRC.TAG.EQUIPE=2
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID10> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID10 = <SRC.UID>
+			SRC.TAG.EQUIPE=1
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID11> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID11 = <SRC.UID>
+			SRC.TAG.EQUIPE=2
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID12> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID12 = <SRC.UID>
+			SRC.TAG.EQUIPE=1
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID13> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID13 = <SRC.UID>
+			SRC.TAG.EQUIPE=2
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID14> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID14 = <SRC.UID>
+			SRC.TAG.EQUIPE=1
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID15> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID15 = <SRC.UID>
+			SRC.TAG.EQUIPE=2
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID16> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID16 = <SRC.UID>
+			SRC.TAG.EQUIPE=1
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID17> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID17 = <SRC.UID>
+			SRC.TAG.EQUIPE=2
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID18> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID18 = <SRC.UID>
+			SRC.TAG.EQUIPE=1
+		ELSEIF <FINDID.i_liste_joueurs_anim.TAG.ID19> == 0
+			FINDID.i_liste_joueurs_anim.TAG.ID19 = <SRC.UID>
+			SRC.TAG.EQUIPE=2
+		ELSE
+			SAY Il ne reste plus de place
+			RETURN 1
+		ENDIF
+		commencer_perso
+	ENDIF
+ELSE
+	SAY Fichez moi le camp!
+ENDIF
+
+[ITEMDEF m_effaceur_perso_rebour]
+ID=i_memory
+TYPE=t_eq_script
+NAME=effaceur de perso
+
+ON=@TIMER
+TOPOBJ.reset_complet
+TOPOBJ.TAG.GAINSKILL_ANIMCOMBAT
+TOPOBJ.TAG.NBMORTS_ANIMCOMBAT
+TOPOBJ.TAG.NBKILLS_ANIMCOMBAT
+IF <TOPOBJ.FINDID.i_hear_player_gaston>
+	TOPOBJ.FINDID.i_hear_player_gaston.REMOVE
+ENDIF
+IF <CONT.FINDLAYER.31>
+	UID.0b6a09.NEWITEM 0bd0
+	UID.0b6a09.ACT.NAME Abus anim Gaston (voir tags)
+	UID.0b6a09.ACT.TAG.RAISON=Sortie d'un objet illegal
+	UID.0b6a09.ACT.TAG.RTIME=<SERV.RTIME>
+	UID.0b6a09.ACT.TAG.PERSO_COMPTE=<CONT.NAME> acc:<CONT.ACCOUNT> ip:<CONT.ACCOUNT.LASTIP>
+	UID.0b6a09.ACT.TAG.UIDOBJET=<CONT.FINDLAYER.31.UID>
+	UID.0b6a09.ACT.TAG.NOMOBJET=<CONT.FINDLAYER.31.NAME>
+	CONT.FINDLAYER.31.TAG.ITEM_TRICHE=1
+	UID.0b6a09.ACT.COLOR=025
+	UID.0b6a09.ACT.ATTR=08010
+	UID.0b6a09.ACT.CONT=0b6a09
+ENDIF
+REMOVE
+RETURN 1
+
+
+[ITEMDEF i_liste_joueurs_anim]
+ID=i_memory
+NAME=Liste joueurs anim
+TYPE=t_eq_script
+
+ON=@CREATE
+TAG.POINTS_EQUIPE_1=0
+TAG.POINTS_EQUIPE_2=0
+TAG.ID0=0
+TAG.ID1=0
+TAG.ID2=0
+TAG.ID3=0
+TAG.ID4=0
+TAG.ID5=0
+TAG.ID6=0
+TAG.ID7=0
+TAG.ID8=0
+TAG.ID9=0
+TAG.ID10=0
+TAG.ID11=0
+TAG.ID12=0
+TAG.ID13=0
+TAG.ID14=0
+TAG.ID15=0
+TAG.ID16=0
+TAG.ID17=0
+TAG.ID18=0
+TAG.ID19=0
+TIMER=7200//2 HEURES 7200
+
+ON=@TIMER
+IF (<TAG.POINTS_EQUIPE_1>) > (<TAG.POINTS_EQUIPE_2>)
+	SERV.B Equipe 1 gagne <EVAL <TAG.POINTS_EQUIPE_1>> a <EVAL <TAG.POINTS_EQUIPE_2>>!
+ELSEIF (<TAG.POINTS_EQUIPE_1>) < (<TAG.POINTS_EQUIPE_2>)
+	SERV.B Equipe 2 gagne <EVAL <TAG.POINTS_EQUIPE_2>> a <EVAL <TAG.POINTS_EQUIPE_1>>!
+ELSE
+	SERV.B Partie nulle <EVAL <TAG.POINTS_EQUIPE_2>> a <EVAL <TAG.POINTS_EQUIPE_1>>!
+ENDIF
+VAR.MEILLEUR_POINT=0
+TROUVER_MEILLEUR_JOUEUR 0
+SERV.B Le meilleur joueur est <UID.<VAR.MEILLEUR_JOUEUR_UID>.NAME> avec <EVAL <VAR.MEILLEUR_POINT>> points!
+REMOVE
+RETURN 1
+
+
+//<ARGS>=0, 1, ... , 20
+[FUNCTION TROUVER_MEILLEUR_JOUEUR]
+IF <EVAL <ARGS>> < 21
+	IF <TAG.ID<ARGS>> != 0
+		VAR.POINT_COURANT = <EVAL (<UID.<TAG.ID<EVAL <ARGS>>>.TAG.NBKILLS_ANIMCOMBAT> * 5)>
+		VAR.POINT_COURANT = <EVAL <VAR.POINT_COURANT> - (<UID.<TAG.ID<EVAL <ARGS>>>.TAG.NBMORTS_ANIMCOMBAT> * 3)>
+		VAR.POINT_COURANT = <EVAL <VAR.POINT_COURANT> + (<UID.<TAG.ID<EVAL <ARGS>>>.TAG.GAINSKILL_ANIMCOMBAT> / 500)>
+		VAR.POINT_COURANT = <EVAL <VAR.POINT_COURANT> + (<UID.<TAG.ID<EVAL <ARGS>>>.TAG.LEVEL>)>
+		IF <EVAL <VAR.POINT_COURANT>> > <EVAL <VAR.MEILLEUR_POINT>>
+			VAR.MEILLEUR_POINT = <VAR.POINT_COURANT>
+			VAR.MEILLEUR_JOUEUR_UID = <TAG.ID<ARGS>>
+		ENDIF
+		TROUVER_MEILLEUR_JOUEUR <EVAL <ARGS> + 1>
+	ENDIF
+ENDIF
+
+
+[ITEMDEF m_lien_pointage_combat]
+ID=i_memory
+NAME=lien pointage
+TYPE=t_eq_script
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_horloge_combat]
+DEFNAME=i_horloge_combat
+NAME=Horloge
+ID=i_clock
+TYPE=t_normal
+
+ON=@DCLICK
+IF <SRC.TAG.EQUIPE> == 1
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez <EVAL <SRC.FINDID.m_lien_pointage_combat.LINK.TAG.POINTS_EQUIPE_1>> points et il reste <EVAL <SRC.FINDID.m_lien_pointage_combat.LINK.TIMER>/60> minutes
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez <EVAL <SRC.FINDID.m_lien_pointage_combat.LINK.TAG.POINTS_EQUIPE_2>> points et il reste <EVAL <SRC.FINDID.m_lien_pointage_combat.LINK.TIMER>/60> minutes
+ENDIF
+RETURN 1
+
+[ITEMDEF i_dalle_teleportatrice_combat]
+DEFNAME=i_dalle_teleportatrice_combat
+NAME=Dalle teleportatrice combat
+ID=049b
+
+ON=@CREATE
+COLOR=0ab8
+ATTR=08090
+TAG.EQUIPE=1
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	IF <SRC.ACCOUNT.PLEVEL> > 2
+		SRC.P=<MOREP>
+		SRC.UPDATE
+	ELSE		
+		IF 0<SRC.TAG.EQUIPE>==<TAG.EQUIPE>
+			SRC.P=<MOREP>
+			SRC.UPDATE
+		ELSE
+			RETURN 1
+		ENDIF
+	ENDIF
+ELSE
+	RETURN 1
+ENDIF
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	MOREP=<SRC.P>
+	IF <TAG.EQUIPE>==1
+		TAG.EQUIPE=2
+	ELSE
+		TAG.EQUIPE=1
+	ENDIF
+	SRC.SYSMESSAGEUA 0481 1 1 0 Coordonnee enregistree pour equipe <TAG.EQUIPE>
+	RETURN 1
+ENDIF
+RETURN 0
+
+[FUNCTION commencer_perso]
+IF <EVAL 0<SRC.TAG.EQUIPE>> == 1
+	SRC.P=5299,1483
+	SRC.UPDATE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes dans l'equipe 1, tuez le plus de joueurs ennemis
+	SRC.COLOR=0B33
+	SRC.OSKIN=0B33
+ELSE
+	SRC.P=5156,1508
+	SRC.UPDATE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes dans l'equipe 2, tuez le plus de joueurs ennemis
+	SRC.COLOR=0B13
+	SRC.OSKIN=0B13
+ENDIF
+SRC.TAG.VRAI_NOM_COMBAT=<SRC.NAME>
+SRC.NAME=<SRC.TAG.VRAI_NOM_COMBAT>(<EVAL 0<SRC.TAG.EQUIPE>>)(lvl<EVAL 0<SRC.TAG.LEVEL>>)
+SRC.EVENTS e_anim_combat
+SRC.TAG.SUMMONNER1_LEVEL=0
+SRC.TAG.SUMMONNER2_LEVEL=0
+SRC.TAG.SUMMONNER3_LEVEL=0
+SRC.TAG.FORPURE=50
+SRC.TAG.DEXPURE=50
+SRC.TAG.INTPURE=50
+SRC.TAG.XP=0
+SRC.TAG.NBKILLS_ANIMCOMBAT=0
+SRC.TAG.NBMORTS_ANIMCOMBAT=0
+SRC.TAG.GAINSKILL_ANIMCOMBAT=0
+IF <SRC.FINDLAYER.25>
+	SRC.FINDLAYER.25.REMOVE
+	SRC.UPDATE
+ENDIF
+SRC.TAG.anti_mark_recall=1
+debogage
+IF <SRC.FINDID.i_rune_night_sight>
+	SRC.FINDID.i_rune_night_sight.REMOVE
+ENDIF
+IF <SRC.NIGHTSIGHT>==0
+	SRC.NIGHTSIGHT
+ENDIF
+SRC.FINDLAYER.21.REMOVE
+
+SRC.NEWITEM i_livre_de_sorts
+SRC.ACT.BOUNCE
+
+SRC.NEWITEM m_effaceur_perso_rebour
+SRC.ACT.EQUIP
+SRC.ACT.TIMER = <EVAL <FINDID.i_liste_joueurs_anim.timer> + 10>
+
+SRC.NEWITEM m_lien_pointage_combat
+SRC.ACT.EQUIP
+SRC.ACT.TIMER = <EVAL <FINDID.i_liste_joueurs_anim.timer> + 10>
+SRC.ACT.LINK = <FINDID.i_liste_joueurs_anim.UID>
+
+SRC.NEWITEM i_hear_player_gaston
+SRC.ACT.EQUIP
+
+SRC.SYSMESSAGEUA 0481 1 1 0 Il reste <EVAL <FINDID.i_liste_joueurs_anim.timer>/60> minutes à l'anim
+SERV.B <SRC.NAME> est entre dans l'equipe <EVAL 0<SRC.TAG.EQUIPE>>

@@ -1,0 +1,724 @@
+[ITEMDEF i_cerveau_gazer]
+DEFNAME=i_cerveau_gazer
+NAME=Cerveau de gazer
+ID=01cf0
+
+ON=@CREATE
+COLOR=0bb7
+
+
+[ITEMDEF i_cerveau_gazer_subalterne]
+DEFNAME=i_cerveau_gazer_subalterne
+NAME=Cerveau de gazer subalterne
+ID=01cf0
+
+ON=@CREATE
+COLOR=0bb6
+
+
+[ITEMDEF i_cerveau_guerrier_gazer]
+DEFNAME=i_cerveau_guerrier_gazer
+NAME=Cerveau de guerrier gazer
+ID=01cf0
+
+ON=@CREATE
+COLOR=0bb5
+
+
+[ITEMDEF i_cerveau_champion_gazer]
+DEFNAME=i_cerveau_champion_gazer
+NAME=Cerveau de champion gazer
+ID=01cf0
+
+ON=@CREATE
+COLOR=0bb4
+
+
+[ITEMDEF i_cerveau_prince_gazer]
+DEFNAME=i_cerveau_prince_gazer
+NAME=Cerveau de prince gazer
+ID=01cf0
+
+ON=@CREATE
+COLOR=0bb3
+
+
+[ITEMDEF i_cerveau_seigneur_gazer]
+DEFNAME=i_cerveau_seigneur_gazer
+NAME=Cerveau de seigneur gazer
+ID=01cf0
+
+ON=@CREATE
+COLOR=0bb2
+
+
+[ITEMDEF i_cerveau_dieu_gazer]
+DEFNAME=i_cerveau_dieu_gazer
+NAME=Cerveau de dieu gazer
+ID=01cf0
+
+ON=@CREATE
+COLOR=0bb1
+
+[ITEMDEF i_croix_oracle41]
+DEFNAME=i_croix_oracle41
+NAME=Croix
+ID=04
+
+ON=@CREATE
+COLOR=0afb
+
+
+ON=@DCLICK
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> <= 3
+	IF <EVAL 0<SRC.TAG.CERVELLE>>==0
+		IF <SRC.FINDID.i_cerveau_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.CONSUME 1 i_cerveau_gazer
+			SRC.TAG.CERVELLE=1
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==1
+		IF <SRC.FINDID.i_cerveau_gazer_subalterne>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.CONSUME 1 i_cerveau_gazer_subalterne
+			SRC.TAG.CERVELLE=2
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==2
+		IF <SRC.FINDID.i_cerveau_guerrier_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=030
+			SRC.ACT.P=5206,778,1
+			SRC.CONSUME 1 i_cerveau_guerrier_gazer
+			SRC.TAG.CERVELLE=3
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==3
+		IF <SRC.FINDID.i_cerveau_champion_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=030
+			SRC.ACT.P=5206,778,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=02b
+			SRC.ACT.P=5205,779,1
+			SRC.CONSUME 1 i_cerveau_champion_gazer
+			SRC.TAG.CERVELLE=4
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==4
+		IF <SRC.FINDID.i_cerveau_prince_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=030
+			SRC.ACT.P=5206,778,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=02b
+			SRC.ACT.P=5205,779,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=08b
+			SRC.ACT.P=5204,779,1
+			SRC.CONSUME 1 i_cerveau_prince_gazer
+			SRC.TAG.CERVELLE=5
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==5
+		IF <SRC.FINDID.i_cerveau_seigneur_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=030
+			SRC.ACT.P=5206,778,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=02b
+			SRC.ACT.P=5205,779,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=08b
+			SRC.ACT.P=5204,779,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=0846
+			SRC.ACT.P=5204,778,1
+			SRC.CONSUME 1 i_cerveau_seigneur_gazer
+			SRC.TAG.CERVELLE=6
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==6
+		IF <SRC.FINDID.i_cerveau_dieu_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=030
+			SRC.ACT.P=5206,778,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=02b
+			SRC.ACT.P=5205,779,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=08b
+			SRC.ACT.P=5204,779,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=0846
+			SRC.ACT.P=5204,778,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=026
+			SRC.ACT.P=5205,778,1
+			SRC.CONSUME 1 i_cerveau_dieu_gazer
+			SRC.TAG.CERVELLE=7
+			SRC.GO 5253,1764
+			SRC.TAG.VERIFQUETED4 = 1
+		ENDIF
+	ELSE
+		SRC.GO 5253,1764
+	ENDIF
+ELSE
+	SRC.GO 5253,1764
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-4
+DESCRIPTION=Croix 1
+
+[ITEMDEF i_croix_oracle42]
+DEFNAME=i_croix_oracle42
+NAME=Croix
+ID=05
+
+ON=@CREATE
+COLOR=0afb
+
+ON=@DCLICK
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> <= 3
+	IF <EVAL 0<SRC.TAG.CERVELLE>>==0
+		IF <SRC.FINDID.i_cerveau_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.CONSUME 1 i_cerveau_gazer
+			SRC.TAG.CERVELLE=1
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==1
+		IF <SRC.FINDID.i_cerveau_gazer_subalterne>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.CONSUME 1 i_cerveau_gazer_subalterne
+			SRC.TAG.CERVELLE=2
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==2
+		IF <SRC.FINDID.i_cerveau_guerrier_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=030
+			SRC.ACT.P=5206,778,1
+			SRC.CONSUME 1 i_cerveau_guerrier_gazer
+			SRC.TAG.CERVELLE=3
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==3
+		IF <SRC.FINDID.i_cerveau_champion_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=030
+			SRC.ACT.P=5206,778,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=02b
+			SRC.ACT.P=5205,779,1
+			SRC.CONSUME 1 i_cerveau_champion_gazer
+			SRC.TAG.CERVELLE=4
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==4
+		IF <SRC.FINDID.i_cerveau_prince_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=030
+			SRC.ACT.P=5206,778,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=02b
+			SRC.ACT.P=5205,779,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=08b
+			SRC.ACT.P=5204,779,1
+			SRC.CONSUME 1 i_cerveau_prince_gazer
+			SRC.TAG.CERVELLE=5
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==5
+		IF <SRC.FINDID.i_cerveau_seigneur_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=030
+			SRC.ACT.P=5206,778,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=02b
+			SRC.ACT.P=5205,779,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=08b
+			SRC.ACT.P=5204,779,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=0846
+			SRC.ACT.P=5204,778,1
+			SRC.CONSUME 1 i_cerveau_seigneur_gazer
+			SRC.TAG.CERVELLE=6
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.CERVELLE>>==6
+		IF <SRC.FINDID.i_cerveau_dieu_gazer>
+			SRC.EMOTE placer le cerveau dans le creux de la croix
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=035
+			SRC.ACT.P=5205,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=032
+			SRC.ACT.P=5206,777,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=030
+			SRC.ACT.P=5206,778,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=02b
+			SRC.ACT.P=5205,779,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=08b
+			SRC.ACT.P=5204,779,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=0846
+			SRC.ACT.P=5204,778,1
+			SRC.NEWITEM i_flamme_d4
+			SRC.ACT.COLOR=026
+			SRC.ACT.P=5205,778,1
+			SRC.CONSUME 1 i_cerveau_dieu_gazer
+			SRC.TAG.CERVELLE=7
+			SRC.GO 5253,1764
+			SRC.TAG.VERIFQUETED4 = 1
+		ENDIF
+	ELSE
+		SRC.GO 5253,1764
+	ENDIF
+ELSE
+	SRC.GO 5253,1764
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-4
+DESCRIPTION=Croix 2
+
+[ITEMDEF i_flamme_d4]
+ID=i_fire_column
+NAME=Colonne enflamee
+TYPE=t_script
+
+ON=@CREATE
+TIMER=3
+ATTR=08010
+COLOR=0
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[CHARDEF c_venerable_de_destard] 
+DEFNAME=c_venerable_de_destard
+NAME=Venerable de Destard
+ID=c_man
+ 
+TSPEECH=spk_venerable_de_destard
+
+ON=@create
+COLOR=03f1
+FOOD=9999
+SPEECHCOLOR=0af4
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=01f03
+COLOR=0af4
+ITEMNEWBIE=0170d
+COLOR=0af4
+ITEMNEWBIE=013f8
+COLOR=0af4
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 3
+	EMOTE sursauter
+	SAY Diantre vous m'avez fait peur ! Les visiteurs se font tellement rares ces temps-ci ...
+ELSE
+	SAY Votre destin est ailleurs <SRC.NAME>
+ENDIF
+
+ON=@NPCHearUnknown
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 3
+	IF <EVAL 0<SRC.TAG.VDEDES>> == 0
+		SRC.TAG.VDEDES=1
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			SAY Je presume que vous etes ici pour continuer votre cheminement vers la purete
+		ELSE
+			SAY Je presume que vous etes ici pour continuer votre cheminement vers la sombreur
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.VDEDES>> == 1
+		SRC.TAG.VDEDES=2
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			SAY Vous n'etes pas sans savoir que seuls les <SRC.SEX aventuriers/aventurieres> au coeur vertueux peuvent esperer achever une telle tache  ...
+		ELSE
+			SAY Vous n'etes pas sans savoir que seuls les <SRC.SEX aventuriers/aventurieres> au coeur obscur peuvent esperer achever une telle tache ...
+		ENDIF
+	ELSE
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			SAY Si vous vous sentez capable de perseverer dans la voie du bien il ne vous reste plus qu'a me le faire savoir
+		ELSE
+			SAY Si vous vous sentez capable de perseverer dans la voie du mal il ne vous reste plus qu'a me le faire savoir
+		ENDIF
+	ENDIF
+ELSE
+	SAY Votre destin est ailleurs <SRC.NAME>
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-4
+DESCRIPTION=Venerable de Destard
+
+[SPEECH spk_venerable_de_destard]
+
+ON=*du bien*
+IF (<EVAL <SRC.TAG.anti_mark_recall>>==1) && (<EVAL <SRC.TAG.INSIDE_D4>>==1)
+	IF <EVAL 0<SRC.TAG.COTE>> == 1
+		IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 3
+			IF <SRC.FINDID.03f0c>
+				IF (<EVAL 0<SRC.TAG.VERIFQUETED4>> == 0)
+					SRC.TAG.TRICHE_D4 = 1
+				ENDIF
+				SRC.TAG.RENAISSANCE=4
+				SRC.FINDID.03f0c.COLOR=0B13
+				SRC.COLOR=0B18
+				SRC.OSKIN=0B18
+				SRC.RENAITRE
+				SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie d'elu avec sa quatrieme renaissance !
+			ELSE
+				SAY Un elu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+			ENDIF
+		ELSE
+			SAY Votre destin est ailleurs <SRC.NAME>
+		ENDIF
+	ELSE
+		SAY Vous avez deja prete serment pour servir le mal
+	ENDIF
+ELSE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.P=1176,2640,2
+	SRC.UPDATE
+ENDIF
+
+ON=*du mal*
+IF (<EVAL <SRC.TAG.anti_mark_recall>>==1) && (<EVAL <SRC.TAG.INSIDE_D4>>==1)
+	IF <EVAL 0<SRC.TAG.COTE>> == 2
+		IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 3
+			IF <SRC.FINDID.03f0c>
+				IF (<EVAL 0<SRC.TAG.VERIFQUETED4>> == 0)
+					SRC.TAG.TRICHE_D4 = 1
+				ENDIF
+				SRC.TAG.RENAISSANCE=4
+				SRC.FINDID.03f0c.COLOR=0B2D
+				SRC.COLOR=0B2D
+				SRC.OSKIN=0B2D
+				SRC.RENAITRE
+				SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie de dechu avec sa quatrieme renaissance !
+			ELSE
+				SAY Un dechu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+			ENDIF
+		ELSE
+			SAY Votre destin est ailleurs <SRC.NAME>
+		ENDIF
+	ELSE
+		SAY Vous avez deja prete serment pour servir le bien	
+	ENDIF
+ELSE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.P=1176,2640,2
+	SRC.UPDATE
+ENDIF
+
+ON=*colise*
+ON=*colyse*
+SAY Seul le venerable de Wrong pourra vous y emmener ...
+
+[CHARDEF c_herakes] 
+DEFNAME=c_herakes
+NAME=Herakes
+ID=c_woman
+ 
+TSPEECH=spk_herakes
+
+ON=@create
+COLOR=083ea
+FOOD=9999
+SPEECHCOLOR=0ab5
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Specialiste des armes de jet
+
+ITEMNEWBIE=i_bow
+NAME=Arc en pin
+COLOR=0ab5
+ITEMNEWBIE=i_hair_ponytail
+COLOR=0ab5
+ITEMNEWBIE=i_shirt_plain
+NAME=T-shirt en cuir
+COLOR=09af
+ITEMNEWBIE=i_armor_female_skirt
+NAME=Jupette en cuir
+COLOR=09af
+ITEMNEWBIE=i_sandals
+NAME=Sandalettes en cuir
+COLOR=09af
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> <= 3
+	IF <EVAL 0<SRC.TAG.HERAKES>> < 1
+		SAY N'avancez pas ou je vous crible de fleches
+	ELSE
+		SAY Quel plaisir de vous revoir <SRC.NAME> !
+	ENDIF
+ELSE
+	SAY Quel plaisir de vous revoir <SRC.NAME> !
+ENDIF
+
+ON=@NPCHearUnknown
+IF (<EVAL <SRC.TAG.RENAISSANCE>> <= 3) && (<EVAL 0<SRC.TAG.HERAKES>> < 1)
+	IF (<EVAL(RAND(15))>=0)
+		EMOTE s'enerver
+		SAY Le jour ou vous m'offrirez un manteau de l'archer vous pourrez rentrer ... Maintenant fichez moi la paix !
+	ELSE
+		SAY Vous ne rentrerez pas, et rien ni personne ne me feras changer d'avis !
+	ENDIF
+ELSE
+	SAY Je vous en pris !
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-4
+DESCRIPTION=Herakes
+
+[SPEECH spk_herakes]
+
+ON=*manteau*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 2
+	IF <EVAL 0<SRC.TAG.HERAKES>> < 1 && <EVAL 0<SRC.TAG.RENAISSANCE>> == 3
+		IF <SRC.RESTEST 1 i_manteau_de_l_archer>
+			SRC.FINDID.i_manteau_de_l_archer.REMOVE
+			SRC.TAG.HERAKES=1
+			EMOTE arracher le manteau de vos mains
+			SAY Je n'en crois pas mes yeux ... Un manteau de l'archer ! Comment vous remercier ?
+		ELSE
+			SAY J'ai toujours reve d'en posseder un, malheureusement ils sont si rares et chers que je pense ne jamais avoir l'opportunite d'en porter un ...
+		ENDIF
+	ELSE
+		SAY Jamais je n'oublierai ce que vous avez fait pour moi <SRC.NAME>
+	ENDIF
+ELSE
+	SAY Jamais je n'adresserai la parole a quelqu'un d'aussi faible que vous !
+ENDIF
+
+ON=*entre*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 3
+	IF !<SRC.FINDLAYER.25>
+		SAY Que la chance soit avec vous <src.name> !
+		SRC.EVENTS +e_anti_mark_recall
+		IF <SRC.FINDLAYER.40>
+			SRC.FINDLAYER.40.REMOVE
+		ENDIF
+		IF (<SRC.FLAGS>&statf_hidden)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+		ENDIF
+		IF (<SRC.FLAGS>&statf_invisible)
+			SRC.FLAGS=<SRC.FLAGS>&~invisible
+		ENDIF
+		IF (<SRC.FLAGS>&statf_insubstantial)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+		SRC.TAG.anti_mark_recall=1
+		SRC.TAG.INSIDE_D4=1
+		SRC.P=5244,1005
+		SRC.UPDATE
+	ELSE
+		SAY Les plafonds de cette cave sont bien trop bas pour un cavalier, vous devriez laisser votre monture ...
+	ENDIF
+ELSE
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 3
+		IF <EVAL <SRC.TAG.HERAKES>> == 1
+			IF <EVAL 0<SRC.TAG.LEVEL>> >99
+				IF !<SRC.FINDLAYER.25>
+					SAY Que la chance soit avec vous <src.name> !
+					SRC.EVENTS +e_anti_mark_recall
+					IF <SRC.FINDLAYER.40>
+						SRC.FINDLAYER.40.REMOVE
+					ENDIF
+					IF (<SRC.FLAGS>&statf_hidden)
+						SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+					ENDIF
+					IF (<SRC.FLAGS>&statf_invisible)
+						SRC.FLAGS=<SRC.FLAGS>&~invisible
+					ENDIF
+					IF (<SRC.FLAGS>&statf_insubstantial)
+						SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+					ENDIF
+					IF <SRC.FINDID.i_rune_delay_g>
+						SRC.FINDID.i_rune_delay_g.REMOVE
+						SRC.EFFECT 3,i_fx_smoke_small,0,60
+						SRC.SFX 01ed
+						SRC.EVENTS -e_casse_gate
+					ENDIF
+					SRC.TAG.anti_mark_recall=1
+					SRC.TAG.INSIDE_D4=1
+					SRC.P=5244,1005
+					SRC.UPDATE
+				ELSE
+					SAY Les plafonds de cette cave sont bien trop bas pour un cavalier, vous devriez laisser votre monture ...
+				ENDIF
+			ELSE
+				EMOTE se retenir de rire
+				SAY Vous etes vous bien <SRC.SEX regarde/regardee> <SRC.SEX monsieur/madame> ? Jamais vous ne pourrez affronter de telles creatures !
+			ENDIF
+		ELSE
+			SAY Vous ne rentrerez pas, et rien ni personne ne me feras changer d'avis !
+		ENDIF
+	ELSE
+		SAY Jamais je n'adresserai la parole a quelqu'un d'aussi faible que vous !
+	ENDIF
+ENDIF
+
+[ITEMDEF i_dalle_enleve_event4]
+DEFNAME=i_dalle_enleve_event4
+NAME=Dalle enleve event 4
+ID=049b
+
+ON=@CREATE
+COLOR=0abf
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D4
+	SRC.P=1176,2640,2
+	SRC.UPDATE
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-4
+DESCRIPTION=Dalle enleve event
+
+[ITEMDEF i_coffre_destard]
+DEFNAME=i_coffre_destard
+NAME=Coffre destard
+ID=0e42
+TYPE=T_SCRIPT
+
+ON=@CREATE
+TIMER=43200
+TAG.REMPLI=0
+
+ON=@DCLICK
+IF (<EVAL 0<TAG.REMPLI>> == 1)
+	TAG.REMPLI=0
+	TAG.PX=<P.X> + 1
+	TAG.PY=<P.Y>
+	TAG.PZ=<P.Z>
+	TAG.POSITION=<EVAL <TAG.PX>>,<EVAL <TAG.PY>>,<EVAL <TAG.PZ>>
+	TAG.TEMPSRESPAWN={43200 172800}
+	TIMER=<TAG.TEMPSRESPAWN>
+	SRC.NEWITEM { i_stats_dropp 15 i_francisque_gazer 1 i_arc_gazer 1 i_epieu_gazer 1 }
+	SRC.ACT.P <TAG.POSITION>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TAG.REMPLI=1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-4
+DESCRIPTION=Coffre de Destard

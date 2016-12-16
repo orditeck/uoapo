@@ -1,0 +1,413 @@
+//*** DÉBUT DE NUJEL'M, EXTREME OUEST ***
+
+[AREA MAISON_NUJEL1]
+CLASS=11
+RECT=3552,1176,3559,1168
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL2]
+//3 maisons collées
+CLASS=11
+RECT=3544,1199,3552,1176
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL3]
+CLASS=11
+RECT=3552,1207,3559,1200
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL4]
+//3 maisons collées
+CLASS=11
+RECT=3592,1216,3600,1192
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL5]
+//2 maisons collées
+CLASS=11
+RECT=3600,1216,3615,1208
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL6]
+CLASS=11
+RECT=3592,1240,3600,1224
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL7]
+CLASS=11
+RECT=3600,1240,3607,1232
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL8]
+CLASS=11
+RECT=3608,1264,3615,1256
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL9]
+//3 maisons collées
+CLASS=11
+RECT=3616,1271,3624,1248
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL10]
+CLASS=11
+RECT=3624,1248,3631,1240
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL11]
+CLASS=11
+RECT=3624,1231,3632,1224
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL11]
+CLASS=11
+RECT=3624,1216,3631,1208
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+//*** DÉBUT DES MAISONS AU NORD DE NUJEL'M ***
+
+
+[AREA MAISON_NUJEL12]
+CLASS=11
+RECT=3688,1168,3695,1160
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL13]
+CLASS=11
+RECT=3656,1175,3664,1168
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL14]
+//2 maisons collées
+CLASS=11
+RECT=3648,1176,3656,1160
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL15]
+CLASS=11
+RECT=3664,1159,3672,1146
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL16]
+CLASS=11
+RECT=3672,1152,3679,1144
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL17]
+//2 maisons collées
+CLASS=11
+RECT=3648,1151,3656,1136
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL18]
+CLASS=11
+RECT=3664,1134,3671,1128
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL19]
+CLASS=11
+RECT=3672,1136,3680,1128
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL20]
+CLASS=11
+RECT=3688,1136,3695,1128
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL21]
+CLASS=11
+RECT=3648,1127,3656,1120
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL22]
+CLASS=11
+RECT=3648,1119,3654,1112
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL23]
+// 1.8 maison
+CLASS=11
+RECT=3656,1104,3672,1096
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL24]
+// 1.2 maison
+CLASS=11
+RECT=3664,1111,3672,1101
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL25]
+// 2 maisons collées
+CLASS=11
+RECT=3680,1119,3688,1096
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL26]
+CLASS=11
+RECT=3688,1112,3696,1104
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL27]
+CLASS=11
+RECT=3656,1079,3664,1072
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL28]
+//2 maisons collées
+CLASS=11
+RECT=3656,1064,3671,1056
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL29]
+//3 maisons collées
+CLASS=11
+RECT=3672,1079,3680,1056
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+// *** DÉBUT DE NUJEL CENTRE VERS L'EST ***
+
+[AREA MAISON_NUJEL30]
+//bunker
+CLASS=11
+RECT=3680,1192,3687,1184
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL31]
+//bunker
+CLASS=11
+RECT=3696,1184,3704,1176
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL32]
+CLASS=11
+RECT=3696,1223,3704,1208
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL33]
+CLASS=11
+RECT=3704,1231,3720,1224
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL34]
+CLASS=11
+RECT=3728,1207,3736,1192
+RECT=3736,1207,3751,1184
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL35]
+CLASS=11
+RECT=3728,1240,3752,1216
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL36]
+CLASS=11
+RECT=3768,1136,3791,1120
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL37]
+CLASS=11
+RECT=3768,1176,3783,1160
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL38]
+CLASS=11
+RECT=3760,1207,3772,1184
+RECT=3771,1196,3783,1184
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL39]
+CLASS=11
+RECT=3760,1239,3772,1216
+RECT=3771,1235,3776,1220
+RECT=3776,1231,3784,1224
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL40]
+CLASS=11
+RECT=3760,1271,3784,1260
+RECT=3760,1260,3783,1248
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL41]
+CLASS=11
+RECT=3728,1271,3751,1264
+RECT=3728,1263,3744,1248
+RECT=3744,1255,3751,1248
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL42]
+//PALAIS DES PLAISIRS DE NUJEL'M
+CLASS=11
+RECT=3672,1328,3703,1288
+RECT=3680,1288,3696,1272
+RECT=3680,1272,3695,1232
+RECT=3672,1247,3681,1232
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL43]
+//BUNKER
+CLASS=11
+RECT=3648,1239,3656,1232
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL44]
+//BUNKER
+CLASS=11
+RECT=3656,1224,3664,1216
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL45]
+//GOUVERNEUR
+CLASS=11
+RECT=3728,1343,3737,1332
+RECT=3737,1342,3750,1331
+RECT=3750,1338,3751,1335
+RECT=3747,1343,3751,1342
+RECT=3740,1343,3743,1342
+RECT=3728,1332,3751,1328
+RECT=3728,1329,3743,1320
+RECT=3728,1321,3740,1311
+RECT=3728,1311,3744,1289
+RECT=3728,1289,3736,1288
+RECT=3740,1289,3743,1288
+RECT=3747,1289,3751,1288
+RECT=3750,1296,3751,1293
+RECT=3750,1303,3751,1300
+RECT=3744,1303,3750,1289
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL46]
+//BANQUE
+CLASS=11
+RECT=3760,1327,3768,1312
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+// *** PARTIE SUD DE NUJEL'M ***
+
+[AREA MAISON_NUJEL47]
+CLASS=11
+RECT=3708,1387,3720,1376
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_NUJEL48]
+CLASS=11
+RECT=3718,1414,3723,1408
+RECT=3712,1408,3732,1392
+RECT=3730,1411,3739,1400
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+// *** AUTRES ***
+
+[AREA EXTERIEUR_PALAIS]
+CLASS=11
+RECT=3640,1343,3658,1298
+RECT=3639,1320,3640,1298
+RECT=3637,1316,3639,1298
+RECT=3635,1314,3637,1298
+//PARTIE + EST
+RECT=3658,1336,3670,1298
+RECT=3670,1339,3685,1328
+RECT=3685,1331,3695,1328
+DEFNAME=maison_nujel
+GROUP=Nujel'm
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out

@@ -1,0 +1,96 @@
+[PLEVEL 1]
+POTION
+
+//<ARGS> = vie, mana, 
+[FUNCTION POTION]
+IF !(STRCMPI("<ARGS>",""))
+	SYSMESSAGEUA 0481 1 1 0 Tapez .Potion suivi de (vie, mana...)
+ELSEIF !(STRCMPI("<ARGS>","vie"))
+	IF <FINDID.i_potion_de_guerison_divine>
+		FINDID.i_potion_de_guerison_divine.USE
+	ELSEIF <FINDID.i_elixir_de_vie>
+		FINDID.i_elixir_de_vie.USE
+	ELSEIF <FINDID.i_potion_de_guerison>
+		FINDID.i_potion_de_guerison.USE
+	ELSEIF <FINDID.i_potion_de_guerison_legere>
+		FINDID.i_potion_de_guerison_legere.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune potion de vie!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","mana"))
+	IF <FINDID.i_potion_de_mana_divine>
+		FINDID.i_potion_de_mana_divine.USE
+	ELSEIF <FINDID.i_elixir_de_mana>
+		FINDID.i_elixir_de_mana.USE
+	ELSEIF <FINDID.i_potion_de_mana>
+		FINDID.i_potion_de_mana.USE
+	ELSEIF <FINDID.i_potion_de_mana_legere>
+		FINDID.i_potion_de_mana_legere.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune potion de mana!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","rajeu"))
+	IF <FINDID.i_potion_de_rajeunissement_divine>
+		FINDID.i_potion_de_rajeunissement_divine.USE
+	ELSEIF <FINDID.i_elixir_de_rajeunissement>
+		FINDID.i_elixir_de_rajeunissement.USE
+	ELSEIF <FINDID.i_potion_de_rajeunissement>
+		FINDID.i_potion_de_rajeunissement.USE
+	ELSEIF <FINDID.i_potion_de_rajeunissement_legere>
+		FINDID.i_potion_de_rajeunissement_legere.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune potion de rajeunissement!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","def"))
+	IF <FINDID.i_potion_de_peau_de_fer>
+		FINDID.i_potion_de_peau_de_fer.USE
+	ELSEIF <FINDID.i_potion_de_peau_de_pierre>
+		FINDID.i_potion_de_peau_de_pierre.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune potion de defense!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","dex"))
+	IF <FINDID.i_potion_de_dexterite>
+		FINDID.i_potion_de_dexterite.USE
+	ELSEIF <FINDID.i_potion_de_dexterite_legere>
+		FINDID.i_potion_de_dexterite_legere.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune potion de dexterite!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","int"))
+	IF <FINDID.i_potion_de_clairvoyance>
+		FINDID.i_potion_de_clairvoyance.USE
+	ELSEIF <FINDID.i_potion_de_clairvoyance_legere>
+		FINDID.i_potion_de_clairvoyance_legere.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune potion de clairvoyance!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","force"))
+	IF <FINDID.i_potion_de_force>
+		FINDID.i_potion_de_force.USE
+	ELSEIF <FINDID.i_potion_de_force_legere>
+		FINDID.i_potion_de_force_legere.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune potion de force!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","magie"))
+	IF <FINDID.i_potion_d_accroissement_magique>
+		FINDID.i_potion_d_accroissement_magique.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune potion d'accroissement magique!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","resist"))
+	IF <FINDID.i_potion_de_bouclier_de_mana>
+		FINDID.i_potion_de_bouclier_de_mana.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune potion de bouclier de mana!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","combat"))
+	IF <FINDID.i_potion_d_instinct_de_combat_majeur>
+		FINDID.i_potion_d_instinct_de_combat_majeur.USE
+	ELSEIF <FINDID.i_potion_d_instinct_de_combat_mineur>
+		FINDID.i_potion_d_instinct_de_combat_mineur.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune potion de combat!
+	ENDIF
+ENDIF

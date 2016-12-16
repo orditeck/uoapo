@@ -1,0 +1,126 @@
+[ITEMDEF i_intestins_rachidis]
+NAME=intestins de rachidis
+ID=i_flesh_entrails
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b10
+
+[ITEMDEF i_coeur_rachidis]
+NAME=coeur de rachidis
+ID=i_flesh_heart
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b10
+
+[ITEMDEF i_cerveau_rachidis]
+NAME=cerveau de rachidis
+ID=i_flesh_brain
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b10
+
+[ITEMDEF i_thorax_rachidis]
+NAME=thorax de rachidis
+ID=i_flesh_torso_3
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b10
+
+[ITEMDEF i_jambes_rachidis]
+NAME=jambes de rachidis
+ID=i_flesh_legs_3
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b10
+
+[ITEMDEF i_effet_rachidis]
+ID=i_fx_Nuage_de_Poison_effect
+NAME=Nuage toxique
+TYPE=t_script
+
+ON=@CREATE
+TIMER=1
+ATTR=08010
+COLOR=0b10
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_effet_piege_laby_d7]
+ID=i_fx_Nuage_de_Glace_effect
+NAME=Cercle de malediction
+TYPE=t_script
+
+ON=@CREATE
+TIMER=1
+ATTR=08010
+COLOR=0b10
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_rune_curse_piege_d7]
+NAME=Rune curse piege d7
+ID=i_rune_curse
+TYPE=t_spell
+LAYER=32
+
+ON=@Create
+MORE2=01
+MOREX=01b
+MOREY={500.0 600.0}
+ATTR=026
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//A DONNER A FILANDRUS POUR ENTRER AU D7
+[ITEMDEF i_livre_de_sacrifice]
+ID=i_book_open_red
+NAME=Livre de sacrifice
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0ba0
+
+ON=@CLICK
+IF (!STRCMPI("<LINK>","04fffffff"))
+	MESSAGE <NAME>
+ELSE
+	MESSAGE <NAME> de <LINK.NAME>
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+SRC.EMOTE sentir une etrange sensation a la lecture de <NAME>
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_portail_sortie_d7]
+NAME=Sortie du dongeon 7
+ID=0dda
+
+ON=@CREATE
+COLOR=0b38
+
+//SEULS LES JOUEURS + que X6 PEUVENT SORTIR
+ON=@STEP
+IF ((!<SRC.BRAIN>) && (<EVAL 0<SRC.TAG.RENAISSANCE>> >= 7))
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.REMOVE_MAUVAIS_TAGS
+	SRC.ENLEVE_OBJETS_D7
+	SRC.GO 1357,1065
+ENDIF
+RETURN 1

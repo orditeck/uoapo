@@ -1,0 +1,65 @@
+//ITEM SELECTIONNEUR DE .TAX
+[ITEMDEF i_selectionneur_tax] 
+ID=i_memory
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur a taxer 1000 pieces d'or...
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner un joueur
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <SRC.FINDID.i_memory_tax>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas taxer un joueur d'ici les <EVAL <SRC.FINDID.i_memory_tax.TIMER>> prochaines secondes
+ELSE
+	VAR.VILLE = <SRC.GUILD_VILLE>
+	TAG.VILLE = <VAR.VILLE>
+	VAR.REGION = <SRC.TARG.REGION.NAME>
+	IF <IS_REGION_DANS_VILLE>
+		SRC.NEWITEM i_memory_tax
+		SRC.ACT.EQUIP
+		SRC.TARG.PAYUP 1000
+		IF <VAR.ENOUGH>
+			SERV.B <SRC.TARG.NAME> a recu une contravention de 1000 pieces d'or par le garde de <VAR.VILLE>, <SRC.NAME>
+			SRC.ACT = <GET_UID_PLAQUE_MAIRIE>
+			SRC.ACT.TAG.CAISSE = <EVAL 0<SRC.ACT.TAG.CAISSE> + 1000>
+		ELSE
+			SERV.B <SRC.NAME>, garde de <VAR.VILLE>, force <SRC.TARG.NAME> a purger 2 minutes de travaux forces pour non-paiement de contravention
+			SRC.NEWITEM i_desemprisonne
+			SRC.ACT.TAG.MINUTES_TRAVAUX_FORCES_TOTAL=2
+			SRC.ACT.TAG.MINUTES_TRAVAUX_FORCES=2
+			SRC.ACT.CONT=<SRC.TARG.UID>
+			SRC.TARG.JAIL
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas donner de contravention a un joueur hors <VAR.VILLE>
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//MEMORY POUR EMPECHER UN GARDE DE TROP TAXER
+[ITEMDEF i_memory_tax] 
+ID=i_memory
+NAME=mem_taxeur
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+REMOVE
+RETURN 1

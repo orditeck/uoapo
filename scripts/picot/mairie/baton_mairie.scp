@@ -1,0 +1,94 @@
+[ITEMDEF i_baton_mairie]
+NAME=Baton de maire
+ID=i_staff_black
+WEIGHT=1
+
+ON=@CREATE
+COLOR=059D
+HITPOINTS=-1
+
+ON=@EQUIP
+IF <LINK.LINK.UID> != <SRC.UID>
+	UNEQUIP
+ENDIF
+
+ON=@DCLICK
+EQUIP
+DIALOG MENU_BATON_MAIRIE
+RETURN 1
+
+ON=@TARGON_ITEM
+//BLOQUER
+IF <EVAL 0<VAR.ACTION_BATON>> == 1
+	IF <SRC.TARG.CONT>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas bloquer un objet a cet endroit
+	ELSE
+		IF <EVAL 0<SRC.TARG.TAG.OBJET_MAIRIE>> == 1
+			VAR.VILLE = <LINK.TAG.VILLE>
+			VAR.REGION = <SRC.TARG.REGION.NAME>
+			IF <IS_REGION_DANS_VILLE> == 1
+				SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> bloque au sol
+				SRC.TARG.ATTR=08010
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez bloquer des objets qu'a <LINK.TAG.VILLE>
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez bloquer que des objets municipaux !
+		ENDIF
+	ENDIF
+//DEBLOQUER
+ELSEIF <EVAL 0<VAR.ACTION_BATON>> == 2
+	IF <EVAL 0<SRC.TARG.TAG.OBJET_MAIRIE>> == 1
+		VAR.VILLE = <LINK.TAG.VILLE>
+		VAR.REGION = <SRC.TARG.REGION.NAME>
+		IF <IS_REGION_DANS_VILLE> == 1
+			SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> debloque du sol
+			SRC.TARG.ATTR=0400a
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez debloquer des objets qu'a <TAG.VILLE>
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez debloquer que des objets municipaux !
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez bloquer que des objets municipaux !
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+CATEGORY=Mairie
+SUBSECTION=Outil
+DESCRIPTION=Baton de maire
+
+[DIALOG MENU_BATON_MAIRIE]
+0,0
+
+page 0
+resizepic 0 0 2620 340 200
+
+page 1
+text 30 20 1152 1//MENU DU BATON DE MAIRE (<LINK.TAG.VILLE>)
+text 40 50 1152 2//Bloquer un objet de mairie
+text 40 70 1152 3//Debloquer un objet de mairie
+button 20 55 2103 2104 1 0 1//BLOQUER
+button 20 75 2103 2104 1 0 2//DEBLOQUER
+
+[DIALOG MENU_BATON_MAIRIE TEXT]
+<VAR.BLANKLINE>
+Menu du baton de maire (<LINK.TAG.VILLE>)
+Bloquer un objet
+Debloquer un objet
+
+[DIALOG MENU_BATON_MAIRIE BUTTON]
+ON=1
+VAR.ACTION_BATON=1
+TARGET
+
+ON=2
+VAR.ACTION_BATON=2
+TARGET

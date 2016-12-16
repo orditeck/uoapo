@@ -1,0 +1,298 @@
+[SKILLMENU sm_inscription]
+// dclick on blank scroll
+Spell Circles
+// Still internal at the moment.
+ON=i_spell_circle_1
+SKILLMENU=sm_inscrip_1
+ON=i_spell_circle_2
+SKILLMENU=sm_inscrip_2
+ON=i_spell_circle_3
+SKILLMENU=sm_inscrip_3
+ON=i_spell_circle_4
+SKILLMENU=sm_inscrip_4
+ON=i_spell_circle_5
+SKILLMENU=sm_inscrip_5
+ON=i_spell_circle_6
+SKILLMENU=sm_inscrip_6
+ON=i_spell_circle_7
+SKILLMENU=sm_inscrip_7
+ON=i_spell_circle_8
+SKILLMENU=sm_inscrip_8
+
+ON=01c13 Livres
+SKILLMENU=sm_inscription_livres
+
+ON=i_scroll_enchantement Divers
+SKILLMENU=sm_scroll_enchantement
+
+[SKILLMENU sm_inscrip_1]
+Spell Circle 1
+
+ON=i_rune_clumsy
+TESTIF=<cancast s_clumsy>
+MAKEITEM=i_scroll_clumsy
+
+ON=i_rune_create_food
+TESTIF=<cancast s_create_food>
+MAKEITEM=i_scroll_create_food
+
+ON=i_rune_feeblemind
+TESTIF=<cancast s_feeblemind>
+MAKEITEM=i_scroll_feeblemind
+
+ON=i_rune_heal
+TESTIF=<cancast s_heal>
+MAKEITEM=i_scroll_heal
+
+ON=i_rune_magic_arrow
+TESTIF=<cancast s_magic_arrow>
+MAKEITEM=i_scroll_magic_arrow
+
+ON=i_rune_night_sight
+TESTIF=<cancast s_night_sight>
+MAKEITEM=i_scroll_night_sight
+
+ON=i_rune_reactive_armor
+TESTIF=<cancast s_reactive_armor>
+MAKEITEM=i_scroll_reactive_armor
+
+ON=i_rune_weaken
+TESTIF=<cancast s_weaken>
+MAKEITEM=i_scroll_weaken
+
+[SKILLMENU sm_inscrip_2]
+Spell Circle 2
+ON=i_rune_agility
+TESTIF=<cancast s_agility>
+MAKEITEM=i_scroll_agility
+ON=i_rune_cunning
+TESTIF=<cancast s_cunning>
+MAKEITEM=i_scroll_cunning
+ON=i_rune_cure
+TESTIF=<cancast s_cure>
+MAKEITEM=i_scroll_cure
+ON=i_rune_harm
+TESTIF=<cancast s_harm>
+MAKEITEM=i_scroll_harm
+ON=i_rune_magic_trap
+TESTIF=<cancast s_magic_trap>
+MAKEITEM=i_scroll_magic_trap
+ON=i_rune_magic_untrap
+TESTIF=<cancast s_magic_untrap>
+MAKEITEM=i_scroll_magic_untrap
+ON=i_rune_protection
+TESTIF=<cancast s_protection>
+MAKEITEM=i_scroll_protection
+ON=i_rune_strength
+TESTIF=<cancast s_strength>
+MAKEITEM=i_scroll_strength
+
+[SKILLMENU sm_inscrip_3]
+Spell Circle 3
+ON=i_rune_bless
+TESTIF=<cancast s_bless>
+MAKEITEM=i_scroll_bless
+ON=i_rune_fireball
+TESTIF=<cancast s_fireball>
+MAKEITEM=i_scroll_fireball
+ON=i_rune_magic_lock
+TESTIF=<cancast s_magic_lock>
+MAKEITEM=i_scroll_magic_lock
+ON=i_rune_poison
+TESTIF=<cancast s_poison>
+MAKEITEM=i_scroll_poison
+ON=i_rune_telekinesis
+TESTIF=<cancast s_telekinesis>
+MAKEITEM=i_scroll_telekinesis
+ON=i_rune_teleport
+TESTIF=<cancast s_teleport>
+MAKEITEM=i_scroll_teleport
+ON=i_rune_unlock
+TESTIF=<cancast s_unlock>
+MAKEITEM=i_scroll_unlock
+ON=i_rune_wall_of_stone
+TESTIF=<cancast s_wall_of_stone>
+MAKEITEM=i_scroll_wall_of_stone
+
+[SKILLMENU sm_inscrip_4]
+Spell Circle 4
+ON=i_rune_archcure
+TESTIF=<cancast s_archcure>
+MAKEITEM=i_scroll_archcure
+ON=i_rune_archprotection
+TESTIF=<cancast s_archprotection>
+MAKEITEM=i_scroll_archprotection
+ON=i_rune_curse
+TESTIF=<cancast s_curse>
+MAKEITEM=i_scroll_curse
+ON=i_rune_fire_field
+TESTIF=<cancast s_fire_field>
+MAKEITEM=i_scroll_fire_field
+ON=i_rune_greater_heal
+TESTIF=<cancast s_greater_heal>
+MAKEITEM=i_scroll_greater_heal
+ON=i_rune_lightning
+TESTIF=<cancast s_lightning>
+MAKEITEM=i_scroll_lightning
+ON=i_rune_mana_drain
+TESTIF=<cancast s_mana_drain>
+MAKEITEM=i_scroll_mana_drain
+ON=i_rune_recall
+TESTIF=<cancast s_recall>
+MAKEITEM=i_scroll_recall
+
+[SKILLMENU sm_inscrip_5]
+Spell Circle 5
+ON=i_rune_blade_spirits
+TESTIF=<cancast s_blade_spirits>
+MAKEITEM=i_scroll_blade_spirits
+ON=i_rune_dispel_field
+TESTIF=<cancast s_dispel_field>
+MAKEITEM=i_scroll_dispel_field
+ON=i_rune_incognito
+TESTIF=<cancast s_incognito>
+MAKEITEM=i_scroll_incognito
+ON=i_rune_magic_reflection
+TESTIF=<cancast s_magic_reflection>
+MAKEITEM=i_scroll_magic_reflection
+ON=i_rune_mind_blast
+TESTIF=<cancast s_mind_blast>
+MAKEITEM=i_scroll_mind_blast
+ON=i_rune_paralyze
+TESTIF=<cancast s_paralyze>
+MAKEITEM=i_scroll_paralyze
+ON=i_rune_poison_field
+TESTIF=<cancast s_poison_field>
+MAKEITEM=i_scroll_poison_field
+ON=i_rune_summon_creature
+TESTIF=<cancast s_summon_creature>
+MAKEITEM=i_scroll_summon_creature
+
+[SKILLMENU sm_inscrip_6]
+Spell Circle 6
+ON=i_rune_dispel
+TESTIF=<cancast s_dispel>
+MAKEITEM=i_scroll_dispel
+ON=i_rune_energy_bolt
+TESTIF=<cancast s_energy_bolt>
+MAKEITEM=i_scroll_energy_bolt
+ON=i_rune_explosion
+TESTIF=<cancast s_explosion>
+MAKEITEM=i_scroll_explosion
+ON=i_rune_invisibility
+TESTIF=<cancast s_invisibility>
+MAKEITEM=i_scroll_invisibility
+ON=i_rune_mark
+TESTIF=<cancast s_mark>
+MAKEITEM=i_scroll_mark
+ON=i_rune_mass_curse
+TESTIF=<cancast s_mass_curse>
+MAKEITEM=i_scroll_mass_curse
+ON=i_rune_paralyze_field
+TESTIF=<cancast s_paralyzation_field>
+MAKEITEM=i_scroll_paralyze_field
+ON=i_rune_reveal
+TESTIF=<cancast s_reveal>
+MAKEITEM=i_scroll_reveal
+
+[SKILLMENU sm_inscrip_7]
+Spell Circle 7
+ON=i_rune_chain_lightning
+TESTIF=<cancast s_chain_lightning>
+MAKEITEM=i_scroll_chain_lightning
+ON=i_rune_energy_field
+TESTIF=<cancast s_energy_field>
+MAKEITEM=i_scroll_energy_field
+ON=i_rune_flamestrike
+TESTIF=<cancast s_flamestrike>
+MAKEITEM=i_scroll_flamestrike
+ON=i_rune_gate_travel
+TESTIF=<cancast s_gate_travel>
+MAKEITEM=i_scroll_gate_travel
+ON=i_rune_mana_vampire
+TESTIF=<cancast s_mana_vampire>
+MAKEITEM=i_scroll_mana_vampire
+ON=i_rune_mass_dispel
+TESTIF=<cancast s_mass_dispel>
+MAKEITEM=i_scroll_mass_dispel
+ON=i_rune_meteor_swarm
+TESTIF=<cancast s_meteor_swarm>
+MAKEITEM=i_scroll_meteor_swarm
+ON=i_rune_polymorph
+TESTIF=<cancast s_polymorph>
+MAKEITEM=i_scroll_polymorph
+
+[SKILLMENU sm_inscrip_8]
+Spell Circle 8
+ON=i_rune_earthquake
+TESTIF=<cancast s_earthquake>
+MAKEITEM=i_scroll_earthquake
+ON=i_rune_energy_vortex
+TESTIF=<cancast s_energy_vortex>
+MAKEITEM=i_scroll_energy_vortex
+ON=i_rune_resurrection
+TESTIF=<cancast s_resurrection>
+MAKEITEM=i_scroll_resurrection
+ON=i_rune_summon_elem_air
+TESTIF=<cancast s_summon_elem_air>
+MAKEITEM=i_scroll_summon_elem_air
+ON=i_rune_summon_daemon
+TESTIF=<cancast s_summon_daemon>
+MAKEITEM=i_scroll_summon_daemon
+ON=i_rune_summon_elem_earth
+TESTIF=<cancast s_summon_elem_earth>
+MAKEITEM=i_scroll_summon_elem_earth
+ON=i_rune_summon_elem_fire
+TESTIF=<cancast s_summon_elem_fire>
+MAKEITEM=i_scroll_summon_elem_fire
+ON=i_rune_summon_elem_water
+TESTIF=<cancast s_summon_elem_water>
+MAKEITEM=i_scroll_summon_elem_water
+
+[SKILLMENU sm_inscription_livres]
+Livres
+
+ON=i_livre_1 <name> (<resmake>)
+MAKEITEM=i_livre_1
+
+ON=i_livre_2 <name> (<resmake>)
+MAKEITEM=i_livre_2
+
+ON=i_livre_3 <name> (<resmake>)
+MAKEITEM=i_livre_3
+
+ON=i_livre_4 <name> (<resmake>)
+MAKEITEM=i_livre_4
+
+ON=i_livre_5 <name> (<resmake>)
+MAKEITEM=i_livre_5
+
+ON=i_livre_6 <name> (<resmake>)
+MAKEITEM=i_livre_6
+
+ON=i_livre_7 <name> (<resmake>)
+MAKEITEM=i_livre_7
+
+ON=i_livre_de_sorts <name> (<resmake>)
+MAKEITEM=i_livre_de_sorts
+
+ON=i_runebook <name> (<resmake>)
+MAKEITEM=i_runebook
+
+ON=i_livre_de_recettes_1 <name> (<resmake>)
+MAKEITEM=i_livre_de_recettes_1
+
+ON=i_livre_de_recettes_2 <name> (<resmake>)
+MAKEITEM=i_livre_de_recettes_2
+
+ON=i_livre_de_recettes_3 <name> (<resmake>)
+MAKEITEM=i_livre_de_recettes_3
+
+ON=i_livre_de_recettes_4 <name> (<resmake>)
+MAKEITEM=i_livre_de_recettes_4
+
+[SKILLMENU sm_scroll_enchantement]
+Divers
+
+ON=i_scroll_enchantement <name> (<resmake>)
+MAKEITEM=i_scroll_enchantement

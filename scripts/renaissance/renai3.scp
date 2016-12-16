@@ -1,0 +1,539 @@
+[ITEMDEF i_fleche_newbifiee]
+DEFNAME=i_fleche_newbifiee
+NAME=arrow%s
+ID=i_arrow
+
+ON=@CREATE
+ATTR=00004
+
+[ITEMDEF i_cle_donjon3_1]
+DEFNAME=i_cle_donjon3_1
+NAME=Cle de lierres 1
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_2]
+DEFNAME=i_cle_donjon3_2
+NAME=Cle de lierres 2
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_3]
+DEFNAME=i_cle_donjon3_3
+NAME=Cle de lierres 3
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_4]
+DEFNAME=i_cle_donjon3_4
+NAME=Cle de lierres 4
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_5]
+DEFNAME=i_cle_donjon3_5
+NAME=Cle de lierres 5
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_6]
+DEFNAME=i_cle_donjon3_6
+NAME=Cle de lierres 6
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_7]
+DEFNAME=i_cle_donjon3_7
+NAME=Cle de lierres 7
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_8]
+DEFNAME=i_cle_donjon3_8
+NAME=Cle de lierres 8
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_9]
+DEFNAME=i_cle_donjon3_9
+NAME=Cle de lierres 9
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_10]
+DEFNAME=i_cle_donjon3_10
+NAME=Cle de lierres 10
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_11]
+DEFNAME=i_cle_donjon3_11
+NAME=Cle de lierres 11
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_cle_donjon3_12]
+DEFNAME=i_cle_donjon3_12
+NAME=Cle de lierres 12
+ID=01010
+
+ON=@CREATE
+COLOR=07d6
+LINK=040035db1
+MORE1=040035db1
+
+[ITEMDEF i_edifice_amazone]
+DEFNAME=i_edifice_amazone
+NAME=Edifice
+ID=012d8
+
+ON=@CREATE
+COLOR=07d2
+
+ON=@DCLICK
+IF (<SRC.FINDID.i_cle_donjon3_1> && <SRC.FINDID.i_cle_donjon3_2> && <SRC.FINDID.i_cle_donjon3_3> && <SRC.FINDID.i_cle_donjon3_4> && <SRC.FINDID.i_cle_donjon3_5> && <SRC.FINDID.i_cle_donjon3_6> && <SRC.FINDID.i_cle_donjon3_7> && <SRC.FINDID.i_cle_donjon3_8> && <SRC.FINDID.i_cle_donjon3_9> && <SRC.FINDID.i_cle_donjon3_10> && <EVAL <SRC.TAG.RENAISSANCE>> == 2)
+	IF <SRC.FINDID.i_cle_donjon3_1.MORE2>==2
+		SRC.FINDID.i_cle_donjon3_1.EMOTE tomber en poussiere
+		SRC.FINDID.i_cle_donjon3_1.REMOVE
+	ELSE
+		SRC.FINDID.i_cle_donjon3_1.MORE2=<SRC.FINDID.i_cle_donjon3_1.MORE2>+1
+	ENDIF
+	IF <SRC.FINDID.i_cle_donjon3_2.MORE2>==2
+		SRC.FINDID.i_cle_donjon3_2.EMOTE tomber en poussiere
+		SRC.FINDID.i_cle_donjon3_2.REMOVE
+	ELSE
+		SRC.FINDID.i_cle_donjon3_2.MORE2=<SRC.FINDID.i_cle_donjon3_2.MORE2>+1
+	ENDIF
+	IF <SRC.FINDID.i_cle_donjon3_3.MORE2>==2
+		SRC.FINDID.i_cle_donjon3_3.EMOTE tomber en poussiere
+		SRC.FINDID.i_cle_donjon3_3.REMOVE
+	ELSE
+		SRC.FINDID.i_cle_donjon3_3.MORE2=<SRC.FINDID.i_cle_donjon3_3.MORE2>+1
+	ENDIF
+	IF <SRC.FINDID.i_cle_donjon3_4.MORE2>==2
+		SRC.FINDID.i_cle_donjon3_4.EMOTE tomber en poussiere
+		SRC.FINDID.i_cle_donjon3_4.REMOVE
+	ELSE
+		SRC.FINDID.i_cle_donjon3_4.MORE2=<SRC.FINDID.i_cle_donjon3_4.MORE2>+1
+	ENDIF
+	IF <SRC.FINDID.i_cle_donjon3_5.MORE2>==2
+		SRC.FINDID.i_cle_donjon3_5.EMOTE tomber en poussiere
+		SRC.FINDID.i_cle_donjon3_5.REMOVE
+	ELSE
+		SRC.FINDID.i_cle_donjon3_5.MORE2=<SRC.FINDID.i_cle_donjon3_5.MORE2>+1
+	ENDIF
+	IF <SRC.FINDID.i_cle_donjon3_6.MORE2>==2
+		SRC.FINDID.i_cle_donjon3_6.EMOTE tomber en poussiere
+		SRC.FINDID.i_cle_donjon3_6.REMOVE
+	ELSE
+		SRC.FINDID.i_cle_donjon3_6.MORE2=<SRC.FINDID.i_cle_donjon3_6.MORE2>+1
+	ENDIF
+	IF <SRC.FINDID.i_cle_donjon3_7.MORE2>==2
+		SRC.FINDID.i_cle_donjon3_7.EMOTE tomber en poussiere
+		SRC.FINDID.i_cle_donjon3_7.REMOVE
+	ELSE
+		SRC.FINDID.i_cle_donjon3_7.MORE2=<SRC.FINDID.i_cle_donjon3_7.MORE2>+1
+	ENDIF
+	IF <SRC.FINDID.i_cle_donjon3_8.MORE2>==2
+		SRC.FINDID.i_cle_donjon3_8.EMOTE tomber en poussiere
+		SRC.FINDID.i_cle_donjon3_8.REMOVE
+	ELSE
+		SRC.FINDID.i_cle_donjon3_8.MORE2=<SRC.FINDID.i_cle_donjon3_8.MORE2>+1
+	ENDIF
+	IF <SRC.FINDID.i_cle_donjon3_9.MORE2>==2
+		SRC.FINDID.i_cle_donjon3_9.EMOTE tomber en poussiere
+		SRC.FINDID.i_cle_donjon3_9.REMOVE
+	ELSE
+		SRC.FINDID.i_cle_donjon3_9.MORE2=<SRC.FINDID.i_cle_donjon3_9.MORE2>+1
+	ENDIF
+	IF <SRC.FINDID.i_cle_donjon3_10.MORE2>==2
+		SRC.FINDID.i_cle_donjon3_10.EMOTE tomber en poussiere
+		SRC.FINDID.i_cle_donjon3_10.REMOVE
+	ELSE
+		SRC.FINDID.i_cle_donjon3_10.MORE2=<SRC.FINDID.i_cle_donjon3_10.MORE2>+1
+	ENDIF
+	EMOTE trembler
+	SRC.TAG.VERIFQUETE3=1
+	SRC.EFFECT 2,i_fx_smoke,0,15
+	SRC.P=5509,1808
+	SRC.UPDATE
+ENDIF
+RETURN 1
+
+[CHARDEF c_Nims] 
+DEFNAME=c_Nims
+NAME=Nims
+ID=c_man
+ 
+TSPEECH=spk_Nims
+
+ON=@create
+COLOR=083ea
+FOOD=9999
+SPEECHCOLOR=00038
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Specialiste en pugilat
+
+TAG.FORPURE=600
+
+ITEMNEWBIE=01f03
+NAME=Robe du pugiliste
+COLOR=00038
+ITEMNEWBIE=i_gants_de_jouteur
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> <= 2
+	IF <EVAL 0<SRC.TAG.NIMS>> < 1
+		SAY <SRC.SEX Sir/Madame> partez avant qu'il ne soit trop tard ...
+	ELSE
+		SAY Decidement rien ne vous fait peur <SRC.NAME> !
+ELSE
+	SAY Vous venez me rendre une petite visite?
+ENDIF
+
+ON=@NPCHearUnknown
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> <= 2
+	IF (<EVAL(RAND(15))>=0)
+		EMOTE sourire
+		SAY Il est vrai qu'une belle paire de gants de pugiliste pourrait me delier la langue ...
+	ELSE
+		SAY Je ne peux rien vous dire de plus si ce n'est ... Fuyez !
+	ENDIF
+ELSE
+	SAY Je ne peux rien dire de plus, vous savez ce qui se trouve dans cette caverne !
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-3
+DESCRIPTION=Nims
+
+[SPEECH spk_Nims]
+
+ON=*gants*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 1
+	IF <EVAL 0<SRC.TAG.NIMS>> < 1 && <EVAL 0<SRC.TAG.RENAISSANCE>> == 2
+		IF <SRC.RESTEST 1 i_gants_de_pugiliste>
+			SRC.FINDID.i_gants_de_pugiliste.REMOVE
+			SRC.TAG.NIMS=1
+			EMOTE esquisser un large sourire
+			SAY C'est exactement ce que je recherchais ! Au fait que vous vouliez vous contre cette paire de gants ?
+		ELSE
+			SAY Je ne parlerai pas tant que vous ne me ramenerai pas ces gants !
+		ENDIF
+	ELSE
+		SAY Je vous remercie encore de votre petit cadeau <SRC.NAME>, mais souvenez nous ... Pas un mot de tout ca a quiconque !
+	ENDIF
+ELSE
+	SAY Hors de ma vue cloporte !
+ENDIF
+
+ON=*entre*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 2
+	IF !<SRC.FINDLAYER.25>
+		EMOTE gromeller
+		SAY Si vous insistez ...
+		SRC.EVENTS +e_anti_mark_recall
+		IF <SRC.FINDLAYER.40>
+			SRC.FINDLAYER.40.REMOVE
+		ENDIF
+		IF (<SRC.FLAGS>&statf_hidden)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+		ENDIF
+		IF (<SRC.FLAGS>&statf_invisible)
+			SRC.FLAGS=<SRC.FLAGS>&~invisible
+		ENDIF
+		IF (<SRC.FLAGS>&statf_insubstantial)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+		SRC.TAG.anti_mark_recall=1
+		SRC.TAG.INSIDE_D3=1
+		SRC.P=5457,1862
+		SRC.UPDATE
+	ELSE
+		SAY Pauvre fou n'entrez pas a cheval ... Si l'une des creatures vivant dans ces caves vous le capturait elle deviendrait surpuissante !
+	ENDIF
+ELSE
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 2
+		IF <EVAL <SRC.TAG.NIMS>> == 1
+			IF <EVAL 0<SRC.TAG.LEVEL>> >99
+				IF !<SRC.FINDLAYER.25>
+					EMOTE gromeller
+					SAY Si vous insistez ...
+					SRC.EVENTS +e_anti_mark_recall
+					IF <SRC.FINDLAYER.40>
+						SRC.FINDLAYER.40.REMOVE
+					ENDIF
+					IF (<SRC.FLAGS>&statf_hidden)
+						SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+					ENDIF
+					IF (<SRC.FLAGS>&statf_invisible)
+						SRC.FLAGS=<SRC.FLAGS>&~invisible
+					ENDIF
+					IF (<SRC.FLAGS>&statf_insubstantial)
+						SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+					ENDIF
+					IF <SRC.FINDID.i_rune_delay_g>
+						SRC.FINDID.i_rune_delay_g.REMOVE
+						SRC.EFFECT 3,i_fx_smoke_small,0,60
+						SRC.SFX 01ed
+						SRC.EVENTS -e_casse_gate
+					ENDIF
+					SRC.TAG.anti_mark_recall=1
+					SRC.TAG.INSIDE_D3=1
+					SRC.P=5457,1862
+					SRC.UPDATE
+				ELSE
+					SAY Pauvre fou n'entrez pas a cheval ... Si l'une des creatures vivant dans ces caves vous le capturait elle deviendrait surpuissante !
+				ENDIF
+			ELSE
+				EMOTE se retenir de rire
+				SAY Vous ? Combattre en ces lieux ?
+			ENDIF
+		ELSE
+			SAY <SRC.SEX Messire/Madame> ces lieux sont terriblement dangereux, vous devriez partir au plus vite.
+		ENDIF
+	ELSE
+		SAY Hors de ma vue cloporte humaine !
+	ENDIF
+ENDIF
+
+[ITEMDEF i_dalle_enleve_event2]
+DEFNAME=i_dalle_enleve_event2
+NAME=Dalle enleve event 2
+ID=049b
+
+ON=@CREATE
+COLOR=0abf
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D3
+	SRC.P=2498,922
+	SRC.UPDATE
+ENDIF
+
+[CHARDEF c_venerable_de_covetous] 
+DEFNAME=c_venerable_de_covetous
+NAME=Venerable de Covetous
+ID=c_man
+ 
+TSPEECH=spk_venerable_de_covetous
+
+ON=@create
+COLOR=03f1
+FOOD=9999
+SPEECHCOLOR=0aa4
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=01f03
+COLOR=0aa4
+ITEMNEWBIE=0170d
+COLOR=0aa4
+ITEMNEWBIE=013f8
+COLOR=0aa4
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 2
+	SAY J'avais predis votre arrivee <SRC.NAME> !
+ELSE
+	SAY Votre destin est ailleurs <SRC.NAME>
+ENDIF
+
+ON=@NPCHearUnknown
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 2
+	IF <EVAL 0<SRC.TAG.VDECOV>> == 0
+		SRC.TAG.VDECOV=1
+		SAY J'ai longuement etudie votre cas <SRC.NAME> et vous m'avez tout particulierement surpris ...
+	ELSEIF <EVAL 0<SRC.TAG.VDECOV>> == 1
+		SRC.TAG.VDECOV=2
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			SAY J'ai donc decide de vous accorder la poursuite de votre ascension dans la voie benefique ...
+		ELSE
+			SAY J'ai donc decide de vous accorder la poursuite de votre ascension dans la voie malefique ...
+		ENDIF
+	ELSE
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			SAY Une fois pret a assumer une telle responsabilite confirmez moi que vous desirez poursuivre la voie benefique
+		ELSE
+			SAY Une fois pret a assumer une telle responsabilite confirmez moi que vous desirez poursuivre la voie malefique
+		ENDIF
+	ENDIF
+ELSE
+	SAY Votre destin est ailleurs <SRC.NAME>
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-3
+DESCRIPTION=Venerable de Covetous
+
+[SPEECH spk_venerable_de_covetous]
+
+ON=Je desire poursuivre la voie benefique
+IF (<EVAL <SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D3>> == 1)
+	IF <EVAL 0<SRC.TAG.COTE>> == 1
+		IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 2
+			IF <SRC.FINDID.03f0c>
+				IF (<EVAL 0<SRC.TAG.VERIFQUETE3>> == 0)
+					SRC.TAG.TRICHE_D3 = 1
+				ENDIF
+				SRC.TAG.RENAISSANCE=3
+				SRC.FINDID.03f0c.COLOR=0B16
+				SRC.COLOR=0B1C
+				SRC.OSKIN=0B1C
+				SRC.RENAITRE
+				SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie d'elu avec sa troisieme renaissance !
+			ELSE
+				SAY Un elu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+			ENDIF
+		ELSE
+			SAY Votre destin est ailleurs <SRC.NAME>
+		ENDIF
+	ELSE
+		SAY Vous avez deja prete serment pour servir le mal
+	ENDIF
+ELSE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D3
+	SRC.P=2498,922
+	SRC.UPDATE
+ENDIF
+
+ON=Je desire poursuivre la voie malefique
+IF (<EVAL <SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D3>> == 1)
+	IF <EVAL 0<SRC.TAG.COTE>> == 2
+		IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 2
+			IF <SRC.FINDID.03f0c>
+				IF (<EVAL 0<SRC.TAG.VERIFQUETE3>> == 0)
+					SRC.TAG.TRICHE_D3 = 1
+				ENDIF
+				SRC.TAG.RENAISSANCE=3
+				SRC.FINDID.03f0c.COLOR=0B2A
+				SRC.COLOR=0B2A
+				SRC.OSKIN=0B2A
+				SRC.RENAITRE
+				SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie de dechu avec sa troisieme renaissance !
+			ELSE
+				SAY Un dechu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+			ENDIF
+		ELSE
+			SAY Votre destin est ailleurs <SRC.NAME>
+		ENDIF
+	ELSE
+		SAY Vous avez deja prete serment pour servir le bien
+	ENDIF
+ELSE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D3
+	SRC.P=2498,922
+	SRC.UPDATE
+ENDIF
+
+ON=*colise*
+ON=*colyse*
+SAY Seul le venerable de Wrong pourra vous y emmener ...
+
+[ITEMDEF i_coffre_covetous]
+DEFNAME=i_coffre_covetous
+NAME=Coffre covetous
+ID=0e43
+TYPE=T_SCRIPT
+
+ON=@CREATE
+TIMER=43200
+TAG.REMPLI=0
+
+ON=@DCLICK
+IF (<EVAL 0<TAG.REMPLI>> == 1)
+	TAG.REMPLI=0
+	TAG.PX=<P.X>
+	TAG.PY=<P.Y> + 1
+	TAG.PZ=<P.Z>
+	TAG.POSITION=<EVAL <TAG.PX>>,<EVAL <TAG.PY>>,<EVAL <TAG.PZ>>
+	TAG.TEMPSRESPAWN={43200 172800}
+	TIMER=<TAG.TEMPSRESPAWN>
+	SRC.NEWITEM { i_stats_dropp 15 i_hallebarde_de_souffre 1 i_fleau_d_arme_de_souffre 1 i_kriss_de_souffre 1 }
+	SRC.ACT.P <TAG.POSITION>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TAG.REMPLI=1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-3
+DESCRIPTION=Coffre de Covetous

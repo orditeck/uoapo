@@ -1,0 +1,304 @@
+[SPEECH spk_un_joueur_piece] 
+
+on=*bonjour* 
+SAY 'Jour <SRC.SEX l'ami/l'amie> ! Pour 1000 piecettes te srai ti tenter par en' tchote partie d' pile ou face ?
+
+ON=*oui* 
+Say Pile ou face ? 
+
+ON=*non* 
+Say Tant pis <SRC.SEX tcho/tchotte> <SRC.SEX gaillard/é> ... A la revoyure ! 
+
+ON=*fiole*
+SAY Ouai <SRC.SEX gamin/gamine> ! J'possede une telle fiole mais ... em' rapporte po un sous ! 
+
+ON=*sous*
+SAY Quoi ? te s'rai pret a parier tin pecul pour avoir cte fiole !?
+
+ON=*parier*
+SAY Vindiou ! J'la parie pour 10 000 piecettes sur un nouveau jeu !
+
+ON=*jeu*
+SAY Donn' moi donc un nombre entre 1 pis 6 , je jette mon de, si l'chiffre dessus c'est celui qu'ta dit , chte donne la fiole !
+
+ON=*1*
+IF (<SRC.RESTEST 10000 i_gold>)
+SRC.CONSUME 10000 i_gold
+IF 0<SRC.TAG.PARIERFIOLE> <1
+SRC.TAG.PARIERFIOLE=1
+EMOTE jetter un de
+DORAND 6
+SRC.TAG.DEFIOLE=1
+SRC.TAG.DEFIOLE=2
+SRC.TAG.DEFIOLE=3
+SRC.TAG.DEFIOLE=4
+SRC.TAG.DEFIOLE=5
+SRC.TAG.DEFIOLE=6
+ENDDO
+IF <SRC.TAG.DEFIOLE>=1
+SRC.NEWITEM i_fiole_de_quete
+SRC.ACT.BOUNCE
+SAY Bravo ! T'a joue l'bon numero ... vla' ta fiole !
+ELSE
+SAY L'de y'est tombe sur <EVAL <SRC.TAG.DEFIOLE>> et t'a joue le 1, t'a perdu ... dommage !
+ENDIF
+ELSE
+SAY Ah non ! j'reparierai po c'te fiole ... Elle a bin trop d'importance !
+ENDIF
+ELSE
+EMOTE fouiller <SRC.NAME>
+SAY T'es bin <SRC.SEX minteu/minteuse> toi ! T'a nin 10 000 piecettes !
+ENDIF
+
+ON=*2*
+IF (<SRC.RESTEST 10000 i_gold>)
+SRC.CONSUME 10000 i_gold
+IF 0<SRC.TAG.PARIERFIOLE> <1
+SRC.TAG.PARIERFIOLE=1
+EMOTE jetter un de
+DORAND 6
+SRC.TAG.DEFIOLE=1
+SRC.TAG.DEFIOLE=2
+SRC.TAG.DEFIOLE=3
+SRC.TAG.DEFIOLE=4
+SRC.TAG.DEFIOLE=5
+SRC.TAG.DEFIOLE=6
+ENDDO
+IF <SRC.TAG.DEFIOLE>=2
+SRC.NEWITEM i_fiole_de_quete
+SRC.ACT.BOUNCE
+SAY Bravo ! T'a joue l'bon numero ... vla' ta fiole !
+ELSE
+SAY L'de y'est tombe sur <EVAL <SRC.TAG.DEFIOLE>> et t'a joue le 2, t'a perdu ... dommage !
+ENDIF
+ELSE
+SAY Ah non ! j'reparierai po c'te fiole ... Elle a bin trop d'importance !
+ENDIF
+ELSE
+EMOTE fouiller <SRC.NAME>
+SAY T'es bin <SRC.SEX minteu/minteuse> toi ! T'a nin 10 000 piecettes !
+ENDIF
+
+ON=*3*
+IF (<SRC.RESTEST 10000 i_gold>)
+SRC.CONSUME 10000 i_gold
+IF 0<SRC.TAG.PARIERFIOLE> <1
+SRC.TAG.PARIERFIOLE=1
+EMOTE jetter un de
+DORAND 6
+SRC.TAG.DEFIOLE=1
+SRC.TAG.DEFIOLE=2
+SRC.TAG.DEFIOLE=3
+SRC.TAG.DEFIOLE=4
+SRC.TAG.DEFIOLE=5
+SRC.TAG.DEFIOLE=6
+ENDDO
+IF <SRC.TAG.DEFIOLE>=3
+SRC.NEWITEM i_fiole_de_quete
+SRC.ACT.BOUNCE
+SAY Bravo ! T'a joue l'bon numero ... vla' ta fiole !
+ELSE
+SAY L'de y'est tombe sur <EVAL <SRC.TAG.DEFIOLE>> et t'a joue le 3, t'a perdu ... dommage !
+ENDIF
+ELSE
+SAY Ah non ! j'reparierai po c'te fiole ... Elle a bin trop d'importance !
+ENDIF
+ELSE
+EMOTE fouiller <SRC.NAME>
+SAY T'es bin <SRC.SEX minteu/minteuse> toi ! T'a nin 10 000 piecettes !
+ENDIF
+
+ON=*4*
+IF (<SRC.RESTEST 10000 i_gold>)
+SRC.CONSUME 10000 i_gold
+IF 0<SRC.TAG.PARIERFIOLE> <1
+SRC.TAG.PARIERFIOLE=1
+EMOTE jetter un de
+DORAND 6
+SRC.TAG.DEFIOLE=1
+SRC.TAG.DEFIOLE=2
+SRC.TAG.DEFIOLE=3
+SRC.TAG.DEFIOLE=4
+SRC.TAG.DEFIOLE=5
+SRC.TAG.DEFIOLE=6
+ENDDO
+IF <SRC.TAG.DEFIOLE>=4
+SRC.NEWITEM i_fiole_de_quete
+SRC.ACT.BOUNCE
+SAY Bravo ! T'a joue l'bon numero ... vla' ta fiole !
+ELSE
+SAY L'de y'est tombe sur <EVAL <SRC.TAG.DEFIOLE>> et t'a joue le 4, t'a perdu ... dommage !
+ENDIF
+ELSE
+SAY Ah non ! j'reparierai po c'te fiole ... Elle a bin trop d'importance !
+ENDIF
+ELSE
+EMOTE fouiller <SRC.NAME>
+SAY T'es bin <SRC.SEX minteu/minteuse> toi ! T'a nin 10 000 piecettes !
+ENDIF
+
+ON=*5*
+IF (<SRC.RESTEST 10000 i_gold>)
+SRC.CONSUME 10000 i_gold
+IF 0<SRC.TAG.PARIERFIOLE> <1
+SRC.TAG.PARIERFIOLE=1
+EMOTE jetter un de
+DORAND 6
+SRC.TAG.DEFIOLE=1
+SRC.TAG.DEFIOLE=2
+SRC.TAG.DEFIOLE=3
+SRC.TAG.DEFIOLE=4
+SRC.TAG.DEFIOLE=5
+SRC.TAG.DEFIOLE=6
+ENDDO
+IF <SRC.TAG.DEFIOLE>=5
+SRC.NEWITEM i_fiole_de_quete
+SRC.ACT.BOUNCE
+SAY Bravo ! T'a joue l'bon numero ... vla' ta fiole !
+ELSE
+SAY L'de y'est tombe sur <EVAL <SRC.TAG.DEFIOLE>> et t'a joue le 5, t'a perdu ... dommage !
+ENDIF
+ELSE
+SAY Ah non ! j'reparierai po c'te fiole ... Elle a bin trop d'importance !
+ENDIF
+ELSE
+EMOTE fouiller <SRC.NAME>
+SAY T'es bin <SRC.SEX minteu/minteuse> toi ! T'a nin 10 000 piecettes !
+ENDIF
+
+ON=*6*
+IF (<SRC.RESTEST 10000 i_gold>)
+SRC.CONSUME 10000 i_gold
+IF 0<SRC.TAG.PARIERFIOLE> <1
+SRC.TAG.PARIERFIOLE=1
+EMOTE jetter un de
+DORAND 6
+SRC.TAG.DEFIOLE=1
+SRC.TAG.DEFIOLE=2
+SRC.TAG.DEFIOLE=3
+SRC.TAG.DEFIOLE=4
+SRC.TAG.DEFIOLE=5
+SRC.TAG.DEFIOLE=6
+ENDDO
+IF <SRC.TAG.DEFIOLE>=6
+SRC.NEWITEM i_fiole_de_quete
+SRC.ACT.BOUNCE
+SAY Bravo ! T'a joue l'bon numero ... vla' ta fiole !
+ELSE
+SAY L'de y'est tombe sur <EVAL <SRC.TAG.DEFIOLE>> et t'a joue le 6, t'a perdu ... dommage !
+ENDIF
+ELSE
+SAY Ah non ! j'reparierai po c'te fiole ... Elle a bin trop d'importance !
+ENDIF
+ELSE
+EMOTE fouiller <SRC.NAME>
+SAY T'es bin <SRC.SEX minteu/minteuse> toi ! T'a nin 10 000 piecettes !
+ENDIF
+
+ON=*pile*
+IF (<SRC.RESTEST 1000 i_gold>)
+SRC.CONSUME 1000 i_gold
+emote envoyer sa piece en l'air 
+DORAND 2 
+SRC.TAG.PIECE=0
+SRC.TAG.PIECE=1
+ENDDO 
+IF <SRC.TAG.PIECE>=0 
+EMOTE soupirer
+SAY Pile ... Vla tin pecule ! te r'joue ?
+SRC.NEWITEM i_gold
+SRC.ACT.AMOUNT 2000 
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE Vous gagnez 2000 pieces d'or !
+ELSE
+EMOTE ricaner
+Say Pile ... T'laisse nin abattre <SRC.SEX tcho/tchotte> <SRC.SEX pere/mere> ! te r'joue ?
+ENDIF 
+ELSE 
+EMOTE fouiller <SRC.NAME>
+SAY T'es bin <SRC.SEX minteu/minteuse> toi ! T'a nin 1000 piecettes !
+ENDIF
+
+ON=*face* 
+IF (<SRC.RESTEST 1000 i_gold>)
+SRC.CONSUME 1000 i_gold
+emote envoyer sa piece en l'air 
+DORAND 2 
+SRC.TAG.PIECE=0
+SRC.TAG.PIECE=1
+ENDDO 
+IF <SRC.TAG.PIECE>=0 
+EMOTE soupirer
+SAY Face ... Vla tin pecule ! te r'joue ?
+SRC.NEWITEM i_gold
+SRC.ACT.AMOUNT 2000 
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE Vous gagnez 2000 pieces d'or !
+ELSE
+EMOTE ricaner
+Say Pile ... T'laisse nin abattre <SRC.SEX tcho/tchotte> <SRC.SEX pere/mere> ! te r'joue ?
+ENDIF 
+ELSE 
+EMOTE fouiller <SRC.NAME>
+SAY T'es bin <SRC.SEX minteu/minteuse> toi ! T'a nin 1000 piecettes !
+ENDIF
+
+[CHARDEF c_un_joueur_piece]
+DEFNAME=c_un_joueur_piece
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+TSPEECH=spk_un_joueur_piece
+
+CATEGORY=Genese
+SUBSECTION=Quete
+DESCRIPTION=Pile ou face
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+TITLE=é
+FLAGS=024
+TIMER=-1
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=colors_all
+ITEM=i_sandals
+COLOR=08e
+
+ON=@NPCSeeNewPlayer
+EMOTE jetter une piece en l'air
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1

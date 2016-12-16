@@ -1,0 +1,1178 @@
+////////////////////////////////////////////////////////////////////
+// Vendeur de Reactifs                          //
+// Script cr�� par Bart Amara                      //
+// Modifi� par Picot                          //
+////////////////////////////////////////////////////////////////////
+//Vendeur de Reactif femme .... c_vendeur_de_reg_F
+//Vendeur de Reactif homme .... c_vendeur_de_reg_M
+//
+
+
+//CANCEL LA VENTE SI TROP LONG
+[ITEMDEF i_timer_vendeur_cancel]
+ID=i_memory
+NAME=vendeur_reg_cancel
+TYPE=t_eq_script
+
+ON=@CREATE
+TAG.BouteillesVide=0
+TAG.BatWings=0
+TAG.Blackmoor=0
+TAG.BlackPearl=0
+TAG.BloodMoss=0
+TAG.BloodSpawn=0
+TAG.VialsOfBlood=0
+TAG.Bones=0
+TAG.Brimstone=0
+TAG.DeamonBones=0
+TAG.FertileDirt=0
+TAG.DragonsBlood=0
+TAG.ExecutionersCap=0
+TAG.Garlics=0
+TAG.Ginseng=0
+TAG.MandrakeRoots=0
+TAG.EyesOfNewt=0
+TAG.Nightshade=0
+TAG.Obsidion=0
+TAG.PigIron=0
+TAG.Pumice=0
+TAG.SulfurousAsh=0
+TAG.SpiderSilk=0
+TAG.SerpentsScales=0
+TAG.VolcanicAsh=0
+TAG.DeadWood=0
+TAG.WyrmsHearts=0
+TIMER=90
+
+ON=@TIMER
+ANNUL_REG_VENTE
+CONT.SYSMESSAGE Vente annulee
+REMOVE
+RETURN 1
+
+[CHARDEF c_vendeur_de_reg_M]
+NAME=#NAMES_HUMANMALE, Vendeur de regs
+ID=C_MAN
+DESIRES=i_gold
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=e_vendeur_reg
+
+ON=@Create
+SPEECHCOLOR=COLORS_ALL
+NPC=brain_vendor
+FLAGS=000000001
+COLOR=colors_skin
+STR=1
+DEX=1
+INT=1
+HITS=9999
+FOOD=9999
+
+NEED=i_gold
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_robe
+COLOR=colors_all
+ITEMNEWBIE=i_sandals
+ITEMNEWBIE=i_timer_restock
+
+ON=@NPCHearUnknown
+SAY Quel bon reg vous amene?
+RETURN 1
+
+ON=@GetHit
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+HITS=9999
+FOOD=9999
+RETURN 1
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Mage (male)
+
+[CHARDEF c_vendeur_de_reg_F]
+NAME=#NAMES_HUMANFEMALE, Vendeuse de regs
+ID=C_WOMAN
+DESIRES=i_gold
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=e_vendeur_reg
+
+ON=@Create
+SPEECHCOLOR=COLORS_ALL
+NPC=brain_vendor
+FLAGS=000000001
+COLOR=colors_skin
+STR=1
+DEX=1
+INT=1
+HITS=9999
+FOOD=9999
+
+NEED=i_gold
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_robe_de_femme
+COLOR=colors_all
+ITEMNEWBIE=i_sandals
+ITEMNEWBIE=i_timer_restock
+
+ON=@NPCHearUnknown
+SAY Quel bon reg vous amene?
+RETURN 1
+
+ON=@GetHit
+HITS=9999
+FOOD=9999
+RETURN 1
+
+ON=@SPELLCAST
+HITS=9999
+FOOD=9999
+RETURN 1
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Mage (female)
+
+[ITEMDEF i_timer_restock]
+ID=i_memory
+NAME=timer_restock_reg
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=5
+
+ON=@TIMER
+IF <EVAL 0<TAG.BouteillesVide> > < 10
+TAG.BouteillesVide=<EVAL 0<TAG.BouteillesVide> + {0 1} >
+ENDIF
+IF <EVAL 0<TAG.BatWings> > < 100
+TAG.BatWings=<EVAL 0<TAG.BatWings> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.Blackmoor> > < 100
+TAG.Blackmoor=<EVAL 0<TAG.Blackmoor> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.BlackPearl> > < 100
+TAG.BlackPearl=<EVAL 0<TAG.BlackPearl> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.BloodMoss> > < 100
+TAG.BloodMoss=<EVAL 0<TAG.BloodMoss> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.BloodSpawn> > < 100
+TAG.BloodSpawn=<EVAL 0<TAG.BloodSpawn> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.VialsOfBlood> > < 100
+TAG.VialsOfBlood=<EVAL 0<TAG.VialsOfBlood> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.Bones> > < 100
+TAG.Bones=<EVAL 0<TAG.Bones> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.Brimstone> > < 100
+TAG.Brimstone=<EVAL 0<TAG.Brimstone> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.DeamonBones> > < 100
+TAG.DeamonBones=<EVAL 0<TAG.DeamonBones> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.FertileDirt> > < 100
+TAG.FertileDirt=<EVAL 0<TAG.FertileDirt> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.DragonsBlood> > < 100
+TAG.DragonsBlood=<EVAL 0<TAG.DragonsBlood> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.ExecutionersCap> > < 100
+TAG.ExecutionersCap=<EVAL 0<TAG.ExecutionersCap> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.Garlics> > < 100
+TAG.Garlics=<EVAL 0<TAG.Garlics> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.Ginseng> > < 100
+TAG.Ginseng=<EVAL 0<TAG.Ginseng> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.MandrakeRoots> > < 100
+TAG.MandrakeRoots=<EVAL 0<TAG.MandrakeRoots> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.EyesOfNewt> > < 100
+TAG.EyesOfNewt=<EVAL 0<TAG.EyesOfNewt> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.Nightshade> > < 100
+TAG.Nightshade=<EVAL 0<TAG.Nightshade> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.Obsidion> > < 100
+TAG.Obsidion=<EVAL 0<TAG.Obsidion> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.PigIron> > < 100
+TAG.PigIron=<EVAL 0<TAG.PigIron> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.Pumice> > < 100
+TAG.Pumice=<EVAL 0<TAG.Pumice> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.SulfurousAsh> > < 100
+TAG.SulfurousAsh=<EVAL 0<TAG.SulfurousAsh> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.SpiderSilk> > < 100
+TAG.SpiderSilk=<EVAL 0<TAG.SpiderSilk> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.SerpentsScales> > < 100
+TAG.SerpentsScales=<EVAL 0<TAG.SerpentsScales> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.VolcanicAsh> > < 100
+TAG.VolcanicAsh=<EVAL 0<TAG.VolcanicAsh> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.DeadWood> > < 100
+TAG.DeadWood=<EVAL 0<TAG.DeadWood> +{1 3} >
+ENDIF
+IF <EVAL 0<TAG.WyrmsHearts> > < 100
+TAG.WyrmsHearts=<EVAL 0<TAG.WyrmsHearts> +{1 3} >
+ENDIF
+TIMER=150 // 2.5 Minutes ... 5k reg par jour
+RETURN 1
+
+[SPEECH e_vendeur_reg]
+ON=*Bonjour*
+DORAND 2
+    SAY Bonjour !
+    SAY Salutations !
+ENDDO
+
+ON=*sell*
+IF <EVAL <DISTANCE>> < 3
+    SAY Je n'ai besoin de rien, merci !!!
+ELSE
+    SAY Approchez vous, je ne vous mangerai pas!
+ENDIF
+
+ON=*buy*
+ON=*acheter*
+ON=*achat*
+IF ((<EVAL <DISTANCE>> < 3) && (<CANSEE>))
+    SAY Voici ce que j'ai a vous vendre <SRC.NAME> .
+    IF <SRC.FINDID.i_timer_vendeur_cancel>
+        SRC.FINDID.i_timer_vendeur_cancel.ANNUL_REG_VENTE
+        SRC.NEWITEM i_timer_vendeur_cancel
+        SRC.ACT.EQUIP
+        SRC.ACT.LINK=<FINDID.i_timer_restock.UID>
+    ELSE
+        SRC.NEWITEM i_timer_vendeur_cancel
+        SRC.ACT.EQUIP
+        SRC.ACT.LINK=<FINDID.i_timer_restock.UID>
+    ENDIF
+ELSE
+    SAY Approchez vous, je ne vous mangerai pas!
+ENDIF
+SRC.DIALOG D_VENDEUR_REG
+RETURN 1
+
+
+[DIALOG D_VENDEUR_REG]
+20,0
+PAGE 0
+resizepic 0 0 2520 420 620
+resizepic 420 0 2520 340 200
+text 130 10 1152 0
+text 480 10 1152 57
+text 460 65 1152 58
+text 560 90 1152 59
+button 560 120 52 52 1 0 55
+text 630 122 1152 60
+
+tilepic 20 40 3854    // Bouteilles Vide
+button 242 40 55 55 1 0 1
+button 260 40 56 56 1 0 2
+text 70 40 1152 1
+tilepic 20 60 3960    // Bat Wings
+button 242 60 55 55 1 0 3
+button 260 60 56 56 1 0 4
+text 70 60 1152 2
+tilepic 20 80 3961    // Blackmoor
+button 242 80 55 55 1 0 5
+button 260 80 56 56 1 0 6
+text 70 80 1152 3
+tilepic 20 100 3962    // Black Pearl
+button 242 100 55 55 1 0 7
+button 260 100 56 56 1 0 8
+text 70 100 1152 4
+tilepic 20 120 3963    // Blood Moss
+button 242 120 55 55 1 0 9
+button 260 120 56 56 1 0 10
+text 70 120 1152 5
+tilepic 20 140 3964    // Blood Spawn
+button 242 140 55 55 1 0 11
+button 260 140 56 56 1 0 12
+text 70 140 1152 6
+tilepic 20 160 3965    // Vials Of Blood
+button 242 160 55 55 1 0 13
+button 260 160 56 56 1 0 14
+text 70 160 1152 7
+tilepic 20 180 3966    // Bones
+button 242 180 55 55 1 0 15
+button 260 180 56 56 1 0 16
+text 70 180 1152 8
+tilepic 20 200 3967    // Brimstone
+button 242 200 55 55 1 0 17
+button 260 200 56 56 1 0 18
+text 70 200 1152 9
+tilepic 20 220 3968    // Deamon Bones
+button 242 220 55 55 1 0 19
+button 260 220 56 56 1 0 20
+text 70 220 1152 10
+tilepic 20 240 3969    // Fertile Dirt
+button 242 240 55 55 1 0 21
+button 260 240 56 56 1 0 22
+text 70 240 1152 11
+tilepic 20 260 3970    // Dragon's Blood
+button 242 260 55 55 1 0 23
+button 260 260 56 56 1 0 24
+text 70 260 1152 12
+tilepic 20 280 3971    // Executioner's Cap
+button 242 280 55 55 1 0 25
+button 260 280 56 56 1 0 26
+text 70 280 1152 13
+tilepic 20 300 3972    // Garlics
+button 242 300 55 55 1 0 27
+button 260 300 56 56 1 0 28
+text 70 300 1152 14
+tilepic 20 320 3973    // Ginseng
+button 242 320 55 55 1 0 29
+button 260 320 56 56 1 0 30
+text 70 320 1152 15
+tilepic 20 340 3974    // Mandrake Roots
+button 242 340 55 55 1 0 31
+button 260 340 56 56 1 0 32
+text 70 340 1152 16
+tilepic 20 360 3975    // Eyes Of Newt
+button 242 360 55 55 1 0 33
+button 260 360 56 56 1 0 34
+text 70 360 1152 17
+tilepic 20 380 3976    // Nightshade
+button 242 380 55 55 1 0 35
+button 260 380 56 56 1 0 36
+text 70 380 1152 18
+tilepic 20 400 3977    // Obsidion
+button 242 400 55 55 1 0 37
+button 260 400 56 56 1 0 38
+text 70 400 1152 19
+tilepic 20 420 3978    // Pig Iron
+button 242 420 55 55 1 0 39
+button 260 420 56 56 1 0 40
+text 70 420 1152 20
+tilepic 20 440 3979    // Pumice
+button 242 440 55 55 1 0 41
+button 260 440 56 56 1 0 42
+text 70 440 1152 21
+tilepic 20 460 3980    // Sulfurous Ash
+button 242 460 55 55 1 0 43
+button 260 460 56 56 1 0 44
+text 70 460 1152 22
+tilepic 20 480 3981    // Spider Silk
+button 242 480 55 55 1 0 45
+button 260 480 56 56 1 0 46
+text 70 480 1152 23
+tilepic 20 500 3982    // Serpent's Scales
+button 242 500 55 55 1 0 47
+button 260 500 56 56 1 0 48
+text 70 500 1152 24
+tilepic 20 520 3983    // Volcanic Ash
+button 242 520 55 55 1 0 49
+button 260 520 56 56 1 0 50
+text 70 520 1152 25
+tilepic 20 540 3984    // Dead Wood
+button 242 540 55 55 1 0 51
+button 260 540 56 56 1 0 52
+text 70 540 1152 26
+tilepic 20 560 3985    // Wyrm's Hearts
+button 242 560 55 55 1 0 53
+button 260 560 56 56 1 0 54
+text 70 560 1152 27
+text 290 40 1152 28
+text 290 60 1152 29
+text 290 80 1152 30
+text 290 100 1152 31
+text 290 120 1152 32
+text 290 140 1152 33
+text 290 160 1152 34
+text 290 180 1152 35
+text 290 200 1152 36
+text 290 220 1152 37
+text 290 240 1152 38
+text 290 260 1152 39
+text 290 280 1152 40
+text 290 300 1152 41
+text 290 320 1152 42
+text 290 340 1152 43
+text 290 360 1152 44
+text 290 380 1152 45
+text 290 400 1152 46
+text 290 420 1152 47
+text 290 440 1152 48
+text 290 460 1152 49
+text 290 480 1152 50
+text 290 500 1152 51
+text 290 520 1152 52
+text 290 540 1152 53
+text 290 560 1152 54
+text 340 40 1152 55
+text 340 60 1152 56
+text 340 80 1152 56
+text 340 100 1152 56
+text 340 120 1152 56
+text 340 140 1152 56
+text 340 160 1152 56
+text 340 180 1152 56
+text 340 200 1152 56
+text 340 220 1152 56
+text 340 240 1152 56
+text 340 260 1152 56
+text 340 280 1152 56
+text 340 300 1152 56
+text 340 320 1152 56
+text 340 340 1152 56
+text 340 360 1152 56
+text 340 380 1152 56
+text 340 400 1152 56
+text 340 420 1152 56
+text 340 440 1152 56
+text 340 460 1152 56
+text 340 480 1152 56
+text 340 500 1152 56
+text 340 520 1152 56
+text 340 540 1152 56
+text 340 560 1152 56
+text 200 40 1152 61
+text 200 60 1152 62
+text 200 80 1152 63
+text 200 100 1152 64
+text 200 120 1152 65
+text 200 140 1152 66
+text 200 160 1152 67
+text 200 180 1152 68
+text 200 200 1152 69
+text 200 220 1152 70
+text 200 240 1152 71
+text 200 260 1152 72
+text 200 280 1152 73
+text 200 300 1152 74
+text 200 320 1152 75
+text 200 340 1152 76
+text 200 360 1152 77
+text 200 380 1152 78
+text 200 400 1152 79
+text 200 420 1152 80
+text 200 440 1152 81
+text 200 460 1152 82
+text 200 480 1152 83
+text 200 500 1152 84
+text 200 520 1152 85
+text 200 540 1152 86
+text 200 560 1152 87
+
+[DIALOG D_VENDEUR_REG TEXT]
+Acheter des Ingredients
+Bouteilles Vide
+Bat Wings
+Blackmoor
+Black Pearl
+Blood Moss
+Blood Spawn
+Vials Of Blood
+Bones
+Brimstone
+Deamon Bones
+Fertile Dirt
+Dragon's Blood
+Executioner's Cap
+Garlics
+Ginseng
+Mandrake Roots
+Eyes Of Newt
+Nightshade
+Obsidion
+Pig Iron
+Pumice
+Sulfurous Ash
+Spider Silk
+Serpent's Scales
+Volcanic Ash
+Dead Wood
+Wyrm's Hearts
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.BouteillesVide>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.BatWings>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.Blackmoor>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.BlackPearl>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.BloodMoss>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.BloodSpawn>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.VialsOfBlood>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.Bones>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.Brimstone>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.DeamonBones>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.FertileDirt>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.DragonsBlood>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.ExecutionersCap>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.Garlics>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.Ginseng>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.MandrakeRoots>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.EyesOfNewt>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.Nightshade>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.Obsidion>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.PigIron>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.Pumice>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.SulfurousAsh>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.SpiderSilk>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.SerpentsScales>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.VolcanicAsh>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.DeadWood>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.WyrmsHearts>>
+380 Po
+ 30 Po
+<SRC.NAME>
+Prix a Payer :
+<EVAL (<EVAL <SRC.FINDID.i_timer_vendeur_cancel.TAG.BouteillesVide> * 380>)+(<EVAL (<SRC.FINDID.i_timer_vendeur_cancel.TAG.BatWings>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.Blackmoor>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.BlackPearl>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.BloodMoss>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.BloodSpawn>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.VialsOfBlood>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.Bones>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.Brimstone>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.DeamonBones>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.FertileDirt>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.DragonsBlood>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.ExecutionersCap>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.Garlics>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.Ginseng>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.MandrakeRoots>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.EyesOfNewt>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.Nightshade>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.Obsidion>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.PigIron>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.Pumice>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.SulfurousAsh>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.SpiderSilk>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.SerpentsScales>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.VolcanicAsh>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.DeadWood>+<SRC.FINDID.i_timer_vendeur_cancel.TAG.WyrmsHearts>) *30>)> Piece(s) d'Or
+Acheter
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.BouteillesVide>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.BatWings>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.Blackmoor>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.BlackPearl>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.BloodMoss>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.BloodSpawn>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.VialsOfBlood>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.Bones>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.Brimstone>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.DeamonBones>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.FertileDirt>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.DragonsBlood>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.ExecutionersCap>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.Garlics>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.Ginseng>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.MandrakeRoots>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.EyesOfNewt>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.Nightshade>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.Obsidion>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.PigIron>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.Pumice>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.SulfurousAsh>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.SpiderSilk>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.SerpentsScales>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.VolcanicAsh>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.DeadWood>>
+<EVAL <SRC.FINDID.i_timer_vendeur_cancel.LINK.TAG.WyrmsHearts>>
+
+[DIALOG D_VENDEUR_REG BUTTON]
+on=0
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.ANNUL_REG_VENTE
+ENDIF
+on=1
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER BouteillesVide
+ENDIF
+on=2
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER BouteillesVide
+ENDIF
+on=3
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER BatWings
+ENDIF
+on=4
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER BatWings
+ENDIF
+on=5
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER Blackmoor
+ENDIF
+on=6
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER Blackmoor
+ENDIF
+on=7
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER BlackPearl
+ENDIF
+on=8
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER BlackPearl
+ENDIF
+on=9
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER BloodMoss
+ENDIF
+on=10
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER BloodMoss
+ENDIF
+on=11
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER BloodSpawn
+ENDIF
+on=12
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER BloodSpawn
+ENDIF
+on=13
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER VialsOfBlood
+ENDIF
+on=14
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER VialsOfBlood
+ENDIF
+on=15
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER Bones
+ENDIF
+on=16
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER Bones
+ENDIF
+on=17
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER Brimstone
+ENDIF
+on=18
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER Brimstone
+ENDIF
+on=19
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER DeamonBones
+ENDIF
+on=20
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER DeamonBones
+ENDIF
+on=21
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER FertileDirt
+ENDIF
+on=22
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER FertileDirt
+ENDIF
+on=23
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER DragonsBlood
+ENDIF
+on=24
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER DragonsBlood
+ENDIF
+on=25
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER ExecutionersCap
+ENDIF
+on=26
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER ExecutionersCap
+ENDIF
+on=27
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER Garlics
+ENDIF
+on=28
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER Garlics
+ENDIF
+on=29
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER Ginseng
+ENDIF
+on=30
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER Ginseng
+ENDIF
+on=31
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER MandrakeRoots
+ENDIF
+on=32
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER MandrakeRoots
+ENDIF
+on=33
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER EyesOfNewt
+ENDIF
+on=34
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER EyesOfNewt
+ENDIF
+on=35
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER Nightshade
+ENDIF
+on=36
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER Nightshade
+ENDIF
+on=37
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER Obsidion
+ENDIF
+on=38
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER Obsidion
+ENDIF
+on=39
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER PigIron
+ENDIF
+on=40
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER PigIron
+ENDIF
+on=41
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER Pumice
+ENDIF
+on=42
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER Pumice
+ENDIF
+on=43
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER SulfurousAsh
+ENDIF
+on=44
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER SulfurousAsh
+ENDIF
+on=45
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER SpiderSilk
+ENDIF
+on=46
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER SpiderSilk
+ENDIF
+on=47
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER SerpentsScales
+ENDIF
+on=48
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER SerpentsScales
+ENDIF
+on=49
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER VolcanicAsh
+ENDIF
+on=50
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER VolcanicAsh
+ENDIF
+on=51
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER DeadWood
+ENDIF
+on=52
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER DeadWood
+ENDIF
+on=53
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.AJOUTER_REG_AU_PANIER WyrmsHearts
+ENDIF
+on=54
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.RETIRER_REG_DU_PANIER WyrmsHearts
+ENDIF
+ON=55
+IF <SRC.FINDID.i_timer_vendeur_cancel>
+    SRC.FINDID.i_timer_vendeur_cancel.EFFECTUER_ACHAT_REG
+ENDIF
+
+//#############################################
+//##############ANNUL_REG_VENTE###############
+//#############################################
+//OBJECT=i_timer_vendeur_cancel
+[FUNCTION ANNUL_REG_VENTE]
+LINK.TAG.BouteillesVide=<EVAL <EVAL <LINK.TAG.BouteillesVide>>+<EVAL <TAG.BouteillesVide>>>
+LINK.TAG.BatWings=<EVAL <EVAL <LINK.TAG.BatWings>>+<EVAL <TAG.BatWings>>>
+LINK.TAG.Blackmoor=<EVAL <EVAL <LINK.TAG.Blackmoor>>+<EVAL <TAG.Blackmoor>>>
+LINK.TAG.BlackPearl=<EVAL <EVAL <LINK.TAG.BlackPearl>>+<EVAL <TAG.BlackPearl>>>
+LINK.TAG.BloodMoss=<EVAL <EVAL <LINK.TAG.BloodMoss>>+<EVAL <TAG.BloodMoss>>>
+LINK.TAG.BloodSpawn=<EVAL <EVAL <LINK.TAG.BloodSpawn>>+<EVAL <TAG.BloodSpawn>>>
+LINK.TAG.VialsOfBlood=<EVAL <EVAL <LINK.TAG.VialsOfBlood>>+<EVAL <TAG.VialsOfBlood>>>
+LINK.TAG.Bones=<EVAL <EVAL <LINK.TAG.Bones>>+<EVAL <TAG.Bones>>>
+LINK.TAG.Brimstone=<EVAL <EVAL <LINK.TAG.Brimstone>>+<EVAL <TAG.Brimstone>>>
+LINK.TAG.DeamonBones=<EVAL <EVAL <LINK.TAG.DeamonBones>>+<EVAL <TAG.DeamonBones>>>
+LINK.TAG.FertileDirt=<EVAL <EVAL <LINK.TAG.FertileDirt>>+<EVAL <TAG.FertileDirt>>>
+LINK.TAG.DragonsBlood=<EVAL <EVAL <LINK.TAG.DragonsBlood>>+<EVAL <TAG.DragonsBlood>>>
+LINK.TAG.ExecutionersCap=<EVAL <EVAL <LINK.TAG.ExecutionersCap>>+<EVAL <TAG.ExecutionersCap>>>
+LINK.TAG.Garlics=<EVAL <EVAL <LINK.TAG.Garlics>>+<EVAL <TAG.Garlics>>>
+LINK.TAG.Ginseng=<EVAL <EVAL <LINK.TAG.Ginseng>>+<EVAL <TAG.Ginseng>>>
+LINK.TAG.MandrakeRoots=<EVAL <EVAL <LINK.TAG.MandrakeRoots>>+<EVAL <TAG.MandrakeRoots>>>
+LINK.TAG.EyesOfNewt=<EVAL <EVAL <LINK.TAG.EyesOfNewt>>+<EVAL <TAG.EyesOfNewt>>>
+LINK.TAG.Nightshade=<EVAL <EVAL <LINK.TAG.Nightshade>>+<EVAL <TAG.Nightshade>>>
+LINK.TAG.Obsidion=<EVAL <EVAL <LINK.TAG.Obsidion>>+<EVAL <TAG.Obsidion>>>
+LINK.TAG.PigIron=<EVAL <EVAL <LINK.TAG.PigIron>>+<EVAL <TAG.PigIron>>>
+LINK.TAG.Pumice=<EVAL <EVAL <LINK.TAG.Pumice>>+<EVAL <TAG.Pumice>>>
+LINK.TAG.SulfurousAsh=<EVAL <EVAL <LINK.TAG.SulfurousAsh>>+<EVAL <TAG.SulfurousAsh>>>
+LINK.TAG.SpiderSilk=<EVAL <EVAL <LINK.TAG.SpiderSilk>>+<EVAL <TAG.SpiderSilk>>>
+LINK.TAG.SerpentsScales=<EVAL <EVAL <LINK.TAG.SerpentsScales>>+<EVAL <TAG.SerpentsScales>>>
+LINK.TAG.VolcanicAsh=<EVAL <EVAL <LINK.TAG.VolcanicAsh>>+<EVAL <TAG.VolcanicAsh>>>
+LINK.TAG.DeadWood=<EVAL <EVAL <LINK.TAG.DeadWood>>+<EVAL <TAG.DeadWood>>>
+LINK.TAG.WyrmsHearts=<EVAL <EVAL <LINK.TAG.WyrmsHearts>>+<EVAL <TAG.WyrmsHearts>>>
+LINK.SAY Annulation de la vente ...
+REMOVE
+
+//#############################################
+//###########AJOUTER_REG_AU_PANIER#############
+//#############################################
+//<ARGS> = ingredient ex:<ARGS>=BouteillesVide
+//OBJECT=i_timer_vendeur_cancel
+[FUNCTION AJOUTER_REG_AU_PANIER]
+TRYP 0 VAR.NB_REG_SUR_VENDEUR = <LINK.TAG.<ARGS>>
+IF <EVAL <VAR.NB_REG_SUR_VENDEUR>> > 0
+    TRYP 0 TAG.<ARGS>=<EVAL <TAG.<ARGS>>+1>
+    TRYP 0 LINK.TAG.<ARGS>=<EVAL <LINK.TAG.<ARGS>>-1>
+    CONT.DIALOG D_VENDEUR_REG
+ELSE
+    TRYP 0 LINK.TAG.<ARGS> = <EVAL <TAG.<ARGS>>>
+    TRYP 0 TAG.<ARGS>=0    
+    CONT.DIALOG D_VENDEUR_REG
+ENDIF
+
+//#############################################
+//#########RETIRER_REG_DU_PANIER###############
+//#############################################
+//<ARGS> = ingredient ex:<ARGS>=BouteillesVide
+//OBJECT=i_timer_vendeur_cancel
+[FUNCTION RETIRER_REG_DU_PANIER]
+TRYP 0 VAR.NB_REG_ACHETE = <TAG.<ARGS>>
+IF <EVAL <VAR.NB_REG_ACHETE>> > 0
+    TRYP 0 TAG.<ARGS>=<EVAL <TAG.<ARGS>>-1>
+    TRYP 0 LINK.TAG.<ARGS>=<EVAL <LINK.TAG.<ARGS>>+1>
+    CONT.DIALOG D_VENDEUR_REG
+ELSE
+    TRYP 0 TAG.<ARGS>=<EVAL <LINK.TAG.<ARGS>>>
+    TRYP 0 LINK.TAG.<ARGS>=0   
+    CONT.DIALOG D_VENDEUR_REG
+ENDIF
+
+//#############################################
+//###########EFFECTUER_ACHAT_REG###############
+//#############################################
+//OBJECT=i_timer_vendeur_cancel
+[FUNCTION EFFECTUER_ACHAT_REG]
+TAG.PRIXDESREGAPAYER=<EVAL (<EVAL <TAG.BouteillesVide> *380>)+(<EVAL (<TAG.BatWings>+<TAG.Blackmoor>+<TAG.BlackPearl>+<TAG.BloodMoss>+<TAG.BloodSpawn>+<TAG.VialsOfBlood>+<TAG.Bones>+<TAG.Brimstone>+<TAG.DeamonBones>+<TAG.FertileDirt>+<TAG.DragonsBlood>+<TAG.ExecutionersCap>+<TAG.Garlics>+<TAG.Ginseng>+<TAG.MandrakeRoots>+<TAG.EyesOfNewt>+<TAG.Nightshade>+<TAG.Obsidion>+<TAG.PigIron>+<TAG.Pumice>+<TAG.SulfurousAsh>+<TAG.SpiderSilk>+<TAG.SerpentsScales>+<TAG.VolcanicAsh>+<TAG.DeadWood>+<TAG.WyrmsHearts>) *30>)>
+IF <EVAL <TAG.PRIXDESREGAPAYER> >0
+    CONT.PAYUP <EVAL <TAG.PRIXDESREGAPAYER>>
+    IF ( !<VAR.ENOUGH> ) 
+        LINK.CONT.SAY Vous ne possedez pas <EVAL <TAG.PRIXDESREGAPAYER>> pieces d'or ...
+        CONT.DIALOG D_VENDEUR_REG
+        RETURN 1
+    ENDIF
+    LINK.CONT.SAY Voici <CONT.NAME>, et merci pour ces <EVAL <TAG.PRIXDESREGAPAYER>> Pieces d'Or
+    IF <EVAL <TAG.BouteillesVide>> >0
+        CONT.NEWITEM i_bottle_empty
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.BouteillesVide>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.BatWings>> >0
+        CONT.NEWITEM i_reag_batwing
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.BatWings>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.Blackmoor>> >0
+        CONT.NEWITEM i_reag_blackmoor
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.Blackmoor>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.BlackPearl>> >0
+        CONT.NEWITEM i_reag_black_pearl
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.BlackPearl>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.BloodMoss>> >0
+        CONT.NEWITEM i_reag_blood_moss
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.BloodMoss>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.BloodSpawn>> >0
+        CONT.NEWITEM i_reag_blood_spawn
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.BloodSpawn>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.VialsOfBlood>> >0
+        CONT.NEWITEM i_reag_blood_vial
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.VialsOfBlood>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.Bones>> >0
+        CONT.NEWITEM i_reag_bone
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.Bones>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.Brimstone>> >0
+        CONT.NEWITEM i_reag_brimstone
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.Brimstone>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.DeamonBones>> >0
+        CONT.NEWITEM i_reag_daemon_bone
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.DeamonBones>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.FertileDirt>> >0
+        CONT.NEWITEM i_reag_fertile_dirt
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.FertileDirt>>
+        CONT.ACT.BOUNCE
+        ENDIF
+    IF <EVAL <TAG.DragonsBlood>> >0
+        CONT.NEWITEM i_reag_dragon_blood
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.DragonsBlood>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.ExecutionersCap>> >0
+        CONT.NEWITEM i_reag_executioners_cap
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.ExecutionersCap>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.Garlics>> >0
+        CONT.NEWITEM i_reag_garlic
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.Garlics>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.Ginseng>> >0
+        CONT.NEWITEM i_reag_ginseng
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.Ginseng>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.MandrakeRoots>> >0
+        CONT.NEWITEM i_reag_mandrake_root
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.MandrakeRoots>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.EyesOfNewt>> >0
+        CONT.NEWITEM i_reag_eye_of_newt
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.EyesOfNewt>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.Nightshade>> >0
+        CONT.NEWITEM i_reag_nightshade
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.Nightshade>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.Obsidion>> >0
+        CONT.NEWITEM i_reag_obsidian
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.Obsidion>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.PigIron>> >0
+        CONT.NEWITEM i_reag_pig_iron
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.PigIron>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.Pumice>> >0
+        CONT.NEWITEM i_reag_pumice
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.Pumice>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.SulfurousAsh>> >0
+        CONT.NEWITEM i_reag_sulfur_ash
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.SulfurousAsh>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.SpiderSilk>> >0
+        CONT.NEWITEM i_reag_spider_silk
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.SpiderSilk>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.SerpentsScales>> >0
+        CONT.NEWITEM i_reag_serpent_scale
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.SerpentsScales>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.VolcanicAsh>> >0
+        CONT.NEWITEM i_reag_volcanic_ash
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.VolcanicAsh>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.DeadWood>> >0
+        CONT.NEWITEM i_reag_dead_wood
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.DeadWood>>
+        CONT.ACT.BOUNCE
+    ENDIF
+    IF <EVAL <TAG.WyrmsHearts>> >0
+        CONT.NEWITEM i_reag_worm_heart
+        CONT.ACT.AMOUNT 10 * <EVAL <TAG.WyrmsHearts>>
+        CONT.ACT.BOUNCE
+    ENDIF
+ELSE
+    LINK.CONT.SAY A bientot <CONT.NAME> .
+ENDIF
+REMOVE
+
+//*****************************
+//***********LEGUMES***********
+//*****************************
+[CHARDEF C_VENDEUR_DE_LEGUMES]
+NAME=Vendeur de legumes
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_vendeur_active
+TSPEECH=spk_shopkeep
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=200
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=020
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_pantalon
+COLOR=0750
+ITEMNEWBIE=i_casquette
+COLOR=020
+ITEMNEWBIE=i_chaussures
+COLOR=0b36
+
+SELL=VENDOR_S_LEGUMES
+
+CATEGORY=PNJ
+SUBSECTION=vendeur
+DESCRIPTION=Vendeur de legumes
+
+//*****************************
+//************FRUITS***********
+//*****************************
+
+[CHARDEF C_VENDEUR_DE_FRUITS]
+NAME=Vendeur de fruits
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_vendeur_active
+TSPEECH=spk_shopkeep
+
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=200
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=020
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_pantalon
+COLOR=0750
+ITEMNEWBIE=i_casquette
+COLOR=020
+ITEMNEWBIE=i_chaussures
+COLOR=0b36
+
+SELL=VENDOR_S_FRUITS
+
+CATEGORY=PNJ
+SUBSECTION=vendeur
+DESCRIPTION=Vendeur de fruits
+
+[SPEECH spk_vendeur_active]
+ON=*buy*
+ON=*achete*
+BUY
+
+//*****************************
+//***********ALIMENTS**********
+//*****************************
+
+[CHARDEF C_VENDEUR_D_ALIMENTS]
+NAME=Vendeur d'aliments
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_vendeur_active
+TSPEECH=spk_shopkeep
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=200
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=020
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_pantalon
+COLOR=0750
+ITEMNEWBIE=i_casquette
+COLOR=020
+ITEMNEWBIE=i_chaussures
+COLOR=0b36
+
+SELL=VENDOR_S_ALIMENTS
+
+CATEGORY=PNJ
+SUBSECTION=vendeur
+DESCRIPTION=Vendeur d'aliments
+
+
+[SPEECH spk_vendeur_active]
+ON=*buy*
+ON=*achete*
+DORAND 3
+    SAY Voici ce que j'ai a vous vendre
+    SAY Voila ce dont je possede en stock
+    SAY Voici la marchandise dont je dispose
+ENDDO
+BUY

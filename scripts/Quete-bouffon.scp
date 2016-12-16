@@ -1,0 +1,345 @@
+[ITEMDEF i_plastron_morbide]
+DEFNAME=i_plastron_morbide
+NAME=Plastron morbide
+ID=0144f
+ARMOR=190
+REQSTR=0
+
+ON=@Create
+COLOR=0b7c
+HITPOINTS=350
+TAG.DOMMAGESREDUITS=40
+
+ON=@EQUIP
+BONUS_ARMURE_GEMME_EQUIP
+IF !<SRC.PEUT_ARMURE_B>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.5>
+	SRC.FINDLAYER.5.UNEQUIP
+ENDIF
+
+ON=@UNEQUIP
+BONUS_ARMURE_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+
+[ITEMDEF i_jambieres_morbides]
+DEFNAME=i_jambieres_morbides
+NAME=Jambieres morbides
+ID=01452
+ARMOR=190
+REQSTR=0
+
+ON=@Create
+COLOR=0b7c
+HITPOINTS=350
+TAG.DOMMAGESREDUITS=40
+
+ON=@EQUIP
+BONUS_ARMURE_GEMME_EQUIP
+IF !<SRC.PEUT_ARMURE_B>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.23>
+	SRC.FINDLAYER.23.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@UNEQUIP
+BONUS_ARMURE_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+
+[ITEMDEF i_brassieres_morbides]
+DEFNAME=i_brassieres_morbides
+NAME=Brassieres morbides
+ID=0144e
+ARMOR=190
+REQSTR=0
+
+ON=@Create
+COLOR=0b7c
+HITPOINTS=350
+TAG.DOMMAGESREDUITS=40
+
+ON=@EQUIP
+BONUS_ARMURE_GEMME_EQUIP
+IF !<SRC.PEUT_ARMURE_B>
+	UNEQUIP
+ENDIF
+
+ON=@UNEQUIP
+BONUS_ARMURE_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+
+[ITEMDEF i_ecu_morbide]
+DEFNAME=i_ecu_morbide
+NAME=Ecu morbide
+ID=01b7a
+ARMOR=45
+REQSTR=0
+WEIGHT=8
+
+ON=@Create
+COLOR=0b7c
+HITPOINTS=350
+
+ON=@EQUIP
+BONUS_ARMURE_GEMME_EQUIP
+IF !<SRC.PEUT_ARMURE_B>
+	UNEQUIP
+ENDIF
+
+ON=@UNEQUIP
+BONUS_ARMURE_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+
+[ITEMDEF i_heaume_morbide]
+DEFNAME=i_heaume_morbide
+NAME=Heaume morbide
+ID=01451
+ARMOR=190
+REQSTR=0
+
+ON=@Create
+COLOR=0b7c
+HITPOINTS=350
+TAG.DOMMAGESREDUITS=40
+
+ON=@EQUIP
+BONUS_ARMURE_GEMME_EQUIP
+IF !<SRC.PEUT_ARMURE_B>
+	UNEQUIP
+ENDIF
+
+ON=@UNEQUIP
+BONUS_ARMURE_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+
+[ITEMDEF i_gantelets_morbides]
+DEFNAME=i_gantelets_morbides
+NAME=Gantelets morbides
+ID=01450
+ARMOR=190
+REQSTR=0
+
+ON=@Create
+COLOR=0b7c
+HITPOINTS=350
+TAG.DOMMAGESREDUITS=40
+
+ON=@EQUIP
+BONUS_ARMURE_GEMME_EQUIP
+IF !<SRC.PEUT_ARMURE_B>
+	UNEQUIP
+ENDIF
+
+ON=@UNEQUIP
+BONUS_ARMURE_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+
+[ITEMDEF i_crane_du_bouffon_morbide]
+DEFNAME=i_crane_du_bouffon_morbide
+ID=i_bone_skull
+NAME=Crane du bouffon morbide
+
+ON=@Create
+COLOR=0b7c
+
+[CHARDEF c_archimede] 
+DEFNAME=c_archimede
+NAME=Archimede
+ID=C_MAN
+ 
+TSPEECH=spk_archimede
+
+ON=@create
+COLOR=083ea
+FOOD=9999 
+SPEECHCOLOR=0aab
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=01410
+COLOR=0aab
+ITEMNEWBIE=01411
+COLOR=0aab
+ITEMNEWBIE=01412
+COLOR=0aab
+ITEMNEWBIE=01413
+COLOR=0aab
+ITEMNEWBIE=01414
+COLOR=0aab
+ITEMNEWBIE=01415
+COLOR=0aab
+ITEMNEWBIE=0143e
+COLOR=025
+
+ON=@NPCSEENEWPLAYER
+IF 0<SRC.TAG.ARCHIMEDE> <1
+	SAY Halte la camarade j'ai une requete a vous demander !
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>> == 1
+	IF (<EVAL(RAND(<EVAL <SRC.TAG.ARCHIMEDE>-1>))>=0)
+		SRC.TAG.ARCHIMEDE=5
+		SAY Le bouffon morbide ne cesse de se ranimer et continue d'hanter nos contrees, expulsez le avec acharnement et vous serez dignement recompense !
+	ELSE
+		SAY Salutations camarde !
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>> == 6
+	IF (<EVAL(RAND(<EVAL <SRC.TAG.ARCHIMEDE>-1>))>=0)
+		SRC.TAG.ARCHIMEDE=10
+		SAY Excusez moi <SRC.NAME> ... Je suis confu de vous demander cela mais malgre tous vos efforts le bouffon morbide rode encore ... Faites le fuir a jamais et vous serez gratifie comme il se doit !
+	ELSE
+		SAY Salutations camarde !
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>> == 11
+	IF (<EVAL(RAND(<EVAL <SRC.TAG.ARCHIMEDE>-1>))>=0)
+		SRC.TAG.ARCHIMEDE=15
+		SAY Le bouffon morbide nous tient encore tete ! Continuez de le malmener, il finira bien par cesser de nous tourmenter et je vous doterai d'un superbe present !
+	ELSE
+		SAY Salutations camarde !
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>> == 16
+	IF (<EVAL(RAND(<EVAL <SRC.TAG.ARCHIMEDE>-1>))>=0)
+		SRC.TAG.ARCHIMEDE=20
+		EMOTE s'enerver
+		SAY Bien qu'il se fasse rare, le bouffon morbide continue de tyranniser nos paisibles contrees, aneantissez le encore et encore, je vous en serai reconnaissant !
+	ELSE
+		SAY Salutations camarde !
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>> == 21
+	IF (<EVAL(RAND(<EVAL <SRC.TAG.ARCHIMEDE>-1>))>=0)
+		SRC.TAG.ARCHIMEDE=25
+		EMOTE soupire
+		SAY Je commence a desesperer ... Nombreux sont ceux qui ont trepasse sous les coups du bouffon morbide et il siege toujours derriere ces murailles ... Supprimez le a jamais avant qu'il nous aneantisse tous !
+	ELSE
+		SAY Salutations camarde !
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>> == 26
+	IF (<EVAL(RAND(<EVAL <SRC.TAG.ARCHIMEDE>-1>))>=0)
+		SRC.TAG.ARCHIMEDE=30
+		EMOTE vous interpeller
+		SAY Aux dernieres nouvelles le bouffon morbide semblerai vouloir battre en retraite. Faites le quitter definitivement la region et je vous ferai don d'une precieuse offrande !
+	ELSE
+		SAY Salutations camarde !
+	ENDIF
+ELSE
+	SAY Salutations camarde !
+ENDIF
+
+ON=@NPCHearUnknown
+SAY Si je savais ...
+
+ON=@GetHit
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes
+DESCRIPTION=Archimede
+
+[SPEECH spk_archimede]
+
+ON=*requete*
+IF 0<SRC.TAG.ARCHIMEDE> <1
+	SAY Le bouffon morbide ne cesse de nous causer des ennuis, tuez le, rapportez moi son crane, et vous serez recompense !
+ENDIF
+
+ON=*crane*
+IF 0<SRC.TAG.ARCHIMEDE> <1
+	IF (<SRC.RESTEST 1 i_crane_du_bouffon_morbide>)
+		SRC.TAG.ARCHIMEDE=1
+		SRC.CONSUME 1 i_crane_du_bouffon_morbide
+		SAY Diantre, mes yeux ne mentent pas, c'est bel et bien le crane du bouffon morbide ! Tenez voici votre recompense.
+		SRC.NEWITEM i_gold
+		SRC.ACT.AMOUNT 5000
+		SRC.ACT.BOUNCE
+		SRC.TAG.XP=<EVAL 0<SRC.TAG.XP>+2000>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous recevez 5000 pieces d'or !
+	ELSE
+		SAY Je ne suis pas dupe, vous ne possedez pas le crane !
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>>==5
+	IF (<SRC.RESTEST 5 i_crane_du_bouffon_morbide>)
+		SRC.TAG.ARCHIMEDE=6
+		SRC.CONSUME 5 i_crane_du_bouffon_morbide
+		SAY Je suis fier de vous <SRC.NAME> ! Pour vous remercier voici de rares gantelets qui vous seront bien utiles !
+		SRC.NEWITEM i_gantelets_morbides
+		SRC.ACT.BOUNCE
+	ELSE
+		SAY Allons <SRC.NAME>, prouvez moi que le bouffon morbide a trepasse de nombreuses fois sous vos coups !
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>>==10
+	IF (<SRC.RESTEST 10 i_crane_du_bouffon_morbide>)
+		SRC.TAG.ARCHIMEDE=11
+		SRC.CONSUME 10 i_crane_du_bouffon_morbide
+		SAY Merci encore <SRC.NAME> ! Esperons qu'avec vos efforts le bouffon morbide ne remette plus les pieds ici ... Comme promis voici votre recompense !
+		SRC.NEWITEM i_brassieres_morbides
+		SRC.ACT.BOUNCE
+	ELSE
+		SAY Vos efforts sont louables, continuez ainsi et vous serez recompense !
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>>==15
+	IF (<SRC.RESTEST 15 i_crane_du_bouffon_morbide>)
+		SRC.TAG.ARCHIMEDE=16
+		SRC.CONSUME 15 i_crane_du_bouffon_morbide
+		SAY Que ferais je sans vous <SRC.NAME> ? Prennez ce heaume, vous le meritez !
+		SRC.NEWITEM i_heaume_morbide
+		SRC.ACT.BOUNCE
+	ELSE
+		SAY J'apprecie vraiment votre aide, poursuivez dans cette voie et je me montrerai digne de vos efforts !
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>>==20
+	IF (<SRC.RESTEST 20 i_crane_du_bouffon_morbide>)
+		SRC.TAG.ARCHIMEDE=21
+		SRC.CONSUME 20 i_crane_du_bouffon_morbide
+		SAY Grace a votre ardeur le bouffon morbide n'est pas pret de revenir ! Acceptez ces modestes jambieres en guise de reconnaissance
+		SRC.NEWITEM i_jambieres_morbides
+		SRC.ACT.BOUNCE
+	ELSE
+		EMOTE sursauter
+		SAY C'est lui ! Je l'entend ... il ricane ... il est encore la ... Chassez le definitivement et vous obtiendrez votre du !
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>>==25
+	IF (<SRC.RESTEST 25 i_crane_du_bouffon_morbide>)
+		SRC.TAG.ARCHIMEDE=26
+		SRC.CONSUME 25 i_crane_du_bouffon_morbide
+		SAY Merci encore de votre fidelite <SRC.NAME>, voici de quoi vous donner encore plus de coeur a l'ouvrage !
+		SRC.NEWITEM i_plastron_morbide
+		SRC.ACT.BOUNCE
+	ELSE
+		SAY Ce matin encore on m'a signale la presence du bouffon morbide derriere ces ramparts ... Maintenez vos attaques et je vous gratifierai d'une precieuse donation
+	ENDIF
+ELSEIF <EVAL <SRC.TAG.ARCHIMEDE>>==30
+	IF (<SRC.RESTEST 30 i_crane_du_bouffon_morbide>)
+		SRC.TAG.ARCHIMEDE=31
+		SRC.CONSUME 30 i_crane_du_bouffon_morbide
+		SAY Bien que le bouffon morbide ne soit pas decider a quitter les lieux votre rage de vaincre vous vaut de posseder ce precieux ecu, prennez en soin et merci encore pour votre aide <SRC.NAME> !
+		SRC.NEWITEM i_ecu_morbide
+		SRC.ACT.BOUNCE
+	ELSE
+		SAY Poursuivez vos salves, cette maudite carcasse finira par quitter les lieux !
+	ENDIF
+ELSE
+	SAY Si je savais ...
+ENDIF

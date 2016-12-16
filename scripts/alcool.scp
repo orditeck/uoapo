@@ -1,0 +1,29 @@
+[TYPEDEF T_BOOZE]
+
+ON=@DCLICK
+SRC.NEWITEM=i_drunk_memory 
+SRC.ACT.EQUIP
+REMOVE
+RETURN 1
+
+[ITEMDEF i_drunk_memory]
+ID=i_memory
+TYPE=t_eq_script
+WEIGHT=0
+
+ON=@Create
+TIMER={5 15}
+TAG.HIC={5 15}
+
+ON=@Timer
+IF <EVAL 0<TAG.HIC>> <1
+	REMOVE
+ELSE
+	TAG.HIC=<EVAL <TAG.HIC>-1>
+	DORAND 2
+		SRC.ANIM=020
+		CONT.SAY=*Hic*
+	ENDDO
+	TIMER={5 15}
+ENDIF
+RETURN 1

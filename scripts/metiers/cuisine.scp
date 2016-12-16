@@ -1,0 +1,824 @@
+//**************************************
+//************BARRIL D'EAU**************
+//**************************************
+
+//MOREX = CHARGES D'EAU
+[ITEMDEF i_barril_d_eau]
+NAME=Barril d'eau
+ID=i_barrel_open
+WEIGHT=100
+TYPE=t_barril_d_eau
+
+ON=@CREATE
+MOREX = 0
+
+//WEIGHT = 10*eau + 10
+[TYPEDEF t_barril_d_eau]
+ON=@CLICK
+IF <MOREX> == 0
+	MESSAGE Barril d'eau vide
+ELSE
+	MESSAGE Barril d'eau [<EVAL <MOREX>>/50]
+ENDIF
+
+ON=@DCLICK
+IF <MOREX> >= 50
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le <NAME> est rempli !
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez une etendue d'eau pour remplir votre barril...
+	TARGET
+ENDIF
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas remplir ou vider votre barril au sol !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.BASEID> == i_cruche_d_eau
+	SRC.TARG.REMOVE
+	SRC.NEWITEM i_pitcher_glass
+	SRC.ACT.CONT = <SRC.UID>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous remplissez d'une charge votre <NAME>
+	IF <MOREX> == 0
+		DISPID = i_barrel_water
+		UPDATE
+	ENDIF
+	MOREX = <EVAL <MOREX> + 1>
+ELSEIF <SRC.TARG.BASEID> == i_pitcher_glass
+	IF <MOREX> > 0
+		MOREX = <EVAL <MOREX> - 1>
+		SRC.TARG.REMOVE
+		SRC.NEWITEM i_cruche_d_eau
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous videz d'une charge votre <NAME>
+		IF <MOREX> == 0
+			DISPID = i_barrel_open
+			UPDATE
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Votre <NAME> est vide !
+	ENDIF		
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas remplir ou vider votre barril sur <SRC.TARG.NAME> !
+ENDIF
+WEIGHT = <EVAL (<MOREX> * 10) + 10>
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas remplir ou vider votre barril sur <SRC.TARG.NAME> !
+RETURN 1
+
+
+//***********************************
+//**************TYPES****************
+//***********************************
+
+[TYPEDEF t_livre_de_recette]
+ON=@DCLICK
+SRC.SKILLMENU sm_cook
+RETURN 1
+
+//TAG.ID_MEMORY = ID memory cree lorsque consomme
+[TYPEDEF t_ingredient_cruche]
+ON=@DCLICK
+IF !<TAG.ID_MEMORY>
+	SRC.SYSMESSAGEUA 0481 1 1 0 <NAME> est inutilisable, veuillez en acheter un autre !
+	RETURN 1
+ENDIF
+SRC.NEWITEM i_pitcher_glass
+SRC.ACT.CONT = <SRC.UID>
+IF <SRC.FINDID.<TAG.ID_MEMORY>>
+	TRYP 0 SRC.FINDID.<TAG.ID_MEMORY>.AMOUNT = <EVAL <SRC.FINDID.<TAG.ID_MEMORY>.AMOUNT> + 1>
+	TRYP 0 SRC.FINDID.<TAG.ID_MEMORY>.TIMER = 120
+ELSE
+	SRC.NEWITEM <TAG.ID_MEMORY>
+	SRC.ACT.CONT = <SRC.UID>
+ENDIF
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous utilisez votre <NAME>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//MORE1 = nb de bouffe donne
+//MORE2 = nb de sante donne
+[TYPEDEF t_nourriture]
+ON=@DCLICK
+IF <SRC.FOOD> >= 16
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous essayez de manger, mais vous etes plein !
+ELSE
+	IF <SRC.FOOD> == 15
+		SRC.FOOD = 16
+	ELSE
+		SRC.FOOD = <SRC.FOOD> + <MORE1>
+		IF <SRC.FOOD> > 15
+			SRC.FOOD = 15
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous vous sentez presque plein !
+		ENDIF
+	ENDIF
+	IF <SRC.FINDID.m_timer_general>
+		SRC.FINDID.m_timer_general.TAG.SANTE = <EVAL <SRC.FINDID.m_timer_general.TAG.SANTE> + <MORE2>>
+		IF <SRC.FINDID.m_timer_general.TAG.SANTE> > 100
+			SRC.FINDID.m_timer_general.TAG.SANTE = 100
+		ENDIF
+	ELSE
+		SRC.NEWITEM m_timer_general
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.ACT.EQUIP
+	ENDIF
+	SRC.EMOTE manger <NAME>
+	CONSUME 1
+ENDIF
+RETURN 1
+
+//MORE1 = nourriture generee
+//MORE2 = skill en cuisine requis
+[TYPEDEF t_nourriture_crue]
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Sur quoi voulez-vous cuire <NAME> ?
+TARGET
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner un objet chauffant pour cuire <NAME> !
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner un objet chauffant pour cuire <NAME> !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.IS_OBJET_CHAUFFANT>
+	IF !<SRC.IS_DEJA_TRAVAIL>
+		SRC.NEWITEM m_cuisson_cuisine
+		SRC.ACT.MORE1 = <MORE1>
+		SRC.ACT.MORE2 = <MORE2>
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.ACT.EQUIP
+		CONSUME
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja occupe !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un objet chauffant !
+ENDIF
+RETURN 1
+
+[TYPEDEF t_moulin]
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez ce que vous voulez moudre...
+TARGET
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas moudre le sol !
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas moudre <SRC.TARG.NAME> !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <SRC.TARG.BASEID> == i_hay_sheaf
+		IF <EVAL <SRC.RESCOUNT i_hay_sheaf>> >= 5
+			SRC.CONSUME 5 i_hay_sheaf
+			SRC.NEWITEM i_sac_de_farine
+			SRC.ACT.CONT = <SRC.UID>
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut au moins 5 <SRC.TARG.NAME> pour remplir un sac de farine !
+		ENDIF
+	ELSEIF <SRC.TARG.TYPE> == t_fruit
+		IF <SRC.TARG.AMOUNT> >= 10
+			SRC.TARG.AMOUNT = <EVAL <SRC.TARG.AMOUNT> - 10>
+			IF <SRC.TARG.AMOUNT> == 0
+				SRC.TARG.REMOVE
+			ELSE
+				SRC.TARG.UPDATE
+			ENDIF
+			SRC.NEWITEM i_sac_de_sucre
+			SRC.ACT.CONT = <SRC.UID>
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut au moins 10 <SRC.TARG.NAME> pour remplir un sac de sucre !
+		ENDIF			
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> doit etre sur vous pour l'utiliser !
+ENDIF
+
+//MORE1 = nourriture generee
+//MORE2 = skill en cuisine requis
+[ITEMDEF m_cuisson_cuisine]
+NAME=en cuisson
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER = <EVAL RAND(3,6)>
+
+ON=@TIMER
+IF <MORE2> <= <CONT.COOKING>
+	CONT.NEWITEM <MORE1>
+	CONT.ACT.CONT = <CONT.UID>
+	CONT.ACT.UPDATE
+ELSE
+	CONT.SYSMESSAGEUA 0481 1 1 0 Vous ratez votre cuisson et rendez la nourriture immangeable !
+ENDIF
+REMOVE
+RETURN 1
+
+
+//*************************************************
+//**************LIVRES DE RECETTES*****************
+//*************************************************
+[ITEMDEF i_livre_de_recettes_1]
+NAME=Livre de recettes pour les nuls
+ID=i_spellbook
+TYPE=t_tinker_tools
+RESOURCES=10 i_scroll_blank
+SKILLMAKE=INSCRIPTION 40.0, 1 i_livre_de_recettes_1
+
+ON=@DCLICK
+SRC.SKILLMENU sm_cuisine_nuls
+RETURN 1
+
+CATEGORY=Cuisine
+SUBSECTION=Livres
+DESCRIPTION=Livre de cuisine pour les nuls
+
+
+[ITEMDEF i_livre_de_recettes_2]
+NAME=Livre de recettes pour apprentis
+ID=i_spellbook
+TYPE=t_tinker_tools
+RESOURCES=20 i_scroll_blank
+SKILLMAKE=INSCRIPTION 50.0, 1 i_livre_de_recettes_2
+
+ON=@DCLICK
+SRC.SKILLMENU sm_cuisine_apprentis
+RETURN 1
+
+CATEGORY=Cuisine
+SUBSECTION=Livres
+DESCRIPTION=Livre de cuisine pour apprentis
+
+
+[ITEMDEF i_livre_de_recettes_3]
+NAME=Livre de recettes pour inities
+ID=i_spellbook
+TYPE=t_tinker_tools
+RESOURCES=30 i_scroll_blank
+SKILLMAKE=INSCRIPTION 60.0, 1 i_livre_de_recettes_3
+
+ON=@DCLICK
+SRC.SKILLMENU sm_cuisine_inities
+RETURN 1
+
+CATEGORY=Cuisine
+SUBSECTION=Livres
+DESCRIPTION=Livre de cuisine pour inities
+
+[ITEMDEF i_livre_de_recettes_4]
+NAME=Livre de recettes pour les chefs
+ID=i_spellbook
+TYPE=t_tinker_tools
+RESOURCES=40 i_scroll_blank
+SKILLMAKE=INSCRIPTION 70.0, 1 i_livre_de_recettes_4
+
+ON=@DCLICK
+SRC.SKILLMENU sm_cuisine_chefs
+RETURN 1
+
+CATEGORY=Cuisine
+SUBSECTION=Livres
+DESCRIPTION=Livre de cuisine pour les chefs
+
+
+//*************************************************
+//*****************INGREDIENTS*********************
+//*************************************************
+
+[ITEMDEF i_cruche_de_creme]
+NAME=Cruche de creme
+ID=i_pitcher_milk
+TYPE=t_ingredient_cruche
+VALUE=100
+
+ON=@CREATE
+COLOR=0b13
+TAG.ID_MEMORY=m_cruche_de_creme
+
+[ITEMDEF m_cruche_de_creme]
+NAME=mem creme
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_cruche_d_eau]
+NAME=Cruche d'eau
+ID=i_pitcher_water
+TYPE=t_ingredient_cruche
+VALUE=5
+
+ON=@CREATE
+TAG.ID_MEMORY=m_cruche_d_eau
+
+[ITEMDEF m_cruche_d_eau]
+NAME=mem eau
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_cruche_de_lait]
+NAME=Cruche de lait
+ID=i_pitcher_milk
+TYPE=t_ingredient_cruche
+VALUE=20
+
+ON=@CREATE
+TAG.ID_MEMORY=m_cruche_de_lait
+
+[ITEMDEF m_cruche_de_lait]
+NAME=mem lait
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//POIDS = 0.1 * <MORE1>
+[ITEMDEF i_sac_de_sel]
+NAME=Sac de sel
+TYPE=t_normal
+ID=i_flour_sack
+WEIGHT=5.0
+VALUE=2000
+
+ON=@CREATE
+MORE1=50
+COLOR=0b15
+
+ON=@CLICK
+IF <MORE1> == 0
+	MORE1 = 50
+ENDIF
+MESSAGE <NAME> [<EVAL <MORE1>>]
+RETURN 1
+
+ON=@DCLICK
+IF <MORE1> == 0
+	MORE1 = 50
+ENDIF
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous utilisez une pincee de sel !
+IF <SRC.FINDID.m_sac_de_sel>
+	SRC.FINDID.m_sac_de_sel.MORE1 = <EVAL <SRC.FINDID.m_sac_de_sel.MORE1> + 1>
+	SRC.FINDID.m_sac_de_sel.TIMER = 120
+ELSE
+	SRC.NEWITEM m_sac_de_sel
+	SRC.ACT.CONT = <SRC.UID>
+ENDIF
+IF <MORE1> <= 1
+	REMOVE
+ELSE
+	MORE1 = <EVAL <MORE1> - 1>
+	WEIGHT = <MORE1>
+	IF <MORE1> == 10
+		DISPID = i_flour_spilled_3
+		COLOR=0481
+		UPDATE
+	ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF m_sac_de_sel]
+NAME=mem sel
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//POIDS = 0.1 * <MORE1>
+[ITEMDEF i_sac_de_farine]
+NAME=Sac de farine
+ID=i_flour_sack
+TYPE=t_normal
+WEIGHT=5.0
+VALUE=1000
+
+ON=@CREATE
+MORE1=50
+COLOR=0b19
+
+ON=@CLICK
+IF <MORE1> == 0
+	MORE1 = 50
+ENDIF
+MESSAGE <NAME> [<EVAL <MORE1>>]
+RETURN 1
+
+
+ON=@DCLICK
+IF <MORE1> == 0
+	MORE1 = 50
+ENDIF
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous utilisez une tasse de farine !
+IF <SRC.FINDID.m_sac_de_farine>
+	SRC.FINDID.m_sac_de_farine.MORE1 = <EVAL <SRC.FINDID.m_sac_de_farine.MORE1> + 1>
+	SRC.FINDID.m_sac_de_farine.TIMER = 120
+ELSE
+	SRC.NEWITEM m_sac_de_farine
+	SRC.ACT.CONT = <SRC.UID>
+ENDIF
+IF <MORE1> <= 1
+	REMOVE
+ELSE
+	MORE1 = <EVAL <MORE1> - 1>
+	WEIGHT = <MORE1>
+	IF <MORE1> == 10
+		DISPID = i_flour_spilled_3
+		COLOR=0481
+		UPDATE
+	ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF m_sac_de_farine]
+NAME=mem farine
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//POIDS = 0.1 * <MORE1>
+[ITEMDEF i_sac_de_sucre]
+NAME=Sac de sucre
+ID=i_flour_sack
+TYPE=t_normal
+WEIGHT=5.0
+VALUE=1000
+
+ON=@CREATE
+MORE1=50
+COLOR=0481
+
+ON=@CLICK
+IF <MORE1> == 0
+	MORE1 = 50
+ENDIF
+MESSAGE <NAME> [<EVAL <MORE1>>]
+RETURN 1
+
+
+ON=@DCLICK
+IF <MORE1> == 0
+	MORE1 = 50
+ENDIF
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous utilisez une pincee de sucre !
+IF <SRC.FINDID.m_sac_de_sucre>
+	SRC.FINDID.m_sac_de_sucre.MORE1 = <EVAL <SRC.FINDID.m_sac_de_sucre.MORE1> + 1>
+	SRC.FINDID.m_sac_de_sucre.TIMER = 120
+ELSE
+	SRC.NEWITEM m_sac_de_sucre
+	SRC.ACT.CONT = <SRC.UID>
+ENDIF
+IF <MORE1> <= 1
+	REMOVE
+ELSE
+	MORE1 = <EVAL <MORE1> - 1>
+	WEIGHT = <MORE1>
+	IF <MORE1> == 10
+		DISPID = i_flour_spilled_3
+		COLOR=0481
+		UPDATE
+	ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF m_sac_de_sucre]
+NAME=mem sucre
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//POIDS = 0.1 * <MORE1>
+[ITEMDEF i_sac_d_epices]
+NAME=Sac d'epices
+ID=i_flour_sack
+TYPE=t_normal
+WEIGHT=5.0
+RESOURCES=100 i_reag_dragon_blood, 100 i_reag_garlic, 100 i_reag_nightshade, 100 i_reag_dead_wood
+SKILLMAKE=ALCHEMY 90.0
+VALUE=5000
+
+ON=@CREATE
+MORE1=50
+
+ON=@CLICK
+IF <MORE1> == 0
+	MORE1 = 50
+ENDIF
+MESSAGE <NAME> [<EVAL <MORE1>>]
+RETURN 1
+
+
+ON=@DCLICK
+IF <MORE1> == 0
+	MORE1 = 50
+ENDIF
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous utilisez une pincee d'epices !
+IF <SRC.FINDID.m_sac_d_epices>
+	SRC.FINDID.m_sac_d_epices.MORE1 = <EVAL <SRC.FINDID.m_sac_d_epices.MORE1> + 1>
+	SRC.FINDID.m_sac_d_epices.TIMER = 120
+ELSE
+	SRC.NEWITEM m_sac_d_epices
+	SRC.ACT.CONT = <SRC.UID>
+ENDIF
+IF <MORE1> <= 1
+	REMOVE
+ELSE
+	MORE1 = <EVAL <MORE1> - 1>
+	WEIGHT = <MORE1>
+	IF <MORE1> == 10
+		DISPID = i_flour_spilled_3
+		COLOR=0481
+		UPDATE
+	ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF m_sac_d_epices]
+NAME=mem sucre
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_sac_de_haricots]
+NAME=Sac de haricots
+ID=i_flour_sack
+TYPE=t_normal
+WEIGHT=5.0
+VALUE=20
+PILE=1
+
+[ITEMDEF i_levure]
+NAME=Levure
+ID=i_dough
+TYPE=t_normal
+VALUE=20
+PILE=1
+
+[ITEMDEF i_champignon]
+NAME=champignon
+ID=0d16
+TYPE=t_fruit
+VALUE=5
+PILE=1
+
+[ITEMDEF i_tomate]
+NAME=tomate
+ID=i_fruit_apple
+TYPE=t_fruit
+VALUE=5
+PILE=1
+
+[ITEMDEF i_orange]
+NAME=Orange
+ID=0172c
+TYPE=t_fruit
+VALUE=5
+PILE=1
+
+[ITEMDEF i_piment_doux]
+NAME=Piment doux
+ID=0c6c
+TYPE=t_fruit
+VALUE=5
+PILE=1
+
+ON=@CREATE
+COLOR=039
+
+[ITEMDEF i_piment_jalapeno]
+NAME=Piment jalapeno
+ID=i_fruit_banana
+TYPE=t_normal
+VALUE=100
+PILE=1
+
+ON=@CREATE
+COLOR=08a0
+
+ON=@DCLICK
+IF <TOPOBJ.UID> == <SRC.UID>
+	IF ( (!<SRC.FINDID.m_piment_jalapeno>) || (<SRC.FINDID.m_piment_jalapeno.MORE2> < 5) )
+		SRC.EMOTE manger un <NAME>
+		IF !<SRC.FINDID.m_piment_jalapeno>
+			SRC.NEWITEM m_piment_jalapeno
+			SRC.ACT.CONT = <SRC.UID>
+			SRC.ACT.EQUIP
+		ELSE
+			SRC.FINDID.m_piment_jalapeno.MORE2 = <EVAL <SRC.FINDID.m_piment_jalapeno.MORE2> + 1>
+			SRC.FINDID.m_piment_jalapeno.MORE1 = 0
+		ENDIF
+		SRC.CONSUME 1 i_piment_jalapeno
+	ELSE
+		SRC.EMOTE etre incapable d'avaler un autre <NAME>
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <NAME> n'est pas dans votre inventaire
+ENDIF
+RETURN 1
+
+[ITEMDEF i_piment_habanero]
+NAME=Piment habanero
+ID=0c75
+TYPE=t_normal
+VALUE=500
+PILE=1
+
+ON=@CREATE
+COLOR=02d
+
+ON=@DCLICK
+IF <TOPOBJ.UID> == <SRC.UID>
+	IF !<SRC.FINDID.m_piment_habanero>
+		SRC.EMOTE manger un <NAME>
+		SRC.NEWITEM m_piment_habanero
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.ACT.EQUIP
+		SRC.CONSUME 1 i_piment_habanero
+	ELSE
+		SRC.EMOTE etre incapable d'avaler un autre <NAME>
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <NAME> n'est pas dans votre inventaire
+ENDIF
+RETURN 1
+
+//MORE1 = NB DE @TIMER PASSE DEPUIS LA DERNIERE CONSOMMATION
+//MORE2 = NB DE PIMENTS CONSOMMES
+[ITEMDEF m_piment_jalapeno]
+NAME=mem jalapeno
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=8
+MORE2=1
+
+ON=@TIMER
+IF <MORE2> < 3
+	DORAND 6
+		CONT.EMOTE souffler en grimacant
+		CONT.EMOTE ouvrir la bouche et souffler en sortant la langue
+		CONT.EMOTE avoir la face ecarlate
+		CONT.EMOTE aspirer de l'air frais
+		CONT.EMOTE se tenir fermement la bouche
+		CONT.EMOTE devenir bleme
+	ENDDO
+ELSEIF <EVAL <MORE2>> < 4
+	DORAND 6
+		CONT.EMOTE devenir fantomatique
+		CONT.EMOTE avoir les deux yeux dans le meme trou
+		CONT.EMOTE se serrer la bouche en grimacant
+		BEGIN
+			CONT.EMOTE sautiller en soufflant la bouche ouverte
+			CONT.ANIM 25
+		END
+		CONT.EMOTE se frotter la langue avec ses doigts tout en grimacant
+		CONT.EMOTE regretter amerement son geste
+	ENDDO
+ELSE
+	DORAND 6
+		BEGIN
+			CONT.EMOTE hurler de douleur
+			CONT.SFX <CONT.SEX 0157/0150>
+		END
+		BEGIN
+			CONT.EMOTE se plier a genoux en se tenant fermement la bouche
+			CONT.ANIM 020
+		END
+		BEGIN
+			CONT.SAY Ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+			CONT.SFX <CONT.SEX 015b/0152>
+		ENDIF
+		CONT.EMOTE pleurer a chaudes larmes !
+		BEGIN
+			CONT.EMOTE se plier a genoux en hurlant de douleur
+			CONT.SFX <CONT.SEX 0157/0150>
+			CONT.ANIM 020
+		END
+		CONT.EMOTE supplier le ciel de lui epargner ces souffrances !
+	ENDDO
+ENDIF
+MORE1 = <EVAL <MORE1> + 1>
+TIMER=8
+IF <MORE1> > 6
+	REMOVE
+ENDIF
+RETURN 1
+
+//MORE1 = NB DE @TIMER PASSE DEPUIS LA DERNIERE CONSOMMATION
+[ITEMDEF m_piment_habanero]
+NAME=mem habanero
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=8
+
+ON=@TIMER
+IF <MORE1> == 0
+	CONT.EMOTE sourir en regardant autour
+ELSEIF <MORE1> == 1
+	CONT.EMOTE avoir le teint de plus en plus pale
+ELSEIF <MORE1> == 2
+	CONT.EMOTE se mettre la main sur la bouche en fermant les yeux
+ELSEIF <MORE1> == 3
+	CONT.EMOTE hurler de douleur
+	CONT.SFX <CONT.SEX 0157/0150>
+ELSEIF <MORE1> == 4
+	CONT.EMOTE se plier a genoux en se tenant fermement la bouche
+	CONT.ANIM 020
+ELSEIF <MORE1> == 5
+	CONT.SAY AHHHHHH au feu! au feu!
+	CONT.SFX <CONT.SEX 015b/0152>
+ELSEIF <MORE1> == 6
+	CONT.EMOTE se tremper la bouche dans une flaque d'eau
+	CONT.ANIM 22
+ELSEIF <MORE1> == 7
+	CONT.EMOTE aspirer de l'air frais de facon desesperee
+	CONT.ANIM 25
+ELSEIF <MORE1> == 8
+	CONT.EMOTE pleurer en se sucant le pouce
+ELSEIF <MORE1> == 9
+	CONT.EMOTE souffler en poussant de l'air avec sa main
+ELSE
+	CONT.EMOTE revenir dans son etat normal en continuant d'aspirer de l'air frais
+ENDIF
+MORE1 = <EVAL <MORE1> + 1>
+TIMER=8
+IF <MORE1> > 10
+	REMOVE
+ENDIF
+RETURN 1
+
+//*************************************************
+//*******************FONCTIONS*********************
+//*************************************************
+[FUNCTION IS_OBJET_CHAUFFANT]
+IF (<TYPE> == t_forge) || (<TYPE> == t_fire) || (<TYPE> == t_campfire)
+	RETURN 1
+ELSE
+	RETURN 0
+ENDIF

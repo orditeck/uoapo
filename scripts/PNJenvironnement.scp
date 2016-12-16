@@ -1,0 +1,1518 @@
+[ITEMDEF i_discussion_memoire_1]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+NAME=Discussion
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Memoire discussion
+
+ON=@TIMER
+IF (<MORE1>==0)|| (<MORE1>==1)|| (<MORE1>==2)|| (<MORE1>==3)|| (<MORE1>==4)|| (<MORE1>==5)|| (<MORE1>==6)|| (<MORE1>==7)|| (<MORE1>==8)|| (<MORE1>==9)|| (<MORE1>==10)|| (<MORE1>==11)|| (<MORE1>==12)|| (<MORE1>==13)|| (<MORE1>==14)|| (<MORE1>==15)|| (<MORE1>==16)|| (<MORE1>==17)|| (<MORE1>==18)|| (<MORE1>==19)|| (<MORE1>==20)|| (<MORE1>==21)|| (<MORE1>==22)|| (<MORE1>==23)
+VAR.TEMP=<CONT>
+CONT=<LINK>
+LINK=<VAR.TEMP>
+ENDIF
+CONT.TIMER=(-1)
+
+doswitch <MORE1>
+CONT.SAY ... et tu iras aussi chercher du bois !
+CONT.SAY Entendu , je file en chercher ...
+CONT.SAY Attends donc !
+CONT.SAY Qu'y a t il encore ?
+CONT.SAY Tu oublies de me demander de quel bois j'ai besoin !
+CONT.SAY Raah ! de quel bois as tu donc besoin ?
+CONT.SAY Tu iras me couper du noyer du merisier et du tilleul ...
+CONT.SAY Pfff et quoi encore ?
+CONT.SAY Pour ton insolence tu iras aussi chercher du chene !
+CONT.SAY S'en est trop ! je demissionne !
+CONT.SAY Va t'en je t'en prie ... mais ne reviens pas pleurnicher comme chaque fois ...
+CONT.SAY Moi pleurnicher ?
+CONT.SAY Cesse de faire semblant ! Meme ta pauvre mere en a marre de tes caprices ...
+CONT.SAY Cette fois je pars pour de bon !
+CONT.SAY Et comment nourriras tu tes enfants en cette periode de crise ?
+CONT.SAY Euh ...
+CONT.SAY Allons soit raisonnable ... Affrontes la realite !
+CONT.SAY Bien bien je ne m'en vais pas ...
+CONT.SAY Ah voila qui est mieux !
+CONT.SAY Mais ne profite pas de ma faiblesse pour me faire faire les taches les plus dures ...
+CONT.SAY Ne recommence pas ! Ici c'est moi le patron !
+CONT.SAY Oui oui ... j'ai compris !
+CONT.SAY Pour la peine tu prepareras le repas ...
+MORE1=(-1) //24 <--
+enddo
+CONT.FACE
+
+MORE1=<EVAL <MORE1>+1>
+TIMER=8
+RETURN 1
+
+[CHARDEF C_CHEF_MENUISIER]
+DEFNAME=C_CHEF_MENUISIER
+NAME=#NAMES_HUMANMALE
+
+ID=C_MAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Chef menuisier
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+TITLE=Le menuisier
+FLAGS=024
+TIMER=-1
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=08e
+ITEM=i_shoes_plain
+COLOR=08e
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[CHARDEF C_APPRENTI_MENUISIER]
+DEFNAME=C_APPRENTI_MENUISIER
+NAME=#NAMES_HUMANMALE l'apprenti menuisier
+ID=C_MAN
+SHELTER=r_house
+DESIRES=i_gold
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Apprenti menuisier
+
+ON=@Create
+COLOR=colors_skin
+STR={26 40}
+DEX={21 35}
+INT={16 30}
+FLAGS=04
+
+BEGGING={55.0 78.0}
+SNOOPING={35.0 50.0}
+STEALING={35.0 50.0}
+WRESTLING={15.0 38.0}
+TACTICS={15.0 38.0}
+
+NPC=brain_human
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=035
+ITEM=i_shoes_plain
+COLOR=035
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[ITEMDEF i_deed_discussion_menuisier]
+ID=i_deed
+TYPE=t_script
+NAME=Discution
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Deeds discussion menuisier
+
+ON=@DCLICK
+SRC.NEWNPC=C_APPRENTI_MENUISIER
+SRC.ACT.DIR=0
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+1>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=035
+VAR.TEMP1=<SRC.ACT>
+
+SRC.NEWNPC=C_CHEF_MENUISIER
+SRC.ACT.DIR=4
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+(-1)>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=08e
+VAR.TEMP2=<SRC.ACT>
+
+SRC.NEWITEM=i_discussion_memoire_1
+SRC.ACT.LINK=<VAR.TEMP2>
+SRC.ACT.CONT=<VAR.TEMP1>
+SRC.ACT.TIMER=8
+
+REMOVE
+RETURN 1
+
+[ITEMDEF i_discussion_memoire_2]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+NAME=Discussion
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Memoire discussion 2
+
+ON=@TIMER
+IF (<MORE1>==0)|| (<MORE1>==1)|| (<MORE1>==2)|| (<MORE1>==3)|| (<MORE1>==4)|| (<MORE1>==5)|| (<MORE1>==6)|| (<MORE1>==7)|| (<MORE1>==8)|| (<MORE1>==9)|| (<MORE1>==10)|| (<MORE1>==11)|| (<MORE1>==12)|| (<MORE1>==13)|| (<MORE1>==14)|| (<MORE1>==15)|| (<MORE1>==16)|| (<MORE1>==17)|| (<MORE1>==18)|| (<MORE1>==19)|| (<MORE1>==20)|| (<MORE1>==21)|| (<MORE1>==22)|| (<MORE1>==23)|| (<MORE1>==24)|| (<MORE1>==25)
+VAR.TEMP=<CONT>
+CONT=<LINK>
+LINK=<VAR.TEMP>
+ENDIF
+CONT.TIMER=(-1)
+
+doswitch <MORE1>
+CONT.SAY J'vais prendre une autre biere, plutot.
+CONT.SAY T'es sur que c'est une bonne idee ?
+CONT.SAY Oui, oui... il me faut une biere. Tout de suite. *hic*
+CONT.SAY J'crois que tu ferais mieux de rentrer, tu sais.
+CONT.SAY Oh, de toute facon...
+CONT.SAY Quoi, de toute facon ?
+CONT.SAY Tu sais, elle m'en fait voir.
+CONT.SAY Je sais, oui.
+CONT.SAY Co... Comment ca, tu sais ?
+CONT.SAY Tu ne parles que de ca !
+CONT.SAY A l'heure qu'il est, elle doit etre en train de courir avec je ne sais qui ...
+CONT.SAY Il a bon dos, je ne sais qui... Si t'etais pas toujours fourre ici...
+CONT.SAY Oui, je sais, c'est ma faute. J'vais aller me pendre tiens.
+CONT.SAY Oh, dis pas de betises ! Attends, je vais te servir un verre.
+CONT.SAY Ah, oui, ca va me remonter le moral *hic*
+CONT.EMOTE servir une biere
+CONT.EMOTE avaler sa biere d'une traite
+CONT.SAY C'est la maison qui paye !
+CONT.SAY Ah, merci, t'es un chic type, j'ai toujours su que je pouvais compter sur toi !
+CONT.SAY Oh, oh doucement... n'essaye pas d'abuser de ma bonte, non plus...
+CONT.SAY Ouais, c'est ce qu'ils disent tous, a commencer par ma femme... *hic*
+CONT.SAY Arrete un peu avec ta femme... C'est une perle...
+CONT.SAY Une perle, ah ! t'en a de bonnes, toi... une furie, oui.
+CONT.SAY Tu exageres tout, tout de suite... rentre chez toi, je suis sur qu'elle t'attend.
+CONT.SAY Non, non et non ... Je ne rentrerai pas ...
+MORE1=(-1) //24 <--
+enddo
+CONT.FACE
+
+MORE1=<EVAL <MORE1>+1>
+TIMER=8
+RETURN 1
+
+[CHARDEF C_UN_TAVERNIER]
+DEFNAME=C_UN_TAVERNIER
+NAME=#NAMES_HUMANMALE
+
+ID=C_MAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Un tavernier
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+TITLE=Le tavernier
+FLAGS=024
+TIMER=-1
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=030
+ITEM=i_shoes_plain
+COLOR=030
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[CHARDEF C_UN_SAOULARD]
+DEFNAME=C_UN_SAOULARD
+NAME=Un saoulard
+ID=C_MAN
+SHELTER=r_house
+DESIRES=i_gold
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Un saoulard
+
+ON=@Create
+COLOR=colors_skin
+STR={26 40}
+DEX={21 35}
+INT={16 30}
+FLAGS=04
+
+BEGGING={55.0 78.0}
+SNOOPING={35.0 50.0}
+STEALING={35.0 50.0}
+WRESTLING={15.0 38.0}
+TACTICS={15.0 38.0}
+
+NPC=brain_human
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=0455
+ITEM=i_shoes_plain
+COLOR=0455
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[ITEMDEF i_deed_discussion_bar]
+ID=i_deed
+TYPE=t_script
+NAME=Discution
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Deeds discussion bar
+
+ON=@DCLICK
+SRC.NEWNPC=C_UN_TAVERNIER
+SRC.ACT.DIR=0
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+1>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=030
+VAR.TEMP1=<SRC.ACT>
+
+SRC.NEWNPC=C_UN_SAOULARD
+SRC.ACT.DIR=4
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+(-1)>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=0455
+VAR.TEMP2=<SRC.ACT>
+
+SRC.NEWITEM=i_discussion_memoire_2
+SRC.ACT.LINK=<VAR.TEMP2>
+SRC.ACT.CONT=<VAR.TEMP1>
+SRC.ACT.TIMER=8
+
+REMOVE
+RETURN 1
+
+[ITEMDEF i_discussion_memoire_3]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+NAME=Discussion
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Memoire discussion 3
+
+ON=@TIMER
+IF (<MORE1>==0)|| (<MORE1>==1)|| (<MORE1>==2)|| (<MORE1>==3)|| (<MORE1>==4)|| (<MORE1>==5)|| (<MORE1>==6)|| (<MORE1>==7)|| (<MORE1>==8)|| (<MORE1>==9)|| (<MORE1>==10)|| (<MORE1>==11)|| (<MORE1>==12)|| (<MORE1>==13)|| (<MORE1>==14)|| (<MORE1>==15)|| (<MORE1>==16)|| (<MORE1>==17)|| (<MORE1>==18)|| (<MORE1>==19)|| (<MORE1>==20)|| (<MORE1>==21)|| (<MORE1>==22)|| (<MORE1>==23)|| (<MORE1>==24)|| (<MORE1>==25)|| (<MORE1>==26)|| (<MORE1>==27)|| (<MORE1>==28)|| (<MORE1>==29)|| (<MORE1>==30)|| (<MORE1>==31)|| (<MORE1>==32)|| (<MORE1>==33)|| (<MORE1>==34)|| (<MORE1>==35)|| (<MORE1>==36)|| (<MORE1>==37)|| (<MORE1>==38)|| (<MORE1>==39)|| (<MORE1>==40)|| (<MORE1>==41)|| (<MORE1>==42)|| (<MORE1>==43)|| (<MORE1>==44)|| (<MORE1>==45)|| (<MORE1>==46)|| (<MORE1>==47)
+VAR.TEMP=<CONT>
+CONT=<LINK>
+LINK=<VAR.TEMP>
+ENDIF
+CONT.TIMER=(-1)
+
+doswitch <MORE1>
+CONT.SAY ... je te laisse les blancs.
+CONT.SAY Entendu.
+CONT.SAY Comme ca, si tu perds, tu n'auras pas d'excuses.
+CONT.SAY Je vais commencer prudemment ... Pion en e4.
+CONT.SAY Bon... ca commence timidement, je trouve.
+CONT.SAY Comment ca ?
+CONT.SAY Attends de voir ! Pion en e5.
+CONT.SAY Oui... *Reflechit*
+CONT.SAY On donne dans le classique, la. On l'a deja jouee, cette partie, non ?
+CONT.SAY Hmmm... peut-etre ... je ne sais plus ... laisse-moi reflechir, tu veux ? //10
+CONT.SAY Pardon.
+CONT.SAY je me lance. Fou en c4.
+CONT.SAY Mouais... pas tres construit, tout ca... Tu n'as rien de mieux ?
+CONT.SAY Non. Tais-toi et joue.
+CONT.SAY He dis-donc... pas la peine de monter sur tes grands chevaux !
+CONT.SAY C'est ton tour, je te signale.
+CONT.SAY Oh, tres bien... Si c'est comme ca... allez ! le cavalier en C6 !
+CONT.SAY C'est a moi, alors ?
+CONT.SAY Eh, bien oui, c'est a toi !
+CONT.SAY Tu as joue quoi ? //20
+CONT.SAY Le cavalier ! je viens de te le dire... Et apres, tu vas me reprocher de ne pas etre concentre !
+CONT.SAY Ca va, ca va... inutile d'en rajouter...
+CONT.EMOTE attendre que son adversaire joue d'un air agace
+CONT.SAY Bon... euh... La dame... je sors la dame.
+CONT.SAY Premature, ce coup.
+CONT.SAY Comment ca, premature ? Qu'est-ce que tu en sais, d'abord ?
+CONT.SAY Premature, je te dis...
+CONT.SAY Alors joue, puisque tu connais mieux le jeu que moi !
+CONT.SAY Minute, tu permets que je reflechisse ?
+CONT.EMOTE passablement enerve //30
+CONT.SAY He he...
+CONT.SAY Comment ca, he he ?
+CONT.SAY Tu verras bien... fou en c5 !
+CONT.EMOTE le regarder fixement
+CONT.SAY Alors ca, ca te laisse sans voix, pas vrai ?
+CONT.SAY Oui.
+CONT.SAY J'en etais sur... Qu'est-ce que tu vas repondre a ce coup la ?
+CONT.SAY Dame prend pion. Mat.
+CONT.SAY ... Pardon ?
+CONT.SAY Dame prend pion. Mat. //40
+CONT.SAY Tu es sur ?
+CONT.SAY Oui.
+CONT.SAY Oh... oui, en effet ... *air piteux*
+CONT.SAY Tu veux prendre ta revanche ?
+CONT.SAY Evidemment, mais cette fois-ci tu vas connaitre ton maitre.
+CONT.SAY Puisque tu le dis... //46
+CONT.SAY Bien sur tu va voir ! Allez ...
+MORE1=(-1)
+enddo
+CONT.FACE
+
+MORE1=<EVAL <MORE1>+1>
+TIMER=8
+RETURN 1
+
+[CHARDEF C_UN_JOUEUR_D_ECHEC_1]
+DEFNAME=C_UN_JOUEUR_D_ECHEC_1
+NAME=#NAMES_HUMANMALE
+
+ID=C_MAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Un joueur d'echec (1)
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+TITLE=Joueur d'echec
+FLAGS=024
+TIMER=-1
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=026f
+ITEM=i_shoes_plain
+COLOR=026f
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[CHARDEF C_UN_JOUEUR_D_ECHEC_2]
+DEFNAME=C_UN_JOUEUR_D_ECHEC_2
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+SHELTER=r_house
+DESIRES=i_gold
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Un joueur d'echec (2)
+
+ON=@Create
+TITLE=Joueur d'echec
+COLOR=colors_skin
+STR={26 40}
+DEX={21 35}
+INT={16 30}
+FLAGS=04
+
+BEGGING={55.0 78.0}
+SNOOPING={35.0 50.0}
+STEALING={35.0 50.0}
+WRESTLING={15.0 38.0}
+TACTICS={15.0 38.0}
+
+NPC=brain_human
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=028d
+ITEM=i_shoes_plain
+COLOR=028d
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[ITEMDEF i_deed_discussion_echec]
+ID=i_deed
+TYPE=t_script
+NAME=Discution
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Deeds discussion echec
+
+ON=@DCLICK
+SRC.NEWNPC=C_UN_JOUEUR_D_ECHEC_2
+SRC.ACT.DIR=0
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+1>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=028d
+VAR.TEMP1=<SRC.ACT>
+
+SRC.NEWNPC=C_UN_JOUEUR_D_ECHEC_1
+SRC.ACT.DIR=4
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+(-1)>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=026f
+VAR.TEMP2=<SRC.ACT>
+
+SRC.NEWITEM=i_discussion_memoire_3
+SRC.ACT.LINK=<VAR.TEMP2>
+SRC.ACT.CONT=<VAR.TEMP1>
+SRC.ACT.TIMER=8
+
+REMOVE
+RETURN 1
+
+[ITEMDEF i_discussion_memoire_4]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+NAME=Discussion
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Memoire discussion 4
+
+ON=@TIMER
+IF (<MORE1>==0)|| (<MORE1>==1)|| (<MORE1>==2)|| (<MORE1>==3)|| (<MORE1>==4)|| (<MORE1>==5)|| (<MORE1>==6)|| (<MORE1>==7)|| (<MORE1>==8)|| (<MORE1>==9)|| (<MORE1>==10)|| (<MORE1>==11)|| (<MORE1>==12)|| (<MORE1>==13)|| (<MORE1>==14)|| (<MORE1>==15)|| (<MORE1>==16)|| (<MORE1>==17)|| (<MORE1>==18)|| (<MORE1>==19)|| (<MORE1>==20)|| (<MORE1>==21)|| (<MORE1>==22)|| (<MORE1>==23)|| (<MORE1>==24)|| (<MORE1>==25)
+VAR.TEMP=<CONT>
+CONT=<LINK>
+LINK=<VAR.TEMP>
+ENDIF
+CONT.TIMER=(-1)
+
+doswitch <MORE1>
+CONT.SAY In Lor
+CONT.SAY Pas comme cela. Tu n'etais pas assez concentre. Reprends.
+CONT.SAY *Soupire* Je n'y arriverai jamais, maitre.
+CONT.SAY L'art est difficile, mon enfant, mais il offre des tresors pour qui a la force de les meriter.
+CONT.SAY Mais maitre, c'est la centieme fois que j'essaie aujourd'hui !
+CONT.SAY Et tu echoueras encore mille fois. Tu dois garder confiance.
+CONT.SAY Bien, maitre.
+CONT.SAY Tiens-toi droit , fais des gestes souples ... Tu est le roc ou se focalisents les energies.
+CONT.EMOTE mimer chacun des gestes
+CONT.SAY Et tiens fermements les reactifs en main.
+CONT.SAY Entendu.
+CONT.SAY Avant de reprendre, rappelle moi leur nom.
+CONT.SAY Il y a ... la soie d'araignee.
+CONT.SAY oui ... et a quoi l'emploie-t-on ?
+CONT.SAY *recite* Elle... elle... concentre la force des invocations ?
+CONT.SAY Tres bien. Et l'autre reactif ?
+CONT.SAY Les cendres sulfureuses. Elles... servent a...
+CONT.SAY A quoi ?
+CONT.SAY A ... a convoquer les ... energies explosives dont elle est nee...
+CONT.SAY hmmm ... ?
+CONT.SAY ... pour creer des explosions ... du feu et de la lumiere !
+CONT.SAY C'est cela. Lorsque tu liberes leur pouvoir, visualise leur image mentalement et fixe-la en toi.
+CONT.EMOTE ecouter attentivement en hochant la tete
+CONT.SAY Bien. La theorie est une chose, mais tu dois parfaire ta pratique ... reessaye !
+CONT.EMOTE *se concentrer*
+MORE1=(-1)
+enddo
+CONT.FACE
+
+MORE1=<EVAL <MORE1>+1>
+TIMER=8
+RETURN 1
+
+[CHARDEF C_UN_MAITRE_MAGICIEN]
+DEFNAME=C_UN_MAITRE_MAGICIEN
+NAME=#NAMES_HUMANMALE
+
+ID=C_MAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Un maitre magicien
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+TITLE=Grand maitre magicien
+FLAGS=024
+TIMER=-1
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=0481
+ITEM=i_shoes_plain
+COLOR=0481
+ITEM=i_staff_black
+COLOR=0481
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[CHARDEF C_UN_APPRENTI_MAGICIEN]
+DEFNAME=C_UN_APPRENTI_MAGICIEN
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+SHELTER=r_house
+DESIRES=i_gold
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Un apprenti magicien
+
+ON=@Create
+TITLE=Apprenti magicien
+COLOR=colors_skin
+STR={26 40}
+DEX={21 35}
+INT={16 30}
+FLAGS=04
+
+BEGGING={55.0 78.0}
+SNOOPING={35.0 50.0}
+STEALING={35.0 50.0}
+WRESTLING={15.0 38.0}
+TACTICS={15.0 38.0}
+
+NPC=brain_human
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=0251
+ITEM=i_shoes_plain
+COLOR=0251
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[ITEMDEF i_deed_discussion_teachmagicien]
+ID=i_deed
+TYPE=t_script
+NAME=Discution
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Deeds discussion magicien
+
+ON=@DCLICK
+SRC.NEWNPC=C_UN_MAITRE_MAGICIEN
+SRC.ACT.DIR=0
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+1>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=0481
+VAR.TEMP1=<SRC.ACT>
+
+SRC.NEWNPC=C_UN_APPRENTI_MAGICIEN
+SRC.ACT.DIR=4
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+(-1)>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=0251
+VAR.TEMP2=<SRC.ACT>
+
+SRC.NEWITEM=i_discussion_memoire_4
+SRC.ACT.LINK=<VAR.TEMP2>
+SRC.ACT.CONT=<VAR.TEMP1>
+SRC.ACT.TIMER=8
+
+REMOVE
+RETURN 1
+
+[ITEMDEF i_discussion_memoire_5]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+NAME=Discussion
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Memoire discussion 5
+
+ON=@TIMER
+IF (<MORE1>==0)|| (<MORE1>==1)|| (<MORE1>==2)|| (<MORE1>==3)|| (<MORE1>==4)|| (<MORE1>==5)|| (<MORE1>==6)|| (<MORE1>==7)|| (<MORE1>==8)|| (<MORE1>==9)|| (<MORE1>==10)|| (<MORE1>==11)|| (<MORE1>==12)|| (<MORE1>==13)|| (<MORE1>==14)|| (<MORE1>==15)|| (<MORE1>==16)|| (<MORE1>==17)|| (<MORE1>==18)|| (<MORE1>==19)|| (<MORE1>==20)|| (<MORE1>==21)|| (<MORE1>==22)|| (<MORE1>==23)|| (<MORE1>==24)|| (<MORE1>==25)|| (<MORE1>==26)|| (<MORE1>==27)|| (<MORE1>==28)|| (<MORE1>==29) 
+VAR.TEMP=<CONT>
+CONT=<LINK>
+LINK=<VAR.TEMP>
+ENDIF
+CONT.TIMER=(-1)
+
+doswitch <MORE1>
+CONT.SAY L'incroyable elixir de jouvence du frere Petrus !
+CONT.SAY Ooooh !
+CONT.SAY Oui, mesdames, messieurs, C'est bien lui, l'elixir de longue vie renomme dans tout Britannia !
+CONT.EMOTE regarder d'un air emerveille
+CONT.SAY Il nous vient des iles du sud, bien au large des continents et realise de veritables prodiges !
+CONT.SAY Et quels prodiges ?
+CONT.SAY Quels prodiges ? *petit rire* Mais toutes les legendes rapportent ses effets miraculeux !
+CONT.SAY Et quels sont ces effets ?
+CONT.SAY L'elixir de jouvence du frere Petrus, concu selon une recette millenaire, prolonge la vie...
+CONT.SAY Oooh !
+CONT.SAY ... il guerit les fievres les plus malignes...
+CONT.SAY Et la fievre des marais ?
+CONT.SAY ... la fievre des marais comme toutes les autres affections, bien sur.
+CONT.SAY C'est extraordinaire !
+CONT.SAY Et ce n'est pas tout ! l'elixir de jouvence du frere Petrus referme les plaies infectees ...
+CONT.SAY Prodigieux !
+CONT.SAY Il repousse les moustiques, donne une haleine agreable et redresse les dents dechassees ...
+CONT.SAY Et combien, pour ce brevage miraculeux ?
+CONT.SAY Chaque chose en son temps mon amie ... Vous ai-je dit qu'il agissait comme un philtre aphrodisiaque ?
+CONT.SAY Non...
+CONT.SAY Et qu'il renforcait les couples desunis ? qu'il rendait les femmes fertiles ?
+CONT.SAY Que de pouvoirs magiques ! que de pouvoirs magiques !
+CONT.SAY Et tout cela pour la somme modique de... de...
+CONT.SAY *bouche bee*
+CONT.SAY ... de 120 pieces d'or ! pas une de plus ! 120 miserables piecettes pour une vie meilleure et plus longue !
+CONT.SAY Seulement ?
+CONT.SAY Oui, madame. Et aujourd'hui seulement, car demain, il n'y en aura plus. Profitez-en vite !
+CONT.SAY J'en prends cinq fioles !
+CONT.SAY Oh, puissiez vous vivre un siecle ! Personne d'autre ne veut de ...
+MORE1=(-1)
+enddo
+CONT.FACE
+
+MORE1=<EVAL <MORE1>+1>
+TIMER=8
+RETURN 1
+
+[CHARDEF C_UN_VENDEUR_AMBIANCE]
+DEFNAME=C_UN_VENDEUR_AMBIANCE
+NAME=#NAMES_HUMANMALE
+
+ID=C_MAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Un vendeur
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+TITLE=é
+FLAGS=024
+TIMER=-1
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=025
+ITEM=i_shoes_plain
+COLOR=025
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[CHARDEF C_UN_ACHETEUR_AMBIANCE_1]
+DEFNAME=C_UN_ACHETEUR_AMBIANCE_1
+NAME=Colette
+ID=C_WOMAN
+SHELTER=r_house
+DESIRES=i_gold
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Acheteuse ambiance 1
+
+ON=@Create
+TITLE=Menagere
+COLOR=colors_skin
+STR={26 40}
+DEX={21 35}
+INT={16 30}
+FLAGS=04
+
+BEGGING={55.0 78.0}
+SNOOPING={35.0 50.0}
+STEALING={35.0 50.0}
+WRESTLING={15.0 38.0}
+TACTICS={15.0 38.0}
+
+NPC=brain_human
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=029c
+ITEM=i_shoes_plain
+COLOR=029c
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[ITEMDEF i_deed_discussion_vendeurambiance]
+ID=i_deed
+TYPE=t_script
+NAME=Discution
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Deeds discussion vendeur-foule
+
+ON=@DCLICK
+SRC.NEWNPC=C_UN_ACHETEUR_AMBIANCE_1
+SRC.ACT.DIR=0
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+1>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=029c
+VAR.TEMP1=<SRC.ACT>
+
+SRC.NEWNPC=C_UN_VENDEUR_AMBIANCE
+SRC.ACT.DIR=4
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+(-1)>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=025
+VAR.TEMP2=<SRC.ACT>
+
+SRC.NEWITEM=i_discussion_memoire_5
+SRC.ACT.LINK=<VAR.TEMP2>
+SRC.ACT.CONT=<VAR.TEMP1>
+SRC.ACT.TIMER=8
+
+REMOVE
+RETURN 1
+
+[ITEMDEF i_discussion_memoire_6]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+NAME=Discussion
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Memoire discussion 6
+
+ON=@TIMER
+IF (<MORE1>==0)|| (<MORE1>==1)|| (<MORE1>==2)|| (<MORE1>==3)|| (<MORE1>==4)|| (<MORE1>==5)|| (<MORE1>==6)|| (<MORE1>==7)|| (<MORE1>==8)|| (<MORE1>==9)|| (<MORE1>==10)|| (<MORE1>==11)|| (<MORE1>==12)|| (<MORE1>==13)|| (<MORE1>==14)|| (<MORE1>==15)|| (<MORE1>==16)
+VAR.TEMP=<CONT>
+CONT=<LINK>
+LINK=<VAR.TEMP>
+ENDIF
+CONT.TIMER=(-1)
+
+doswitch <MORE1>
+CONT.SAY Epatant !
+CONT.SAY Incroyable ...
+CONT.SAY Fantastique !!
+CONT.EMOTE prendre des pieces de sa bourse
+CONT.SAY Surprenant ...
+CONT.SAY Extraordinaire !
+CONT.SAY Sensationnel ...
+CONT.SAY Merveilleux !
+CONT.EMOTE applaudir
+CONT.SAY Prodigieux ...
+CONT.SAY Epoustouflant !!!
+CONT.SAY Exeptionnel ...
+CONT.EMOTE tendre l'oreille
+CONT.SAY Formidable !
+CONT.SAY Remarquable ...
+CONT.EMOTE ecarquiller les yeux
+MORE1=(-1) //24 <--
+enddo
+CONT.FACE
+
+MORE1=<EVAL <MORE1>+1>
+TIMER=8
+RETURN 1
+
+[CHARDEF C_UN_ACHETEUR_AMBIANCE_2]
+DEFNAME=C_UN_ACHETEUR_AMBIANCE_2
+NAME=#NAMES_HUMANMALE
+
+ID=C_MAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Acheteuse ambiance 2
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+TITLE=é
+FLAGS=024
+TIMER=-1
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=0386
+ITEM=i_shoes_plain
+COLOR=0386
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[CHARDEF C_UN_ACHETEUR_AMBIANCE_3]
+DEFNAME=C_UN_ACHETEUR_AMBIANCE_3
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+SHELTER=r_house
+DESIRES=i_gold
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Acheteuse ambiance 3
+
+ON=@Create
+TITLE=é
+COLOR=colors_skin
+STR={26 40}
+DEX={21 35}
+INT={16 30}
+FLAGS=04
+
+BEGGING={55.0 78.0}
+SNOOPING={35.0 50.0}
+STEALING={35.0 50.0}
+WRESTLING={15.0 38.0}
+TACTICS={15.0 38.0}
+
+NPC=brain_human
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=0ba
+ITEM=i_shoes_plain
+COLOR=0ba
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[ITEMDEF i_deed_foule_en_delire]
+ID=i_deed
+TYPE=t_script
+NAME=Discution
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Deeds discussion foule
+
+ON=@DCLICK
+SRC.NEWNPC=C_UN_ACHETEUR_AMBIANCE_2
+SRC.ACT.DIR=0
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+1>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=0386
+VAR.TEMP1=<SRC.ACT>
+
+SRC.NEWNPC=C_UN_ACHETEUR_AMBIANCE_3
+SRC.ACT.DIR=4
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+(-1)>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=0ba
+VAR.TEMP2=<SRC.ACT>
+
+SRC.NEWITEM=i_discussion_memoire_6
+SRC.ACT.LINK=<VAR.TEMP2>
+SRC.ACT.CONT=<VAR.TEMP1>
+SRC.ACT.TIMER=8
+
+REMOVE
+RETURN 1
+
+[ITEMDEF i_discussion_memoire_7]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+NAME=Discussion
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Memoire discussion 7
+
+ON=@TIMER
+VAR.TEMP=<CONT>
+CONT=<LINK>
+LINK=<VAR.TEMP>
+
+CONT.TIMER=(-1)
+
+doswitch <MORE1>
+CONT.SAY Dites trente-trois ...
+CONT.SAY Drende drois
+CONT.SAY Encore une fois ...
+CONT.SAY Drende drois !
+CONT.SAY Maintenant inspirez bien a fond ...
+CONT.EMOTE inspirer
+CONT.SAY ... Expirez !
+CONT.EMOTE expirer 
+CONT.SAY Vous avez attrappe un vilain rhume on dirait !
+CONT.EMOTE renifler bruyamment
+CONT.SAY Rien de grave, et puis c'est dans l'air en ce moment ...
+CONT.SAY Oui il barrait... je vous rebercie docdeur ... 
+CONT.EMOTE poser son stetoscope
+CONT.SAY Gombien je bous dois ?
+CONT.SAY Ca fera mille pieces d'or, s'il vous plait
+CONT.SAY Je be sens bal ... 
+CONT.SAY Allons allons remettez vous !
+CONT.EMOTE faire mine de s'evanouir
+CONT.EMOTE lui mettre des claques pour le reanimer
+CONT.EMOTE faire mine de revenir a lui
+CONT.SAY Ca peux aller ?
+CONT.SAY Oui berci ... ca b'arribe soubent !
+CONT.SAY Tiens tiens voyons voir ca ...
+CONT.EMOTE renifler
+CONT.EMOTE prendre son stetoscope
+
+MORE1=(-1) //24 <--
+enddo
+CONT.FACE
+
+MORE1=<EVAL <MORE1>+1>
+TIMER=8
+RETURN 1
+
+[CHARDEF C_UN_DOCTEUR]
+DEFNAME=C_UN_DOCTEUR
+NAME=#NAMES_HUMANMALE
+
+ID=C_MAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Docteur
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+TITLE=Le docteur
+FLAGS=024
+TIMER=-1
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=0481
+ITEM=i_shoes_plain
+COLOR=0481
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[CHARDEF C_UN_PATIENT]
+DEFNAME=C_UN_PATIENT
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+SHELTER=r_house
+DESIRES=i_gold
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Un patient
+
+ON=@Create
+COLOR=colors_skin
+STR={26 40}
+DEX={21 35}
+INT={16 30}
+FLAGS=04
+
+BEGGING={55.0 78.0}
+SNOOPING={35.0 50.0}
+STEALING={35.0 50.0}
+WRESTLING={15.0 38.0}
+TACTICS={15.0 38.0}
+
+NPC=brain_human
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=016a
+ITEM=i_shoes_plain
+COLOR=016a
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[ITEMDEF i_deed_discussion_docteur]
+ID=i_deed
+TYPE=t_script
+NAME=Discution
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Deeds discussion docteur
+
+ON=@DCLICK
+SRC.NEWNPC=C_UN_PATIENT
+SRC.ACT.DIR=0
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+1>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=016a
+VAR.TEMP1=<SRC.ACT>
+
+SRC.NEWNPC=C_UN_DOCTEUR
+SRC.ACT.DIR=4
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+(-1)>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=0481
+VAR.TEMP2=<SRC.ACT>
+
+SRC.NEWITEM=i_discussion_memoire_7
+SRC.ACT.LINK=<VAR.TEMP2>
+SRC.ACT.CONT=<VAR.TEMP1>
+SRC.ACT.TIMER=8
+
+REMOVE
+RETURN 1
+
+[ITEMDEF i_discussion_memoire_9]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+NAME=Discussion
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Memoire discussion 9
+
+ON=@TIMER
+VAR.TEMP=<CONT>
+CONT=<LINK>
+LINK=<VAR.TEMP>
+
+CONT.TIMER=(-1)
+
+doswitch <MORE1>
+CONT.SAY Cette arme est parfaite ! 
+CONT.SAY Oh, c'est beaucoup dire ... 
+CONT.SAY Si je vous assure, elle est a la fois legere et solide
+CONT.EMOTE flatte
+CONT.SAY Comment avez vous fait ? 
+CONT.SAY En fait, j'ai utilise un alliage qu'avait decouvert mon pere
+CONT.SAY Il a l'air efficace
+CONT.SAY Oui tres ... Mon pere etait un habile forgeron
+CONT.SAY Peut etre mais vous restez l'auteur de cette sublime lame ... Vous etes vraiment tres doue 
+CONT.SAY Vous exagerez ... forger une telle epee ne demande pas enormement de savoir-faire 
+CONT.SAY Croyez moi, je sais reconnaitre une bonne lame, et celle-ci est tout simplement excellente 
+CONT.EMOTE rougir 
+CONT.SAY Exercez vous ce metier depuis longtemps ? 
+CONT.SAY Cela va bientot faire trois mois. 
+CONT.SAY Seulement ? Vous semblez pourtant deja etre fort habile de vos mains ... 
+CONT.SAY En fait j'ai passe la majeure partie de mon enfance dans cette forge a regarder mon pere travailler, j'ai donc beaucoup appris en l'observant 
+CONT.SAY Oh je vois ... et maintenant vous avez pris la releve n'est ce pas ?
+CONT.SAY Oui, il est trop vieux pour travailler 
+CONT.SAY Ce changement de proprietaire n'a-t-il pas effraye la clientele ? 
+CONT.SAY Non, elle est d'ailleurs assez satisfaite de mon travail : jugez par vous meme de la qualite de cette lame ...
+CONT.EMOTE observer attentivement la lame
+
+MORE1=(-1) //24 <--
+enddo
+CONT.FACE
+
+MORE1=<EVAL <MORE1>+1>
+TIMER=8
+RETURN 1
+
+[CHARDEF C_UN_FORGERON1]
+DEFNAME=C_UN_FORGERON1
+NAME=#NAMES_HUMANMALE
+
+ID=C_MAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Forgeron 1
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+TITLE=Forgeron
+FLAGS=024
+TIMER=-1
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=0125
+ITEM=i_shoes_plain
+COLOR=0125
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[CHARDEF C_UN_AMATEUR_EPEE]
+DEFNAME=C_UN_AMATEUR_EPEE
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+SHELTER=r_house
+DESIRES=i_gold
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Amateur d'armes
+
+ON=@Create
+COLOR=colors_skin
+STR={26 40}
+DEX={21 35}
+INT={16 30}
+FLAGS=04
+
+BEGGING={55.0 78.0}
+SNOOPING={35.0 50.0}
+STEALING={35.0 50.0}
+WRESTLING={15.0 38.0}
+TACTICS={15.0 38.0}
+
+NPC=brain_human
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=014d
+ITEM=i_shoes_plain
+COLOR=014d
+
+ON=@TIMER
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[ITEMDEF i_deed_discussion_forgeron]
+ID=i_deed
+TYPE=t_script
+NAME=Discution
+
+CATEGORY=Genese
+SUBSECTION=PNJ
+DESCRIPTION=Deeds discussion forgeron
+
+ON=@DCLICK
+SRC.NEWNPC=C_UN_FORGERON1
+SRC.ACT.DIR=0
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+1>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=0125
+VAR.TEMP1=<SRC.ACT>
+
+SRC.NEWNPC=C_UN_AMATEUR_EPEE
+SRC.ACT.DIR=4
+SRC.ACT.GO=<SRC.P.X>,<EVAL <SRC.P.Y>+(-1)>,<SRC.P.Z>
+SRC.ACT.SPEECHCOLOR=014d
+VAR.TEMP2=<SRC.ACT>
+
+SRC.NEWITEM=i_discussion_memoire_9
+SRC.ACT.LINK=<VAR.TEMP2>
+SRC.ACT.CONT=<VAR.TEMP1>
+SRC.ACT.TIMER=8
+
+REMOVE
+RETURN 1

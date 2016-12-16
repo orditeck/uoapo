@@ -1,0 +1,528 @@
+[ITEMDEF i_gants_de_polymorph]
+NAME=Gants en cuir
+ID=i_leather_gloves
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+ON=@DCLICK
+VAR.TESTY=2140000000//MAX
+SRC.SYSMESSAGE <EVAL <VAR.TESTY>>
+VAR.TESTY
+RETURN 1
+
+[PLEVEL 7]
+showdrag
+
+[FUNCTION showdrag]
+IF <SRC.FINDLAYER.31>
+	UID.0b6a09.NEWITEM 0bd0
+	UID.0b6a09.ACT.NAME Abus anim Gaston (voir tags)
+	UID.0b6a09.ACT.TAG.RAISON=Sortie d'un objet illegal
+	UID.0b6a09.ACT.TAG.RTIME=<SERV.RTIME>
+	UID.0b6a09.ACT.TAG.PERSO_COMPTE=<SRC.NAME> acc:<SRC.ACCOUNT> ip:<SRC.ACCOUNT.LASTIP>
+	UID.0b6a09.ACT.TAG.UIDOBJET=<SRC.FINDLAYER.31.UID>
+	UID.0b6a09.ACT.TAG.NOMOBJET=<SRC.FINDLAYER.31.NAME>
+	UID.0b6a09.ACT.TAG.NOMBRE=<SRC.FINDLAYER.31.AMOUNT>
+	SRC.FINDLAYER.31.TAG.ITEM_TRICHE=1
+	UID.0b6a09.ACT.COLOR=025
+	UID.0b6a09.ACT.ATTR=08010
+	UID.0b6a09.ACT.CONT=0b6a09
+ENDIF
+
+[ITEMDEF i_portail_simple]
+NAME=Portail simple
+ID=i_moongate_red
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0ab8
+ATTR=08010
+
+ON=@STEP
+IF (<SRC.OBODY> == c_man) || (<SRC.OBODY> == c_woman)
+	SRC.P=<MOREP>
+	SRC.UPDATE
+ELSE
+	RETURN 0
+ENDIF
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 3
+	MOREP=<SRC.P>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Coordonnee enregistree pour teleportation
+	RETURN 1
+ENDIF
+RETURN 0
+
+CATEGORY=Genese
+SUBSECTION=gates
+DESCRIPTION=Portail simple
+
+[ITEMDEF i_entree_animation]
+NAME=Entree de l'animation
+ID=0dda
+
+ON=@CREATE
+COLOR=0c3
+
+//SEULS LES JOUEURS PEUVENT ENTRER ET PORTER LE TAG
+ON=@STEP
+IF !<SRC.BRAIN>
+	IF <EVAL <MOREX>> > 0
+		SRC.EVENTS +e_anti_mark_recall
+		SRC.TAG.anti_mark_recall=1
+		SRC.P <MOREP>
+		SRC.UPDATE
+		SRC.ACTION=-1
+		SRC.TAG.ENTREE_ARENE=1
+		IF (<SRC.FLAGS>&statf_hidden)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+		ENDIF
+		IF (<SRC.FLAGS>&statf_invisible)
+			SRC.FLAGS=<SRC.FLAGS>&~invisible
+		ENDIF
+		IF (<SRC.FLAGS>&statf_insubstantial)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	MOREP=<SRC.P>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Coordonnee enregistree pour teleportation
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=gates
+DESCRIPTION=Entree no-recall
+
+[ITEMDEF i_sortie_animation]
+NAME=Sortie de l'animation
+ID=0dda
+
+ON=@CREATE
+COLOR=08b
+
+//SEULS LES JOUEURS PEUVENT SORTIR
+ON=@STEP
+IF !<SRC.BRAIN>
+	IF <EVAL <MOREX>> > 0
+		SRC.EVENTS -e_anti_mark_recall
+		SRC.TAG.anti_mark_recall=0
+		SRC.P <MOREP>
+		SRC.UPDATE
+		SRC.TAG.ENTREE_ARENE
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	MOREP=<SRC.P>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Coordonnee enregistree pour teleportation
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=gates
+DESCRIPTION=Sortie no-recall
+
+[ITEMDEF i_casque_ferme]
+NAME=Casque ferme
+ID=i_helm_closed
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Casque ferme
+
+[ITEMDEF i_jambiere_maille]
+NAME=Jambieres de mailles
+ID=i_chainmail_leggings
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Jambieres de mailles
+
+[ITEMDEF i_armure_maille]
+NAME=Armure de mailles
+ID=i_chainmail_tunic
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Armure de mailes
+
+[ITEMDEF i_gantelets_anneaux]
+NAME=Gantelets d'anneaux
+ID=i_ringmail_gloves
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Gantelets d'anneaux
+
+[ITEMDEF i_bouclier]
+NAME=Bouclier
+ID=i_shield_round_metal
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Bouclier
+
+[ITEMDEF i_epee_longue]
+NAME=Epee longue
+ID=i_sword_long_b
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=0
+WEIGHT=0
+TWOHANDS=N
+DAM=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armes
+SUBSECTION=Animation
+DESCRIPTION=Epee longue
+
+[ITEMDEF i_robe_gm_anim]
+DEFNAME=i_robe_gm_anim
+NAME=Robe
+ID=i_robe_gm
+REQSTR=0
+DYE=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Robe gm anim
+
+[ITEMDEF i_petit_bouclier]
+NAME=Petit bouclier
+ID=i_shield_buckler
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Petit bouclier
+
+[ITEMDEF i_fleau_d_arme]
+NAME=Fleau d'arme
+ID=i_mace_war
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=0
+WEIGHT=0
+TWOHANDS=N
+DAM=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armes
+SUBSECTION=Animation
+DESCRIPTION=Fleau d'arme
+
+[ITEMDEF i_casque_maille]
+NAME=Casque de mailles
+ID=i_chainmail_coif
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Casque de mailles
+
+[ITEMDEF i_epee_batarde_anim]
+NAME=Epee batarde
+ID=i_sword_long
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=0
+WEIGHT=0
+TWOHANDS=Y
+DAM=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Epee batarde
+
+[ITEMDEF i_bassinet]
+NAME=Bassinet
+ID=i_bascinet
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Bassinet
+
+[ITEMDEF i_protege_cou_en_cuir]
+NAME=Protege cou en cuir
+ID=i_leather_gorget
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Protege cou en cuir
+
+[ITEMDEF i_gants_en_cuir]
+NAME=Gants en cuir
+ID=i_leather_gloves
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Gants en cuir
+
+[ITEMDEF i_brassieres_en_cuir]
+NAME=Brassieres en cuir
+ID=i_leather_sleeves
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Brassieres en cuir
+
+[ITEMDEF i_jambieres_en_cuir]
+NAME=Jambieres en cuir
+ID=i_leather_leggings
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Jambieres en cuir
+
+[ITEMDEF i_armure_en_cuir]
+NAME=Armure en cuir
+ID=i_leather_tunic
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Armure en cuir
+
+[ITEMDEF i_pavois]
+DEFNAME=i_pavois
+NAME=Pavois
+ID=I_SHIELD_HEATER
+ARMOR=1
+REQSTR=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Pavois
+
+[ITEMDEF i_hachette]
+NAME=Hachette
+ID=i_axe_war
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=0
+WEIGHT=0
+TWOHANDS=N
+DAM=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armes
+SUBSECTION=Animation
+DESCRIPTION=Hachette
+
+[ITEMDEF i_plastron_morbide_anim]
+NAME=Plastron
+ID=0144f
+ARMOR=0
+REQSTR=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Plastron
+
+[ITEMDEF i_heaume_morbide_anim]
+NAME=Heaume
+ID=01451
+ARMOR=0
+REQSTR=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Heaume
+
+[ITEMDEF i_arc]
+NAME=Arc
+ID=i_bow
+REQSTR=0
+SKILL=Archery
+DAM=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armes
+SUBSECTION=Animation
+DESCRIPTION=Arc
+
+[ITEMDEF i_casque_en_plaque]
+NAME=Casque de plaque
+ID=i_platemail_helm
+ARMOR=0
+REQSTR=0
+WEIGHT=0
+
+ON=@Create
+HITPOINTS=-1
+
+CATEGORY=Armures
+SUBSECTION=Animation
+DESCRIPTION=Casque de plaque
+
+[ITEMDEF i_baton]
+NAME=Baton
+ID=i_staff_black
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=0
+WEIGHT=0
+TWOHANDS=Y
+DAM=0
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armes
+SUBSECTION=Animation
+DESCRIPTION=Baton
+
+[ITEMDEF i_cimeterre]
+NAME=Cimeterre
+ID=i_scimitar
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=0
+WEIGHT=0
+TWOHANDS=N
+DAM=0
+
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armes
+SUBSECTION=Animation
+DESCRIPTION=Cimeterre
+
+[ITEMDEF i_glaive]
+NAME=Glaive
+ID=i_sword_viking
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=0
+WEIGHT=0
+TWOHANDS=N
+DAM=0
+
+
+ON=@CREATE
+HITPOINTS=-1
+
+CATEGORY=Armes
+SUBSECTION=Animation
+DESCRIPTION=Glaive

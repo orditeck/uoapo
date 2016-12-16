@@ -1,0 +1,146 @@
+[CHARDEF c_antabolis] 
+DEFNAME=c_antabolis
+NAME=Antabolis l'alchimiste
+ID=C_MAN
+ 
+TSPEECH=spk_antabolis
+
+ON=@create
+COLOR=083ea
+FOOD=9999 
+SPEECHCOLOR=00847
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=0203c
+COLOR=005e6
+ITEMNEWBIE=i_robe
+COLOR=00995
+ITEMNEWBIE=i_sandals
+COLOR=00995
+
+ON=@NPCSEENEWPLAYER
+IF 0<SRC.TAG.ANTABOLIS> <1
+	SAY Bien le bonjour <SRC.SEX sir/madame> !
+ELSEIF <EVAL <SRC.TAG.ANTABOLIS>>==2
+	SAY Ah vous revoila ! M'avez vous rapporte ce que je vous avais demander ?
+ELSE
+	SAY Ravi de vous revoir <SRC.SEX sir/madame> !
+ENDIF
+
+
+ON=@NPCHearUnknown
+SAY Articulez je vous prie !
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes
+DESCRIPTION=Antabolis
+
+[SPEECH spk_antabolis]
+
+ON=*bonjour*
+IF 0<SRC.TAG.ANTABOLIS> <1
+	SAY Dites moi, pourriez vous me rendre un service ?
+ELSEIF <EVAL <SRC.TAG.ANTABOLIS>> == 2
+	SAY Ah vous revoila ! M'avez vous rapporte ce que je vous avais demander ?
+ELSE
+	SAY Articulez je vous prie !
+ENDIF
+
+ON=*oui*
+IF 0<SRC.TAG.ANTABOLIS> <1
+	SRC.TAG.ANTABOLIS=1
+	SAY Il me faut manque 20 ginsengs ainsi que 20 bouteilles vides afin de completer mon stock de potions, pourriez vous m'en apporter ? 
+ELSEIF <EVAL <SRC.TAG.ANTABOLIS>>==1
+	SAY Merveilleux, je vous attends !
+	SRC.TAG.ANTABOLIS=2
+ELSEIF <EVAL <SRC.TAG.ANTABOLIS>>==2
+	IF (<SRC.RESTEST 20 i_reag_ginseng>) && (<SRC.RESTEST 20 i_bottle_empty>)
+		SRC.TAG.ANTABOLIS=3
+		SRC.CONSUME 20 i_reag_ginseng
+		SRC.CONSUME 20 i_bottle_empty
+		SAY Parfait, pour vous recompenser voici 15 potions de guerison legere.
+		SRC.NEWITEM i_potion_de_guerison_legere
+		SRC.ACT.AMOUNT 15
+		SRC.ACT.BOUNCE
+		SRC.TAG.XP=<EVAL <SRC.TAG.XP>+2000>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous gagnez 2000 points d'experience !
+	ELSE
+		SAY Vous n'avez pas tous les ingredients que je vous avais demande, allez en rechercher !
+	ENDIF
+ELSE
+	SAY Articulez je vous prie !
+ENDIF
+
+ON=*grimoire*
+IF 0<SRC.TAG.FOSSOYEUROUI>==4
+	SAY Quel bel ouvrage ! Je pourrais volontier vous le decrypter mais cela ne sera pas sans contrepartie ...
+ELSEIF 0<SRC.TAG.FOSSOYEUROUI>==6
+	IF !<SRC.FINDID.m_attente_grimoire>
+		SAY L'auteur de ce livre parle de plumes ... De plumes d'oiseaux rares et d'un oracle tout puissant ...
+		SRC.TAG.FOSSOYEUROUI=7
+	ELSE
+		SAY Le cryptage est plus difficile que je ne l'aurai pense, revenez plus tard
+	ENDIF
+ELSE
+	SAY Articulez je vous prie !
+ENDIF
+
+ON=*contrepartie*
+IF 0<SRC.TAG.FOSSOYEUROUI>==4
+	SAY Je travaille actuellement sur un prototype de potion mais je gache enormement de matiere premiere. Si vous m'apportez les ingredients dont j'ai besoin je pourrais peut etre vous aider ...
+ENDIF
+
+on=*ingredient*
+IF 0<SRC.TAG.FOSSOYEUROUI>==4
+	SRC.TAG.FOSSOYEUROUI=5
+	SRC.TAG.MANDRAKEAURA=<EVAL(RAND(1500))>
+	SAY <EVAL <SRC.TAG.MANDRAKEAURA>> racines de mandrake devraient me convaincre pour conclure ce marche
+ELSEIF 0<SRC.TAG.FOSSOYEUROUI>==5
+	IF <SRC.RESTEST <EVAL <SRC.TAG.MANDRAKEAURA>> i_reag_mandrake_root>
+		IF <SRC.FINDID.i_livre_quete_aura>
+			SRC.CONSUME <EVAL <SRC.TAG.MANDRAKEAURA>> i_reag_mandrake_root
+			SRC.FINDID.i_livre_quete_aura.REMOVE
+			SRC.TAG.FOSSOYEUROUI=6
+			EMOTE prend le grimoire
+			SAY Merci infiniment ! Je vais etudier le contenu de votre grimoire mais cela me prendra du temps
+			SRC.NEWITEM m_attente_grimoire
+			SRC.ACT.CONT=<SRC.UID>
+		ELSE
+			SAY Vous avez oublie de m'apporter votre grimoire !
+		ENDIF
+	ELSE
+		SAY Nous avions convenu de <EVAL <SRC.TAG.MANDRAKEAURA>> racines de Mandrake hors vous ne m'en apportez que <SRC.FINDID.i_reag_mandrake_root.AMOUNT>
+	ENDIF
+ELSE
+	SAY Articulez je vous prie !
+ENDIF
+
+on=*oracle*
+IF 0<SRC.TAG.FOSSOYEUROUI>==7
+	SAY L'oracle dont Epsinus fait part serait en mesure de doter la personne lui apportant une de ces plumes d'une aura infiniment puissante ...
+ENDIF
+
+on=*plume*
+IF 0<SRC.TAG.FOSSOYEUROUI>==7
+	SAY Les plumes dont il est question se trouveraient sur des oiseaux vivant sur des iles lointaines. Le livre ayant ete altere par le temps je n'ai pu decrypter la suite ...
+ENDIF
+
+[ITEMDEF m_attente_grimoire]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=7200
+
+ON=@TIMER
+REMOVE
+RETURN 1

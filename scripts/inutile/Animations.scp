@@ -1,0 +1,174 @@
+[ITEMDEF i_dalle_sortie_mine_minoc]
+DEFNAME=i_dalle_sortie_mine_minoc
+ID=053b
+TYPE=t_rock
+
+ON=@CREATE
+ATTR=08090
+
+ON=@STEP
+SRC.P=2572,476
+SRC.UPDATE
+
+[ITEMDEF i_dalle_entree_mine_minoc]
+DEFNAME=i_dalle_entree_mine_minoc
+ID=053b
+TYPE=t_rock
+
+ON=@CREATE
+ATTR=08090
+
+ON=@STEP
+SRC.P=5527,1479,1
+SRC.UPDATE
+
+[ITEMDEF i_fumee_rocher]
+ID=i_fx_smoke
+NAME=Poussiere
+TYPE=t_script
+
+ON=@CREATE
+TIMER=2
+COLOR=0901
+ATTR=08010
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_rocher_bloquant_1]
+DEFNAME=i_rocher_bloquant_1
+ID=01363
+NAME=Rocher
+TYPE=t_normal
+
+ON=@CREATE
+ATTR=00010
+MORE1=50
+
+ON=@CLICK
+IF (<MORE1> >40) && (<MORE1> <51)
+SAY *Tres peu endommage*
+ELSEIF (<MORE1> >30) && (<MORE1> <41)
+SAY *Peu endommage*
+ELSEIF (<MORE1> >20) && (<MORE1> <31)
+SAY *Endommage*
+ELSEIF (<MORE1> >10) && (<MORE1> <21)
+SAY *Tres endommage*
+ELSE
+SAY *Pret a se briser*
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF (<SRC.FINDLAYER.1.type>==t_weapon_mace_pick)
+IF <SRC.FINDID.m_limitateur_carriere>
+RETURN 1
+ELSE
+SRC.ANIM 11
+MORE1=<MORE1>-1
+SRC.NEWITEM m_limitateur_carriere
+SRC.ACT.EQUIP
+IF <MORE1>==0
+SRC.NEWITEM=i_fumee_rocher
+SRC.ACT.P=<SRC.P>
+REMOVE
+ENDIF
+ENDIF
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Seule une pioche pourrait venir a bout d'un tel rocher
+ENDIF
+RETURN 1
+
+[CHARDEF c_Phoberomys_pattersoni]
+DEFNAME=c_Phoberomys_pattersoni
+NAME=Phoberomys pattersoni
+ID=0d7
+BLOODCOLOR=0ac0
+
+ON=@Create
+STR=6000
+DEX=6000
+INT=0
+
+COLOR=0ac0
+
+EVENTS +e_xpmonstre
+TAG.XPMORT=400000
+TAG.XPCOUP=20000
+TAG.PIECES_OR={10000 20000}
+TAG.TAPER=20
+TAG.NIVEAU=1
+
+KARMA=-9999
+
+TACTICS={3000.0 3000.0}
+WRESTLING={3000.0 3000.0}
+
+DetectingHidden={3000.0 3000.0}
+
+NPC=BRAIN_MONSTER
+
+ON=@GETHIT
+IF 0<SRC.ACT.TAG.TAPER> >0
+SRC.NEWNPC c_rat_pestifere_2
+SRC.ACT.P=<SRC.P>
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1 i_perle_enchantement 2 }
+
+CATEGORY=Monstres
+SUBSECTION=Animations
+DESCRIPTION=Phoberomys pattersoni
+
+[CHARDEF c_infame_gargouille]
+DEFNAME=c_infame_gargouille
+NAME=Infame gargouille
+ID=09
+BLOODCOLOR=09af
+
+ON=@Create
+STR=6000
+DEX=6000
+INT=0
+HITPOINTS=10000
+COLOR=09af
+
+EVENTS +e_xpmonstre
+TAG.XPMORT=500000
+TAG.XPCOUP=20000
+TAG.PIECES_OR={15000 30000}
+TAG.TAPER=20
+TAG.NIVEAU=1
+
+KARMA=-9999
+
+TACTICS={3000.0 3000.0}
+WRESTLING={3000.0 3000.0}
+
+DetectingHidden={3000.0 3000.0}
+
+NPC=BRAIN_MONSTER
+
+ON=@GETHIT
+IF 0<SRC.ACT.TAG.TAPER> >0
+SRC.NEWNPC c_horreur_railleuse
+SRC.ACT.P=<SRC.P>
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_perle_enchantement
+ITEM=i_perle_enchantement
+ITEM=i_perle_enchantement
+ITEM=i_perle_enchantement
+ITEM=i_perle_enchantement
+ITEM=i_perle_enchantement
+ITEM=i_perle_enchantement
+ITEM=i_perle_enchantement
+ITEM=i_perle_enchantement
+ITEM=i_perle_enchantement
+
+CATEGORY=Monstres
+SUBSECTION=Animations
+DESCRIPTION=Infame gargouille

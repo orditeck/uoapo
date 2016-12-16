@@ -1,0 +1,334 @@
+//*************************************************
+//******************FONCTIONS**********************
+//*************************************************
+
+[PLEVEL 1]
+PRIXVENTE
+
+//FONCTION PLEVEL 1
+[FUNCTION PRIXVENTE]
+IF (STRCMPI("<ARGS>",""))
+	IF <EVAL <ARGS>> > 0
+		NEWITEM i_setprice
+		ACT.MORE1 = <ARGS>
+		ACT.EQUIP
+		ACT.USE
+	ELSE
+		SRC.SYSMESSAGEUA 025 1 1 0 Veuillez saisir un prix positif
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Tapez .prixvente suivi du montant que vous voulez vendre votre objet/unite
+ENDIF
+RETURN 1
+
+//DEFAULT : t_item_to_sell
+[FUNCTION GET_SELLITEM_TOTALPRICE]
+ARGS = 0
+IF <TYPE> == t_item_to_sell
+	ARGS = <EVAL 0<TAG.PRICE> * <AMOUNT>>
+ENDIF
+RETURN <ARGS>
+
+
+//DEFAULT : ITEM TO SELL
+[FUNCTION IS_ITEM_SELLABLE]
+ARGS = 0
+IF ( (<TYPE> == t_item_to_sell) && (0<TAG.PRICE> > 0) )
+	IF <CONT.TYPE> == t_container_item_to_sell
+		ARGS = 1
+	ELSE
+		VAR.VALIDATIONMESSAGE = "<NAME> doit etre sur un contenant de vente"
+	ENDIF
+ELSE
+	VAR.VALIDATIONMESSAGE = "<NAME> n'est pas a vendre !"
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : t_item_to_sell
+[FUNCTION RETURN_ITEMTOSELL_ON_HISCONTAINER]
+IF <TYPE> == t_item_to_sell
+	IF <TAG.CONTAINER_UID>
+		IF <TAG.CONTAINER_UID> != <CONT.UID>
+			CONT = <TAG.CONTAINER_UID>
+			UPDATE
+		ENDIF
+	ENDIF
+ENDIF
+
+
+//DEFAULT : OBJET A METTRE SUR LE JOUEUR
+//ARGS : UID DU JOUEUR SUR QUI METTRE L'OBJET
+//RETURN 1 SI L'OBJET A ETE RETOURNE AU JOUEUR
+[FUNCTION RETURN_ITEM_TO_SELL_ON_PLAYER]
+VAR.TEMP_RETURN = 0
+TAG.BACKUP_UID = <LINK.UID>
+LINK = <ARGS>
+IF <LINK.ISPLAYER>
+	ATTR = <TAG.OLD_ATTR>
+	TYPE = <TAG.OLD_TYPE>
+	CONT = <LINK.FINDLAYER.21>
+	LINK = <TAG.OLD_LINK>
+	IF <TAG.OLD_LINK> == 0
+		LINK = 04fffffff
+	ENDIF
+	TAG.OLD_ATTR
+	TAG.OLD_TYPE
+	TAG.OLD_LINK
+	TAG.PRICE
+	TAG.CONTAINER_UID
+	VAR.TEMP_RETURN = 1
+ELSE
+	LINK = <TAG.BACKUP_UID>
+ENDIF
+TAG.BACKUP_UID
+RETURN <VAR.TEMP_RETURN>
+
+
+//*************************************************
+//********************MEMORY***********************
+//*************************************************
+
+//MORE1 :  Prix a setter
+[ITEMDEF i_setprice] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez l'objet que vous voulez vendre pour <EVAL <MORE1>> pieces d'or
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TYPE> == t_item_to_sell
+	IF ( (<SRC.TARG.ATTR> == 08010) && (<SRC.TARG.LINK.UID> == <SRC.UID>) )
+		SRC.TARG.TAG.PRICE = <MORE1>
+		IF <SRC.TARG.AMOUNT> > 1
+			SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.AMOUNT> <SRC.TARG.NAME> sont maintenant en vente pour un total de <EVAL <SRC.TARG.GET_SELLITEM_TOTALPRICE>> pieces d'or
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> est maintenant en vente pour  <EVAL <SRC.TARG.GET_SELLITEM_TOTALPRICE>> pieces d'or
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> ne vous appartient pas !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> n'est pas un objet pour la vente !
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un objet pour la vente !
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+
+[ITEMDEF i_activer_desactiver_coffre_de_vente]
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le contenant que vous voulez activer/desactiver en coffre de vente
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.ATTR> == 08010
+	IF <SRC.TARG.LINK> == <SRC.UID>
+		IF <SRC.TARG.TYPE> == t_container_item_to_sell
+			IF <SRC.TARG.RESCOUNT> == 0
+				SRC.TARG.TYPE = t_container
+				SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> est maintenant un coffre normal
+			ELSE
+				SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> doit etre vide pour le remettre en coffre normal
+			ENDIF	
+		ELSE IF <SRC.TARG.TYPE> == t_container
+			IF <SRC.TARG.RESCOUNT> == 0
+				SRC.TARG.TYPE = t_container_item_to_sell
+				SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> est maintenant un coffre de vente
+			ELSE
+				SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> doit etre vide pour le modifier en coffre de vente
+			ENDIF			
+		ELSE
+			SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> n'est pas un contenant !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> ne vous appartient pas !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> n'est pas verrouille au sol
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un contenant !
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//LINK : OBJET DE VENTE
+[ITEMDEF m_click_sur_objet_de_vente]
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//*************************************************
+//*********************TYPES***********************
+//*************************************************
+
+
+//TYPE DE L'ITEM QUI EST DISPONIBLE POUR LA VENTE
+[TYPEDEF t_item_to_sell]
+
+ON=@CLICK
+RETURN_ITEMTOSELL_ON_HISCONTAINER
+IF (<SRC.FINDID.m_click_sur_objet_de_vente> && <SRC.FINDID.m_click_sur_objet_de_vente.LINK.UID> == <UID>)
+	SRC.FINDID.m_click_sur_objet_de_vente.REMOVE
+	IF <LINK.UID> == <SRC.UID>
+		RETURN_ITEM_TO_SELL_ON_PLAYER <SRC.UID>
+	ELSE
+		IF <IS_ITEM_SELLABLE>
+			DIALOG D_BUY_ITEM_TO_SELL
+		ELSE
+			SRC.SYSMESSAGEUA 025 1 1 0 <VAR.VALIDATIONMESSAGE>
+		ENDIF
+	ENDIF
+ELSE
+	IF <SRC.FINDID.m_click_sur_objet_de_vente>
+		SRC.FINDID.m_click_sur_objet_de_vente.REMOVE
+	ENDIF
+	IF <EVAL 0<TAG.PRICE>> > 0
+		MESSAGE <EVAL <AMOUNT>> <NAME> [A vendre <EVAL 0<TAG.PRICE>> pieces d'or] (Re-cliquer pour acheter)
+		SRC.NEWITEM m_click_sur_objet_de_vente
+		SRC.ACT.TIMER=30
+		SRC.ACT.LINK=<UID>
+		SRC.ACT.CONT=<SRC.UID>
+	ELSE
+		MESSAGE <EVAL <AMOUNT>> <NAME> [Pas a vendre]
+	ENDIF
+ENDIF
+RETURN 1
+
+[TYPEDEF t_container_item_to_sell]
+
+ON=@DROPON_SELF
+VAR.TEMP = 0
+OBJ <ARGO.UID>
+IF (<ATTR> != 08010)
+	SRC.SYSMESSAGE @026 Vous devez bloquer <NAME> au sol pour vendre des objets !
+	VAR.TEMP = 1
+ELSEIF (<LINK.UID> != <SRC.UID>)
+	SRC.SYSMESSAGE @026 Vous devez etre proprietaire de <NAME> pour vendre des objets !
+	VAR.TEMP = 1
+ELSEIF <OBJ.TYPE>==T_CONTAINER 
+	SRC.SYSMESSAGE @026 Vous ne pouvez pas vendre des contenants sur des vendeurs.
+	VAR.TEMP = 1
+ELSE
+	OBJ.TAG.OLD_TYPE = <OBJ.TYPE>
+	OBJ.TAG.OLD_ATTR = <OBJ.ATTR>
+	OBJ.TAG.OLD_LINK = <OBJ.LINK.UID>
+	OBJ.TAG.PRICE = 0
+	OBJ.TAG.CONTAINER_UID = <UID>
+	OBJ.TYPE = t_item_to_sell
+	OBJ.ATTR = 08010
+	OBJ.LINK = <SRC.UID>
+ENDIF
+//UID.0b6a09.SYSMESSAGEUA 025 0 0 1 DEFAULT : <NAME> SRC : <SRC.NAME> ITEM : <ARGO.NAME> AMOUNT : <ARGO.AMOUNT>
+RETURN <VAR.TEMP>
+
+ON=@DCLICK
+OPEN
+RETURN 1
+
+ON=@CLICK
+MESSAGE <NAME> (VENTE)
+RETURN 1
+
+//PEUT RIEN SORTIR DU CONTAINER
+ON=@PickUp_Self
+RETURN 0
+
+
+
+//*************************************************
+//********************DIALOGS**********************
+//*************************************************
+
+
+[DIALOG D_BUY_ITEM_TO_SELL]
+0,0
+
+page 0
+resizepic 0 0 2620 550 200
+
+page 1
+text 210 20 1152 1//Acheter un objet
+text 20 50 1152 2//<NAME>
+text 400 50 1152 3//<PRICE>
+text 480 50 1152 4//po/unite
+text 20 70 1152 5//Quantite
+text 400 70 1152 6//<QUANTITE>
+text 20 90 1152 7//Total
+text 400 90 1152 8//<TOTAL>
+text 480 90 1152 9//po
+text 480 120 1152 10//Acheter
+button 400 120 52 52 1 0 1//ACHETER
+button 500 20 1150 1151 1 0 20// X SORTIE
+
+
+[DIALOG D_BUY_ITEM_TO_SELL TEXT]
+<VAR.BLANKLINE>
+Acheter un objet
+<NAME>
+<EVAL 0<TAG.PRICE>>
+po/unite
+Quantite
+<EVAL <AMOUNT>>
+Total
+<EVAL <GET_SELLITEM_TOTALPRICE>>
+po
+Acheter
+
+[DIALOG D_BUY_ITEM_TO_SELL BUTTON]
+//ACHETER
+ON=1
+IF (<IS_ITEM_SELLABLE> && <LINK.ISPLAYER>)
+	VAR.TEMP_ITEM_SELLABLE = <GET_SELLITEM_TOTALPRICE>
+	SRC.PAYUP <VAR.TEMP_ITEM_SELLABLE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 025 1 1 0 Vous n'avez pas <EVAL <VAR.TEMP_ITEM_SELLABLE>> pieces d'or !
+	ELSE
+		LINK.DEPOSER_CASH <VAR.TEMP_ITEM_SELLABLE>
+		SRC.SYSMESSAGEUA 025 1 1 0 Vous avez achete <EVAL <AMOUNT>> <NAME> pour <EVAL <VAR.TEMP_ITEM_SELLABLE>> po !
+		RETURN_ITEM_TO_SELL_ON_PLAYER <SRC.UID>
+	ENDIF
+	VAR.TEMP_ITEM_SELLABLE
+ENDIF
+RETURN 1
+
+//SORTIE
+ON=20
+RETURN 1

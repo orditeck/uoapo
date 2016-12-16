@@ -1,0 +1,422 @@
+[FUNCTION REMPLIR_UNE_CHARGE]
+// ARGN Bene 17
+// AGRN Proto 15
+IF <MOREX> == 0
+	LINK=<SRC.UID>
+	MOREX = <ARGN>
+	MORE2 = <EVAL <MORE2> + 1>
+	MOREY = <EVAL (<SRC.MAGERY> / 4) * 3>
+	ATTR=00020
+	EMOTE briller
+	IF (<EVAL(RAND(<EVAL <SRC.INSCRIPTION>>))>=0)
+		SRC.INSCRIPTION=<SRC.INSCRIPTION> + 0.1
+	ENDIF
+	IF <ARGN> == 17
+		COLOR = 00026
+	ENDIF
+	IF <ARGN> == 15
+		COLOR = 00048
+	ENDIF
+ELSE
+	IF <ARGN> == <MOREX>
+		IF <LINK>==<SRC.UID>
+			MORE2 = <EVAL <MORE2> + 1>
+			MOREY = <EVAL (<SRC.MAGERY> / 4) * 3>
+			SRC.SAY Reel : <SRC.MAGERY>
+			SRC.SAY Bag : <MOREY>
+			ATTR=00020
+			EMOTE briller
+			IF (<EVAL(RAND(<EVAL <SRC.INSCRIPTION>>))>=0)
+				SRC.INSCRIPTION=<SRC.INSCRIPTION> + 0.1
+			ENDIF
+			IF <ARGN> == 17
+				COLOR = 00026
+			ENDIF
+			IF <ARGN> == 15
+				COLOR = 00048
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas ecrire un sort sur une baguette que vous n'avez pas initialise !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Le sort que vous tentez d'inscrire ne correspond pas a celui actuellement charge dans la baguette !
+	ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_baguette_magique] 
+DEFNAME=i_baguette_magique
+NAME=Baguette
+ID=i_wand_4
+TYPE=T_WAND
+
+RESOURCES=2 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+ON=@CREATE
+MORE2=0
+MOREX=0
+
+ON=@SPELLEFFECT
+
+IF (<ARGN>==51) || (<ARGN>==55) || (<ARGN>==57)
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le sort que vous tentez de transcrire ne peut etre stocke dans une baguette
+ELSE
+	IF (0 < <ARGN>) && ( <ARGN> < 25)
+		IF <SRC.INSCRIPTION> < 30.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 5
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (24 < <ARGN>) && ( <ARGN> < 33)
+		IF <SRC.INSCRIPTION> < 40.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 5
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (32 < <ARGN>) && ( <ARGN> < 41)
+		IF <SRC.INSCRIPTION> < 50.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 5
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (40 < <ARGN>) && ( <ARGN> < 49)
+		IF <SRC.INSCRIPTION> < 60.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 5
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (48 < <ARGN>) && ( <ARGN> < 57)
+		IF <SRC.INSCRIPTION> < 70.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 5
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSE
+		IF <SRC.INSCRIPTION> < 80.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 5
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TYPE> == t_wand
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas viser <SRC.TARG.NAME> !
+	RETURN 1
+ENDIF
+
+
+[ITEMDEF i_baguette_magique_2] 
+DEFNAME=i_baguette_magique_2
+NAME=Baguette
+ID=i_wand_3
+TYPE=T_WAND
+
+RESOURCES=2 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 50.0, t_tinker_tools
+
+ON=@CREATE
+attr=00020
+MORE2=0
+MOREX=0
+
+ON=@SPELLEFFECT
+IF (<ARGN>==51) || (<ARGN>==55) || (<ARGN>==57)
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le sort que vous tentez de transcrire ne peut etre stocke dans une baguette
+ELSE
+	IF (0 < <ARGN>) && ( <ARGN> < 25)
+		IF <SRC.INSCRIPTION> < 30.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 10
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (24 < <ARGN>) && ( <ARGN> < 33)
+		IF <SRC.INSCRIPTION> < 40.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 10
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (32 < <ARGN>) && ( <ARGN> < 41)
+		IF <SRC.INSCRIPTION> < 50.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 10
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (40 < <ARGN>) && ( <ARGN> < 49)
+		IF <SRC.INSCRIPTION> < 60.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 10
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (48 < <ARGN>) && ( <ARGN> < 57)
+		IF <SRC.INSCRIPTION> < 70.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 10
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSE
+		IF <SRC.INSCRIPTION> < 80.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 10
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TYPE> == t_wand
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas viser <SRC.TARG.NAME> !
+	RETURN 1
+ENDIF
+
+[ITEMDEF i_baguette_magique_3] 
+DEFNAME=i_baguette_magique_3
+NAME=Baguette
+ID=i_wand_2
+TYPE=T_WAND
+
+RESOURCES=3 i_ingot_iron
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+ON=@CREATE
+attr=00020
+MORE2=0
+MOREX=0
+
+ON=@SPELLEFFECT
+IF (<ARGN>==51) || (<ARGN>==55) || (<ARGN>==57)
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le sort que vous tentez de transcrire ne peut etre stocke dans une baguette
+ELSE
+	IF (0 < <ARGN>) && ( <ARGN> < 25)
+		IF <SRC.INSCRIPTION> < 30.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 20
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (24 < <ARGN>) && ( <ARGN> < 33)
+		IF <SRC.INSCRIPTION> < 40.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 20
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (32 < <ARGN>) && ( <ARGN> < 41)
+		IF <SRC.INSCRIPTION> < 50.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 20
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (40 < <ARGN>) && ( <ARGN> < 49)
+		IF <SRC.INSCRIPTION> < 60.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 20
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (48 < <ARGN>) && ( <ARGN> < 57)
+		IF <SRC.INSCRIPTION> < 70.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 20
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSE
+		IF <SRC.INSCRIPTION> < 80.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 20
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TYPE> == t_wand
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas viser <SRC.TARG.NAME> !
+	RETURN 1
+ENDIF
+
+[ITEMDEF i_baguette_magique_4] 
+DEFNAME=i_baguette_magique_4
+NAME=Baguette
+ID=i_wand_1
+TYPE=T_WAND
+
+RESOURCES=3 i_ingot_iron
+SKILLMAKE=TINKERING 70.0, t_tinker_tools
+
+ON=@CREATE
+attr=00020
+MORE2=0
+MOREX=0
+
+ON=@SPELLEFFECT
+IF (<ARGN>==51) || (<ARGN>==55) || (<ARGN>==57)
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le sort que vous tentez de transcrire ne peut etre stocke dans une baguette
+ELSE
+	IF (0 < <ARGN>) && ( <ARGN> < 25)
+		IF <SRC.INSCRIPTION> < 30.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 50
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (24 < <ARGN>) && ( <ARGN> < 33)
+		IF <SRC.INSCRIPTION> < 40.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 50
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (32 < <ARGN>) && ( <ARGN> < 41)
+		IF <SRC.INSCRIPTION> < 50.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 50
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (40 < <ARGN>) && ( <ARGN> < 49)
+		IF <SRC.INSCRIPTION> < 60.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 50
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSEIF (48 < <ARGN>) && ( <ARGN> < 57)
+		IF <SRC.INSCRIPTION> < 70.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 50
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ELSE
+		IF <SRC.INSCRIPTION> < 80.0
+			SRC.EFFECT=3,i_fx_smoke_small,10
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les competences suffisantes en transcription pour ecrire ce sort sur cette baguette !
+		ELSE
+			IF <MORE2> < 50
+				REMPLIR_UNE_CHARGE <ARGN>
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 La baguette a atteind son nombre maximum de charges !
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TYPE> == t_wand
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas viser <SRC.TARG.NAME> !
+	RETURN 1
+ENDIF

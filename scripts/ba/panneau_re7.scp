@@ -1,0 +1,202 @@
+[DIALOG panneau_re7]
+0, 0
+PAGE 0
+gumppic 205 160 3600
+gumppic 219 174 3604
+gumppic 347 174 3604
+gumppic 219 302 3604
+gumppic 347 302 3604
+gumppic 205 174 3603
+gumppic 220 339 3604
+gumppic 347 339 3604
+gumppic 475 174 3604
+gumppic 220 466 3607
+gumppic 205 466 3606
+gumppic 327 466 3607
+gumppic 475 301 3604
+gumppic 436 466 3607
+gumppic 475 338 3604
+gumppic 480 466 3607
+gumppic 603 466 3608
+gumppic 480 160 3601
+gumppic 603 160 3602
+gumppic 378 160 3601
+gumppic 287 160 3601
+gumppic 219 160 3601
+gumppic 603 174 3605
+text 225 230 1313 0
+text 225 247 1313 1
+text 225 264 1313 2
+text 225 281 1313 3
+text 225 298 1313 4
+text 289 179 1152 5
+text 225 212 995 6
+text 507 212 995 7
+text 546 212 995 8
+text 225 414 32 9
+text 225 315 1313 10
+text 225 332 1313 11
+text 225 349 1313 12
+text 225 366 1313 13
+text 225 383 1313 14
+text 546 414 1313 15
+button 572 443 4005 4006 1 0 1
+text 510 230 1313 16
+text 510 247 1313 17
+text 510 264 1313 18
+text 510 281 1313 19
+text 510 298 1313 20
+text 510 315 1313 21
+text 510 332 1313 22
+text 510 349 1313 23
+text 510 366 1313 24
+text 510 383 1313 25
+button 570 235 2103 2104 1 0 2
+button 570 252 2103 2104 1 0 3
+button 570 269 2103 2104 1 0 4
+button 570 286 2103 2104 1 0 5
+button 570 303 2103 2104 1 0 6
+button 570 320 2103 2104 1 0 7
+button 570 337 2103 2104 1 0 8
+button 570 354 2103 2104 1 0 9
+button 570 371 2103 2104 1 0 10
+button 570 388 2103 2104 1 0 11
+button 221 443 4014 4015 1 0 12
+
+[DIALOG panneau_re7 TEXT]
+Armoiries tribales 1 (ouest)
+Armoiries tribales 2 (nord)
+Armoiries tribales 2 (ouest)
+Bouclier decoratif 1 (nord)
+Bouclier decoratif 1 (ouest)
+Panneau de gestion des recompenses
+Nom de l'objet
+Cout
+Acquerir
+Nombre de points de recompense disponibles
+Bouclier decoratif 2
+Bouclier decoratif 3
+Casque orc
+Masque d'orc
+Masque tribal 1
+<EVAL 0<SRC.TAG.POINTSBA>>
+40
+40
+40
+40
+40
+40
+40
+40
+40
+40
+
+
+[DIALOG panneau_re7 BUTTON]
+on=1
+SRC.DIALOG panneau_re8
+on=2
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 39
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-40>
+SRC.NEWITEM 0428
+SRC.ACT.NAME Armoiries tribales
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re7
+ENDIF
+on=3
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 39
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-40>
+SRC.NEWITEM 0420
+SRC.ACT.NAME Armoiries tribales
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re7
+ENDIF
+on=4
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 39
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-40>
+SRC.NEWITEM 0429
+SRC.ACT.NAME Armoiries tribales
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re7
+ENDIF
+on=5
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 39
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-40>
+SRC.NEWITEM 0156d
+SRC.ACT.NAME Bouclier decoratif
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re7
+ENDIF
+on=6
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 39
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-40>
+SRC.NEWITEM 0156c
+SRC.ACT.NAME Bouclier decoratif
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re7
+ENDIF
+on=7
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 39
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-40>
+SRC.NEWITEM 01634
+SRC.ACT.NAME Bouclier decoratif
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re7
+ENDIF
+on=8
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 39
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-40>
+SRC.NEWITEM 01636
+SRC.ACT.NAME Bouclier decoratif
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re7
+ENDIF
+on=9
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 39
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-40>
+SRC.NEWITEM 01f0c
+SRC.ACT.NAME Casque orc
+SRC.ACT.HITPOINTS=9999
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re7
+ENDIF
+on=10
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 39
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-40>
+SRC.NEWITEM 0141b
+SRC.ACT.NAME Masque d'orc
+SRC.ACT.HITPOINTS=9999
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re7
+ENDIF
+on=11
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 39
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-40>
+SRC.NEWITEM 0154a
+SRC.ACT.NAME Masque tribal
+SRC.ACT.HITPOINTS=9999
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re7
+ENDIF
+on=12
+SRC.DIALOG panneau_re6

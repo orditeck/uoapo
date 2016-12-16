@@ -1,0 +1,62 @@
+[ITEMDEF m_limitateur_meditation]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=2
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_regagne_mana]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=2
+
+ON=@DCLICK
+IF <SRC.MEDITATION> > 399.9
+	TAG.INTERVALLE=1
+ELSE
+	TAG.INTERVALLE=<EVAL (500 - <EVAL <SRC.MEDITATION>/10>)/100>
+ENDIF
+TAG.GAINMANA=<EVAL (<SRC.MEDITATION>/500)+<EVAL <SRC.INT>/100>>
+TIMER=<EVAL <TAG.INTERVALLE>>
+RETURN 1
+
+ON=@TIMER
+IF <EVAL <CONT.MANA>> > <EVAL (<CONT.INT>-<TAG.GAINMANA>)>
+	CONT.MANA=<CONT.INT>
+	CONT.EMOTE finir de mediter
+	CONT.EVENTS -e_casse_meditation
+	REMOVE
+ELSE
+	TAG.CONTAINERMANA=<EVAL <CONT.MANA> + <TAG.GAINMANA>>
+	CONT.MANA=<TAG.CONTAINERMANA>
+ENDIF
+TIMER=<EVAL <TAG.INTERVALLE>>
+RETURN 1
+
+[EVENTS e_casse_meditation]
+
+ON=@HIT
+SYSMESSAGEUA 0481 1 1 0 Vous perdez votre concentration !
+FINDID.m_regagne_mana.REMOVE
+EVENTS -e_casse_meditation
+
+ON=@GETHIT
+SRC.ACT.SYSMESSAGEUA 0481 1 1 0 Vous perdez votre concentration !
+SRC.ACT.FINDID.m_regagne_mana.REMOVE
+SRC.ACT.EVENTS -e_casse_meditation
+
+ON=@SPELLEFFECT
+SRC.ACT.SYSMESSAGEUA 0481 1 1 0 Vous perdez votre concentration !
+SRC.ACT.FINDID.m_regagne_mana.REMOVE
+SRC.ACT.EVENTS -e_casse_meditation
+
+ON=@SPELLCAST
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous perdez votre concentration !
+SRC.FINDID.m_regagne_mana.REMOVE
+SRC.EVENTS -e_casse_meditation

@@ -1,0 +1,57 @@
+// ***COVE, DÉBUT AU NORD***
+
+[AREA MAISON_COVE1]
+CLASS=11
+RECT=2208,1119,2216,1112
+DEFNAME=maison_skara
+GROUP=COVE
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_COVE2]
+CLASS=11
+RECT=2208,1171,2224,1164
+DEFNAME=maison_skara
+GROUP=COVE
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_COVE3]
+CLASS=11
+RECT=2212,1199,2220,1184
+DEFNAME=maison_skara
+GROUP=COVE
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_COVE4]
+CLASS=11
+RECT=2232,1192,2239,1184
+DEFNAME=maison_skara
+GROUP=COVE
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_COVE5]
+CLASS=11
+RECT=2224,1219,2232,1212
+DEFNAME=maison_skara
+GROUP=COVE
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_COVE6]
+CLASS=11
+RECT=2240,1208,2247,1200
+DEFNAME=maison_skara
+GROUP=COVE
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_COVE7]
+CLASS=11
+RECT=2240,1239,2248,1224
+DEFNAME=maison_skara
+GROUP=COVE
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_COVE8]
+CLASS=11
+RECT=2256,1223,2264,1216
+DEFNAME=maison_skara
+GROUP=COVE
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out

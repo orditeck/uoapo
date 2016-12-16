@@ -1,0 +1,48 @@
+[DIALOG ACHETE_OBJET_MAIRIE]
+0,0
+
+page 0
+resizepic 0 0 2620 400 260
+text 100 20 1152 1//Menu d'achat de <TAG.VILLE>
+text 80 40 1152 2//Votre solde : <TAG.CAISSE>
+
+page 1
+text 40 70 1152 3//Lampadaire regulier (150k)
+button 20 75 2103 2104 1 0 1//ACHETE LAMPADAIRE
+
+[DIALOG ACHETE_OBJET_MAIRIE TEXT]
+<VAR.BLANKLINE>
+Menu d'achat de <TAG.VILLE>
+Votre solde (Pieces d'or) : <EVAL 0<TAG.CAISSE>>
+Lampadaire regulier (50,000 po)
+
+[DIALOG ACHETE_OBJET_MAIRIE BUTTON]
+
+ON=1
+VAR.COUT = 150000
+CREER_OBJET_MAIRIE i_lamppost2_lit
+RETURN 1
+
+//*******************************
+//***********FONCTIONS***********
+//*******************************
+
+//VAR.COUT = COUT POUR CREER CET OBJET
+//DEFAULT = i_plaque_de_maire
+//SRC = MAIRE
+//<args> = BASEID DE L'OBJET A CREER
+[FUNCTION CREER_OBJET_MAIRIE]
+IF 0<TAG.CAISSE> >= 0<VAR.COUT>
+	IF <ARGS>
+		TAG.CAISSE = <EVAL <TAG.CAISSE> - 0<VAR.COUT>>
+		SRC.NEWITEM <ARGS>
+		SRC.ACT.NAME = <NAME> [Ville de <TAG.VILLE>]
+		SRC.ACT.TAG.OBJET_MAIRIE = 1
+		SRC.ACT.BOUNCE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.ACT.NAME> achete avec succes. <EVAL 0<VAR.COUT>> pieces d'or ont ete retirees des caisses de la ville de <TAG.VILLE> !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 La mairie de <TAG.VILLE> ne possede pas les <EVAL <VAR.COUT>> pieces d'or necessaires !
+ENDIF
+VAR.COUT
+RETURN 1

@@ -1,0 +1,344 @@
+//*********************************
+//************CARTES***************
+//*********************************
+
+PROCHAINE_CARTE_ALEATOIRE
+	retourne une carte au hasard qui n'est pas utilisée
+	default : i_paquet_de_cartes
+
+NB_CARTES_DANS_PAQUET
+	retourne le nombre de cartes dans le paquet
+	default : i_paquet_de_cartes
+
+RESET_JEU_DE_CARTE
+	remet a zéro le paquet de cartes
+	default : i_paquet_de_cartes
+
+SET_JEU_DE_CARTES_NO_JOKER
+	enleve les jokers du paquet (ne reviennent pas non plus avec un reset)
+	default : i_paquet_de_cartes
+
+AJOUTER_CARTE_NUMERO_ARGS_AU_JOUEUR
+	ajoute la carte <args> au joueur
+	default : joueur
+	retour : uid de la carte qui a été ajoutée
+	la carte est deposée sur le joueur
+		[1...13] ==> as de pique à roi de pique
+		[14...26] ==> as de trefle à roi de trèfle
+		[27...39] ==> as de carreau à roi de carreau
+		[40...52] ==> as de coeur a roi de coeur
+		[53...54] ==> joker couleur et joker blanc
+
+
+**LES PROCHAINES FONCTIONS RETOURNENT UNE VALEUR POSITIVE
+**SI C'EST LA BONNE CARTE
+**[1 : trefle] [2 : carreau] [3 : pique] [4 : coeur]
+**[1 : joker couleur] [2 : joker blanc]
+**default : la carte
+IS_CARTE_AS
+IS_CARTE_2
+IS_CARTE_3
+IS_CARTE_4
+IS_CARTE_5
+IS_CARTE_6
+IS_CARTE_7
+IS_CARTE_8
+IS_CARTE_9
+IS_CARTE_10
+IS_CARTE_VALET
+IS_CARTE_DAME
+IS_CARTE_ROI
+IS_CARTE_JOKER
+
+**LES PROCHAINES FONCTIONS RETOURNENT UNE VALEUR POSITIVE
+**SI C'EST LA BONNE CARTE
+**[14 : as] [13 : roi] .... [2 : 2]
+IS_CARTE_PIQUE
+IS_CARTE_TREFLE
+IS_CARTE_PIQUE
+IS_CARTE_CARREAU
+IS_CARTE_COEUR
+
+
+IS_CARTE_ROUGE
+	retourne 1 si la carte est du coeur ou bien du carreau, 0 sinon
+	default : la carte
+
+IS_CARTE_NOIRE
+	retourne 1 si la carte est du trefle ou bien du pique, 0 sinon
+	default : la carte
+
+IS_CARTE_A_JOUER
+	retourne 1 si c'est une carte, 0 sinon
+	default : la carte?
+
+**LES PROCHAINES FONCTIONS RETOURNENT LE NOMBRE DE CETTE
+**CARTE QUE LE JOUEUR A SUR LUI
+**default : le joueur
+JOUEUR_POSSEDE_AS
+JOUEUR_POSSEDE_2
+JOUEUR_POSSEDE_3
+JOUEUR_POSSEDE_4
+JOUEUR_POSSEDE_5
+JOUEUR_POSSEDE_6
+JOUEUR_POSSEDE_7
+JOUEUR_POSSEDE_8
+JOUEUR_POSSEDE_9
+JOUEUR_POSSEDE_10
+JOUEUR_POSSEDE_VALET
+JOUEUR_POSSEDE_DAME
+JOUEUR_POSSEDE_ROI
+JOUEUR_POSSEDE_JOKER
+JOUEUR_POSSEDE_PIQUE
+JOUEUR_POSSEDE_TREFLE
+JOUEUR_POSSEDE_CARREAU
+JOUEUR_POSSEDE_COEUR
+
+**LES PROCHAINES FONCTIONS RETOURNENT LA Xe PLUS HAUTE CARTE DE
+**CETTE COULEUR QUE POSSEDE LE JOUEUR
+**[14 : as] [13 : roi] ... [2 : 2]
+**default : le joueur
+**args : Xe plus haute a trouver
+////Si le joueur a [as coeur] [roi coeur] [7 coeur] ==> 
+////[JOUEUR_PLUS_HAUT_COEUR 2] = 13 [JOUEUR_PLUS_HAUT_COEUR 3] = 7 [JOUEUR_PLUS_HAUT_COEUR 4] = 0
+JOUEUR_PLUS_HAUT_COEUR
+JOUEUR_PLUS_HAUT_CARREAU
+JOUEUR_PLUS_HAUT_TREFLE
+JOUEUR_PLUS_HAUT_PIQUE
+
+SUPPRIMER_TOUTES_CARTES_DU_JOUEUR
+	supprime toutes les cartes qu'a le joueur
+	default : joueur
+
+IS_JOUEUR_ASSEZ_D_OR
+	retourne 1 si le joueur a assez d'or sur lui, 0 sinon
+	default : joueur
+	args : nb de po à avoir
+
+PAYER_QUE_DU_SAC_CARTES
+	LE JOUEUR PAIE CE <ARGS> PIECES D'OR OU DIAMANTS
+	default : joueur
+	args : payer qu'a partir du sac
+
+GET_TOTAL_PIECES_D_OR
+	Retourne le nombre de pieces d'or que le joueur a sur lui (+ 1000 x diamants)
+	default : joueur
+
+DECREMENTER_MISE_CARTES
+	Decremente de <args> la mise
+	default : i_mise_cartes
+	args : nb de pieces a decrementer
+	retourne le nombre de po qui a été décrémenté
+
+
+
+//***********************************
+//**************POKER****************
+//***********************************
+//**MAX DE 9 CARTES SUR LES JOUEURS**
+//***********************************
+
+
+IS_POKER_QUINTE_COULEUR
+	retourne un entier si le joueur a une quinte couleur, 0 sinon
+	[valeur de la plus haute carte de la quinte couleur]
+	default : joueur
+
+IS_POKER_CARRE
+	retourne un entier si le joueur a un carre, 0 sinon
+	additionner
+		[valeur du carre * 15]
+		[valeur carte haute]
+	default : joueur
+
+IS_POKER_MAIN_PLEINE
+	retourne un entier si le joueur a une main pleine, 0 sinon
+	additionner
+		[valeur du brelan * 15]
+		[valeur de la paire]
+	default : joueur
+
+IS_POKER_COULEUR
+	retourne un entier si le joueur a une couleur, 0 sinon
+	additionner
+		[valeur 1ere plus haute couleur * 50625]
+		[valeur 2e plus haute couleur * 3375]
+		[valeur 3e plus haute couleur * 225]
+		[valeur 4e plus haute couleur * 15]
+		[valeur 5e plus haute couleur]
+	default : joueur
+
+IS_POKER_QUINTE
+	retourne un entier si le joueur a une quinte, 0 sinon
+	[valeur de la plus haute carte de la quinte]
+	default : joueur
+
+IS_POKER_BRELAN
+	retourne un entier si le joueur a un brelan, 0 sinon
+	additionner
+		[valeur du brelan * 225]
+		[valeur carte plus haute * 15]
+		[valeur 2e carte plus haute]
+	default : joueur
+
+IS_POKER_DEUX_PAIRES
+	retourne un entier si le joueur a 2 paires, 0 sinon
+	additionner
+		[valeur de la plus haute paire * 225]
+		[valeur de la 2e paire * 15]
+		[valeur carte haute]
+	default : joueur
+
+IS_POKER_PAIRE
+	retourne un entier si le joueur a une paire, 0 sinon
+	additionner
+		[valeur de la paire * 3375]
+		[valeur carte haute * 225]
+		[valeur 2e carte haute * 15]
+		[valeur 3e carte haute]
+	default : joueur
+
+IS_POKER_CARTE_HAUTE
+	retourne un entier si le joueur a une carte haute, 0 sinon
+	additionner
+		[valeur de la carte haute * 50625]
+		[valeur 2e carte haute * 3375]
+		[valeur 3e carte haute * 225]
+		[valeur 4e carte haute * 15]
+		[valeur 5e carte haute]
+	default : joueur
+
+NB_JOUEURS_ACTIFS_POKER
+	retourne le nombre de joueurs actifs à une table
+	default : table de poker
+
+SET_GAGNANT_PAR_FORFAIT_POKER
+	retourne sous forme de tags la position 1 au gagnant et 2 aux autres
+	[TAG.POS_JOUEUR<args> = 1]
+	[TAG.POS_JOUEUR<autres> = 2]
+
+FIND_GAGNANT_POKER
+	retourne sous forme de tags la position de chacun des joueurs
+	[TAG.POS_JOUEUR1 = POSITION DU JOUEUR 1]
+	.....
+	[TAG.POS_JOUEUR8 = POSITION DU JOUEUR 8]
+	////A NOTER QUE LES JOUEURS QUI ONT ABANDONNES SERONT AU RANG 8
+
+IS_TABLE_LIBRE
+	retourne le premier # de chaise libre a la table, sinon 0
+	default : table de poker
+
+JOINDRE_LA_PARTIE
+	retourne le # de chaise où le joueur va jouer, sinon 0
+	default : table de poker
+	args : uid du joueur
+
+IS_JOUEUR_A_LA_TABLE
+	retourne le # de table du joueur s'il joue, sinon 0
+	default : table de poker
+	args : uid du joueur
+
+SORTIR_DE_TABLE
+	retourne 1 si le joueur peut sortir et le sort, 0 sinon
+	default : table de poker
+	args : uid du joueur
+
+JOUEUR_A_SA_TABLE
+	retourne 1 si le joueur <args> est a la table <args>, 0 sinon
+	default : table de poker
+	args : # de table
+
+JOUEUR_ACTIF_A_SA_TABLE
+	retourne le uid du joueur si le joueur #<args> est actif a la table #<args>, 0 sinon
+	default : table de poker
+	args : # de table
+
+PROCHAIN_JOUEUR_ACTIF_POKER
+	retourne le # de table du prochain joueur actif apres la table #args
+	default : table de poker
+	args : # de table
+
+TOUTES_MISES_COMPLETES_POKER
+	retourne 1 si tous les joueurs ont misés leur du (all-in ou le max)
+	default : table de poker
+
+JOUEUR_MISE_COMPLETE_POKER
+	retourne 1 si le joueur a mise son du
+	default : table de poker
+	args : # du joueur
+
+MAX_MISE_POKER
+	retourne la mise maximum parmis tous les joueurs
+	default : table de poker
+
+GET_PIECES_DANS_LE_POT
+	retourne le nombre de pieces dans le pot
+	default : table de poker
+
+GET_MISE_DU_JOUEUR
+	retourne la mise du joueur #<args>
+	default : table de poker
+	args : # du joueur
+
+GET_NOM_DU_JEU_POKER
+	retourne le nom du jeu qu'a le joueur
+	default : joueur
+
+SORTIR_TOUT_JOUEUR_DECONNECTE_POKER
+
+
+//*******************************************
+//**************POKER HOLD'EM****************
+//*******************************************
+
+CREER_POKER_HOLD_EM
+	donne un deed a celui qui a tappe la commande.
+	l'utilisation du deed cree la table, le croupier, les tables... etc
+	default : maitre de jeu
+
+SUPPRIMER_OBJ_IF_BASEID
+	supprimer l'objet args si le baseid == <VAR.BASEID>
+	default : Peu importe
+	args : uid de l'objet a supprimer
+
+SUPPRIMER_OBJ_IF_CARTE
+	supprimer l'objet args si c'est une carte
+	default : Peu importe
+	args : uid de l'objet a supprimer
+
+SUPPRIMER_POKER_HOLD_EM
+	supprime tous les objets du poker hold em
+	default : i_obj_poker_hold_em
+
+COMMENCER_PARTIE_POKER_HOLD_EM
+	rend actif tous les joueurs inscrits et a leur place
+	default : table de poker hold em
+
+TERMINER_PARTIE_POKER_HOLD_EM
+	rend tous les joueurs inactifs et remet a l'etat initial
+	default : table de poker hold em
+
+OUVRIR_DIALOG_POKER_HOLD_EM
+	ouvre une interface demandant au joueur de faire sa mise
+	default : table de poker hold em
+
+DISTRIBUER_GAINS_POKER_HOLD_EM
+	DISTRIBUE LES GAINS AU(X) GAGNANT(S)
+	default : table de poker hold em
+	////A NOTER QU'IL FAUTQUE LES POSITIONS DES JOUEURS SOIENT DEJA CONNUS
+
+ABANDONNER_PARTIE_POKER_HOLD_EM
+	LE JOUEUR ABANDONNE LA PARTIE ET NE FAIT PLUS PARTI DES JOUEURS ACTIFS
+	default : table de poker hold em
+	args : UID DU JOUEUR
+	//// SUPPRIME EGALEMENT TOUTES LES CARTES DU JOUEUR ET AJUSTE LES TAGS
+
+INCREMENTER_MISE_POKER_HOLD_EM
+	INCREMENTE LA MISE DU JOUEUR COURANT (TAG.ETAT_J)
+	default : table de poker hold em
+	args : NOMBRE DE PO A INCREMENTER
+	//// MET LA MISE SUR LE <TAG.ETAT_J> DONC NE PAS MODIFIER CE TAG AVANT!
+
+AJOUTER_CARTES_AU_CHANGEMENT_D_ETAT
+	VERIFIE L'ETAT ET AJOUTE LA OU LES CARTES QU'IL FAUT SUR LA TABLE ET LES JOUEURS
+	default : table de poker hold em

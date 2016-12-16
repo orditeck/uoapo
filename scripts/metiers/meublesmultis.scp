@@ -1,0 +1,242 @@
+[ITEMDEF 04019]
+DEFNAME=i_Lit_luxueux
+NAME=Lit_luxueux
+TYPE=T_NORMAL
+VALUE=2000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=Lit_luxueux
+
+[ITEMDEF 0401A]
+DEFNAME=i_Lit_luxueux2
+NAME=Lit_luxueux2
+TYPE=T_NORMAL
+VALUE=2000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=Lit_luxueux2
+
+[ITEMDEF 0401B]
+DEFNAME=i_petit_banc_de_bois_nord
+NAME=petit banc de bois nord
+TYPE=T_NORMAL
+VALUE=300
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=petit banc de bois nord
+
+[ITEMDEF 0401C]
+DEFNAME=i_petit_banc_de_bois_ouest
+NAME=petit banc de bois ouest
+TYPE=T_NORMAL
+VALUE=300
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=petit banc de bois ouest
+
+[ITEMDEF 0401D]
+DEFNAME=i_banc_luxueux_nord
+NAME=banc luxueux nord
+TYPE=T_NORMAL
+VALUE=1000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=banc luxueux nord
+
+[ITEMDEF 0401E]
+DEFNAME=i_banc_luxueux_ouest
+NAME=banc luxueux ouest
+TYPE=T_NORMAL
+VALUE=1000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=banc luxueux ouest
+
+[ITEMDEF 0401F]
+DEFNAME=i_grand_banc
+NAME=grand banc
+TYPE=T_NORMAL
+VALUE=5000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=grand banc
+
+[ITEMDEF 04020]
+DEFNAME=i_bar_ouest
+NAME=bar ouest
+TYPE=T_NORMAL
+VALUE=5000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=bar ouest
+
+[ITEMDEF 04021]
+DEFNAME=i_bar_nord
+NAME=bar nord
+TYPE=T_NORMAL
+VALUE=5000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=bar nord
+
+[ITEMDEF 04022]
+DEFNAME=i_maquilleuse_ouest
+NAME=maquilleuse ouest
+TYPE=T_NORMAL
+VALUE=2500
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=maquilleuse ouest
+
+[ITEMDEF 04023]
+DEFNAME=i_maquilleuse_nord
+NAME=maquilleuse nord
+TYPE=T_NORMAL
+VALUE=2500
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=maquilleuse nord
+
+[ITEMDEF 04024]
+DEFNAME=i_petit_lit_marron_ouest
+NAME=petit lit marron ouest
+TYPE=T_NORMAL
+VALUE=3000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=petit lit marron ouest
+
+[ITEMDEF 04025]
+DEFNAME=i_petit_lit_marron_nord
+NAME=petit lit marron nord
+TYPE=T_NORMAL
+VALUE=2500
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=petit lit marron nord
+
+[ITEMDEF 04026]
+DEFNAME=i_petit_lit_gris_nord
+NAME=petit lit gris nord
+TYPE=T_NORMAL
+VALUE=2500
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=petit lit gris nord
+
+[ITEMDEF 04027]
+DEFNAME=i_petit_lit_gris_ouest
+NAME=petit lit gris ouest
+TYPE=T_NORMAL
+VALUE=2500
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=petit lit gris ouest
+
+[ITEMDEF 04028]
+DEFNAME=i_Lit_luxueux_bleu_ouest
+NAME=Lit luxueux bleu ouest
+TYPE=T_NORMAL
+VALUE=5000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=Lit luxueux bleu ouest
+
+[ITEMDEF 04029]
+DEFNAME=i_Lit_luxueux_bleu_nord
+NAME=Lit luxueux bleu nord
+TYPE=T_NORMAL
+VALUE=5000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=Lit luxueux bleu nord
+
+[ITEMDEF 0402A]
+DEFNAME=i_table_rondin_nord
+NAME=table rondin nord
+TYPE=T_NORMAL
+VALUE=1000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=table rondin nord
+
+[ITEMDEF 0402B]
+DEFNAME=i_table_rondin_ouest
+NAME=table rondin ouest
+TYPE=T_NORMAL
+VALUE=1000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=table rondin ouest
+
+[ITEMDEF 0402C]
+DEFNAME=i_table_moderne_tissus_nord
+NAME=table moderne tissus nord
+TYPE=T_NORMAL
+VALUE=2000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=table moderne tissus nord
+
+[ITEMDEF 0402D]
+DEFNAME=i_table_moderne_tissus_ouest
+NAME=table moderne tissus ouest
+TYPE=T_NORMAL
+VALUE=2000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=table moderne tissus ouest
+
+[ITEMDEF 0402E]
+DEFNAME=i_table_mauvaise_facture_nord
+NAME=table mauvaise facture nord
+TYPE=T_NORMAL
+VALUE=500
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=table mauvaise facture nord
+
+[ITEMDEF 0402F]
+DEFNAME=i_table_mauvaise_facture_ouest
+NAME=table mauvaise facture ouest
+TYPE=T_NORMAL
+VALUE=500
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=table mauvaise facture ouest
+
+[ITEMDEF 04030]
+DEFNAME=i_bureau_nord
+NAME=bureau nord
+TYPE=T_NORMAL
+VALUE=1000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=bureau nord
+
+[ITEMDEF 04031]
+DEFNAME=i_bureau_ouest
+NAME=bureau ouest
+TYPE=T_NORMAL
+VALUE=1000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=bureau ouest
+
+[ITEMDEF 04032]
+DEFNAME=i_grande_vitrine_nord
+NAME=grande vitrine nord
+TYPE=T_NORMAL
+VALUE=6000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=grande vitrine nord
+
+[ITEMDEF 04033]
+DEFNAME=i_grande_vitrine_ouest
+NAME=grande vitrine ouest
+TYPE=T_NORMAL
+VALUE=6000
+CATEGORY=MULTIS
+SUBSECTION=Custom Structures
+DESCRIPTION=grande vitrine ouest

@@ -1,0 +1,1552 @@
+[RESOURCES]
+// sphere.ini and spheretable.scp are automatic.
+
+
+spheregemmes.scp
+scripts\items\spheredefs.scp
+scripts\items\sphereresources.scp
+scripts\items\sphereitem_ore.scp
+scripts\items\sphereregion.scp
+scripts\items\
+scripts\metiers\
+scripts\speech\
+scripts\
+scripts\regions\
+scripts\picot\
+scripts\picot\mairie\
+scripts\picot\cartes\
+scripts\picot\debutants\
+scripts\inutile\
+scripts\renaissance\
+scripts\renaissance\renai7\
+scripts\armes_armures\
+scripts\ba\
+scripts\animation\
+scripts\animation\anim_combat\
+scripts\animation\orditeck\
+scripts\orditeck\
+
+[MAP 0]
+// This is the default map0.mul file.
+SIZE=6144,4096
+WRAPX=5120
+
+[OBSCENE]
+EOF
+
+[BLOCKEMAIL]
+// List of some of the free email services.
+
+[NOTOTITLES] // NotoTitles[5*11]
+// highest karma
+<none>
+<none>
+<none>
+<none>
+<none>
+
+<none>
+<none>
+<none>
+<none>
+<none>
+
+<none>
+<none>
+<none>
+<none>
+<none>
+
+<none>
+<none>
+<none>
+<none>
+<none>
+
+<none>
+<none>
+<none>
+<none>
+<none>
+
+<none>
+<none>
+<none>
+<none>
+<none>
+
+<none>
+<none>
+<none>
+<none>
+<none>
+
+<none>
+<none>
+<none>
+<none>
+<none>
+
+<none>
+<none>
+<none>
+<none>
+<none>
+
+<none>
+<none>
+<none>
+<none>
+<none>
+
+<none>
+<none>
+<none>
+<none>
+<none>
+
+[PLEVEL 1] //Joueurs
+AFK
+ANIM
+WHERE
+HUNGRY
+HelpPage
+cprincipal
+dire
+eprincipal
+cvente
+vente
+evente
+crp
+prp
+erp
+experience
+gestion
+coince
+vetir
+devetir
+whisp
+envoi
+testwhisp
+ba
+bruler
+debogage
+
+[PLEVEL 2] // Mod�rateurs
+ADMIN
+PAGE
+GO
+JAIL
+
+[PLEVEL 3] // GM maisons
+FIXZ
+INVUL
+NIGHTSIGHT
+LINK
+ALLMOVE
+XNUDGEUP
+XNUDGEDOWN
+NUDGEUP
+NUDGEDOWN
+ATTR
+FLIP
+REMOVE
+NAME
+XNAME
+INVIS
+MOVE
+COLOR
+
+[PLEVEL 4] // Animateurs
+KARMA
+BODY
+CONTROL
+STR
+DEX
+INT
+TITLE
+ADDNPC
+XMOVE
+ADD
+TELE
+TILE
+ALLSHOW
+INFO
+GONAME
+GOUID
+GOCHAR
+DEBUG
+
+[PLEVEL 5] //BUILDMAN
+NUKE
+SET
+
+[PLEVEL 6] // Administrateurs
+GOTYPE
+SETPRIV
+DIALOG
+BLOCKIP
+RESEND
+SYNC
+UNDERWEAR
+SELF
+BARK
+HELP
+FIX
+SLEEP
+CHARLIST
+HEARALL
+CLIENTS
+TWEAK
+PROPS
+GOSOCK
+GOCLI
+KILL
+SUICIDE
+DETAIL
+
+
+[PLEVEL 7] // Owner
+SAVE
+ACCOUNT
+EXTRACT
+UNEXTRACT
+EXPORT
+IMPORT
+EMAIL
+PASSWORD
+TOME
+RESYNC
+LOAD
+
+
+[ADVANCE]
+STR=10000,4000,600
+INT=10000,4000,600
+DEX=10000,4000,600
+
+[STARTS]    // new client
+Yew
+Chambre de la balance
+2458,518,16
+Minoc
+Chambre de la balance
+2458,518,16
+Britain
+Chambre de la balance
+2458,518,16
+Moonglow
+Chambre de la balance
+2458,518,16
+Trinsic
+Chambre de la balance
+2458,518,16
+Magincia
+Chambre de la balance
+2458,518,16
+Jhelom
+Chambre de la balance
+2458,518,16
+Skara Brae
+Chambre de la balance
+2458,518,16
+Vesper
+Chambre de la balance
+2458,518,16
+
+[RUNES]
+An
+Bet
+Corp
+Des
+Ex
+Flam
+Grav
+Hur
+In
+Jux
+Kal
+Lor
+Mani
+Nox
+Ort
+Por
+Quas
+Rel
+Sanct
+Tym
+Uus
+Vas
+Wis
+Xen
+Ylem
+Zan
+
+[COMMENT SKILL x]
+ADV_RATE=5.0,100.0,400.0
+VALUES=0,100    // The amount of value an item created with the skill gets at skill levels.
+
+STAT_STR=80    // You will tend toward these stat vals if you use this skill a lot.
+BONUS_STATS=10    // What percent of the skill success is based on stat levels. = 10%
+BONUS_STR=80    // % of each stat toward success at skill
+
+[SKILL 0]
+DEFNAME=SKILL_ALCHEMY
+KEY=Alchemy
+TITLE=Alchimiste
+
+DELAY=1.8,1.0 // per stroke.
+EFFECT=0.0,100.0
+ADV_RATE=3.5,65.0,250.0
+VALUES=1,20,100
+
+BONUS_STATS=10
+BONUS_STR=0
+BONUS_DEX=20
+BONUS_INT=80
+
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous dosez mal vos reactifs et loupez donc votre potion
+
+[SKILL 1]
+DEFNAME=SKILL_ANATOMY
+KEY=Anatomy
+TITLE=Anatomiste
+PROMPT_MSG=Que dois je examiner ?
+
+DELAY=2.0,1.0
+ADV_RATE=999999.0,999999.0,999999.0
+
+BONUS_STATS=50
+BONUS_STR=0
+BONUS_DEX=0
+BONUS_INT=100
+
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous avez beau regarder , vous n'en savez pas plus sur cet etre ...
+
+[SKILL 2]
+DEFNAME=SKILL_ANIMAL_LORE
+KEY=AnimalLore
+TITLE=Veterinaire
+PROMPT_MSG=Quel animal dois je examiner ?
+DELAY=3.0,1.0
+ADV_RATE=1.25,25.0,100.0
+
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=0
+BONUS_INT=100
+BONUS_STATS=50
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous avez beau regarder , vous n'en savez pas plus sur la creature ...
+
+[SKILL 3]
+DEFNAME=SKILL_APPRAISE
+KEY=ItemID
+TITLE=Specialiste des armes
+PROMPT_MSG=Que voulez vous identifier ?
+DELAY=1.0
+ADV_RATE=1.25,25.0,100.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=0
+BONUS_INT=100
+BONUS_STATS=25
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous avez beau regarder vous en savez pas ce que c'est !
+
+[SKILL 4]
+DEFNAME=SKILL_ARMSLORE
+KEY=ArmsLore
+TITLE=Connaissance des armes
+PROMPT_MSG=Quel arme voulez vous evaluer ?
+DELAY=1.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=33
+BONUS_DEX=33
+BONUS_INT=34
+BONUS_STATS=25
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous avez beau regarder vous n'en savez pas plus sur cet objet !
+
+[SKILL 5]
+DEFNAME=SKILL_Parrying
+KEY=Parrying
+TITLE=Specialiste du combat avec bouclier
+ADV_RATE=999999.0,999999.0,999999.0
+EFFECT=0.0,90.0
+
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=50
+BONUS_DEX=50
+BONUS_INT=0
+BONUS_STATS=10
+
+[SKILL 6]
+DEFNAME=SKILL_Begging
+KEY=Begging
+TITLE=Mendiant
+PROMPT_MSG=A qui voulez vous mendier ?
+DELAY=2.0
+ADV_RATE=1.25,25.0,100.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=50
+BONUS_INT=50
+BONUS_STATS=10
+
+[SKILL 7]
+DEFNAME=SKILL_Blacksmith
+KEY=Blacksmithing
+TITLE=Forgeron
+PROMPT_MSG=
+DELAY=1.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=75
+BONUS_DEX=20
+BONUS_INT=5
+BONUS_STATS=10
+ADV_RATE=1.75,33.5,134.0
+VALUES=1,20,100
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous avez loupe votre piece !
+
+[SKILL 8]
+DEFNAME=Skill_Bowcraft
+KEY=Bowcraft
+TITLE=Fabricant d'arcs
+PROMPT_MSG=
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=15
+BONUS_DEX=70
+BONUS_INT=15
+BONUS_STATS=20
+ADV_RATE=1.75,33.5,134.0
+VALUES=1,30,200
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Votre dague derape et vous fait louper votre creation !
+
+[SKILL 9]
+DEFNAME=SKILL_PEACEMAKING
+KEY=Peacemaking
+TITLE=Barde
+PROMPT_MSG=
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=50
+BONUS_INT=50
+BONUS_STATS=5
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez a calmer personne !
+
+[SKILL 10]
+DEFNAME=Skill_Camping
+KEY=Camping
+TITLE=Campeur
+PROMPT_MSG=
+DELAY=6.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=33
+BONUS_DEX=33
+BONUS_INT=34
+BONUS_STATS=50
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez pas a allumer le feu !
+
+[SKILL 11]
+DEFNAME=Skill_Carpentry
+KEY=Carpentry
+TITLE=Ebeniste
+PROMPT_MSG=
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=50
+BONUS_DEX=30
+BONUS_INT=20
+BONUS_STATS=25
+ADV_RATE=1.75,33.5,134.0
+VALUES=1,20,80
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous loupez votre piece !
+
+[SKILL 12]
+DEFNAME=SKILL_CARTOGRAPHY
+KEY=Cartography
+TITLE=Cartographe
+PROMPT_MSG=
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=20
+BONUS_INT=80
+BONUS_STATS=15
+ADV_RATE=1.25,25.0,100.0
+VALUES=1,20,80
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Votre main tremble trop , vous loupez votre carte !
+
+[SKILL 13]
+DEFNAME=Skill_Cooking
+KEY=Cooking
+TITLE=Cuisinier
+PROMPT_MSG=Que voulez vous cuisinier?
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=40
+BONUS_INT=60
+BONUS_STATS=50
+ADV_RATE=1.75,33.5,134.0
+VALUES=1,20,80
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous calcinez la nourriture et la rendez inmangeable !
+
+[SKILL 14]
+DEFNAME=Skill_DetectHidden
+KEY=DetectingHidden
+TITLE=Detective
+PROMPT_MSG=
+DELAY=1.5,1.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=20
+BONUS_INT=80
+BONUS_STATS=25
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne trouvez personne de cache !
+
+[SKILL 15]
+DEFNAME=Skill_Enticement
+KEY=Enticement
+TITLE=Barde
+PROMPT_MSG=Qui voulez vous draguer?
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=50
+BONUS_INT=50
+BONUS_STATS=5
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Votre musique ne parvient pas a attirer quelqu'un !
+
+[SKILL 16]
+DEFNAME=Skill_EvalInt
+KEY=EvaluatingIntel
+TITLE=Evalue l'intelligence
+PROMPT_MSG=Choisissez la personne a examiner
+DELAY=1.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=0
+BONUS_INT=100
+BONUS_STATS=50
+ADV_RATE=999999.0,999999.0,999999.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez pas a examiner la personne correctement !
+
+[SKILL 17]
+DEFNAME=Skill_Healing
+KEY=Healing
+TITLE=Soigneur
+PROMPT_MSG=Qui voulez vous soigner ?
+
+DELAY=3.0,1.0
+EFFECT=2.0,20.0
+ADV_RATE=999999.0,999999.0,999999.0
+
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+
+BONUS_STATS=20
+BONUS_STR=0
+BONUS_DEX=30
+BONUS_INT=70
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez pas a appliquer les bandages !
+RETURN 1
+
+[SKILL 18]
+DEFNAME=Skill_Fishing
+KEY=Fishing
+TITLE=Pecheur
+PROMPT_MSG=Ou voulez vous lancer votre ligne ?
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=10
+BONUS_DEX=90
+BONUS_INT=0
+BONUS_STATS=25
+ADV_RATE=1.75,33.5,134.0
+VALUES=1,30,200
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Rien ne semble mordre ...
+
+[SKILL 19]
+DEFNAME=Skill_Forensics
+KEY=Forensics
+TITLE=Fossoyeur
+PROMPT_MSG=Quel corps voulez vous examiner ?
+DELAY=1.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=0
+BONUS_INT=100
+BONUS_STATS=25
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne voyez rien de special sur le corps
+
+[SKILL 20]
+DEFNAME=Skill_Herding
+KEY=Herding
+TITLE=Berger
+PROMPT_MSG=
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=25
+BONUS_DEX=45
+BONUS_INT=30
+BONUS_STATS=25
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez pas a attirer la creature !
+
+[SKILL 21]
+DEFNAME=Skill_Hiding
+KEY=Hiding
+TITLE=Espion
+PROMPT_MSG=
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=80
+BONUS_INT=20
+BONUS_STATS=25
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez pas a vous cacher !
+
+[SKILL 22]
+DEFNAME=SKILL_PROVOCATION
+KEY=Provocation
+TITLE=Barde
+PROMPT_MSG=Qui voulez vous provoquer ?
+DELAY=3.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=90
+BONUS_INT=10
+BONUS_STATS=5
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez pas a provoquer la colere de votre cible
+
+[SKILL 23]
+DEFNAME=Skill_Inscription
+KEY=Inscription
+TITLE=Scribe
+PROMPT_MSG=
+DELAY=3.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=0
+BONUS_INT=100
+BONUS_STATS=10
+ADV_RATE=1.5,30.0,120.0
+VALUES=1,30,200
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous loupez votre parchemin !
+
+[SKILL 24]
+DEFNAME=Skill_LockPick
+KEY=LockPicking
+TITLE=Crocheteur de serrures
+PROMPT_MSG=What do you want to pick?
+DELAY=3.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=80
+BONUS_INT=20
+BONUS_STATS=25
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez pas a forcer la serrure !
+
+[SKILL 25]
+DEFNAME=Skill_Magery
+KEY=Magery
+TITLE=Mage
+PROMPT_MSG=
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=0
+BONUS_INT=100
+BONUS_STATS=15
+ADV_RATE=999999.0,999999.0,999999.0
+VALUES=1,20,80
+//DELAY=1.0 // based on skill and difficulty.
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne parvenez pas a lancer votre sort !
+
+[SKILL 26]
+DEFNAME=Skill_MagicResist
+KEY=MagicResistance
+TITLE=Resistant a la magie
+PROMPT_MSG=
+EFFECT=0.0,90.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=0
+BONUS_INT=100
+BONUS_STATS=50
+ADV_RATE=999999.0,999999.0,999999.0
+
+[SKILL 27]
+DEFNAME=Skill_Tactics
+KEY=Tactics
+TITLE=Tacticien
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=50
+BONUS_DEX=50
+BONUS_INT=0
+BONUS_STATS=10
+ADV_RATE=999999.0,999999.0,999999.0
+
+[SKILL 28]
+DEFNAME=Skill_Snooping
+KEY=Snooping
+TITLE=Pick-pocket
+PROMPT_MSG=
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=100
+BONUS_INT=0
+BONUS_STATS=25
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez pas a regarder dans ce sac !
+
+[SKILL 29]
+DEFNAME=Skill_Musicianship
+KEY=Musicianship
+TITLE=Barde
+PROMPT_MSG=
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=80
+BONUS_INT=20
+BONUS_STATS=10
+ADV_RATE=2.0,37.5,150.0
+
+ON=@Fail
+SERV.B allo
+SYSMESSAGEUA 025 1 1 0 Vous jouez mal , arretez ce massacre !
+
+[SKILL 30]
+DEFNAME=SKILL_POISONING
+KEY=Poisoning
+TITLE=Assassin
+PROMPT_MSG=Sur quoi voulez vous appliquer le poison ?
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=20
+BONUS_INT=80
+BONUS_STATS=20
+ADV_RATE=1.25,25.0,100.0
+VALUES=1,30,200
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez pas a appliquer le poison
+
+[SKILL 31]
+DEFNAME=Skill_Archery
+KEY=Archery
+TITLE=Archer
+PROMPT_MSG=
+DELAY=2.0,0.1
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=95
+BONUS_INT=5
+BONUS_STATS=10
+ADV_RATE=999999.0,999999.0,999999.0
+
+[SKILL 32]
+DEFNAME=SKILL_SPIRITSPEAK
+KEY=SpiritSpeak
+TITLE=Medium
+PROMPT_MSG=
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=0
+BONUS_INT=100
+BONUS_STATS=50
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous n'arrivez pas a entrer en contact avec les morts
+
+[SKILL 33]
+DEFNAME=Skill_Stealing
+KEY=Stealing
+TITLE=Voleur
+PROMPT_MSG=Quel objet voulez vous voler ?
+DELAY=2.5
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=100
+BONUS_INT=0
+BONUS_STATS=10
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne parvenez pas a voler l'objet !
+
+[SKILL 34]
+DEFNAME=Skill_Tailoring
+KEY=Tailoring
+TITLE=Tailleur
+PROMPT_MSG=
+DELAY=3.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=5
+BONUS_DEX=75
+BONUS_INT=20
+BONUS_STATS=25
+ADV_RATE=1.75,33.5,134.0
+VALUES=1,20,80
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous loupez votre creation !
+
+[SKILL 35]
+DEFNAME=Skill_Taming
+KEY=Taming
+TITLE=Dresseur
+PROMPT_MSG=Quel animal voulez vous dresser ?
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=30
+BONUS_DEX=10
+BONUS_INT=60
+BONUS_STATS=20
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne parvenez pas a dresser la creature !
+
+[SKILL 36]
+DEFNAME=skill_tasteid
+KEY=TasteID
+TITLE=Gouteur
+PROMPT_MSG=Que voulez vous gouter ?
+DELAY=1.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=20
+BONUS_DEX=0
+BONUS_INT=80
+BONUS_STATS=50
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne parvenez pas a distinguer quoi que ce soit a propos de cet aliment !
+
+[SKILL 37]
+DEFNAME=Skill_Tinkering
+KEY=Tinkering
+TITLE=Bricoleur
+PROMPT_MSG=
+DELAY=3.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=20
+BONUS_DEX=20
+BONUS_INT=60
+BONUS_STATS=10
+ADV_RATE=1.75,33.5,134.0
+VALUES=1,20,100
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne parvenez pas a creer l'objet !
+
+[SKILL 38]
+DEFNAME=Skill_Tracking
+KEY=Tracking
+TITLE=Ranger
+PROMPT_MSG=
+DELAY=4.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=50
+BONUS_INT=50
+BONUS_STATS=25
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne parvenez pas a suivre qui que ce soit !
+
+[SKILL 39]
+DEFNAME=Skill_Vet
+KEY=Veterinary
+TITLE=Veterinaire
+PROMPT_MSG=Quel animal voulez vous soigner ?
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=20
+BONUS_DEX=20
+BONUS_INT=60
+BONUS_STATS=20
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous appliquez les bandages , mais sans succes !
+
+[SKILL 40]
+DEFNAME=Skill_Swordsmanship
+KEY=Swordsmanship
+TITLE=Combattant
+PROMPT_MSG=
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=50
+BONUS_DEX=50
+BONUS_INT=0
+BONUS_STATS=10
+ADV_RATE=999999.0,999999.0,999999.0
+
+[SKILL 41]
+DEFNAME=Skill_Macefighting
+KEY=Macefighting
+TITLE=Specialiste des armes lourdes
+PROMPT_MSG=
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=80
+BONUS_DEX=20
+BONUS_INT=0
+BONUS_STATS=10
+ADV_RATE=999999.0,999999.0,999999.0
+
+[SKILL 42]
+DEFNAME=Skill_Fencing
+KEY=Fencing
+TITLE=Specialiste des armes d'estoc
+PROMPT_MSG=
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=20
+BONUS_DEX=80
+BONUS_INT=0
+BONUS_STATS=10
+ADV_RATE=999999.0,999999.0,999999.0
+
+[SKILL 43]
+DEFNAME=Skill_Wrestling
+KEY=Wrestling
+TITLE=Boxeur
+PROMPT_MSG=
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=50
+BONUS_DEX=50
+BONUS_INT=0
+BONUS_STATS=10
+ADV_RATE=999999.0,999999.0,999999.0
+
+[SKILL 44]
+DEFNAME=SKILL_LUMBERJACK
+KEY=Lumberjacking
+TITLE=Bucheron
+PROMPT_MSG=
+DELAY=1.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=90
+BONUS_DEX=10
+BONUS_INT=0
+BONUS_STATS=20
+ADV_RATE=1.75,33.5,134.0
+VALUES=1,20,100
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous tapez dans l'arbre mais n'en tirez rien d'utile
+
+[SKILL 45]
+DEFNAME=SKILL_MINING
+KEY=Mining
+TITLE=Mineur
+PROMPT_MSG=Ou voulez vous piocher ?
+DELAY=1.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=70
+BONUS_DEX=30
+BONUS_INT=0
+BONUS_STATS=20
+ADV_RATE=4.0,80.0,320.0
+VALUES=1,20,100
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne trouvez rien d'interessant !
+
+[SKILL 46]
+DEFNAME=SKILL_MEDITATION
+KEY=Meditation
+TITLE=Sage
+DELAY=2.0,1.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=5
+BONUS_DEX=90
+BONUS_INT=5
+BONUS_STATS=20
+ADV_RATE=999999.0,999999.0,999999.0
+
+[SKILL 47]
+DEFNAME=SKILL_STEALTH
+KEY=Stealth
+TITLE=Homme de l'ombre
+PROMPT_MSG=
+DELAY=2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=80
+BONUS_INT=20
+BONUS_STATS=25
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne parvenez pas a vous deplacer tout etant cache
+
+[SKILL 48]
+DEFNAME=SKILL_REMOVE_TRAP
+KEY=RemoveTrap
+TITLE=Desamorceur
+PROMPT_MSG=Choisissez le piege a desamorcer
+DELAY=7.0,3.0,2.0
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=80
+BONUS_INT=20
+BONUS_STATS=25
+ADV_RATE=1.25,25.0,100.0
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous ne parvenez pas a desamorcer le piege !
+
+[SKILL 49]
+DEFNAME=SKILL_Necromancy
+KEY=Necromancy
+TITLE=Necromant
+STAT_STR=0
+STAT_INT=0
+STAT_DEX=0
+BONUS_STR=0
+BONUS_DEX=0
+BONUS_INT=100
+BONUS_STATS=15
+ADV_RATE=5.0,100.0,400.0
+VALUES=1,10,80
+
+ON=@Fail
+SRC.SYSMESSAGEUA 025 1 1 0 Vous loupez votre incantation !
+
+[SKILLCLASS 0]
+// undeclared class.
+// max skills for players of this skill class. 
+// might want this to be all 50.0 to make people declare a class?
+DEFNAME=Class_undeclared
+NAME=undeclared
+// EVENTS=e_ClassUndeclared
+STATSUM=9000
+SKILLSUM=150000.0
+STR=3200
+INT=3200
+DEX=3200
+Alchemy=150.0
+Anatomy=3200.0
+ItemID=150.0
+ArmsLore=150.0
+Parrying=3200.0
+Begging=150.0
+Blacksmithing=150.0
+Bowcraft=150.0
+Peacemaking=150.0
+Camping=150.0
+Carpentry=150.0
+Cartography=150.0
+Cooking=150.0
+DetectingHidden=150.0
+Enticement=150.0
+EvaluatingIntel=3200.0
+Healing=3200.0
+Fishing=150.0
+Forensics=150.0
+Herding=150.0
+Hiding=150.0
+Provocation=150.0
+Inscription=150.0
+LockPicking=150.0
+Magery=3200.0
+MagicResistance=3200.0
+Parrying=3200.0
+Tactics=3200.0
+Snooping=150.0
+Musicianship=150.0
+Poisoning=150.0
+Archery=3200.0
+SpiritSpeak=150.0
+Stealing=150.0
+Tailoring=150.0
+Taming=150.0
+TasteID=150.0
+Tinkering=150.0
+Tracking=150.0
+Veterinary=150.0
+Swordsmanship=3200.0
+Macefighting=3200.0
+Fencing=3200.0
+Wrestling=3200.0
+Lumberjacking=150.0
+Mining=150.0
+Meditation=150.0
+Stealth=150.0
+RemoveTrap=150.0
+Necromancy=150.0
+
+on=@login
+//IF (STRCMPI("<SRC.CLIENTVERSION>","3.0.0g"))
+//    IF <SRC.ACCOUNT.PLEVEL> < 7
+//        SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas la bonne version du client.
+//        SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez telecharger et installer le kit de connection et utiliser UO-Apo.exe
+//        SRC.WEBLINK http:\\www.uoapo.com/installation.asp
+//        RETURN 1
+//    ENDIF
+//ENDIF
+EVENTS +E_TEOT_FIX
+src.events e_resistance_magie
+src.events e_pertexp
+src.events e_boxe
+SRC.EVENTS +e_general
+IF !<SRC.FINDID.m_timer_general>
+    SRC.NEWITEM m_timer_general
+    SRC.ACT.CONT = <SRC.UID>
+    SRC.ACT.EQUIP
+ENDIF
+IF <SRC.FINDID.m_exp_equipe>
+	FINDID.m_exp_equipe.REMOVE // TEMPORAIRE
+ENDIF
+IF 0<SRC.TAG.DEBUTANT> < 1
+    NEWITEM m_journal_player_details
+    ACT.EQUIP
+    ACT.TIMER=-1
+    ACT.MORE1 = 01f
+    SRC.TAG.XP = 0
+    SRC.DETAIL 0
+    SRC.TAG.DEBUTANT=1
+    SRC.TITLE * Level 1 *
+    SRC.ALLSKILLS 30.0
+    SRC.STR=30
+    SRC.HITS=30
+    SRC.DEX=30
+    SRC.STAMINA=30
+    SRC.INT=30
+    SRC.MANA=30
+    SRC.TAG.FORPURE=<SRC.STR>
+    SRC.TAG.DEXPURE=<SRC.DEX>
+    SRC.TAG.INTPURE=<SRC.INT>
+    SRC.TAG.MAGIEPURE=<EVAL <SRC.MAGERY>/10>
+    SRC.TAG.TACTICSPURE=<EVAL <SRC.TACTICS>/10>
+    SRC.TAG.FENCINGPURE=<EVAL <SRC.FENCING>/10>
+    SRC.TAG.MACEFIGHTINGPURE=<EVAL <SRC.MACEFIGHTING>/10>
+    SRC.TAG.SWORDSMANSHIPPURE=<EVAL <SRC.SWORDSMANSHIP>/10>
+    SRC.TAG.PARRYINGPURE=<EVAL <SRC.PARRYING>/10>
+    SRC.TAG.HEALINGPURE=<EVAL <SRC.HEALING>/10>
+    SRC.TAG.WRESTLINGPURE=<EVAL <SRC.WRESTLING>/10>
+    SRC.TAG.MEDITATIONPURE=<EVAL <SRC.MEDITATION>/10>
+    SRC.TAG.MAGICRESISTANCEPURE=<EVAL <SRC.MAGICRESISTANCE>/10>
+    SRC.TAG.ARCHERYPURE=<EVAL <SRC.ARCHERY>/10>
+    SRC.TAG.ANATOMYPURE=<EVAL <SRC.ANATOMY>/10>
+    SRC.TAG.EvaluatingIntelPURE=<EVAL <SRC.EvaluatingIntel>/10>
+    SRC.TAG.LEVEL=1
+    SRC.TAG.PTSSTAT=0
+    SRC.TAG.PTSSKILLS=0
+    SRC.ECOUTER
+    SRC.EVENTE
+    SRC.ERP
+    SRC.WHISP on
+ENDIF
+IF <EVAL 0<SRC.TAG.POINTSBA>> < 3
+    SRC.SYSMESSAGE Pour gagner de nombreux lots tout en aidant l'equipe UO-Apocalypse, utilisez le systeme des bonnes actions en tapant .BA
+ENDIF
+IF <EVAL 0<SRC.TAG.LOGOUTGREENACRES>>==0
+    SRC.TAG.LOGOUTGREENACRES
+ELSE
+    SRC.P=<SRC.TAG.LOGOUTGREENACRES>
+    SRC.TAG.LOGOUTGREENACRES
+    SRC.UPDATE
+ENDIF
+
+IF !(<SRC.FINDID.m_compteur_temps>)
+    SRC.NEWITEM m_compteur_temps
+    SRC.ACT.CONT=<SRC.UID>
+ENDIF
+
+IF !(<SRC.FINDID.m_timer_xp>)
+    SRC.NEWITEM m_timer_xp
+    SRC.ACT.CONT=<SRC.UID>
+    SRC.TAG.MODXP_RECEIVED = 0
+    SRC.TAG.LAST_X_WAS = 4
+    SRC.ACT
+ENDIF
+
+IF <EVAL 0<SRC.TAG.HEURESJOUEES>> <1
+    SRC.TAG.PARTICIPATION=0
+ELSE
+    SRC.TAG.PARTICIPATION=<EVAL ((0<SRC.TAG.VERIFCLICK>*600)/(0<SRC.TAG.HEURESJOUEES>))>
+ENDIF
+
+IF <EVAL 0<SRC.TAG.PARTICIPATION>> >460
+    SRC.TAG.COULEURPARTICIPATION=460p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >430
+    SRC.TAG.COULEURPARTICIPATION=430p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >400
+    SRC.TAG.COULEURPARTICIPATION=400p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >370
+    SRC.TAG.COULEURPARTICIPATION=370p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >340
+    SRC.TAG.COULEURPARTICIPATION=340p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >310
+    SRC.TAG.COULEURPARTICIPATION=310p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >280
+    SRC.TAG.COULEURPARTICIPATION=280p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >250
+    SRC.TAG.COULEURPARTICIPATION=250p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >220
+    SRC.TAG.COULEURPARTICIPATION=220p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >190
+    SRC.TAG.COULEURPARTICIPATION=190p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >160
+    SRC.TAG.COULEURPARTICIPATION=160p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >130
+    SRC.TAG.COULEURPARTICIPATION=130p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >100
+    SRC.TAG.COULEURPARTICIPATION=100p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >90
+    SRC.TAG.COULEURPARTICIPATION=90p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >80
+    SRC.TAG.COULEURPARTICIPATION=80p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >70
+    SRC.TAG.COULEURPARTICIPATION=70p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >60
+    SRC.TAG.COULEURPARTICIPATION=60p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >50
+    SRC.TAG.COULEURPARTICIPATION=50p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >40
+    SRC.TAG.COULEURPARTICIPATION=40p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >30
+    SRC.TAG.COULEURPARTICIPATION=30p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >20
+    SRC.TAG.COULEURPARTICIPATION=20p.gif
+ELSEIF <EVAL 0<SRC.TAG.PARTICIPATION>> >10
+    SRC.TAG.COULEURPARTICIPATION=10p.gif
+ELSE
+    SRC.TAG.COULEURPARTICIPATION=0p.gif
+ENDIF
+
+SRC.TAG.IMAGESEXE=<SRC.SEX homme.gif/femme.gif>
+
+IF <SRC.ACCOUNT.PLEVEL> > 4
+    SRC.ALLSHOW 0
+ENDIF
+
+IF (<SRC.ACCOUNT.PLEVEL> < 2)
+    SRC.TAG.COULEURNOM=#FFFFFF
+ELSEIF (<SRC.ACCOUNT.PLEVEL> == 2) && (<EVAL <SRC.TAG.RESPONSABLEMODERATION>>==1)
+    SRC.TAG.COULEURNOM=#00ff59
+ELSEIF <SRC.ACCOUNT.PLEVEL> == 2
+    SRC.TAG.COULEURNOM=#ffff0c
+ELSEIF <SRC.ACCOUNT.PLEVEL> == 3
+    SRC.TAG.COULEURNOM=#00e5ff
+ELSEIF <SRC.ACCOUNT.PLEVEL> == 4
+    SRC.TAG.COULEURNOM=#5900ff
+ELSEIF <SRC.ACCOUNT.PLEVEL> == 5
+    SRC.TAG.COULEURNOM=#6699cc
+ELSEIF <SRC.ACCOUNT.PLEVEL> == 6
+    SRC.TAG.COULEURNOM=#ff0066
+ELSE
+    SRC.TAG.COULEURNOM=#FF0014
+ENDIF
+
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 1
+    IF <EVAL 0<SRC.TAG.COTE>> == 1
+        TAG.IMAGE=elu1.gif
+    ELSE
+        TAG.IMAGE=dechu1.gif
+    ENDIF
+ELSEIF <EVAL 0<SRC.TAG.RENAISSANCE>> == 2
+    IF <EVAL 0<SRC.TAG.COTE>> == 1
+        TAG.IMAGE=elu2.gif
+    ELSE
+        TAG.IMAGE=dechu2.gif
+    ENDIF
+ELSEIF <EVAL 0<SRC.TAG.RENAISSANCE>> == 3
+    IF <EVAL 0<SRC.TAG.COTE>> == 1
+        TAG.IMAGE=elu3.gif
+    ELSE
+        TAG.IMAGE=dechu3.gif
+    ENDIF
+ELSEIF <EVAL 0<SRC.TAG.RENAISSANCE>> == 4
+    IF <EVAL 0<SRC.TAG.COTE>> == 1
+        TAG.IMAGE=elu4.gif
+    ELSE
+        TAG.IMAGE=dechu4.gif
+    ENDIF
+ELSEIF <EVAL 0<SRC.TAG.RENAISSANCE>> == 5
+    IF <EVAL 0<SRC.TAG.COTE>> == 1
+        TAG.IMAGE=elu5.gif
+    ELSE
+        TAG.IMAGE=dechu5.gif
+    ENDIF
+ELSEIF <EVAL 0<SRC.TAG.RENAISSANCE>> == 6
+    IF <EVAL 0<SRC.TAG.COTE>> == 1
+        TAG.IMAGE=elu6.gif
+    ELSE
+        TAG.IMAGE=dechu6.gif
+    ENDIF
+ELSEIF <EVAL 0<SRC.TAG.RENAISSANCE>> == 7
+    IF <EVAL 0<SRC.TAG.COTE>> == 1
+        TAG.IMAGE=elu7.gif
+    ELSE
+        TAG.IMAGE=dechu7.gif
+    ENDIF
+ELSE
+    TAG.IMAGE=na.gif
+ENDIF
+
+IF (0<SRC.ACCOUNT.JAIL>==1)
+    TAG.IMAGE3=prison.gif
+ELSE
+    TAG.IMAGE3=humain.gif
+ENDIF
+
+IF (!<SRC.MEMORYFINDTYPE.memory_guild.UID>)
+    TAG.GUILDES=Aucune
+ELSE
+    TAG.GUILDES=<SRC.GUILDABBREV>
+ENDIF
+
+IF <EVAL 0<SRC.TAG.CHARTRE>>==0
+    SRC.TAG.CHARTRE=1
+    SRC.NEWITEM m_charte
+    SRC.ACT.EQUIP
+ENDIF
+
+// Syst�me de Top
+IF (<SRC.ACCOUNT.PLEVEL> < 3)
+    SRC.SET_TOP
+ENDIF
+
+IF <EVAL <serv.STATCLIENTS>> > <EVAL <UID.04003aaf0.TAG.JOUEURSMAX>>
+    UID.04003aaf0.TAG.JOUEURSMAX=<EVAL <serv.STATCLIENTS>>
+ENDIF
+
+//IF (<SRC.ACCOUNT.PLEVEL> < 2)
+//    IF <EVAL 0<SRC.TAG.PARTICIPATION>> < 100
+//        SRC.PAGEWEB uoapo.com/sponsor.asp
+//    ENDIF
+//ENDIF
+
+//SYSTEME DE DETAILGM
+IF (<SRC.ACCOUNT.PLEVEL> < 6)
+    SRC.GMDETAIL_ENVOI co <SERV.RTIME> : <SRC.NAME> acc:<SRC.ACCOUNT> ip:<SRC.ACCOUNT.LASTIP>
+ENDIF
+
+// SYSTEME MULTI ACC
+VAR.I_IP = 0
+FORCLIENTS 6144
+	IF <ACCOUNT.LASTIP> == <SRC.ACCOUNT.LASTIP>
+		VAR.I_IP = <EVAL <VAR.I_IP>> + 1
+	ENDIF
+ENDFOR
+
+VAR.NBPERMIS = 2
+IF 0<SRC.TAG.NBCLIENTPERMIS> > 2
+	VAR.NBPERMIS = <SRC.TAG.NBCLIENTPERMIS>
+ENDIF
+
+IF <VAR.I_IP> > <VAR.NBPERMIS>
+	SYSMESSAGEUA 025 1 1 0 Vous avez depasser votre limite de <EVAL <VAR.NBPERMIS>> comptes connectes. 
+	SYSMESSAGEUA 025 1 1 0 Vous allez maintenant etre deconnecter. 
+    SRC.NEWITEM i_logoutmultiacc
+    SRC.ACT.EQUIP
+ENDIF
+
+VAR.I_IP
+
+//Systeme de delestage
+//SRC.ANTILAG
+
+//IF <EVAL 0<SRC.TAG.POPUP>> < 15
+//    SRC.SYSMESSAGE Mise � jour Apo2 Version : 1.3.1
+//    SRC.PAGEWEB uoapo.dyndns.org:8888/forum_posts.asp?TID=524
+//    SRC.TAG.POPUP = 15
+//ENDIF
+
+ON=@LOGOUT
+IF (<SRC.FINDID.m_compteur_temps>)
+    SRC.FINDID.m_compteur_temps.REMOVE
+ENDIF
+
+IF <SRC.FINDID.i_desemprisonne>
+    SRC.TAG.LOGOUTGREENACRES=<SRC.P>
+    SRC.P=<EVAL {5120 5607}>,<EVAL {2064 2303}>
+    SRC.UPDATE
+ELSEIF ( !STRCMPI("<SRC.REGION.NAME>","SALLE_DE_DETENTE") )
+    SRC.P=2464,514,15
+    SRC.UPDATE 
+ELSEIF ( (!STRCMPI("<SRC.REGION.NAME>","Minoc_nopvp")) || (!STRCMPI("<SRC.REGION.NAME>","TEMPLE")) || (!STRCMPI("<SRC.REGION.NAME>","MAISON_MINOC19")))
+    SRC.TAG.LOGOUTGREENACRES=<SRC.P>
+    SRC.P=<EVAL {5120 5607}>,<EVAL {2064 2303}>
+    SRC.UPDATE    
+ENDIF
+
+IF <SRC.FINDID.m_exp_equipe>
+    VAR.MSG_TEAM_NUMBER = <SRC.FINDID.m_exp_equipe.MOREX>
+    SERV.ALLCLIENTS MESSAGE_TEAM_ALLCLIENTS <SRC.NAME> s'est <SRC.SEX deconnecte/deconnectee> et quitte l'equipe
+    SRC.QUITTER_TEAM
+ENDIF
+
+IF (<SRC.ACCOUNT.PLEVEL> < 6)
+    SRC.GMDETAIL_ENVOI deco <SERV.RTIME> : <SRC.NAME> acc:<SRC.ACCOUNT> P:<SRC.TAG.LOGOUTGREENACRES>
+ENDIF
+
+[EOF]

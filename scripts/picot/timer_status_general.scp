@@ -1,0 +1,90 @@
+[PLEVEL 1]
+status
+
+[FUNCTION status]
+DIALOG D_STATUS
+RETURN 1
+
+[ITEMDEF m_timer_general]
+NAME=timer general(Ne pas toucher)
+TYPE=t_eq_script
+
+ON=@CREATE
+TAG.BONHEUR=50
+TAG.SANTE=50
+TIMER=300//5 minutes
+
+ON=@TIMER
+IF <TAG.BONHEUR> > 0
+    IF <EVAL RAND(10)> == 0
+        TAG.BONHEUR = <EVAL <TAG.BONHEUR> - 1>
+    ENDIF
+ENDIF
+IF <TAG.SANTE> > 0
+    IF <EVAL RAND(5)> == 0
+        TAG.SANTE = <EVAL <TAG.SANTE> - 1>
+    ENDIF
+ENDIF
+TIMER=300
+RETURN 1
+
+
+[ITEMDEF m_timer_xp]
+NAME=m_timer_xp
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=84600 // 23h30
+
+ON=@TIMER
+TOPOBJ.UNEQUIP
+I.REMOVE
+RETURN 1
+
+[DIALOG D_STATUS]
+0,0
+PAGE 0
+resizepic 0 0 2620 550 300
+PAGE 1
+text 200 20 1152 1//Status de <SRC.NAME>
+text 20 40 1152 2//Bonheur
+text 20 60 1152 3//Sante
+text 200 40 1152 4//Vie
+text 200 60 1152 5//Stam
+text 200 80 1152 6//Mana
+text 200 120 1152 7//Compte cree le : <DATE>
+text 200 140 1152 8//temps de jeu : <HEURES> heures
+text 292 160 1152 9//et <MINUTES> minutes
+text 200 200 1152 10//Cout du prochain point de stat : <SRC.CALCULATE_COUT_STAT>
+text 200 220 1152 11//Cout du prochain point de competence : <SRC.CALCULATE_COUT_COMPETENCE>
+
+
+[DIALOG D_STATUS TEXT]
+<VAR.BLANKLINE>
+Status de <SRC.NAME>
+Bonheur : <EVAL <SRC.FINDID.m_timer_general.TAG.BONHEUR>>/100
+Sante : <EVAL <SRC.FINDID.m_timer_general.TAG.SANTE>>/100
+Vie  : <EVAL <SRC.HITS>> / <EVAL <SRC.STR>>
+Stam : <EVAL <SRC.STAM>> / <EVAL <SRC.DEX>>
+Mana : <EVAL <SRC.MANA>> / <EVAL <SRC.INT>>
+Compte cree le : <SRC.ACCOUNT.FIRSTCONNECTDATE>
+Temps de jeu : <EVAL 0<SRC.TAG.HEURESJOUEES>> heures
+et <EVAL 0<SRC.TAG.MINUTESJOUEES>> minutes
+Cout du prochain point de stat : <EVAL <SRC.CALCULATE_COUT_STAT>>
+Cout du prochain point de competence : <EVAL <SRC.CALCULATE_COUT_COMPETENCE>>
+
+[DIALOG D_STATUS BUTTON]
+ON=1
+RETURN 1
+
+
+//ARGS = DOMMAGES OU POINTS MAGIE ; DEFAULT = joueur attaquant
+[FUNCTION CALCULATE_BONUS_DOMMAGES]
+VAR.TEMP = 0
+IF <FINDID.m_timer_general>
+    VAR.TEMP = <EVAL (<ARGS> * (<FINDID.m_timer_general.TAG.BONHEUR> + <FINDID.m_timer_general.TAG.SANTE>)/10)/100>
+    IF (<FOOD> == 0) || (<FOOD> >= 16)
+        VAR.TEMP = <EVAL <VAR.TEMP> - (<ARGS> * 5) / 100>
+    ENDIF
+ENDIF
+RETURN <EVAL <VAR.TEMP> + <ARGS>>

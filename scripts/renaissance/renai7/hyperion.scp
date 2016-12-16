@@ -1,0 +1,564 @@
+[CHARDEF c_hyperion]
+NAME=Hyperion
+ID=c_DRAGON_RED
+SOUND=snd_MONSTER_DRAGON1
+CAN=MT_WALK|MT_FLY|MT_RUN
+
+ON=@Create
+NPC=brain_dragon
+COLOR=0afc
+STR=7500
+DEX=1000
+INT=0
+
+TACTICS=3000.0
+WRESTLING=3000.0
+EVENTS +e_regenere_vie
+TAG.REGENEREVIE=110000
+
+KARMA=-9999
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+	IF <SRC.ACCOUNT.PLEVEL> < 2
+		UID.09903F.NEWITEM 0bd0
+		UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+		UID.09903F.ACT.COLOR=025
+		UID.09903F.ACT.ATTR=08010
+		UID.09903F.ACT.CONT=0b6a09
+	ENDIF
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.P=1357,1065
+	SRC.UPDATE
+ENDIF
+
+ON=@HIT
+VAR.CHOIX_HYPERION=<EVAL (rand(10))>
+IF <VAR.CHOIX_HYPERION> == 0
+	ACT.STAM=0
+	ACT.MANA=0
+	IF (<ACT.HITS> > <EVAL <ACT.MAXHITS> / 4>)
+		ACT.HITS=<EVAL <ACT.MAXHITS> / 4>
+	ENDIF
+	ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous terrorise !
+	IF <ACT.FINDID.m_anti_popotage>
+		ACT.FINDID.m_anti_popotage.REMOVE
+	ENDIF
+	RETURN 1
+ELSEIF <VAR.CHOIX_HYPERION> == 1
+	IF !<ACT.FINDID.i_rune_curse_piege_d7>
+		ACT.NEWITEM i_rune_curse_piege_d7
+		ACT.ACT.LINK=<SRC.UID>
+		ACT.ACT.EQUIP
+		ACT.ACT.TIMER=240
+	ENDIF
+	RETURN 1
+ELSEIF <VAR.CHOIX_HYPERION> == 2
+	IF <ACT.FINDID.i_rune_protection>
+		ACT.FINDID.i_rune_protection.REMOVE
+	ENDIF
+	RETURN 1
+ELSEIF <VAR.CHOIX_HYPERION> == 3
+	IF !<ACT.FINDID.i_rune_de_poison>
+		ACT.EFFECT 3,i_fx_curse,0,15
+		ACT.NEWITEM i_rune_de_poison
+		ACT.ACT.MOREY=2400.0
+		ACT.ACT.LINK=<UID>
+		ACT.ACT.CONT=<ACT.UID>
+		ACT.ACT.TIMER=5
+	ENDIF
+	RETURN 1
+ELSEIF <VAR.CHOIX_HYPERION> == 4
+	VAR.UIDLAYER=<ACT.FINDLAYER.1.UID>
+	IF <VAR.UIDLAYER>!=0
+		ACT.FINDLAYER.1.UNEQUIP
+		TRYP 0 UID.<VAR.UIDLAYER>.CONT=<ACT.FINDLAYER.21.UID>
+	ENDIF
+	VAR.UIDLAYER=<ACT.FINDLAYER.2.UID>
+	IF <VAR.UIDLAYER>!=0
+		ACT.FINDLAYER.2.UNEQUIP
+		TRYP 0 UID.<VAR.UIDLAYER>.CONT=<ACT.FINDLAYER.21.UID>
+	ENDIF
+	VAR.UIDLAYER
+	ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous desarme !
+ELSEIF <VAR.CHOIX_HYPERION> == 5
+	ACT.NEWITEM=i_attaque_dragonnet
+	ACT.ACT.P=<SRC.P>
+	ACT.DAMAGE 200 0008 <UID>
+	ANIM 6
+ENDIF
+RETURN 0
+
+ON=@GETHIT
+IF <EVAL <DISTANCE>> > 2
+	IF <EVAL (rand(5))> == 0
+		IF !<SRC.FINDID.i_rune_curse_piege_d7>
+			SRC.NEWITEM i_rune_curse_piege_d7
+			SRC.ACT.LINK=<SRC.UID>
+			SRC.ACT.EQUIP
+			SRC.ACT.TIMER=240
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL <DISTANCE>> > 2
+	IF <EVAL (rand(5))> == 0
+		P=<SRC.P>
+		UPDATE
+	ENDIF
+ENDIF
+RETURN 0
+
+ON=@DEATH
+IF <EVAL 0<SRC.ACT.TAG.INSIDE_D7>> < 11
+	//TRICHEUR
+	IF <EVAL 0<SRC.ACT.TAG.INSIDE_D7> + 2> <= 11
+		UID.09903F.NEWITEM 0bd0
+		UID.09903F.ACT.NAME voir tags
+		UID.09903F.ACT.TAG.RTIME=<SERV.RTIME>
+		UID.09903F.ACT.TAG.PERSO_ACCOUNT=<SRC.ACT.NAME> acc:<SRC.ACT.ACCOUNT>
+		UID.09903F.ACT.TAG.POSITION=<SRC.ACT.P>
+		UID.09903F.ACT.TAG.ETAITMORE=<SRC.ACT.TAG.INSIDE_D7>
+		UID.09903F.ACT.TAG.DEVIENTMORE=11
+		UID.09903F.ACT.COLOR=025
+		UID.09903F.ACT.ATTR=08010
+		UID.09903F.ACT.CONT=0b6a09
+	ENDIF
+	SRC.ACT.TAG.INSIDE_D7=11
+ENDIF
+IF <SRC.ACT.FINDID.m_status_boss_final_d7>
+	UID.09903F.ACT = <SRC.ACT.FINDID.m_status_boss_final_d7.UID>
+	UID.09903F.ACT.LINK = <UID.09903F.ACT.MORE1>
+	IF <UID.09903F.ACT.LINK.BASEID> == c_hyperion
+		UID.09903F.ACT.LINK.REMOVE
+	ENDIF
+	UID.09903F.ACT.LINK = <UID.09903F.ACT.MORE2>
+	IF <UID.09903F.ACT.LINK.BASEID> == c_hyperion
+		UID.09903F.ACT.LINK.REMOVE
+	ENDIF
+	UID.09903F.ACT.REMOVE
+	UID.09903F.ACT.LINK = <UID.09903F.ACT.TAG.LIEN_OBJET_ENTREE>
+	UID.09903F.ACT.LINK.TAG.COMBATTANT
+ENDIF
+SRC.ACT.TAG.VIE_HYPERION
+SRC.ACT.TAG.BOSS_FINAL_TUE=1
+SRC.ACT.EVENTS -e_boss_final_d7
+SRC.ACT.GO 5507,844,45
+SRC.ACT.EMOTE sentir une grande force vous envahir !
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Hyperion
+
+
+//LINK==>plaque de questions
+[ITEMDEF i_entree_hyperion_d7]
+NAME=Portail
+ID=0dda
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0aa4
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 6
+	IF <MORE1> == 0
+		SRC.SYSMESSAGEUA 0481 1 1 0 Selectionner la plaque de questions
+		TARGET
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	IF <EVAL 0<SRC.TAG.INSIDE_D7>> > 0
+		IF 0<TAG.COMBATTANT> == 0
+			TAG.COMBATTANT = 1
+			LINK.TIMER=1
+			SRC.NEWITEM m_status_boss_final_d7
+			SRC.ACT.TAG.LIEN_OBJET_ENTREE=<UID>
+			SRC.ACT.EQUIP
+			SRC.ACT.TIMER=5
+			SRC.EVENTS +e_boss_final_d7
+			SRC.GO 5525,890,30
+			IF <EVAL 0<SRC.TAG.VIE_HYPERION>> == 0
+				SRC.TAG.VIE_HYPERION=50000
+			ENDIF
+		ELSE
+			SRC.GO 5536,883,30
+		ENDIF
+	ENDIF
+ELSE
+RETURN 1
+ENDIF
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.BASEID>==i_plaque_questions_d7)
+	LINK=<SRC.TARG.UID>
+	SRC.SYSMESSAGEUA 0481 1 1 0 entree liee a la plaque de question est un succes
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez une plaque de questions!
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=gates
+DESCRIPTION=D7 Hyperion
+
+//MORE1=UID_PLAQUE_GAUCHE ; MORE2=UID_PLAQUE_DROITE ; MOREX=NUMERO_QUESTION ; MOREY=0(BON_GAUCHE)1(BON_DROITE)
+[ITEMDEF i_plaque_questions_d7]
+NAME=Question
+ID=0bd0
+TYPE=t_normal
+
+ON=@CREATE
+ATTR=08010
+COLOR=0aa4
+
+ON=@CLICK
+SAY <TAG.QUESTION>
+RETURN 1
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 6
+	VAR.SUA_COLOR=0481
+	IF <MORE1> == 0
+		SAY Selectionner l'objet de question 1
+		TARGET
+	ELSEIF <MORE2> == 0
+		SAY Selectionner l'objet de question 2
+		TARGET
+	ENDIF
+	RETURN 1
+ELSE
+	SAY <TAG.QUESTION>
+ENDIF
+RETURN 1
+
+ON=@TIMER
+MOREX=<EVAL (rand(21))>
+MOREY=<EVAL (rand(2))>
+LINK=<MORE1>
+IF <LINK.BASEID> == i_plaque_reponses_d7
+	LINK.MOREX=<MOREX>
+	IF <MOREY> == 0
+		LINK.MOREY=0
+	ELSE
+		LINK.MOREY=1
+	ENDIF
+	LINK.NAME=Reponse gauche
+	LINK.TIMER=3
+ENDIF
+LINK=<MORE2>
+IF <LINK.BASEID> == i_plaque_reponses_d7
+	LINK.MOREX=<MOREX>
+	IF <MOREY> == 0
+		LINK.MOREY=1
+	ELSE
+		LINK.MOREY=0
+	ENDIF
+	LINK.NAME=Reponse droite
+	LINK.TIMER=3
+ENDIF
+IF <EVAL <MOREX>> == 0
+	TAG.QUESTION=Force requise pour un kryss d'adamandite
+ELSEIF <EVAL <MOREX>> == 1
+	TAG.QUESTION=Force requise pour une hachette legendaire
+ELSEIF <EVAL <MOREX>> == 2
+	TAG.QUESTION=Intelligence requise pour une masse de qualite
+ELSEIF <EVAL <MOREX>> == 3
+	TAG.QUESTION=AR d'une full classe 7 en plaque
+ELSEIF <EVAL <MOREX>> == 4
+	TAG.QUESTION=Bonus en % de force d'une armure 4 capricorni
+ELSEIF <EVAL <MOREX>> == 5
+	TAG.QUESTION=Alchimie requise pour une potion de mana legere
+ELSEIF <EVAL <MOREX>> == 6
+	TAG.QUESTION=Bricolage requis pour une enclume
+ELSEIF <EVAL <MOREX>> == 7
+	TAG.QUESTION=Bricolage requis pour une potiere
+ELSEIF <EVAL <MOREX>> == 8
+	TAG.QUESTION=Menuiserie requise pour une table rustique
+ELSEIF <EVAL <MOREX>> == 9
+	TAG.QUESTION=menuiserie requise pour une rune vierge
+ELSEIF <EVAL <MOREX>> == 10
+	TAG.QUESTION=la commande .potion divine prends automatiquement une divine
+ELSEIF <EVAL <MOREX>> == 11
+	TAG.QUESTION=la commande .potion rajeu prendra une potion de rajeunissement divine avant une potion de rajeunissement
+ELSEIF <EVAL <MOREX>> == 12
+	TAG.QUESTION=couture requise pour une armure de cuir d'harpie
+ELSEIF <EVAL <MOREX>> == 13
+	TAG.QUESTION=couture requise pour un petit bandana
+ELSEIF <EVAL <MOREX>> == 14
+	TAG.QUESTION=La force monte le max de vie, la dex le max d'endurance et l'intelligence le max de mana
+ELSEIF <EVAL <MOREX>> == 15
+	TAG.QUESTION=Faire ses ba aide le serveur
+ELSEIF <EVAL <MOREX>> == 16
+	TAG.QUESTION=Transcription requise pour fabriquer un livre de runes
+ELSEIF <EVAL <MOREX>> == 17
+	TAG.QUESTION=Transcription requise pour le sort gate travel
+ELSEIF <EVAL <MOREX>> == 18
+	TAG.QUESTION=ferronerie requise pour une lame legendaire
+ELSEIF <EVAL <MOREX>> == 19
+	TAG.QUESTION=ferronerie requise pour un glaive poli
+ELSEIF <EVAL <MOREX>> == 20
+	TAG.QUESTION=Il vous est possible que de charger une baguette vierge ou deja chargee par vous
+ELSEIF <EVAL <MOREX>> == 21
+	TAG.QUESTION=Fabrication d'arc requis pour une arbalete en chene
+ELSEIF <EVAL <MOREX>> == 22
+	TAG.QUESTION=Fabrication d'arc requis pour un arc en oxandre
+ELSEIF <EVAL <MOREX>> == 23
+	TAG.QUESTION=L'esquive monte le AR seulement en portant un bouclier ou un pavois
+ELSEIF <EVAL <MOREX>> == 24
+	TAG.QUESTION=Bonus en % de magie que donne l'anneau de vraie foi
+ELSEIF <EVAL <MOREX>> == 25
+	TAG.QUESTION=Bonus en % d'intelligence que donne la robe de grand pretre
+ELSEIF <EVAL <MOREX>> == 26
+	TAG.QUESTION=Plus la magie d'un mage bruleur est elevee, plus ses brulures feront de degats
+ELSEIF <EVAL <MOREX>> == 27
+	TAG.QUESTION=Un boxeur peut desarmer sans gants de boxeur, en autant qu'il n'ait pas d'armure
+ELSEIF <EVAL <MOREX>> == 28
+	TAG.QUESTION=L'anatomie est une competence utile, tant pour les boxeurs, que pour les archers et guerriers
+ELSEIF <EVAL <MOREX>> == 29
+	TAG.QUESTION=A chaque 200 cadavres brules, vous aurez un point de ba
+ELSE
+	TAG.QUESTION=Niveau requis pour faire de l'experience aux sorciers heretiques
+ENDIF
+SAY <TAG.QUESTION>
+TIMER=-1
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.BASEID>==i_plaque_reponses_d7)
+	IF <MORE1> == 0
+		MORE1=<SRC.TARG.UID>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Plaque reponse correctement liee a la plaque question 1
+	ELSE
+		MORE2=<SRC.TARG.UID>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Plaque reponse correctement liee a la plaque question 2
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Il faut lier a une plaque de reponse du d7
+ENDIF
+RETURN 1
+
+
+//MOREX=NUMERO_QUESTION ; MOREY=0(BONNE REPONSE)1(MAUVAISE REPONSE)
+[ITEMDEF i_plaque_reponses_d7]
+NAME=Reponse
+ID=0bd0
+TYPE=t_normal
+
+ON=@CREATE
+ATTR=08010
+COLOR=0aa4
+MOREY=1
+
+ON=@CLICK
+SAY <TAG.REPONSE>
+RETURN 1
+
+ON=@TIMER
+IF <MOREY> == 0
+	IF <EVAL <MOREX>> == 0
+		TAG.REPONSE=[358]
+	ELSEIF <EVAL <MOREX>> == 1
+		TAG.REPONSE=[620]
+	ELSEIF <EVAL <MOREX>> == 2
+		TAG.REPONSE=[94]
+	ELSEIF <EVAL <MOREX>> == 3
+		TAG.REPONSE=[190]
+	ELSEIF <EVAL <MOREX>> == 4
+		TAG.REPONSE=[10]
+	ELSEIF <EVAL <MOREX>> == 5
+		TAG.REPONSE=[30]
+	ELSEIF <EVAL <MOREX>> == 6
+		TAG.REPONSE=[90]
+	ELSEIF <EVAL <MOREX>> == 7
+		TAG.REPONSE=[0]
+	ELSEIF <EVAL <MOREX>> == 8
+		TAG.REPONSE=[53]
+	ELSEIF <EVAL <MOREX>> == 9
+		TAG.REPONSE=[40]
+	ELSEIF <EVAL <MOREX>> == 10
+		TAG.REPONSE=[Faux]
+	ELSEIF <EVAL <MOREX>> == 11
+		TAG.REPONSE=[Vrai]
+	ELSEIF <EVAL <MOREX>> == 12
+		TAG.REPONSE=[90]
+	ELSEIF <EVAL <MOREX>> == 13
+		TAG.REPONSE=[42]
+	ELSEIF <EVAL <MOREX>> == 14
+		TAG.REPONSE=[Vrai]
+	ELSEIF <EVAL <MOREX>> == 15
+		TAG.REPONSE=[Vrai]
+	ELSEIF <EVAL <MOREX>> == 16
+		TAG.REPONSE=[60]
+	ELSEIF <EVAL <MOREX>> == 17
+		TAG.REPONSE=[70]
+	ELSEIF <EVAL <MOREX>> == 18
+		TAG.REPONSE=[105]
+	ELSEIF <EVAL <MOREX>> == 19
+		TAG.REPONSE=[35]
+	ELSEIF <EVAL <MOREX>> == 20
+		TAG.REPONSE=[Vrai]
+	ELSEIF <EVAL <MOREX>> == 21
+		TAG.REPONSE=[58.2]
+	ELSEIF <EVAL <MOREX>> == 22
+		TAG.REPONSE=[90.5]
+	ELSEIF <EVAL <MOREX>> == 23
+		TAG.REPONSE=[Vrai]
+	ELSEIF <EVAL <MOREX>> == 24
+		TAG.REPONSE=[30]
+	ELSEIF <EVAL <MOREX>> == 25
+		TAG.REPONSE=[Faux]
+	ELSEIF <EVAL <MOREX>> == 26
+		TAG.REPONSE=[Faux]
+	ELSEIF <EVAL <MOREX>> == 27
+		TAG.REPONSE=[Faux]
+	ELSEIF <EVAL <MOREX>> == 28
+		TAG.REPONSE=[Vrai]
+	ELSEIF <EVAL <MOREX>> == 29
+		TAG.REPONSE=[Faux]
+	ELSE
+		TAG.REPONSE=[120]
+	ENDIF
+ELSE
+	IF <EVAL <MOREX>> == 0
+		TAG.REPONSE=[378]
+	ELSEIF <EVAL <MOREX>> == 1
+		TAG.REPONSE=[600]
+	ELSEIF <EVAL <MOREX>> == 2
+		TAG.REPONSE=[102]
+	ELSEIF <EVAL <MOREX>> == 3
+		TAG.REPONSE=[140]
+	ELSEIF <EVAL <MOREX>> == 4
+		TAG.REPONSE=[20]
+	ELSEIF <EVAL <MOREX>> == 5
+		TAG.REPONSE=[35]
+	ELSEIF <EVAL <MOREX>> == 6
+		TAG.REPONSE=[0]
+	ELSEIF <EVAL <MOREX>> == 7
+		TAG.REPONSE=[100]
+	ELSEIF <EVAL <MOREX>> == 8
+		TAG.REPONSE=[90]
+	ELSEIF <EVAL <MOREX>> == 9
+		TAG.REPONSE=[30]
+	ELSEIF <EVAL <MOREX>> == 10
+		TAG.REPONSE=[Vrai]
+	ELSEIF <EVAL <MOREX>> == 11
+		TAG.REPONSE=[Faux]
+	ELSEIF <EVAL <MOREX>> == 12
+		TAG.REPONSE=[80]
+	ELSEIF <EVAL <MOREX>> == 13
+		TAG.REPONSE=[33]
+	ELSEIF <EVAL <MOREX>> == 14
+		TAG.REPONSE=[Faux]
+	ELSEIF <EVAL <MOREX>> == 15
+		TAG.REPONSE=[Faux]
+	ELSEIF <EVAL <MOREX>> == 16
+		TAG.REPONSE=[80]
+	ELSEIF <EVAL <MOREX>> == 17
+		TAG.REPONSE=[50]
+	ELSEIF <EVAL <MOREX>> == 18
+		TAG.REPONSE=[100]
+	ELSEIF <EVAL <MOREX>> == 19
+		TAG.REPONSE=[45]
+	ELSEIF <EVAL <MOREX>> == 20
+		TAG.REPONSE=[Faux]
+	ELSEIF <EVAL <MOREX>> == 21
+		TAG.REPONSE=[71.9]
+	ELSEIF <EVAL <MOREX>> == 22
+		TAG.REPONSE=[80.2]
+	ELSEIF <EVAL <MOREX>> == 23
+		TAG.REPONSE=[Faux]
+	ELSEIF <EVAL <MOREX>> == 24
+		TAG.REPONSE=[20]
+	ELSEIF <EVAL <MOREX>> == 25
+		TAG.REPONSE=[Vrai]
+	ELSEIF <EVAL <MOREX>> == 26
+		TAG.REPONSE=[Vrai]
+	ELSEIF <EVAL <MOREX>> == 27
+		TAG.REPONSE=[Vrai]
+	ELSEIF <EVAL <MOREX>> == 28
+		TAG.REPONSE=[Faux]
+	ELSEIF <EVAL <MOREX>> == 29
+		TAG.REPONSE=[Vrai]
+	ELSE
+		TAG.REPONSE=[125]
+	ENDIF
+ENDIF
+SAY <TAG.REPONSE>
+TIMER=-1
+RETURN 1
+
+//MORE1=UID_BON_BOSS ; MORE2=UID_MAUVAIS_BOSS ; TAG.LIEN_OBJET_ENTREE=UID_OBJET_ENTREE
+[ITEMDEF m_status_boss_final_d7]
+ID=i_memory
+NAME=status boss final
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=5
+MORE1=0
+
+ON=@TIMER
+IF <MORE1> == 0
+	LINK=<TAG.LIEN_OBJET_ENTREE>
+	IF <LINK.BASEID> == i_entree_hyperion_d7
+		//MONSTRE GAUCHE
+		UID.09903F.NEWNPC c_hyperion
+		UID.09903F.ACT.P=5514,907,30
+		IF <EVAL 0<CONT.TAG.VIE_HYPERION>> > 10000
+			UID.09903F.ACT.TAG.REGENEREVIE=<EVAL <CONT.TAG.VIE_HYPERION> - 10000>
+			UID.09903F.ACT.HITS=10000
+		ELSE
+			UID.09903F.ACT.TAG.REGENEREVIE=0
+			UID.09903F.ACT.HITS=<EVAL 0<CONT.TAG.VIE_HYPERION>>
+		ENDIF
+		UID.09903F.ACT.UPDATE
+		//BON A GAUCHE
+		IF <LINK.LINK.MOREY> == 0
+			MORE1=<UID.09903F.ACT.UID>
+		ELSE
+			MORE2=<UID.09903F.ACT.UID>
+		ENDIF
+
+		//MONSTRE DROITE
+		UID.09903F.NEWNPC c_hyperion
+		UID.09903F.ACT.P=5521,873,30
+		IF <EVAL 0<CONT.TAG.VIE_HYPERION>> > 10000
+			UID.09903F.ACT.TAG.REGENEREVIE=<EVAL <CONT.TAG.VIE_HYPERION> - 10000>
+			UID.09903F.ACT.HITS=10000
+		ELSE
+			UID.09903F.ACT.TAG.REGENEREVIE=0
+			UID.09903F.ACT.HITS=<EVAL 0<CONT.TAG.VIE_HYPERION>>
+		ENDIF
+		UID.09903F.ACT.UPDATE
+		//BON A GAUCHE
+		IF <LINK.LINK.MOREY> == 0
+			MORE2=<UID.09903F.ACT.UID>
+		ELSE
+			MORE1=<UID.09903F.ACT.UID>
+		ENDIF
+	ENDIF
+	TIMER=30
+ELSE
+	LINK=<MORE1>
+	IF <LINK.BASEID> == c_hyperion
+		CONT.TAG.VIE_HYPERION=<EVAL <LINK.TAG.REGENEREVIE> + <LINK.HITS> + 1>
+		LINK.REMOVE
+	ENDIF
+	LINK=<MORE2>
+	IF <LINK.BASEID> == c_hyperion
+		LINK.REMOVE
+	ENDIF
+	LINK=<TAG.LIEN_OBJET_ENTREE>
+	LINK.TAG.COMBATTANT
+	CONT.EVENTS -e_boss_final_d7
+	CONT.GO 5536,883,30
+	REMOVE
+ENDIF
+RETURN 1

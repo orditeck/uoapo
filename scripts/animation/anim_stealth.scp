@@ -1,0 +1,192 @@
+[ITEMDEF i_deed_creer_anim_stealth]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de creation anim stealth
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_gate_anim_stealth_start
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_gate_anim_stealth_goal
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_gate_anim_stealth_sortie
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_gate_anim_stealth_depart
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[EVENTS e_anim_stealth]
+ON=@CLICK
+IF (<SRC.FLAGS>&statf_hidden)
+	MESSAGE @0c7 <NAME>
+ELSE
+	MESSAGE @026 <NAME>
+ENDIF
+RETURN 1
+
+ON=@SkillSelect
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas utiliser une skill pendant l'animation
+SRC.ACTION=-1
+RETURN 1
+
+ON=@HIT
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas attaquer une cible pendant l'animation
+RETURN 1
+
+ON=@SPELLCAST
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas faire de sort pendant l'animation
+RETURN 1
+
+ON=@DEATH
+GO 5974 323 -22
+RETURN 1
+
+//ENTREE DANS L'ANIM
+[ITEMDEF i_gate_anim_stealth_start]
+NAME=Gate Anim Stealth Entree
+ID=i_moongate_red
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=07
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	IF !<SRC.FINDLAYER.25>
+		IF <SRC.FINDID.i_rune_night_sight>
+			SRC.FINDID.i_rune_night_sight.REMOVE
+		ENDIF
+		IF <SRC.NIGHTSIGHT>==0
+			SRC.NIGHTSIGHT
+		ENDIF
+		SRC.TAG.anti_mark_recall=1
+		SRC.ACTION=-1
+		SRC.TAG.STEALTH_BACKUP = <SRC.STEALTH>
+		SRC.STEALTH = 2000
+		SRC.TAG.POINT_ANIM_STEALTH
+		SRC.EVENTS +e_anim_stealth
+		SRC.P 5974 323 -22
+		SRC.UPDATE
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas entrer avec une monture!
+	ENDIF
+ENDIF
+
+//DONNE UN POINT AU JOUEUR EN STEALTH ET RETOURNE UN JOUEUR DANS LA SALLE D'ATTENTE
+[ITEMDEF i_gate_anim_stealth_goal]
+NAME=Gate Anim Stealth Goal
+ID=i_moongate_red
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=044
+
+ON=@STEP
+IF !<SRC.FINDLAYER.25>
+	IF (<SRC.FLAGS>&statf_hidden)
+		SERV.B <SRC.NAME> est arrive au but et marque un point!
+		SRC.TAG.POINT_ANIM_STEALTH = <EVAL 0<SRC.TAG.POINT_ANIM_STEALTH> + 1>
+	ENDIF
+	SRC.GO 5974 323 -22
+ENDIF
+
+//SORTIE COMPLETE DE L'ANIM
+[ITEMDEF i_gate_anim_stealth_sortie]
+NAME=Gate Anim Stealth Sortie [Sortir vous enlevera vos points accumules]
+ID=i_moongate_red
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=025
+
+ON=@CLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	MESSAGE Gate Anim Stealth Sortie [Meneur:<TAG.MEILLEUR_PERSO> avec <TAG.MEILLEUR_POINTEUR> points]
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	IF <TIMER> == -1
+		SRC.SYSMESSAGEUA 0481 1 1 0 Pour remettre les pointages a zero, double cliquez a nouveau !
+		TIMER=3
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Le pointage a ete remis a zero !
+		TIMER=-1
+		TAG.MEILLEUR_POINTEUR
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@STEP
+IF !<SRC.FINDLAYER.25>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez marque <EVAL 0<SRC.TAG.POINT_ANIM_STEALTH>> points pendant l'anim
+	IF <EVAL 0<SRC.TAG.POINT_ANIM_STEALTH>> > <EVAL 0<TAG.MEILLEUR_POINTEUR>>
+		TAG.MEILLEUR_POINTEUR = <SRC.TAG.POINT_ANIM_STEALTH>
+		TAG.MEILLEUR_PERSO = <SRC.NAME>
+	ENDIF
+	IF <EVAL 0<SRC.TAG.STEALTH_BACKUP>> > 0
+		SRC.STEALTH = <SRC.TAG.STEALTH_BACKUP>
+		SRC.TAG.STEALTH_BACKUP
+	ENDIF
+	SRC.TAG.POINT_ANIM_STEALTH
+	SRC.EVENTS -e_anim_stealth
+	SRC.TAG.anti_mark_recall=0
+	SRC.GO minoc
+ENDIF
+
+ON=@TIMER
+TIMER=-1
+RETURN 1
+
+//LE JOUEUR ENTRE DANS UN NOUVEAU ROUND
+[ITEMDEF i_gate_anim_stealth_depart]
+NAME=Gate Anim Stealth Depart
+ID=i_moongate_red
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=07
+
+ON=@STEP
+IF !<SRC.FINDLAYER.25>
+	VAR.COORD_X = <EVAL 5945 + rand(13)>
+	VAR.COORD_Y = <EVAL 341 + rand(9)>
+	IF !(<SRC.FLAGS>&statf_hidden)
+		SRC.FLAGS = <EVAL <SRC.FLAGS> + 0800000>
+	ENDIF
+	SRC.P <EVAL <VAR.COORD_X>> <EVAL <VAR.COORD_Y>> -22
+	SRC.UPDATE
+ENDIF
+
+//DALLE QUI PRODUIT UNE FUMEE
+[ITEMDEF i_dalle_de_fumee]
+NAME=Dalle de fumee
+ID=049b
+
+ON=@CREATE
+COLOR=0b10
+ATTR=08010
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	IF <TIMER> > 0
+		SRC.NEWITEM i_effet_piege_laby_d7
+		SRC.ACT.P=<EVAL <SRC.P.X>+1>,<EVAL <SRC.P.Y>+1>,<SRC.P.Z>
+	ENDIF
+ENDIF
+TIMER=1
+
+ON=@TIMER
+TIMER=-1
+RETURN 1

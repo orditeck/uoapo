@@ -1,0 +1,78 @@
+//verifier la magie
+[FUNCTION SPELLARGN]
+VAR.SPELLARGN <ARGN> + 0dc000000
+
+[EVENTS e_polymorph]
+ON=@SpellEffect
+SPELLARGN <ARGN>
+IF (<ARGN> == s_dispel) || (<ARGN> == s_mass_dispel)
+	IF (<FINDID.i_polymorph>)
+		FLAGS <FLAGS> &~ statf_polymorph
+		BODY <OBODY>
+		COLOR <OSKIN>
+		FINDID.i_polymorph.REMOVE
+	ENDIF
+ELSEIF (<ARGN> == s_polymorph)
+	IF !(<FLAGS> & (statf_dead|statf_polymorph))
+		FLAGS <FLAGS> | statf_polymorph
+		NEWITEM i_polymorph
+		ACT.MORE2 <TIME>
+		ACT.CONT <UID>
+		ACT.TAG.POLY <TAG.POLY>
+		ACT.TIMER <EVAL (<SRC.MAGERY> / 2)>
+		NEWNPC <TAG.POLY>
+		TAG.NPCTEMPO=<ACT.UID>
+		BODY <ACT.BODY>
+		COLOR <ACT.COLOR>
+		TRY UID.<TAG.NPCTEMPO>.REMOVE
+		UPDATE
+		TAG.POLY
+		RETURN 1
+	ENDIF
+ENDIF
+
+ON=@Death
+IF (<FINDID.i_polymorph>)
+	FLAGS <FLAGS> &~ statf_polymorph
+	BODY <OBODY>
+	COLOR <OSKIN>
+	FINDID.i_polymorph.REMOVE
+ENDIF
+
+ON=@EnvirOnChange
+IF (<FLAGS> & statf_polymorph)
+	BARK
+ENDIF
+
+ON=@CliPeriodic
+IF (<FLAGS> & statf_polymorph)
+	BARK
+ENDIF
+
+[ITEMDEF i_polymorph]
+ID=i_rune_polymorph
+TYPE=t_eq_script
+NAME=mem Polymorph
+
+ON=@Create
+ATTR attr_decay
+
+ON=@Timer
+CONT.FLAGS <CONT.FLAGS> &~ statf_polymorph
+CONT.COLOR <CONT.OSKIN>
+CONT.BODY <CONT.OBODY>
+CONT.UPDATE
+
+[FUNCTION polynew]
+IF !(<ISEVENT.e_polymorph>)
+	EVENTS e_polymorph
+ENDIF
+IF (<FLAGS> & statf_dead)
+	TAG.POLYLEVEL
+ELSEIF (<FLAGS> & statf_polymorph)
+	TAG.POLYLEVEL
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja polymorphe !
+ELSE
+	TAG.POLY <ARGS>
+	POLY <ARGS>
+ENDIF

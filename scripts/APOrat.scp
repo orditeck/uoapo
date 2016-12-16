@@ -1,0 +1,406 @@
+[PLEVEL 1]
+level
+quelx
+
+[FUNCTION LEVEL]
+IF !(STRCMPI("<ARGS>",""))
+    SYSMESSAGEUA 0481 1 1 0 Pour desactiver l'affichage de votre niveau tapez .level off
+    SYSMESSAGEUA 0481 1 1 0 Pour l'activer tapez .level on
+ELSEIF !(STRCMPI("<ARGS>","on"))
+    TITLE= * Level 
+    TITLE=<TITLE> <EVAL <TAG.LEVEL>> *
+    TAG.MONLEVEL=<EVAL <TAG.LEVEL>>
+    SYSMESSAGEUA 0481 1 1 0 Vous activez l'affichage de votre niveau
+ELSEIF !(STRCMPI("<ARGS>","off"))
+    TAG.MONLEVEL=
+    IF <EVAL 0<TAG.COTE>> == 0
+        TITLE=<SEX Humain/Humaine>
+    ELSEIF <EVAL 0<TAG.COTE>> == 1
+        TITLE=<SEX Elu/Elue>
+        IF <EVAL 0<TAG.RENAISSANCE>> == 1
+            TITLE=<TITLE> <EVAL <TAG.RENAISSANCE>> ere renaissance
+        ELSE
+            TITLE=<TITLE> <EVAL <TAG.RENAISSANCE>> eme renaissance
+        ENDIF
+    ELSE
+        TITLE=<SEX Dechu/Dechue>
+        IF <EVAL 0<TAG.RENAISSANCE>> == 1
+            TITLE=<TITLE> <EVAL <TAG.RENAISSANCE>> ere renaissance
+        ELSE
+            TITLE=<TITLE> <EVAL <TAG.RENAISSANCE>> eme renaissance
+        ENDIF
+    ENDIF
+    SYSMESSAGEUA 0481 1 1 0 Vous desactivez l'affichage de votre niveau
+ELSE
+    SYSMESSAGEUA 0481 1 1 0 Pour desactiver l'affichage de votre niveau tapez .level off
+    SYSMESSAGEUA 0481 1 1 0 Pour l'activer tapez .level on
+ENDIF
+
+[EVENTS e_xpmonstre]
+ON=@CLICK
+IF ((<SRC.P.Z> > <EVAL <P.Z> + 15>) || (<SRC.P.Z> < <EVAL <P.Z> - 15>))
+    RETURN 1
+ENDIF
+IF <TAG.NIVEAU>
+    MESSAGE @026 <NAME> [<EVAL <TAG.NIVEAU>>]
+ENDIF
+RETURN 1
+
+ON=@SPELLEFFECT
+//SRC = attaquant
+//[] = victime
+IF ((<ARGN>==20)||(<ARGN>==28)||(<ARGN>==39)
+    IF !<SRC.BRAIN>
+        SRC.SYSMESSAGEUA 0481 1 1 0 Ce sort n'affecte pas la creature
+    ENDIF
+    RETURN 1
+ELSEIF <IS_SORT_BLESSURES <ARGN>>
+    //EARTHQUAKE
+    IF <ARGN> == 57
+        ARGN2 = <EVAL (<ARGN2> * 3) / 2>
+    ELSE
+        ARGN2 = <EVAL <ARGN2> * 2>
+    ENDIF
+ENDIF
+//BONUS SANTE + BONHEUR
+IF <IS_SORT_BLESSURES <ARGN>>
+    ARGN2 = <SRC.CALCULATE_BONUS_DOMMAGES <ARGN2>>
+ENDIF
+IF <IS_SORT_AGRESSIF <ARGN>>
+    SRC.AURA_OFF
+    IF <SRC.ISCHAR>
+        IF <EVAL 0<TAG.TAPER>> > 0
+            TAG.TAPER=<EVAL <TAG.TAPER> - 1>
+            VAR.EXPGAIN=<EVAL (<TAG.XPCOUP> * 11) / 10>
+            SRC.GAIN_EXP <TAG.NIVEAU>
+        ENDIF
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@GETHIT
+//SRC = attaquant
+//[] = victime
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT = <SRC.UID>
+IF <SRC.BRAIN>
+    IF <SRC.ACT.FINDID.i_rune_summon_creature>
+        IF <SRC.ACT.FINDID.i_rune_summon_creature.LINK.CANSEE>==1
+            SRC.ACT=<SRC.ACT.FINDID.i_rune_summon_creature.LINK>
+        ENDIF
+    ELSE IF <SRC.ACT.FINDID.i_vire_creature>
+        IF !<SRC.ACT.FINDID.i_vire_creature.LINK.BRAIN>
+            SRC.ACT=<SRC.ACT.FINDID.i_vire_creature.LINK>
+        ENDIF
+    ENDIF
+ENDIF
+IF <SRC.ACT.ISCHAR>
+    IF <EVAL 0<TAG.TAPER>> > 0
+        TAG.TAPER=<EVAL <TAG.TAPER> - 1>
+        VAR.EXPGAIN=<EVAL (<TAG.XPCOUP> * 11) / 10>
+        SRC.ACT.GAIN_EXP <TAG.NIVEAU>
+    ENDIF
+    SRC.ACT.AURA_OFF
+ENDIF
+SRC.ACT = <VAR.ACTSAVE>
+VAR.ACTSAVE
+RETURN 0
+
+ON=@DEATH
+//ACT = SRC.ACT = tueur
+//SRC = [] = mort
+IF <SRC.ACT.BRAIN>
+    IF <SRC.ACT.FINDID.i_rune_summon_creature>
+        IF <SRC.ACT.FINDID.i_rune_summon_creature.LINK.CANSEE>==1
+            SRC.ACT=<SRC.ACT.FINDID.i_rune_summon_creature.LINK>
+        ENDIF
+    ELSE IF <SRC.ACT.FINDID.i_vire_creature>
+        IF !<SRC.ACT.FINDID.i_vire_creature.LINK.BRAIN>
+            SRC.ACT=<SRC.ACT.FINDID.i_vire_creature.LINK>
+        ENDIF
+    ENDIF
+ENDIF
+IF <SRC.FINDID.m_jeton_niveau_arene>
+    IF <SRC.FINDID.m_jeton_niveau_arene.LINK>==<SRC.ACT.UID>
+        IF <EVAL <SRC.FINDID.m_jeton_niveau_arene.TAG.NIVEAUDIFFICULTE>> > <EVAL <SRC.ACT.TAG.NIVEAUCOLYSEE>>
+            SRC.ACT.TAG.NIVEAUCOLYSEE=<EVAL <SRC.FINDID.m_jeton_niveau_arene.TAG.NIVEAUDIFFICULTE>>
+        ENDIF
+    ENDIF
+    SRC.FINDID.m_jeton_niveau_arene.LINK=04c37f
+    SRC.FINDID.m_jeton_niveau_arene.LINK.TAG.MONSTRELANCE=<EVAL <SRC.FINDID.m_jeton_niveau_arene.LINK.TAG.MONSTRELANCE>-1>
+ENDIF
+
+IF <SRC.ACT.ISCHAR>
+    VAR.EXPGAIN = <EVAL <SRC.TAG.XPMORT> + (<SRC.TAG.TAPER> * <SRC.TAG.XPCOUP>)>
+    VAR.EXPGAIN=<EVAL (<VAR.EXPGAIN>*11)/10>
+    VAR.CASHGAIN=<EVAL (<SRC.TAG.XPMORT> / 81) + RAND(1,10)>
+    VAR.ISMORT=1
+    SRC.ACT.DONNEUR_EXP_EQUIPE <SRC.UID>
+    VAR.EXPGAIN
+    VAR.CASHGAIN
+    VAR.ISMORT
+ENDIF
+RETURN 0
+
+//DEFAULT : MONSTRE
+//SRC : PERSO FRAPPE
+ON=@HIT
+IF <IS_ESQUIVE <SRC.UID>>
+    RETURN 1
+ENDIF
+RETURN 0
+
+[FUNCTION GAIN_NIVEAU]
+TAG.XP=0
+TAG.MILLEXP=0
+TAG.LEVEL=<EVAL <TAG.LEVEL> + 1>
+SYSMESSAGEUA 0481 1 1 0 Vous avez gagne un niveau !
+TITLE= * Level 
+TITLE=<TITLE> <EVAL <TAG.LEVEL>> *
+TAG.PTSSTAT=<EVAL 0<TAG.PTSSTAT> + 5>
+TAG.PTSSKILLS=<EVAL 0<TAG.PTSSKILLS> + 5>
+
+[FUNCTION IS_GAIN_NIVEAU_PP_10]
+IF (<EVAL <TAG.XP>>) > (<EVAL 2500 + 500*<EVAL <TAG.LEVEL>>>)
+    GAIN_NIVEAU
+    IF <EVAL 0<TAG.LEVEL>> == 9
+        TAG.XPDEBUTLVL=7000
+    ENDIF
+ENDIF
+
+//EXEMPLE 10523 XP ==> 523 XP + 10 MILLEXP
+[FUNCTION EXP_VERS_MILLEXP]
+IF <EVAL 0<TAG.XP>> > 999
+    VAR.NUMERATEUR_CONVERSION=<EVAL <TAG.XP>/1000>
+    TAG.MILLEXP=<EVAL 0<TAG.MILLEXP> + <VAR.NUMERATEUR_CONVERSION>>
+    TAG.XP=<EVAL <TAG.XP> - (<VAR.NUMERATEUR_CONVERSION>*1000)>
+    VAR.NUMERATEUR_CONVERSION
+ENDIF
+
+
+/////////////////// ZAK
+/////////////////// ET ORDI
+
+[FUNCTION EXP_VERS_MILLEXP_ARG]
+IF <EVAL 0<ARGS>> > 999999
+    VAR.INITIAL = <EVAL <ARGS>>
+    VAR.MILLION = <EVAL <VAR.INITIAL>/1000000>
+    VAR.RESTE = <EVAL (<VAR.INITIAL> - (<EVAL <VAR.MILLION>*1000000>))>
+    VAR.MILLE = <EVAL <VAR.RESTE>/1000>
+    VAR.RESTE = <EVAL (<VAR.RESTE> - (<EVAL <VAR.MILLE>*1000>))>
+    VAR.CENT = <EVAL <VAR.RESTE>/100>
+    ARGS = <EVAL <VAR.MILLION>>m<EVAL <VAR.MILLE>>k<EVAL <VAR.CENT>>
+ELSEIF <EVAL 0<ARGS>> > 999
+    VAR.INITIAL = <EVAL <ARGS>>
+    VAR.MILLE = <EVAL <VAR.INITIAL>/1000>
+    VAR.RESTE = <EVAL (<VAR.INITIAL> - (<EVAL <VAR.MILLE>*1000>))>
+    VAR.CENT = <EVAL <VAR.RESTE>/100>
+    ARGS = <EVAL <VAR.MILLE>>k<EVAL <VAR.CENT>>
+ELSE
+    ARGS = <EVAL 0<ARGS>> points
+ENDIF
+RETURN <ARGS>
+
+[FUNCTION QUELX]
+
+MODXP_TO_RECEIVE
+VAR.XP_REMAINING_TO_RECEIVE = <EVAL <VAR.XP_TO_RECEIVE>> - <EVAL <VAR.SHOWABLE_XP_RECEVED>>
+VAR.PRETTY_XP_REMAINING = <EXP_VERS_MILLEXP_ARG <VAR.XP_REMAINING_TO_RECEIVE>>
+
+IF ( <EVAL <SRC.FINDID.m_timer_xp.TIMER>> > 3600 )
+    VAR.INITIAL_TIMER = <SRC.FINDID.m_timer_xp.TIMER>
+    VAR.HEURES = <EVAL ((<VAR.INITIAL_TIMER> / 60) / 60)>
+    VAR.SECONDES = <EVAL ((<VAR.HEURES> * 60) * 60)>
+    VAR.MINUTES_REMAINING = <EVAL ((<VAR.INITIAL_TIMER> - <VAR.SECONDES>) / 60)>
+    VAR.PRETTY_TIMER = <EVAL <VAR.HEURES>> heures <EVAL <VAR.MINUTES_REMAINING>> minutes
+ELSE
+    VAR.PRETTY_TIMER = <EVAL (<SRC.FINDID.m_timer_xp.TIMER> / 60)> minutes
+ENDIF
+
+IF <EVAL <TAG.LAST_X_WAS>> == 1
+    SYSMESSAGEUA 0481 1 1 0 Votre bonus est termine pour aujourd'hui. Votre prochain bonus x4 sera disponible dans <VAR.PRETTY_TIMER>.
+ELSE
+    SYSMESSAGEUA 0481 1 1 0 Vous etes actuellement en mode x<EVAL <TAG.LAST_X_WAS>>. Il vous reste <VAR.PRETTY_XP_REMAINING> d'experiences au mode actuel avant de tomber au mode suivant. Votre prochain bonus x4 sera disponible dans <VAR.PRETTY_TIMER>.
+ENDIF
+
+
+[FUNCTION MODXP_TO_RECEIVE]
+
+// Verifie que le timer existe, sinon on le cree
+// Je l'ai mis a la connexion du perso, mais je le met ici aussi, au cas ou 
+// le joueur resterait co 3 jours de temps
+IF !(<SRC.FINDID.m_timer_xp>)
+    VAR.ACTSAVE = <SRC.ACT.UID>
+    SRC.NEWITEM m_timer_xp
+    SRC.ACT.CONT = <SRC.UID>
+    SRC.TAG.MODXP_RECEIVED = 0
+    SRC.TAG.LAST_X_WAS = 4
+    SRC.ACT = <VAR.ACTSAVE>
+    VAR.ACTSAVE
+ENDIF
+
+// MODXP_RECEIVED est a zero, ce qui veut dire qu'il faut determiner
+// combien d'exp on a droit a chaque mode pour les prochains 23h30
+IF <EVAL 0<TAG.MODXP_RECEIVED>> == 0
+
+    // En haut du lvl 88, tomber en "mille xp"
+    IF <EVAL 0<TAG.LEVEL>> > 88
+        VAR.XPDEBUTLVLAJUSTE = <EVAL <TAG.XPDEBUTLVL> * 1000>
+    ELSE
+        VAR.XPDEBUTLVLAJUSTE = <TAG.XPDEBUTLVL>
+    ENDIF
+
+    // On definie l'exp à recevoir pour chaque palier
+    // 65614 = exp combiné des 15 premiers nya le timiveaux avec le multiplicateur 1.4
+    TAG.XP_TO_RECEIVE_X4 = (<EVAL((65614 + (<EVAL 0<VAR.XPDEBUTLVLAJUSTE>> / 10)) + <EVAL <TAG.LEVEL>*500>)>)
+    TAG.XP_TO_RECEIVE_X3 = (<EVAL((65614 + (<EVAL 0<VAR.XPDEBUTLVLAJUSTE>> / 8)) + <EVAL <TAG.LEVEL>*1500>)>)
+    TAG.XP_TO_RECEIVE_X2 = (<EVAL((65614 + (<EVAL 0<VAR.XPDEBUTLVLAJUSTE>> / 5)) + <EVAL <TAG.LEVEL>*2500>)>)
+
+    // Encore un petit boost de plus de humain a x5, lvl en dessous de 80
+    IF ( (<EVAL <TAG.LEVEL>> < 80) && (<EVAL 0<TAG.RENAISSANCE>> <= 5) )
+
+        // Attribue le multiplicateur en fonction de la renaissance
+        IF ( <EVAL 0<TAG.RENAISSANCE>> < 1) 
+            VAR.MULTIPLICATEUR = 140
+        ELSEIF (<EVAL 0<TAG.RENAISSANCE>> == 1) 
+            VAR.MULTIPLICATEUR = 130 
+        ELSEIF (<EVAL 0<TAG.RENAISSANCE>> == 2) 
+            VAR.MULTIPLICATEUR = 120 
+        ELSEIF (<EVAL 0<TAG.RENAISSANCE>> == 3) 
+            VAR.MULTIPLICATEUR = 115
+        ELSEIF (<EVAL 0<TAG.RENAISSANCE>> == 4) 
+            VAR.MULTIPLICATEUR = 110 
+        ELSEIF (<EVAL 0<TAG.RENAISSANCE>> == 5) 
+            VAR.MULTIPLICATEUR = 105 
+        END IF
+
+        TAG.XP_TO_RECEIVE_X4 = <EVAL (<EVAL <TAG.XP_TO_RECEIVE_X4>> * <EVAL <VAR.MULTIPLICATEUR>>) / 100>
+        TAG.XP_TO_RECEIVE_X3 = <EVAL (<EVAL <TAG.XP_TO_RECEIVE_X3>> * <EVAL <VAR.MULTIPLICATEUR>>) / 100>
+        TAG.XP_TO_RECEIVE_X2 = <EVAL (<EVAL <TAG.XP_TO_RECEIVE_X2>> * <EVAL <VAR.MULTIPLICATEUR>>) / 100>
+
+    ENDIF
+ENDIF
+
+VAR.TOTAL_XP_X3 = <EVAL <TAG.XP_TO_RECEIVE_X4>> + <EVAL <TAG.XP_TO_RECEIVE_X3>>
+VAR.TOTAL_XP_X2 = <EVAL <VAR.TOTAL_XP_X3>> + <EVAL <TAG.XP_TO_RECEIVE_X2>>
+
+//SYSMESSAGEUA 0481 1 1 0 X4 net: <EVAL <TAG.XP_TO_RECEIVE_X4>>
+//SYSMESSAGEUA 0481 1 1 0 X3 net: <EVAL <TAG.XP_TO_RECEIVE_X3>>
+//SYSMESSAGEUA 0481 1 1 0 X2 net: <EVAL <TAG.XP_TO_RECEIVE_X2>>
+//SYSMESSAGEUA 0481 1 1 0 X4 tot: <EVAL <TAG.XP_TO_RECEIVE_X4>>
+//SYSMESSAGEUA 0481 1 1 0 X3 tot: <EVAL <VAR.TOTAL_XP_X3>>
+//SYSMESSAGEUA 0481 1 1 0 X2 tot: <EVAL <VAR.TOTAL_XP_X2>>
+
+IF ( <EVAL 0<TAG.MODXP_RECEIVED>> <= <EVAL <TAG.XP_TO_RECEIVE_X4>> )
+    IF ( (<IS_DETAIL_JOURNAL_PLAYER_FLAG detail_flags_exp_boost> == 1) && (<EVAL 0<TAG.LAST_X_WAS>> != 4) )
+        SYSMESSAGEUA 0481 1 1 0 Vous etes maintenant en mode x4 pour les prochains <EVAL 0<TAG.XP_TO_RECEIVE_X4>> points d'experience.
+    ENDIF
+    TAG.LAST_X_WAS = 4
+    VAR.SHOWABLE_XP_RECEVED = <EVAL 0<TAG.MODXP_RECEIVED>>
+    VAR.XP_TO_RECEIVE = <EVAL <TAG.XP_TO_RECEIVE_X4>>
+ELSEIF ( <EVAL 0<TAG.MODXP_RECEIVED>> <= <EVAL <VAR.TOTAL_XP_X3>> )
+    IF ( (<IS_DETAIL_JOURNAL_PLAYER_FLAG detail_flags_exp_boost> == 1) && (<EVAL 0<TAG.LAST_X_WAS>> != 3) )
+        SYSMESSAGEUA 0481 1 1 0 Vous etes maintenant en mode x3 pour les prochains <EVAL 0<TAG.XP_TO_RECEIVE_X3>> points d'experience.
+    ENDIF
+    TAG.LAST_X_WAS = 3
+    VAR.SHOWABLE_XP_RECEVED = <EVAL 0<TAG.MODXP_RECEIVED>> - <EVAL 0<TAG.XP_TO_RECEIVE_X4>>
+    VAR.XP_TO_RECEIVE = <EVAL <TAG.XP_TO_RECEIVE_X3>>
+ELSEIF ( <EVAL 0<TAG.MODXP_RECEIVED>> <= <EVAL <VAR.TOTAL_XP_X2>> )
+    IF ( (<IS_DETAIL_JOURNAL_PLAYER_FLAG detail_flags_exp_boost> == 1) && (<EVAL 0<TAG.LAST_X_WAS>> != 2) )
+        SYSMESSAGEUA 0481 1 1 0 Vous etes maintenant en mode x2 pour les prochains <EVAL 0<TAG.XP_TO_RECEIVE_X2>> points d'experience.
+    ENDIF
+    TAG.LAST_X_WAS = 2
+    VAR.SHOWABLE_XP_RECEVED = (<EVAL 0<TAG.MODXP_RECEIVED>> - <EVAL 0<TAG.XP_TO_RECEIVE_X4>>) - <EVAL 0<TAG.XP_TO_RECEIVE_X3>>
+    VAR.XP_TO_RECEIVE = <EVAL <TAG.XP_TO_RECEIVE_X2>>
+ELSE
+    TAG.LAST_X_WAS = 1
+    VAR.XP_TO_RECEIVE = 0
+ENDIF
+
+VAR.TOTAL_XP_X3
+VAR.TOTAL_XP_X2
+VAR.REALXPDEBUTLVL
+
+
+[FUNCTION MODXP]
+MODXP_TO_RECEIVE
+
+VAR.TOTAL_XP_X3 = <EVAL <TAG.XP_TO_RECEIVE_X4>> + <EVAL <TAG.XP_TO_RECEIVE_X3>>
+VAR.TOTAL_XP_X2 = <EVAL <VAR.TOTAL_XP_X3>> + <EVAL <TAG.XP_TO_RECEIVE_X2>>
+
+// Calcul le multiplicateur de l'exp + multiplicateur de renai
+IF ( <EVAL 0<TAG.MODXP_RECEIVED>> < <EVAL <TAG.XP_TO_RECEIVE_X4>> )
+    VAR.EXPGAIN = <EVAL 0<VAR.EXPGAIN>> * 4
+ELSEIF ( <EVAL 0<TAG.MODXP_RECEIVED>> < <EVAL <VAR.TOTAL_XP_X3>> )
+    VAR.EXPGAIN = <EVAL 0<VAR.EXPGAIN>> * 3
+ELSEIF ( <EVAL 0<TAG.MODXP_RECEIVED>> < <EVAL <VAR.TOTAL_XP_X2>> )
+    VAR.EXPGAIN = <EVAL 0<VAR.EXPGAIN>> * 2 
+ENDIF
+
+// On augmente de façon global l'exp de 1 fois et demi.
+VAR.EXPGAIN = <EVAL (<VAR.EXPGAIN> * 150) / 100>
+TAG.MODXP_RECEIVED = <EVAL 0<TAG.MODXP_RECEIVED>> + <EVAL 0<VAR.EXPGAIN>>
+
+VAR.TOTAL_XP_X3
+VAR.TOTAL_XP_X2
+    
+
+[FUNCTION MODCASH]
+    VAR.CASHGAIN=<EVAL (<VAR.CASHGAIN> * 128) / 100>
+    
+    ///////////////////////////////////FIN
+    ///////////////////////////////////ZAK
+    
+//<VAR.EXPGAIN> ; <VAR.CASHGAIN> ; <ARGS>=LEVEL REQUIS
+//DEFAULT:joueur
+[FUNCTION GAIN_EXP]
+IF !<BRAIN>
+
+    IF <EVAL 0<TAG.LEVEL>> >= <EVAL 0<ARGS>>
+
+        MODXP
+
+        IF <IS_DETAIL_JOURNAL_PLAYER_FLAG detail_flags_exp_gain> == 1
+            SYSMESSAGEUA 0481 1 1 0 Vous gagnez <EVAL 0<VAR.EXPGAIN>> exp !
+        ENDIF
+        TAG.XP=<EVAL 0<TAG.XP> + 0<VAR.EXPGAIN>>
+        //CALCUL DU LEVEL SUIVANT
+        IF <EVAL 0<TAG.LEVEL>> < 9
+            TAG.XPDEBUTLVL (<EVAL 2500 + 500*<EVAL <TAG.LEVEL>>>)
+            IS_GAIN_NIVEAU_PP_10
+        ELSEIF <EVAL 0<TAG.LEVEL>> <88
+            IF <EVAL <TAG.XP>> > <EVAL <TAG.XPDEBUTLVL>>
+                TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> * 1074) / 1000>
+                GAIN_NIVEAU
+            ENDIF
+        ELSEIF <EVAL 0<TAG.LEVEL>> == 88
+            IF <EVAL <TAG.XP>> > <EVAL <TAG.XPDEBUTLVL>>
+                TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> * 1074) / 1000>
+                TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> / 1000)>
+                GAIN_NIVEAU
+            ENDIF
+        ELSE
+            EXP_VERS_MILLEXP
+            IF <EVAL <TAG.MILLEXP>> > <EVAL <TAG.XPDEBUTLVL>>
+                TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> * 1074) / 1000>
+                GAIN_NIVEAU
+            ENDIF
+        ENDIF
+    ENDIF
+
+    //CALCUL DU CASH
+    IF <EVAL 0<VAR.CASHGAIN>> > 0
+        MODCASH
+        NEWITEM i_GOLD
+        ACT.AMOUNT=<VAR.CASHGAIN>
+        ACT.CONT=<UID>
+        IF <IS_DETAIL_JOURNAL_PLAYER_FLAG detail_flags_cash_gain> == 1
+            SYSMESSAGEUA 0481 1 1 0 Vous recevez <EVAL <VAR.CASHGAIN>> pieces d'or
+        ENDIF
+    ENDIF
+
+    //MESSAGE MOB LVL TROP HAUT POUR DONNER DE LEXP
+    IF ((<EVAL 0<TAG.LEVEL>> < <EVAL 0<ARGS>>) && (<EVAL <VAR.ISMORT>> == 1))
+        SYSMESSAGEUA 0481 1 1 0 Bien que vous vainquiez, aucune exp ne peut etre attribuee. Le niveau minimum pour obtenir de l'exp de ce monstre est <EVAL 0<ARGS>>.
+    END IF
+ENDIF

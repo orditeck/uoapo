@@ -1,0 +1,72 @@
+Bol de carrotes : i_bowl_wood_carrots
+Bol de mais : i_bowl_wood_corn
+Bol de salade : i_bowl_wood_lettuce
+Bol de pois : i_bawl_wood_peas
+Bol de patates : i_bowl_pewter_potatoes
+Casserole de Ragout : i_bowl_stew_lg
+Soupe de tomate : i_bowl_tomato_soup
+Cuisse de poulet ( non cuite) : i_chicken_leg_raw
+Cuisse de poulet (cuite) : i_chicken_leg
+Pied d'agneau (non cuit) : i_lamb_leg_raw
+Pied d'agneau (cuit) : i_lamb_leg$
+Banane : i_fruit_banana
+Régime de Banane : i_banana_bunch
+Noix de coco (ouverte) : i_coconut_unpeeled
+Noix de coco (fermé) : i_fruit_coconut
+Grappe de dates : i_fruit_dates
+Citron : i_lemon_halved
+Citron vert : i_fruit_lime
+Peche : 0172c
+Poire : 0172d
+Corp de poisson ( non cuit + Sans tête) : i_fish_raw
+Corp de poisson ( cuit + sans tête) : i_fish_cooked
+Tranche de jambon : i_ham_slices
+Morceau de bacon : i_bacon_slab
+Tranche de bacon : i_bacon_slice
+Tranche de poisson ( non cuit) : i_fish_cut_raw
+Tranche de poisson (cuit) : i_fish_cut_cooked
+Roue de fromage : i_cheese_weel
+Panier de fruit : i_basket_fruit
+Pomme : i_fruit_apple
+Assiette de nourriture : i_plate_food
+Assiette de nourriture ( sale) : i_plate_dirty
+Oeuf ( non cuit) : i_eggs_fresh
+Oeuf ( cuit) : i_eggs fried
+Coquilles d'oeuf : i_eggshells
+Poulet grille : i_bird_cooked
+Poulet ( non cuit) : i_bird_raw
+Porc roti : i_pig_roast
+Saucisses : i_sausages
+Jambon : i_ham
+Grappe de raisin: i_fruit_grapes
+Viande ( non cuite) : i_ribs_raw
+Viande (cuite) : i_ribs_cooked
+Pizza : i_pizza
+Pizza ( pas cuit) : i_pizza_uncooked
+Pain : i_bread_wonder
+Mélange a biscuit ( dans un bol) : i_cookie_mix
+Plat de biscuit : i_plate_cookies
+Plateau de biscuit : i_pan_cookies
+Tarte (pas cuite) : i_pie_unbaked
+Tarte ( cuite) : i_pie_baked
+Beignets : i_donuts
+Baguettes francaises : i_bread_french
+Gateau : i_cake
+Muffin  (1): i_muffin
+Muffins (2) : i_muffins_2
+Muffins (3)  : i_muffins
+Jarre de miel : i_jar_honey
+Pasteque : i_fruit_watermelon
+Gourd ( jaune) : i_fruit_gourd1
+Gourd (vert) : i_fruit_gourd2
+Citrouille : i_fruit_pumkin
+Oignon : i_fruit_onion
+Salade : i_fruit_lettuce
+Courgette : i_fruit_squash
+Melon : i_fruit_honeydewmelon
+Carotte :i_fruit_carrot
+Potiron : i_fruit_canteloupe
+Chou : i_fruit_cabbage
+Mais : i_fruit_corn
+Navet : i_fruit_turnip
+

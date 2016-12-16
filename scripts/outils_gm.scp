@@ -1,0 +1,1430 @@
+[PLEVEL 2]
+XGO
+AQUI
+DEBUGBA
+QUI
+SHOWACTION
+
+[PLEVEL 3]
+XATTR
+XCOLOR
+MONTER
+BOUGER
+DEPOSER
+
+[PLEVEL 4]
+XSAY
+XEMOTE
+XMORE1
+XMORE2
+XMOREX
+XMOREY
+XMOREZ
+XMOREP
+XTIMER
+
+[PLEVEL 6]
+GMDETAIL
+
+[PLEVEL 7]
+test_s
+levelup
+leveldown
+COPIE_ATTRIBUTS_ITEM_DUPEUR
+ADMIN_PERCE_TROUS_ARMURES
+
+[FUNCTION GAIN_NIVEAU_2]
+IF <EVAL 0<TAG.LEVEL>> > 7
+	IF <TAG.LEVEL> == 8
+		TAG.XPDEBUTLVL=7000
+	ELSEIF <TAG.LEVEL> < 88
+		TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> * 1074) / 1000>
+	ELSEIF <TAG.LEVEL> == 88
+		TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> * 1074) / 1000>
+		TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> / 1000)>
+	ELSE
+		TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> * 1074) / 1000>
+	ENDIF
+ENDIF
+TAG.XP=0
+TAG.MILLEXP=0
+TAG.LEVEL=<EVAL <TAG.LEVEL> + 1>
+SYSMESSAGEUA 0481 1 1 0 Vous avez gagne un niveau !
+TITLE= * Level 
+TITLE=<TITLE> <EVAL <TAG.LEVEL>> *
+TAG.PTSSTAT=<EVAL 0<TAG.PTSSTAT> + 5>
+TAG.PTSSKILLS=<EVAL 0<TAG.PTSSKILLS> + 5>
+
+[FUNCTION LEVELUP]
+NEWITEM i_function_levelup
+ACT.EQUIP
+ACT.USE
+
+[ITEMDEF i_function_levelup] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur dont vous souhaitez monter son niveau
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.TARG.GAIN_NIVEAU_2
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> :  <SRC.TARG.UID>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[FUNCTION PERTE_NIVEAU_2]
+debogage_nosrc
+IF <EVAL 0<TAG.LEVEL>> > 7
+	IF <TAG.LEVEL> == 8
+		TAG.XPDEBUTLVL=7000
+	ELSEIF <TAG.LEVEL> < 88
+		TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> * 1074) / 1000>
+	ELSEIF <TAG.LEVEL> == 88
+		TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> * 1074) / 1000>
+		TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> / 1000)>
+	ELSE
+		TAG.XPDEBUTLVL = <EVAL (<TAG.XPDEBUTLVL> * 1074) / 1000>
+	ENDIF
+ENDIF
+TAG.XP=0
+TAG.MILLEXP=0
+TAG.LEVEL=<EVAL <TAG.LEVEL> - 1>
+SYSMESSAGEUA 0481 1 1 0 Vous avez perdu un niveau !
+TITLE= * Level 
+TITLE=<TITLE> <EVAL <TAG.LEVEL>> *
+TAG.PTSSTAT=<EVAL 0<TAG.PTSSTAT> - 5>
+TAG.PTSSKILLS=<EVAL 0<TAG.PTSSKILLS> - 5>
+
+[FUNCTION LEVELDOWN]
+NEWITEM i_function_leveldown
+ACT.EQUIP
+ACT.USE
+
+[ITEMDEF i_function_leveldown] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur dont vous souhaitez descendre son niveau
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+//SRC.TARG.PERTE_NIVEAU_2
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> :  <SRC.TARG.UID>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+[FUNCTION ADMIN_TROUER_ARMURE]
+IF 0<SRC.TARG.MOREZ>==0
+	TAG.TROUS=<ARGS>
+	SRC.TARG.MOREZ=1
+	SRC.EMOTE percer <SRC.TARG.NAME> de <EVAL <TAG.TROUS>> trous
+	SRC.TARG.TAG.NOM=<SRC.TARG.NAME>
+	IF <EVAL <TAG.TROUS>>==0
+		SRC.TARG.TAG.SUFFIXE1=
+		SRC.TARG.TAG.SUFFIXE2=
+		SRC.TARG.TAG.SUFFIXE3=
+		SRC.TARG.TAG.SUFFIXE4=
+		SRC.TARG.TAG.SUFFIXE5=
+	ELSEIF <EVAL <TAG.TROUS>>==1
+		SRC.TARG.TAG.SUFFIXE1=[x]
+		SRC.TARG.TAG.SUFFIXE2=
+		SRC.TARG.TAG.SUFFIXE3=
+		SRC.TARG.TAG.SUFFIXE4=
+		SRC.TARG.TAG.SUFFIXE5=
+	ELSEIF <EVAL <TAG.TROUS>>==2
+		SRC.TARG.TAG.SUFFIXE1=[x]
+		SRC.TARG.TAG.SUFFIXE2=[x]
+		SRC.TARG.TAG.SUFFIXE3=
+		SRC.TARG.TAG.SUFFIXE4=
+		SRC.TARG.TAG.SUFFIXE5=
+	ELSEIF <EVAL <TAG.TROUS>>==3
+		SRC.TARG.TAG.SUFFIXE1=[x]
+		SRC.TARG.TAG.SUFFIXE2=[x]
+		SRC.TARG.TAG.SUFFIXE3=[x]
+		SRC.TARG.TAG.SUFFIXE4=
+		SRC.TARG.TAG.SUFFIXE5=
+	ELSEIF <EVAL <TAG.TROUS>>==4
+		SRC.TARG.TAG.SUFFIXE1=[x]
+		SRC.TARG.TAG.SUFFIXE2=[x]
+		SRC.TARG.TAG.SUFFIXE3=[x]
+		SRC.TARG.TAG.SUFFIXE4=[x]
+		SRC.TARG.TAG.SUFFIXE5=
+	ELSE
+		SRC.TARG.TAG.SUFFIXE1=[x]
+		SRC.TARG.TAG.SUFFIXE2=[x]
+		SRC.TARG.TAG.SUFFIXE3=[x]
+		SRC.TARG.TAG.SUFFIXE4=[x]
+		SRC.TARG.TAG.SUFFIXE5=[x]
+	ENDIF
+	SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+	SRC.TARG.TAG.NBREGMAX=<EVAL <TAG.TROUS>>
+	SRC.TARG.TAG.NBREG=0
+	SRC.TARG.TAG.BRICOLEUR=<SRC.UID>
+	TAG.TROUS
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas percer cet objet car il a ete fragilise par une precedente tentative de percage
+ENDIF
+
+
+
+[ITEMDEF i_function_admin_perce_trous] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez l'item a percer <MORE1> trous
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.ADMIN_TROUER_ARMURE <MORE1>
+IF <MORE2> == 0
+	SRC.TARG.TAG.ARME=2
+ELSE
+	SRC.TARG.TAG.ARME=1
+ENDIF
+SYSMESSAGEUA 0481 1 1 0 Il manque : TAG.BRICOLEUR
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+[FUNCTION ADMIN_PERCE_TROUS_ARMURES]
+IF <SRC.ACCOUNT.PLEVEL> >= 7
+	IF (STRCMPI("<ARGS>",""))
+		NEWITEM i_function_admin_perce_trous
+		ACT.MORE2 = 0
+		ACT.MORE1 = <ARGS>
+		ACT.EQUIP
+		ACT.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Entrer le nb de trous a percer en parametre
+	ENDIF
+ENDIF
+RETURN 1
+
+
+[FUNCTION TEST_S]
+SERV.LOG test
+//SERV.B test : <UID.040001beb.GET_NOM_MISE_POKER_HOLD_EM>
+
+//UID.040001beb.TAG.JOUE1=0b6a09
+//UID.040001beb.TAG.JOUEUR1=0b6a09
+//UID.040001beb.TAG.ETAT_J=1
+//UID.040001beb.TAG.ETAT=2
+
+//UID.040001beb.TAG.POS_JOUEUR1=1
+//UID.040001beb.TAG.POS_JOUEUR2=2
+//UID.040001beb.TAG.POS_JOUEUR3=2
+//UID.040001beb.TAG.POS_JOUEUR4=2
+//UID.040001beb.TAG.POS_JOUEUR5=2
+//UID.040001beb.TAG.POS_JOUEUR6=2
+//UID.040001beb.TAG.POS_JOUEUR7=2
+//UID.040001beb.TAG.POS_JOUEUR8=2
+
+//UID.040001beb.TAG.MISE1=0400223f6
+//UID.040001beb.TAG.MISE2=0400223b3
+//UID.040001beb.TAG.MISE3=0400223b2
+//UID.040001beb.TAG.MISE4=0400223b6
+//UID.040001beb.TAG.MISE5=0400223b7
+//UID.040001beb.TAG.MISE6=0400223b8
+//UID.040001beb.TAG.MISE7=0400223ba
+//UID.040001beb.TAG.MISE8=0400223bb
+
+//UID.0400223f6.MORE1 = 5000
+
+//UID.040001beb.DISTRIBUER_GAINS_POKER_HOLD_EM
+
+//SRC.NEWITEM m_enigme_dongeon_humain_1
+//SRC.ACT.EQUIP
+//SRC.ACT.DIALOG D_ENIGME_CHIFFRE
+
+//SYSMESSAGE quinte couleur : <IS_POKER_QUINTE_COULEUR>
+//SYSMESSAGE carre : <IS_POKER_CARRE>
+//SYSMESSAGE main pleine : <IS_POKER_MAIN_PLEINE>
+//SYSMESSAGE couleur : <IS_POKER_COULEUR>
+//SYSMESSAGE quinte : <IS_POKER_QUINTE>
+//SYSMESSAGE brelan : <IS_POKER_BRELAN>
+//SYSMESSAGE 2 paires : <IS_POKER_DEUX_PAIRES>
+//SYSMESSAGE paire : <IS_POKER_PAIRE>
+//SYSMESSAGE carte haute : <IS_POKER_CARTE_HAUTE>
+
+//SYSMESSAGE meilleur jeu : <POKER_HAND_RANK>
+
+RETURN 1
+
+
+[FUNCTION TOTO_BLBL]
+ARGS=<UID>
+TRYP 0 UID.<ARGS>.SAY allo
+
+
+[ITEMDEF i_baton_teleportation]
+NAME=Baton de teleportation
+ID=i_staff_black
+WEIGHT=5000
+
+ON=@CREATE
+COLOR=0481
+HITPOINTS={5 10}
+ATTR=attr_newbie|attr_move_never|attr_magic
+
+ON=@DCLICK
+LINK=04fffffff
+IF 0<SRC.ACCOUNT.PLEVEL><2
+	REMOVE
+ELSE
+	TARGET Select the player you would like to move.
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGE You cannot move <SRC.TARG.NAME> or any other item.
+RETURN 1
+
+ON=@TARGON_CHAR
+LINK=<SRC.TARG.UID>
+TARGETG Where would you like to move <SRC.TARG.NAME>?
+RETURN 1
+
+ON=@TARGON_GROUND
+LINK.GO <SRC.TARGP>
+LINK=04fffffff
+RETURN 1
+
+CATEGORY=Outil Staff
+SUBSECTION=Outil Aide
+DESCRIPTION=Baton de teleportation
+
+
+//******************************
+//******COFFRE DE BANQUE********
+//******************************
+
+
+[ITEMDEF i_coffre_banque] 
+DEFNAME=i_coffre_banque
+NAME=Coffre de banque
+ID=i_box_brass
+
+CATEGORY=Genese
+SUBSECTION=Coffre
+DESCRIPTION=Coffre de banque
+
+ON=@CREATE
+COLOR=03e9
+
+ON=@DCLICK 
+SRC.BANK
+RETURN 1
+
+ON=@DROPON_SELF
+SRC.SYSMESSAGE @026 Vous ne pouvez pas deposer d'objet dans un coffre de banque
+RETURN 1
+
+//******************************
+//*************QUI**************
+//******************************
+[FUNCTION qui]
+NEWITEM i_qui
+ACT.EQUIP
+ACT.USE
+
+[ITEMDEF i_qui] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur dont vous souhaitez connaitre l'identifiant
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> :  <SRC.TARG.UID>
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//*********SHOWACTION***********
+//******************************
+[FUNCTION SHOWACTION]
+IF <SRC.ACCOUNT.PLEVEL> >= 2
+	NEWITEM m_fonction_action
+	ACT.EQUIP
+	ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_fonction_action]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=fnmetier
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 De quel joueur voulez-vous connaitre son action?
+TARGET
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Le sol ne fait aucun action
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> est en train de : <SRC.TARG.ACTION>
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> est un objet inerte !
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//************AQUI**************
+//******************************
+
+[FUNCTION aqui]
+SYSMESSAGEUA 0481 1 1 0 Selectionnez l'objet dont vous souhaitez connaitre le proprietaire.
+NEWITEM i_deed_qui
+ACT.EQUIP
+ACT.USE
+
+[ITEMDEF i_deed_qui] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.LINK> == 04FFFFFFF)
+	SRC.SYSMESSAGEUA 0481 1 1 0 Proprietaire : Inconnu
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Proprietaire : <SRC.TARG.LINK.NAME>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Nom du compte : <SRC.TARG.LINK.ACCOUNT>
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un objet !
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//**********DEBUGBA*************
+//******************************
+
+[FUNCTION debugba]
+SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur dont vous souhaitez debugguer les BA.
+NEWITEM i_debug_ba
+ACT.EQUIP
+ACT.USE
+
+[ITEMDEF i_debug_ba] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <SRC.TARG.FINDID.m_limitateur_publicite.TIMER>==-1
+	SRC.TARG.FINDID.m_limitateur_publicite.REMOVE
+ENDIF
+IF <SRC.TARG.FINDID.m_limitateur_publicite2.TIMER>==-1
+	SRC.TARG.FINDID.m_limitateur_publicite2.REMOVE
+ENDIF
+IF <SRC.TARG.FINDID.m_limitateur_publicite3.TIMER>==-1
+	SRC.TARG.FINDID.m_limitateur_publicite3.REMOVE
+ENDIF
+IF <SRC.TARG.FINDID.m_limitateur_publicite4.TIMER>==-1
+	SRC.TARG.FINDID.m_limitateur_publicite4.REMOVE
+ENDIF
+IF <SRC.TARG.FINDID.m_limitateur_publicite5.TIMER>==-1
+	SRC.TARG.FINDID.m_limitateur_publicite5.REMOVE
+ENDIF
+IF <SRC.TARG.FINDID.m_limitateur_publicite6.TIMER>==-1
+	SRC.TARG.FINDID.m_limitateur_publicite6.REMOVE
+ENDIF
+IF <SRC.TARG.FINDID.m_limitateur_entrepub.TIMER>==-1
+	SRC.TARG.FINDID.m_limitateur_entrepub.REMOVE
+ENDIF
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a desormais les BA fonctionnelles
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//************XGO***************
+//******************************
+
+[FUNCTION xgo]
+IF <SRC.ACCOUNT.PLEVEL> >= 2
+	SRC.NEWITEM i_letele
+	SRC.ACT.TAG.COORD = <ARGS>
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_letele]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Qui voulez-vous deplacer vers <TAG.COORD>?
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <SRC.TARG.ISPLAYER>
+	SRC.TARG.GO <TAG.COORD>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez que deplacer un joueur!
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez que deplacer un joueur!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez que deplacer un joueur!
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//***********XATTR**************
+//******************************
+
+[FUNCTION xattr]
+IF <SRC.ACCOUNT.PLEVEL> >= 3
+	SRC.NEWITEM m_lexattr
+	SRC.ACT.TAG.ATTR = <ARGS>
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_lexattr]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+IF <TAG.ATTR>
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous changer le attr a : <TAG.ATTR>?
+ELSE
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous connaitre le attr ?
+ENDIF
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le attr d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le attr d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <TAG.ATTR>
+	SRC.TARG.ATTR=<TAG.ATTR>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Nouveau attr de <SRC.TARG.NAME> : <TAG.ATTR>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le ATTR de <SRC.TARG.NAME> est : <SRC.TARG.ATTR>
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//***********XCOLOR*************
+//******************************
+
+[FUNCTION xcolor]
+IF <SRC.ACCOUNT.PLEVEL> >= 3
+	SRC.NEWITEM m_lexcolor
+	SRC.ACT.TAG.COULEUR = <ARGS>
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_lexcolor]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+IF <TAG.COULEUR>
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet ou creature voulez-vous changer la couleur a : <TAG.COULEUR>?
+ELSE
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet ou creature voulez-vous connaitre la couleur ?
+ENDIF
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <TAG.COULEUR>
+	SRC.TARG.COLOR=<TAG.COULEUR>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Nouvelle couleur de <SRC.TARG.NAME> : <SRC.TARG.COLOR>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 La couleur de <SRC.TARG.NAME> est : <SRC.TARG.COLOR>
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement la couleur d'un objet ou d'une creature!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <TAG.COULEUR>
+	SRC.TARG.COLOR=<TAG.COULEUR>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Nouvelle couleur de <SRC.TARG.NAME> : <SRC.TARG.COLOR>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 La couleur de <SRC.TARG.NAME> est : <SRC.TARG.COLOR>
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//******************************
+//************MONTER************
+//******************************
+
+[FUNCTION monter]
+IF <SRC.ACCOUNT.PLEVEL> >= 3
+	VAR.VALEUR_TEMP = <EVAL 0<ARGS>>
+	IF (<VAR.VALEUR_TEMP> > 0) || (<VAR.VALEUR_TEMP> < 0)
+		NEWITEM m_fonction_monter
+		ACT.TIMER=30
+		ACT.EQUIP
+		ACT.MORE1=<VAR.VALEUR_TEMP>
+		ACT.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Veuillez entrer une valeur positive pour monter un objet, et negative pour le descendre
+	ENDIF
+	VAR.VALEUR_TEMP
+	RETURN 1
+ENDIF
+RETURN 0
+
+[ITEMDEF m_fonction_monter]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=lemonter
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+IF <MORE1> > 0
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous monter de <EVAL <MORE1>> unites?
+ELSE
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous descendre de <EVAL -<MORE1>> unites?
+ENDIF
+TARGET
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez seulement monter ou descendre un objet
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez seulement monter ou descendre un objet
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.P = <EVAL <SRC.TARG.P.X>>,<EVAL <SRC.TARG.P.Y>>,<EVAL <SRC.TARG.P.Z> + <MORE1>>
+SRC.TARG.UPDATE
+IF <MORE1> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a ete monte de <EVAL <MORE1>> unites
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a ete descendu de <EVAL -<MORE1>> unites
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//******************************
+//*************XSAY*************
+//******************************
+
+[FUNCTION XSAY]
+IF <SRC.ACCOUNT.PLEVEL> >= 4
+	IF (STRCMPI("<ARGS>",""))
+		NEWITEM m_fonction_xsay
+		ACT.TAG.ADIRE=<ARGS>
+		ACT.TIMER=30
+		ACT.EQUIP
+		ACT.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Entrez une phrase en parametre a faire dire a un joueur
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+[ITEMDEF m_fonction_xsay]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=lexsay
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Qui voulez-vous faire parler?
+TARGET
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas faire parler le sol
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.TARG.SAY <TAG.ADIRE>
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas faire parler un objet
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//******************************
+//************XEMOTE************
+//******************************
+
+[FUNCTION XEMOTE]
+IF <SRC.ACCOUNT.PLEVEL> >= 4
+	IF (STRCMPI("<ARGS>",""))
+		NEWITEM m_fonction_xemote
+		ACT.TAG.AEMOTE=<ARGS>
+		ACT.TIMER=30
+		ACT.EQUIP
+		ACT.USE
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Entrez une phrase en parametre a faire comme emote
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+[ITEMDEF m_fonction_xemote]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=lexemote
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Sur qui voulez-vous faire un emote?
+TARGET
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Le sol ne peut pas faire de emote
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.TARG.EMOTE <TAG.AEMOTE>
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.EMOTE <TAG.AEMOTE>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//******************************
+//************BOUGER************
+//******************************
+
+[FUNCTION BOUGER]
+IF <SRC.ACCOUNT.PLEVEL> >= 3
+	IF (STRCMPI("<ARGS>",""))
+		IF ((!STRCMPI("<ARGS>","nord")) || (!STRCMPI("<ARGS>","n")) || (!STRCMPI("<ARGS>","north")))
+			VAR.TEMP_DIRECTION = 1
+		ELSEIF ((!STRCMPI("<ARGS>","est")) || (!STRCMPI("<ARGS>","east")) || (!STRCMPI("<ARGS>","e")))
+			VAR.TEMP_DIRECTION = 2
+		ELSEIF ((!STRCMPI("<ARGS>","sud")) || (!STRCMPI("<ARGS>","south")) || (!STRCMPI("<ARGS>","s")))
+			VAR.TEMP_DIRECTION = 3
+		ELSEIF ((!STRCMPI("<ARGS>","ouest")) || (!STRCMPI("<ARGS>","west")) || (!STRCMPI("<ARGS>","o")) || (!STRCMPI("<ARGS>","w")))
+			VAR.TEMP_DIRECTION = 4
+		ENDIF
+		IF 0<VAR.TEMP_DIRECTION> > 0
+			NEWITEM m_fonction_bouger
+			ACT.TAG.DIRECTION = <VAR.TEMP_DIRECTION>
+			ACT.TIMER=30
+			ACT.EQUIP
+			ACT.USE
+		ELSE
+			SYSMESSAGEUA 0481 1 1 0 Veuillez entrer une direction valide (nord est sud ouest)
+		ENDIF
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Veuillez entrer une direction valide en parametre (nord est sud ouest)
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+//TAG.DIRECTION : 1=nord 2=est 3=sud 4=ouest
+[ITEMDEF m_fonction_bouger]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=lebouger
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+IF <TAG.DIRECTION> == 1
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Que voulez-vous faire bouger vers le nord?
+ELSEIF <TAG.DIRECTION> == 2
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Que voulez-vous faire bouger vers l'est?
+ELSEIF <TAG.DIRECTION> == 3
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Que voulez-vous faire bouger vers le sud?
+ELSE
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Que voulez-vous faire bouger vers l'ouest?
+ENDIF
+TARGET
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez seulement bouger un objet
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez seulement bouger un objet
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <TAG.DIRECTION> == 1
+	SRC.TARG.P = <EVAL <SRC.TARG.P.X>>,<EVAL <SRC.TARG.P.Y>-1>,<EVAL <SRC.TARG.P.Z>>
+ELSEIF <TAG.DIRECTION> == 2
+	SRC.TARG.P = <EVAL <SRC.TARG.P.X>+1>,<EVAL <SRC.TARG.P.Y>>,<EVAL <SRC.TARG.P.Z>>
+ELSEIF <TAG.DIRECTION> == 3
+	SRC.TARG.P = <EVAL <SRC.TARG.P.X>>,<EVAL <SRC.TARG.P.Y>+1>,<EVAL <SRC.TARG.P.Z>>
+ELSE
+	SRC.TARG.P = <EVAL <SRC.TARG.P.X>-1>,<EVAL <SRC.TARG.P.Y>>,<EVAL <SRC.TARG.P.Z>>
+ENDIF
+SRC.TARG.UPDATE
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//************DEPOSER***********
+//******************************
+[FUNCTION DEPOSER]
+IF <SRC.ACCOUNT.PLEVEL> >= 3
+	NEWITEM m_fonction_deposer
+	ACT.TIMER=30
+	ACT.EQUIP
+	ACT.USE
+ENDIF
+RETURN 0
+
+[ITEMDEF m_fonction_deposer]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=deposer
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous deposer a vos pieds?
+TARGET
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez seulement deposer un objet
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez seulement deposer un objet
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.P = <SRC.P>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//***********XMORE1*************
+//******************************
+
+[FUNCTION xmore1]
+IF <SRC.ACCOUNT.PLEVEL> >= 4
+	SRC.NEWITEM m_lexmore1
+	SRC.ACT.MORE1 = <ARGS>
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_lexmore1]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous changer le MORE1 a : <MORE1>?
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MORE1 d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MORE1 d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.MORE1=<MORE1>
+SRC.SYSMESSAGEUA 0481 1 1 0 Nouveau MORE1 de <SRC.TARG.NAME> : <SRC.TARG.MORE1>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//***********XMORE2*************
+//******************************
+
+[FUNCTION xmore2]
+IF <SRC.ACCOUNT.PLEVEL> >= 4
+	SRC.NEWITEM m_lexmore2
+	SRC.ACT.MORE2 = <ARGS>
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_lexmore2]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous changer le MORE2 a : <MORE2>?
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MORE2 d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MORE2 d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.MORE2=<MORE2>
+SRC.SYSMESSAGEUA 0481 1 1 0 Nouveau MORE2 de <SRC.TARG.NAME> : <SRC.TARG.MORE2>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//***********XMOREX*************
+//******************************
+
+[FUNCTION xmorex]
+IF <SRC.ACCOUNT.PLEVEL> >= 4
+	SRC.NEWITEM m_lexmorex
+	SRC.ACT.MOREX = <ARGS>
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_lexmorex]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous changer le MOREX a : <MOREX>?
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MOREX d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MOREX d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.MOREX=<MOREX>
+SRC.SYSMESSAGEUA 0481 1 1 0 Nouveau MOREX de <SRC.TARG.NAME> : <SRC.TARG.MOREX>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//***********XMOREY*************
+//******************************
+
+[FUNCTION xmorey]
+IF <SRC.ACCOUNT.PLEVEL> >= 4
+	SRC.NEWITEM m_lexmorey
+	SRC.ACT.MOREY = <ARGS>
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_lexmorey]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous changer le MOREY a : <MOREY>?
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MOREY d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MOREY d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.MOREY=<MOREY>
+SRC.SYSMESSAGEUA 0481 1 1 0 Nouveau MOREY de <SRC.TARG.NAME> : <SRC.TARG.MOREY>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//***********XMOREZ*************
+//******************************
+
+[FUNCTION xmorez]
+IF <SRC.ACCOUNT.PLEVEL> >= 4
+	SRC.NEWITEM m_lexmorez
+	SRC.ACT.MOREZ = <ARGS>
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_lexmorez]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous changer le MOREZ a : <MOREZ>?
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MOREZ d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MOREZ d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.MOREZ=<MOREZ>
+SRC.SYSMESSAGEUA 0481 1 1 0 Nouveau MOREZ de <SRC.TARG.NAME> : <SRC.TARG.MOREZ>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//***********XMOREP*************
+//******************************
+
+[FUNCTION xmorep]
+IF <SRC.ACCOUNT.PLEVEL> >= 4
+	SRC.NEWITEM m_lexmorep
+	SRC.ACT.MOREP = <ARGS>
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_lexmorep]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous changer le MOREP a : <MOREP>?
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MOREP d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le MOREP d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.MOREP=<MOREP>
+SRC.SYSMESSAGEUA 0481 1 1 0 Nouveau MOREP de <SRC.TARG.NAME> : <SRC.TARG.MOREP>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//***********XTIMER*************
+//******************************
+
+[FUNCTION xtimer]
+IF <SRC.ACCOUNT.PLEVEL> >= 4
+	SRC.NEWITEM m_lextimer
+	SRC.ACT.TAG.TIMER = <ARGS>
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_lextimer]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+IF ((<TAG.TIMER>) && (<EVAL <TAG.TIMER>> > -2))
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Quel objet voulez-vous changer le TIMER a : <EVAL <TAG.TIMER>>?
+	TARGET
+ELSE
+	SRC.SYSMESSAGEUA 0afb 1 1 0 Vous devez entrer un entier plus grand que -2 !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le TIMER d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez changer seulement le TIMER d'un objet!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.TARG.TIMER=<TAG.TIMER>
+SRC.SYSMESSAGEUA 0481 1 1 0 Nouveau TIMER de <SRC.TARG.NAME> : <EVAL <SRC.TARG.TIMER>>
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//******************************
+//**********GMDETAIL************
+//******************************
+
+[FUNCTION GMDETAIL_ENVOI] //function to speak on the chat
+SERV.ALLCLIENTS mainmsg_gm <ARGS>
+
+
+[FUNCTION mainmsg_gm] //sub function
+IF (<ACCOUNT.PLEVEL> >= 6)
+	IF <FINDID.i_hear_player_gm>
+		SYSMESSAGEUA 025 1 1 0 <ARGS>
+	ENDIF
+ENDIF
+
+[FUNCTION gmdetail] //function to toggle chat on/off
+IF !(<SRC.FINDID.i_hear_player_gm.UID> )
+	SRC.SYSMESSAGE Vous activez le GM detail
+	SRC.NEWITEM i_hear_player_gm
+	SRC.ACT.CONT <SRC.UID>
+ELSE
+	SRC.SYSMESSAGE Vous desactivez le GM detail
+	SRC.FINDID.i_hear_player_gm.REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_hear_player_gm]
+DEFNAME=i_hear_player_gm
+NAME=Canal gm
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+LAYER=30
+
+
+//***************************************
+//**********ITEMS DUPEUR*****************
+//***************************************
+
+[ITEMDEF i_item_dupeur]
+ID=I_GOLD
+NAME=Item de dupeur
+TYPE=T_NORMAL
+VALUE=1000
+
+CATEGORY=Provisions - Miscellaneous 
+SUBSECTION=Coins
+DESCRIPTION=item dupeur
+
+[FUNCTION COPIE_ATTRIBUTS_ITEM_DUPEUR]
+IF <SRC.ACCOUNT.PLEVEL> >= 7
+	SRC.NEWITEM m_copie_item_dupeur
+	SRC.ACT.TIMER=30
+	SRC.ACT.EQUIP
+	SRC.ACT.USE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_copie_item_dupeur]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=letele
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0afb 1 1 0 Choisir la source de la copie
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Impossible sur un joueur!
+REMOVE
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Impossible au sol!
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <MORE1> == 0
+	TAG.COLOR = <SRC.TARG.COLOR>
+	TAG.AMOUNT = <SRC.TARG.AMOUNT>
+	TAG.DISPID = <SRC.TARG.DISPID>
+	TAG.NAME = <SRC.TARG.NAME>
+	MORE1 = 1
+	SRC.SYSMESSAGEUA 0481 1 1 0 Maintenant choisir un i_item_dupeur
+	TARGET
+ELSE
+	IF <SRC.TARG.BASEID> == i_item_dupeur
+		SRC.TARG.COLOR = <TAG.COLOR>
+		SRC.TARG.AMOUNT = <TAG.AMOUNT>
+		SRC.TARG.DISPID = <TAG.DISPID>
+		SRC.TARG.NAME = <TAG.NAME>
+	ENDIF
+	REMOVE
+ENDIF
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1

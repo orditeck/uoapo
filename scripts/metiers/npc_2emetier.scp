@@ -1,0 +1,50 @@
+[CHARDEF c_2e_metier] 
+NAME=Turing
+ID=c_man
+ 
+TSPEECH=spk_2e_metier
+
+ON=@create
+COLOR=083b
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le savant
+INVUL
+
+ITEMNEWBIE=i_short
+COLOR=012
+ITEMNEWBIE=i_beard_long
+COLOR=03a4
+ITEMNEWBIE=i_hair_long
+COLOR=03a4
+
+ON=@NPCSEENEWPLAYER
+SAY Bonjour vous qui croisez mon chemin!
+
+ON=@NPCHearUnknown
+DORAND 4
+	SAY Meme une machine complexe ne decrypterait pas votre langage !
+	SAY Si vous voulez apprendre un autre metier, il faudra aligner les bons mots dans une syntaxe appropriee
+	SAY Vous voulez apprendre un autre metier si je me fis a mon instinct
+	SAY J'ai invente une machine donnant les capacites aux gens d'apprendre un deuxieme metier
+ENDDO
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quete 2e metier
+DESCRIPTION=Turing
+
+[SPEECH spk_2e metier]
+
+ON=*metier*
+SAY Je suis desole, ma machine n'est pas encore operationnelle, mais ce sera pour tres bientot!

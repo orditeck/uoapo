@@ -1,0 +1,1594 @@
+[PLEVEL 3]
+lier
+lierporte
+renommer
+copieporte
+
+[TYPEDEF t_cle_maison]
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte de maison voulez-vous verrouiller ou deverrouiller?
+TARGET
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner une porte de maison
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner une porte de maison
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TYPE> == t_porte_maison
+	IF <MORE1> == <SRC.TARG.MORE1>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Porte verrouillee
+		SRC.TARG.TYPE = t_porte_maison_verrouillee
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Cette cle ne peut pas verrouiller cette serrure
+	ENDIF
+ELSEIF <SRC.TARG.TYPE> == t_porte_maison_verrouillee
+	IF <MORE1> == <SRC.TARG.MORE1>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Porte deverrouillee
+		SRC.TARG.TYPE = t_porte_maison
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Cette cle ne peut pas deverrouiller cette serrure
+	ENDIF
+ELSEIF <SRC.TARG.TYPE> == t_key
+	IF <SRC.TARG.MORE1> == 0
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez fait une copie de votre cle de maison avec succes
+		SRC.TARG.TYPE = t_cle_maison
+		SRC.TARG.MORE1 = <MORE1>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 La cle que vous voulez copier n'est pas vierge
+	ENDIF		
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner une porte de maison
+ENDIF
+RETURN 1
+
+
+[TYPEDEF t_porte_maison]
+ON=@CLICK
+MESSAGE <NAME>
+RETURN 1
+
+ON=@DCLICK
+TYPE=t_door
+USE
+TYPE=t_porte_maison
+TIMER=-1
+RETURN 1
+
+ON=@TIMER
+TIMER=-1
+RETURN 1
+
+
+[TYPEDEF t_porte_maison_verrouillee]
+ON=@CLICK
+MESSAGE <NAME>[verrouillee]
+RETURN 1
+
+ON=@DCLICK
+VAR.TEMP_MORE1 = <MORE1>
+VAR.TEMP_ALACLE = 0
+FORCONT <SRC.FINDLAYER.21.UID>
+	IF ((<TYPE> == t_cle_maison) && (<MORE1> == <VAR.TEMP_MORE1>))
+		VAR.TEMP_ALACLE = 1
+	ENDIF
+ENDFOR
+IF ((<VAR.TEMP_ALACLE> == 1) || (<SRC.ACCOUNT.PLEVEL> > 2))
+	TYPE=t_door
+	USE
+	TYPE=t_porte_maison_verrouillee
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 La porte est verrouillee
+ENDIF
+IF ((<VAR.TEMP_ALACLE> == 0) && (<SRC.ACCOUNT.PLEVEL> > 2))
+	SRC.SYSMESSAGEUA 0481 1 1 0 La porte est verrouillee
+ENDIF
+VAR.TEMP_MORE1
+VAR.TEMP_ALACLE
+TIMER=-1
+RETURN 1
+
+ON=@TIMER
+TIMER=-1
+RETURN 1
+
+[FUNCTION lier]
+IF !(STRCMPI("<ARGS>",""))
+	SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur puis la plaque a lier
+	NEWITEM i_item_lieur
+	ACT.EQUIP
+	ACT.USE
+ENDIF
+
+[ITEMDEF i_item_lieur] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=10
+
+ON=@DCLICK
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <EVAL 0<TAG.LIER>>==0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+	REMOVE
+ELSE
+	SRC.TARG.LINK=<TAG.LIER>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Lien effectue !
+	REMOVE
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <EVAL 0<TAG.LIER>>==0
+	TAG.LIER=<SRC.TARG.UID>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez maintenant la plaque a lier !
+	TARGET
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas une plaque de maison !
+	REMOVE
+ENDIF
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[FUNCTION lierporte]
+IF !(STRCMPI("<ARGS>",""))
+	SYSMESSAGEUA 0481 1 1 0 Selectionnez la porte puis la clef a lier
+	NEWITEM i_item_lieur_porte
+	ACT.EQUIP
+	ACT.USE
+ENDIF
+
+[ITEMDEF i_item_lieur_porte] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=10
+
+ON=@DCLICK
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <EVAL 0<TAG.LIER>>==0
+	SRC.TARG.MORE1=<SRC.TARG.UID>
+	TAG.LIER=<SRC.TARG.UID>
+	TARGET
+ELSE
+	SRC.TARG.MORE1=<TAG.LIER>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Lien effectue !
+	REMOVE
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas une porte ni une clef !
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[FUNCTION copieporte]
+IF !(STRCMPI("<ARGS>",""))
+	SYSMESSAGEUA 0481 1 1 0 Selectionnez la porte ou la cle a copier puis une cle ou une porte sur laquelle copier le code
+	NEWITEM i_item_copieur_porte
+	ACT.EQUIP
+	ACT.USE
+ENDIF
+
+[ITEMDEF i_item_copieur_porte] 
+ID=i_memory 
+TYPE=t_eq_script 
+NAME=copieur porte
+LAYER=30
+
+ON=@CREATE
+TIMER=10
+
+ON=@DCLICK
+TARGET
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas une porte ni une clef !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas une porte ni une clef !
+REMOVE
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <EVAL 0<TAG.LIER>> == 0
+	IF ((<SRC.TARG.TYPE> == t_door) || (<SRC.TARG.TYPE> == t_door_locked) || (<SRC.TARG.TYPE> == t_porte_maison) || (<SRC.TARG.TYPE> == t_porte_maison_verrouillee) || (<SRC.TARG.TYPE> == t_key) || (<SRC.TARG.TYPE> == t_cle_maison))
+		IF <SRC.TARG.MORE1> == 0
+			SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'a pas de code
+			REMOVE
+		ELSE
+			TAG.LIER = <SRC.TARG.MORE1>
+			TARGET
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas une porte ni une cle
+		REMOVE
+	ENDIF
+ELSE
+	IF ((<SRC.TARG.TYPE> == t_door) || (<SRC.TARG.TYPE> == t_door_locked) || (<SRC.TARG.TYPE> == t_porte_maison) || (<SRC.TARG.TYPE> == t_porte_maison_verrouillee) || (<SRC.TARG.TYPE> == t_key) || (<SRC.TARG.TYPE> == t_cle_maison))
+		SRC.TARG.MORE1 = <TAG.LIER>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Code de serrure copie
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas une porte ni une cle
+		REMOVE
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//***********************************************
+//*******************DEEDS***********************
+//***********************************************
+
+[ITEMDEF i_deed_porte_metal_nord]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de porte en metal nord
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_key_gold
+	VAR.MORE1_PORTE=<SRC.ACT.UID>
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_cle_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_metal
+	SRC.ACT.NAME=Porte en metal
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=067d
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_metal
+	SRC.ACT.NAME=Porte en metal
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=067f
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+	VAR.MORE1_PORTE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_porte_metal_ouest]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de porte en metal ouest
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_key_gold
+	VAR.MORE1_PORTE=<SRC.ACT.UID>
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_cle_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_metal
+	SRC.ACT.NAME=Porte en metal
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=i_door_metal
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_metal
+	SRC.ACT.NAME=Porte en metal
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=0677
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+	VAR.MORE1_PORTE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_porte_grillage_ouest]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de porte en grillage ouest
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_key_gold
+	VAR.MORE1_PORTE=<SRC.ACT.UID>
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_cle_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_metal_bar
+	SRC.ACT.NAME=Porte en grillage
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=i_door_metal_bar
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_metal_bar
+	SRC.ACT.NAME=Porte en grillage
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=0687
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+	VAR.MORE1_PORTE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_porte_grillage_nord]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de porte en grillage nord
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_key_gold
+	VAR.MORE1_PORTE=<SRC.ACT.UID>
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_cle_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_metal_bar
+	SRC.ACT.NAME=Porte en grillage
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=068d
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_metal_bar
+	SRC.ACT.NAME=Porte en grillage
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=068f
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+	VAR.MORE1_PORTE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_porte_bois_brun_nord]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de porte en bois brun nord
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_key_gold
+	VAR.MORE1_PORTE=<SRC.ACT.UID>
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_cle_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_wood
+	SRC.ACT.NAME=Porte en bois
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=06ad
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_wood
+	SRC.ACT.NAME=Porte en bois
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=06af
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+	VAR.MORE1_PORTE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_porte_bois_brun_ouest]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de porte en bois brun ouest
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_key_gold
+	VAR.MORE1_PORTE=<SRC.ACT.UID>
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_cle_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_wood
+	SRC.ACT.NAME=Porte en bois
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=i_door_wood
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_wood
+	SRC.ACT.NAME=Porte en bois
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=06a7
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+	VAR.MORE1_PORTE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_porte_bois_fer_ouest]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de porte en bois fer ouest
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_key_gold
+	VAR.MORE1_PORTE=<SRC.ACT.UID>
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_cle_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_wood_3
+	SRC.ACT.NAME=Porte en bois
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=i_door_wood_3
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_wood_3
+	SRC.ACT.NAME=Porte en bois
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=06e7
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+	VAR.MORE1_PORTE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_porte_bois_fer_nord]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de porte en bois fer nord
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_key_gold
+	VAR.MORE1_PORTE=<SRC.ACT.UID>
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_cle_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_wood_3
+	SRC.ACT.NAME=Porte en bois
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=06ed
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+
+	SRC.NEWITEM=i_door_wood_3
+	SRC.ACT.NAME=Porte en bois
+	SRC.ACT.ATTR=08010
+	SRC.ACT.DISPID=06ef
+	SRC.ACT.UPDATE
+	SRC.ACT.MORE1=<VAR.MORE1_PORTE>
+	SRC.ACT.TYPE = t_porte_maison
+	SRC.ACT.BOUNCE
+	VAR.MORE1_PORTE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_de_bourse]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de bourse
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_bag
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_de_cle_vierge]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de cle vierge
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_key_gold
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_plaster_wall_nord]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de plaster wall [Nord]
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_wall_plaster
+	SRC.ACT.DISPID 0129
+	SRC.ACT.UPDATE
+	SRC.ACT.ATTR=08010
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_plaster_wall_ouest]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de plaster wall [Ouest]
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_wall_plaster
+	SRC.ACT.DISPID 0128
+	SRC.ACT.UPDATE
+	SRC.ACT.ATTR=08010
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_proprietaire_maison_nord]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de plaque interieure [Nord]
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_plaque_de_proprietaire
+	SRC.ACT.TAG.ORIENTATION=1
+	SRC.ACT.LINK=<SRC.UID>
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_proprietaire_maison_ouest]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de plaque interieure [Ouest]
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_plaque_de_proprietaire
+	SRC.ACT.DISPID 0bcf
+	SRC.ACT.UPDATE
+	SRC.ACT.TAG.ORIENTATION=2
+	SRC.ACT.LINK=<SRC.UID>
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_plaque_ordinaire_nord]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de plaque ordinaire [Nord]
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_plaque_ordinaire
+	SRC.ACT.LINK=<SRC.UID>
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_plaque_ordinaire_ouest]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de plaque ordinaire [Ouest]
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_plaque_ordinaire
+	SRC.ACT.DISPID 0bcf
+	SRC.ACT.UPDATE
+	SRC.ACT.LINK=<SRC.UID>
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+
+//**********************************************
+//**********************************************
+//**********************************************
+
+[ITEMDEF i_plaque_ordinaire] 
+NAME=Plaque
+ID=0bd0
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+TIMER=-1
+
+ON=@DCLICK
+MESSAGE <NAME>
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+[ITEMDEF i_plaque_de_proprietaire] 
+NAME=Plaque
+ID=0bd0
+TYPE=t_eq_script
+
+ON=@CREATE
+attr=08010
+TIMER=-1
+
+ON=@CLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	IF <TAG.UID_PLAQUE_PROPRIO>
+		MESSAGE Plaque interieure de <LINK.NAME>[Associee]
+	ELSE
+		MESSAGE Plaque interieure de <LINK.NAME>[Non Associee]
+	ENDIF
+ELSE
+	IF <LINK.ACCOUNT.PLEVEL> < 3
+		MESSAGE <NAME> de <LINK.NAME>
+	ELSE
+		MESSAGE <NAME>
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+TAG.TEMPSIDLE//MENAGE
+IF (!STRCMPI("<SRC.ACCOUNT>","<LINK.ACCOUNT>"))
+	IF <SRC.UID> == <LINK.UID>
+		MORE1 = <SRC.TAG.FAMILLE_UID>
+	ENDIF		
+	DIALOG Panneau_menu
+ELSEIF ((0<SRC.TAG.FAMILLE_UID> == 0<MORE1>) && (<MORE1>!=0))
+	SRC.BANK
+ELSE
+	IF <SRC.ACCOUNT.PLEVEL> > 2
+		IF <TAG.UID_PLAQUE_PROPRIO>
+			MESSAGE Plaque interieure de <LINK.NAME>[Associee]
+		ELSE
+			MESSAGE Plaque interieure de <LINK.NAME>[Non Associee]
+		ENDIF
+	ELSE
+		IF <LINK.ACCOUNT.PLEVEL> < 3
+			MESSAGE <NAME> de <LINK.NAME>
+		ELSE
+			MESSAGE <NAME>
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TIMER=-1
+RETURN 1
+
+[DIALOG Panneau_menu]
+0, 0
+PAGE 0
+gumppic 205 160 3600
+gumppic 219 174 3604
+gumppic 347 174 3604
+gumppic 219 302 3604
+gumppic 347 302 3604
+gumppic 205 174 3603
+gumppic 220 339 3604
+gumppic 347 339 3604
+gumppic 475 174 3604
+gumppic 220 466 3607
+gumppic 205 466 3606
+gumppic 327 466 3607
+gumppic 475 302 3604
+gumppic 436 466 3607
+gumppic 475 338 3604
+gumppic 480 466 3607
+gumppic 603 466 3608
+gumppic 480 160 3601
+gumppic 603 160 3602
+gumppic 378 160 3601
+gumppic 287 160 3601
+gumppic 219 160 3601
+gumppic 603 174 3605
+
+PAGE 1
+text 286 183 1152 0//Panneau de controle
+text 260 232 995 1//Modifier le nom du batiment
+text 260 255 995 2//Modifier l'apparence de la plaque
+text 260 278 995 3//Ajouter un vendeur
+text 260 301 995 4//Retirer un vendeur
+text 260 324 995 5//Acceder a sa banque
+text 260 347 995 22//Activer/Desactiver coffre destine a la vente
+text 470 444 1152 6//Page suivante
+button 234 237 2103 2104 1 0 1//MODIFIER LE NOM
+button 234 260 2103 2104 1 0 2//MODIFIER L'APPARENCE
+button 234 283 2103 2104 1 0 3//AJOUTER UN VENDEUR
+button 234 306 2103 2104 1 0 4//ENLEVER UN VENDEUR
+button 234 329 2103 2104 1 0 5//ACCEDER A SA BANQUE
+button 234 352 2103 2104 1 0 6//ACTIVER/DESACTIVER COFFRE DE VENTE
+button 570 440 2473 2472 0 2 99//page suivante
+
+PAGE 2
+text 276 183 1152 7 //Panneau de controle des batiments (objet)
+text 260 232 995 8//Bloquer un objet
+text 260 255 995 9//Debloquer un objet
+text 260 278 995 10//Deposer un objet au sol
+text 234 301 995 11//Monter un objet
+text 380 301 25 12//-5
+text 420 301 25 13//-1
+text 460 301 25 14//+1
+text 500 301 25 15//+5
+text 234 347 995 16//Bouger un objet
+text 400 340 25 17//N
+text 400 355 25 18//E
+text 380 355 25 19//S
+text 380 340 25 20//O
+text 250 444 1152 21//Page precedente
+button 234 237 2103 2104 1 0 101//BLOQUER UN OBJET
+button 234 260 2103 2104 1 0 102//DEBLOQUER UN OBJET
+button 234 283 2103 2104 1 0 103//DEPOSER UN OBJET
+button 400 306 2103 2104 1 0 104//-5
+button 440 306 2103 2104 1 0 105//-1
+button 480 306 2103 2104 1 0 106//+1
+button 520 306 2103 2104 1 0 107//+5
+button 412 335 2103 2104 1 0 108//N
+button 412 368 2103 2104 1 0 109//E
+button 369 368 2103 2104 1 0 110//S
+button 369 335 2103 2104 1 0 111//O
+button 220 440 2473 2472 0 1 198//page precedente
+
+
+[DIALOG Panneau_menu TEXT]
+Panneau de controle des batiments
+Modifier le nom du batiment
+Modifier l'apparence de la plaque
+Ajouter un vendeur
+Retirer un vendeur
+Acceder a sa banque
+Page suivante
+Panneau de controle des batiments (objet)
+Bloquer un objet
+Debloquer un objet
+Deposer un objet au sol
+Monter un objet
+-5
+-1
++1
++5
+Bouger un objet
+N
+E
+S
+O
+Page precedente
+Activer/Desactiver coffre destine a la vente
+
+
+[DIALOG Panneau_menu BUTTON]
+on=1
+//Modifier le nom du batiment
+INPDLG NAME 20
+
+on=2
+//Modifier l'apparence de la plaque
+DIALOG apparence_plaque
+
+on=3
+//Ajouter un vendeur
+IF 0<SRC.TAG.VENDEUR>==0
+	SRC.NEWITEM i_deed_vendeur
+	SRC.ACT.P=<SRC.P>
+	SRC.ACT.LINK=<SRC.UID>
+	SRC.ACT.ATTR=08010
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le deed de vendeur a ete place a vos pieds, positionnez vous ou vous desirez qu'il apparaisse puis double clickez le deed.
+	SRC.TAG.VENDEUR=1
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez posseder qu'un seul vendeur !
+ENDIF
+
+on=4
+//Retirer un vendeur
+SRC.NEWITEM i_enleve_vendeur
+SRC.ACT.CONT=<SRC.UID> 
+SRC.ACT.USE
+
+on=5
+//Acceder a sa banque
+SRC.BANKSELF
+
+//Activer/Desactiver coffre de vente
+ON=6
+SRC.NEWITEM i_activer_desactiver_coffre_de_vente
+//OBJET DANS coffre_de_vente.scp
+SRC.ACT.CONT=<SRC.UID>
+SRC.ACT.USE
+RETURN 1
+
+
+on=101
+//Bloquer un objet
+SRC.SYSMESSAGEUA 0481 1 1 0 Attention tout objet vise ne vous appartenant pas ou situe hors de votre habitation est passible d'une destruction de votre compte .
+SRC.NEWITEM i_item_memoire_Lock 
+SRC.ACT.CONT=<SRC.UID> 
+SRC.ACT.USE
+SRC.NEWITEM=m_limitateur_statifieur
+SRC.ACT.EQUIP
+
+on=102
+//Debloquer un objet
+SRC.SYSMESSAGEUA 0481 1 1 0 Attention tout objet vise ne vous appartenant pas ou situe hors de votre habitation est passible d'une destruction de votre compte .
+SRC.NEWITEM i_item_memoire_DeLock 
+SRC.ACT.CONT=<SRC.UID> 
+SRC.ACT.USE
+SRC.NEWITEM=m_limitateur_statifieur
+SRC.ACT.EQUIP
+
+ON=103
+//DEPOSER UN OBJET
+SRC.NEWITEM m_item_memoire_deposerobjet
+SRC.ACT.CONT = <SRC.UID>
+SRC.ACT.USE
+RETURN 1
+
+ON=104
+//MONTER -5
+MONTER_OBJET_PLAQUE -5
+RETURN 1
+
+ON=105
+//MONTER -1
+MONTER_OBJET_PLAQUE -1
+RETURN 1
+
+ON=106
+//MONTER +1
+MONTER_OBJET_PLAQUE 1
+RETURN 1
+
+ON=107
+//MONTER +5
+MONTER_OBJET_PLAQUE 5
+RETURN 1
+
+ON=108
+//BOUGER N
+SRC.NEWITEM m_item_memoire_bougerobjet
+SRC.ACT.CONT = <SRC.UID>
+SRC.ACT.MORE1 = 1
+SRC.ACT.TAG.DIRECTION_DESCRIPTION = le nord
+SRC.ACT.USE
+RETURN 1
+
+ON=109
+//BOUGER E
+SRC.NEWITEM m_item_memoire_bougerobjet
+SRC.ACT.CONT = <SRC.UID>
+SRC.ACT.MORE1 = 2
+SRC.ACT.TAG.DIRECTION_DESCRIPTION = l'est
+SRC.ACT.USE
+RETURN 1
+
+ON=110
+//BOUGER S
+SRC.NEWITEM m_item_memoire_bougerobjet
+SRC.ACT.CONT = <SRC.UID>
+SRC.ACT.MORE1 = 3
+SRC.ACT.TAG.DIRECTION_DESCRIPTION = le sud
+SRC.ACT.USE
+RETURN 1
+
+ON=111
+//BOUGER O
+SRC.NEWITEM m_item_memoire_bougerobjet
+SRC.ACT.CONT = <SRC.UID>
+SRC.ACT.MORE1 = 4
+SRC.ACT.TAG.DIRECTION_DESCRIPTION = l'ouest
+SRC.ACT.USE
+RETURN 1
+
+//ARGS : NB DE CASES A MONTER
+//DEFAULT : PLAQUE INTERIEURE
+//SRC : JOUEUR
+[FUNCTION MONTER_OBJET_PLAQUE]
+SRC.NEWITEM m_item_memoire_monterobjet
+SRC.ACT.CONT = <SRC.UID>
+SRC.ACT.MORE1 = <ARGS>
+SRC.ACT.USE
+RETURN 1
+
+
+[ITEMDEF m_item_memoire_deposerobjet] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@CREATE 
+TIMER=30 
+
+ON=@TIMER 
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK 
+TARGET Que voulez-vous deposer au sol ?
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> n'est pas un objet et ne peut donc pas etre bouge !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID>==<SRC.UID>
+	IF ( (<SRC.TARG.ATTR>&attr_move_never) || (<SRC.TARG.ATTR>&attr_static) )
+		SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> est bloque et ne peut pas etre bouge !
+	ELSE
+		SRC.TARG.P = <SRC.P>
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a ete mis au sol a vos pieds !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> n'est pas sur vous !
+ENDIF
+RETURN 1
+
+//MORE1 : NB d'unites a monter
+[ITEMDEF m_item_memoire_monterobjet] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@CREATE 
+TIMER=30 
+
+ON=@TIMER 
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK 
+TARGET Que voulez-vous monter de <EVAL <MORE1>> unites ?
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> n'est pas un objet et ne peut donc pas etre bouge !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.PEUT_BOUGER_OBJET <REGION.NAME>>
+	IF <SRC.TARG.PEUT_MONTER_OBJET <MORE1>>
+		SRC.TARG.P = <EVAL <SRC.TARG.P.X>>,<EVAL <SRC.TARG.P.Y>>,<EVAL <SRC.TARG.P.Z> + <MORE1>>
+		SRC.TARG.UPDATE
+	ENDIF
+ENDIF
+RETURN 1
+
+//MORE1 : DIRECTION ; (N=1 ; E=2 ; S=3 ; O=4)
+//TAG.DIRECTION_DESCRIPTION : direction a bouger (ex:l'est ; le nord...)
+[ITEMDEF m_item_memoire_bougerobjet] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@CREATE 
+TIMER=30 
+
+ON=@TIMER 
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK 
+TARGET Que voulez-vous bouger vers <TAG.DIRECTION_DESCRIPTION> ?
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> n'est pas un objet et ne peut donc pas etre bouge !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.PEUT_BOUGER_OBJET <REGION.NAME>>
+	IF <MORE1> == 1
+		SRC.TARG.P = <EVAL <SRC.TARG.P.X>>,<EVAL <SRC.TARG.P.Y>-1>,<EVAL <SRC.TARG.P.Z>>
+	ELSEIF <MORE1> == 2
+		SRC.TARG.P = <EVAL <SRC.TARG.P.X>+1>,<EVAL <SRC.TARG.P.Y>>,<EVAL <SRC.TARG.P.Z>>
+	ELSEIF <MORE1> == 3
+		SRC.TARG.P = <EVAL <SRC.TARG.P.X>>,<EVAL <SRC.TARG.P.Y>+1>,<EVAL <SRC.TARG.P.Z>>
+	ELSE
+		SRC.TARG.P = <EVAL <SRC.TARG.P.X>-1>,<EVAL <SRC.TARG.P.Y>>,<EVAL <SRC.TARG.P.Z>>
+	ENDIF
+	SRC.TARG.UPDATE
+ENDIF
+RETURN 1
+
+[DIALOG apparence_plaque]
+0, 0
+PAGE 0
+gumppic 205 160 3600
+gumppic 219 174 3604
+gumppic 347 174 3604
+gumppic 219 302 3604
+gumppic 347 302 3604
+gumppic 205 174 3603
+gumppic 220 339 3604
+gumppic 347 339 3604
+gumppic 475 174 3604
+gumppic 220 466 3607
+gumppic 205 466 3606
+gumppic 327 466 3607
+gumppic 475 302 3604
+gumppic 436 466 3607
+gumppic 475 338 3604
+gumppic 480 466 3607
+gumppic 603 466 3608
+gumppic 480 160 3601
+gumppic 603 160 3602
+gumppic 378 160 3601
+gumppic 287 160 3601
+gumppic 219 160 3601
+gumppic 603 174 3605
+text 296 182 1152 0
+tilepic 235 233 2966
+button 252 270 2103 2104 1 0 1
+tilepic 265 233 2980
+button 282 270 2103 2104 1 0 2
+tilepic 295 229 2982
+button 312 270 2103 2104 1 0 3
+tilepic 325 229 2984
+button 342 270 2103 2104 1 0 4
+tilepic 355 229 2986
+button 372 270 2103 2104 1 0 5
+tilepic 385 229 2988
+button 402 270 2103 2104 1 0 6
+tilepic 415 229 2990
+button 432 270 2103 2104 1 0 7
+tilepic 445 229 2992
+button 462 270 2103 2104 1 0 8
+tilepic 475 233 2994
+button 492 270 2103 2104 1 0 9
+tilepic 505 233 2996
+button 522 270 2103 2104 1 0 10
+tilepic 535 233 2998
+button 552 270 2103 2104 1 0 11
+tilepic 235 306 3000
+button 252 347 2103 2104 1 0 12
+tilepic 265 306 3002
+button 282 347 2103 2104 1 0 13
+tilepic 295 310 3004
+button 312 347 2103 2104 1 0 14
+tilepic 325 306 3006
+button 342 347 2103 2104 1 0 15
+tilepic 355 310 3008
+button 372 347 2103 2104 1 0 16
+tilepic 385 306 3010
+button 402 347 2103 2104 1 0 17
+tilepic 415 310 3012
+button 432 347 2103 2104 1 0 18
+tilepic 445 310 3014
+button 462 347 2103 2104 1 0 19
+tilepic 475 306 3016
+button 492 347 2103 2104 1 0 20
+tilepic 505 310 3018
+button 522 347 2103 2104 1 0 21
+tilepic 535 306 3020
+button 552 347 2103 2104 1 0 22
+tilepic 235 387 3022
+button 252 424 2103 2104 1 0 23
+tilepic 265 383 3082
+button 282 424 2103 2104 1 0 24
+tilepic 295 387 3084
+button 312 424 2103 2104 1 0 25
+tilepic 325 387 3086
+button 342 424 2103 2104 1 0 26
+tilepic 355 387 3140
+button 372 424 2103 2104 1 0 27
+tilepic 385 383 3026
+button 402 424 2103 2104 1 0 28
+tilepic 415 383 3024
+button 432 424 2103 2104 1 0 29
+
+[DIALOG apparence_plaque TEXT]
+Modifier l'apparence de la plaque
+
+[DIALOG apparence_plaque BUTTON]
+on=1
+//plaque librairie
+IF <TAG.ORIENTATION> == 1
+	DISPID 0b96
+ELSE
+	DISPID 0b95 
+ENDIF
+UPDATE
+on=2
+//plaque boulangerie
+IF <TAG.ORIENTATION> == 1
+	DISPID 0ba4 
+ELSE
+	DISPID 0ba3
+ENDIF
+UPDATE
+on=3
+//plaque couturier
+IF <TAG.ORIENTATION> == 1
+	DISPID 0ba6
+ELSE
+	DISPID 0ba5 
+ENDIF
+UPDATE
+on=4
+//plaque tinker
+IF <TAG.ORIENTATION> == 1
+	DISPID 0ba8
+ELSE
+	DISPID 0ba7 
+ENDIF
+UPDATE
+on=5
+//plaque boucherie
+IF <TAG.ORIENTATION> == 1
+	DISPID 0baa
+ELSE
+	DISPID 0ba9
+ENDIF
+UPDATE
+on=6
+//plaque healer
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bac
+ELSE
+	DISPID 0bab 
+ENDIF
+UPDATE
+on=7
+//plaque magie
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bae
+ELSE
+	DISPID 0bad
+ENDIF
+UPDATE
+on=8
+//plaque menuisier
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bb0
+ELSE
+	DISPID 0baf
+ENDIF
+UPDATE
+on=9
+//plaque astrologue
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bb2
+ELSE
+	DISPID 0bb1 
+ENDIF
+UPDATE
+on=10
+//plaque bougie
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bb4
+ELSE
+	DISPID 0bb3
+ENDIF
+UPDATE
+on=11
+//plaque ancre
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bb6
+ELSE
+	DISPID 0bb5
+ENDIF
+UPDATE
+on=12
+//plaque ecurie
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bb8
+ELSE
+	DISPID 0bb7
+ENDIF
+UPDATE
+on=13
+//plaque rayee
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bba
+ELSE
+	DISPID 0bb9
+ENDIF
+UPDATE
+on=14
+//plaque banjo
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bbc
+ELSE
+	DISPID 0bbb
+ENDIF
+UPDATE
+on=15
+//plaque fleche
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bbe
+ELSE
+	DISPID 0bbd
+ENDIF
+UPDATE
+on=16
+//plaque forgeron
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bc0
+ELSE
+	DISPID 0bbf
+ENDIF
+UPDATE
+on=17
+//plaque diamant
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bc2
+ELSE
+	DISPID 0bc1
+ENDIF
+UPDATE
+on=18
+//plaque taverne
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bc4
+ELSE
+	DISPID 0bc3
+ENDIF
+UPDATE
+on=19
+//plaque toupie
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bc6
+ELSE
+	DISPID 0bc5
+ENDIF
+UPDATE
+on=20
+//plaque forgeron
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bc8
+ELSE
+	DISPID 0bc7
+ENDIF
+UPDATE
+on=21
+//plaque peinture
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bca
+ELSE
+	DISPID 0bc9
+ENDIF
+UPDATE
+on=22
+//plaque torche
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bcc
+ELSE
+	DISPID 0bcb
+ENDIF
+UPDATE
+on=23
+//plaque arbalete
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bce
+ELSE
+	DISPID 0bcd
+ENDIF
+UPDATE
+on=24
+//plaque %
+IF <TAG.ORIENTATION> == 1
+	DISPID 0c0a
+ELSE
+	DISPID 0c09
+ENDIF
+UPDATE
+on=25
+//plaque or
+IF <TAG.ORIENTATION> == 1
+	DISPID 0c0c
+ELSE
+	DISPID 0c0b
+ENDIF
+UPDATE
+on=26
+//plaque masque
+IF <TAG.ORIENTATION> == 1
+	DISPID 0c0e
+ELSE
+	DISPID 0c0d
+ENDIF
+UPDATE
+on=27
+//plaque miel
+IF <TAG.ORIENTATION> == 1
+	DISPID 0c44
+ELSE
+	DISPID 0c43
+ENDIF
+UPDATE
+on=28
+//plaque bois jaune
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bd2
+ELSE
+	DISPID 0bd1
+ENDIF
+UPDATE
+on=29
+//plaque bois marron
+IF <TAG.ORIENTATION> == 1
+	DISPID 0bd0
+ELSE
+	DISPID 0bcf
+ENDIF
+UPDATE
+
+[ITEMDEF i_item_memoire_Lock] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@CREATE 
+TIMER=30 
+
+ON=@TIMER 
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK 
+TARGET Que voulez-vous verouiller ?
+RETURN 1 
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.BASEID>==i_porte_teleportatrice
+	SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne peux pas etre verrouille au sol !
+ELSE
+	IF <SRC.TARG.CONT>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas verrouiller un objet a cet endroit !
+	ELSE
+		IF <EVAL 0<SRC.TARG.TAG.MAIRIE_OBJET>> == 0
+			IF <SRC.FINDID.m_limitateur_statifieur>
+				IF ( (<SRC.TARG.ATTR>&attr_move_never) || (<SRC.TARG.ATTR>&attr_static) )
+					SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet est deja verrouille !
+				ELSEIF <SRC.TARG.TYPE> == t_corpse
+					SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas verrouiller un cadavre !
+				ELSE
+					IF (<SRC.TARG.LINK> == 04FFFFFFF) 
+						SRC.TARG.LINK=<SRC.UID>
+						SRC.TARG.ATTR=08010
+						SRC.TARG.MOREM=00
+						SRC.TARG.MESSAGE Objet verouille au sol par <SRC.NAME>
+					ELSEIF (<SRC.TARG.LINK> == <SRC.UID>)
+						SRC.TARG.ATTR=08010
+						SRC.TARG.MOREM=01
+						SRC.TARG.MESSAGE Objet verouille au sol par <SRC.NAME>
+					ELSE
+						SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne peux pas etre verrouille au sol !
+					ENDIF
+				ENDIF
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas cible assez rapidement l'objet a bloquer , veuillez reiterez votre essai 
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas bloquer un objet de la mairie !
+		ENDIF
+	ENDIF
+ENDIF
+REMOVE
+RETURN 1
+
+[ITEMDEF i_item_memoire_DeLock] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@CREATE 
+TIMER 30 
+
+ON=@TIMER 
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK 
+TARGET Que voulez-vous deverouiller ? 
+RETURN 1 
+
+ON=@TARGON_ITEM
+IF <SRC.FINDID.m_limitateur_statifieur>
+	IF <EVAL 0<SRC.TARG.TAG.MAIRIE_OBJET>> == 0
+		IF <SRC.TARG.LINK> == <SRC.UID>
+			IF ( (<SRC.TARG.baseid> == i_plaque_de_proprietaire) || (<SRC.TARG.baseid> == i_plaque_entree_maison) )
+				SRC.SYSMESSAGEUA 025 1 0 Vous ne pouvez pas deverouiller <SRC.TARG.NAME>
+				RETURN 1
+			ELSEIF ( (<SRC.TARG.TYPE> == t_container_item_to_sell) || (<SRC.TARG.TYPE> == t_item_to_sell)
+				SRC.SYSMESSAGEUA 025 1 0 Vous ne pouvez pas deverouiller <SRC.TARG.NAME> car il est destine a la vente !
+			ELSEIF (<SRC.TARG.TYPE> == t_door) || (<SRC.TARG.TYPE> == t_door_locked) || (<SRC.TARG.baseid> == i_pierre_de_famille)
+				SRC.TARG.LINK=04FFFFFFF
+				SRC.TARG.ATTR=08
+				SRC.SYSMESSAGEUA 0481 1 1 0 Objet deverouille du sol !
+			ELSE
+				IF <SRC.TARG.MOREM> == 0
+					SRC.TARG.LINK=04FFFFFFF
+				ENDIF
+				IF (<SRC.TARG.TYPE> == t_corpse)
+					SRC.TARG.ATTR=00
+				ELSE
+					SRC.TARG.ATTR=0400a
+				ENDIF
+				SRC.TARG.MESSAGE Objet deverouille du sol !
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'etes pas le proprietaire de cet objet !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas debloquer un objet de la mairie !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas cible assez rapidement l'objet a debloquer , veuillez reiterez votre essai
+ENDIF
+REMOVE
+RETURN 1
+
+[ITEMDEF m_limitateur_statifieur]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=5
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_enleve_vendeur] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@CREATE 
+TIMER 30 
+
+ON=@TIMER 
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quel vendeur desirez vous retirer ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un vendeur
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <SRC.TARG.UID> == <SRC.TAG.VENDOR>
+	SRC.PAYUP 500
+	IF (<VAR.ENOUGH>)
+		SRC.TARG.REMOVE
+		SRC.TAG.PENTRERMAGASIN
+		SRC.TAG.ENTRERMAGASIN
+		SRC.TAG.SORTIRMAGASIN
+		SRC.TAG.PSORTIRMAGASIN
+		SRC.TAG.VENDEUR
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Le retrait d'un vendeur coute 500 pieces d'or, hors vous ne possedez pas cette somme !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas votre vendeur !
+ENDIF
+REMOVE
+RETURN 1
+
+[FUNCTION renommer]
+IF !(STRCMPI("<ARGS>",""))
+SYSMESSAGEUA 0481 1 1 0 Tapez .renommer suivi d'un nom puis selectionner l'objet a renommer
+ELSE
+NEWITEM i_item_renommeur_item
+ACT.TAG.NOM=<ARGS>
+ACT.EQUIP
+ACT.USE
+ENDIF
+
+[ITEMDEF i_item_renommeur_item] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@CREATE 
+TIMER 30 
+
+ON=@TIMER 
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK 
+SRC.SYSMESSAGEUA 0481 1 1 0 Quel objet souhaitez vous renommer ?
+TARGET
+RETURN 1 
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> est renomme en <TAG.NOM>
+SRC.TARG.NAME=<TAG.NOM>
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un objet !
+REMOVE
+RETURN 1

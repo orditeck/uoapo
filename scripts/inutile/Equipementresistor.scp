@@ -1,0 +1,1256 @@
+[ITEMDEF i_epee_resistor]
+DEFNAME=i_epee_resistor
+NAME=Epee de contremagie
+ID=i_sword_broad
+//SPEED=20
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron,2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+	MOREY=20.0
+        ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=029
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.TACTICS= (<SRC.TACTICS>+15.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.TACTICS= (<SRC.TACTICS>-(15.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_resistor]
+ID=i_shield_heater
+DEFNAME=i_bouclier_resistor
+NAME=Bouclier de contremagie
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=029
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+2.5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(2.5))
+	RETURN 0
+
+
+[ITEMDEF i_casque_resistor]
+DEFNAME=i_Casque_resistor
+ID=i_platemail_helm
+NAME=Casque de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron,2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=029
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+2.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(2.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_resistor]
+DEFNAME=i_jambieres_resistor
+ID=i_platemail_leggings
+NAME=Jambieres de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron,2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=029
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+2.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(2.0))
+	RETURN 0
+
+[ITEMDEF i_armure_resistor]
+DEFNAME=i_armure_resistor
+ID=i_platemail_chest
+NAME=Armure de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron,2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=029
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+2.5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(2.5))
+	RETURN 0
+
+[ITEMDEF i_gants_resistor]
+DEFNAME=i_gants_resistor
+ID=i_platemail_gloves
+NAME=Gants de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron,2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=029
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+2.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(2.0))
+	RETURN 0
+
+[ITEMDEF i_cou_resistor]
+DEFNAME=i_cou_resistor
+ID=i_platemail_gorget
+NAME=Protege cou de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron,2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=029
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+2.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(2.0))
+	RETURN 0
+
+[ITEMDEF i_bras_resistor]
+DEFNAME=i_bras_resistor
+ID=i_platemail_arms
+NAME=Protege bras de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=029
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+2.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(2.0))
+	RETURN 0
+
+[ITEMDEF i_epee_resistor2]
+DEFNAME=i_epee_resistor2
+NAME=Epee de contremagie
+ID=i_sword_broad
+//SPEED=20
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron,4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=025e
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.TACTICS= (<SRC.TACTICS>+30.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.TACTICS= (<SRC.TACTICS>-(30.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_resistor2]
+ID=i_shield_heater
+DEFNAME=i_bouclier_resistor2
+NAME=Bouclier de contremagie
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=025e
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+5.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(5.0))
+	RETURN 0
+
+
+[ITEMDEF i_casque_resistor2]
+DEFNAME=i_Casque_resistor2
+ID=i_platemail_helm
+NAME=Casque de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron,4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=025e
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+4.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(4.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_resistor2]
+DEFNAME=i_jambieres_resistor2
+ID=i_platemail_leggings
+NAME=Jambieres de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron,4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=025e
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+4.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(4.0))
+	RETURN 0
+
+[ITEMDEF i_armure_resistor2]
+DEFNAME=i_armure_resistor2
+ID=i_platemail_chest
+NAME=Armure de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron,4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=025e
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+5.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(5.0))
+	RETURN 0
+
+[ITEMDEF i_gants_resistor2]
+DEFNAME=i_gants_resistor2
+ID=i_platemail_gloves
+NAME=Gants de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron,4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=025e
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+4.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(4.0))
+	RETURN 0
+
+[ITEMDEF i_cou_resistor2]
+DEFNAME=i_cou_resistor2
+ID=i_platemail_gorget
+NAME=Protege cou de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron,4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=025e
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+4.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(4.0))
+	RETURN 0
+
+[ITEMDEF i_bras_resistor2]
+DEFNAME=i_bras_resistor2
+ID=i_platemail_arms
+NAME=Protege bras de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=025e
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+4.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(4.0))
+	RETURN 0
+
+[ITEMDEF i_epee_resistor4]
+DEFNAME=i_epee_resistor4
+NAME=Epee de contremagie
+ID=i_sword_broad
+//SPEED=20
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron,16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=038
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.TACTICS= (<SRC.TACTICS>+60.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.TACTICS= (<SRC.TACTICS>-(60.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_resistor4]
+ID=i_shield_heater
+DEFNAME=i_bouclier_resistor4
+NAME=Bouclier de contremagie
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=038
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(10.0))
+	RETURN 0
+
+
+[ITEMDEF i_casque_resistor4]
+DEFNAME=i_Casque_resistor4
+ID=i_platemail_helm
+NAME=Casque de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron,16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=038
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+8.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(8.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_resistor4]
+DEFNAME=i_jambieres_resistor4
+ID=i_platemail_leggings
+NAME=Jambieres de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron,16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=038
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+8.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(8.0))
+	RETURN 0
+
+[ITEMDEF i_armure_resistor4]
+DEFNAME=i_armure_resistor4
+ID=i_platemail_chest
+NAME=Armure de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron,16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=038
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_gants_resistor4]
+DEFNAME=i_gants_resistor4
+ID=i_platemail_gloves
+NAME=Gants de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron,16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=038
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+8.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(8.0))
+	RETURN 0
+
+[ITEMDEF i_cou_resistor4]
+DEFNAME=i_cou_resistor4
+ID=i_platemail_gorget
+NAME=Protege cou de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron,16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=038
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+8.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(8.0))
+	RETURN 0
+
+[ITEMDEF i_bras_resistor4]
+DEFNAME=i_bras_resistor4
+ID=i_platemail_arms
+NAME=Protege bras de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=038
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+8.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(8.0))
+	RETURN 0
+
+[ITEMDEF i_epee_resistor3]
+DEFNAME=i_epee_resistor3
+NAME=Epee de contremagie
+ID=i_sword_broad
+//SPEED=20
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron,8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=03d
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.TACTICS= (<SRC.TACTICS>+45.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.TACTICS= (<SRC.TACTICS>-(45.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_resistor3]
+ID=i_shield_heater
+DEFNAME=i_bouclier_resistor3
+NAME=Bouclier de contremagie
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=03d
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+7.5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(7.5))
+	RETURN 0
+
+
+[ITEMDEF i_casque_resistor3]
+DEFNAME=i_Casque_resistor3
+ID=i_platemail_helm
+NAME=Casque de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron,8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=03d
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+6.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(6.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_resistor3]
+DEFNAME=i_jambieres_resistor3
+ID=i_platemail_leggings
+NAME=Jambieres de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron,8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=03d
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+6.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(6.0))
+	RETURN 0
+
+[ITEMDEF i_armure_resistor3]
+DEFNAME=i_armure_resistor3
+ID=i_platemail_chest
+NAME=Armure de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron,8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=03d
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+7.5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(7.5))
+	RETURN 0
+
+[ITEMDEF i_gants_resistor3]
+DEFNAME=i_gants_resistor3
+ID=i_platemail_gloves
+NAME=Gants de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron,8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=03d
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+6.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(6.0))
+	RETURN 0
+
+[ITEMDEF i_cou_resistor3]
+DEFNAME=i_cou_resistor3
+ID=i_platemail_gorget
+NAME=Protege cou de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron,8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=03d
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+6.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(6.0))
+	RETURN 0
+
+[ITEMDEF i_bras_resistor3]
+DEFNAME=i_bras_resistor3
+ID=i_platemail_arms
+NAME=Protege bras de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=03d
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+6.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(6.0))
+	RETURN 0
+
+[ITEMDEF i_epee_resistor6]
+DEFNAME=i_epee_resistor6
+NAME=Epee de contremagie
+ID=i_sword_broad
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron,64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=01
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.TACTICS= (<SRC.TACTICS>+100.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.TACTICS= (<SRC.TACTICS>-(100.0))
+	RETURN 0
+
+[ITEMDEF i_casque_resistor6]
+DEFNAME=i_Casque_resistor6
+ID=i_platemail_helm
+NAME=Casque de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron,64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=01
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+14.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(14.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_resistor6]
+DEFNAME=i_jambieres_resistor6
+ID=i_platemail_leggings
+NAME=Jambieres de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron,64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=01
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+14.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(14.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_resistor6]
+ID=i_shield_heater
+DEFNAME=i_bouclier_resistor6
+NAME=Bouclier de contremagie
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=01
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+15.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(15.0))
+	RETURN 0
+
+[ITEMDEF i_armure_resistor6]
+DEFNAME=i_armure_resistor6
+ID=i_platemail_chest
+NAME=Armure de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron,64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=01
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	MORE2=<SRC.COLOR> 
+	SRC.COLOR=01
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+15.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.COLOR=<MORE2>
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(15.0))
+	RETURN 0
+
+[ITEMDEF i_gants_resistor6]
+DEFNAME=i_gants_resistor6
+ID=i_platemail_gloves
+NAME=Gants de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron,64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=01
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+14.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(14.0))
+	RETURN 0
+
+[ITEMDEF i_cou_resistor6]
+DEFNAME=i_cou_resistor6
+ID=i_platemail_gorget
+NAME=Protege cou de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron,64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=01
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+14.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(14.0))
+	RETURN 0
+
+[ITEMDEF i_bras_resistor6]
+DEFNAME=i_bras_resistor6
+ID=i_platemail_arms
+NAME=Protege bras de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=01
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+14.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(14.0))
+	RETURN 0
+
+[ITEMDEF i_epee_resistor5]
+DEFNAME=i_epee_resistor5
+NAME=Epee de contremagie
+ID=i_sword_broad
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron,32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=0481
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.TACTICS= (<SRC.TACTICS>+75.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.TACTICS= (<SRC.TACTICS>-(75.0))
+	RETURN 0
+
+[ITEMDEF i_casque_resistor5]
+DEFNAME=i_Casque_resistor5
+ID=i_platemail_helm
+NAME=Casque de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron,32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0481
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_resistor5]
+DEFNAME=i_jambieres_resistor5
+ID=i_platemail_leggings
+NAME=Jambieres de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron,32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0481
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_resistor5]
+ID=i_shield_heater
+DEFNAME=i_bouclier_resistor5
+NAME=Bouclier de contremagie
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0481
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+12.5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(12.5))
+	RETURN 0
+
+[ITEMDEF i_armure_resistor5]
+DEFNAME=i_armure_resistor5
+ID=i_platemail_chest
+NAME=Armure de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron,32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0481
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+12.5)
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(12.5))
+
+[ITEMDEF i_gants_resistor5]
+DEFNAME=i_gants_resistor5
+ID=i_platemail_gloves
+NAME=Gants de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron,32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0481
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_cou_resistor5]
+DEFNAME=i_cou_resistor5
+ID=i_platemail_gorget
+NAME=Protege cou de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron,32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0481
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_bras_resistor5]
+DEFNAME=i_bras_resistor5
+ID=i_platemail_arms
+NAME=Protege bras de contremagie
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron,32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0481
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.MAGICRESISTANCE= (<SRC.MAGICRESISTANCE>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_armure_resistor21]
+DEFNAME=i_armure_resistor21
+ID=i_platemail_chest
+NAME=Armure de contremagie +3
+
+[ITEMDEF i_armure_resistor22]
+DEFNAME=i_armure_resistor22
+ID=i_platemail_chest
+NAME=Armure de contremagie +6
+
+[ITEMDEF i_armure_resistor23]
+DEFNAME=i_armure_resistor23
+ID=i_platemail_chest
+NAME=Armure de contremagie +9
+
+[ITEMDEF i_armure_resistor24]
+DEFNAME=i_armure_resistor24
+ID=i_platemail_chest
+NAME=Armure de contremagie +12
+
+[ITEMDEF i_armure_resistor25]
+DEFNAME=i_armure_resistor25
+ID=i_platemail_chest
+NAME=Armure de contremagie +15
+
+[ITEMDEF i_armure_resistor26]
+DEFNAME=i_armure_resistor26
+ID=i_platemail_chest
+NAME=Armure de contremagie +18

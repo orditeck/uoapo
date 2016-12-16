@@ -1,0 +1,419 @@
+[DIALOG D_POKER_HOLD_EM_GM]
+0,0
+
+page 0
+resizepic 0 0 2620 350 300
+
+page 1
+resizepic 65 120 2620 150 30
+textentry 70 126 140 14 1152 1 0//PETITE BLIND
+resizepic 65 170 2620 150 30
+textentry 70 176 140 14 1152 2 0//GROSSE BLIND
+text 80 20 1152 1//Menu GM Poker Hold em
+text 10 50 1152 2//Mode :
+text 100 50 1152 3//<MODE>
+text 200 50 1152 4//1) Sans limite
+text 200 70 1152 5//2) Avec limite
+text 10 100 1152 6//Petite Blind :
+text 120 100 1152 7//<TAG.PETITE_BLIND>
+text 10 150 1152 8//Grosse Blind :
+text 120 150 1152 9//<TAG.GROSSE_BLIND>
+text 10 210 1152 10//Etat de la partie :
+text 140 210 1152 11//<TAG.ETAT MODIFIER>
+text 100 250 1152 12//Supprimer la table :
+button 320 20 2103 2104 1 0 1//Quitter
+button 220 120 249 248 1 0 2//OK Petite blind
+button 220 170 249 248 1 0 3//OK Grosse blind
+button 250 255 2103 2104 1 0 4//Supprimer la table
+button 180 50 2103 2104 1 0 5//OK 1) Sans limite
+button 180 70 2103 2104 1 0 6//OK 2) Avec limite
+
+
+
+[DIALOG D_POKER_HOLD_EM_GM TEXT]
+<VAR.BLANKLINE>
+Menu GM Poker Hold em
+Mode :
+<EVAL 0<TAG.MODE>>
+1) Sans limite
+2) Avec limite
+Petite Blind :
+<EVAL 0<TAG.PETITE_MISE>>
+Grosse Blind :
+<EVAL 0<TAG.GROSSE_MISE>>
+Etat de la partie :
+<GET_NOM_ETAT_POKER_HOLD_EM <TAG.ETAT>>
+Supprimer la table :
+
+[DIALOG D_POKER_HOLD_EM_GM BUTTON]
+ON=0
+RETURN 0
+
+//QUITTER
+ON=1
+RETURN 0
+
+//OK Petite blind
+ON=2
+IF !(STRCMPI("<ARGTXT[1]>",""))
+	SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez entrer un nombre dans le champs !
+ELSE
+	VAR.TEMP = <EVAL <ARGTXT[1]>>
+	IF <VAR.TEMP>
+		IF <VAR.TEMP> >= 0
+			TAG.PETITE_MISE = <VAR.TEMP>
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez entrer un nombre valide dans le champs !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez entrer un nombre valide dans le champs !
+	ENDIF
+ENDIF
+RETURN 0
+
+//OK Grosse blind
+ON=3
+IF !(STRCMPI("<ARGTXT[2]>",""))
+	SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez entrer un nombre dans le champs !
+ELSE
+	VAR.TEMP = <EVAL <ARGTXT[2]>>
+	IF <VAR.TEMP>
+		IF <VAR.TEMP> >= 0
+			TAG.GROSSE_MISE = <VAR.TEMP>
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez entrer un nombre valide dans le champs !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez entrer un nombre valide dans le champs !
+	ENDIF
+ENDIF
+RETURN 0
+
+//SUPPRIMER LA TABLE
+ON=4
+SUPPRIMER_POKER_HOLD_EM
+RETURN 0
+
+//MODE SANS LIMITE
+ON=5
+TAG.MODE=1
+SRC.SYSMESSAGEUA 0481 1 1 0 La table est maintenant en mode sans limite
+RETURN 0
+
+//MODE AVEC LIMITE
+ON=6
+SRC.SYSMESSAGEUA 025 1 1 0 Mode sans limite pas encore implemente !
+RETURN 0
+
+
+
+[DIALOG D_POKER_HOLD_EM_BLIND]
+0,0
+
+page 0
+resizepic 0 0 2620 400 460
+
+page 1
+text 140 20 1152 1//Petite mise || Grosse mise
+text 120 80 1152 2//Mise a payer obligatoire
+text 80 150 1152 3//Montant a payer :
+text 220 150 1152 4//<MONTANT A PAYER>
+text 20 180 1152 5//Abandonner la partie
+text 200 180 1152 6//Quitter la table
+button 250 200 1150 1151 1 0 1//Quitter
+button 320 150 249 248 1 0 2//OK
+button 80 200 1150 1151 1 0 3//Cancel
+
+
+[DIALOG D_POKER_HOLD_EM_BLIND TEXT]
+<VAR.BLANKLINE>
+<GET_NOM_MISE_POKER_HOLD_EM>
+Mise a payer obligatoire
+Montant a payer :
+<EVAL 0<GET_NOMBRE_BLIND_POKER_HOLD_EM>>
+Abandonner la partie
+Quitter la table
+
+[DIALOG D_POKER_HOLD_EM_BLIND BUTTON]
+ON=0
+IF <IS_JOUEUR_A_LA_TABLE <SRC.UID>> == <TAG.ETAT_J>
+	DIALOG D_POKER_HOLD_EM_BLIND
+ENDIF
+RETURN 0
+
+//QUITTER
+ON=1
+IF <IS_JOUEUR_A_LA_TABLE <SRC.UID>> == <TAG.ETAT_J>
+	TAG.ATTEND_ACTION_DU_JOUEUR
+	SORTIR_DE_TABLE <SRC.UID>
+	SRC.EMOTE Quitte la partie !
+	TAG.ETAT_J = <PROCHAIN_JOUEUR_ACTIF_POKER <TAG.ETAT_J>>
+	TIMER=1
+ENDIF
+RETURN 0
+
+
+//OK
+ON=2
+IF <IS_JOUEUR_A_LA_TABLE <SRC.UID>> == <TAG.ETAT_J>
+	TAG.ATTEND_ACTION_DU_JOUEUR
+	IF <TAG.RENDU_PETITE_MISE>
+		IF <SRC.PAYER_QUE_DU_SAC_CARTES <TAG.PETITE_MISE>>
+			SRC.EMOTE Paie la petite mise de <EVAL <TAG.PETITE_MISE>> pieces d'or
+			TAG.RENDU_PETITE_MISE
+			TAG.RENDU_GROSSE_MISE = 1
+			INCREMENTER_MISE_POKER_HOLD_EM <TAG.PETITE_MISE>
+		ELSE
+			SRC.EMOTE Abandonne la partie ne pouvant pas payer !
+			ABANDONNER_PARTIE_POKER_HOLD_EM <SRC.UID>
+		ENDIF
+	ELSEIF <TAG.RENDU_GROSSE_MISE>
+		IF <SRC.PAYER_QUE_DU_SAC_CARTES <TAG.GROSSE_MISE>>
+			SRC.EMOTE Paie la grosse mise de <EVAL <TAG.GROSSE_MISE>> pieces d'or
+			TAG.RENDU_GROSSE_MISE
+			TAG.ETAT=2
+			INCREMENTER_MISE_POKER_HOLD_EM <TAG.GROSSE_MISE>
+			AJOUTER_CARTES_AU_CHANGEMENT_D_ETAT
+			TAG.A_JOUER_AVANT_CYCLE = <EVAL <NB_JOUEURS_ACTIFS_POKER> + 1>
+		ELSE
+			SRC.EMOTE Abandonne la partie ne pouvant pas payer !
+			ABANDONNER_PARTIE_POKER_HOLD_EM <SRC.UID>
+		ENDIF
+	ENDIF
+	TAG.ETAT_J = <PROCHAIN_JOUEUR_ACTIF_POKER <TAG.ETAT_J>>
+	TAG.ATTEND_ACTION_DU_JOUEUR
+	TIMER=1
+ENDIF
+RETURN 0
+
+
+//ABANDONNER
+ON=3
+IF <IS_JOUEUR_A_LA_TABLE <SRC.UID>> == <TAG.ETAT_J>
+	ABANDONNER_PARTIE_POKER_HOLD_EM <SRC.UID>
+	TAG.ATTEND_ACTION_DU_JOUEUR
+	SRC.EMOTE Abandonne la partie !
+	TAG.ETAT_J = <PROCHAIN_JOUEUR_ACTIF_POKER <TAG.ETAT_J>>
+	TIMER=1
+ENDIF
+RETURN 0
+
+
+//*********************************************************
+//******************MISES NORMALES*************************
+//*********************************************************
+
+[DIALOG D_MISE_POKER_HOLD_EM]
+0,0
+
+page 0
+resizepic 0 0 2620 400 460
+
+page 1
+resizepic 145 230 2620 150 30
+textentry 150 236 140 14 1152 1 0//Miser ce montant
+text 160 20 1152 1//<Nom de la mise>
+text 20 60 1152 2//Pot :
+text 180 60 1152 3//<OR DANS LE POT>
+text 20 80 1152 4//Votre mise
+text 180 80 1152 5//<MISE DU JOUEUR>
+text 20 100 1152 6//Mise requise
+text 180 100 1152 7//<MISE REQUISE DU JOUEUR>
+text 120 130 1152 8//Pour poursuivre la partie :
+text 40 160 1152 9//Minimum requis :
+text 180 160 1152 10//<MINIMUM REQUIS>
+text 40 180 1152 11//Minimum requis pour relancer :
+text 270 180 1152 12//<MIN POUR RELANCE>
+text 30 270 1152 13//All-In
+text 20 230 1152 14//Miser ce montant
+text 100 270 1152 15//Abandonner la partie
+text 20 350 1152 16//Votre or :
+text 120 350 1152 17//<TOTAL OR>
+text 270 270 1152 18//Quitter la table
+text 300 350 1152 19//Suivre
+button 310 290 1150 1151 1 0 1//Quitter
+button 20 290 249 248 1 0 2//All-In
+button 300 230 249 248 1 0 3//Miser ce montant
+button 150 290 1150 1151 1 0 4//Abandonner
+button 300 370 1150 1151 1 0 5//Suivre
+
+
+
+[DIALOG D_MISE_POKER_HOLD_EM TEXT]
+<VAR.BLANKLINE>
+<GET_NOM_MISE_POKER_HOLD_EM>
+pot :
+<EVAL <GET_PIECES_DANS_LE_POT>>
+Votre mise :
+<EVAL <GET_MISE_DU_JOUEUR <IS_JOUEUR_A_LA_TABLE <SRC.UID>>>>
+Mise requise :
+<EVAL <MAX_MISE_POKER>>
+Pour poursuivre la partie...
+Minimum requis :
+<EVAL <MAX_MISE_POKER> - <GET_MISE_DU_JOUEUR <IS_JOUEUR_A_LA_TABLE <SRC.UID>>>>
+Minimum requis pour relance :
+<EVAL <MAX_MISE_POKER> + <TAG.GROSSE_MISE> - <GET_MISE_DU_JOUEUR <IS_JOUEUR_A_LA_TABLE <SRC.UID>>>>
+All-In
+Miser ce montant
+Abandonner la partie
+Votre or :
+<EVAL <SRC.GET_TOTAL_PIECES_D_OR>>
+Quitter la table
+Suivre
+
+
+[DIALOG D_MISE_POKER_HOLD_EM BUTTON]
+ON=0
+IF <IS_JOUEUR_A_LA_TABLE <SRC.UID>> == <TAG.ETAT_J>
+	DIALOG D_MISE_POKER_HOLD_EM
+ENDIF
+RETURN 0
+
+//QUITTER
+ON=1
+IF <IS_JOUEUR_A_LA_TABLE <SRC.UID>> == <TAG.ETAT_J>
+	TAG.ATTEND_ACTION_DU_JOUEUR
+	SORTIR_DE_TABLE <SRC.UID>
+	SRC.EMOTE Quitte la partie !
+	TAG.ETAT_J = <PROCHAIN_JOUEUR_ACTIF_POKER <TAG.ETAT_J>>
+	TIMER=1
+ENDIF
+RETURN 0
+
+//All-In
+ON=2
+IF <IS_JOUEUR_A_LA_TABLE <SRC.UID>> == <TAG.ETAT_J>
+	TAG.ATTEND_ACTION_DU_JOUEUR
+	INCREMENTER_MISE_POKER_HOLD_EM <SRC.GET_TOTAL_PIECES_D_OR>
+	TAG.ETAT_J = <PROCHAIN_JOUEUR_ACTIF_POKER <TAG.ETAT_J>>
+	TIMER=1
+	SRC.PAYER_QUE_DU_SAC_CARTES <SRC.GET_TOTAL_PIECES_D_OR>
+	SRC.EMOTE se met all-in avec un total de <EVAL <GET_MISE_DU_JOUEUR <IS_JOUEUR_A_LA_TABLE <SRC.UID>>>> po !
+ENDIF
+RETURN 0
+
+//Miser ce montant
+ON=3
+IF <IS_JOUEUR_A_LA_TABLE <SRC.UID>> == <TAG.ETAT_J>
+	TAG.TEMPTEXT = <EVAL <ARGTXT[1]>>
+	IF <TAG.TEMPTEXT> >= 0
+		IF <TAG.TEMPTEXT> > <SRC.GET_TOTAL_PIECES_D_OR>
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas cette somme : <EVAL <TAG.TEMPTEXT>> po !
+			DIALOG D_MISE_POKER_HOLD_EM
+		ELSEIF <TAG.TEMPTEXT> == <SRC.GET_TOTAL_PIECES_D_OR>
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez vous mettre All-In !
+			DIALOG D_MISE_POKER_HOLD_EM
+		ELSEIF <TAG.TEMPTEXT> < <EVAL <MAX_MISE_POKER> - <GET_MISE_DU_JOUEUR <IS_JOUEUR_A_LA_TABLE <SRC.UID>>>>
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez miser au moins le montant requis !
+			DIALOG D_MISE_POKER_HOLD_EM
+		ELSEIF <TAG.TEMPTEXT> < <EVAL <MAX_MISE_POKER> + <TAG.GROSSE_MISE> - <GET_MISE_DU_JOUEUR <IS_JOUEUR_A_LA_TABLE <SRC.UID>>>>
+			SRC.SYSMESSAGEUA 0481 1 1 0 Pour relancer, vous devez miser au moins le montant minimum de relance, sinon faites suivre !
+			DIALOG D_MISE_POKER_HOLD_EM
+		ELSE
+			TAG.ATTEND_ACTION_DU_JOUEUR
+			INCREMENTER_MISE_POKER_HOLD_EM <TAG.TEMPTEXT>
+			TAG.ETAT_J = <PROCHAIN_JOUEUR_ACTIF_POKER <TAG.ETAT_J>>
+			TIMER=1
+			SRC.PAYER_QUE_DU_SAC_CARTES <TAG.TEMPTEXT>
+			SRC.EMOTE mise <EVAL <TAG.TEMPTEXT>> po pour un total de <EVAL <GET_MISE_DU_JOUEUR <IS_JOUEUR_A_LA_TABLE <SRC.UID>>>> po !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez entrer votre mise dans le champs prevu a cet effet !
+		DIALOG D_MISE_POKER_HOLD_EM
+	ENDIF
+	TAG.TEMPTEXT
+ENDIF
+RETURN 0
+
+//PASSER
+ON=4
+IF <IS_JOUEUR_A_LA_TABLE <SRC.UID>> == <TAG.ETAT_J>
+	ABANDONNER_PARTIE_POKER_HOLD_EM <SRC.UID>
+	TAG.ATTEND_ACTION_DU_JOUEUR
+	SRC.EMOTE passe !
+	TAG.ETAT_J = <PROCHAIN_JOUEUR_ACTIF_POKER <TAG.ETAT_J>>
+	TIMER=1
+ENDIF
+RETURN 0
+
+//SUIVRE
+ON=5
+IF <IS_JOUEUR_A_LA_TABLE <SRC.UID>> == <TAG.ETAT_J>
+	TAG.TEMP_A_PAYER = <EVAL <MAX_MISE_POKER> - <GET_MISE_DU_JOUEUR <IS_JOUEUR_A_LA_TABLE <SRC.UID>>>>
+	IF <TAG.TEMP_A_PAYER> > <SRC.GET_TOTAL_PIECES_D_OR>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas cette somme : <EVAL <TAG.TEMP_A_PAYER>> po. pour continuer a jouer, mettez vous all-in
+		DIALOG D_MISE_POKER_HOLD_EM
+	ELSE
+		TAG.ATTEND_ACTION_DU_JOUEUR
+		INCREMENTER_MISE_POKER_HOLD_EM <TAG.TEMP_A_PAYER>
+		TAG.ETAT_J = <PROCHAIN_JOUEUR_ACTIF_POKER <TAG.ETAT_J>>
+		TIMER=1
+		SRC.PAYER_QUE_DU_SAC_CARTES <TAG.TEMP_A_PAYER>
+		SRC.EMOTE mise <EVAL <TAG.TEMP_A_PAYER>> po pour un total de <EVAL <GET_MISE_DU_JOUEUR <IS_JOUEUR_A_LA_TABLE <SRC.UID>>>> po !
+	ENDIF
+	TAG.TEMP_A_PAYER
+ENDIF
+RETURN 0
+
+
+//*************************************************************
+//******************QUELQUES FONCTIONS*************************
+//*************************************************************
+
+
+[FUNCTION GET_NOMBRE_BLIND_POKER_HOLD_EM]
+IF 0<TAG.ETAT> == 1
+	IF <TAG.RENDU_PETITE_MISE>
+		RETURN 0<TAG.PETITE_MISE>
+	ELSEIF <TAG.RENDU_GROSSE_MISE>
+		RETURN 0<TAG.GROSSE_MISE>
+	ENDIF
+ENDIF
+RETURN 0
+
+//ARGS : # DE L'ETAT
+[FUNCTION GET_NOM_ETAT_POKER_HOLD_EM]
+IF <ARGS>
+	IF <ARGS> == 1
+		RETURN "blinds"
+	ELSEIF <ARGS> == 2
+		RETURN "pre-flop"
+	ELSEIF <ARGS> == 3
+		RETURN "flop"
+	ELSEIF <ARGS> == 4
+		RETURN "tournant"
+	ELSEIF <ARGS> == 5
+		RETURN "riviere"
+	ELSE
+		RETURN "???"
+	ENDIF
+ELSE
+	RETURN "Aucune Partie en cours"
+ENDIF
+RETURN 0
+
+//DEFAULT : i_obj_poker_hold_em
+[FUNCTION GET_NOM_MISE_POKER_HOLD_EM]
+IF 0<TAG.ETAT> == 1
+	IF <TAG.RENDU_PETITE_MISE>
+		RETURN "Petite Blind"
+	ELSEIF <TAG.RENDU_GROSSE_MISE>
+		RETURN "Grosse Blind"
+	ENDIF
+ELSEIF 0<TAG.ETAT> == 2
+	RETURN "Pre-flop"
+ELSEIF 0<TAG.ETAT> == 3
+	RETURN "Flop"
+ELSEIF 0<TAG.ETAT> == 4
+	RETURN "Tournant"
+ELSEIF 0<TAG.ETAT> == 5
+	RETURN "Riviere"
+ENDIF
+RETURN 0
+
+//DEFAULT : m_dialog_poker_hold_em
+[FUNCTION IS_DIALOG_TOUJOURS_ACTIF]
+
+
+
+

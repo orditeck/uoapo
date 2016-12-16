@@ -1,0 +1,383 @@
+[PLEVEL 1]
+invoc
+
+//OUVRE LE DIALOG D'INVOCATION
+[FUNCTION invoc]
+IF !(STRCMPI("<ARGS>",""))
+	SYSMESSAGEUA 0481 1 1 0 Tapez .invoc suivi de (go, tele)
+ELSEIF !(STRCMPI("<ARGS>","go"))
+	IF !<FINDID.m_invocation_cancel>
+		DIALOG D_INVOCATION
+	ELSE
+		SYSMESSAGEUA 025 1 1 0 Vous etes deja en train d'invoquer une creature
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","tele"))
+	IF <FINDID.m_invocation_teleport>
+		SYSMESSAGEUA 025 1 1 0 Vous devez attendre <FINDID.m_invocation_teleport.TIMER> secondes avant de teleporter de nouveau
+	ELSE
+		IF (<FINDID.m_invocation_timer> && <FINDID.m_invocation_timer.LINK> && <FINDID.m_invocation_timer.LINK.FINDID.i_vire_creature>)
+			FINDID.m_invocation_timer.LINK.GO =  <P.X>,<P.Y>,<P.Z>
+			NEWITEM m_invocation_teleport
+			ACT.CONT = <UID>
+			ACT.TIMER=5
+		ELSE
+			SYSMESSAGEUA 025 1 1 0 Vous devez posseder une creature pour la teleporter
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+[EVENTS e_invocation]
+ON=@HIT
+SRC.PERTE_CONCENTRATION
+RETURN 0
+
+ON=@GETHIT
+SRC.PERTE_CONCENTRATION
+RETURN 0
+
+ON=@SPELLCAST
+SRC.PERTE_CONCENTRATION
+RETURN 0
+
+ON=@SPELLEFFECT
+SRC.PERTE_CONCENTRATION
+RETURN 0
+
+[EVENTS e_monstre_invocation]
+ON=@DEATH
+//SRC = victime
+//SRC.ACT = attaquant
+SRC.REMOVE
+RETURN 1
+
+
+[FUNCTION PERTE_CONCENTRATION]
+EVENTS -e_invocation
+IF <FINDID.m_invocation_cancel>
+	FINDID.m_invocation_cancel.REMOVE
+	EMOTE perdre sa concentration
+ENDIF
+RETURN 0
+
+
+[ITEMDEF m_invocation_teleport]
+NAME=timeout teleport
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=5
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//RENDU A TIMER=0, CREER LA CREATURE
+//MORE1 = monstre a creer ; MORE2 = force du monstre ; MOREX = mana requis
+[ITEMDEF m_invocation_cancel]
+NAME=invoc cancel
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@TIMER
+CONT.EVENTS -e_invocation
+IF <CONT.MANA> < <MOREX>
+	CONT.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les <EVAL <MOREX>> mana requis pour l'invocation
+	REMOVE
+	RETURN 1
+ELSE
+	CONT.MANA = <EVAL <CONT.MANA>-<MOREX>>
+ENDIF
+//EFFACER L'INVOCATION ACTUELLE DU JOUEUR
+IF <CONT.FINDID.m_invocation_timer>
+	IF ((<CONT.FINDID.m_invocation_timer.LINK>) && (<CONT.FINDID.m_invocation_timer.LINK.FINDID.i_vire_creature>))
+		CONT.FINDID.m_invocation_timer.LINK.FINDID.i_vire_creature.TIMERD=1
+	ENDIF
+	CONT.FINDID.m_invocation_timer.REMOVE
+ENDIF
+VAR.ACTSAVE = <CONT.ACT.UID>
+//CREER LE MONSTRE
+CONT.NEWNPC <MORE1>
+CONT.ACT.FLAGS=<CONT.ACT.FLAGS> + statf_conjured
+VAR.UIDMONSTRE = <CONT.ACT.UID>
+VAR.STATSBASE=<MORE2>
+CONT.ACT.NAME = <CONT.ACT.NAME> de <CONT.NAME>
+CONT.ACT.P = <CONT.P>
+CONT.ACT.UPDATE
+CONT.ACT.KARMA=0
+CONT.ACT.FAME=0
+CONT.ACT.TAG.PROPRIO_UID = <CONT.UID>
+CONT.ACT.INVOC_BONUS_STATS <CONT.MEDITATION>
+CONT.NEWITEM i_memory
+CONT.ACT.TIMER = -1
+CONT.ACT.COLOR = 042
+CONT.ACT.LINK = <CONT.UID>
+CONT.ACT.CONT = <VAR.UIDMONSTRE>
+CONT.NEWITEM i_vire_creature
+CONT.ACT.LINK = <CONT.UID>
+CONT.ACT.TIMER = <EVAL <CONT.MEDITATION>/2>
+CONT.ACT.CONT = <VAR.UIDMONSTRE>
+//CREER LE MEMORY
+CONT.NEWITEM m_invocation_timer
+CONT.ACT.LINK = <VAR.UIDMONSTRE>
+CONT.ACT.TIMER=<EVAL <CONT.MEDITATION>/2>
+CONT.ACT.CONT = <CONT.UID>
+//MENAGE VARIABLES
+VAR.UIDMONSTRE
+VAR.STATSBASE
+CONT.ACT = <VAR.ACTSAVE>
+VAR.ACTSAVE
+REMOVE
+RETURN 1
+
+//INVOCATION DU JOUEUR, REMPLACER SI LE JOUEUR EN INVOQUE UN AUTRE LA CREATURE EST EFFACEE
+//LINK = INVOCATION CRÉE
+[ITEMDEF m_invocation_timer]
+NAME=invoc timer
+TYPE=t_eq_script
+ID=i_memory
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//DEFAULT : MONSTRE INVOQUÉ <ARGS> = MEDITATION DU JOUEUR
+[FUNCTION INVOC_BONUS_STATS]
+MAXHITS=<VAR.STATSBASE>
+STR=<VAR.STATSBASE>
+MAXHITS = <EVAL <MAXHITS> + ((<MAXHITS>/10) * (<ARGS>/10))/30>
+STR = <EVAL <STR> + ((<STR>/10) * (<ARGS>/10))/60>
+MAGERY = 0
+DEX = <STR>
+INT = 0
+HITS = <MAXHITS>
+RETURN 0
+
+
+
+[DIALOG D_INVOCATION]
+0,0
+
+page 0
+resizepic 0 0 2620 480 350
+
+page 1
+text 200 20 1152 1//Table d'invocations
+text 20 50 1152 2//nom
+text 120 50 1152 3//magie et meditation
+text 300 50 1152 4//mana
+text 380 50 1152 5//Invoquer?
+text 20 70 1152 6//loup
+text 170 70 1152 7//150
+text 305 70 1152 8//100
+text 20 100 1152 9//ours brun
+text 170 100 1152 10//200
+text 305 100 1152 11//150
+text 20 130 1152 12//lynx
+text 170 130 1152 13//250
+text 305 130 1152 14//200
+text 20 160 1152 15//vortex
+text 170 160 1152 16//300
+text 305 160 1152 17//275
+text 20 190 1152 18//esprit des lames
+text 170 190 1152 19//350
+text 305 190 1152 20//325
+text 20 220 1152 21//dragonnet
+text 170 220 1152 22//400
+text 305 220 1152 23//450
+text 20 250 1152 24//demon inferieur
+text 170 250 1152 25//500
+text 305 250 1152 26//575
+text 20 280 1152 27//demon superieur
+text 170 280 1152 28//600
+text 305 280 1152 29//700
+button 400 70 2473 2472 1 0 1//INVOQUER LOUP
+button 400 100 2473 2472 1 0 2//INVOQUER OURS BRUN
+button 400 130 2473 2472 1 0 3//INVOQUER LYNX
+button 400 160 2473 2472 1 0 4//INVOQUER VORTEX
+button 400 190 2473 2472 1 0 5//INVOQUER ESPRIT DES LAMES
+button 400 220 2473 2472 1 0 6//INVOQUER DRAGONNET
+button 400 250 2473 2472 1 0 7//INVOQUER DEMON INFERIEUR
+button 400 280 2473 2472 1 0 8//INVOQUER DEMON SUPERIEUR
+button 230 310 1150 1151 1 0 9//X
+
+[DIALOG D_INVOCATION TEXT]
+<VAR.BLANKLINE>
+Table d'invocations
+Nom
+Magie&Meditation
+Mana
+Invoquer?
+loup
+150
+100
+ours brun
+200
+150
+panthere
+250
+200
+vortex
+300
+275
+esprit des lames
+350
+325
+dragonnet
+400
+450
+demon inferieur
+500
+575
+demon superieur
+600
+700
+
+[DIALOG D_INVOCATION BUTTON]
+ON=1
+IF (!(<FINDID.m_invocation_cancel>) && !(<REGION.FLAGS>&08000))
+	IF (<MAGERY> >= 150.0) && (<MEDITATION> >= 150.0) && (<MANA> > 100)
+		EVENTS +e_invocation
+		NEWITEM m_invocation_cancel
+		ACT.EQUIP
+		ACT.TIMER=5
+		ACT.MORE1=c_wolf
+		ACT.MORE2=100
+		ACT.MOREX = 100
+		EMOTE en train d'invoquer une creature
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les prerequis pour invoquer un loup
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas invoquer pour l'instant !
+ENDIF
+
+ON=2
+IF (!(<FINDID.m_invocation_cancel>) && !(<REGION.FLAGS>&08000))
+	IF (<MAGERY> >= 200.0) && (<MEDITATION> >= 200.0) && (<MANA> > 150)
+		EVENTS +e_invocation
+		NEWITEM m_invocation_cancel
+		ACT.EQUIP
+		ACT.TIMER=6
+		ACT.MORE1=c_bear_brown
+		ACT.MORE2=250
+		ACT.MOREX = 150
+		EMOTE en train d'invoquer une creature
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les prerequis pour invoquer un ours brun
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas invoquer pour l'instant !
+ENDIF
+
+ON=3
+IF (!(<FINDID.m_invocation_cancel>) && !(<REGION.FLAGS>&08000))
+	IF (<MAGERY> >= 250.0) && (<MEDITATION> >= 250.0) && (<MANA> > 200)
+		EVENTS +e_invocation
+		NEWITEM m_invocation_cancel
+		ACT.EQUIP
+		ACT.TIMER=7
+		ACT.MORE1=c_panther
+		ACT.MORE2=400
+		ACT.MOREX = 200
+		EMOTE en train d'invoquer une creature
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les prerequis pour invoquer une panthere
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas invoquer pour l'instant !
+ENDIF
+
+ON=4
+IF (!(<FINDID.m_invocation_cancel>) && !(<REGION.FLAGS>&08000))
+	IF (<MAGERY> >= 300.0) && (<MEDITATION> >= 300.0) && (<MANA> > 275)
+		EVENTS +e_invocation
+		NEWITEM m_invocation_cancel
+		ACT.EQUIP
+		ACT.TIMER=8
+		ACT.MORE1=c_vortex
+		ACT.MORE2=600
+		ACT.MOREX = 275
+		EMOTE en train d'invoquer une creature
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les prerequis pour invoquer un vortex d'energie
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas invoquer pour l'instant !
+ENDIF
+
+ON=5
+IF (!(<FINDID.m_invocation_cancel>) && !(<REGION.FLAGS>&08000))
+	IF (<MAGERY> >= 350.0) && (<MEDITATION> >= 350.0) && (<MANA> > 325)
+		EVENTS +e_invocation
+		NEWITEM m_invocation_cancel
+		ACT.EQUIP
+		ACT.TIMER=9
+		ACT.MORE1=c_blade_spirit
+		ACT.MORE2=800
+		ACT.MOREX = 325
+		EMOTE en train d'invoquer une creature
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les prerequis pour invoquer un esprit des lames
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas invoquer pour l'instant !
+ENDIF
+
+ON=6
+IF (!(<FINDID.m_invocation_cancel>) && !(<REGION.FLAGS>&08000))
+	IF (<MAGERY> >= 400.0) && (<MEDITATION> >= 400.0) && (<MANA> > 450)
+		EVENTS +e_invocation
+		NEWITEM m_invocation_cancel
+		ACT.EQUIP
+		ACT.TIMER=10
+		ACT.MORE1=c_dragon_small_black
+		ACT.MORE2=1050
+		ACT.MOREX = 450
+		EMOTE en train d'invoquer une creature
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les prerequis pour invoquer un dragonnet
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas invoquer pour l'instant !
+ENDIF
+
+ON=7
+IF (!(<FINDID.m_invocation_cancel>) && !(<REGION.FLAGS>&08000))
+	IF (<MAGERY> >= 500.0) && (<MEDITATION> >= 500.0) && (<MANA> > 575)
+		EVENTS +e_invocation
+		NEWITEM m_invocation_cancel
+		ACT.EQUIP
+		ACT.TIMER=11
+		ACT.MORE1=c_daemon
+		ACT.MORE2=1300
+		ACT.MOREX = 575
+		EMOTE en train d'invoquer une creature
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les prerequis pour invoquer un demon inferieur
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas invoquer pour l'instant !
+ENDIF
+
+ON=8
+IF (!(<FINDID.m_invocation_cancel>) && !(<REGION.FLAGS>&08000))
+	IF (<MAGERY> >= 600.0) && (<MEDITATION> >= 600.0) && (<MANA> > 700)
+		EVENTS +e_invocation
+		NEWITEM m_invocation_cancel
+		ACT.EQUIP
+		ACT.TIMER=12
+		ACT.MORE1=c_daemon_w_sword
+		ACT.MORE2=1500
+		ACT.MOREX = 700
+		EMOTE en train d'invoquer une creature
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas les prerequis pour invoquer un demon superieur
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas invoquer pour l'instant !
+ENDIF

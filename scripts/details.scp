@@ -1,0 +1,113 @@
+[DEFNAME DETAIL_FLAGS_MORE1]
+detail_flags_coups_speciaux		01
+detail_flags_esquive			02
+detail_flags_exp_gain			04
+detail_flags_cash_gain			08
+detail_flags_exp_boost			16
+
+[PLEVEL 1]
+details
+
+[FUNCTION DETAILS]
+IF !<FINDID.m_journal_player_details>
+	NEWITEM m_journal_player_details
+	ACT.EQUIP
+	ACT.TIMER=-1
+ENDIF
+FINDID.m_journal_player_details.DIALOG D_DETAIL_JOURNAL_PLAYER
+RETURN 1
+
+
+[DIALOG D_DETAIL_JOURNAL_PLAYER]
+0,0
+
+page 0
+resizepic 0 0 2620 400 450
+
+page 1
+text 80 20 1152 1//Choisir votre niveau de detail
+text 20 50 1152 2//Coups speciaux
+text 20 80 1152 3//Esquive
+text 20 110 1152 4//Experience gagnee
+text 20 140 1152 5//pieces d'or gagnees
+text 20 170 1152 6//Boost d'experience
+button 200 48 <GET_BUTTON_GUMP_DETAIL_JOURNAL detail_flags_coups_speciaux> <GET_BUTTON_GUMP_DETAIL_JOURNAL detail_flags_coups_speciaux> 1 0 100//Active/desactive coups speciaux
+button 200 78 <GET_BUTTON_GUMP_DETAIL_JOURNAL detail_flags_esquive> <GET_BUTTON_GUMP_DETAIL_JOURNAL detail_flags_esquive> 1 0 101//Active/desactive Esquive
+button 200 108 <GET_BUTTON_GUMP_DETAIL_JOURNAL detail_flags_exp_gain> <GET_BUTTON_GUMP_DETAIL_JOURNAL detail_flags_exp_gain> 1 0 102//Active/desactive exp gagnee
+button 200 138 <GET_BUTTON_GUMP_DETAIL_JOURNAL detail_flags_cash_gain> <GET_BUTTON_GUMP_DETAIL_JOURNAL detail_flags_cash_gain> 1 0 103//Active/desactive cash gagnee
+button 200 168 <GET_BUTTON_GUMP_DETAIL_JOURNAL detail_flags_exp_boost> <GET_BUTTON_GUMP_DETAIL_JOURNAL detail_flags_exp_boost> 1 0 104//Active/desactive boost xp
+
+[DIALOG D_DETAIL_JOURNAL_PLAYER TEXT]
+<VAR.BLANKLINE>
+Choisir votre niveau de detail
+Coups speciaux
+Esquive
+Experience gagnee
+Pieces d'or gagnees
+Boost d'experience
+
+[DIALOG D_DETAIL_JOURNAL_PLAYER BUTTON]
+ON=100
+ACTIVATE_DETAIL_JOURNAL_PLAYER_FLAG detail_flags_coups_speciaux
+RETURN 1
+
+ON=101
+ACTIVATE_DETAIL_JOURNAL_PLAYER_FLAG detail_flags_esquive
+RETURN 1
+
+ON=102
+ACTIVATE_DETAIL_JOURNAL_PLAYER_FLAG detail_flags_exp_gain
+RETURN 1
+
+ON=103
+ACTIVATE_DETAIL_JOURNAL_PLAYER_FLAG detail_flags_cash_gain
+RETURN 1
+
+ON=104
+ACTIVATE_DETAIL_JOURNAL_PLAYER_FLAG detail_flags_exp_boost
+RETURN 1
+
+
+//ARGS : bit to activate
+//DEFAULT : m_journal_player_details
+[FUNCTION ACTIVATE_DETAIL_JOURNAL_PLAYER_FLAG]
+IF <MORE1>&<ARGS>
+	MORE1 = <EVAL <MORE1> - <ARGS>>
+ELSE
+	MORE1 = <EVAL <MORE1> + <ARGS>>
+ENDIF
+DIALOG D_DETAIL_JOURNAL_PLAYER
+RETURN 1
+
+//ARGS : bit to activate
+//DEFAULT : JOUEUR
+//RETURN 1 : active ;; 2 : desactive
+[FUNCTION IS_DETAIL_JOURNAL_PLAYER_FLAG]
+IF <FINDID.m_journal_player_details>
+	IF <FINDID.m_journal_player_details.MORE1>&<ARGS>
+		RETURN 1
+	ENDIF
+ENDIF
+RETURN 0
+
+//ARGS : bit to activate
+//DEFAULT : JOUEUR
+//RETURN ID du gump (bouton)
+[FUNCTION GET_BUTTON_GUMP_DETAIL_JOURNAL]
+IF <MORE1>&<ARGS>
+	RETURN 086A
+ELSE
+	RETURN 0868
+ENDIF
+
+[ITEMDEF m_journal_player_details]
+ID=i_memory
+NAME=Detail journal
+TYPE=t_eq_script
+
+ON=@Create
+TIMER=-1
+
+ON=@TIMER
+TIMER = -1
+RETURN 1

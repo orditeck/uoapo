@@ -1,0 +1,89 @@
+[ITEMDEF i_ecu_de_jouvence]
+NAME=Ecu de jouvence
+ID=i_shield_round_bronze
+ARMOR=0
+REQSTR=1
+WEIGHT=1
+
+ON=@Create
+MORE2=0
+COLOR=0af6
+HITPOINTS=1000
+TIMER=10
+
+ON=@EQUIP
+MORE2=1
+
+ON=@UNEQUIP
+MORE2=0
+
+ON=@TIMER
+IF <MORE2>==1
+    IF !(<EVAL <TOPOBJ.TAG.LEVEL>> >9)
+        IF (<EVAL(RAND(10))>=0)
+            TOPOBJ.HITS=<TOPOBJ.STR>
+            EMOTE briller
+        ENDIF
+    ELSE
+        EMOTE se desintegrer
+        REMOVE
+    ENDIF
+ENDIF
+TIMER=10
+RETURN 1
+
+[ITEMDEF i_epee_de_jouvence]
+NAME=Epee de jouvence
+ID = i_sword_viking
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+LAYER=1
+REQSTR = 1
+TWOHANDS=N
+DAM=0
+WEIGHT=5
+
+ON=@Create
+MORE2 = 1
+COLOR=0af6
+HITPOINTS=1000
+TIMER = 0
+
+ON=@EQUIP
+IF ((<EVAL 0<SRC.TAG.RENAISSANCE>> > 0) || (<EVAL <TOPOBJ.TAG.LEVEL>> > 24))
+    EMOTE se desintegrer
+    SRC.UNEQUIP
+    I.REMOVE
+ENDIF
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE <EVAL 0<TOPOBJ.TAG.LEVEL> + 10>
+
+ON=@DCLICK
+IF (<SRC.findlayer.1.uid>!=<I.uid>)
+    I.LINK=<SRC.UID>
+    I.EQUIP
+ENDIF
+IF ((<EVAL 0<SRC.TAG.RENAISSANCE>> > 0) || (<EVAL <TOPOBJ.TAG.LEVEL>> > 24))
+    EMOTE se desintegrer
+    SRC.UNEQUIP
+    I.REMOVE
+ELSE
+    IF (<SRC.findlayer.1.uid>==<I.uid >)    
+        IF <MORE2>==1
+            SRC.SpellEffect=s_bless,400.0,<uid> // avant: 400
+            //SRC.SpellEffect=s_protection,2000.0,<uid> // retirer ça
+            MORE2 = 0
+            TIMER = 10
+        ELSE
+            EMOTE Recharge en magie
+        ENDIF
+    ENDIF 
+ENDIF
+return 1       
+
+ON=@TIMER
+MORE2 = 1
+
+RETURN 1
+[EOF]

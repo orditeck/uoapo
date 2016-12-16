@@ -1,0 +1,495 @@
+[PLEVEL 1]
+TEAM
+MT
+
+//QUITTER, INVITER, CREER, BOOTER, ACCEPTER
+[FUNCTION TEAM]
+IF !(STRCMPI("<ARGS>","quitter"))
+	IF <FINDID.m_exp_equipe>
+		QUITTER_TEAM
+	ELSE
+		SYSMESSAGEUA 025 1 1 0 Vous n'etes pas dans une equipe!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","inviter"))
+	IF <FINDID.m_exp_equipe>
+		NEWITEM i_selectionner_invite_team
+		ACT.EQUIP
+		ACT.USE
+	ELSE
+		SYSMESSAGEUA 025 1 1 0 Vous devez etre dans une equipe pour inviter un joueur
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","creer"))
+	IF !<FINDID.m_exp_equipe>
+		NEWITEM m_exp_equipe
+		ACT.EQUIP
+		ACT.MOREZ = 1
+		ACT.MOREY = 0
+		ACT.MOREX = {1 9999}
+		SYSMESSAGEUA 0481 1 1 0 Votre equipe vient d'etre creee!
+	ELSE
+		SYSMESSAGEUA 025 1 1 0 Vous etes deja dans une equipe!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","accepter"))
+	IF <FINDID.m_temp_invite_team>
+		NEWITEM m_exp_equipe
+		ACT.EQUIP
+		ACT.MOREZ = 0
+		ACT.MOREY = <FIND_MAXPOSITION_TEAM <FINDID.m_temp_invite_team.MOREX>>
+		ACT.MOREY = <EVAL <ACT.MOREY> + 1>
+		ACT.MOREX = <FINDID.m_temp_invite_team.MOREX>
+		VAR.MSG_TEAM_NUMBER = <ACT.MOREX>
+		ARGS = <SRC.NAME> entre dans l'equipe !
+		SERV.ALLCLIENTS MESSAGE_TEAM_ALLCLIENTS <ARGS>
+	ELSE
+		SYSMESSAGEUA 025 1 1 0 Personne ne vous a invite dans son team!
+	ENDIF
+ELSEIF !(STRCMPI("<ARGS>","liste"))
+	REFRESH_PLAYER_TEAM_LIST
+ELSE
+	SYSMESSAGEUA 025 1 1 0 .team quitter, .team inviter, .team creer, .team liste, .team accepter
+ENDIF
+RETURN 1
+
+
+//ARGS : MESSAGE A ENVOYER
+//DEFAULT : JOUEUR QUI ENVOIE
+[FUNCTION MT]
+IF <SRC.FINDID.m_exp_equipe>
+	VAR.MSG_TEAM_NUMBER = <SRC.FINDID.m_exp_equipe.MOREX>
+	ARGS = <SRC.NAME> : <ARGS>
+	SERV.ALLCLIENTS MESSAGE_TEAM_ALLCLIENTS <ARGS>
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous devez faire parti d'une equipe pour envoyer un message !
+ENDIF
+RETURN 1
+
+
+//DEFAULT : Joueur
+[FUNCTION QUITTER_TEAM]
+IF <FINDID.m_exp_equipe>
+	SERV.ALLCLIENTS MESSAGE_TEAM_ALLCLIENTS <NAME> quitte l'equipe !
+	//LEADER DE L'ÉQUIPE, ON DOIT EN TROUVER UN NOUVEAU
+	IF <FINDID.m_exp_equipe.MOREZ> == 1
+		FIND_NEW_LEADER_FOR_TEAM <FINDID.m_exp_equipe.MOREX>
+	ENDIF
+	FINDID.m_exp_equipe.REMOVE
+ENDIF
+RETURN 1
+
+
+//VAR.MSG_TEAM_NUMBER ==> # de l'equipe
+//ARGS : MESSAGE RECU
+[FUNCTION MESSAGE_TEAM_ALLCLIENTS]
+IF 0<VAR.MSG_TEAM_NUMBER> > 0
+	IF <FINDID.m_exp_equipe>
+		IF <FINDID.m_exp_equipe.MOREX> == <VAR.MSG_TEAM_NUMBER>
+			SYSMESSAGEUA 02b 1 1 0 <ARGS>
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+//ARGS : # team
+[FUNCTION FIND_NEW_LEADER_FOR_TEAM]
+VAR.MINPOSITION = 99999
+SERV.ALLCLIENTS FIND_NEW_LEADER_FOR_TEAM_ALLCLIENTS <ARGS>
+IF <VAR.MINPOSITION_PLAYERID>
+	VAR.ACTSAVE = <ACT.UID>
+	ACT = <VAR.MINPOSITION_PLAYERID>
+	ACT.FINDID.m_exp_equipe.MOREZ = 1
+	SERV.ALLCLIENTS MESSAGE_TEAM_ALLCLIENTS <ACT.NAME> est maintenant le nouveau leader de l'equipe !
+	ACT = <VAR.ACTSAVE>
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de trouver un nouveau leader!
+ENDIF
+VAR.MINPOSITION
+VAR.MINPOSITION_PLAYERID
+RETURN 1
+
+//ARGS : # team
+[FUNCTION FIND_MAXPOSITION_TEAM]
+VAR.MAXPOSITION = 0
+SERV.ALLCLIENTS FIND_MAXPOSITION_TEAM_ALLCLIENTS <ARGS>
+ARGS = <VAR.MAXPOSITION>
+VAR.MAXPOSITION
+RETURN <ARGS>
+
+//VAR.MAXPOSITION ==> position max
+//ARGS : # team
+[FUNCTION FIND_MAXPOSITION_TEAM_ALLCLIENTS]
+IF <FINDID.m_exp_equipe>
+	IF <FINDID.m_exp_equipe.MOREX> == <ARGS>
+		IF <FINDID.m_exp_equipe.MOREY> > <VAR.MAXPOSITION>
+			VAR.MAXPOSITION = <FINDID.m_exp_equipe.MOREY>
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+//ON EXCLU LE LEADER
+//VAR.MINPOSITION ==> Position minimum
+//VAR.MINPOSITION_PLAYERID ==> Joueur qui a la position minimum
+//ARGS : # team
+[FUNCTION FIND_NEW_LEADER_FOR_TEAM_ALLCLIENTS]
+IF <FINDID.m_exp_equipe>
+	IF <FINDID.m_exp_equipe.MOREX> == <ARGS>
+		IF <FINDID.m_exp_equipe.MOREY> < <VAR.MINPOSITION>
+			IF <FINDID.m_exp_equipe.MOREZ> == 0
+				VAR.MINPOSITION = <FINDID.m_exp_equipe.MOREY>
+				VAR.MINPOSITION_PLAYERID = <UID>
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+
+//DEFAULT : Monstre  mort
+//ARGS : # team
+[FUNCTION COMPTEUR_EXPEURS_EQUIPE]
+VAR.NOMBRE_EXPEURS_VALIDES=0
+VAR.NOMBRE_CASHERS_VALIDES=0
+VAR.UID_MONSTRE_MORT=<UID>
+SERV.ALLCLIENTS COMPTEUR_EXPEURS_EQUIPE_ALLCLIENTS <ARGS>
+VAR.UID_MONSTRE_MORT
+RETURN 1
+
+//DEFAULT : JOUEUR TESTÉ
+//VAR.UID_MONSTRE_MORT
+//ARGS : # team
+[FUNCTION COMPTEUR_EXPEURS_EQUIPE_ALLCLIENTS]
+IF <FINDID.m_exp_equipe>
+	IF <FINDID.m_exp_equipe.MOREX> == <ARGS>
+		DISTANCE_APO <VAR.UID_MONSTRE_MORT>
+		IF <VAR.DISTANCE> <= 20
+			IF <EVAL 0<TAG.LEVEL>> >= <EVAL <UID.<VAR.UID_MONSTRE_MORT>.TAG.NIVEAU>>
+				FINDID.m_exp_equipe.TAG.PROCHAIN_EXP = 1
+				VAR.NOMBRE_EXPEURS_VALIDES = <EVAL <VAR.NOMBRE_EXPEURS_VALIDES> + 1>
+			ENDIF
+			VAR.NOMBRE_CASHERS_VALIDES = <EVAL <VAR.NOMBRE_CASHERS_VALIDES> + 1>
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+//VAR.CASHGAIN : Doit etre deja setté a nb de cash total qui sera donné
+//VAR.EXPGAIN : Doit etre deja setté a nb d'exp total qui sera donné
+//DEFAULT : JOUEUR qui vient de faire de l'exp
+//ARGS : UID du monstre
+[FUNCTION DONNEUR_EXP_EQUIPE]
+VAR.ACTSAVEDEE = <ACT.UID>
+ACT = <ARGS>
+IF <FINDID.m_exp_equipe>
+	ACT.COMPTEUR_EXPEURS_EQUIPE <FINDID.m_exp_equipe.MOREX>
+	IF <EVAL 0<VAR.NOMBRE_EXPEURS_VALIDES>> > 0
+		VAR.EXPGAIN_EQUIPE = <EVAL (<VAR.EXPGAIN> / <VAR.NOMBRE_EXPEURS_VALIDES>) + 1>
+		VAR.CASHGAIN_EQUIPE = <EVAL (<VAR.CASHGAIN> / <VAR.NOMBRE_CASHERS_VALIDES>) + 1>
+		SERV.ALLCLIENTS DONNEUR_EXP_EQUIPE_ALLCLIENTS <ARGS>
+	ENDIF
+ELSE
+	GAIN_EXP <ACT.TAG.NIVEAU>
+ENDIF
+ACT = <VAR.ACTSAVEDEE>
+VAR.ACTSAVEDEE
+RETURN 1
+
+//ARGS : UID du monstre
+[FUNCTION DONNEUR_EXP_EQUIPE_ALLCLIENTS]
+IF <FINDID.m_exp_equipe>
+	IF 0<FINDID.m_exp_equipe.TAG.PROCHAIN_EXP> == 1
+		VAR.EXPGAIN = <VAR.EXPGAIN_EQUIPE>
+		VAR.CASHGAIN = <VAR.CASHGAIN_EQUIPE> 
+		GAIN_EXP <UID.<ARGS>.TAG.NIVEAU>
+		FINDID.m_exp_equipe.TAG.PROCHAIN_EXP
+	ENDIF
+ENDIF
+RETURN 1
+
+
+//DEFAULT : m_exp_equipe de celui qu'on veut afficher la liste de joueurs dans l'equipe
+[FUNCTION REMPLIR_LISTE_UID]
+ARGS = <UID>
+VAR.TEMP_NUM_EQUIPE = <MOREX>
+VAR.RENDU_NUM = 1
+FORPLAYERS
+	IF <FINDID.m_exp_equipe>
+		IF <FINDID.m_exp_equipe.MOREX> == <VAR.TEMP_NUM_EQUIPE>
+			IF <FINDID.m_exp_equipe.MOREZ> == 1
+				TRYP 0 UID.<ARGS>.TAG.UID_PERSO0 = <UID>
+			ELSE
+				TRYP 0 UID.<ARGS>.TAG.UID_PERSO<EVAL <VAR.RENDU_NUM>> = <UID>
+				VAR.RENDU_NUM = <EVAL <VAR.RENDU_NUM> + 1>
+			ENDIF
+		ENDIF
+	ENDIF
+ENDFOR
+VAR.TEMP_NUM_EQUIPE
+VAR.RENDU_NUM
+
+//DEFAULT : m_exp_equipe
+[FUNCTION VIDER_LISTE_UID_EXP_EQUIPE]
+VAR.TEMP = 0
+WHILE 0<TAG.UID_PERSO<EVAL <VAR.TEMP>>> > 0
+	TRYP 0 TAG.UID_PERSO<EVAL <VAR.TEMP>>
+	VAR.TEMP = <EVAL <VAR.TEMP> + 1>
+ENDWHILE
+//FOR X 1 50
+//	TRYP 0 TAG.UID_PERSO<EVAL <LOCAL.X>>
+//ENDFOR
+RETURN 1
+
+//********************************************
+//********************************************
+//*******************OBJETS*******************
+//********************************************
+//********************************************
+
+
+//MOREZ ; 1 = leader  ; 0 = membre
+//MOREY ; Position du groupe (Le plus bas est le leader)
+//MOREX = # team {1,9999}
+//TAG.PROCHAIN_EXP = 1 ==> prochain test d'exp, le joueur gagne de l'exp
+//TAG.UID_PERSO_x ==> UID_PERSO_1 ==> uid du leader ; UID_PERSO_2 ==> uid du joueur #2 de l'equipe... etc
+[ITEMDEF m_exp_equipe]
+NAME=Joueurs equipe
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=-1
+
+
+[ITEMDEF i_selectionner_invite_team]
+NAME=Selectionner joueur team
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur que vous desirez inclure dans votre equipe
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+IF !<SRC.TARG.FINDID.m_exp_equipe>
+	IF <SRC.FINDID.m_exp_equipe>
+		IF !<SRC.TARG.FINDID.m_temp_invite_team>
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous invitez <SRC.TARG.NAME> dans votre equipe
+			SRC.TARG.SYSMESSAGEUA 0481 1 1 0 <SRC.NAME> vous invite dans son equipe, tappez .team accepter pour y entrer
+			SRC.TARG.NEWITEM m_temp_invite_team
+			SRC.TARG.ACT.CONT = <SRC.TARG.UID>
+			SRC.TARG.ACT.MOREX = <SRC.FINDID.m_exp_equipe.MOREX>
+		ELSE
+			SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> a deja recu une invitation!
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas inviter <SRC.TARG.NAME> car vous n'etes dans aucune equipe
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas inviter <SRC.TARG.NAME> car il est deja dans une equipe!
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//MOREX = # team {1 9999}
+[ITEMDEF m_temp_invite_team]
+DEFNAME=m_temp_invite_team
+NAME=team invitation
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=30
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//*************************************
+//*****************DIALOG**************
+//*************************************
+
+//DEFAULT : JOUEUR
+[FUNCTION REFRESH_PLAYER_TEAM_LIST]
+IF <FINDID.m_exp_equipe>
+	FINDID.m_exp_equipe.VIDER_LISTE_UID_EXP_EQUIPE
+	FINDID.m_exp_equipe.REMPLIR_LISTE_UID
+	FINDID.m_exp_equipe.TAG.DEBUTLISTE=0
+	DIALOG LISTE_TEAM_DIALOG
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous devez etre dans une equipe pour voir la liste!
+ENDIF
+RETURN 1
+
+//DEFAULT : joueur qui boot
+//ARGS : UID du joueur a booter
+[FUNCTION BOOT_PLAYER_FROM_TEAM]
+IF <FINDID.m_exp_equipe>
+	IF <FINDID.m_exp_equipe.MOREZ> == 1
+		VAR.SAVEACT = <ACT>
+		ACT = <ARGS>
+		IF <ACT.UID> != <UID>
+			IF <ACT.FINDID.m_exp_equipe.MOREX> == <FINDID.m_exp_equipe.MOREX>
+				VAR.MSG_TEAM_NUMBER = <FINDID.m_exp_equipe.MOREX>
+				SERV.ALLCLIENTS MESSAGE_TEAM_ALLCLIENTS <ACT.NAME> a ete ejecte de l'equipe !
+				ACT.QUITTER_TEAM
+			ENDIF
+		ELSE
+			SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas vous ejecter de l'equipe ! Utilisez .team quitter !
+		ENDIF
+		ACT = <VAR.SAVEACT>
+	ELSE
+		SYSMESSAGEUA 025 1 1 0 <UID.<FINDID.m_exp_equipe.TAG.UID_PERSO0>.NAME> est le seul pouvant ejecter des joueurs de l'equipe !
+	ENDIF
+	REFRESH_PLAYER_TEAM_LIST
+ENDIF
+RETURN 1
+
+[DIALOG LISTE_TEAM_DIALOG]
+0,0
+PAGE 0
+resizepic 0 0 2620 400 520
+PAGE 1
+text 100 20 1152 1//Liste des joueurs de l'equipe
+text 20 50 1152 2//boot
+text 60 50 1152 3//#
+text 100 50 1152 4//Nom des joueurs
+text 60 80 1152 5//<TAG.DEBUTLISTE>*10 +0
+text 60 120 1152 6
+text 60 160 1152 7
+text 60 200 1152 8
+text 60 240 1152 9
+text 60 280 1152 10
+text 60 320 1152 11
+text 60 360 1152 12
+text 60 400 1152 13
+text 60 440 1152 14//<TAG.DEBUTLISTE>*10 +9
+text 100 80 1152 15//<UID.TAG.UID_PERSO<EVAL 0<TAG.DEBUTLISTE> + 0>.CONT.NAME>
+text 100 120 1152 16
+text 100 160 1152 17
+text 100 200 1152 18
+text 100 240 1152 19
+text 100 280 1152 20
+text 100 320 1152 21
+text 100 360 1152 22
+text 100 400 1152 23
+text 100 440 1152 24//<UID.TAG.UID_PERSO<EVAL 0<TAG.DEBUTLISTE> + 9>.CONT.NAME>
+text 40 480 1152 25//10 precedents
+text 200 480 1152 26//10 suivants
+
+button 10 80 2473 2472 <FINDID.m_exp_equipe.MOREZ> 0 1//BOOT UID <TAG.DEBUTLISTE>*10 + 0
+button 10 120 2473 2472 <FINDID.m_exp_equipe.MOREZ> 0 2
+button 10 160 2473 2472 <FINDID.m_exp_equipe.MOREZ> 0 3
+button 10 200 2473 2472 <FINDID.m_exp_equipe.MOREZ> 0 4
+button 10 240 2473 2472 <FINDID.m_exp_equipe.MOREZ> 0 5
+button 10 280 2473 2472 <FINDID.m_exp_equipe.MOREZ> 0 6
+button 10 320 2473 2472 <FINDID.m_exp_equipe.MOREZ> 0 7
+button 10 360 2473 2472 <FINDID.m_exp_equipe.MOREZ> 0 8
+button 10 400 2473 2472 <FINDID.m_exp_equipe.MOREZ> 0 9
+button 10 440 2473 2472 <FINDID.m_exp_equipe.MOREZ> 0 10//BOOT UID <TAG.DEBUTLISTE>*10 + 9
+button 10 480 2473 2472 1 0 11//precedents
+button 300 480 2473 2472 1 0 12//suivants
+
+[DIALOG LISTE_TEAM_DIALOG TEXT]
+<VAR.BLANKLINE>
+Liste des joueurs de l'equipe
+boot
+num
+Nom des joueurs
+<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 1> -
+<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 2> -
+<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 3> -
+<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 4> -
+<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 5> -
+<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 6> -
+<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 7> -
+<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 8> -
+<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 9> -
+<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 10> -
+<UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 0>>.NAME>
+<UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 1>>.NAME>
+<UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 2>>.NAME>
+<UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 3>>.NAME>
+<UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 4>>.NAME>
+<UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 5>>.NAME>
+<UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 6>>.NAME>
+<UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 7>>.NAME>
+<UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 8>>.NAME>
+<UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 9>>.NAME>
+10 precedents
+10 suivants
+[DIALOG LISTE_TEAM_DIALOG BUTTON]
+ON=1
+BOOT_PLAYER_FROM_TEAM <FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 0>>
+RETURN 1
+
+ON=2
+BOOT_PLAYER_FROM_TEAM <FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 1>>
+RETURN 1
+
+ON=3
+BOOT_PLAYER_FROM_TEAM <FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 2>>
+RETURN 1
+
+ON=4
+BOOT_PLAYER_FROM_TEAM <FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 3>>
+RETURN 1
+
+ON=5
+BOOT_PLAYER_FROM_TEAM <FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 4>>
+RETURN 1
+
+ON=6
+BOOT_PLAYER_FROM_TEAM <FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 5>>
+RETURN 1
+
+ON=7
+BOOT_PLAYER_FROM_TEAM <FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 6>>
+RETURN 1
+
+ON=8
+BOOT_PLAYER_FROM_TEAM <FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 7>>
+RETURN 1
+
+ON=9
+BOOT_PLAYER_FROM_TEAM <FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 8>>
+RETURN 1
+
+ON=10
+BOOT_PLAYER_FROM_TEAM <FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 9>>
+RETURN 1
+
+ON=11
+IF <FINDID.m_exp_equipe>
+	IF <EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE>> > 9
+		FINDID.m_exp_equipe.TAG.DEBUTLISTE=<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> - 10>
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous etes deja au debut de la liste
+	ENDIF
+	DIALOG LISTE_TEAM_DIALOG
+ENDIF
+RETURN 1
+
+ON=12
+IF <FINDID.m_exp_equipe>
+	IF <UID.<FINDID.m_exp_equipe.TAG.UID_PERSO<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 9>.BASEID> == m_exp_equipe
+		FINDID.m_exp_equipe.TAG.DEBUTLISTE=<EVAL 0<FINDID.m_exp_equipe.TAG.DEBUTLISTE> + 10>
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous etes deja a la fin de la liste
+	ENDIF
+	DIALOG LISTE_TEAM_DIALOG
+ENDIF
+RETURN 1

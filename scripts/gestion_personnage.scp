@@ -1,0 +1,817 @@
+[FUNCTION PAYUP_NODIAMANT]
+IF !(<ARGS>)
+	ARGS=0
+ENDIF
+VAR.ENOUGH=0
+VAR.TOTALGOLD=<EVAL <RESCOUNT i_gold> + <FINDLAYER.29.RESCOUNT i_gold>>
+IF (<EVAL <ARGS>> <= <VAR.TOTALGOLD>)
+	VAR.ENOUGH=1
+	PAYER_DU_SAC_NODIAMANT <ARGS>
+ENDIF
+
+[FUNCTION PAYER_DU_SAC_NODIAMANT]
+VAR.A_PAYER_DU_SAC = <EVAL <ARGS>>
+WHILE ( (<VAR.A_PAYER_DU_SAC> > 0) && (<FINDID.i_gold>) )
+	IF <FINDID.i_gold.AMOUNT> <= <VAR.A_PAYER_DU_SAC>
+		VAR.A_PAYER_DU_SAC = <EVAL <VAR.A_PAYER_DU_SAC> - <FINDID.i_gold.AMOUNT>>
+		FINDID.i_gold.REMOVE
+	ELSE
+		FINDID.i_gold.AMOUNT = <EVAL <FINDID.i_gold.AMOUNT> - <VAR.A_PAYER_DU_SAC>>
+		FINDID.i_gold.UPDATE
+		VAR.A_PAYER_DU_SAC = 0
+	ENDIF
+ENDWHILE
+IF <VAR.A_PAYER_DU_SAC> > 0
+	PAYER_DE_LA_BANQUE_NODIAMANT <VAR.A_PAYER_DU_SAC>
+ENDIF
+VAR.A_PAYER_DU_SAC
+
+[FUNCTION PAYER_DE_LA_BANQUE_NODIAMANT]
+VAR.A_PAYER_DE_LA_BANQUE = <EVAL <ARGS>>
+WHILE ( (<VAR.A_PAYER_DE_LA_BANQUE> > 0) && (<FINDLAYER.29.FINDID.i_gold> || <FINDLAYER.29.FINDID.i_piece_diamant>) )
+	IF <FINDLAYER.29.FINDID.i_gold.AMOUNT> <= <VAR.A_PAYER_DE_LA_BANQUE>
+		VAR.A_PAYER_DE_LA_BANQUE = <EVAL <VAR.A_PAYER_DE_LA_BANQUE> - <FINDLAYER.29.FINDID.i_gold.AMOUNT>>
+		FINDLAYER.29.FINDID.i_gold.REMOVE
+	ELSE
+		FINDLAYER.29.FINDID.i_gold.AMOUNT = <EVAL <FINDLAYER.29.FINDID.i_gold.AMOUNT> - <VAR.A_PAYER_DE_LA_BANQUE>>
+		VAR.A_PAYER_DE_LA_BANQUE = 0
+	ENDIF
+ENDWHILE
+VAR.A_PAYER_DE_LA_BANQUE
+
+[FUNCTION PAYUP]
+IF !(<ARGS>)
+	ARGS=0
+ENDIF
+VAR.ENOUGH=0
+VAR.TOTALGOLD=<EVAL (<RESCOUNT i_piece_diamant>*1000) + (<FINDLAYER.29.RESCOUNT i_piece_diamant>*1000) + <RESCOUNT i_gold> + <FINDLAYER.29.RESCOUNT i_gold>>
+IF (<EVAL <ARGS>> <= <VAR.TOTALGOLD>)
+	VAR.ENOUGH=1
+	PAYER_DU_SAC <ARGS>
+ENDIF
+
+//ARGS = GOLD A PAYER ; DEFAULT = joueur
+[FUNCTION PAYER_DU_SAC]
+VAR.A_PAYER_DU_SAC = <EVAL <ARGS>>
+WHILE ( (<VAR.A_PAYER_DU_SAC> > 0) && ( <FINDID.i_gold> || <FINDID.i_piece_diamant>) )
+	IF <FINDID.i_gold>
+		IF <FINDID.i_gold.AMOUNT> <= <VAR.A_PAYER_DU_SAC>
+			VAR.A_PAYER_DU_SAC = <EVAL <VAR.A_PAYER_DU_SAC> - <FINDID.i_gold.AMOUNT>>
+			FINDID.i_gold.REMOVE
+		ELSE
+			FINDID.i_gold.AMOUNT = <EVAL <FINDID.i_gold.AMOUNT> - <VAR.A_PAYER_DU_SAC>>
+			FINDID.i_gold.UPDATE
+			VAR.A_PAYER_DU_SAC = 0
+		ENDIF
+	ELSE
+		IF <EVAL <FINDID.i_piece_diamant.AMOUNT> * 1000> <= <EVAL <VAR.A_PAYER_DU_SAC>>
+			VAR.A_PAYER_DU_SAC = <EVAL <VAR.A_PAYER_DU_SAC> - <FINDID.i_piece_diamant.AMOUNT>*1000>
+			FINDID.i_piece_diamant.REMOVE
+		ELSE
+			FINDID.i_piece_diamant.AMOUNT = <EVAL <FINDID.i_piece_diamant.AMOUNT> - <VAR.A_PAYER_DU_SAC>/1000>
+			VAR.A_PAYER_DU_SAC = <EVAL <VAR.A_PAYER_DU_SAC> - (<VAR.A_PAYER_DU_SAC>/1000)*1000>
+			IF <VAR.A_PAYER_DU_SAC> > 0
+				NEWITEM i_gold
+				ACT.AMOUNT = <EVAL 1000 - <VAR.A_PAYER_DU_SAC>>
+				ACT.CONT = <FINDID.i_piece_diamant.CONT.UID>
+				CONSUME 1 i_piece_diamant
+				VAR.A_PAYER_DU_SAC = 0
+			ENDIF
+		ENDIF
+	ENDIF
+ENDWHILE
+IF <VAR.A_PAYER_DU_SAC> > 0
+	PAYER_DE_LA_BANQUE <VAR.A_PAYER_DU_SAC>
+ENDIF
+VAR.A_PAYER_DU_SAC
+
+//ARGS = GOLD A PAYER ; DEFAULT = joueur
+[FUNCTION PAYER_DE_LA_BANQUE]
+VAR.A_PAYER_DE_LA_BANQUE = <EVAL <ARGS>>
+WHILE ( (<VAR.A_PAYER_DE_LA_BANQUE> > 0) && (<FINDLAYER.29.FINDID.i_gold> || <FINDLAYER.29.FINDID.i_piece_diamant>) )
+	IF <FINDLAYER.29.FINDID.i_gold>
+		IF <FINDLAYER.29.FINDID.i_gold.AMOUNT> <= <VAR.A_PAYER_DE_LA_BANQUE>
+			VAR.A_PAYER_DE_LA_BANQUE = <EVAL <VAR.A_PAYER_DE_LA_BANQUE> - <FINDLAYER.29.FINDID.i_gold.AMOUNT>>
+			FINDLAYER.29.FINDID.i_gold.REMOVE
+		ELSE
+			FINDLAYER.29.FINDID.i_gold.AMOUNT = <EVAL <FINDLAYER.29.FINDID.i_gold.AMOUNT> - <VAR.A_PAYER_DE_LA_BANQUE>>
+			VAR.A_PAYER_DE_LA_BANQUE = 0
+		ENDIF
+	ELSE
+		IF <EVAL <FINDLAYER.29.FINDID.i_piece_diamant.AMOUNT> * 1000> <= <EVAL <VAR.A_PAYER_DE_LA_BANQUE>>
+			VAR.A_PAYER_DE_LA_BANQUE = <EVAL <VAR.A_PAYER_DE_LA_BANQUE> - <FINDLAYER.29.FINDID.i_piece_diamant.AMOUNT>*1000>
+			FINDLAYER.29.FINDID.i_piece_diamant.REMOVE
+		ELSE
+			FINDLAYER.29.FINDID.i_piece_diamant.AMOUNT = <EVAL <FINDLAYER.29.FINDID.i_piece_diamant.AMOUNT> - <VAR.A_PAYER_DE_LA_BANQUE>/1000>
+			VAR.A_PAYER_DE_LA_BANQUE = <EVAL <VAR.A_PAYER_DE_LA_BANQUE> - (<VAR.A_PAYER_DE_LA_BANQUE>/1000)*1000>
+			IF <VAR.A_PAYER_DE_LA_BANQUE> > 0
+				NEWITEM i_gold
+				ACT.AMOUNT = <EVAL 1000 - <VAR.A_PAYER_DE_LA_BANQUE>>
+				ACT.CONT = <FINDLAYER.29.FINDID.i_piece_diamant.CONT.UID>
+				IF <FINDLAYER.29.FINDID.i_piece_diamant.AMOUNT> == 1
+					FINDLAYER.29.FINDID.i_piece_diamant.REMOVE
+				ELSE
+					FINDLAYER.29.FINDID.i_piece_diamant.AMOUNT = <EVAL <FINDLAYER.29.FINDID.i_piece_diamant.AMOUNT> - 1>
+					FINDLAYER.29.FINDID.i_piece_diamant.UPDATE
+				ENDIF
+				VAR.A_PAYER_DE_LA_BANQUE = 0
+			ENDIF
+		ENDIF
+	ENDIF
+ENDWHILE
+VAR.A_PAYER_DE_LA_BANQUE
+
+//DEPOSE DANS LE SAC DU DEFAULT, LES DIAMANTS D'ABORD ET LE CHANGE EN OR ENSUITE
+//<ARGS> ==> NOMBRE DE PIECES
+[FUNCTION DEPOSER_CASH]
+IF ((<ARGS> > 0) && ((<BODY>==c_man) || (<BODY>==c_woman)))
+	VAR.TEMP = <ARGS>
+	IF <EVAL <VAR.TEMP>> >= 1000
+		WHILE (<EVAL <VAR.TEMP>> >= 1000)
+			NEWITEM i_piece_diamant
+			IF <EVAL <VAR.TEMP>> < 65000000
+				ACT.AMOUNT = <EVAL <VAR.TEMP> / 1000>
+				VAR.TEMP = <EVAL <VAR.TEMP> - <ACT.AMOUNT>*1000>
+			ELSE
+				ACT.AMOUNT = 65000
+				VAR.TEMP = <EVAL <VAR.TEMP> - 65000000>
+			ENDIF
+			ACT.CONT = <FINDLAYER.layer_bankbox.UID>
+		ENDWHILE
+	ENDIF
+	IF <EVAL <VAR.TEMP>> > 0
+		NEWITEM i_gold
+		ACT.AMOUNT = <VAR.TEMP>
+		ACT.CONT = <FINDLAYER.layer_bankbox.UID>
+	ENDIF
+	VAR.TEMP
+ELSE
+	RETURN 1
+ENDIF
+
+
+[FUNCTION GESTION]
+DIALOG gestion_personnage
+RETURN 1
+
+[FUNCTION deshabiller] 
+VAR.MYBODY=<BODY> 
+BODY c_rabbit
+BODY=<VAR.MYBODY> 
+
+
+[DIALOG gestion_personnage]
+0, 0
+PAGE 0
+gumppic 507 267 200
+gumppic 507 207 200
+gumppic 507 79 200
+gumppic 463 267 200
+gumppic 463 206 200
+gumppic 463 79 200
+gumppic 335 79 200
+gumppic 335 207 200
+gumppic 335 268 200
+gumppic 207 269 200
+gumppic 207 207 200
+gumppic 207 79 200
+gumppic 163 395 204
+gumppic 207 395 233
+gumppic 634 395 205
+gumppic 634 79 203
+gumppic 634 35 207
+gumppic 207 35 201
+gumppic 163 79 202
+gumppic 163 35 206
+text 310 55 1152 0 //Feuille de gestion du personnage
+text 185 81 1152 1 //Statistiques
+text 185 125 995 2 //Force
+text 185 145 995 3 //Dex
+text 185 165 995 4 //Intel
+button 345 127 01458 01458 1 0 1 //+Force
+button 345 147 01458 01458 1 0 2 //+Dex
+button 345 167 01458 01458 1 0 3 //+Int
+button 370 127 01459 01459 1 0 17 //-Force
+button 370 147 01459 01459 1 0 18 //-Dex
+button 370 167 01459 01459 1 0 19 //-Int
+text 300 125 10 5 //<str>
+text 300 145 10 6 //<dex>
+text 300 165 10 7 //<int>
+text 185 185 1152 8 //Competences
+text 185 345 995 9 //guerison
+text 390 225 995 10 //magie
+text 390 245 995 11 //meditation
+text 390 265 995 12 //resistance
+text 185 245 995 13 //estoc
+text 185 265 995 14 //choc
+text 185 285 995 15 //taille
+text 185 305 995 16 //esquive
+text 185 365 995 17 //lutte
+text 390 285 995 18 //tectique
+text 390 305 995 19 //tir a l arc
+button 345 247 01458 01458 1 0 4 //+estoc
+button 370 247 01459 01459 1 0 21 //-estoc
+button 345 267 01458 01458 1 0 5 //+choc
+button 370 267 01459 01459 1 0 22 //-choc
+button 345 287 01458 01458 1 0 6 //+taille
+button 370 287 01459 01459 1 0 23 //-taille
+button 345 307 01458 01458 1 0 7 //+esquive
+button 370 307 01459 01459 1 0 24 //-esquive
+button 345 347 01458 01458 1 0 8 //+guerison
+button 370 347 01459 01459 1 0 26 //-guerison
+button 345 367 01458 01458 1 0 9 //+lutte
+button 370 367 01459 01459 1 0 27 //-lutte
+button 615 227 01458 01458 1 0 10 //+magie
+button 640 227 01459 01459 1 0 28 //-magie
+button 615 247 01458 01458 1 0 11 //+meditation
+button 640 247 01459 01459 1 0 29 //-meditation
+button 615 267 01458 01458 1 0 12 //+resist magie
+button 640 267 01459 01459 1 0 30 //-resist magie
+button 615 287 01458 01458 1 0 13 //+tactique
+button 640 287 01459 01459 1 0 31 //-tactique
+button 615 307 01458 01458 1 0 14 //+tir a l arc
+button 640 307 01459 01459 1 0 32 //-tir a l arc
+button 345 227 01458 01458 1 0 15 //+Anatomie
+button 370 227 01459 01459 1 0 20 //-Anatomie
+button 345 327 01458 01458 1 0 16 //+eval intellect
+button 370 327 01459 01459 1 0 25 //-eval intellect
+button 400 397 1150 1151 1 0 100 //OKAY
+text 390 165 1152 20 //Il vous reste <NB> points de statistiques
+text 390 365 1152 21 //Il vous reste <NB> points de competences
+text 300 245 10 22 //<estoc>
+text 300 265 10 23 //<choc>
+text 300 285 10 24 //<taille>
+text 300 305 10 25 //<esquive>
+text 300 345 10 26 //<guerison>
+text 300 365 10 27 //<lutte>
+text 570 225 10 28 //magie
+text 570 245 10 29 //meditation
+text 570 265 10 30 //resistance
+text 570 285 10 31 //tactique
+text 570 305 10 32 //tir a l arc
+text 185 225 995 33 //anatomie
+text 300 225 10 34 //<anatomie>
+text 185 325 995 35 //eval
+text 300 325 10 36 //<eval>
+text 280 100 55 37 //Enlever un point : <TOTAL> pieces d'or
+text 280 200 55 38 //Enlever un point : <TOTAL> pieces d'or
+text 280 81 55 39 //Prochain point : <COUT> pieces d'or (stat)
+text 280 185 55 40 //Prochain point : <COUT> pieces d'or (competence)
+
+[DIALOG gestion_personnage TEXT]
+Feuille de gestion du personnage
+Statistiques
+Force
+Dexterite
+Intelligence
+<src.str>
+<src.dex>
+<src.int>
+Competences
+Guerison
+Magie
+Meditation
+Resistance aux sortileges
+Armes d'estoc
+Armes de choc
+Armes de taille
+Esquive
+Lutte
+Tactique
+Tir a l'arc
+Il vous reste <EVAL <SRC.TAG.PTSSTAT>> points de statistiques
+Il vous reste <EVAL <SRC.TAG.PTSSKILLS>> points de competences
+<EVAL <SRC.FENCING>/10>
+<EVAL <SRC.MACEFIGHTING>/10>
+<EVAL <SRC.SWORDSMANSHIP>/10>
+<EVAL <SRC.PARRYING>/10>
+<EVAL <SRC.HEALING>/10>
+<EVAL <SRC.WRESTLING>/10>
+<EVAL <SRC.MAGERY>/10>
+<EVAL <SRC.MEDITATION>/10>
+<EVAL <SRC.MAGICRESISTANCE>/10>
+<EVAL <SRC.TACTICS>/10>
+<EVAL <SRC.ARCHERY>/10>
+Anatomie
+<EVAL <SRC.ANATOMY>/10>
+Eval. Intellect
+<EVAL <SRC.EvaluatingIntel>/10>
+Enlever un point: <EVAL <SRC.CALCULATE_COUT_ENLEVERSTAT>> pieces d'or
+Enlever un point : <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or
+Prochain point : <EVAL <SRC.CALCULATE_COUT_STAT>> pieces d'or
+Prochain point : <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or
+
+[DIALOG gestion_personnage BUTTON]
+on=1
+IF <EVAL <SRC.TAG.PTSSTAT>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_STAT>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_STAT>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSTAT=<EVAL <SRC.TAG.PTSSTAT> - 1>
+		SRC.TAG.FORPURE=<EVAL <SRC.TAG.FORPURE> + 1>
+		SRC.debogage
+
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=2
+IF <EVAL <SRC.TAG.PTSSTAT>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_STAT>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_STAT>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSTAT=<EVAL <SRC.TAG.PTSSTAT> - 1>
+		SRC.TAG.DEXPURE=<EVAL <SRC.TAG.DEXPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=3
+IF <EVAL <SRC.TAG.PTSSTAT>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_STAT>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_STAT>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSTAT=<EVAL <SRC.TAG.PTSSTAT> - 1>
+		SRC.TAG.INTPURE=<EVAL <SRC.TAG.INTPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=4
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.FENCINGPURE=<EVAL <SRC.TAG.FENCINGPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=5
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.MACEFIGHTINGPURE=<EVAL <SRC.TAG.MACEFIGHTINGPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=6
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.SWORDSMANSHIPPURE=<EVAL <SRC.TAG.SWORDSMANSHIPPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=7
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.PARRYINGPURE=<EVAL <SRC.TAG.PARRYINGPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=8
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.HEALINGPURE=<EVAL <SRC.TAG.HEALINGPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=9
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.WRESTLINGPURE=<EVAL <SRC.TAG.WRESTLINGPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=10
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.MAGIEPURE=<EVAL <SRC.TAG.MAGIEPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=11
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.MEDITATIONPURE=<EVAL <SRC.TAG.MEDITATIONPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=12
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.MAGICRESISTANCEPURE=<EVAL <SRC.TAG.MAGICRESISTANCEPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=13
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.TACTICSPURE=<EVAL <SRC.TAG.TACTICSPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=14
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.ARCHERYPURE=<EVAL <SRC.TAG.ARCHERYPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=15
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_COMPETENCE>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.ANATOMYPURE=<EVAL <SRC.TAG.ANATOMYPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+on=16
+IF <EVAL <SRC.TAG.PTSSKILLS>> > 0
+	SRC.PAYUP <SRC.CALCULATE_COUT_COMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <VAR.PRIX_POINT_GESTION>> pieces d'or pour attribuer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> - 1>
+		SRC.TAG.EvaluatingIntelPURE=<EVAL <SRC.TAG.EvaluatingIntelPURE> + 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ENDIF
+
+//-FORCE
+on=17
+IF <SRC.TAG.FORPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERSTAT>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERSTAT>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSTAT=<EVAL <SRC.TAG.PTSSTAT> + 1>
+		SRC.TAG.FORPURE=<EVAL <SRC.TAG.FORPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre force en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-DEX
+on=18
+IF <SRC.TAG.DEXPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERSTAT>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERSTAT>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSTAT=<EVAL <SRC.TAG.PTSSTAT> + 1>
+		SRC.TAG.DEXPURE=<EVAL <SRC.TAG.DEXPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre dexterite en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-INT
+on=19
+IF <SRC.TAG.INTPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERSTAT>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERSTAT>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSTAT=<EVAL <SRC.TAG.PTSSTAT> + 1>
+		SRC.TAG.INTPURE=<EVAL <SRC.TAG.INTPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre intelligence en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-ANATOMY
+on=20
+IF <SRC.TAG.ANATOMYPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.ANATOMYPURE=<EVAL <SRC.TAG.ANATOMYPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre anatomie en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-ESTOC
+on=21
+IF <SRC.TAG.FENCINGPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.FENCINGPURE=<EVAL <SRC.TAG.FENCINGPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre arme d'estoc en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-CHOC
+on=22
+IF <SRC.TAG.MACEFIGHTINGPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.MACEFIGHTINGPURE=<EVAL <SRC.TAG.MACEFIGHTINGPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre arme de choc en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-TAILLE
+on=23
+IF <SRC.TAG.SWORDSMANSHIPPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.SWORDSMANSHIPPURE=<EVAL <SRC.TAG.SWORDSMANSHIPPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre arme de taille en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-ESQUIVE
+on=24
+IF <SRC.TAG.PARRYINGPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.PARRYINGPURE=<EVAL <SRC.TAG.PARRYINGPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre esquive en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-EVAL INTEL
+on=25
+IF <SRC.TAG.EvaluatingIntelPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.EvaluatingIntelPURE=<EVAL <SRC.TAG.EvaluatingIntelPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre eval. de l'intel en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-GUERISON
+on=26
+IF <SRC.TAG.HEALINGPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.HEALINGPURE=<EVAL <SRC.TAG.HEALINGPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre guerison en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-LUTTE
+on=27
+IF <SRC.TAG.WRESTLINGPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.WRESTLINGPURE=<EVAL <SRC.TAG.WRESTLINGPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre lutte en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-MAGIE
+on=28
+IF <SRC.TAG.MAGIEPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.MAGIEPURE=<EVAL <SRC.TAG.MAGIEPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre magie en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-MEDITATION
+on=29
+IF <SRC.TAG.MEDITATIONPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.MEDITATIONPURE=<EVAL <SRC.TAG.MEDITATIONPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre meditation en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-RESISTMAGIE
+on=30
+IF <SRC.TAG.MAGICRESISTANCEPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.MAGICRESISTANCEPURE=<EVAL <SRC.TAG.MAGICRESISTANCEPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre resist. a la magie en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-TACTIQUE
+on=31
+IF <SRC.TAG.TACTICSPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.TACTICSPURE=<EVAL <SRC.TAG.TACTICSPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre tactique en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+//-TIR A L'ARC
+on=32
+IF <SRC.TAG.ARCHERYPURE> > <SRC.GET_ALLSTATS_STARTPOINTS>
+	SRC.PAYUP <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>
+	IF (!<VAR.ENOUGH>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il vous faut <EVAL <SRC.CALCULATE_COUT_ENLEVERCOMPETENCE>> pieces d'or pour retirer un point de statistique ou de competence, hors vous n'avez pas assez.
+	ELSE
+		SRC.TAG.PTSSKILLS=<EVAL <SRC.TAG.PTSSKILLS> + 1>
+		SRC.TAG.ARCHERYPURE=<EVAL <SRC.TAG.ARCHERYPURE> - 1>
+		SRC.debogage
+	ENDIF
+	SRC.DIALOG gestion_personnage
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas descendre votre tir a l'arc en bas de <EVAL <SRC.GET_ALLSTATS_STARTPOINTS>> !
+ENDIF
+
+
+//DEFAULT = joueur
+[FUNCTION CALCULATE_COUT_STAT]
+ARGS = <getPrixGestion <TAG.PTSSTAT>>
+RETURN <ARGS>
+
+
+//DEFAULT = joueur
+[FUNCTION CALCULATE_COUT_COMPETENCE]
+ARGS = <getPrixGestion <TAG.PTSSKILLS>>
+RETURN <ARGS>
+
+
+//DEFAULT = joueur
+[FUNCTION CALCULATE_COUT_ENLEVERSTAT]
+ARGS = <CALCULATE_COUT_STAT>
+ARGS = <EVAL <ARGS> * 4>
+ARGS = <EVAL <ARGS> + 5000>
+RETURN <ARGS>
+
+
+//DEFAULT = joueur
+[FUNCTION CALCULATE_COUT_ENLEVERCOMPETENCE]
+ARGS = <CALCULATE_COUT_COMPETENCE>
+ARGS = <EVAL <ARGS> * 4>
+ARGS = <EVAL <ARGS> + 5000>
+RETURN <ARGS>
+
+
+//ARGS = POINTS DE GESTION DE LIBRE
+//DEFAULT = joueur
+[FUNCTION getPrixGestion]
+VAR.LEVEL_RESULT=<EVAL <TAG.LEVEL> - ((0<ARGS>-1)/5)>
+IF <EVAL <VAR.LEVEL_RESULT>> < 10
+	ARGS = 0
+ELSE
+	IF <EVAL 0<TAG.RENAISSANCE>> == 0
+		ARGS = <EVAL (<VAR.LEVEL_RESULT>*<VAR.LEVEL_RESULT>)/4>
+	ELSE
+		ARGS = <EVAL (<VAR.LEVEL_RESULT>*<VAR.LEVEL_RESULT>*<TAG.RENAISSANCE>)/2>
+	ENDIF
+
+	// Les points coutent environ 1.5 moins cher 
+	ARGS = <EVAL (<ARGS> * 66) / 100>
+ENDIF
+VAR.LEVEL_RESULT
+VAR.PRIX_POINT_GESTION
+RETURN <ARGS>

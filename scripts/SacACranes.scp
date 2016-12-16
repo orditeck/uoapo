@@ -1,0 +1,145 @@
+[itemdef 02a92] 
+type=t_normal 
+
+[itemdef i_boite_a_crane] 
+id=02a92 
+type=t_normal 
+name=Boite a crane (vide) 
+resources=8 i_log,1 i_ingot_iron,1 i_crane_du_bouffon_morbide
+weight=20 
+
+category=Bart 
+subsection=Item Pratique 
+description=boite a crane 
+
+skillmake=carpentry 105.0, t_carpentry 
+
+on=@create
+COLOR=0b7c
+
+on=@dclick 
+if <SRC.FINDID.i_boite_a_crane>
+	DIALOG d_boite_a_crane 
+else 
+	SRC.SYSMESSAGE Vous devez avoir le boite a crane dans votre boite ! 
+endif
+RETURN 1
+
+
+/////////////////////////////////////////////////////////////////////////// 
+/////////////////// Type: boite a crane (pleine)///////////////////// 
+/////////////////////////////////////////////////////////////////////////// 
+
+[typedef t_boite_contient] 
+on=@click 
+if <eval <more1>> == 0
+	MESSAGE Boite a crane (vide) 
+elseif <eval <more1>> == 1
+	MESSAGE Boite a crane (1 crane)
+else
+	MESSAGE Boite a crane (<eval (<more1>)> cranes) 
+endif
+return 1 
+
+/////////////////////////////////////////////////////////////////////////// 
+/////////////////// Fonction: Remise des objets dans le boite /////////////// 
+/////////////////////////////////////////////////////////////////////////// 
+
+[function RECUP_CRANE]
+IF <ARGN> > 0
+	FOR <ARGN>
+		NEWITEM i_crane_du_bouffon_morbide
+		ACT.BOUNCE
+	ENDFOR
+ENDIF
+//IF <ARGN> < 1
+//	RETURN 1
+//ELSE
+//	newitem i_crane_du_bouffon_morbide 
+//	act.bounce 
+//	recup_crane <eval <argn>-1>
+//ENDIF
+
+/////////////////////////////////////////////////////////////////////////// 
+/////////////////// Menu: Remplissage de la boite de rangement /////////// 
+/////////////////////////////////////////////////////////////////////////// 
+
+[dialog d_boite_a_crane] 
+50,50
+page 0 
+resizepic 0 0 3500 480 200 
+gumppic 292 40 2501
+gumppic 292 70 2443
+gumppic 292 100 2443
+button 438 5 5514 5415 1 0 0 // Fermer la fenetre
+button 370 70 238 239 1 0 3 // valider l'ajout
+button 370 100 238 239 1 0 4 // valider l'extraction
+button 370 130 247 248 1 0 5 // vider la boite
+TEXT 80 10 04 0
+TEXT 15 42 04 1
+text 300 41 37 2
+TEXT 15 72 04 3
+textentry 300 71 610 20 37 1 7
+TEXT 15 102 04 4
+textentry 300 101 610 20 37 2 8 
+TEXT 15 132 04 5
+TEXT 15 45 04 6
+TEXT 15 75 04 6
+TEXT 15 105 04 6
+TEXT 15 135 04 6
+
+[dialog d_boite_a_crane TEXT] 
+Gestion de la boite a crane de bouffon morbide
+Nombre de crane dans la boite
+<EVAL <MORE1>>
+Ajouter des cranes dans la boite
+Extraire des crane de la boite
+Vider la boite
+___________________ :
+<EVAL <SRC.TAG.AJOUT_CRANE>>
+<EVAL <SRC.TAG.ENLEV_CRANE>>
+
+[dialog d_boite_a_crane button] 
+on=3
+SRC.TAG.AJOUT_CRANE=<eval <argtxt[1]>>
+IF <SRC.TAG.AJOUT_CRANE> == 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas ajouter 0 crane!
+ELSEIF (<src.restest <EVAL <SRC.TAG.AJOUT_CRANE>> i_crane_du_bouffon_morbide>) 
+	TYPE=t_boite_contient
+	MORE1=<EVAL <MORE1>+<SRC.TAG.AJOUT_CRANE>>
+	SRC.consume <EVAL <SRC.TAG.AJOUT_CRANE>> i_crane_du_bouffon_morbide 
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez mi <EVAL <SRC.TAG.AJOUT_CRANE>> Crane(s) de bouffon morbide dans la boite. 
+else
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas <EVAL <SRC.TAG.AJOUT_CRANE>> Crane(s) de bouffon dans votre boite ! 
+endif
+SRC.TAG.AJOUT_CRANE
+
+on=4
+SRC.TAG.ENLEV_CRANE=<EVAL <argtxt[2]>>
+IF <SRC.TAG.ENLEV_CRANE> == 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas enlever 0 crane!
+ELSEIF <EVAL <SRC.TAG.ENLEV_CRANE>> > 50
+	SRC.SYSMESSAGEUA 0481 1 1 0 Il n'est pas conseille de vider plus de 50 cranes a la fois!
+ELSEIF <EVAL <MORE1>> >= <EVAL <SRC.TAG.ENLEV_CRANE>>
+	TYPE=t_boite_contient
+	MORE1=<EVAL <MORE1>-<SRC.TAG.ENLEV_CRANE>>
+	SRC.recup_crane <eval (<SRC.TAG.ENLEV_CRANE>)> 
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez mis <eval <SRC.TAG.ENLEV_CRANE>> Crane(s) de bouffon morbide dans la boite. 
+ELSE 
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas <eval <SRC.TAG.ENLEV_CRANE>> Crane(s) de bouffon dans votre boite ! 
+ENDIF
+SRC.TAG.ENLEV_CRANE
+
+on=5
+IF <MORE1> > 0
+	IF <MORE1> < 51
+		SRC.RECUP_CRANE <MORE1>
+		MORE1=0
+		TYPE=t_boite_contient 
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez vide le contenu de votre boite a crane dans votre sac.
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il n'est pas conseille de vider plus de 50 cranes a la fois!
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Votre boite est vide !
+ENDIF

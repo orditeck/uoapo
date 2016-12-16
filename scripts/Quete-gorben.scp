@@ -1,0 +1,139 @@
+[CHARDEF c_Listerine] 
+DEFNAME=c_Listerine
+NAME=Listerine
+ID=C_WOMAN
+ 
+TSPEECH=spk_Listerine
+
+ON=@create
+COLOR=083ea
+FOOD=9999
+SPEECHCOLOR=00851
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Archere
+
+ITEMNEWBIE=0203c
+COLOR=005a6
+ITEMNEWBIE=01c06
+COLOR=00851
+NAME=Plastron de cuir
+ITEMNEWBIE=01c08
+COLOR=00851
+NAME=Jupette de cuir
+ITEMNEWBIE=013b1
+COLOR=0481
+NAME=Arc des neiges
+ITEMNEWBIE=i_sandals
+COLOR=00851
+NAME=Sandalettes
+
+ON=@NPCSEENEWPLAYER
+IF 0<SRC.TAG.LISTERINE> < 1
+	SAY <SRC.SEX Damoiseau/Damoiselle> pourriez vous me venir en aide ?
+ELSEIF <EVAL <SRC.TAG.LISTERINE>> == 1
+	SAY Avez vous accompli la mission que je vous ai confiee ?
+ELSE
+	EMOTE sourire
+	SAY Ravie de voir que vous etes toujours en vie <SRC.NAME> !
+ENDIF
+
+ON=@NPCHearUnknown
+IF <EVAL <SRC.TAG.LISTERINE>>==1
+	SAY J'ai besoin de repos, revenez me voir lorsque vous pourrez me prouver que vous avez tue Gorben
+ELSE
+	SAY Exprimez vous correctement je vous prie !
+ENDIF
+
+ON=@GetHit
+return 1
+
+ON=@SpellEffect
+return 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes
+DESCRIPTION=Listerine
+
+[SPEECH spk_Listerine]
+
+ON=*oui*
+IF 0<SRC.TAG.LISTERINE> <1
+	SAY Gorben, le roi goblin, a pourfendu ma famille c'est pourquoi je souhaiterais <SRC.SEX qu'un/qu'une> <SRC.SEX valeureux/valeureuse> <SRC.SEX aventurier/aventuriere> me rapporte une preuve de sa mort pour satisfaire ma vengeance
+	SRC.TAG.LISTERINE=1
+ELSEIF <SRC.TAG.LISTERINE>==1
+	IF <SRC.RESTEST 1 i_coeur_de_gorben>
+		SRC.TAG.LISTERINE=2
+		SRC.NEWITEM i_pavois_de_gorben
+		SRC.ACT.BOUNCE
+		SRC.CONSUME 1 i_coeur_de_gorben
+		SAY Merci l'honneur de ma famille a ete venge, en guise de remerciement voici le pavois qu'il a laisse tombe pendant sa fuite lors de notre derniere bataille
+	ELSE
+		SAY Ne mentez pas ! Vous ne possedez pas la preuve que je vous ai demandee
+	ENDIF
+ELSE
+	SAY Exprimez vous correctement je vous prie !
+ENDIF
+
+[CHARDEF c_gorben]
+DEFNAME=c_gorben
+NAME=Gorben
+ID=011
+
+ON=@Create
+COLOR=0ac8
+STR=180
+DEX=180
+INT=0
+
+EVENTS +e_xpmonstre
+TAG.XPMORT=15000
+TAG.XPCOUP={500 1000}
+TAG.PIECES_OR={500 1000}
+TAG.TAPER=15
+TAG.NIVEAU=73
+
+TACTICS={180.0 180.0}
+WRESTLING={180.0 180.0}
+
+NPC=BRAIN_MONSTER
+
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 100 i_coeur_de_gorben 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Gorben
+
+[ITEMDEF i_pavois_de_gorben]
+DEFNAME=i_pavois_de_gorben
+NAME=Pavois de Gorben
+ID=I_SHIELD_KITE_WOOD
+ARMOR=45
+REQSTR=0
+WEIGHT=8
+
+ON=@Create
+HITPOINTS=350
+COLOR=0ac8
+
+ON=@EQUIP
+BONUS_ARMURE_GEMME_EQUIP
+
+ON=@UNEQUIP
+BONUS_ARMURE_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+[ITEMDEF i_coeur_de_gorben]
+DEFNAME=i_coeur_de_gorben
+NAME=Coeur de Gorben
+ID=i_flesh_heart
+WEIGHT=2
+
+ON=@Create
+COLOR=0ac8

@@ -1,0 +1,765 @@
+//LES EVENTS SONT CAPTES DANS
+//event_general : joueurs
+//xp_monstres : monstres
+
+[PLEVEL 1]
+aura
+
+[FUNCTION aura]
+IF <EVAL 0<SRC.TAG.QUELLEAURA>> > 0
+	IF <EVAL 0<SRC.TAG.QUELLEAURA>>==1
+		SYSMESSAGEUA 0481 1 1 0 Type d'aura : Offensive
+		SYSMESSAGEUA 0481 1 1 0 Declenchement de l'aura : <EVAL <SRC.CHANCE_DECLANCHE_AURA>> sur 1000
+		AFFICHE_COMPETENCE_AURA
+	ELSEIF <EVAL 0<SRC.TAG.QUELLEAURA>>==2
+		SYSMESSAGEUA 0481 1 1 0 Type d'aura : Defensive
+		SYSMESSAGEUA 0481 1 1 0 Declenchement de l'aura : <EVAL <SRC.CHANCE_DECLANCHE_AURA>> sur 1000
+		AFFICHE_COMPETENCE_AURA
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'etes pas detenteur d'une aura !
+ENDIF
+RETURN 1
+
+[ITEMDEF i_aura_offensive1]
+ID=i_fx_flare
+NAME=Aura offensive
+TYPE=t_script
+
+ON=@CREATE
+TIMER=3
+ATTR=08010
+COLOR=0
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_aura_offensive2]
+ID=i_fx_flare
+NAME=Aura offensive
+TYPE=t_script
+
+ON=@CREATE
+TIMER=3
+ATTR=08010
+COLOR=0b7e
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_aura_offensive3]
+ID=i_fx_flare
+NAME=Aura offensive
+TYPE=t_script
+
+ON=@CREATE
+TIMER=3
+ATTR=08010
+COLOR=0aff
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_aura_defensive1]
+ID=i_fx_soins_avances
+NAME=Aura defensive
+TYPE=t_script
+
+ON=@CREATE
+TIMER=3
+ATTR=08010
+COLOR=0
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_aura_defensive2]
+ID=i_fx_soins_avances
+NAME=Aura defensive
+TYPE=t_script
+
+ON=@CREATE
+TIMER=3
+ATTR=08010
+COLOR=0481
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_aura_defensive3]
+ID=i_fx_soins_avances
+NAME=Aura defensive
+TYPE=t_script
+
+ON=@CREATE
+TIMER=3
+ATTR=08010
+COLOR=01
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[CHARDEF c_fossoyeur_de_cove] 
+DEFNAME=c_fossoyeur_de_cove
+NAME=Fossoyeur de Cove
+ID=C_MAN
+ 
+TSPEECH=spk_fossoyeur_de_cove
+
+ON=@create
+COLOR=07fff
+FOOD=9999 
+SPEECHCOLOR=00ae2
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=i_robe
+DISPID=i_deathshroud
+ITEMNEWBIE=0f4c
+
+ON=@NPCSEENEWPLAYER
+IF !<SRC.FINDID.m_pas_parler_24h>
+	SAY Ola <SRC.SEX voyageur/voyageuse> etes vous <SRC.SEX venu/venue> me tenir compagnie ?
+ELSE
+	SAY Hors de ma vue ignoble cloporte !
+ENDIF
+
+ON=@NPCHearUnknown
+IF !<SRC.FINDID.m_pas_parler_24h>
+	IF 0<SRC.TAG.FOSSOYEUROUI> <2
+		SAY Demandez aux esprits ... peut etre vous repondront ils ...
+	ELSE
+		SAY Desole <SRC.SEX voyageur/voyageuse> mais je n'en sais pas plus sur cette histoire ...
+	ENDIF
+ELSE
+	SAY Hors de ma vue ignoble cloporte !
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes
+DESCRIPTION=Fossoyeur de Cove
+
+[SPEECH spk_Fossoyeur_de_cove]
+
+ON=oui
+IF <EVAL 0<SRC.TAG.QUELLEAURA>> == 0
+	IF !<SRC.FINDID.m_pas_parler_24h>
+		IF 0<SRC.TAG.FOSSOYEUROUI> <1
+			SRC.TAG.FOSSOYEUROUI=1
+			SAY Ah fort bien ! Dans ce cas j'espere que vous ne voyez pas d'inconvenient a ce que je vous compte une legende ?
+		ELSEIF 0<SRC.TAG.FOSSOYEUROUI>==3
+			EMOTE gromeller
+			SAY Je n'y comprends pas grand chose ... Il semblerait qu'il soit ecrit dans l'alphabet qu'utilisaient les alchimistes il y a de cela des millenaires
+			SRC.TAG.FOSSOYEUROUI=4
+		ELSE
+			SAY Desole <SRC.SEX voyageur/voyageuse> mais je n'en sais pas plus sur cette histoire ...
+		ENDIF
+	ELSE
+		SAY Hors de ma vue ignoble cloporte !
+	ENDIF
+ELSE
+	SAY Enchante de vous revoir!
+ENDIF
+
+ON=non
+IF <EVAL 0<SRC.TAG.QUELLEAURA>> == 0
+	IF !<SRC.FINDID.m_pas_parler_24h>
+		IF 0<SRC.TAG.FOSSOYEUROUI> <1
+			SAY He bien puisque vous le prennez sur ce ton, inutile de revenir me demander quoi que ce soit avant longtemps !
+			SRC.NEWITEM m_pas_parler_24h
+			SRC.ACT.CONT=<SRC.UID>
+		ELSEIF 0<SRC.TAG.FOSSOYEUROUI>==1
+			NEWITEM m_dialogue_fossoyeur_de_cove
+			ACT.CONT=<UID>
+			SRC.TAG.FOSSOYEUROUI=2
+			EMOTE toussoter
+		ELSEIF 0<SRC.TAG.FOSSOYEUROUI>==3
+			SAY He bien gardez le votre ouvrage  ...
+		ELSE
+			SAY Desole <SRC.SEX voyageur/voyageuse> mais je n'en sais pas plus sur cette histoire ...
+		ENDIF
+	ELSE
+		SAY Hors de ma vue ignoble cloporte !
+	ENDIF
+ELSE
+	SAY Alors, vous pouvez partir
+ENDIF
+
+ON=*livre*
+IF <EVAL 0<SRC.TAG.QUELLEAURA>> == 0
+	IF !<SRC.FINDID.m_pas_parler_24h>
+		IF <SRC.FINDID.i_livre_quete_aura>
+			SAY Il n'y a pas de doutes, cet ouvrage est le grimoire d'Epsinus  ! M'autorisez vous a l'examiner d'un peu plus pret ?
+			SRC.FINDID.i_livre_quete_aura.NAME=Grimoire d'Epsinus
+			SRC.TAG.FOSSOYEUROUI=3
+		ELSE
+			SAY Personne ne l'a jamais retrouve, entreprendre ces recherches tiendrait donc de la folie ...
+		ENDIF
+	ELSE
+		SAY Hors de ma vue ignoble cloporte !
+	ENDIF
+ELSE
+	SAY Pas un autre livre a traduire?
+ENDIF
+
+ON=*alchimiste*
+IF (0<SRC.TAG.FOSSOYEUROUI>==4)
+	SAY Seul un alchimiste de renomme pourrait vous decrypter un tel ouvrage !
+ENDIF
+
+[ITEMDEF m_dialogue_fossoyeur_de_cove]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=2
+TAG.DIALOGUE=0
+
+ON=@TIMER
+IF 0<TAG.DIALOGUE> <1
+	TIMER=3
+	TAG.DIALOGUE=<TAG.DIALOGUE>+1
+	CONT.SAY Jadis vivait un puissant sorcier du nom d'Epsinus. Un jour, ce dernier parvint a concocter un breuvage si puissant
+ELSEIF <TAG.DIALOGUE>==1
+	TIMER=3
+	TAG.DIALOGUE=<TAG.DIALOGUE>+1
+	CONT.SAY qu'il etait capable de donner des proprietes magiques infinies a celui ou celle qui le boirait ...
+ELSEIF <TAG.DIALOGUE>==2
+	TIMER=3
+	TAG.DIALOGUE=<TAG.DIALOGUE>+1
+	CONT.SAY Malheureusement, ayant abuse de ce dernier, Epsinus mourra dans d'atroces souffrances. On dit pourtant que son grimoire
+ELSE
+	CONT.SAY contenant l'integralite du procede pour l'elaborer serait perdu dans le fin fond d'une ville souterraine ...
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF m_pas_parler_24h]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=86400
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_coffre_quete_aura]
+DEFNAME=i_coffre_quete_aura
+NAME=Coffre
+ID=0e42
+TYPE=t_script
+
+ON=@DCLICK
+IF (0<SRC.TAG.COFFRE_QUETE_AURA> <2) && (<EVAL 0<SRC.TAG.QUELLEAURA>> == 0)
+	SRC.TAG.COFFRE_QUETE_AURA=<EVAL 0<SRC.TAG.COFFRE_QUETE_AURA>+1>
+	SRC.ANIM 6
+	SRC.SYSMESSAGEUA 0481 1 1 0 Malgre vos efforts le coffre refuse de s'ouvrir
+ELSEIF 0<SRC.TAG.COFFRE_QUETE_AURA>==2
+	SRC.TAG.COFFRE_QUETE_AURA=<EVAL <SRC.TAG.COFFRE_QUETE_AURA>+1>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Apres avoir meticuleusement observe le coffre vous realisez que celui-ci est dote d'un mecanisme que vous vous empressez de declencher
+	SRC.ANIM 11
+ELSEIF 0<SRC.TAG.COFFRE_QUETE_AURA>==3
+	SRC.TAG.COFFRE_QUETE_AURA=<EVAL <SRC.TAG.COFFRE_QUETE_AURA>+1>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous deverouillez le coffre et y trouvez un vieux grimoire poussiereux
+	SRC.NEWITEM i_livre_quete_aura
+	SRC.ACT.BOUNCE
+	SRC.TAG.TROUVEGRIMOIRE=1
+ELSE
+	RETURN 1
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quete aura
+DESCRIPTION=Coffre
+
+[ITEMDEF i_livre_quete_aura]
+DEFNAME=i_livre_quete_aura
+NAME=Livre poussiereux
+ID=01c13
+TYPE=t_script
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Le grimoire semble correspondre a la description que vous en a fait le fossoyeur de Cove, cependant vous ne parvenez pas a en dechiffrer son contenu.
+RETURN 1
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quete aura
+DESCRIPTION=Grimoire
+
+
+[CHARDEF c_oiseau_blanc_du_paradis]
+NAME=Oiseau blanc du paradis
+ID=05
+
+ON=@Create
+STR=15
+DEX=15
+INT=0
+
+COLOR=0481
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 10 i_plume_oiseau_blanc_paradis 1 }
+
+CATEGORY=PNJ
+SUBSECTION=Quetes
+DESCRIPTION=Oiseau blanc du paradis
+
+[CHARDEF c_oiseau_noir_du_paradis]
+NAME=Oiseau noir du paradis
+ID=05
+
+ON=@Create
+STR=15
+DEX=15
+INT=0
+
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 10 i_plume_oiseau_noir_paradis 1 }
+
+CATEGORY=PNJ
+SUBSECTION=Quetes
+DESCRIPTION=Oiseau du paradis noir
+
+[ITEMDEF i_plume_oiseau_blanc_paradis]
+NAME=Plume d'oiseau blanc du paradis
+ID=01bd1
+
+ON=@CREATE
+COLOR=0481
+
+[ITEMDEF i_plume_oiseau_noir_paradis]
+NAME=Plume d'oiseau noir du paradis
+ID=01bd1
+
+ON=@CREATE
+COLOR=0ab2
+
+//TAG.BONUS ==> BONUS A AJOUTER OU ENLEVER AU JOUEUR
+[ITEMDEF m_aura_timer]
+NAME=Aura timer
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=120
+
+ON=@UNEQUIP
+CONT.AURA_DEBOOST
+RETURN 1
+
+ON=@TIMER
+//UNEQUIP
+REMOVE
+RETURN 1
+
+//[] = JOUEUR QUI A L'AURA
+[FUNCTION ACTION_BOOST]
+IF <FINDID.m_aura_timer>
+	FINDID.m_aura_timer.TIMER = 120
+ELSE
+	VAR.ACTSAVE = <ACT.UID>
+	NEWITEM m_aura_timer
+	ACT.CONT = <UID>
+	ACT = <VAR.ACTSAVE>
+	VAR.ACTSAVE
+	AURA_BOOST
+ENDIF
+RETURN 0
+
+//[] = JOUEUR QUI A L'AURA
+[FUNCTION AURA_OFF]
+IF (0<TAG.QUELLEAURA> == 1)
+	IF <IS_DECLANCHE_AURA>
+		IF <EVAL 0<TAG.COTE>>==0
+			UID.09903F.NEWITEM i_aura_offensive1
+			UID.09903F.ACT.TIMER=2
+			UID.09903F.ACT.P=<P>
+			UID.09903F.ACT.UPDATE
+		ELSEIF <EVAL <TAG.COTE>>==1
+			UID.09903F.NEWITEM i_aura_offensive2
+			UID.09903F.ACT.TIMER=2
+			UID.09903F.ACT.P=<P>
+			UID.09903F.ACT.UPDATE
+		ELSE
+			UID.09903F.NEWITEM i_aura_offensive3
+			UID.09903F.ACT.TIMER=2
+			UID.09903F.ACT.P=<P>
+			UID.09903F.ACT.UPDATE
+		ENDIF
+		SFX 01fd
+		ACTION_BOOST
+	ENDIF
+ENDIF
+RETURN 0
+
+//[] = JOUEUR QUI A L'AURA
+[FUNCTION AURA_DEF]
+IF (0<TAG.QUELLEAURA> == 2)
+	IF <IS_DECLANCHE_AURA>
+		IF <EVAL 0<TAG.COTE>>==0
+			UID.09903F.NEWITEM i_aura_defensive1
+			UID.09903F.ACT.TIMER=2
+			UID.09903F.ACT.P=<P>
+			UID.09903F.ACT.UPDATE
+		ELSEIF <EVAL <TAG.COTE>>==1
+			UID.09903F.NEWITEM i_aura_defensive2
+			UID.09903F.ACT.TIMER=2
+			UID.09903F.ACT.P=<P>
+			UID.09903F.ACT.UPDATE
+		ELSE
+			UID.09903F.NEWITEM i_aura_defensive3
+			UID.09903F.ACT.TIMER=2
+			UID.09903F.ACT.P=<P>
+			UID.09903F.ACT.UPDATE
+		ENDIF
+		SRC.SFX 020d
+		ACTION_BOOST
+	ENDIF
+ENDIF
+RETURN 0
+
+//[] = JOUEUR QUI A L'AURA
+//RETURN LE NB DE CHANCE SUR 1000
+[FUNCTION CHANCE_DECLANCHE_AURA]
+RETURN <EVAL (<TAG.LEVEL> + 100) / 10>
+
+//[] = JOUEUR QUI A L'AURA
+[FUNCTION AURA_BOOST]
+FINDID.m_aura_timer.TAG.BONUS = <EVAL 20 * <TAG.LEVEL>>
+VAR.BONUS_TEMP = <FINDID.m_aura_timer.TAG.BONUS>
+IF 0<TAG.BONUS_AURA_MAGICRESISTANCE> > 0
+	MAGICRESISTANCE=<EVAL <MAGICRESISTANCE> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_MAGIE> > 0
+	MAGERY=<EVAL <MAGERY> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_EvaluatingIntel>
+	EvaluatingIntel=<EVAL <EvaluatingIntel> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_MEDITATION> > 0
+	MEDITATION=<EVAL <MEDITATION> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_FENCING> > 0
+	FENCING=<EVAL <FENCING> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_SWORDSMANSHIP> > 0
+	SWORDSMANSHIP=<EVAL <SWORDSMANSHIP> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_MACEFIGHTING> > 0
+	MACEFIGHTING=<EVAL <MACEFIGHTING> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_ANATOMY> > 0
+	ANATOMY=<EVAL <ANATOMY> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_HEALING> > 0
+	HEALING=<EVAL <HEALING> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_ARCHERY> > 0
+	ARCHERY=<EVAL <ARCHERY> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_PARRYING> > 0
+	PARRYING=<EVAL <PARRYING> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_WRESTLING> > 0
+	WRESTLING=<EVAL <WRESTLING> + <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_TACTICS> > 0
+	TACTICS=<EVAL <TACTICS> + <VAR.BONUS_TEMP>>
+ENDIF
+VAR.BONUS_TEMP
+RETURN 1
+
+//[] = JOUEUR QUI A L'AURA
+[FUNCTION AURA_DEBOOST]
+VAR.BONUS_TEMP = 0<FINDID.m_aura_timer.TAG.BONUS>
+FINDID.m_aura_timer.TAG.BONUS
+IF 0<TAG.BONUS_AURA_MAGICRESISTANCE> > 0
+	MAGICRESISTANCE=<EVAL <MAGICRESISTANCE> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_MAGIE> > 0
+	MAGERY=<EVAL <MAGERY> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_EvaluatingIntel>
+	EvaluatingIntel=<EVAL <EvaluatingIntel> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_MEDITATION> > 0
+	MEDITATION=<EVAL <MEDITATION> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_FENCING> > 0
+	FENCING=<EVAL <FENCING> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_SWORDSMANSHIP> > 0
+	SWORDSMANSHIP=<EVAL <SWORDSMANSHIP> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_MACEFIGHTING> > 0
+	MACEFIGHTING=<EVAL <MACEFIGHTING> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_ANATOMY> > 0
+	ANATOMY=<EVAL <ANATOMY> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_HEALING> > 0
+	HEALING=<EVAL <HEALING> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_ARCHERY> > 0
+	ARCHERY=<EVAL <ARCHERY> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_PARRYING> > 0
+	PARRYING=<EVAL <PARRYING> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_WRESTLING> > 0
+	WRESTLING=<EVAL <WRESTLING> - <VAR.BONUS_TEMP>>
+ELSEIF 0<TAG.BONUS_AURA_TACTICS> > 0
+	TACTICS=<EVAL <TACTICS> - <VAR.BONUS_TEMP>>
+ENDIF
+VAR.BONUS_TEMP
+RETURN 1
+
+//[] = JOUEUR QUI A L'AURA
+[FUNCTION AFFICHE_COMPETENCE_AURA]
+VAR.TEMP = "Competence amelioree : "
+IF 0<TAG.BONUS_AURA_MAGICRESISTANCE> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Resistance aux sortileges
+ELSEIF 0<TAG.BONUS_AURA_MAGIE> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Magie
+ELSEIF 0<TAG.BONUS_AURA_EvaluatingIntel>
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Evaluation de l'intellect
+ELSEIF 0<TAG.BONUS_AURA_MEDITATION> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Meditation
+ELSEIF 0<TAG.BONUS_AURA_FENCING> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Armes d'estoc
+ELSEIF 0<TAG.BONUS_AURA_SWORDSMANSHIP> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Armes de taille
+ELSEIF 0<TAG.BONUS_AURA_MACEFIGHTING> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Armes de choc
+ELSEIF 0<TAG.BONUS_AURA_ANATOMY> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Anatomie
+ELSEIF 0<TAG.BONUS_AURA_HEALING> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Guerison
+ELSEIF 0<TAG.BONUS_AURA_ARCHERY> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Tir a l'arc
+ELSEIF 0<TAG.BONUS_AURA_PARRYING> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Esquive
+ELSEIF 0<TAG.BONUS_AURA_WRESTLING> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Lutte
+ELSEIF 0<TAG.BONUS_AURA_TACTICS> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Tactique
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> Aucune
+ENDIF
+VAR.TEMP
+RETURN 1
+
+//[] = JOUEUR QUI A L'AURA
+[FUNCTION IS_DECLANCHE_AURA]
+IF <EVAL RAND(1000)> < <EVAL <CHANCE_DECLANCHE_AURA>>
+	RETURN 1
+ENDIF
+RETURN 0
+
+//[] = JOUEUR QUI A L'AURA
+[FUNCTION ENLEVER_BOOST_AURA]
+TAG.BONUS_AURA_MAGICRESISTANCE
+TAG.BONUS_AURA_MAGIE
+TAG.BONUS_AURA_EvaluatingIntel
+TAG.BONUS_AURA_MEDITATION
+TAG.BONUS_AURA_FENCING
+TAG.BONUS_AURA_SWORDSMANSHIP
+TAG.BONUS_AURA_MACEFIGHTING
+TAG.BONUS_AURA_ANATOMY
+TAG.BONUS_AURA_HEALING
+TAG.BONUS_AURA_ARCHERY
+TAG.BONUS_AURA_PARRYING
+TAG.BONUS_AURA_WRESTLING
+TAG.BONUS_AURA_TACTICS
+RETURN 1
+
+//[] = JOUEUR QUI A L'AURA
+[FUNCTION ENLEVER_AURA]
+ENLEVER_BOOST_AURA
+TAG.QUELLEAURA
+RETURN 1
+
+//[] = JOUEUR QUI A L'AURA
+[DIALOG D_BOOST_AURA]
+0,0
+
+page 0
+resizepic 0 0 2620 300 460
+
+page 1
+text 12 5 38 1//Competence qui sera augmentee par l'aura
+text 10 30 1152 2//Resistance a la magie
+text 10 60 1152 3//Magie
+text 10 90 1152 4//Evaluation de l'intellect
+text 10 120 1152 5//Meditation
+text 10 150 1152 6//Armes d'estoc
+text 10 180 1152 7//Armes de taille
+text 10 210 1152 8//Armes de choc
+text 10 240 1152 9//Anatomie
+text 10 270 1152 10//Guerison
+text 10 300 1152 11//Tir a l'arc
+text 10 330 1152 12//Esquive
+text 10 360 1152 13//Lutte
+text 10 390 1152 14//Tactique
+button 180 30 2473 2472 1 0 1//+Resistance a la magie
+button 180 60 2473 2472 1 0 2//+Magie
+button 180 90 2473 24724 1 0 3//+Evaluation de l'intellect
+button 180 120 2473 2472 1 0 4//+Meditation
+button 180 150 2473 2472 1 0 5//+Armes d'estoc
+button 180 180 2473 2472 1 0 6//+Armes de taille
+button 180 210 2473 2472 1 0 7//+Armes de choc
+button 180 240 2473 2472 1 0 8//+Anatomie
+button 180 270 2473 2472 1 0 9//+Guerison
+button 180 300 2473 2472 1 0 10//+Tir a l'arc
+button 180 330 2473 2472 1 0 11//+Esquive
+button 180 360 2473 2472 1 0 12//+Lutte
+button 180 390 2473 2472 1 0 13//+Tactique
+button 120 430 1150 1151 1 0 100//Annuler
+
+[DIALOG D_BOOST_AURA TEXT]
+<VAR.BLANKLINE>
+Competence qui sera augmentee par l'aura
+Resistance a la magie
+Magie
+Evaluation de l'intellect
+Meditation
+Armes d'estoc
+Armes de taille
+Armes de choc
+Anatomie
+Guerison
+Tir a l'arc
+Esquive
+Lutte
+Tactique
+
+[DIALOG D_BOOST_AURA BUTTON]
+ONBUTTON=1
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_MAGICRESISTANCE=1
+	SYSMESSAGEUA 025 1 1 0 Resistance a la magie selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=2
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_MAGIE=1
+	SYSMESSAGEUA 025 1 1 0 Magie selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=3
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_EvaluatingIntel=1
+	SYSMESSAGEUA 025 1 1 0 Evaluation de l'intellect selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=4
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_MEDITATION=1
+	SYSMESSAGEUA 025 1 1 0 Meditation selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=5
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_FENCING=1
+	SYSMESSAGEUA 025 1 1 0 Armes d'estoc selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=6
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_SWORDSMANSHIP=1
+	SYSMESSAGEUA 025 1 1 0 Armes de taille selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=7
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_MACEFIGHTING=1
+	SYSMESSAGEUA 025 1 1 0 Armes de choc selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=8
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_ANATOMY=1
+	SYSMESSAGEUA 025 1 1 0 Anatomie selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=9
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_HEALING=1
+	SYSMESSAGEUA 025 1 1 0 Guerison selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=10
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_ARCHERY=1
+	SYSMESSAGEUA 025 1 1 0 Tir a l'arc selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=11
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_PARRYING=1
+	SYSMESSAGEUA 025 1 1 0 Esquive selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=12
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_WRESTLING=1
+	SYSMESSAGEUA 025 1 1 0 Lutte selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=13
+IF !<FINDID.m_aura_timer>
+	ENLEVER_BOOST_AURA
+	TAG.BONUS_AURA_TACTICS=1
+	SYSMESSAGEUA 025 1 1 0 Tactique selectionne !
+ELSE
+	SYSMESSAGEUA 025 1 1 0 Impossible de changer d'aura pour le moment !
+ENDIF
+RETURN 1
+
+ONBUTTON=100
+RETURN 1

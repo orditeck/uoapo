@@ -1,0 +1,155 @@
+[PLEVEL 2]
+couper
+ma
+
+[FUNCTION ma]
+IF <ARGS> >= 0
+	IF !(STRCMPI("<ARGS>",""))
+		SYSMESSAGEUA 0481 1 1 0 Tapez .ma suivi d'un nombre de points de points de bonne action a retirer au joueur desire
+	ELSE
+		NEWITEM i_faiseur_ma
+		ACT.TAG.PTSMA=<ARGS>
+		ACT.EQUIP
+		ACT.USE
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Veuillez saisir un nombre positif !
+ENDIF
+
+[ITEMDEF i_faiseur_ma] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur a qui retirer les points de bonnes actions
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+IF !(<EVAL 0<SRC.TARG.TAG.POINTSBA>>==0)
+	IF <EVAL <TAG.PTSMA>> > <EVAL 0<SRC.TARG.TAG.POINTSBA>>
+		SRC.TARG.TAG.POINTSBA=0
+	ELSE
+		SRC.TARG.TAG.POINTSBA=<EVAL <SRC.TARG.TAG.POINTSBA> - <EVAL <TAG.PTSMA>>>
+	ENDIF
+ENDIF
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a <EVAL <SRC.TARG.TAG.POINTSBA>> points de bonnes actions restants pour un total de <EVAL <SRC.TARG.TAG.CLICKTOTAL>> clicks effectues
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[FUNCTION couper]
+IF !(STRCMPI("<ARGS>",""))
+	SYSMESSAGEUA 0481 1 1 0 Tapez .couper suivi d'un temps en heures ou .couper 0 pour reactiver les cris d'un joueur 
+ELSEIF !(STRCMPI("<ARGS>","0"))
+	NEWITEM i_decoupeur_cris
+	ACT.EQUIP
+	ACT.USE
+ELSE
+	NEWITEM i_coupeur_cris
+	ACT.TAG.TEMPSCOUPE=<ARGS>
+	ACT.EQUIP
+	ACT.USE
+ENDIF
+
+[ITEMDEF i_coupeur_cris] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur a qui couper les cris
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+IF !(<SRC.TARG.FINDID.i_cris_coupes>)
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a desormais les cris coupes pour <EVAL <TAG.TEMPSCOUPE>> heures
+	SRC.TARG.TAG.BANNICHAT=1
+	SRC.TARG.SYSMESSAGEUA 0481 1 1 0 <SRC.NAME> vous a couper les cris pour <EVAL <TAG.TEMPSCOUPE>> heures
+	SRC.NEWITEM=i_cris_coupes
+	SRC.ACT.TAG.TEMPSCOUPE=<EVAL <TAG.TEMPSCOUPE>*60>
+	SRC.ACT.TIMER=1
+	SRC.ACT.CONT=<SRC.TARG.UID>
+ELSE
+	SRC.TARG.SYSMESSAGEUA 0481 1 1 0 <SRC.NAME> vous a couper les cris pour <EVAL <TAG.TEMPSCOUPE>> heures supplementaires
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a desormais les cris coupes pour <EVAL <TAG.TEMPSCOUPE>> heures supplementaires
+	SRC.TARG.FINDID.i_cris_coupes.TIMER=1
+	SRC.TARG.FINDID.i_cris_coupes.TAG.TEMPSCOUPE = <EVAL <SRC.TARG.FINDID.i_cris_coupes.TAG.TEMPSCOUPE> + <TAG.TEMPSCOUPE>*60>
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_cris_coupes] 
+ID=i_memory 
+TYPE=t_eq_script 
+NAME=coupeur cris
+LAYER=30
+
+ON=@TIMER
+IF <TAG.TEMPSCOUPE> <= 0
+	CONT.TAG.BANNICHAT
+	REMOVE
+ELSE
+	TAG.TEMPSCOUPE = <EVAL <TAG.TEMPSCOUPE> - 1>
+	TIMER=59
+ENDIF
+RETURN 1
+
+[ITEMDEF i_decoupeur_cris] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur a qui reactiver les cris
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+IF (<SRC.TARG.FINDID.i_cris_coupes>)
+	SRC.TARG.FINDID.i_cris_coupes.TIMER=1
+	SRC.NEWITEM=i_cris_coupes
+	SRC.ACT.TIMER=<EVAL <VAR.TEMPSCOUPE>>
+	SRC.ACT.CONT=<SRC.TARG.UID>
+ELSE
+	SRC.TARG.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'a pas les cris coupes !
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1

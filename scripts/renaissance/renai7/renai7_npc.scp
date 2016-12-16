@@ -1,0 +1,1198 @@
+[CHARDEF c_docteur_filou] 
+NAME=Docteur Filou
+ID=c_man
+ 
+TSPEECH=spk_docteur_filou
+
+ON=@create
+COLOR=083b
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le fou
+INVUL
+
+ITEMNEWBIE=i_chapeau_a_plume
+COLOR=036
+ITEMNEWBIE=i_tunique_de_fou
+COLOR=041
+ITEMNEWBIE=i_short
+COLOR=012
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=02b
+ITEMNEWBIE=i_chaussures
+COLOR=058
+ITEMNEWBIE=i_beard_long
+COLOR=03a4
+ITEMNEWBIE=i_hair_long
+COLOR=03a4
+
+ON=@NPCSEENEWPLAYER
+SAY Kekun, quel... quelqu'un!
+
+ON=@NPCHearUnknown
+DORAND 4
+	SAY oh oui je comprends!!
+	SAY taralaouti!
+	SAY jvais vous dire un secret a vous!
+	SAY Ne touchez pas a mes champignons!
+ENDDO
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-7
+DESCRIPTION=Docteur Filou
+
+[SPEECH spk_docteur_filou]
+
+ON=*secret*
+SAY Il suffit de regarder ces monstres pour savoir qu'ils nous cachent quelque chose!! oh oui!
+
+ON=*cache*
+SAY Ne voyez vous pas? Leurs yeux... si vides!
+
+ON=*yeux*
+EMOTE tapper des mains
+SAY J'ai deux yeux tant mieux, deux oreilles c'est pareil, deux epaules c'est drole!!! HAHAHA
+
+ON=*epaule*
+SAY eeee Paul? Non, moi c'est Filou!
+
+ON=*oreille*
+SAY Les murs ont des oreilles, et il parait qu'ils ont des yeux aussi!
+
+ON=*monstre*
+SAY Ce ne sont que des os animes, je prefere les dessins
+
+ON=*os*
+SAY Comment voulez vous je vous reponde, ca fait... longtemps que je suis ici!
+
+ON=*dessin*
+SAY Que voulez-vous savoir, je suis docteur, pas baptiste... euh artiste!
+
+ON=*champignon*
+EMOTE devenir en colere
+SAY N'Y TOUCHEZ PAS C'EST A MOI!!
+
+ON=*fou*
+SAY qui est fou? moi pas fou! pas fou! PAS FOU!
+
+//NPC POUR POUVOIR PASSER AU NIVEAU 2
+[CHARDEF c_benjamin] 
+NAME=Benjamin
+ID=c_man
+ 
+TSPEECH=spk_benjamin
+
+ON=@create
+COLOR=083b
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=L'aventurier
+INVUL
+
+ITEMNEWBIE=i_epee_longue
+NAME=Epee en or
+COLOR=08a6
+ITEMNEWBIE=i_casque_en_plaque
+COLOR=0c4
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0c4
+ITEMNEWBIE=i_sandales
+COLOR=0c4
+ITEMNEWBIE=i_armure_en_cuir
+COLOR=0481
+ITEMNEWBIE=i_jambieres_en_cuir
+COLOR=0481
+ITEMNEWBIE=i_brassieres_en_cuir
+COLOR=0481
+ITEMNEWBIE=i_CAPE
+COLOR=0ab2
+
+ON=@CLICK
+RETURN 1
+
+ON=@NPCSEENEWPLAYER
+SAY Heureux de voir enfin quelqu'un!
+
+ON=@NPCHearUnknown
+DORAND 3
+	SAY Je ne sais pas ce que vous dites
+	SAY Quoi?
+	SAY Vous parlez des monstres?
+ENDDO
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-7
+DESCRIPTION=Benjamin
+
+[SPEECH spk_benjamin]
+ON=*monstre*
+SAY Si vous saviez quels perils et choses etranges vous attendent!
+
+ON=*peril*
+SAY Ces monstres sont très puissants et les pieges sont insurmontables!
+
+ON=*piege*
+SAY Vous vous etes surement deja rendus compte des pieges de feu mon ami!
+
+ON=*etrange*
+SAY Si vous etes assez malin et fort pour trouver une chose bizarre à ce niveau, je vous dirai ce que je sais
+
+ON=*arbre*
+SAY L'eau est source de la vie, la mort est la fin
+
+ON=*mort*
+SAY La mort n'est pas le contraire de la vie, elle est son bourreau
+
+ON=*eau*
+SAY Toute vie a besoin d'eau pour grandir, vivre et se reproduire
+
+ON=*roche*
+ON=*pierre*
+SAY Tout ce que vous voyez autour est compose de silicium, n'est-ce pas merveilleux?
+
+ON=*ginseng*
+ON=*plante*
+SAY Tu parles de mon ginseng? Cette plante a besoin de peu de lumiere, les conditions sont favorables.
+
+ON=*eau*
+SAY Ou avez-vous trouve de l'eau?
+
+ON=*rachidis*
+SAY L'esprit de Rachidis n'a jamais quitte ce monde, il aidera tout guerrier qui en vaille la peine
+
+ON=*code*
+ON=*formule*
+IF ((<SRC.FINDID.i_intestins_rachidis>) && (<SRC.FINDID.i_coeur_rachidis>) && (<SRC.FINDID.i_cerveau_rachidis>) && (<SRC.FINDID.i_thorax_rachidis>) && (<SRC.FINDID.i_jambes_rachidis>))
+	IF (<EVAL 0<SRC.TAG.CODE_RACHIDIS_D7>> == 0)
+		SRC.TAG.CODE_RACHIDIS_D7 = <EVAL (rand(999)) + 1>
+		EMOTE regarder attentivement les morceaux du corps de Rachidis
+		SAY En entrant le code <EVAL 0<SRC.TAG.CODE_RACHIDIS_D7>>, vous pourrez entrer!
+	ELSE
+		SAY Vous ne vous rappelez plus de votre code? C'est le <EVAL 0<SRC.TAG.CODE_RACHIDIS_D7>>
+	ENDIF
+ELSE
+	SAY Pour avoir votre code, il me faudra analyser les 5 morceaux du corps de Rachidis
+ENDIF
+
+//ENIGME ENTRE 0 ET 1000
+[CHARDEF c_bourreau_1_d7] 
+NAME=Bourreau 1
+ID=c_man
+ 
+TSPEECH=spk_bourreau_1_d7
+
+ON=@create
+COLOR=0FFF
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le roi des nombres
+INVUL
+
+ITEMNEWBIE=i_baton
+COLOR=0bb1
+ITEMNEWBIE=i_casquette
+COLOR=0bb1
+ITEMNEWBIE=i_chaussures
+COLOR=0bb1
+
+ON=@CLICK
+RETURN 1
+
+ON=@NPCSEENEWPLAYER
+SAY Bienvenue dans cette epreuve!
+
+ON=@NPCHearUnknown
+SAY Demandez moi le but du jeu et je vous les dirai
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-7
+DESCRIPTION=Bourreau 1
+
+
+[SPEECH spk_bourreau_1_d7]
+ON=*but*
+SAY Je choisis au hasard un chiffre entre 0 et 1000. Votre but est de decouvrir ce nombre. Vous avez 10 chances pour y parvenir. Maintenant les reglements?
+
+ON=*regle*
+SAY A chacune de vos tentatives, je vous dirai si la reponse est plus grande ou plus petite. Vous devrez gagner a ce jeu deux fois sur trois. Dites le moi quand vous etes pret a jouer
+
+ON=*je suis pret a jouer*
+IF <EVAL <DISTANCE>> < 3
+	IF <EVAL 0<SRC.TAG.CHANCES_RESTANTES_RDN>> == 0
+		SRC.TAG.CHIFFRE1_RDN=0
+		SRC.TAG.CHIFFRE2_RDN=0
+		SRC.TAG.CHIFFRE3_RDN=0
+		SRC.TAG.COMBINAISON_RDN=<EVAL (rand(999)) + 1>
+		SRC.TAG.CHANCES_RESTANTES_RDN=10
+	ENDIF
+	DIALOG D_BOURREAU_1
+ELSE
+	SAY Approchez vous!
+ENDIF
+
+//LUI PARLER FAIT QUITTER L'EPREUVE ET DONNE UN POINT
+[CHARDEF c_passeur_d7] 
+NAME=Passeur
+ID=c_man
+ 
+TSPEECH=spk_passeur_d7
+
+ON=@create
+COLOR=0FFF
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=" "
+INVUL
+
+ITEMNEWBIE=i_baton
+COLOR=0b1c
+ITEMNEWBIE=i_casquette
+COLOR=0b1c
+ITEMNEWBIE=i_chaussures
+COLOR=0b1c
+
+ON=@CLICK
+RETURN 1
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL <DISTANCE>> < 3
+	SAY Bienvenue dans cette epreuve!
+ELSE
+	SAY Approchez!
+ENDIF
+
+ON=@NPCHearUnknown
+IF <EVAL <DISTANCE>> < 3
+	SAY Vous avez reussi cette epreuve, voulez vous la quitter?
+ELSE
+	SAY Approchez!
+ENDIF
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-7
+DESCRIPTION=Passeur
+
+[SPEECH spk_passeur_d7]
+ON=*oui*
+IF ((<EVAL <DISTANCE>> < 3) && (<CanSeeLOS>))
+	SAY Bonne continuite!
+	SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+	IF <EVAL <SRC.TAG.EPREUVE_A_FAIRE_D7>> == 1
+		SRC.GO 5473,829,60
+	ELSEIF <EVAL <SRC.TAG.EPREUVE_A_FAIRE_D7>> == 3
+		SRC.GO 5480,805,60
+	ELSEIF <EVAL <SRC.TAG.EPREUVE_A_FAIRE_D7>> == 4
+		SRC.GO 5509,935,20
+	ELSEIF <EVAL <SRC.TAG.EPREUVE_A_FAIRE_D7>> == 6
+		SRC.GO 5433,782,60
+	ELSEIF <EVAL <SRC.TAG.EPREUVE_A_FAIRE_D7>> == 8
+		SRC.GO 5453,962,15
+	ELSEIF <EVAL <SRC.TAG.EPREUVE_A_FAIRE_D7>> == 10
+		SRC.GO 5398,937,20
+	ELSE
+		SRC.GO 5405,859,45
+	ENDIF
+	SRC.TAG.EPREUVE_A_FAIRE_D7
+ELSE
+	SAY Approchez!
+ENDIF
+
+ON=*non*
+IF ((<EVAL <DISTANCE>> < 3) && (<CANSEE>))
+	SAY Alors profitez du paysage!
+ELSE
+	SAY Approchez!
+ENDIF
+
+//ENIGMES VARIEES
+[CHARDEF c_bourreau_2_d7] 
+NAME=Bourreau 2
+ID=c_man
+ 
+TSPEECH=spk_bourreau_2_d7
+
+ON=@create
+COLOR=0FFF
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le poseur d'enigmes
+INVUL
+
+ITEMNEWBIE=i_baton
+COLOR=0bb1
+ITEMNEWBIE=i_casquette
+COLOR=0bb1
+ITEMNEWBIE=i_chaussures
+COLOR=0bb1
+
+ON=@CLICK
+RETURN 1
+
+ON=@NPCSEENEWPLAYER
+SAY Bienvenue dans cette epreuve!
+
+ON=@NPCHearUnknown
+IF <EVAL 0<SRC.TAG.CHANCES_RESTANTES_ENIGME>> > 0
+	SRC.TAG.CHANCES_RESTANTES_ENIGME = <EVAL <SRC.TAG.CHANCES_RESTANTES_ENIGME> - 1>
+	IF <EVAL <SRC.TAG.CHANCES_RESTANTES_ENIGME>> > 1
+		SAY Mauvaise reponse, il vous reste <EVAL <SRC.TAG.CHANCES_RESTANTES_ENIGME>> chances!
+	ELSEIF <EVAL <SRC.TAG.CHANCES_RESTANTES_ENIGME>> == 1
+		SAY Mauvaise reponse, la prochaine vous coutera la vie!
+	ELSE
+		SAY malheureusement c'est faux, tel est le destin des ames faibles!
+		SRC.TAG.CHANCES_RESTANTES_ENIGME
+		SRC.TAG.EPREUVES_REUSSIES_D7
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.NUMERO_ENIGME_D7
+		SRC.KILL
+	ENDIF
+ELSE
+	SAY Demandez moi le but du jeu et je vous le dirai
+ENDIF
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-7
+DESCRIPTION=Bourreau 2
+
+
+[SPEECH spk_bourreau_2_d7]
+ON=*but*
+SAY Je vous poserai une enigme, il vous faudra y repondre correctement. Demandez moi la question maintenant.
+
+ON=*question*
+IF <EVAL <DISTANCE>> < 3
+	IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 0
+		SRC.TAG.NUMERO_ENIGME_D7=<EVAL (rand(1,5))>
+		IF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 1
+			SRC.TAG.CHANCES_RESTANTES_ENIGME=2
+		ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 2
+			SRC.TAG.CHANCES_RESTANTES_ENIGME//AUCUNE CHANCE
+		ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 3
+			SRC.TAG.CHANCES_RESTANTES_ENIGME
+		ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 4
+			SRC.TAG.CHANCES_RESTANTES_ENIGME
+		ELSE
+			SRC.TAG.CHANCES_RESTANTES_ENIGME=2
+		ENDIF
+	ENDIF
+	IF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 1
+		SAY Dernierement je consultais un ouvrage de reference dans lequel le samedi vient avant le vendredi. Mais ou ai-je pris cette information ?
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 2
+		SAY J'ai des billes, toutes sont rouges sauf deux, toutes sont vertes sauf deux et toutes sont bleues sauf deux. Combien de billes rouges, bleues et vertes je possede ?
+		DIALOG D_BOURREAU_2_E2
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 3
+		SAY S'il etait 3 heures plus tard, ca prendrait la moitie moins de temps pour atteindre minuit que s'il etait 1 heure plus tard, quelle heure est-il?
+		SRC.TAG.ENIGME_HEURE_0=O
+		SRC.TAG.HEURE_ENIGME_D7=0
+		SRC.TAG.ENIGME_MINUTE_0=O
+		SRC.TAG.MINUTE_ENIGME_D7=0
+		DIALOG D_BOURREAU_2_E3
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 4
+		SAY Quelle est la suite logique de ces nombre : 1-2-5-14-41-?
+		SRC.TAG.CHIFFRE1_RDN=0
+		SRC.TAG.CHIFFRE2_RDN=0
+		SRC.TAG.CHIFFRE3_RDN=0
+		DIALOG D_BOURREAU_2_E4
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 5
+		SAY Je represente un poids, mais egalement une arme, qui suis-je?
+	ELSE
+		SAY probleme de configuration
+	ENDIF
+ELSE
+	SAY Approchez vous!
+ENDIF
+
+ON=*dictionnaire*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 1
+	SAY felicitations, vous avez bien repondu a la question!
+	SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	SRC.TAG.CHANCES_RESTANTES_ENIGME
+	SRC.TAG.EPREUVE_A_FAIRE_D7
+	SRC.GO 5439,857,45
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=*masse*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 5
+	SAY felicitations, vous avez bien repondu a la question!
+	SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	SRC.TAG.CHANCES_RESTANTES_ENIGME
+	SRC.TAG.EPREUVE_A_FAIRE_D7
+	SRC.GO 5439,857,45
+	RETURN 1
+ENDIF
+RETURN 0
+
+
+//EPREUVES MATHEMATIQUES
+[CHARDEF c_bourreau_3_d7] 
+NAME=Bourreau 3
+ID=c_man
+ 
+TSPEECH=spk_bourreau_3_d7
+
+ON=@create
+COLOR=0FFF
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le mathematicien
+INVUL
+
+ITEMNEWBIE=i_baton
+COLOR=0bb1
+ITEMNEWBIE=i_casquette
+COLOR=0bb1
+ITEMNEWBIE=i_chaussures
+COLOR=0bb1
+
+ON=@CLICK
+RETURN 1
+
+ON=@NPCSEENEWPLAYER
+SAY Bienvenue dans cette epreuve!
+
+ON=@NPCHearUnknown
+SAY Demandez moi le but du jeu et je vous les dirai
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-7
+DESCRIPTION=Bourreau 3
+
+
+[SPEECH spk_bourreau_3_d7]
+ON=*but*
+SAY Je vous dirai une question mathematique et vous devrez y repondre correctement. Dites moi quand vous etes pret a jouer
+
+ON=*je suis pret a jouer*
+IF <EVAL <DISTANCE>> < 3
+	IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 0
+		SRC.TAG.NUMERO_ENIGME_D7=<EVAL (rand(9))+1>
+	ENDIF
+	IF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 1
+		SAY Si on coupe une tarte en 8 morceaux et que nous sommes 4 mangeurs, combien aurai-je de huitieme de tarte si nous partageons equitablement?
+		SRC.TAG.REPONSE_ENIGME_D7=2
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 2
+		SAY Si je prends la moitie de la moitie de 100 pommes, combien de douzaines completes de pommes aurai-je?
+		SRC.TAG.REPONSE_ENIGME_D7=2
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 3
+		SAY Si une main se compose de 5 doigts, combien aurai-je besoin de mains pour compter jusqu'a 21?
+		SRC.TAG.REPONSE_ENIGME_D7=5
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 4
+		SAY L'eau est constituee d'hydrogene et d'oxygene, si une mol d'eau pese 18g et qu'il y'a 2g d'hydrogene dans cette mol, alors quelle est la masse d'oxygene en gramme dans une mol d'eau?
+		SRC.TAG.REPONSE_ENIGME_D7=16
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 5
+		SAY J'ai 6 ennemis et 9 amis, si je donne 2po a chacun de mes ennemis et que je donne 8 po a chacun de mes amis, combien cela me coutera-t-il de po au total?
+		SRC.TAG.REPONSE_ENIGME_D7=84
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 6
+		SAY Dans une ferme ou il y'a des vaches et des poules, on y compte 10 tetes d'animaux. Si on sait qu'il y'a 28 pattes au total, combien y'a-t-il de vaches?
+		SRC.TAG.REPONSE_ENIGME_D7=4
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 7
+		SAY Si je m'achete un sac de 200 noix, qu'ensuite je m'en achete un de 150 noix, que j'en mange 20 et que je donne la moitie de ce qu'il me reste, combien de noix me reste-t-il?
+		SRC.TAG.REPONSE_ENIGME_D7=165
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 8
+		SAY Si on sait que je pese maintenant 70 Kg et que je viens de pisser 1 litre d'eau, quel etait mon poids en Kg avant de pisser sachant 100mL d'eau pese 100g?
+		SRC.TAG.REPONSE_ENIGME_D7=71
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 9
+		SAY Sur un morceau de gateau, si la visite mange 4/25 + 6/40 + 2/4 + 1/10 + 3/50, alors combien me reste-t-il de centiemes de gateau?
+		SRC.TAG.REPONSE_ENIGME_D7=3
+	ENDIF
+	DIALOG D_BOURREAU_3
+ELSE
+	SAY Approchez vous!
+ENDIF
+
+
+//EPREUVE DE FRANCAIS
+[CHARDEF c_bourreau_4_d7] 
+NAME=Bourreau 4
+ID=c_man
+ 
+TSPEECH=spk_bourreau_4_d7
+
+ON=@create
+COLOR=0FFF
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le specialiste des langues
+INVUL
+
+ITEMNEWBIE=i_baton
+COLOR=0bb1
+ITEMNEWBIE=i_casquette
+COLOR=0bb1
+ITEMNEWBIE=i_chaussures
+COLOR=0bb1
+
+ON=@CLICK
+RETURN 1
+
+ON=@NPCSEENEWPLAYER
+SAY Bienvenue dans cette epreuve!
+
+ON=@NPCHearUnknown
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> > 0
+	SRC.TAG.NUMERO_ENIGME_D7
+	SRC.TAG.DEFAITE_RDN = <EVAL 0<SRC.TAG.DEFAITE_RDN> + 1>
+	IF <EVAL <SRC.TAG.DEFAITE_RDN>> == 1
+		SAY Mauvaise reponse, la prochaine vous coutera la vie!
+	ELSE
+		SAY malheureusement c'est faux, tel est le destin des ames faibles!
+		SRC.TAG.EPREUVES_REUSSIES_D7
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.DEFAITE_RDN
+		SRC.TAG.GAIN_RDN
+		SRC.KILL
+	ENDIF
+ELSE
+	SAY Demandez moi le but du jeu et je vous le dirai
+ENDIF
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-7
+DESCRIPTION=Bourreau 4
+
+
+[SPEECH spk_bourreau_4_d7]
+ON=*but*
+SAY Je vous dirai une phrase ou il se trouve une faute. Vous devrez me dire le mot corrige et seulement ce mot en oubliant tous les accents. Dites moi quand vous etes pret a jouer.
+
+ON=*je suis pret a jouer*
+IF <EVAL <DISTANCE>> < 3
+	IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 0
+		SRC.TAG.NUMERO_ENIGME_D7=<EVAL (rand(9))+1>
+	ENDIF
+	IF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 1
+		SAY Le monstre erre sur les collines asseches du desert. (Trouvez l'erreur)
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 2
+		SAY La mere tremblais comme la feuille sur l'arbre. (Trouvez l'erreur)
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 3
+		SAY Au coeur de chaque homme, se trouvent la bonte et la sagesse. (Trouvez l'erreur)
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 4
+		SAY Cent pieces d'or tomberent du cheval et se repanderent sur l'herbe humide. (Trouvez l'erreur)
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 5
+		SAY La nuit est tombee sur la ville assieges par des milliers d'hommes. (Trouvez l'erreur)
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 6
+		SAY Une pente extremement abrute s'appelle un trou. (Trouvez l'erreur)
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 7
+		SAY La nuit, tout les humains sont endormis. (Trouvez l'erreur)
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 8
+		SAY Aider une seule personne, c'est aide l'humanite entiere. (Trouvez l'erreur)
+	ELSEIF <EVAL <SRC.TAG.NUMERO_ENIGME_D7>> == 9
+		SAY Le chevalier sans son cheval, couru jusqu'au lever du jour. (Trouvez l'erreur)
+	ENDIF
+ELSE
+	SAY Approchez vous!
+ENDIF
+
+ON=*assechees*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 1
+	SRC.TAG.GAIN_RDN=<EVAL 0<SRC.TAG.GAIN_RDN> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	IF <EVAL <SRC.TAG.GAIN_RDN>> == 2
+		SAY Felicitations, vous avez reussi l'epreuve!
+		SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+		SRC.TAG.CHANCES_RESTANTES_ENIGME
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.DEFAITE_RDN
+		SRC.TAG.GAIN_RDN
+		SRC.GO 5423,881,30
+	ELSE
+		SAY Bravo, vous avez un point, il vous en manque un dernier
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=*tremblait*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 2
+	SRC.TAG.GAIN_RDN=<EVAL 0<SRC.TAG.GAIN_RDN> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	IF <EVAL <SRC.TAG.GAIN_RDN>> == 2
+		SAY Felicitations, vous avez reussi l'epreuve!
+		SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+		SRC.TAG.CHANCES_RESTANTES_ENIGME
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.DEFAITE_RDN
+		SRC.TAG.GAIN_RDN
+		SRC.GO 5423,881,30
+	ELSE
+		SAY Bravo, vous avez un point, il vous en manque un dernier
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=*trouve*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 3
+	SRC.TAG.GAIN_RDN=<EVAL 0<SRC.TAG.GAIN_RDN> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	IF <EVAL <SRC.TAG.GAIN_RDN>> == 2
+		SAY Felicitations, vous avez reussi l'epreuve!
+		SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+		SRC.TAG.CHANCES_RESTANTES_ENIGME
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.DEFAITE_RDN
+		SRC.TAG.GAIN_RDN
+		SRC.GO 5423,881,30
+	ELSE
+		SAY Bravo, vous avez un point, il vous en manque un dernier
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=*repandirent*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 4
+	SRC.TAG.GAIN_RDN=<EVAL 0<SRC.TAG.GAIN_RDN> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	IF <EVAL <SRC.TAG.GAIN_RDN>> == 2
+		SAY Felicitations, vous avez reussi l'epreuve!
+		SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+		SRC.TAG.CHANCES_RESTANTES_ENIGME
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.DEFAITE_RDN
+		SRC.TAG.GAIN_RDN
+		SRC.GO 5423,881,30
+	ELSE
+		SAY Bravo, vous avez un point, il vous en manque un dernier
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=*assiegee*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 5
+	SRC.TAG.GAIN_RDN=<EVAL 0<SRC.TAG.GAIN_RDN> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	IF <EVAL <SRC.TAG.GAIN_RDN>> == 2
+		SAY Felicitations, vous avez reussi l'epreuve!
+		SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+		SRC.TAG.CHANCES_RESTANTES_ENIGME
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.DEFAITE_RDN
+		SRC.TAG.GAIN_RDN
+		SRC.GO 5423,881,30
+	ELSE
+		SAY Bravo, vous avez un point, il vous en manque un dernier
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=*abrupte*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 6
+	SRC.TAG.GAIN_RDN=<EVAL 0<SRC.TAG.GAIN_RDN> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	IF <EVAL <SRC.TAG.GAIN_RDN>> == 2
+		SAY Felicitations, vous avez reussi l'epreuve!
+		SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+		SRC.TAG.CHANCES_RESTANTES_ENIGME
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.DEFAITE_RDN
+		SRC.TAG.GAIN_RDN
+		SRC.GO 5423,881,30
+	ELSE
+		SAY Bravo, vous avez un point, il vous en manque un dernier
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=*tous*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 7
+	SRC.TAG.GAIN_RDN=<EVAL 0<SRC.TAG.GAIN_RDN> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	IF <EVAL <SRC.TAG.GAIN_RDN>> == 2
+		SAY Felicitations, vous avez reussi l'epreuve!
+		SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+		SRC.TAG.CHANCES_RESTANTES_ENIGME
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.DEFAITE_RDN
+		SRC.TAG.GAIN_RDN
+		SRC.GO 5423,881,30
+	ELSE
+		SAY Bravo, vous avez un point, il vous en manque un dernier
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=*aider*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 8
+	SRC.TAG.GAIN_RDN=<EVAL 0<SRC.TAG.GAIN_RDN> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	IF <EVAL <SRC.TAG.GAIN_RDN>> == 2
+		SAY Felicitations, vous avez reussi l'epreuve!
+		SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+		SRC.TAG.CHANCES_RESTANTES_ENIGME
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.DEFAITE_RDN
+		SRC.TAG.GAIN_RDN
+		SRC.GO 5423,881,30
+	ELSE
+		SAY Bravo, vous avez un point, il vous en manque un dernier
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=*courut*
+IF <EVAL 0<SRC.TAG.NUMERO_ENIGME_D7>> == 9
+	SRC.TAG.GAIN_RDN=<EVAL 0<SRC.TAG.GAIN_RDN> + 1>
+	SRC.TAG.NUMERO_ENIGME_D7
+	IF <EVAL <SRC.TAG.GAIN_RDN>> == 2
+		SAY Felicitations, vous avez reussi l'epreuve!
+		SRC.TAG.EPREUVES_REUSSIES_D7 = <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7> + 1>
+		SRC.TAG.CHANCES_RESTANTES_ENIGME
+		SRC.TAG.EPREUVE_A_FAIRE_D7
+		SRC.TAG.DEFAITE_RDN
+		SRC.TAG.GAIN_RDN
+		SRC.GO 5423,881,30
+	ELSE
+		SAY Bravo, vous avez un point, il vous en manque un dernier
+	ENDIF
+	RETURN 1
+ENDIF
+RETURN 0
+
+//LE MAITRE DES EPREUVES
+[CHARDEF c_imgler_d7] 
+NAME=Imgler
+ID=c_man
+ 
+TSPEECH=spk_imgler_d7
+
+ON=@create
+COLOR=0FFF
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le maitre des epreuves
+INVUL
+
+ITEMNEWBIE=i_epee_batarde_anim
+COLOR=084a
+ITEMNEWBIE=i_robe_gm_anim
+COLOR=084a
+
+ON=@CLICK
+RETURN 1
+
+ON=@NPCSEENEWPLAYER
+SAY Bienvenue <SRC.NAME> ! Une epreuve?
+
+ON=@NPCHearUnknown
+SAY Une epreuve?
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-7
+DESCRIPTION=Imgler
+
+[SPEECH spk_imgler_d7]
+ON=*oui*
+ON=*epreuve*
+IF <EVAL <DISTANCE>> < 3
+	IF <EVAL 0<SRC.TAG.EPREUVES_REUSSIES_D7>> < 5
+		IF <EVAL 0<SRC.TAG.EPREUVE_A_FAIRE_D7>> == 0
+			SRC.TAG.EPREUVE_A_FAIRE_D7=<EVAL (rand(10)) + 1>
+			SRC.NEWITEM i_cle_d7_finale
+			SRC.ACT.MORE1=<SRC.TAG.EPREUVE_A_FAIRE_D7>
+			SRC.ACT.BOUNCE
+		ELSE
+			IF !<SRC.FINDID.i_cle_d7_finale>
+				SRC.NEWITEM i_cle_d7_finale
+				SRC.ACT.MORE1=<SRC.TAG.EPREUVE_A_FAIRE_D7>
+				SRC.ACT.BOUNCE
+			ENDIF
+		ENDIF		
+		SAY Vous devez faire l'epreuve numero <EVAL <SRC.TAG.EPREUVE_A_FAIRE_D7>>
+	ELSE
+		SAY Bravo, vous avez termine les epreuves avec succes !
+		IF <EVAL 0<SRC.TAG.INSIDE_D7>> < 6
+			//TRICHEUR
+			IF <EVAL 0<SRC.TAG.INSIDE_D7> + 2> <= 6
+				UID.09903F.NEWITEM 0bd0
+				UID.09903F.ACT.NAME voir tags
+				UID.09903F.ACT.TAG.RTIME=<SERV.RTIME>
+				UID.09903F.ACT.TAG.PERSO_ACCOUNT=<SRC.ACT.NAME> acc:<SRC.ACT.ACCOUNT>
+				UID.09903F.ACT.TAG.POSITION=<SRC.ACT.P>
+				UID.09903F.ACT.TAG.ETAITMORE=<SRC.ACT.TAG.INSIDE_D7>
+				UID.09903F.ACT.TAG.DEVIENTMORE=6
+				UID.09903F.ACT.COLOR=025
+				UID.09903F.ACT.ATTR=08010
+				UID.09903F.ACT.CONT=0b6a09
+			ENDIF
+			SRC.TAG.INSIDE_D7=6
+		ENDIF
+		SRC.TAG.EPREUVES_REUSSIES_D7
+		SRC.GO 5507,844,45
+	ENDIF
+ELSE
+	SAY Approchez, n'ayez pas peur !
+ENDIF
+
+
+//REINE DU DESTIN (ENTREE DU D7) INUTILE
+[CHARDEF c_ananke] 
+NAME=Ananke
+ID=c_woman
+ 
+TSPEECH=spk_ananke
+
+ON=@create
+COLOR=083b
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=La reine du destin
+INVUL
+
+ITEMNEWBIE=i_robe_gm_anim
+COLOR=0b67
+ITEMNEWBIE=i_baton
+COLOR=0983
+
+ON=@NPCSEENEWPLAYER
+SAY A vous voir <SRC.NAME>, la vie ne fait pas de cadeau!
+
+ON=@NPCHearUnknown
+SAY Je suis la reine du destin, pas de la comprehension de votre charrabia debile!
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-7
+DESCRIPTION=Ananke
+
+[SPEECH spk_ananke]
+
+ON=*destin*
+SAY croyez-vous au destin?
+
+ON=non*
+SAY Alors foutez moi le camps d'ici!
+
+ON=oui*
+IF <EVAL (rand(8))> == 0
+	SAY Alors, vous devez etre au courant du... secret
+ELSE
+	SAY ah oui, vraiment?
+ENDIF
+
+ON=secret
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 5
+	IF ((<EVAL 0<SRC.TAG.ANANKE>> == 1) || (<EVAL 0<SRC.TAG.RENAISSANCE>> > 6))
+		SAY Comme je vous ai dit et je n'aurais pas du... celui que vous cherchez s'occupe d'ingredients magiques !
+	ELSE
+		IF <EVAL (rand(10))> == 0
+			SAY Vous me paraissez honnete...
+			EMOTE reflechir
+			SAY Celui que vous cherchez s'occupe d'ingredients magiques, il vous en dira plus. Ne luis dites pas mon nom !
+			IF <EVAL 0<SRC.TAG.ANANKE>> == 0
+				SRC.TAG.ANANKE=1
+			ENDIF
+		ELSE
+			SAY N'insistez pas, je n'ai rien dit du tout!
+		ENDIF
+	ENDIF
+ELSE
+	SAY Votre petite cervelle est trop peu evoluee pour comprendre
+ENDIF
+
+ON=*entre*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 0
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 5
+		IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 6
+			SAY Vous avez oublie la procedure? Ce n'est pas digne d'une personne de votre statut !
+		ELSE
+			SAY Aucun vivant ne peut entrer ici, ce dongeon est... special
+		ENDIF
+	ELSE
+		SAY Vous etes trop faible pour entrer ici, foutez moi le camps!
+	ENDIF
+ELSE
+	EMOTE se tordre de rire!
+	SAY Vo.... vous, entrer ici? Retournez chez vous faible humain avant que je perdre patience!
+ENDIF
+
+ON=dongeon
+ON=special
+SAY Le temps dans ce dongeon n'est pas en phase avec ce monde, entrer, c'est mourir instantannement !
+
+[CHARDEF c_venerable_de_despise] 
+NAME=Venerable de Despise
+ID=c_man
+ 
+TSPEECH=spk_venerable_de_despise
+
+ON=@create
+COLOR=03f1
+FOOD=9999
+SPEECHCOLOR=0b7f
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=01f03
+COLOR=0b8f
+ITEMNEWBIE=0170d
+COLOR=0b8f
+ITEMNEWBIE=013f8
+COLOR=0b8f
+
+ON=@CLICK
+IF <EVAL <DISTANCE>> > 10
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 6
+	SAY Venez pres de moi <SRC.NAME> !
+ELSE
+	SAY Vous etes revenu me rendre une visite <SRC.NAME>?
+ENDIF
+
+ON=@NPCHearUnknown
+IF <EVAL <DISTANCE>> < 3
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 6
+		IF <EVAL 0<SRC.TAG.VDEDESPISE>> == 0
+			SRC.TAG.VDEDESPISE=1
+			IF <EVAL 0<SRC.TAG.COTE>> == 1
+				SAY Votre croisade vers la vertu touche a sa fin...
+			ELSE
+				SAY Votre croisade vers la perversion touche presque a sa fin...
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.VDEDESPISE>> == 1
+			SRC.TAG.VDEDESPISE=2
+			SAY Presque inexistants, ceux qui sont parvenus jusqu'a moi, vous etes un grand heros !
+		ELSE
+			IF <EVAL 0<SRC.TAG.COTE>> == 1
+				SAY Il est desormais temps de me dire si vous vous sentez toujours apte a continuer sur le chemin de la vertu
+			ELSE
+				SAY Il est desormais temps de me dire si vous vous sentez toujours apte a continuer sur le chemin de la perversion
+			ENDIF
+		ENDIF
+	ELSE
+		SAY Votre destin est ailleurs <SRC.NAME>
+	ENDIF
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-7
+DESCRIPTION=Venerable de Despise
+
+[SPEECH spk_venerable_de_despise]
+
+ON=*vertu*
+IF <EVAL <DISTANCE>> < 3
+	IF (<EVAL 0<SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D7>> > 0)
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 6
+				IF <SRC.FINDID.03f0c>
+					IF <EVAL 0<SRC.TAG.INSIDE_D7>> != 11
+						UID.09903F.NEWITEM 0bd0
+						UID.09903F.ACT.NAME Abus venerable (voir tags)
+						UID.09903F.ACT.TAG.RTIME=<SERV.RTIME>
+						UID.09903F.ACT.TAG.PERSO_COMPTE=<SRC.NAME> acc:<SRC.ACCOUNT>
+						UID.09903F.ACT.TAG.INSIDE_D7=<SRC.TAG.INSIDE_D7>
+						UID.09903F.ACT.COLOR=025
+						UID.09903F.ACT.ATTR=08010
+						UID.09903F.ACT.CONT=0b6a09
+					ENDIF
+					IF <EVAL 0<SRC.TAG.BOSS_FINAL_TUE>> == 0
+						UID.09903F.NEWITEM 0bd0
+						UID.09903F.ACT.NAME Abus venerable (voir tags)
+						UID.09903F.ACT.TAG.RTIME=<SERV.RTIME>
+						UID.09903F.ACT.TAG.PERSO_COMPTE=<SRC.NAME> acc:<SRC.ACCOUNT>
+						UID.09903F.ACT.TAG.BOSS_FINAL=pas tue
+						UID.09903F.ACT.COLOR=025
+						UID.09903F.ACT.ATTR=08010
+						UID.09903F.ACT.CONT=0b6a09
+					ENDIF
+					SRC.TAG.BOSS_FINAL_TUE
+					SRC.TAG.FIN_LABY_CHECKPOINT_D7
+					SRC.ENLEVE_TOUT_OBJET_D7
+
+					SRC.TAG.RENAISSANCE=7
+					SRC.FINDID.03f0c.COLOR=0B0a
+					SRC.COLOR=0B10
+					SRC.OSKIN=0B10
+					SRC.RENAITRE
+					SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie d'elu avec sa septieme renaissance !
+				ELSE
+					SAY Un elu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+				ENDIF
+			ELSE
+				SAY Votre destin est ailleurs <SRC.NAME>
+			ENDIF
+		ELSE
+			SAY Vous avez deja prete serment pour servir le mal
+		ENDIF
+	ELSE
+		SRC.EVENTS -e_anti_mark_recall
+		SRC.TAG.anti_mark_recall=0
+		SRC.TAG.INSIDE_D7
+		SRC.P=1357,1065
+		SRC.UPDATE
+	ENDIF
+ENDIF
+
+ON=*perversion*
+IF <EVAL <DISTANCE>> < 3
+	IF (<EVAL 0<SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D7>> > 0)
+		IF <EVAL 0<SRC.TAG.COTE>> == 2
+			IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 6
+				IF <SRC.FINDID.03f0c>
+					IF <EVAL 0<SRC.TAG.INSIDE_D7>> != 11
+						UID.09903F.NEWITEM 0bd0
+						UID.09903F.ACT.NAME Abus venerable (voir tags)
+						UID.09903F.ACT.TAG.RTIME=<SERV.RTIME>
+						UID.09903F.ACT.TAG.PERSO_COMPTE=<SRC.NAME> acc:<SRC.ACCOUNT>
+						UID.09903F.ACT.TAG.INSIDE_D7=<SRC.TAG.INSIDE_D7>
+						UID.09903F.ACT.COLOR=025
+						UID.09903F.ACT.ATTR=08010
+						UID.09903F.ACT.CONT=0b6a09
+					ENDIF
+					IF <EVAL 0<SRC.TAG.BOSS_FINAL_TUE>> == 0
+						UID.09903F.NEWITEM 0bd0
+						UID.09903F.ACT.NAME Abus venerable (voir tags)
+						UID.09903F.ACT.TAG.RTIME=<SERV.RTIME>
+						UID.09903F.ACT.TAG.PERSO_COMPTE=<SRC.NAME> acc:<SRC.ACCOUNT>
+						UID.09903F.ACT.TAG.BOSS_FINAL=pas tue
+						UID.09903F.ACT.COLOR=025
+						UID.09903F.ACT.ATTR=08010
+						UID.09903F.ACT.CONT=0b6a09
+					ENDIF
+					SRC.TAG.BOSS_FINAL_TUE
+					SRC.TAG.FIN_LABY_CHECKPOINT_D7
+					SRC.ENLEVE_TOUT_OBJET_D7
+
+					SRC.TAG.RENAISSANCE=7
+					SRC.FINDID.03f0c.COLOR=0B36
+					SRC.COLOR=0B36
+					SRC.OSKIN=0B36
+					SRC.RENAITRE
+					SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie de dechu avec sa septieme renaissance !
+				ELSE
+					SAY Un dechu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+				ENDIF
+			ELSE
+				SAY Votre destin est ailleurs <SRC.NAME>
+			ENDIF
+		ELSE
+			SAY Vous avez deja prete serment pour servir le bien
+		ENDIF
+	ELSE
+		SRC.EVENTS -e_anti_mark_recall
+		SRC.TAG.anti_mark_recall=0
+		SRC.TAG.INSIDE_D7
+		SRC.P=1357,1065
+		SRC.UPDATE
+	ENDIF
+ENDIF

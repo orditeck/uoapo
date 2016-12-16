@@ -1,0 +1,318 @@
+[FUNCTION caisse_bombe]
+FORITEMS 1
+	IF (<BASEID> == i_caisse_bombe)
+		TIMER=0
+	ENDIF
+ENDFOR
+
+[ITEMDEF i_quit_Bombe]
+NAME=Quitter Bomberman
+id=i_moongate_blue
+TYPE=T_wall
+WEIGHT=1
+
+ON=@CREATE
+color=0992
+attr=08010
+
+ON=@CLICK
+Message <name>
+return 1
+
+ON=@DCLICK
+return 1
+
+ON=@STEP
+src.consume i_bombe
+src.tag.bombe=0
+src.go minoc
+src.sysmessage @050 Bon jeu.
+src.events -e_bomberman
+RETURN 1
+
+[ITEMDEF i_gate_Bombe]
+NAME=Portal pour Bomberman
+id=i_moongate_blue
+TYPE=T_wall
+WEIGHT=1
+
+ON=@CREATE
+color=0992
+attr=08010
+
+ON=@CLICK
+Message <name>
+return 1
+
+ON=@DCLICK
+return 1
+
+ON=@STEP
+IF <src.findlayer(25)>
+	src.sysmessage @050 Vous ne pouvez pas entrer avec un animal.
+	return 1
+ELSEIF (<eval <src.tag.level>> == 1)
+	src.sysmessage @050 Vous entrez dans le Bomberman.
+	SRC.deshabiller
+	SRC.ACT=<SRC.FINDLAYER(LAYER_PACK).UID> 
+	SRC.FINDLAYER(LAYER_PACK).CONT=<SRC.FINDLAYER(LAYER_BANKBOX).UID>  
+	SRC.FINDLAYER(LAYER_BANKBOX).UPDATE 
+	SRC.ACT.UPDATE 
+	SRC.ACT.ATTR=0 
+	SRC.NEWITEM=I_BACKPACK
+	SRC.ACT.COLOR=0
+	SRC.ACT.LAYER=LAYER_PACK 
+	SRC.ACT.EQUIP
+	SRC.GO=5989,1426
+	SRC.NEWITEM i_bombe
+	src.act.bounce
+	src.events +e_bomberman
+	return 1
+else
+	src.sysmessage @050 Vous devez etre level 1 pour entrer.
+	return 1
+endif
+
+[EVENTS e_bomberman]
+ON=@DEATH
+consume i_bombe
+events -e_bomberman
+RETURN 0
+
+[ITEMDEF i_Bombe]
+NAME=Bombe
+id=0c5c
+TYPE=T_wall
+WEIGHT=1
+
+ON=@CREATE
+color=0992
+attr=08014
+
+ON=@CLICK
+Message [Illimite]
+Message <name>
+return 1
+
+ON=@DCLICK
+IF (<eval <src.tag.bombe>> == 1)
+	src.sysmessage @050 Tu a deja une bombe d'active, attend quelle explose.
+	return 1
+else
+	SRC.NEWITEM i_bombe_sol
+	src.act.attr 08010
+	src.act.bounce
+	src.act.timer=1
+	src.act.more1=3
+	SRC.ACT.drop
+	src.act.link=<src.uid>
+	src.act.say @050 3
+	src.sysmessage @050 Tu active la bombe...
+	src.tag.bombe=1
+	return 1
+endif
+
+[ITEMDEF i_caisse_bombe]
+NAME=Caisse explosive
+id=0e3d
+TYPE=T_wall
+WEIGHT=1
+
+ON=@CREATE
+color=0afb
+attr=08010
+
+ON=@CLICK
+Message <name>
+return 1
+
+ON=@DCLICK
+return 1
+
+ON=@STEP
+RETURN 1
+
+ON=@TIMER
+serv.newitem i_bombe_explosion
+NEw.p=<p>
+NEW.timer=1
+NEW.attr 08010
+SERV.newitem i_bombe_explosion_invisible
+NEW.attr 08090
+NEW.p=<p>
+NEW.move 1,0
+NEW.timer=1
+SERV.newitem i_bombe_explosion_invisible
+NEW.attr 08090
+NEW.p=<p>
+NEW.move 1,1
+NEW.timer=1
+SERV.newitem i_bombe_explosion_invisible
+NEW.attr 08090
+NEW.p=<p>
+NEW.move 1,-1
+NEW.timer=1
+SERV.newitem i_bombe_explosion_invisible
+NEW.attr 08090
+NEW.p=<p>
+NEW.move -1,0
+NEW.timer=1
+SERV.newitem i_bombe_explosion_invisible
+NEW.attr 08090
+NEW.p=<p>
+NEW.move -1,1
+NEW.timer=1
+SERV.newitem i_bombe_explosion_invisible
+NEW.attr 08090
+NEW.p=<p>
+NEW.move -1,-1
+NEW.timer=1
+SERV.newitem i_bombe_explosion_invisible
+NEW.attr 08090
+NEW.p=<p>
+NEW.move 0,-1
+NEW.timer=1
+SERV.newitem i_bombe_explosion_invisible
+NEW.attr 08090
+NEW.p=<p>
+NEW.move 0,1
+NEW.timer=1
+ATTR=ATTR_DECAY
+
+
+[ITEMDEF i_protection_bombe]
+NAME=Protection
+id=01772
+TYPE=T_wall
+WEIGHT=1
+
+ON=@CREATE
+color=0abe
+attr=08010
+
+ON=@CLICK
+Message <name>
+return 1
+
+ON=@DCLICK
+return 1
+
+[ITEMDEF i_Bombe_sol]
+NAME=Bombe active
+id=0c5c
+TYPE=T_wall
+WEIGHT=1
+
+ON=@CREATE
+color=0992
+attr=08010
+
+ON=@CLICK
+Message <name>
+return 1
+
+ON=@TIMER
+if <more1> > 1
+	more1=<more1>-1
+	say @050 <eval <more1>>
+	TIMER=1
+	return 1
+ELSE
+	caisse_bombe
+	link.newitem i_bombe_explosion
+	link.act.p=<p>
+	link.act.timer=1
+	link.act.attr 08010
+	link.act.link=<link.uid>
+	link.newitem i_bombe_explosion_invisible
+	link.act.attr 08090
+	link.act.p=<p>
+	link.act.move 1,0
+	link.act.timer=1
+	link.newitem i_bombe_explosion_invisible
+	link.act.attr 08090
+	link.act.p=<p>
+	link.act.move 1,1
+	link.act.timer=1
+	link.newitem i_bombe_explosion_invisible
+	link.act.attr 08090
+	link.act.p=<p>
+	link.act.move 1,-1
+	link.act.timer=1
+	link.newitem i_bombe_explosion_invisible
+	link.act.attr 08090
+	link.act.p=<p>
+	link.act.move -1,0
+	link.act.timer=1
+	link.newitem i_bombe_explosion_invisible
+	link.act.attr 08090
+	link.act.p=<p>
+	link.act.move -1,1
+	link.act.timer=1
+	link.newitem i_bombe_explosion_invisible
+	link.act.attr 08090
+	link.act.p=<p>
+	link.act.move -1,-1
+	link.act.timer=1
+	link.newitem i_bombe_explosion_invisible
+	link.act.attr 08090
+	link.act.p=<p>
+	link.act.move 0,-1
+	link.act.timer=1
+	link.newitem i_bombe_explosion_invisible
+	link.act.attr 08090
+	link.act.p=<p>
+	link.act.move 0,1
+	link.act.timer=1
+	link.tag.bombe=0
+	attr=attr_decay
+	remove
+	return 1
+ENDIF
+
+ON=@DCLICK
+return 1
+
+[ITEMDEF i_bombe_explosion]
+ID=i_fx_explode
+NAME=Bombe qui explose
+TYPE=t_EQ_script
+
+ON=@CREATE
+ATTR=attr_decay
+
+ON=@DCLICK
+TIMER=1
+
+ON=@EQUIP
+TIMER=1
+
+ON=@STEP
+src.hits=(<src.hits>-100)
+src.sysmessage @050 La bombe vous explose sur le corps.
+src.anim 20
+
+ON=@TIMER
+attr=attr_decay
+
+[ITEMDEF i_bombe_explosion_invisible]
+ID=i_floor_marble
+NAME=Bombe qui explose
+TYPE=t_EQ_script
+
+ON=@CREATE
+ATTR=attr_decay
+
+ON=@DCLICK
+TIMER=1
+
+ON=@EQUIP
+TIMER=1
+
+ON=@STEP
+src.hits=(<src.hits>-100)
+src.sysmessage @050 La bombe vous explose sur le corps.
+src.anim 20
+
+ON=@TIMER
+attr=attr_decay

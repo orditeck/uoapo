@@ -1,0 +1,129 @@
+[ITEMDEF i_jeton_or]
+ID=0e1b
+NAME=Jeton d'or
+WEIGHT=5
+
+ON=@CREATE
+COLOR=0bb6
+
+DESCRIPTION=Jeton d'or
+
+[ITEMDEF i_jeton_argent]
+ID=0e1b
+NAME=Jeton d'argent
+WEIGHT=5
+
+ON=@CREATE
+COLOR=0ac9
+
+DESCRIPTION=Jeton d'argent
+
+[ITEMDEF i_jeton_bronze]
+ID=0e1b
+NAME=Jeton de bronze
+WEIGHT=5
+
+ON=@CREATE
+COLOR=0afc
+
+DESCRIPTION=Jeton de bronze
+
+[CHARDEF c_harpie_d_or]
+NAME=Harpie d'or
+ID=01e
+RESOURCES=20 i_feather
+
+ON=@Create
+COLOR=0bb6
+STR=500
+DEX=450
+INT=450
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=5000
+TAG.XPCOUP=<EVAL (RAND(312,625))>
+TAG.TAPER=8
+TAG.NIVEAU=71
+
+KARMA=-9999
+
+TACTICS=500.0
+WRESTLING=500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 29 i_jeton_or 1}
+
+CATEGORY=Monstres
+SUBSECTION=Animation
+DESCRIPTION=Harpie d'or
+
+[CHARDEF c_ophidien_d_argent]
+NAME=Ophidien d'argent
+ID=056
+
+ON=@Create
+COLOR=0ac9
+STR=230
+DEX=200
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=2300
+TAG.XPCOUP=<EVAL (RAND(143,287))>
+TAG.TAPER=8
+TAG.NIVEAU=54
+
+KARMA=-9999
+
+TACTICS=230.0
+WRESTLING=230.0
+MAGICRESISTANCE=115.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 19 i_jeton_argent 1}
+
+CATEGORY=Monstres
+SUBSECTION=Animation
+DESCRIPTION=Ophidien d'argent
+
+[CHARDEF c_anthropophage_de_bronze]
+NAME=Anthropophage de bronze
+ID=03
+
+ON=@Create
+COLOR=0afc
+STR=90
+DEX=90
+INT=120
+
+KARMA=-9999
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1260
+TAG.XPCOUP=<EVAL (RAND(157,315))>
+TAG.TAPER=4
+TAG.NIVEAU=16
+
+TACTICS=90.0
+WRESTLING=90.0
+MAGERY=200.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00200000
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 9 i_jeton_bronze 1}
+
+CATEGORY=Monstres
+SUBSECTION=Animation
+DESCRIPTION=Anthropophage de bronze

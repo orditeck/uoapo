@@ -1,0 +1,51 @@
+[PLEVEL 2]
+nom
+
+[FUNCTION Nom]
+IF !(STRCMPI("<ARGS>",""))
+	SYSMESSAGEUA 0481 1 1 0 Tapez .nom suivi du nouveau nom du joueur
+ELSE
+	NEWITEM i_changeur_nom
+	ACT.NAME=<ARGS>
+	ACT.EQUIP
+	ACT.USE
+ENDIF
+
+[ITEMDEF i_changeur_nom] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur a qui changer le nom
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+IF (STRCMPI("<SRC.TARG.TAG.VRAI_PRENOM>",""))
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a deja change de nom !
+ELSE
+	IF <SRC.TARG.ACCOUNT.PLEVEL>==2
+		SERV.B <SRC.TARG.NAME> s'appelle desormais <NAME> --
+		SRC.TARG.NAME=<NAME> --
+		SRC.TARG.TAG.VRAI_PRENOM=<NAME>
+	ELSE
+		SERV.B <SRC.TARG.NAME> s'appelle desormais <NAME>
+		SRC.TARG.NAME=<NAME>
+		SRC.TARG.TAG.VRAI_PRENOM=<NAME>
+	ENDIF
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1

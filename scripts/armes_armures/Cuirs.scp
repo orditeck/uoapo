@@ -1,0 +1,1581 @@
+[ITEMDEF i_cuir_de_rat]
+DEFNAME=i_cuir_de_rat
+NAME=Cuir de rat
+ID=01078
+TYPE=t_hide
+VALUE=200
+
+ON=@CREATE
+COLOR=0745
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de rat
+DESCRIPTION=Cuir de rat
+
+[ITEMDEF i_cuir_de_gobelin]
+DEFNAME=i_cuir_de_gobelin
+NAME=Cuir de gobelin
+ID=01078
+TYPE=t_hide
+VALUE=400
+
+ON=@CREATE
+COLOR=025
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de gobelin
+DESCRIPTION=Cuir de gobelin
+
+[ITEMDEF i_cuir_de_loup]
+DEFNAME=i_cuir_de_loup
+NAME=Cuir de loup
+ID=01078
+TYPE=t_hide
+VALUE=750
+
+ON=@CREATE
+COLOR=083a
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de loup
+DESCRIPTION=Cuir de loup
+
+[ITEMDEF i_cuir_d_ophidien]
+DEFNAME=i_cuir_d_ophidien
+NAME=Cuir d'ophidien
+ID=01078
+TYPE=t_hide
+VALUE=1500
+
+ON=@CREATE
+COLOR=0abe
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'ophidien
+DESCRIPTION=Cuir d'ophidien
+
+[ITEMDEF i_cuir_de_tetrapode]
+DEFNAME=i_cuir_de_tetrapode
+NAME=Cuir de tetrapode
+ID=01078
+TYPE=t_hide
+VALUE=3000
+
+ON=@CREATE
+COLOR=029
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de tetrapode
+DESCRIPTION=Cuir de tetrapode
+
+[ITEMDEF i_cuir_d_harpie]
+DEFNAME=i_cuir_d_harpie
+NAME=Cuir d'harpie
+ID=01078
+TYPE=t_hide
+VALUE=5000
+
+ON=@CREATE
+COLOR=08b0
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'harpie
+DESCRIPTION=Cuir d'harpie
+
+
+[ITEMDEF i_cuir_de_troll]
+NAME=Cuir de troll
+ID=01078
+TYPE=t_hide
+VALUE=50000
+
+ON=@CREATE
+COLOR=0aab
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de troll
+DESCRIPTION=Cuir de troll
+
+
+// *** RAT ***
+
+
+
+[ITEMDEF i_armure_en_cuir_de_rat]
+NAME=Armure en cuir de rat
+ID=i_leather_tunic
+ARMOR=15
+REQSTR=25
+RESOURCES=5 i_cuir_de_rat
+SKILLMAKE=TAILORING 40.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=50
+COLOR=0745
+TAG.DOMMAGESREDUITS=5
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C1>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.5>
+	SRC.FINDLAYER.5.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de rat
+DESCRIPTION=Armure en cuir de rat
+
+
+[ITEMDEF i_armure_de_femme_en_cuir_de_rat]
+NAME=Armure en cuir de rat
+ID=i_armor_female_bustier_studded
+ARMOR=15
+REQSTR=25
+RESOURCES=5 i_cuir_de_rat
+SKILLMAKE=TAILORING 40.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=50
+COLOR=0745
+TAG.DOMMAGESREDUITS=5
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C1>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.13>
+	SRC.FINDLAYER.13.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de rat
+DESCRIPTION=Armure de femme en cuir de rat
+
+
+[ITEMDEF i_jambieres_en_cuir_de_rat]
+NAME=Jambieres en cuir de rat
+ID=i_leather_leggings
+ARMOR=15
+REQSTR=25
+RESOURCES=4 i_cuir_de_rat
+SKILLMAKE=TAILORING 40.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=50
+COLOR=0745
+TAG.DOMMAGESREDUITS=5
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C1>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.23>
+	SRC.FINDLAYER.23.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de rat
+DESCRIPTION=Jambieres en cuir de rat
+
+
+[ITEMDEF i_jupette_en_cuir_de_rat]
+NAME=Jupette en cuir de rat
+ID=01c08
+ARMOR=15
+REQSTR=25
+RESOURCES=4 i_cuir_de_rat
+SKILLMAKE=TAILORING 40.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=50
+COLOR=0745
+TAG.DOMMAGESREDUITS=5
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C1>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.4>
+	SRC.FINDLAYER.4.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de rat
+DESCRIPTION=Jupette en cuir de rat
+
+
+[ITEMDEF i_brassieres_en_cuir_de_rat]
+NAME=Brassieres en cuir de rat
+ID=i_leather_sleeves
+ARMOR=15
+REQSTR=25
+RESOURCES=3 i_cuir_de_rat
+SKILLMAKE=TAILORING 40.0, t_sewing_kit
+WEIGHT=6
+
+ON=@CREATE
+HITPOINTS=50
+COLOR=0745
+TAG.DOMMAGESREDUITS=5
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C1>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de rat
+DESCRIPTION=Brassieres en cuir de rat
+
+
+[ITEMDEF i_gants_en_cuir_de_rat]
+NAME=Gants en cuir de rat
+ID=i_leather_gloves
+ARMOR=15
+REQSTR=25
+RESOURCES=2 i_cuir_de_rat
+SKILLMAKE=TAILORING 40.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=50
+COLOR=0745
+TAG.DOMMAGESREDUITS=5
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C1>
+UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de rat
+DESCRIPTION=Gants en cuir de rat
+
+
+[ITEMDEF i_protege_cou_en_cuir_de_rat]
+NAME=Protege cou en cuir de rat
+ID=i_leather_gorget
+ARMOR=15
+REQSTR=25
+RESOURCES=2 i_cuir_de_rat
+SKILLMAKE=TAILORING 40.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=50
+COLOR=0745
+TAG.DOMMAGESREDUITS=5
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C1>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de rat
+DESCRIPTION=Protege cou en cuir de rat
+
+
+
+// *** GOBELIN ***
+
+
+
+[ITEMDEF i_armure_en_cuir_de_gobelin]
+NAME=Armure en cuir de gobelin
+ID=i_leather_tunic
+ARMOR=30
+REQSTR=50
+RESOURCES=5 i_cuir_de_gobelin
+SKILLMAKE=TAILORING 50.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=100
+COLOR=025
+TAG.DOMMAGESREDUITS=10
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C2>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.5>
+	SRC.FINDLAYER.5.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de gobelin
+DESCRIPTION=Armure en cuir de gobelin
+
+[ITEMDEF i_armure_de_femme_en_cuir_de_gobelin]
+NAME=Armure en cuir de gobelin
+ID=i_armor_female_bustier_studded
+ARMOR=30
+REQSTR=50
+RESOURCES=5 i_cuir_de_gobelin
+SKILLMAKE=TAILORING 50.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=100
+COLOR=025
+TAG.DOMMAGESREDUITS=10
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C2>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.13>
+	SRC.FINDLAYER.13.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de gobelin
+DESCRIPTION=Armure de femme en cuir de gobelin
+
+[ITEMDEF i_jambieres_en_cuir_de_gobelin]
+NAME=Jambieres en cuir de gobelin
+ID=i_leather_leggings
+ARMOR=30
+REQSTR=50
+RESOURCES=4 i_cuir_de_gobelin
+SKILLMAKE=TAILORING 50.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=100
+COLOR=025
+TAG.DOMMAGESREDUITS=10
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C2>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.23>
+	SRC.FINDLAYER.23.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de gobelin
+DESCRIPTION=Jambieres en cuir de gobelin
+
+[ITEMDEF i_jupette_en_cuir_de_gobelin]
+NAME=Jupette en cuir de gobelin
+ID=01c08
+ARMOR=30
+REQSTR=50
+RESOURCES=4 i_cuir_de_gobelin
+SKILLMAKE=TAILORING 50.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=100
+COLOR=025
+TAG.DOMMAGESREDUITS=10
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C2>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.4>
+	SRC.FINDLAYER.4.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de gobelin
+DESCRIPTION=Jupette en cuir de gobelin
+
+
+[ITEMDEF i_brassieres_en_cuir_de_gobelin]
+NAME=Brassieres en cuir de gobelin
+ID=i_leather_sleeves
+ARMOR=30
+REQSTR=50
+RESOURCES=3 i_cuir_de_gobelin
+SKILLMAKE=TAILORING 50.0, t_sewing_kit
+WEIGHT=6
+
+ON=@CREATE
+HITPOINTS=100
+COLOR=025
+TAG.DOMMAGESREDUITS=10
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C2>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de gobelin
+DESCRIPTION=Brassieres en cuir de gobelin
+
+[ITEMDEF i_gants_en_cuir_de_gobelin]
+NAME=Gants en cuir de gobelin
+ID=i_leather_gloves
+ARMOR=30
+REQSTR=50
+RESOURCES=2 i_cuir_de_gobelin
+SKILLMAKE=TAILORING 50.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=100
+COLOR=025
+TAG.DOMMAGESREDUITS=10
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C2>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de gobelin
+DESCRIPTION=Gants en cuir de gobelin
+
+
+[ITEMDEF i_protege_cou_en_cuir_de_gobelin]
+NAME=Protege cou en cuir de gobelin
+ID=i_leather_gorget
+ARMOR=30
+REQSTR=50
+RESOURCES=2 i_cuir_de_gobelin
+SKILLMAKE=TAILORING 50.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=100
+COLOR=025
+TAG.DOMMAGESREDUITS=10
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C2>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de gobelin
+DESCRIPTION=Protege cou en cuir de gobelin
+
+
+
+// *** LOUP ***
+
+
+
+[ITEMDEF i_armure_en_cuir_de_loup]
+NAME=Armure en cuir de loup
+ID=i_leather_tunic
+ARMOR=55
+REQSTR=75
+RESOURCES=5 i_cuir_de_loup
+SKILLMAKE=TAILORING 60.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=150
+COLOR=083a
+TAG.DOMMAGESREDUITS=15
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C3>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.5>
+	SRC.FINDLAYER.5.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de loup
+DESCRIPTION=Armure en cuir de loup
+
+[ITEMDEF i_armure_de_femme_en_cuir_de_loup]
+NAME=Armure en cuir de loup
+ID=i_armor_female_bustier_studded
+ARMOR=55
+REQSTR=75
+RESOURCES=5 i_cuir_de_loup
+SKILLMAKE=TAILORING 60.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=150
+COLOR=083a
+TAG.DOMMAGESREDUITS=15
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C3>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.13>
+	SRC.FINDLAYER.13.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de loup
+DESCRIPTION=Armure de femme en cuir de loup
+
+[ITEMDEF i_jambieres_en_cuir_de_loup]
+NAME=Jambieres en cuir de loup
+ID=i_leather_leggings
+ARMOR=55
+REQSTR=75
+RESOURCES=4 i_cuir_de_loup
+SKILLMAKE=TAILORING 60.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=150
+COLOR=083a
+TAG.DOMMAGESREDUITS=15
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C3>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.23>
+	SRC.FINDLAYER.23.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de loup
+DESCRIPTION=Jambieres en cuir de loup
+
+[ITEMDEF i_jupette_en_cuir_de_loup]
+NAME=Jupette en cuir de loup
+ID=01c08
+ARMOR=55
+REQSTR=75
+RESOURCES=4 i_cuir_de_loup
+SKILLMAKE=TAILORING 60.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=150
+COLOR=083a
+TAG.DOMMAGESREDUITS=15
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C3>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.4>
+	SRC.FINDLAYER.4.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de loup
+DESCRIPTION=Jupette en cuir de loup
+
+
+[ITEMDEF i_brassieres_en_cuir_de_loup]
+NAME=Brassieres en cuir de loup
+ID=i_leather_sleeves
+ARMOR=55
+REQSTR=75
+RESOURCES=3 i_cuir_de_loup
+SKILLMAKE=TAILORING 60.0, t_sewing_kit
+WEIGHT=6
+
+ON=@CREATE
+HITPOINTS=150
+COLOR=083a
+TAG.DOMMAGESREDUITS=15
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C3>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de loup
+DESCRIPTION=Brassieres en cuir de loup
+
+
+[ITEMDEF i_gants_en_cuir_de_loup]
+NAME=Gants en cuir de loup
+ID=i_leather_gloves
+ARMOR=55
+REQSTR=75
+RESOURCES=2 i_cuir_de_loup
+SKILLMAKE=TAILORING 60.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=150
+COLOR=083a
+TAG.DOMMAGESREDUITS=15
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C3>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de loup
+DESCRIPTION=Gants en cuir de loup
+
+
+[ITEMDEF i_protege_cou_en_cuir_de_loup]
+NAME=Protege cou en cuir de loup
+ID=i_leather_gorget
+ARMOR=55
+REQSTR=75
+RESOURCES=2 i_cuir_de_loup
+SKILLMAKE=TAILORING 60.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=150
+COLOR=083a
+TAG.DOMMAGESREDUITS=15
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C3>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de loup
+DESCRIPTION=Protege cou en cuir de loup
+
+
+
+// *** OPHIDIEN ***
+
+
+
+[ITEMDEF i_armure_en_cuir_d_ophidien]
+NAME=Armure en cuir d'ophidien
+ID=i_leather_tunic
+ARMOR=90
+REQSTR=100
+RESOURCES=5 i_cuir_d_ophidien
+SKILLMAKE=TAILORING 70.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=175
+COLOR=0abe
+TAG.DOMMAGESREDUITS=20
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C4>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.5>
+	SRC.FINDLAYER.5.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'ophidien
+DESCRIPTION=Armure en cuir d'ophidien
+
+[ITEMDEF i_armure_de_femme_en_cuir_d_ophidien]
+NAME=Armure en cuir d'ophidien
+ID=i_armor_female_bustier_studded
+ARMOR=90
+REQSTR=100
+RESOURCES=5 i_cuir_d_ophidien
+SKILLMAKE=TAILORING 70.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=175
+COLOR=0abe
+TAG.DOMMAGESREDUITS=20
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C4>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.13>
+	SRC.FINDLAYER.13.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'ophidien
+DESCRIPTION=Armure de femme en cuir d'ophidien
+
+[ITEMDEF i_jambieres_en_cuir_d_ophidien]
+NAME=Jambieres en cuir d'ophidien
+ID=i_leather_leggings
+ARMOR=90
+REQSTR=100
+RESOURCES=4 i_cuir_d_ophidien
+SKILLMAKE=TAILORING 70.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=175
+COLOR=0abe
+TAG.DOMMAGESREDUITS=20
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C4>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.23>
+	SRC.FINDLAYER.23.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'ophidien
+DESCRIPTION=Jambieres en cuir d'ophidien
+
+[ITEMDEF i_jupette_en_cuir_d_ophidien]
+NAME=Jupette en cuir d'ophidien
+ID=01c08
+ARMOR=90
+REQSTR=100
+RESOURCES=4 i_cuir_d_ophidien
+SKILLMAKE=TAILORING 70.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=175
+COLOR=0abe
+TAG.DOMMAGESREDUITS=20
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C4>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.4>
+	SRC.FINDLAYER.4.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'ophidien
+DESCRIPTION=Jupette en cuir d'ophidien
+
+
+[ITEMDEF i_brassieres_en_cuir_d_ophidien]
+NAME=Brassieres en cuir d'ophidien
+ID=i_leather_sleeves
+ARMOR=90
+REQSTR=100
+RESOURCES=3 i_cuir_d_ophidien
+SKILLMAKE=TAILORING 70.0, t_sewing_kit
+WEIGHT=6
+
+ON=@CREATE
+HITPOINTS=175
+COLOR=0abe
+TAG.DOMMAGESREDUITS=20
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C4>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'ophidien
+DESCRIPTION=Brassieres en cuir d'ophidien
+
+[ITEMDEF i_gants_en_cuir_d_ophidien]
+NAME=Gants en cuir d'ophidien
+ID=i_leather_gloves
+ARMOR=90
+REQSTR=100
+RESOURCES=2 i_cuir_d_ophidien
+SKILLMAKE=TAILORING 70.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=175
+COLOR=0abe
+TAG.DOMMAGESREDUITS=20
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C4>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'ophidien
+DESCRIPTION=Gants en cuir d'ophidien
+
+
+[ITEMDEF i_protege_cou_en_cuir_d_ophidien]
+NAME=Protege cou en cuir d'ophidien
+ID=i_leather_gorget
+ARMOR=90
+REQSTR=100
+RESOURCES=2 i_cuir_d_ophidien
+SKILLMAKE=TAILORING 70.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=175
+COLOR=0abe
+TAG.DOMMAGESREDUITS=20
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C4>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'ophidien
+DESCRIPTION=Protege cou en cuir d'ophidien
+
+
+
+// *** TETRAPODE ***
+
+
+
+[ITEMDEF i_armure_en_cuir_de_tetrapode]
+NAME=Armure en cuir de tetrapode
+ID=i_leather_tunic
+ARMOR=135
+REQSTR=125
+RESOURCES=5 i_cuir_de_tetrapode
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=225
+COLOR=029
+TAG.DOMMAGESREDUITS=25
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C5>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.5>
+	SRC.FINDLAYER.5.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de tetrapode
+DESCRIPTION=Armure en cuir de tetrapode
+
+[ITEMDEF i_armure_de_femme_en_cuir_de_tetrapode]
+NAME=Armure en cuir de tetrapode
+ID=i_armor_female_bustier_studded
+ARMOR=135
+REQSTR=125
+RESOURCES=5 i_cuir_de_tetrapode
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=225
+COLOR=029
+TAG.DOMMAGESREDUITS=25
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C5>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.13>
+	SRC.FINDLAYER.13.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de tetrapode
+DESCRIPTION=Armure de femme en cuir de tetrapode
+
+[ITEMDEF i_jambieres_en_cuir_de_tetrapode]
+NAME=Jambieres en cuir de tetrapode
+ID=i_leather_leggings
+ARMOR=135
+REQSTR=125
+RESOURCES=4 i_cuir_de_tetrapode
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=225
+COLOR=029
+TAG.DOMMAGESREDUITS=25
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C5>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.23>
+	SRC.FINDLAYER.23.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de tetrapode
+DESCRIPTION=Jambieres en cuir de tetrapode
+
+[ITEMDEF i_jupette_en_cuir_de_tetrapode]
+NAME=Jupette en cuir de tetrapode
+ID=01c08
+ARMOR=135
+REQSTR=125
+RESOURCES=4 i_cuir_de_tetrapode
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=225
+COLOR=029
+TAG.DOMMAGESREDUITS=25
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C5>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.4>
+	SRC.FINDLAYER.4.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de tetrapode
+DESCRIPTION=Jupette en cuir de tetrapode
+
+
+[ITEMDEF i_brassieres_en_cuir_de_tetrapode]
+NAME=Brassieres en cuir de tetrapode
+ID=i_leather_sleeves
+ARMOR=135
+REQSTR=125
+RESOURCES=3 i_cuir_de_tetrapode
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+WEIGHT=6
+
+ON=@CREATE
+HITPOINTS=225
+COLOR=029
+TAG.DOMMAGESREDUITS=25
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C5>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de tetrapode
+DESCRIPTION=Brassieres en cuir de tetrapode
+
+[ITEMDEF i_gants_en_cuir_de_tetrapode]
+NAME=Gants en cuir de tetrapode
+ID=i_leather_gloves
+ARMOR=135
+REQSTR=125
+RESOURCES=2 i_cuir_de_tetrapode
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=225
+COLOR=029
+TAG.DOMMAGESREDUITS=25
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C5>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de tetrapode
+DESCRIPTION=Gants en cuir de tetrapode
+
+
+[ITEMDEF i_protege_cou_en_cuir_de_tetrapode]
+NAME=Protege cou en cuir de tetrapode
+ID=i_leather_gorget
+ARMOR=135
+REQSTR=125
+RESOURCES=2 i_cuir_de_tetrapode
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=225
+COLOR=029
+TAG.DOMMAGESREDUITS=25
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C5>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de tetrapode
+DESCRIPTION=Protege cou en cuir de tetrapode
+
+
+
+// *** HARPIE ***
+
+
+
+[ITEMDEF i_armure_en_cuir_d_harpie]
+NAME=Armure en cuir d'harpie
+ID=i_leather_tunic
+ARMOR=190
+REQSTR=150
+RESOURCES=5 i_cuir_d_harpie
+SKILLMAKE=TAILORING 90.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=250
+COLOR=08b0
+TAG.DOMMAGESREDUITS=30
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C6>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.5>
+	SRC.FINDLAYER.5.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'harpie
+DESCRIPTION=Armure en cuir d'harpie
+
+[ITEMDEF i_armure_de_femme_en_cuir_d_harpie]
+NAME=Armure en cuir d'harpie
+ID=i_armor_female_bustier_studded
+ARMOR=190
+REQSTR=150
+RESOURCES=5 i_cuir_d_harpie
+SKILLMAKE=TAILORING 90.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=250
+COLOR=08b0
+TAG.DOMMAGESREDUITS=30
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C6>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.13>
+	SRC.FINDLAYER.13.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'harpie
+DESCRIPTION=Armure de femme en cuir d'harpie
+
+[ITEMDEF i_jambieres_en_cuir_d_harpie]
+NAME=Jambieres en cuir d'harpie
+ID=i_leather_leggings
+ARMOR=190
+REQSTR=150
+RESOURCES=4 i_cuir_d_harpie
+SKILLMAKE=TAILORING 90.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=250
+COLOR=08b0
+TAG.DOMMAGESREDUITS=30
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C6>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.23>
+	SRC.FINDLAYER.23.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'harpie
+DESCRIPTION=Jambieres en cuir d'harpie
+
+[ITEMDEF i_jupette_en_cuir_d_harpie]
+NAME=Jupette en cuir d'harpie
+ID=01c08
+ARMOR=190
+REQSTR=150
+RESOURCES=4 i_cuir_d_harpie
+SKILLMAKE=TAILORING 90.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=250
+COLOR=08b0
+TAG.DOMMAGESREDUITS=30
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C6>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.4>
+	SRC.FINDLAYER.4.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'harpie
+DESCRIPTION=Jupette en cuir d'harpie
+
+
+[ITEMDEF i_brassieres_en_cuir_d_harpie]
+NAME=Brassieres en cuir d'harpie
+ID=i_leather_sleeves
+ARMOR=190
+REQSTR=150
+RESOURCES=3 i_cuir_d_harpie
+SKILLMAKE=TAILORING 90.0, t_sewing_kit
+WEIGHT=6
+
+ON=@CREATE
+HITPOINTS=250
+COLOR=08b0
+TAG.DOMMAGESREDUITS=30
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C6>
+UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'harpie
+DESCRIPTION=Brassieres en cuir d'harpie
+
+[ITEMDEF i_gants_en_cuir_d_harpie]
+NAME=Gants en cuir d'harpie
+ID=i_leather_gloves
+ARMOR=190
+REQSTR=150
+RESOURCES=2 i_cuir_d_harpie
+SKILLMAKE=TAILORING 90.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=250
+COLOR=08b0
+TAG.DOMMAGESREDUITS=30
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C6>
+UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'harpie
+DESCRIPTION=Gants en cuir d'harpie
+
+
+[ITEMDEF i_protege_cou_en_cuir_d_harpie]
+NAME=Protege cou en cuir d'harpie
+ID=i_leather_gorget
+ARMOR=190
+REQSTR=150
+RESOURCES=2 i_cuir_d_harpie
+SKILLMAKE=TAILORING 90.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=250
+COLOR=08b0
+TAG.DOMMAGESREDUITS=30
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C6>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir d'harpie
+DESCRIPTION=Protege cou en cuir d'harpie
+
+
+// *** TROLL ***
+
+
+
+[ITEMDEF i_armure_en_cuir_de_troll]
+NAME=Armure en cuir de troll
+ID=i_leather_tunic
+ARMOR=255
+REQSTR=250
+RESOURCES=5 i_cuir_de_troll
+SKILLMAKE=TAILORING 100.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=1000
+COLOR=0aab
+TAG.DOMMAGESREDUITS=50
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C7>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.5>
+	SRC.FINDLAYER.5.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de troll
+DESCRIPTION=Armure en cuir de troll
+
+
+[ITEMDEF i_armure_de_femme_en_cuir_de_troll]
+NAME=Armure en cuir de troll
+ID=i_armor_female_bustier_studded
+ARMOR=255
+REQSTR=250
+RESOURCES=5 i_cuir_de_troll
+SKILLMAKE=TAILORING 100.0, t_sewing_kit
+WEIGHT=10
+
+ON=@CREATE
+HITPOINTS=1000
+COLOR=0aab
+TAG.DOMMAGESREDUITS=50
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C7>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.13>
+	SRC.FINDLAYER.13.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de troll
+DESCRIPTION=Armure de femme en cuir de troll
+
+
+[ITEMDEF i_jambieres_en_cuir_de_troll]
+NAME=Jambieres en cuir de troll
+ID=i_leather_leggings
+ARMOR=255
+REQSTR=250
+RESOURCES=4 i_cuir_de_troll
+SKILLMAKE=TAILORING 100.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=1000
+COLOR=0aab
+TAG.DOMMAGESREDUITS=50
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C7>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.23>
+	SRC.FINDLAYER.23.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de troll
+DESCRIPTION=Jambieres en cuir de troll
+
+
+[ITEMDEF i_jupette_en_cuir_de_troll]
+NAME=Jupette en cuir de troll
+ID=01c08
+ARMOR=255
+REQSTR=250
+RESOURCES=4 i_cuir_de_troll
+SKILLMAKE=TAILORING 100.0, t_sewing_kit
+WEIGHT=8
+
+ON=@CREATE
+HITPOINTS=1000
+COLOR=0aab
+TAG.DOMMAGESREDUITS=50
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C7>
+	UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.4>
+	SRC.FINDLAYER.4.UNEQUIP
+ENDIF
+IF <SRC.FINDLAYER.24>
+	SRC.FINDLAYER.24.UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de troll
+DESCRIPTION=Jupette en cuir de troll
+
+
+[ITEMDEF i_brassieres_en_cuir_de_troll]
+NAME=Brassieres en cuir de troll
+ID=i_leather_sleeves
+ARMOR=255
+REQSTR=250
+RESOURCES=3 i_cuir_de_troll
+SKILLMAKE=TAILORING 100.0, t_sewing_kit
+WEIGHT=6
+
+ON=@CREATE
+HITPOINTS=1000
+COLOR=0aab
+TAG.DOMMAGESREDUITS=50
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C7>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de troll
+DESCRIPTION=Brassieres en cuir de troll
+
+
+[ITEMDEF i_gants_en_cuir_de_troll]
+NAME=Gants en cuir de troll
+ID=i_leather_gloves
+ARMOR=255
+REQSTR=250
+RESOURCES=2 i_cuir_de_troll
+SKILLMAKE=TAILORING 100.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=1000
+COLOR=0aab
+TAG.DOMMAGESREDUITS=50
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C7>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de troll
+DESCRIPTION=Gants en cuir de troll
+
+
+[ITEMDEF i_protege_cou_en_cuir_de_troll]
+NAME=Protege cou en cuir de troll
+ID=i_leather_gorget
+ARMOR=255
+REQSTR=250
+RESOURCES=2 i_cuir_de_troll
+SKILLMAKE=TAILORING 100.0, t_sewing_kit
+WEIGHT=4
+
+ON=@CREATE
+HITPOINTS=1000
+COLOR=0aab
+TAG.DOMMAGESREDUITS=50
+
+ON=@EQUIP
+IF !<SRC.PEUT_ARMURE_C7>
+	UNEQUIP
+ENDIF
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armures de cuir
+SUBSECTION=Cuir de troll
+DESCRIPTION=Protege cou en cuir de troll

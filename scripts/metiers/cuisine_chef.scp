@@ -1,0 +1,60 @@
+//*************************************************
+//*****************RECETTES CHEF*******************
+//*************************************************
+
+
+[ITEMDEF i_assiette_de_veau_parmigiana_crue]
+NAME=Assiette de veau parmigiana crue
+ID=i_plate_food
+TYPE=t_nourriture_crue
+RESOURCES=1 i_ribs_raw, 1 i_brique_de_fromage, 1 i_bol_de_pates_fraiches, 1 m_sac_de_sel, 1 m_sac_d_epices, 1 i_bol_de_sauce_tomate
+SKILLMAKE=TINKERING 30.0, COOKING 92.0, i_livre_de_recettes_4
+
+ON=@CREATE
+MORE1=i_assiette_de_veau_parmigiana
+MORE2=92.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Assiette de veau parmigiana crue
+
+[ITEMDEF i_assiette_de_veau_parmigiana]
+NAME=Assiette de veau parmigiana
+ID=i_plate_food
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=5
+MORE2=10
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Assiette de veau parmigiana
+
+[ITEMDEF i_assiette_de_canard_a_l_orange_crue]
+NAME=Assiette de canard a l'orange crue
+ID=i_plate_food
+TYPE=t_nourriture_crue
+RESOURCES=1 i_bird_raw, 1 m_sac_d_epices, 1 m_sac_de_sel, 1 m_cruche_d_eau, 3 i_orange
+SKILLMAKE=TINKERING 30.0, COOKING 93.0, i_livre_de_recettes_4
+
+ON=@CREATE
+MORE1=i_assiette_de_canard_a_l_orange
+MORE2=93.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Assiette de canard a l'orange crue
+
+[ITEMDEF i_assiette_de_canard_a_l_orange]
+NAME=Assiette de canard a l'orange
+ID=i_plate_food
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=5
+MORE2=10
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Assiette de canard a l'orange

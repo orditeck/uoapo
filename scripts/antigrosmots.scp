@@ -1,0 +1,196 @@
+[ITEMDEF m_limitateur_coince]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=86400
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_capturer_grosmots] 
+ID=i_worldgem_bit 
+NAME=Capturer gros mots
+TYPE=t_comm_crystal 
+LAYER=99 
+WEIGHT=0
+
+ON=@Create 
+SPEECH=spk_capturegrosmots
+TYPE=t_eq_script
+
+ON=@Equip
+TYPE=t_comm_crystal
+SRC.FLAGS=<SRC.FLAGS>|08000
+ATTR=attr_newbie|attr_move_never 
+
+[SPEECH spk_capturegrosmots] 
+ON=Truc bidon
+
+[EVENTS e_anti_gruge_coince]
+
+ON=@GETHIT
+SRC.ACT.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas utiliser cette fonction durant un combat
+SRC.ACT.FINDID.m_coince_minoc.REMOVE
+SRC.ACT.FINDID.m_limitateur_coince.REMOVE
+SRC.ACT.EVENTS -e_anti_gruge_coince
+
+ON=@SPELLEFFECT
+SRC.ACT.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas utiliser cette fonction durant un combat
+SRC.ACT.FINDID.m_coince_minoc.REMOVE
+SRC.ACT.FINDID.m_limitateur_coince.REMOVE
+SRC.ACT.EVENTS -e_anti_gruge_coince
+
+[ITEMDEF m_coince_minoc]
+NAME=Coince Minoc
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=9
+
+ON=@Timer
+TOPOBJ.GO MINOC
+TOPOBJ.EVENTS -e_anti_gruge_coince
+REMOVE
+RETURN 1
+
+[FUNCTION coince]
+//IF 0<SRC.TAG.anti_mark_recall>==0
+//	IF <SRC.FINDID.m_limitateur_coince>
+//		SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez attendre <EVAL <SRC.FINDID.m_limitateur_coince.timer>/60> minutes avant de reutiliser cette fonction
+//	ELSE
+//		SRC.SYSMESSAGEUA 0481 1 1 0 Vous allez etre teleporte a Minoc dans 10 secondes
+//		SRC.EVENTS e_anti_gruge_coince
+//		SRC.NEWITEM=m_coince_minoc
+//		SRC.ACT.EQUIP
+//		SRC.NEWITEM=m_limitateur_coince
+//		SRC.ACT.EQUIP
+//	ENDIF
+//ELSE
+//	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas utiliser cette fonction en ces lieux !
+//ENDIF
+SRC.SYSMESSAGEUA 0481 1 1 0 Fonction desactivee, contactez ou pagez un moderateur pour vous sortir!
+RETURN 1
+
+[FUNCTION vetir]
+IF <SRC.FINDID.i_choix_vendeur>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez attendre <EVAL <SRC.FINDID.i_choix_vendeur.timer>> secondes avant de recommencer cette operation
+ELSE
+	SRC.NEWITEM i_choix_vendeur
+	SRC.ACT.CONT=<SRC.UID> 
+	SRC.ACT.USE
+ENDIF
+
+[FUNCTION devetir]
+IF <SRC.FINDID.i_retirer_vendeur>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez attendre <EVAL <SRC.FINDID.i_choix_vendeur.timer>> secondes avant de recommencer cette operation
+ELSE
+	SRC.NEWITEM i_retirer_vendeur
+	SRC.ACT.CONT=<SRC.UID> 
+	SRC.ACT.USE
+ENDIF
+
+[ITEMDEF i_choix_vendeur] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@CREATE
+TIMER=60
+MORE=01
+
+ON=@TIMER
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK
+IF <MORE1>==01
+	SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez selectionner le vendeur a qui donner l'objet
+	TARGET
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0  Veuillez selectionner l'objet a donner a <TAG.NOMVENDEUR>
+	TARGET
+	ENDIF
+RETURN 1 
+
+ON=@TARGON_CHAR
+IF <SRC.TARG.ISMYPET> && ((<SRC.TARG.OBODY>==c_h_vendor_f) || (<SRC.TARG.OBODY>==c_h_vendor))
+	SRC.TARG.TAG.FORPURE=590
+	SRC.TARG.STR=590
+	SRC.TARG.HITS=590
+	SRC.TARG.TAG.INTPURE=590
+	SRC.TARG.INT=590
+	SRC.TARG.TAG.DEXPURE=590
+	SRC.TARG.DEX=590
+	TAG.UIDVENDEUR=<SRC.TARG.UID>
+	TAG.NOMVENDEUR=<SRC.TARG.NAME>
+	MORE1=02
+	USE
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas votre vendeur !
+	REMOVE
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF (<SRC.TARG.TYPE> == t_clothing) || (<SRC.TARG.TYPE> == t_armor) || (<SRC.TARG.TYPE> == t_weapon_mace_smith) || (<SRC.TARG.TYPE> == t_weapon_mace_sharp) || (<SRC.TARG.TYPE> == t_weapon_sword) || (<SRC.TARG.TYPE> == t_weapon_fence) || (<SRC.TARG.TYPE> == t_weapon_bow)  || (<SRC.TARG.TYPE> == t_wand)
+		TAG.IDITEM=<SRC.TARG.BASEID>
+		TAG.NOMITEM=<SRC.TARG.NAME>
+		TAG.COULEURITEM=<SRC.TARG.COLOR>
+		TAG.LAYERITEM=<SRC.TARG.LAYER>
+		SRC.TARG.CONT=<TAG.UIDVENDEUR>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez donner uniquement un objet equipable a votre vendeur .
+		REMOVE
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez donner uniquement un objet sur vous ou dans votre sac à votre vendeur .
+	REMOVE
+ENDIF
+
+[ITEMDEF i_retirer_vendeur] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@CREATE
+TIMER=60
+MORE=01
+
+ON=@TIMER
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK
+IF <MORE1>==01
+	SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez selectionner le vendeur a qui retirer l'objet
+	TARGET
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0  Veuillez selectionner l'objet a retirer de <TAG.NOMVENDEUR>
+	TARGET
+ENDIF
+RETURN 1 
+
+ON=@TARGON_CHAR
+IF <SRC.TARG.ISMYPET> && ((<SRC.TARG.OBODY>==c_h_vendor_f) || (<SRC.TARG.OBODY>==c_h_vendor))
+	TAG.NOMVENDEUR=<SRC.TARG.NAME>
+	TAG.UIDVENDEUR=<SRC.TARG.UID>
+	MORE1=02
+	USE
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas votre vendeur !
+	REMOVE
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <TAG.UIDVENDEUR>
+	SRC.TARG.CONT=<SRC.UID>
+	REMOVE
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne se trouve pas sur <SRC.TARG.NAME> !
+	REMOVE
+ENDIF

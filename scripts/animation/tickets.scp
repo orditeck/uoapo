@@ -1,0 +1,94 @@
+/////////////////////////////////////////////////////////
+//
+//                SCRIPT DE LOTERIE
+//
+//                Par Orditeck
+//
+//                Dernière modification le
+//                4 Janvier 2007 à 22:57
+//
+// Utilisation du script :
+// Tappez .add i_ticket pour ajouter un ticket
+// Double cliquez sur un ticket pour faire en sorte
+// qu'il soit gagnant
+// Par defaut, tous les tickets sont perdants.
+/////////////////////////////////////////////////////////
+
+[ITEMDEF i_ticket]
+ID=014ee
+NAME="Ticket"
+WEIGHT=1
+CATEGORY=Item Orditeck
+SUBSECTION=Item Orditeck
+DESCRIPTION=Ticket
+TYPE=t_script
+VALUE=50000
+
+ON=@Create
+COLOR=09ab
+TAG.GAGNANT=0
+TAG.GRATTER=0
+
+ON=@Click
+IF <TAG.GRATTER> == 0
+	IF <SRC.ISGM> // Si le joueur est GM
+		IF <TAG.GAGNANT> == 0 // Si le billet est perdant
+			MESSAGE <NAME> NG perdant
+		ELSE  // si il est gagnant
+			MESSAGE <NAME> NG gagnant
+		ENDIF
+	ELSE // S'il n'est pas GM
+		MESSAGE <NAME>
+	ENDIF
+ELSE // Si le ticket est dja gratter
+	MESSAGE <NAME>
+ENDIF
+RETURN 1
+
+ON=@DClick
+IF <SRC.ISGM> // Si le joueur est GM
+	IF <TAG.GAGNANT> == 0   // si le ticket est perdant
+		SRC.SYSMESSAGEUA 0afb,0,0,fra Le ticket est maintenant gagnant
+		TAG.GAGNANT=1
+	ELSE  // Si le ticket est gagnant      
+		SRC.SYSMESSAGEUA 0afb,0,0,fra Le ticket est maintenant perdant
+		TAG.GAGNANT=0
+	ENDIF
+ELSE // Si le joueur n'est pas GM
+	IF <TOPOBJ.UID> == <SRC.UID> // Si le ticket est dans le sac...
+		SRC.SOUND=0247
+		SRC.SYSMESSAGEUA 0afb,0,0,fra Vous grattez le ticket
+		TAG.GRATTER=1
+		IF <TAG.GAGNANT> == 0   // si le ticket est perdant
+			SRC.SYSMESSAGEUA 0afb,0,0,fra Le ticket est perdant...
+			SRC.SYSMESSAGEUA 0afb,0,0,fra Meilleure chance la prochaine fois !
+			NAME = Ticket perdant
+		ELSE  // Si le ticket est gagnant
+			SRC.SYSMESSAGEUA 0afb,0,0,fra Le ticket est gagnant  !!!!
+			NAME = Ticket gagnant
+		ENDIF
+		DISPID=i_deed
+		UPDATE
+		SRC.newitem i_timerticket
+		SRC.ACT.equip
+		SRC.ACT.timer=86400
+	ELSE // Si le ticket n'est pas le sac...
+		SRC.SYSMESSAGEUA 0afb,0,0,fra Vous devez avoir l'objet dans votre sac pour l'utiliser !
+	ENDIF
+ENDIF
+RETURN 1
+
+// Item qui sert de TIMER
+[ITEMDEF i_timerticket]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=Timer du ticket
+
+ON=@timer
+IF <CONT.FINDID.i_ticket>
+	IF <CONT.FINDID.i_ticket.TAG.GRATTER>==1
+		CONT.FINDID.i_ticket.REMOVE
+	ENDIF
+ENDIF
+REMOVE
+RETURN 1

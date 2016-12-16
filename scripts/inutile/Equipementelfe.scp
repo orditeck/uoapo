@@ -1,0 +1,1277 @@
+[ITEMDEF i_lame_de_rose]
+DEFNAME=i_lame_de_rose
+NAME=Lame de rose
+ID=i_sword_broad
+SKILL=Swordsmanship
+REQSTR=1
+WEIGHT=100
+
+ON=@Create
+	MOREY=20.0
+        ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=02d8
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.STR= (<SRC.STR>+5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.STR= (<SRC.STR>-(5))
+	RETURN 0
+
+[ITEMDEF i_epee_elfique]
+DEFNAME=i_epee_elfique
+NAME=Epee Elfique
+ID=i_sword_broad
+//SPEED=20
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+	MOREY=20.0
+        ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=237
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>+15.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>-(15.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_elfique]
+ID=i_shield_heater
+DEFNAME=i_bouclier_elfique
+NAME=Bouclier Elfique
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=237
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+2.5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(2.5))
+	RETURN 0
+
+
+[ITEMDEF i_casque_elfique]
+DEFNAME=i_Casque_elfique
+ID=i_platemail_helm
+NAME=Casque elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=237
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+2.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(2.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_elfique]
+DEFNAME=i_jambieres_elfique
+ID=i_platemail_leggings
+NAME=Jambieres elfiques
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=237
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+2.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(2.0))
+	RETURN 0
+
+[ITEMDEF i_armure_elfique]
+DEFNAME=i_armure_elfique
+ID=i_platemail_chest
+NAME=Armure elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=237
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+2.5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(2.5))
+	RETURN 0
+
+[ITEMDEF i_gants_elfique]
+DEFNAME=i_gants_elfique
+ID=i_platemail_gloves
+NAME=Gants elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=237
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+2.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(2.0))
+	RETURN 0
+
+[ITEMDEF i_cou_elfique]
+DEFNAME=i_cou_elfique
+ID=i_platemail_gorget
+NAME=Protege cou elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=237
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+2.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(2.0))
+	RETURN 0
+
+[ITEMDEF i_bras_elfique]
+DEFNAME=i_bras_elfique
+ID=i_platemail_arms
+NAME=Protege bras elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+ON=@Create
+MOREY=20.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=237
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+2.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(2.0))
+	RETURN 0
+
+[ITEMDEF i_epee_elfique2]
+DEFNAME=i_epee_elfique2
+NAME=Epee elfique
+ID=i_sword_broad
+//SPEED=20
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron, 4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=0455
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>+30.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>-(30.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_elfique2]
+ID=i_shield_heater
+DEFNAME=i_bouclier_elfique2
+NAME=Bouclier elfique
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0455
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+5.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(5.0))
+	RETURN 0
+
+
+[ITEMDEF i_casque_elfique2]
+DEFNAME=i_Casque_elfique2
+ID=i_platemail_helm
+NAME=Casque elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron, 4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0455
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+4.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(4.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_elfique2]
+DEFNAME=i_jambieres_elfique2
+ID=i_platemail_leggings
+NAME=Jambieres elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron, 4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0455
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+4.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(4.0))
+	RETURN 0
+
+[ITEMDEF i_armure_elfique2]
+DEFNAME=i_armure_elfique2
+ID=i_platemail_chest
+NAME=Armure elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron, 4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0455
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+5.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(5.0))
+	RETURN 0
+
+[ITEMDEF i_gants_elfique2]
+DEFNAME=i_gants_elfique2
+ID=i_platemail_gloves
+NAME=Gants elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron, 4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0455
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+4.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(4.0))
+	RETURN 0
+
+[ITEMDEF i_cou_elfique2]
+DEFNAME=i_cou_elfique2
+ID=i_platemail_gorget
+NAME=Protege cou elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron, 4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0455
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+4.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(4.0))
+	RETURN 0
+
+[ITEMDEF i_bras_elfique2]
+DEFNAME=i_bras_elfique2
+ID=i_platemail_arms
+NAME=Protege bras elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 4 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 60.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=40.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=0455
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+4.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(4.0))
+	RETURN 0
+
+[ITEMDEF i_epee_elfique4]
+DEFNAME=i_epee_elfique4
+NAME=Epee elfique
+ID=i_sword_broad
+//SPEED=20
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron, 16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=06
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>+60.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>-(60.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_elfique4]
+ID=i_shield_heater
+DEFNAME=i_bouclier_elfique4
+NAME=Bouclier elfique
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=06
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(10.0))
+	RETURN 0
+
+
+[ITEMDEF i_casque_elfique4]
+DEFNAME=i_Casque_elfique4
+ID=i_platemail_helm
+NAME=Casque elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron, 16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=06
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+8.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(8.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_elfique4]
+DEFNAME=i_jambieres_elfique4
+ID=i_platemail_leggings
+NAME=Jambieres elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron, 16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=06
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+8.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(8.0))
+	RETURN 0
+
+[ITEMDEF i_armure_elfique4]
+DEFNAME=i_armure_elfique4
+ID=i_platemail_chest
+NAME=Armure elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron, 16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=06
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_gants_elfique4]
+DEFNAME=i_gants_elfique4
+ID=i_platemail_gloves
+NAME=Gants elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron, 16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=06
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+8.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(8.0))
+	RETURN 0
+
+[ITEMDEF i_cou_elfique4]
+DEFNAME=i_cou_elfique4
+ID=i_platemail_gorget
+NAME=Protege cou elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron, 16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=06
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+8.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(8.0))
+	RETURN 0
+
+[ITEMDEF i_bras_elfique4]
+DEFNAME=i_bras_elfique4
+ID=i_platemail_arms
+NAME=Protege bras elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 16 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 80.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=80.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=06
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+8.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(8.0))
+	RETURN 0
+
+[ITEMDEF i_epee_elfique3]
+DEFNAME=i_epee_elfique3
+NAME=Epee elfique
+ID=i_sword_broad
+//SPEED=20
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron, 8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=033
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>+45.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>-(45.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_elfique3]
+ID=i_shield_heater
+DEFNAME=i_bouclier_elfique3
+NAME=Bouclier elfique
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=033
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+7.5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(7.5))
+	RETURN 0
+
+
+[ITEMDEF i_casque_elfique3]
+DEFNAME=i_Casque_elfique3
+ID=i_platemail_helm
+NAME=Casque elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron, 8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=033
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+6.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(6.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_elfique3]
+DEFNAME=i_jambieres_elfique3
+ID=i_platemail_leggings
+NAME=Jambieres elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron, 8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=033
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+6.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(6.0))
+	RETURN 0
+
+[ITEMDEF i_armure_elfique3]
+DEFNAME=i_armure_elfique3
+ID=i_platemail_chest
+NAME=Armure elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron, 8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=033
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+7.5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(7.5))
+	RETURN 0
+
+[ITEMDEF i_gants_elfique3]
+DEFNAME=i_gants_elfique3
+ID=i_platemail_gloves
+NAME=Gants elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron, 8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=033
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+6.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(6.0))
+	RETURN 0
+
+[ITEMDEF i_cou_elfique3]
+DEFNAME=i_cou_elfique3
+ID=i_platemail_gorget
+NAME=Protege cou elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron, 8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=033
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+6.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(6.0))
+	RETURN 0
+
+[ITEMDEF i_bras_elfique3]
+DEFNAME=i_bras_elfique3
+ID=i_platemail_arms
+NAME=Protege bras elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 8 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 70.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=60.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=033
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+6.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(6.0))
+	RETURN 0
+
+[ITEMDEF i_epee_elfique6]
+DEFNAME=i_epee_elfique6
+NAME=Epee elfique
+ID=i_sword_broad
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron, 64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=07fff
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>+100.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>-(100.0))
+	RETURN 0
+
+[ITEMDEF i_casque_elfique6]
+DEFNAME=i_Casque_elfique6
+ID=i_platemail_helm
+NAME=Casque elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron, 64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=07fff
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+14.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(14.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_elfique6]
+DEFNAME=i_jambieres_elfique6
+ID=i_platemail_leggings
+NAME=Jambieres elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron, 64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=07fff
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+14.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(14.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_elfique6]
+ID=i_shield_heater
+DEFNAME=i_bouclier_elfique6
+NAME=Bouclier Elfique
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=07fff
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+15.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(15.0))
+	RETURN 0
+
+[ITEMDEF i_armure_elfique6]
+DEFNAME=i_armure_elfique6
+ID=i_platemail_chest
+NAME=Armure elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron, 64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=07fff
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	MORE2=<SRC.COLOR> 
+	SRC.COLOR=07fff
+	SRC.PARRYING= (<SRC.PARRYING>+15.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.COLOR=<MORE2>
+	SRC.PARRYING= (<SRC.PARRYING>-(15.0))
+	RETURN 0
+
+[ITEMDEF i_gants_elfique6]
+DEFNAME=i_gants_elfique6
+ID=i_platemail_gloves
+NAME=Gants elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron, 64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=07fff
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+14.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(14.0))
+	RETURN 0
+
+[ITEMDEF i_cou_elfique6]
+DEFNAME=i_cou_elfique6
+ID=i_platemail_gorget
+NAME=Protege cou elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron, 64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=07fff
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+14.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(14.0))
+	RETURN 0
+
+[ITEMDEF i_bras_elfique6]
+DEFNAME=i_bras_elfique6
+ID=i_platemail_arms
+NAME=Protege bras elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 64 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 100.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=125.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=07fff
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+14.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(14.0))
+	RETURN 0
+
+[ITEMDEF i_epee_elfique5]
+DEFNAME=i_epee_elfique5
+NAME=Epee elfique
+ID=i_sword_broad
+SKILL=Swordsmanship
+REQSTR=100
+WEIGHT=10
+
+RESOURCES=12 i_ingot_iron, 32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+	HITPOINTS={100 200}
+	COLOR=039
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>+75.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.SWORDSMANSHIP= (<SRC.SWORDSMANSHIP>-(75.0))
+	RETURN 0
+
+[ITEMDEF i_casque_elfique5]
+DEFNAME=i_Casque_elfique5
+ID=i_platemail_helm
+NAME=Casque elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=15 i_ingot_iron, 32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=039
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_jambieres_elfique5]
+DEFNAME=i_jambieres_elfique5
+ID=i_platemail_leggings
+NAME=Jambieres elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=20 i_ingot_iron, 32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=039
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_Bouclier_elfique5]
+ID=i_shield_heater
+DEFNAME=i_bouclier_elfique5
+NAME=Bouclier Elfique
+TYPE=t_shield
+FLIP=1
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=039
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+12.5)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(12.5))
+	RETURN 0
+
+[ITEMDEF i_armure_elfique5]
+DEFNAME=i_armure_elfique5
+ID=i_platemail_chest
+NAME=Armure elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=25 i_ingot_iron, 32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=039
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+12.5)
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(12.5))
+
+[ITEMDEF i_gants_elfique5]
+DEFNAME=i_gants_elfique5
+ID=i_platemail_gloves
+NAME=Gants elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=12 i_ingot_iron, 32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=039
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_cou_elfique5]
+DEFNAME=i_cou_elfique5
+ID=i_platemail_gorget
+NAME=Protege cou elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=10 i_ingot_iron, 32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=039
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_bras_elfique5]
+DEFNAME=i_bras_elfique5
+ID=i_platemail_arms
+NAME=Protege bras elfique
+WEIGHT=10
+REQSTR=100
+
+RESOURCES=18 i_ingot_iron, 32 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 90.0, t_weapon_mace_smith
+
+ON=@Create
+MOREY=100.0
+ATTR=attr_magic
+HITPOINTS={100 200}
+COLOR=039
+
+ON=@EQUIP
+	HITPOINTS={100 200}
+	SRC.PARRYING= (<SRC.PARRYING>+10.0)
+	RETURN 0
+
+ON=@UNEQUIP
+	SRC.PARRYING= (<SRC.PARRYING>-(10.0))
+	RETURN 0
+
+[ITEMDEF i_armure_elfique21]
+DEFNAME=i_armure_elfique21
+ID=i_platemail_chest
+NAME=Armure elfique +3
+
+[ITEMDEF i_armure_elfique22]
+DEFNAME=i_armure_elfique22
+ID=i_platemail_chest
+NAME=Armure elfique +6
+
+[ITEMDEF i_armure_elfique23]
+DEFNAME=i_armure_elfique23
+ID=i_platemail_chest
+NAME=Armure elfique +9
+
+[ITEMDEF i_armure_elfique24]
+DEFNAME=i_armure_elfique24
+ID=i_platemail_chest
+NAME=Armure elfique +12
+
+[ITEMDEF i_armure_elfique25]
+DEFNAME=i_armure_elfique25
+ID=i_platemail_chest
+NAME=Armure elfique +15
+
+[ITEMDEF i_armure_elfique26]
+DEFNAME=i_armure_elfique26
+ID=i_platemail_chest
+NAME=Armure elfique +18

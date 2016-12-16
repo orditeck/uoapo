@@ -1,0 +1,58 @@
+[PLEVEL 1]
+gaston
+egaston
+
+[FUNCTION gaston] //function to speak on the chat
+IF !(0<TAG.BANNICHAT>==1)
+	IF !(<FINDID.i_hear_player_gaston> )
+		SRC.SYSMESSAGE Vous n'avez pas active le canal t1
+		RETURN 1
+	ENDIF
+	IF <EVAL 0<TAG.EQUIPE>> == 1
+		SERV.ALLCLIENTS mainmsg_gastont1 <ARGS>
+	ELSEIF <EVAL 0<TAG.EQUIPE>> == 2
+		SERV.ALLCLIENTS mainmsg_gastont2 <ARGS>
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Vous ne faites parti d'aucune equipe!
+	ENDIF
+ELSE
+	SRC.SYSMESSAGE Vous avez les cris coupes pour une duree de <EVAL <FINDID.i_cris_coupes.TIMER>/60> minutes
+ENDIF
+
+
+[FUNCTION mainmsg_gastont1] //sub function
+IF <EVAL 0<TAG.EQUIPE>> == 1
+	FINDID.i_hear_player.CONT.SYSMESSAGEUA 02b 1 1 0 [Canal Gaston] <SRC.NAME>: <ARGS>
+ELSEIF <ACCOUNT.PLEVEL> > 2
+	FINDID.i_hear_player.CONT.SYSMESSAGEUA 02b 1 1 0 [Canal Gaston] <SRC.NAME>: <ARGS>
+ENDIF
+RETURN 1
+
+[FUNCTION mainmsg_gastont2] //sub function
+IF <EVAL 0<TAG.EQUIPE>> == 2
+	FINDID.i_hear_player.CONT.SYSMESSAGEUA 02b 1 1 0 [Canal Gaston] <SRC.NAME>: <ARGS>
+ELSEIF <ACCOUNT.PLEVEL> > 2
+	FINDID.i_hear_player.CONT.SYSMESSAGEUA 02b 1 1 0 [Canal Gaston] <SRC.NAME>: <ARGS>
+ENDIF
+RETURN 1
+
+[FUNCTION egaston] //function to toggle chat on/off
+IF ((<SRC.FINDID.m_effaceur_perso_rebour>) || (<SRC.ACCOUNT.PLEVEL> > 2))
+	IF !(<SRC.FINDID.i_hear_player_gaston.UID> )
+		SRC.SYSMESSAGE Vous activez le canal Gaston
+		SRC.NEWITEM i_hear_player_gaston
+		SRC.ACT.CONT <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGE Vous desactivez le canal Gaston
+		SRC.FINDID.i_hear_player_gaston.REMOVE
+	ENDIF
+ELSE
+	SRC.SYSMESSAGE Vous n'etes pas dans l'animation de Gaston
+ENDIF
+RETURN 1
+
+[ITEMDEF i_hear_player_gaston]
+NAME=Hear Player Gaston
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+LAYER=30

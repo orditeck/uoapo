@@ -1,0 +1,80 @@
+[SPEECH spk_shopkeep]
+
+ON=*sell*
+ON=*vendre*
+SAY Vous n'avez rien d'interessant a vendre
+
+ON=*buy*
+ON=*achete*
+//IF 0<TAG.PHRASEB>==1
+//	SAY <TAG.PHRASE>
+//ELSE
+//	DORAND 3
+//		SAY Voici ce que j'ai a vous vendre
+//		SAY Voila ce dont je possede en stock
+//		SAY Voici la marchandise dont je dispose
+//	ENDDO
+//ENDIF
+//SRC.TESTING_AMOUNT_TEOT
+//TESTING_DUPE_TEOT
+//BUY
+//SRC.TESTING_AMOUNT_TEOT
+//TESTING_DUPE_TEOT
+SAY Fonction desactivee a cause des tricheurs
+
+ON=*bonjour*
+DORAND 2
+	SAY Salutations !
+	SAY Bonjour !
+ENDDO
+
+
+ON=Bye
+ON=*revoir*
+DORAND 2
+	SAY A bientot !
+	SAY Au revoir !
+ENDDO
+BYE
+RETURN 1
+
+ON=modifier la phrase d'accueil
+IF <UID> == <SRC.TAG.VENDOR>
+	TAG.PHRASEB=1
+	INPDLG TAG.PHRASE 50
+ENDIF
+
+ON=sortir
+//IF <UID> == <SRC.TAG.VENDOR>
+//	IF <EVAL <DISTANCE>> < 3
+//		IF 0<SRC.TAG.SORTIRMAGASIN>==1
+//			SRC.P=<SRC.TAG.PSORTIRMAGASIN>
+//			SRC.UPDATE
+//		ELSE
+//			SRC.NEWITEM i_item_sortie_maison
+//			SRC.ACT.CONT=<SRC.UID> 
+//			SRC.ACT.USE
+//		ENDIF
+//	ELSE
+//		SAY Approchez <SRC.SEX maitre/maitresse>, je n'entend rien de ce que vous tentez de me dire
+//	ENDIF
+//ENDIF
+//
+SAY Fonction desactivee pour tricherie
+ON=entrer
+//IF <UID> == <SRC.TAG.VENDOR>
+//	IF <EVAL <DISTANCE>> < 3
+//		IF 0<SRC.TAG.ENTRERMAGASIN>==1
+//			SRC.P=<SRC.TAG.PENTRERMAGASIN>
+//			SRC.UPDATE
+//		ELSE
+//			SRC.NEWITEM i_item_entree_maison
+//			SRC.ACT.CONT=<SRC.UID> 
+//			SRC.ACT.USE
+//		ENDIF
+//	ELSE
+//		SAY Approchez <SRC.SEX maitre/maitresse>, je n'entend rien de ce que vous tentez de me dire
+//	ENDIF
+//ENDIF
+SAY Fonction desactivee pour tricherie
+[EOF]

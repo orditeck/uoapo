@@ -1,0 +1,2028 @@
+[ITEMDEF i_poignard_rouille_runique]
+DEFNAME=i_poignard_rouille_runique
+NAME=Poignard rouille runique
+ID=i_knife_skinning
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=0
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_rusty, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0aa6
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 8
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Poignard rouille
+
+[ITEMDEF i_epee_courte_rouillee_runique]
+DEFNAME=i_epee_courte_rouillee_runique
+NAME=Epee courte rouillee runique
+ID=i_cutlass
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=0
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_rusty, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0aa6
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 16
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee courte rouillee
+
+[ITEMDEF i_gourdin_runique]
+DEFNAME=i_gourdin_runique
+NAME=Gourdin runique
+ID=i_club
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=0
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+
+ON=@CREATE
+HITPOINTS=500
+
+ON=@EQUIP
+SRC.BONUSARMEMACE2
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_CHOC 36
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSMACE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Gourdin
+
+[ITEMDEF i_dague_rouillee_runique]
+DEFNAME=i_dague_rouillee_runique
+NAME=Dague rouille runique
+ID=i_dagger
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=24
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_rusty, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0aa6
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+IF <EVAL <SRC.TAG.FORPURE>> <24
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 10
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Dague rouillee
+
+[ITEMDEF i_epee_longue_rouillee_runique]
+DEFNAME=i_epee_longue_rouillee_runique
+NAME=Epee longue rouillee runique
+ID=i_sword_long_b
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=24
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_rusty, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0aa6
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <24
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 19
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee longue rouillee
+
+[ITEMDEF i_gourdin_renforce_runique]
+DEFNAME=i_gourdin_renforce_runique
+NAME=Gourdin renforce runique
+ID=i_club
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=30
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+
+ON=@CREATE
+HITPOINTS=500
+
+ON=@EQUIP
+SRC.BONUSARMEMACE2
+IF <EVAL <SRC.TAG.FORPURE>> <30
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_CHOC 40
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSMACE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Gourdin renforce
+
+[ITEMDEF i_hachette_rouillee_runique]
+DEFNAME=i_hachette_rouillee_runique
+NAME=Hachette rouillee runique
+ID=i_axe_war
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=39
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_rusty, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0aa6
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <39
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 44
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Hachette rouillee
+
+[ITEMDEF i_poignard_poli_runique]
+DEFNAME=i_poignard_poli_runique
+NAME=Poignard poli runique
+ID=i_knife_skinning
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=53
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=03c1
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+IF <EVAL <SRC.TAG.FORPURE>> <53
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 14
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Poignard poli
+
+[ITEMDEF i_epee_courte_polie_runique]
+DEFNAME=i_epee_courte_polie_runique
+NAME=Epee courte polie runique
+ID=i_cutlass
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=53
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=03c1
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <53
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 24
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee courte polie
+
+[ITEMDEF i_marteau_de_guerre_renforce_runique]
+DEFNAME=i_marteau_de_guerre_renforce_runique
+NAME=Marteau de guerre renforce runique
+ID=i_hammer_war
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=40
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=03c1
+
+ON=@EQUIP
+SRC.BONUSARMEMACE2
+IF (<EVAL <SRC.TAG.INTPURE>> <41) || (<EVAL <SRC.TAG.FORPURE>> <40)
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_CHOC 48
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSMACE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Marteau de guerre renforce
+
+[ITEMDEF i_dague_polie_runique]
+DEFNAME=i_dague_polie_runique
+NAME=Dague polie runique
+ID=i_dagger
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=68
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=03c1
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+IF <EVAL <SRC.TAG.FORPURE>> <68
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 16
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Dague polie
+
+[ITEMDEF i_epee_longue_polie_runique]
+DEFNAME=i_epee_longue_polie_runique
+NAME=Epee longue polie runique
+ID=i_sword_long_b
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=68
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=03c1
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <68
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 26
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee longue polie
+
+[ITEMDEF i_glaive_poli_runique]
+DEFNAME=i_glaive_poli_runique
+NAME=Glaive poli runique
+ID=i_sword_viking
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=82
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=03c1
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <82
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 29
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Glaive poli
+
+[ITEMDEF i_marteau_de_guerre_en_acier_trempe_runique]
+DEFNAME=i_marteau_de_guerre_en_acier_trempe_runique
+NAME=Marteau de guerre en acier trempe runique
+ID=i_hammer_war
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=60
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 5 i_ingot_shadow, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0afb
+
+ON=@EQUIP
+SRC.BONUSARMEMACE2
+IF (<EVAL <SRC.TAG.INTPURE>> <56) || (<EVAL <SRC.TAG.FORPURE>> <60)
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_CHOC 64
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSMACE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Marteau de guerre en acier trempe
+
+[ITEMDEF i_dague_en_acier_trempe_runique]
+DEFNAME=i_dague_en_acier_trempe_runique
+NAME=Dague en acier trempe runique
+ID=i_dagger
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=97
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_iron, 1 i_ingot_shadow, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0afb
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+IF <EVAL <SRC.TAG.FORPURE>> <97
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 20
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Dague en acier trempe
+
+[ITEMDEF i_hachette_polie_runique]
+DEFNAME=i_hachette_polie_runique
+NAME=Hachette polie runique
+ID=i_axe_war
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=97
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=03c1
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <97
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 60
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Hachette polie
+
+[ITEMDEF i_epee_courte_en_acier_trempe_runique]
+DEFNAME=i_epee_courte_en_acier_trempe_runique
+NAME=Epee courte en acier trempe runique
+ID=i_cutlass
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=111
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=3 i_ingot_iron, 2 i_ingot_shadow, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0afb
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <111
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 34
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee courte en acier trempe
+
+[ITEMDEF i_dague_de_qualite_runique]
+DEFNAME=i_dague_de_qualite_runique
+NAME=Dague de qualite runique
+ID=i_dagger
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=126
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+IF <EVAL <SRC.TAG.FORPURE>> <126
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 24
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Dague de qualite
+
+[ITEMDEF i_epee_longue_en_acier_trempe_runique]
+DEFNAME=i_epee_longue_en_acier_trempe_runique
+NAME=Epee longue en acier trempe runique
+ID=i_sword_long_b
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=126
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=3 i_ingot_iron, 2 i_ingot_shadow, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0afb
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <126
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 37
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee longue en acier trempe
+
+[ITEMDEF i_masse_en_acier_trempe_runique]
+DEFNAME=i_masse_en_acier_trempe_runique
+NAME=Masse en acier trempe runique
+ID=i_mace_war
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=90
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 5 i_ingot_shadow, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0afb
+
+ON=@EQUIP
+SRC.BONUSARMEMACE2
+IF (<EVAL <SRC.TAG.INTPURE>> <79) || (<EVAL <SRC.TAG.FORPURE>> <90)
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_CHOC 76
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSMACE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Masse en acier trempe
+
+[ITEMDEF i_glaive_en_acier_trempe_runique]
+DEFNAME=i_glaive_en_acier_trempe_runique
+NAME=Glaive en acier trempe runique
+ID=i_sword_viking
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=140
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=3 i_ingot_iron, 2 i_ingot_shadow, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0afb
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <140
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 39
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Glaive en acier trempe
+
+[ITEMDEF i_masse_de_qualite_runique]
+DEFNAME=i_masse_de_qualite_runique
+NAME=Masse de qualite runique
+ID=i_mace_war
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=110
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+
+ON=@EQUIP
+SRC.BONUSARMEMACE2
+IF (<EVAL <SRC.TAG.INTPURE>> <94) || (<EVAL <SRC.TAG.FORPURE>> <110)
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_CHOC 80
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSMACE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Masse de qualite
+
+[ITEMDEF i_dague_de_mithril_runique]
+DEFNAME=i_dague_de_mithril_runique
+NAME=Dague de mithril runique
+ID=i_dagger
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=155
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_mytheril, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0539
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+IF <EVAL <SRC.TAG.FORPURE>> <155
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 28
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Dague de mithril
+
+[ITEMDEF i_cimeterre_en_acier_trempe_runique]
+DEFNAME=i_cimeterre_en_acier_trempe_runique
+NAME=Cimeterre en acier trempe runique
+ID=i_scimitar
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=155
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=3 i_ingot_iron, 2 i_ingot_shadow, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0afb
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <155
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 42
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Cimeterre en acier trempe
+
+[ITEMDEF i_hachette_en_acier_trempe_runique]
+DEFNAME=i_hachette_en_acier_trempe_runique
+NAME=Hachette en acier trempe runique
+ID=i_axe_war
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=155
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 5 i_ingot_shadow, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0afb
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <155
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 76
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Hachette en acier trempe
+
+[ITEMDEF i_epee_courte_de_qualite_runique]
+DEFNAME=i_epee_courte_de_qualite_runique
+NAME=Epee courte de qualite runique
+ID=i_cutlass
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=184
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <184
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 45
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee courte de qualite
+
+[ITEMDEF i_hache_de_guerre_en_acier_trempe_runique]
+DEFNAME=i_hache_de_guerre_en_acier_trempe_runique
+NAME=Hache de guerre en acier trempe runique
+ID=i_axe
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=184
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 5 i_ingot_shadow, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0afb
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <184
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 80
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Hache de guerre en acier trempe
+
+[ITEMDEF i_epee_longue_de_qualite_runique]
+DEFNAME=i_epee_longue_de_qualite_runique
+NAME=Epee longue de qualite runique
+ID=i_sword_long_b
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=198
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <198
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 47
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee longue de qualite
+
+[ITEMDEF i_fleau_de_qualite_runique]
+DEFNAME=i_fleau_de_qualite_runique
+NAME=Fleau de qualite runique
+ID=i_mace
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=140
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+
+ON=@EQUIP
+SRC.BONUSARMEMACE2
+IF (<EVAL <SRC.TAG.INTPURE>> <116) || (<EVAL <SRC.TAG.FORPURE>> <140)
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_CHOC 92
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSMACE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Fleau de qualite
+
+[ITEMDEF i_glaive_de_qualite_runique]
+DEFNAME=i_glaive_de_qualite_runique
+NAME=Glaive de qualite runique
+ID=i_sword_viking
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=213
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <213
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 50
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Glaive de qualite
+
+[ITEMDEF i_cimeterre_renforce_runique]
+DEFNAME=i_cimeterre_renforce_runique
+NAME=Cimeterre renforce runique
+ID=i_scimitar
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=227
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0abe
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <227
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 52
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Cimeterre renforce
+
+[ITEMDEF i_fleau_de_mithril_runique]
+DEFNAME=i_fleau_de_mithril_runique
+NAME=Fleau de mithril runique
+ID=i_mace
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=170
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_mytheril, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0539
+
+ON=@EQUIP
+SRC.BONUSARMEMACE2
+IF (<EVAL <SRC.TAG.INTPURE>> <139) || (<EVAL <SRC.TAG.FORPURE>> <170)
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_CHOC 100
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSMACE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Fleau de mithril
+
+[ITEMDEF i_epee_batarde_runique]
+DEFNAME=i_epee_batarde_runique
+NAME=Epee batarde runique
+ID=i_sword_long
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=242
+WEIGHT=6
+TWOHANDS=Y
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0abe
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <242
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 88
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee batarde
+
+[ITEMDEF i_epee_longue_de_mithril_runique]
+DEFNAME=i_epee_longue_de_mithril_runique
+NAME=Epee longue de mithril runique
+ID=i_sword_long_b
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=271
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_mytheril, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0539
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <271
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 58
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee longue de mithril
+
+[ITEMDEF i_hache_de_guerre_de_qualite_runique]
+DEFNAME=i_hache_de_guerre_de_qualite_runique
+NAME=Hache de guerre de qualite runique
+ID=i_axe
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=271
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <271
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 100
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Hache de guerre de qualite
+
+[ITEMDEF i_glaive_de_mithril_runique]
+DEFNAME=i_glaive_de_mithril_runique
+NAME=Glaive de mithril runique
+ID=i_sword_viking
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=285
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_mytheril, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0539
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <285
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 60
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Glaive de mithril
+
+[ITEMDEF i_fleau_d_arme_de_mithril_runique]
+DEFNAME=i_fleau_d_arme_de_mithril_runique
+NAME=Fleau d'arme de mithril runique
+ID=i_mace_war
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=210
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_mytheril, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0539
+
+ON=@EQUIP
+SRC.BONUSARMEMACE2
+IF (<EVAL <SRC.TAG.INTPURE>> <169) || (<EVAL <SRC.TAG.FORPURE>> <210)
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_CHOC 112
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSMACE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Fleau d'arme de mithril
+
+[ITEMDEF i_lame_ancienne_runique]
+DEFNAME=i_lame_ancienne_runique
+NAME=Lame ancienne runique
+ID=i_knife_butcher
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=300
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0983
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+IF <EVAL <SRC.TAG.FORPURE>> <300
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 44
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Lame ancienne
+
+[ITEMDEF i_cimeterre_de_mithril_runique]
+DEFNAME=i_cimeterre_de_mithril_runique
+NAME=Cimeterre de mithril runique
+ID=i_scimitar
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=300
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_mytheril, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0539
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <300
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 63
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Cimeterre de mithril
+
+[ITEMDEF i_hache_de_qualite_a_deux_tranchants_runique]
+DEFNAME=i_hache_de_qualite_a_deux_tranchants_runique
+NAME=Hache de qualite a deux tranchants runique
+ID=i_axe_battle_large
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=300
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <300
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 108
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Hache de qualite a deux tranchants
+
+[ITEMDEF i_epee_batarde_de_mithril_runique]
+DEFNAME=i_epee_batarde_de_mithril_runique
+NAME=Epee batarde de mithril runique
+ID=i_sword_long
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=314
+WEIGHT=6
+TWOHANDS=Y
+DAM=0
+RESOURCES=5 i_ingot_mytheril, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=052f
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <314
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 104
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee batarde de mithril
+
+[ITEMDEF i_fleau_d_arme_antique_runique]
+DEFNAME=i_fleau_d_arme_antique_runique
+NAME=Fleau d'arme antique runique
+ID=i_mace_war
+TYPE=t_weapon_mace_smith
+SKILL=Macefighting
+REQSTR=260
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0983
+
+ON=@EQUIP
+SRC.BONUSARMEMACE2
+IF (<EVAL <SRC.TAG.INTPURE>> <206) || (<EVAL <SRC.TAG.FORPURE>> <260)
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_CHOC 124
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSMACE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Fleau d'arme antique
+
+[ITEMDEF i_kryss_d_adamandite_runique]
+DEFNAME=i_kryss_d_adamandite_runique
+NAME=Kryss d'adamandite runique
+ID=i_kryss
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=358
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_pyromorphite, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0ac2
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+IF <EVAL <SRC.TAG.FORPURE>> <358
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 48
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes +2
+DESCRIPTION=Kryss d'adamandite
+
+[ITEMDEF i_glaive_d_adamandite_runique]
+DEFNAME=i_glaive_d_adamandite_runique
+NAME=Glaive d'adamandite runique
+ID=i_sword_viking
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=358
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=3 i_ingot_iron, 2 i_ingot_pyromorphite, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0ac2
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <358
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 68
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Glaive d'adamandite
+
+[ITEMDEF i_hache_de_guerre_de_mithril_runique]
+DEFNAME=i_hache_de_guerre_de_mithril_runique
+NAME=Hache de guerre de mithril runique
+ID=i_axe
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=358
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_mytheril, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0539
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <358
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 116
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Hache de guerre de mithril
+
+[ITEMDEF i_cimeterre_d_adamandite_runique]
+DEFNAME=i_cimeterre_d_adamandite_runique
+NAME=Cimeterre d'adamandite runique
+ID=i_scimitar
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=372
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=3 i_ingot_iron, 2 i_ingot_pyromorphite, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0ac2
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <372
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 71
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Cimeterre d'adamandite
+
+[ITEMDEF i_epee_batarde_d_adamandite_runique]
+DEFNAME=i_epee_batarde_d_adamandite_runique
+NAME=Epee batarde d'adamandite runique
+ID=i_sword_long
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=387
+WEIGHT=6
+TWOHANDS=Y
+DAM=0
+RESOURCES=3 i_ingot_iron, 2 i_ingot_pyromorphite, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0ac2
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <387
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 116
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee batarde d'adamandite
+
+[ITEMDEF i_hache_a_deux_tranchants_de_mithril_runique]
+DEFNAME=i_hache_a_deux_tranchants_de_mithril_runique
+NAME=Hache a deux tranchants de mithril runique
+ID=i_axe_battle_large
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=416
+WEIGHT=8
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_mytheril, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0539
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <416
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 128
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Hache a deux tranchants de mithril
+
+[ITEMDEF i_kryss_ancienne_runique]
+DEFNAME=i_kryss_ancienne_runique
+NAME=Kryss ancienne runique
+ID=i_kryss
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=459
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0983
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+IF <EVAL <SRC.TAG.FORPURE>> <459
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 56
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes +2
+DESCRIPTION=Kryss ancienne
+
+[ITEMDEF i_cimeterre_ancien_runique]
+DEFNAME=i_cimeterre_ancien_runique
+NAME=Cimeterre ancien runique
+ID=i_scimitar
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=459
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0983
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <459
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 78
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Cimeterre ancien
+
+[ITEMDEF i_epee_batarde_ancienne_runique]
+DEFNAME=i_epee_batarde_ancienne_runique
+NAME=Epee batarde ancienne runique
+ID=i_sword_long
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=532
+WEIGHT=6
+TWOHANDS=Y
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0983
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <532
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 128
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee batarde ancienne
+
+[ITEMDEF i_kryss_antique_runique]
+DEFNAME=i_kryss_antique_runique
+NAME=Kryss antique runique
+ID=i_kryss
+TYPE=t_weapon_fence
+SKILL=Fencing
+REQSTR=590
+WEIGHT=1
+TWOHANDS=N
+DAM=0
+RESOURCES=1 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0afb
+
+ON=@EQUIP
+SRC.BONUSARMEFENCE2
+IF <EVAL <SRC.TAG.FORPURE>> <590
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_ESTOC 60
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSFENCE
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes +2
+DESCRIPTION=Kryss antique
+
+[ITEMDEF i_epee_antique_runique]
+DEFNAME=i_epee_antique_runique
+NAME=Epee antique runique
+ID=i_katana
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=590
+WEIGHT=2
+TWOHANDS=N
+DAM=0
+RESOURCES=5 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0983
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <590
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 84
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Epee antique
+
+[ITEMDEF i_hache_antique_a_deux_tranchants_runique]
+DEFNAME=i_hache_antique_a_deux_tranchants_runique
+NAME=Hache antique a deux tranchants runique
+ID=i_axe_two_hand
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=590
+WEIGHT=5
+TWOHANDS=N
+DAM=0
+RESOURCES=10 i_ingot_iron, 2 i_scroll_enchantement
+SKILLMAKE=BLACKSMITHING 100.0, MAGERY 50.0, t_weapon_mace_smith
+
+ON=@CREATE
+HITPOINTS=500
+COLOR=0983
+
+ON=@EQUIP
+SRC.BONUSARMESWORD2
+IF <EVAL <SRC.TAG.FORPURE>> <590
+	UNEQUIP
+ENDIF
+BONUS_ARME_GEMME_EQUIP
+
+ON=@DAMAGE
+DAMMAGE_ARME_TAILLE 140
+
+ON=@UNEQUIP
+SRC.ENLEVEBONUSSWORD
+BONUS_ARME_GEMME_UNEQUIP
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Armes
+SUBSECTION=Armes runique
+DESCRIPTION=Hache antique a deux tranchants

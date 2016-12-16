@@ -1,0 +1,254 @@
+[CHARDEF c_gazer_divin]
+DEFNAME=c_gazer_divin
+ID=c_GAZER
+NAME=Gazer divin
+SOUND=snd_MONSTER_GAZER1
+CAN=MT_WALK
+DAM=35
+ARMOR=35
+RESOURCES=8 i_ribs_raw
+DESIRES=c_gazer
+SHELTER=r_caves
+AVERSIONS=r_civilization
+TEVENTS=e_combat
+
+ON=@Create
+COLOR=0481
+STR={400 600}
+DEX=9950
+INT={500 1500}
+//ALIGNMENT=EVIL
+//SPELLCIRCLES=3,5
+
+FAME={600 5000}
+KARMA={-4000 -4999}
+
+PARRYING={300.0 500.0}
+MAGERY={300.0 500.0}
+MAGICRESISTANCE={300.0 500.0}
+TACTICS={300.0 500.0}
+WRESTLING={300.0 500.0}
+
+NPC=brain_monster
+
+ITEMNEWBIE=i_spellbook
+MORE1=020080800
+MORE2=00000000
+
+ON=@GETHIT
+SRC.NEWNPC c_gazer_accolyte
+
+ON=@NPCRestock
+ITEM={ i_fiole_de_quete 1 random_weapon_vanq 1 random_shield_invulnerability 1 random_platemail_invulnerability 1 i_perle_enchantement 1 }
+
+ON=@SPELLEFFECT
+IF ( <ARGN> == 20 ) || ( <ARGN> == 38 ) || ( <ARGN> == 39 ) || ( <ARGN> == 47 )
+EMOTE ne pas etre affecte par ce sortilege
+ENDIF
+
+CATEGORY=Monsters
+SUBSECTION=Miscellaneous
+DESCRIPTION=Gazer divin
+
+[CHARDEF c_gazer_accolyte]
+DEFNAME=c_gazer_accolyte
+ID=c_gazer
+NAME=Gazer accolyte
+SOUND=snd_MONSTER_GAZER1
+CAN=MT_WALK
+DAM=10
+ARMOR=10
+RESOURCES=8 i_ribs_raw
+DESIRES=c_gazer
+SHELTER=r_caves
+AVERSIONS=r_civilization
+TEVENTS=e_combat
+
+ON=@Create
+COLOR=0387
+STR={200 250}
+DEX=9990
+INT={50 250}
+//ALIGNMENT=EVIL
+//SPELLCIRCLES=3,5
+
+PARRYING={50.0 200.0}
+MAGERY={50.0 200.0}
+MAGICRESISTANCE={50.0 200.0}
+TACTICS={50.0 200.0}
+WRESTLING={50.0 200.0}
+
+NPC=brain_monster
+
+FAME={600 5000}
+KARMA={-4000 -4999}
+
+ON=@NPCRestock
+ITEM={ i_gold,{1 200} 1000 i_fiole_de_quete 1 i_perle_enchantement 5 }
+
+CATEGORY=Monsters
+SUBSECTION=Miscellaneous
+DESCRIPTION=Gazer accolyte
+
+[CHARDEF c_m_guerrier_gazer]
+DEFNAME=c_m_guerrier_gazer
+NAME=Guerrier gazer
+ID=c_GAZER
+SOUND=snd_MONSTER_GAZER1
+CAN=MT_WALK
+DAM=15
+ARMOR=20
+RESOURCES=8 i_ribs_raw
+DESIRES=c_gazer
+SHELTER=r_caves
+AVERSIONS=r_civilization
+TEVENTS=e_combat
+
+ON=@Create
+STR={150 250}
+DEX=9000
+INT={150 250}
+//ALIGNMENT=EVIL
+//SPELLCIRCLES=3,5
+
+PARRYING={50.0 200.0}
+MAGERY={50.0 200.0}
+MAGICRESISTANCE={50.0 200.0}
+TACTICS={50.0 200.0}
+WRESTLING={50.0 200.0}
+
+NPC=brain_monster
+
+FAME={600 5000}
+KARMA={-4000 -4999}
+
+ON=@NPCRestock
+ITEM={ loot_GAZER 1000 i_fiole_de_quete 1 i_perle_enchantement 5 }
+ITEM=i_gold,{100 500}
+
+CATEGORY=Monsters
+SUBSECTION=Miscellaneous
+DESCRIPTION=Guerrier gazer
+
+[CHARDEF c_m_prince_gazer]
+DEFNAME=c_m_prince_gazer
+NAME=Prince gazer
+ID=c_GAZER
+SOUND=snd_MONSTER_GAZER1
+CAN=MT_WALK
+DAM=17
+ARMOR=22
+RESOURCES=8 i_ribs_raw
+DESIRES=c_gazer
+SHELTER=r_caves
+AVERSIONS=r_civilization
+TEVENTS=e_combat
+
+ON=@Create
+COLOR=0387
+STR={200 300}
+DEX=9000
+INT={200 300}
+//ALIGNMENT=EVIL
+//SPELLCIRCLES=3,5
+
+PARRYING={80.0 150.0}
+MAGERY={80.0 150.0}
+MAGICRESISTANCE={80.0 150.0}
+TACTICS={80.0 150.0}
+WRESTLING={80.0 150.0}
+
+NPC=brain_monster
+
+FAME={600 5000}
+KARMA={-4000 -4999}
+
+ON=@NPCRestock
+ITEM=i_gold,{500 800}
+ITEM={ loot_GAZER 500 i_fiole_de_quete 1 i_perle_enchantement 5 }
+
+CATEGORY=Monsters
+SUBSECTION=Miscellaneous
+DESCRIPTION=Prince gazer
+
+[CHARDEF c_m_roi_gazer]
+DEFNAME=c_m_roi_gazer
+NAME=Roi gazer
+ID=c_GAZER
+SOUND=snd_MONSTER_GAZER1
+CAN=MT_WALK
+DAM=20
+ARMOR=25
+RESOURCES=8 i_ribs_raw
+DESIRES=c_gazer
+SHELTER=r_caves
+AVERSIONS=r_civilization
+TEVENTS=e_combat
+
+ON=@Create
+COLOR=0455
+STR={250 350}
+DEX=9000
+INT={250 350}
+//ALIGNMENT=EVIL
+//SPELLCIRCLES=3,5
+
+PARRYING={150.0 300.0}
+MAGERY={150.0 300.0}
+MAGICRESISTANCE={150.0 300.0}
+TACTICS={150.0 300.0}
+WRESTLING={150.0 300.0}
+
+NPC=brain_monster
+
+FAME={600 5000}
+KARMA={-4000 -4999}
+
+ON=@NPCRestock
+ITEM=i_gold,{500 1000}
+ITEM={ loot_GAZER 200 i_fiole_de_quete 1 i_perle_enchantement 5 }
+
+CATEGORY=Monsters
+SUBSECTION=Miscellaneous
+DESCRIPTION=Roi gazer
+
+[CHARDEF c_m_gazer_crystal]
+DEFNAME=c_m_gazer_crystal
+NAME=Gazer de crystal
+ID=c_GAZER
+SOUND=snd_MONSTER_GAZER1
+CAN=MT_WALK
+DAM=35
+ARMOR=35
+RESOURCES=8 i_ribs_raw
+DESIRES=c_gazer
+SHELTER=r_caves
+AVERSIONS=r_civilization
+TEVENTS=e_combat
+
+ON=@Create
+COLOR=07fff
+STR={300 500}
+DEX=9000
+INT={300 500}
+//ALIGNMENT=EVIL
+//SPELLCIRCLES=3,5
+
+PARRYING={300.0 500.0}
+MAGERY={300.0 500.0}
+MAGICRESISTANCE={300.0 500.0}
+TACTICS={300.0 500.0}
+WRESTLING={300.0 500.0}
+
+NPC=brain_monster
+
+FAME={600 5000}
+KARMA={-4000 -4999}
+
+ON=@NPCRestock
+ITEM={ RANDOM_WEAPON_FORCE 10 RANDOM_SHIELD_HARDENING 10 RANDOM_PLATEMAIL_HARDENING 10 i_fiole_de_quete 1 i_peau_de_creature_crystal 1 i_perle_enchantement 5 }
+ITEM=i_gold,{1000 2000}
+
+CATEGORY=Monsters
+SUBSECTION=Miscellaneous
+DESCRIPTION=Gazer de crystal

@@ -1,0 +1,436 @@
+[SKILLMENU sm_summon]
+What do you want to summon ?
+
+ON=i_PET_SCORP <name>
+TESTIF=MAGERY 75.0
+SUMMON=c_SCORPION_GIANT
+
+ON=i_PET_BEAR <name>
+TESTIF=MAGERY 50.0
+SUMMON=c_Bear_Brown
+
+ON=i_PET_RAT_2 <name>
+TESTIF=MAGERY 35.0
+SUMMON=c_RAT_GIANT
+
+ON=i_PET_CHICKEN <name>
+TESTIF=MAGERY 35.0
+SUMMON=c_CHICKEN
+
+ON=i_PET_DEER <name>
+TESTIF=MAGERY 35.0
+SUMMON=c_STAG
+
+ON=i_PET_DEER <name>
+TESTIF=MAGERY 35.0
+SUMMON=c_DOE
+
+ON=i_pet_DOG <name>
+TESTIF=MAGERY 35.0
+SUMMON=c_DOG
+
+ON=i_PET_CROC <name>
+TESTIF=MAGERY 35.0
+SUMMON=c_Alligator
+
+ON=i_pet_Grizzly <name>
+TESTIF=MAGERY 35.0
+SUMMON=c_Bear_Grizzly
+
+ON=i_pet_horse_brown_lt <name>
+TESTIF=MAGERY 35.0
+SUMMON=HORSES
+
+ON=i_pet_bear_polar <name>
+TESTIF=MAGERY 35.0
+SUMMON=c_Bear_Polar
+
+ON=i_pet_rabbit_2 <name>
+TESTIF=MAGERY 20.0
+SUMMON=c_Rabbit
+
+ON=i_pet_snake <name>
+TESTIF=MAGERY 25.0
+SUMMON=c_Snake
+
+ON=i_pet_SHEEP <name>
+TESTIF=MAGERY 35.0
+SUMMON=c_SHEEP_WOOLLY
+
+[SKILLMENU sm_polymorph]
+Quelle apparence prendre ?
+
+ON=i_pet_sheep Groupe 1
+SKILLMENU=sm_polymorph_1
+
+ON=i_pet_eagle Groupe 2
+SKILLMENU=sm_polymorph_2
+
+ON=i_pet_mongbat Groupe 3
+SKILLMENU=sm_polymorph_3
+
+ON=i_pet_zombie Groupe 4
+SKILLMENU=sm_polymorph_4
+
+ON=i_pet_reaper Groupe 5
+SKILLMENU=sm_polymorph_5
+
+ON=i_pet_elem_earth Groupe 6
+SKILLMENU=sm_polymorph_6
+
+ON=i_pet_dragon Groupe 7
+SKILLMENU=sm_polymorph_7
+
+[SKILLMENU sm_polymorph_1]
+Quelle apparence prendre ?
+
+ON=i_pet_sheep Brebis
+IF <MAGERY> >= 100.0
+	TAG.POLYLEVEL 1
+	POLY c_sheep_shorn
+ENDIF
+ON=i_pet_sheep Mouton
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_sheep_woolly
+ON=i_pet_snake Serpent
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_snake
+ON=i_pet_deer Cerf
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_stag
+ON=i_pet_pig Cochonnet
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_pig
+ON=i_pet_pig Cochon
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_pig_big
+ON=i_pet_rabbit Lapin
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_rabbit
+ON=i_pet_rat Rat
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_rat
+ON=i_pet_goat Chevre
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_goat
+ON=i_pet_bird Oiseau
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_bird
+ON=i_pet_chicken Poule
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_chicken
+ON=i_pet_cat Chat
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_cat
+ON=i_pet_dog Chien
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_dog
+ON=i_pet_bullfrog Crapaud buffle
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_bullfrog
+ON=i_pet_deer Biche
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_doe
+ON=i_pet_bull_brown_dk Taureau noir
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_bull_brown_dk
+ON=i_pet_cow Vache marron
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_cow_brown
+ON=i_pet_cow Vache noire
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_cow_bw
+ON=i_pet_bull Taureau marron
+TESTIF=MAGERY 100.0
+TAG.POLYLEVEL 1
+POLY c_bull_brown_lt
+
+[SKILLMENU sm_polymorph_2]
+Quelle apparence prendre ?
+
+ON=i_pet_bear Ours brun
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_bear_brown
+ON=i_pet_grizzly Ours grizzly
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_bear_grizzly
+ON=i_pet_bear_polar Ours polaire
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_bear_polar
+ON=i_pet_croc Crocodile
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_alligator
+ON=i_pet_eagle Aigle
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_eagle
+ON=i_pet_gorilla Gorille
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_gorilla
+ON=i_pet_panther Panthere
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_panther
+ON=i_pet_rat_2 Rat geant
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_rat_giant
+ON=i_pet_walrus Elephant de mer
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_walrus
+ON=i_pet_wisp Luciole
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_wisp
+ON=i_pet_wolf Loup
+TESTIF=MAGERY 200.0
+TAG.POLYLEVEL 2
+POLY c_wolf
+
+[SKILLMENU sm_polymorph_3]
+Quelle apparence prendre ?
+
+ON=i_pet_slime Sangsue
+TESTIF=MAGERY 300.0
+TAG.POLYLEVEL 3
+POLY c_slime
+ON=i_pet_headless Decapite
+TESTIF=MAGERY 300.0
+TAG.POLYLEVEL 3
+POLY c_headless
+ON=i_pet_mongbat Chauve souris
+TESTIF=MAGERY 300.0
+TAG.POLYLEVEL 3
+POLY c_mongbat
+ON=i_pet_snake_giant Serpent geant
+TESTIF=MAGERY 300.0
+TAG.POLYLEVEL 3
+POLY c_snake_giant
+ON=i_pet_spider_giant Araignee geante
+TESTIF=MAGERY 300.0
+TAG.POLYLEVEL 3
+POLY c_spider_giant
+ON=i_pet_toad_giant Crapaud geant
+TESTIF=MAGERY 300.0
+TAG.POLYLEVEL 3
+POLY c_toad_giant
+ON=i_pet_scorp Scorpion geant
+TESTIF=MAGERY 300.0
+TAG.POLYLEVEL 3
+POLY c_scorpion_giant
+
+[SKILLMENU sm_polymorph_4]
+Quelle apparence prendre ?
+
+ON=i_pet_gazer Gazer
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_gazer
+ON=i_pet_orc Orc
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_orc
+ON=i_pet_orc Seigneur Orc
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_orc_lord
+ON=i_pet_orc Orc avec massue
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_orc_w_club
+ON=i_pet_ratman Skraug
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_ratman
+ON=i_pet_ratman Skraug avec hachette
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_ratman_w_mace
+ON=i_pet_ratman Skraug avec epee
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_ratman_w_sword
+ON=i_pet_skeleton Squelette
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_skeleton
+ON=i_pet_skeleton Squelette avec hache
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_skeleton_w_axe
+ON=i_pet_skeleton Squelette avec epee
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_skeleton_w_sword
+ON=i_pet_ghoul Spectre
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_spectre
+ON=i_pet_zombie Zombie
+TESTIF=MAGERY 400.0
+TAG.POLYLEVEL 4
+POLY c_zombie
+
+[SKILLMENU sm_polymorph_5]
+Quelle apparence prendre ?
+
+ON=i_pet_terathan_drone Kraanien
+TESTIF=MAGERY 500.0
+TAG.POLYLEVEL 5
+POLY c_terathan_drone
+ON=i_pet_terathan_queen Kraanien a mille pattes
+TESTIF=MAGERY 500.0
+TAG.POLYLEVEL 5
+POLY c_terathan_matriarch
+ON=i_pet_terathan_war Ouvrier Kraanien
+TESTIF=MAGERY 500.0
+TAG.POLYLEVEL 5
+POLY c_terathan_warrior
+ON=i_pet_lich Liche
+TESTIF=MAGERY 500.0
+TAG.POLYLEVEL 5
+POLY c_liche
+ON=i_pet_reaper Arbre demoniaque
+TESTIF=MAGERY 500.0
+TAG.POLYLEVEL 5
+POLY c_reaper
+ON=i_pet_lizman Tetrapode
+TESTIF=MAGERY 500.0
+TAG.POLYLEVEL 5
+POLY c_lizardman
+ON=i_pet_lizman Tetrapode avec fleau
+TESTIF=MAGERY 500.0
+TAG.POLYLEVEL 5
+POLY c_lizardman_mace
+ON=i_pet_lizman Tetrapode avec lance
+TESTIF=MAGERY 500.0
+TAG.POLYLEVEL 5
+POLY c_lizardman_spear
+ON=i_pet_corpser Tentacule
+TESTIF=MAGERY 500.0
+TAG.POLYLEVEL 5
+POLY c_corpser
+ON=i_pet_garg Gargouille
+TESTIF=MAGERY 500.0
+TAG.POLYLEVEL 5
+POLY c_gargoyle
+
+[SKILLMENU sm_polymorph_6]
+Quelle apparence prendre ?
+
+ON=i_pet_elem_air Elementaire d'air
+TESTIF=MAGERY 600.0
+TAG.POLYLEVEL 6
+POLY c_elem_air
+ON=i_pet_elem_earth Elementaire de terre
+TESTIF=MAGERY 600.0
+TAG.POLYLEVEL 6
+POLY c_elem_earth
+ON=i_pet_ophid_mage Ophidien mage
+TESTIF=MAGERY 600.0
+TAG.POLYLEVEL 6
+POLY c_ophidian_mage
+ON=i_pet_ophid_queen Reine ophidien
+TESTIF=MAGERY 600.0
+TAG.POLYLEVEL 6
+POLY c_ophidian_queen
+ON=i_pet_ophid_war Ophidien guerrier
+TESTIF=MAGERY 600.0
+TAG.POLYLEVEL 6
+POLY c_ophidian_warrior
+ON=i_pet_elem_fire Elementaire de feu
+TESTIF=MAGERY 600.0
+TAG.POLYLEVEL 6
+POLY c_elem_fire
+ON=i_pet_elem_water Elementaire d'eau
+TESTIF=MAGERY 600.0
+TAG.POLYLEVEL 6
+POLY c_elem_water
+ON=i_pet_harpy Harpie
+TESTIF=MAGERY 600.0
+TAG.POLYLEVEL 6
+POLY c_harpy
+
+
+[SKILLMENU sm_polymorph_7]
+Quelle apparence prendre ?
+
+ON=i_pet_ettin Ettin
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_ettin
+ON=i_pet_ettin Ettin avec hache
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_ettin_w_axe
+ON=i_pet_ogre Ogre
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_ogre
+ON=i_pet_cyclops Cyclope
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_cyclops
+ON=i_pet_titan Titan
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_titan
+ON=i_pet_troll Troll
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_troll
+ON=i_pet_troll Troll avec hache
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_troll_w_axe
+ON=i_pet_troll Troll avec fleau
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_troll_w_mace
+ON=i_pet_daemon Demon
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_daemon
+ON=i_pet_daemon Daemon superieur
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_daemon_w_sword
+ON=i_pet_dragon Dragonnet inferieur
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_dragon_small_red
+ON=i_pet_dragon Dragonnet superieur
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_dragon_small_black
+ON=i_pet_dragon Dragon inferieur
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_dragon_red
+ON=i_pet_dragon Dragon superieur
+TESTIF=MAGERY 700.0
+TAG.POLYLEVEL 7
+POLY c_dragon_green

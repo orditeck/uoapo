@@ -1,0 +1,1118 @@
+//Script réalisé par Laymain
+
+[plevel 4]
+creer_basket
+ 
+[function creer_basket]
+newitem i_creer_basket
+act.bounce
+ 
+[itemdef i_creer_basket]
+ID=i_cannon_ball
+NAME=Creation Basket
+TYPE=t_eq_script
+LAYER=32
+ 
+On=@DClick
+src.newitem i_inscr_basket
+src.act.bounce
+var.link_basket = <src.act.uid>
+src.newitem i_score_basket
+src.act.link = <var.link_basket>
+src.findid(i_inscr_basket).tag.panneau_score = <src.act.uid>
+var.link_basket = <src.act.uid>
+src.act.bounce
+src.newitem i_panier_basket
+src.act.color 0c9
+src.act.link = <var.link_basket>
+src.act.bounce
+src.newitem i_panier_basket
+src.act.color 08a
+src.act.link = <var.link_basket>
+src.act.bounce
+remove
+var.link_basket=
+ 
+ 
+[ITEMDEF i_inscr_basket]
+ID=01f28
+NAME=Partie de basket
+TYPE=t_script
+ 
+On=@Create
+attr=0010
+tag.en_cours=0
+tag.players=0
+tag.player01.name=aucun
+tag.player02.name=aucun
+tag.player03.name=aucun
+tag.player04.name=aucun
+tag.player05.name=aucun
+tag.player06.name=aucun
+tag.player07.name=aucun
+tag.player08.name=aucun
+tag.name_score=personne
+tag.name_esquive=personne
+tag.name_prise=personne
+tag.name_passe=personne
+tag.name_intercept=personne
+ 
+ 
+On=@Dclick
+if (<src.account.plevel> > 3)
+    dialog d_config_basket
+elseif !(0<tag.en_cours>)
+    dialog d_inscr_basket
+else
+    SRC.SYSMESSAGEUA 0481 1 1 0 Une partie est deja en cours, veuillez patienter.
+endif
+return 1
+ 
+On=@Timer
+f_link_players f_cancel_player
+f_resetTAG_basket
+timer -1
+return 1
+ 
+ 
+[DIALOG d_stats_basket]
+150,75 
+resizepic 0 0 2620 410 290  // background
+text 150 10 255 0           // titre
+ 
+text 340 9 1153 1
+button 325 14 2104 2103 1 0 1
+text 20 35 1153 2
+ 
+text 25 70 100 3
+text 185 90 1153 4
+ 
+text 25 110 100 5
+text 185 130 1153 6
+ 
+text 25 150 100 7
+text 185 170 1153 8
+ 
+text 25 190 100 9
+text 185 210 1153 10
+ 
+text 25 230 100 11
+text 185 250 1153 12
+ 
+[DIALOG d_stats_basket TEXT]
+Statistiques
+Retour
+Reccord dans une partie du
+Meilleur esquiveur avec <eval 0<tag.pc_esquive>>% de reussite pour
+<tag.name_esquive>
+Meilleur preneur de balle avec <eval 0<tag.pc_prise>>% de reussite pour
+<tag.name_prise>
+Meilleur passeur avec <eval 0<tag.pc_passe>>% de reussite pour
+<tag.name_passe>
+Meilleur intercepteur avec <eval 0<tag.pc_intercept>>% de reussite pour
+<tag.name_intercept>
+Meilleur buteur avec <eval 0<tag.score>> buts pour
+<tag.name_score>
+ 
+[DIALOG d_stats_basket BUTTON]
+on=1
+dialog d_inscr_basket
+ 
+ 
+ 
+[DIALOG d_stats_player]
+150,75 
+resizepic 0 0 2620 350 170  // background
+text 100 10 255 0           // titre
+ 
+text 25 40 100 1
+text 25 60 100 2
+text 25 80 100 3
+text 25 100 100 4
+text 25 120 100 5
+ 
+button 140 145 2104 2103 1 0 0
+text 155 140 1153 6
+ 
+[DIALOG d_stats_player TEXT]
+Statistiques personnelles
+Pourcentage d'esquive reussie : <eval 0<tag.pc_esquive>>%
+Pourcentage de prise de balle reussie : <eval 0<tag.pc_prise>>%
+Pourcentage de passe reussi : <eval 0<tag.pc_passe>>%
+Pourcentage d'interception reussi : <eval 0<tag.pc_intercept>>%
+Nombre de buts : <eval 0<tag.score>>
+Fermer
+ 
+[DIALOG d_stats_player BUTTON]
+ 
+ 
+ 
+ 
+ 
+[DIALOG d_config_basket]
+150,75 
+resizepic 0 0 2620 300 155  // background
+text 90 10 255 0           // titre
+ 
+text 30 35 100 1
+button 15 39 2104 2103 1 0 1
+text 30 55 100 2
+button 15 59 2104 2103 1 0 2
+text 30 75 100 3
+button 15 79 2104 2103 1 0 3
+text 30 95 100 4
+button 15 99 2104 2103 1 0 4
+text 245 10 1153 5
+button 230 14 2104 2103 1 0 5
+text 30 125 1153 6
+button 15 129 2104 2103 1 0 6
+ 
+[DIALOG d_config_basket TEXT]
+Configuration
+Sortie :   <tag.exit>
+Depart equipe bleue :   <tag.0c9>
+Depart equipe rouge :   <tag.08a>
+Centre du terrain :   <tag.centre>
+Reset
+Liste des inscrits
+ 
+[DIALOG d_config_basket BUTTON]
+on=1
+var.tag_basket = tag.exit
+src.newitem i_targ_basket
+src.act.p = <src.p>
+src.act.link = <uid>
+src.act.use
+on=2
+var.tag_basket = tag.0c9
+src.newitem i_targ_basket
+src.act.p = <src.p>
+src.act.link = <uid>
+src.act.use
+on=3
+var.tag_basket = tag.08a
+src.newitem i_targ_basket
+src.act.p = <src.p>
+src.act.link = <uid>
+src.act.use
+on=4
+var.tag_basket = tag.centre
+src.newitem i_targ_basket
+src.act.p = <src.p>
+src.act.link = <uid>
+src.act.use
+on=5
+tag.exit=
+tag.0c9=
+tag.08a=
+tag.centre=
+src.sysmessage Reset effectue.
+on=6
+dialog d_inscr_basket
+ 
+ 
+[DIALOG d_inscr_basket]
+150,75 
+resizepic 0 0 2620 500 250  // background
+text 200 10 255 0           // titre
+text 150 30 1153 1          // joueurs inscrits
+text 70 50 100 2            // Equipe bleue
+text 330 50 31 3            // Equipe rouge
+ 
+// liste joueurs inscrits
+ 
+// bleu
+resizepic 25 70 3000 180 22 
+text 30 72 100 4
+button 210 75 2104 2103 1 0 1
+resizepic 25 100 3000 180 22 
+text 30 102 100 5
+button 210 105 2104 2103 1 0 2
+resizepic 25 130 3000 180 22 
+text 30 132 100 6
+button 210 135 2104 2103 1 0 3
+resizepic 25 160 3000 180 22 
+text 30 162 100 7
+button 210 165 2104 2103 1 0 4
+// rouge
+resizepic 285 70 3000 180 22 
+text 290 72 31 8
+button 265 75 2104 2103 1 0 5
+resizepic 285 100 3000 180 22 
+text 290 102 31 9
+button 265 105 2104 2103 1 0 6
+resizepic 285 130 3000 180 22 
+text 290 132 31 10
+button 265 135 2104 2103 1 0 7
+resizepic 285 160 3000 180 22 
+text 290 162 31 11
+button 265 165 2104 2103 1 0 8
+ 
+text 190 220 1153 12
+button 175 225 2104 2103 1 0 9
+ 
+text 210 185 1153 13
+button 195 190 2104 2103 1 0 10
+ 
+text 22 15 1153 14
+button 7 20 2104 2103 1 0 11
+ 
+[DIALOG d_inscr_basket TEXT]
+Partie de basket
+Nombre de joueurs inscrits : <eval <tag.players>>
+Equipe bleue
+Equipe rouge
+<tag.player01.name>
+<tag.player02.name>
+<tag.player03.name>
+<tag.player04.name>
+<tag.player05.name>
+<tag.player06.name>
+<tag.player07.name>
+<tag.player08.name>
+Commencer la partie
+Statistiques
+Actualiser
+ 
+ 
+[DIALOG d_inscr_basket BUTTON]
+on=1
+var.basket.on=1
+f_inscr_basket
+on=2
+var.basket.on=2
+f_inscr_basket
+on=3
+var.basket.on=3
+f_inscr_basket
+on=4
+var.basket.on=4
+f_inscr_basket
+on=5
+var.basket.on=5
+f_inscr_basket
+on=6
+var.basket.on=6
+f_inscr_basket
+on=7
+var.basket.on=7
+f_inscr_basket
+on=8
+var.basket.on=8
+f_inscr_basket
+on=9
+if (0<tag.gerant> == <src.uid>)
+    var.link_basket = <uid>
+    var.0c9 = <tag.0c9>
+    var.08a = <tag.08a>
+    src.newitem i_balle_basket
+    src.act.p = <tag.centre>
+    tag.balle = <src.act.uid>
+    link = <tag.panneau_score>
+    link.timer 600
+    timer -1
+    f_link_players f_start_basket
+    var.link_basket=
+    f_link_players SYSMESSAGEUA 0481 1 1 0 La partie commence et durera 10 minutes
+    tag.en_cours = 1
+else
+    src.SYSMESSAGEUA 0481 1 1 0 Vous n'etes pas le gerant de cette partie.
+endif
+on=10
+dialog d_stats_basket
+on=11
+dialog d_inscr_basket
+ 
+ 
+[function f_link_players]
+if (0<tag.player01>)
+    link=<tag.player01>
+    tryp 0 link.<args>
+endif
+if (0<tag.player02>)
+    link=<tag.player02>
+    tryp 0 link.<args>
+endif
+if (0<tag.player03>)
+    link=<tag.player03>
+    tryp 0 link.<args>
+endif
+if (0<tag.player04>)
+    link=<tag.player04>
+    tryp 0 link.<args>
+endif
+if (0<tag.player05>)
+    link=<tag.player05>
+    tryp 0 link.<args>
+endif
+if (0<tag.player06>)
+    link=<tag.player06>
+    tryp 0 link.<args>
+endif
+if (0<tag.player07>)
+    link=<tag.player07>
+    tryp 0 link.<args>
+endif
+if (0<tag.player08>)
+    link=<tag.player08>
+    tryp 0 link.<args>
+endif
+ 
+[function f_inscr_basket]
+if (0<src.tag.inscrit>)
+    if (StrMatch(<tag.player<var.basket.on>.name>,<src.name>))
+        if (0<tag.gerant> == <src.uid>)
+            src.tag.inscrit =
+            src.tag.equipe =
+            f_link_players SYSMESSAGEUA 0481 1 1 0 Partie annulee.
+            timer 1
+            var.basket.on=
+            return 1
+        endif
+        src.SYSMESSAGEUA 0481 1 1 0 Vous vous retirez de la partie.
+        src.tag.inscrit =
+        src.tag.equipe =
+        tryp 0 tag.player<var.basket.on>.name = aucun
+        tryp 0 tag.player<var.basket.on> =
+        tag.players = <eval <tag.players>-1>
+        link = <tag.gerant>
+        link.SYSMESSAGEUA 0481 1 1 0 <src.name> quitte la partie.
+        var.basket.on=
+        return 1
+    elseif (0<tag.gerant> == <src.uid>)
+        if (StrMatch(<tag.player<var.basket.on>.name>,aucun))
+            return 1
+        endif
+        src.SYSMESSAGEUA 0481 1 1 0 Vous retirez <tag.player<var.basket.on>.name> de la partie.
+        link=<tag.player<var.basket.on>>
+        link.tag.inscrit =
+        link.tag.equipe =
+        link.SYSMESSAGEUA 0481 1 1 0 <src.name> vous a retire de la partie.
+        tryp 0 tag.player<var.basket.on>.name = aucun
+        tryp 0 tag.player<var.basket.on> =
+        tag.players = <eval <tag.players> -1>
+        var.basket.on=
+        return 1
+    endif
+    src.SYSMESSAGEUA 0481 1 1 0 Vous etes deja inscrit parmis les joueurs
+    var.basket.on=
+    return 1
+endif
+if !(StrMatch(<tag.player<var.basket.on>.name>,aucun))
+    src.SYSMESSAGEUA 0481 1 1 0 Il y a deja un joueur d'inscrit a cette place.
+    var.basket.on=
+    return 1
+endif
+if (<eval <tag.players>> == 0)
+    src.SYSMESSAGEUA 0481 1 1 0 Vous gerez a present la partie de basket.
+    tag.gerant = <src.uid>
+    src.SYSMESSAGEUA 0481 1 1 0 Il vous reste 2 minutes pour lancer la partie.
+    timer 120
+else
+    link = <tag.gerant>
+    link.SYSMESSAGEUA 0481 1 1 0 <src.name> rejoint la partie.
+endif
+tryp 0 tag.player<var.basket.on>.name = <src.name>
+tryp 0 tag.player<var.basket.on> = <src.uid>
+src.tag.inscrit = <var.basket.on>
+if (<eval <var.basket.on>> < 5)
+    src.tag.equipe = 0c9
+else
+    src.tag.equipe = 08a
+endif
+tag.players = <eval 0<tag.players>+1>
+var.basket.on=
+dialog d_inscr_basket
+ 
+[function f_start_basket]
+body c_chicken
+body <obody>
+newitem i_robe
+act.more2 = <var.link_basket>
+act.attr = attr_move_never
+act.color = <tag.equipe>
+equip <act>
+flags = <flags> | statf_invul
+events e_basket
+go <var.<tag.equipe>>
+ 
+[function f_resetTAG_basket]
+tag.gerant=
+tag.players=0
+tag.player01=
+tag.player02=
+tag.player03=
+tag.player04=
+tag.player05=
+tag.player06=
+tag.player07=
+tag.player08=
+tag.player01.name=aucun
+tag.player02.name=aucun
+tag.player03.name=aucun
+tag.player04.name=aucun
+tag.player05.name=aucun
+tag.player06.name=aucun
+tag.player07.name=aucun
+tag.player08.name=aucun
+tag.en_cours=0
+tag.balle=
+ 
+[function f_cancel_basket]
+link = <tag.balle>
+link.remove
+var.score_basket = <eval 0<tag.score>>
+var.name_score = <tag.name_score>
+var.pc_esquive = <eval 0<tag.pc_esquive>>
+var.name_esquive = <tag.name_esquive>
+var.pc_prise = <eval 0<tag.pc_prise>>
+var.name_prise = <tag.name_prise>
+var.pc_passe = <eval 0<tag.pc_passe>>
+var.name_passe = <tag.name_passe>
+var.pc_intercept = <eval 0<tag.pc_intercept>>
+var.name_intercept = <tag.name_intercept>
+f_link_players f_verif_score
+tag.score = <eval 0<var.score_basket>>
+tag.name_score = <var.name_score>
+tag.pc_esquive = <eval 0<var.pc_esquive>>
+tag.name_esquive = <var.name_esquive>
+tag.pc_prise = <eval 0<var.pc_prise>>
+tag.name_prise = <var.name_prise>
+var.exit = <tag.exit>
+f_link_players f_cancel_player
+var.exit=
+var.score_basket=
+var.name_score=
+var.pc_esquive=
+var.name_esquive=
+var.pc_prise=
+var.name_prise=
+var.pc_passe=
+var.name_passe=
+var.pc_intercept=
+var.name_intercept=
+f_resetTAG_basket
+
+[function f_remise_basket]
+if (0<args> == 0c9)
+  var.args = 08a
+  f_link_players f_remise_player <tag.08A>
+elseif (0<args> == 08a)
+  var.args = 0c9
+  f_link_players f_remise_player <tag.0C9>
+endif
+var.args =
+
+[function f_remise_player]
+if (<tag.equipe> == <var.args>)
+  go <args>
+endif
+ 
+[function f_cancel_player]
+events -e_basket
+flags <flags> &~ statf_invul
+go <var.exit>
+if ( (0<tag.pc_esquive>) || (0<tag.pc_prise>) || (0<tag.pc_passe>) || (0<tag.pc_intercept>) || (0<tag.score>) )
+    newitem i_stats_player
+    act.cont = <uid>
+    act.color = <tag.equipe>
+    act.tag.name = <name>
+    act.tag.score = <eval 0<tag.score>>
+    act.tag.pc_esquive = <eval 0<tag.pc_esquive>>
+    act.tag.pc_prise = <eval 0<tag.pc_prise>>
+    act.tag.pc_intercept = <eval 0<tag.pc_intercept>>
+    act.tag.pc_passe = <eval 0<tag.pc_passe>>
+endif
+tag.score
+tag.pc_esquive
+tag.pc_prise
+tag.pc_intercept
+tag.pc_passe
+tag.inscrit
+tag.equipe
+if (<findlayer(layer_robe)>)
+    findlayer(layer_robe).remove
+endif
+SYSMESSAGEUA 0481 1 1 0 Fin de la partie
+
+[function f_exit_player2]
+tryp 0 tag.player<var.player>=
+tryp 0 tag.player<var.player>.name=aucun
+tag.players = <eval <tag.players> -1>
+
+
+[function f_exit_player]
+if (<findid(i_balle_basket)>)
+    findid(i_balle_basket).p =<p>
+endif
+act = <findlayer(layer_robe).more2>
+if (<act.tag.players> <= 1)
+  var.link = <act.link>
+  act.link = <act.tag.panneau_score> 
+  act.link.timer 0
+  act.link = <var.link>
+  var.link =
+  return 1
+endif
+var.player = <tag.inscrit>
+act.f_exit_player2
+var.player =
+go <act.tag.exit>
+findlayer(layer_robe).remove
+events -e_basket
+tag.score=
+tag.pc_esquive=
+tag.pc_prise=
+tag.pc_passe=
+tag.pc_intercept=
+tag.inscrit=
+tag.equipe=
+flags=<flags>&~statf_invul
+ 
+ 
+[function f_verif_score]
+if !(0<tag.esquive_total>)
+    tag.esquive_total = 1
+endif
+if !(0<tag.prise_total>)
+    tag.prise_total = 1
+endif
+if !(0<tag.passe_total>)
+    tag.passe_total = 1
+endif
+if !(0<tag.intercept_total>)
+    tag.intercept_total = 1
+endif
+tag.pc_esquive = <eval (<eval 0<tag.esquive>>*100)/<eval <tag.esquive_total>>>
+tag.pc_prise = <eval (<eval 0<tag.prise>>*100)/<eval <tag.prise_total>>>
+tag.pc_passe = <eval (<eval 0<tag.passe>>*100)/<eval <tag.passe_total>>>
+tag.pc_intercept = <eval (<eval 0<tag.intercept>>*100)/<eval <tag.intercept_total>>>
+tag.esquive=
+tag.esquive_total=
+tag.prise=
+tag.prise_total=
+tag.intercept=
+tag.intercept_total=
+tag.passe=
+tag.passe_total=
+if (<eval 0<tag.score>> > <eval 0<var.score_basket>>)
+    var.score_basket = <eval 0<tag.score>>
+    var.name_score = <name>
+endif
+if (<eval 0<tag.pc_esquive>> > <eval 0<var.pc_esquive>>)
+    var.pc_esquive = <eval 0<tag.pc_esquive>>
+    var.name_esquive = <name>
+endif
+if (<eval 0<tag.pc_prise>> > <eval 0<var.pc_prise>>)
+    var.pc_prise = <eval 0<tag.pc_prise>>
+    var.name_prise = <name>
+endif
+if (<eval 0<tag.pc_passe>> > <eval 0<var.pc_passe>>)
+    var.pc_passe = <eval 0<tag.pc_passe>>
+    var.name_passe = <name>
+endif
+if (<eval 0<tag.pc_intercept>> > <eval 0<var.pc_intercept>>)
+    var.pc_intercept = <eval 0<tag.pc_intercept>>
+    var.name_intercept = <name>
+endif
+ 
+ 
+[ITEMDEF i_score_basket]
+ID=01f28
+NAME=Score
+TYPE=t_script
+ 
+On=@Create
+attr=0010
+tag.bleu = 0
+tag.rouge = 0
+ 
+On=@Click
+if (<timer> > 60)
+    var.minutes = (<timer>/60)
+    var.secondes = (<timer>-(<var.minutes>*60))
+    say Encore <eval <var.minutes>> minute(s) et <eval <var.secondes>> seconde(s) de jeu
+    var.minutes=
+    var.secondes=
+elseif (<timer> > 0)
+    say Plus que <eval <timer>> seconde(s) de jeu
+endif
+return 1
+ 
+On=@Dclick
+dialog d_score_basket
+return 1
+ 
+On=@Timer
+say Fin de la partie
+say Equipe bleue : <eval <tag.bleu>> points
+say Equipe rouge : <eval <tag.rouge>> points
+if (<eval <tag.bleu>> == <eval <tag.rouge>>)
+    link.say Les deux equipes sont a egalite avec <eval <tag.bleu>> points partout
+elseif (<eval <tag.bleu>> > <eval <tag.rouge>>)
+    link.say L'equipe bleue remporte la partie avec <eval <tag.bleu>-<tag.rouge>> points de plus (<eval <tag.bleu>> : <eval <tag.rouge>>)
+else
+    link.say L'equipe rouge remporte la partie avec <eval <tag.rouge>-<tag.bleu>> points de plus (<eval <tag.rouge>> : <eval <tag.bleu>>)
+endif
+tag.bleu=0
+tag.rouge=0
+link.f_cancel_basket
+timer -1
+return 1
+ 
+[DIALOG d_score_basket]
+100,50
+gumppic 0 0 2070
+text 70 15 255 0
+text 30 30 33 1
+text 41 50 3 2
+button 120 40 1154 1155 1 0 0
+text 70 75 255 3
+button 60 80 2104 2103 1 0 1
+ 
+[DIALOG d_score_basket TEXT]
+Score
+Rouge : <eval 0<tag.rouge>>
+Bleu : <eval 0<tag.bleu>>
+Partir
+ 
+[DIALOG d_score_basket BUTTON]
+on=1
+src.f_exit_player
+
+ 
+ 
+[ITEMDEF i_mem_para_basket]
+ID=i_rune_paralyze
+NAME=Paralysie
+TYPE=t_eq_script
+LAYER=32
+ 
+On=@Equip
+cont.flags = <cont.flags> | 00000004
+ 
+On=@Timer
+cont.flags = <cont.flags> &~ 00000004
+remove
+return 1
+ 
+[itemdef i_balle_basket]
+ID=i_cannon_ball
+NAME=Balle
+type=t_script
+ 
+On=@Create
+timer -1
+COLOR=02c
+ATTR=0010
+ 
+On=@DClick
+if (<src.findid(i_mem_para_basket)>)
+    if (0<src.findid(i_mem_para_basket).tag.msg>)
+        src.SYSMESSAGEUA 0481 1 1 0 <src.findid(i_mem_para_basket).tag.msg>
+    endif
+    return 1
+endif
+if ((<cont> == 00) && (<distance> > 1))
+    return 1
+endif
+if !(<cont.cont> == <src.uid>)
+    src.bounce <uid>
+    return 1
+endif
+p = <src.p>
+return 1
+ 
+On=@Click
+if (<src.findid(i_mem_para_basket)>)
+    if (0<src.findid(i_mem_para_basket).tag.msg>)
+        src.SYSMESSAGEUA 0481 1 1 0 <src.findid(i_mem_para_basket).tag.msg>
+    endif
+    return 1
+endif
+if ((<cont> == 00) && (<distance> > 1))
+    return 1
+endif
+if !(<cont.cont> == <src.uid>)
+    src.bounce <uid>
+    return 1
+endif
+p = <src.p>
+return 1
+ 
+[itemdef i_panier_basket]
+ID=i_tub_empty
+NAME=Panier
+ 
+On=@Create
+COLOR=0c9
+ATTR=0010
+ 
+On=@DClick
+if (<src.findid(i_mem_para_basket)>)
+    if (0<src.findid(i_mem_para_basket).tag.msg>)
+        src.SYSMESSAGEUA 0481 1 1 0 <src.findid(i_mem_para_basket).tag.msg>
+    endif
+    return 1
+endif
+if ((<color> == 0c9) && (<src.findid.i_robe.color> == 0c9)) || ((<color>== 08a) && (<src.findid.i_robe.color> == 08a))
+    if (<distance> < 2)
+        if (<findid(i_balle_basket)>)
+          findid(i_balle_basket).cont = <src.uid>
+          link.link.f_remise_basket <color>
+          link.say Remise en jeu
+          return 1
+        endif
+    else
+        return 1
+    endif
+endif
+if (!(<src.findid(i_balle_basket)>) || (<distance> > <eval 0<src.findid(m_boost_basket_accuracy).more1> +3>))
+    return 1
+endif
+if (<distance> == 1)
+    src.anim 29
+else
+    src.anim 11
+endif
+var.verticale=
+if (<p.x> == <src.p.x>)
+  var.verticale = 1
+else
+  var.coeff_dir = (100*(<eval <p.y>> - <eval <src.p.y>>)) / (<eval <p.x>> - <eval <src.p.x>>)
+  var.ord_orgn = <eval <p.y>> - ((<eval <var.coeff_dir>>*<eval <p.x>>)/100)
+endif
+if (<p.y> > <src.p.y>)
+  var.Ymax = <p.y>
+  var.Ymin = <src.p.y>
+else
+  var.Ymax = <src.p.y>
+  var.Ymin = <p.y>
+endif
+if (<p.x> > <src.p.x>)
+  var.Xmax = <p.x>
+  var.Xmin = <src.p.x>
+else
+  var.Xmax = <src.p.x>
+  var.Xmin = <p.x>
+endif
+var.passe_chance = <eval (Rand(50)+(<eval <distance>*10>)) - <eval 0<src.findid(m_boost_basket_accuracy).more1> *7>>
+var.passe_src = <src.uid>
+var.lanceur = <src.tag.equipe>
+link.link.f_link_players f_test_intercept
+if (0<var.intercepted>)
+  var.intercepted=
+  return 1
+endif
+effect 0,i_cannon_ball,5,45
+if (<var.passe_chance> <= 50)
+    if (<color> == 0c9)
+        link.tag.rouge = <eval 0<link.tag.rouge>+1>
+    else
+        link.tag.bleu = <eval 0<link.tag.bleu>+1>
+    endif
+    src.findid(i_balle_basket).cont = <uid>
+    say Score
+    say Rouge : <eval 0<link.tag.rouge>>
+    say Bleu : <eval 0<link.tag.bleu>>
+    src.tag.score = <eval 0<src.tag.score> +1>
+else
+    src.findid(i_balle_basket).p = <p.x>,<p.y>,<src.z>
+    say A cote !
+endif
+return 1
+ 
+[function f_test_intercept]
+if (<uid> == <var.passe_src>)
+  return 1
+endif
+if (0<var.intercepted>)
+    return 1
+endif
+if !(<tag.equipe> == <var.lanceur>)
+    //say Je suis pas de ton equipe !
+    // si le joueur est dans le rectangle
+    if ( (<var.Xmin> <= <p.x>) && (<p.x> <= <var.Xmax>) && (<var.Xmin> <= <p.x>) && (<p.x> <= <var.Xmax>) )
+        //say je suis dans le rectangle !
+        // si la droite est verticale (pas de coeff directeur)
+        if !(<eval <var.verticale>> == 1)
+            var.equation = ((<eval <var.coeff_dir>>*<eval <p.x>>)/100) + <eval <var.ord_orgn>>
+            //say Equation : <eval <var.equation>>
+            // si le joueur n'est pas sur la droite (ou tres proche)
+            if !( (<eval <var.equation>> == <eval <p.y>>) || (<eval <var.equation>> == <eval <p.y>+1>) || (<eval <var.equation>> == <eval <p.y>-1>) )
+                return 1
+            endif
+        endif
+        var.verticale=
+        // le joueur a des chances d'intercepter la balle
+        //say J'intercepte la balle si je veux (enfin si je peux)!
+        var.intercept_chance = (rand(40))
+        tag.intercept_total = <eval 0<tag.intercept_total>+1>
+        say <eval <var.passe_chance>> contre <eval <var.intercept_chance>>
+        if (<eval <var.intercept_chance>> <= <eval <var.passe_chance>>)
+            src = <var.passe_src>
+            if (<src.dir> < 4)
+                dir = (<src.dir>+4)
+            else
+                dir = (<src.dir>-4)
+            endif
+            fix
+            effect 0,i_cannon_ball,5,45
+            anim 7
+            say * intercepte la balle *
+            src.findid(i_balle_basket).cont = <uid>
+            var.intercepted = 1
+            tag.intercept = <eval 0<tag.intercept>+1>
+            if (<var.intercept_chance> > 45)
+              f_boost_basket
+            endif
+        endif
+    endif
+endif
+        
+[EVENTS e_basket]
+On=@Logout
+f_exit_player
+
+On=@SpellCast
+SYSMESSAGEUA 0481 1 1 0 Pas de magie au basket
+return 1
+ 
+On=@DClick
+if (<src.uid> == <uid>)
+    return 0
+endif
+if (<src.findid(i_mem_para_basket)>)
+    if (0<src.findid(i_mem_para_basket).tag.msg>)
+        src.SYSMESSAGEUA 0481 1 1 0 <src.findid(i_mem_para_basket).tag.msg>
+    endif
+    return 1
+endif
+// Fait une passe
+if (<findid.i_robe.color> == <src.findid.i_robe.color>)
+    if ( !(<findid(i_balle_basket)>) && <src.findid(i_balle_basket)> )
+        if (<distance> > <eval 0<src.findid(m_boost_basket_accuracy).more1> +8>)
+            return 1
+        endif
+        var.verticale=
+        if (<p.x> == <src.p.x>)
+            // src.say Vertical Limit !
+            var.verticale = 1
+        else
+            // say haaann c'est meme pas en vertical !
+            // Coefficient Directeur : a = (Ya - Yb)/(Xa - Xb)
+            var.coeff_dir = (100*(<eval <p.y>> - <eval <src.p.y>>)) / (<eval <p.x>> - <eval <src.p.x>>)
+            // say Coeff : <eval <var.coeff_dir>>
+            // Ordonnée à l'origine : B = Y - aX
+            var.ord_orgn = <eval <p.y>> - ((<eval <var.coeff_dir>>*<eval <p.x>>)/100)
+            // say Ord : <eval <var.ord_orgn>>
+        endif
+        if (<p.y> > <src.p.y>)
+            var.Ymax = <p.y>
+            var.Ymin = <src.p.y>
+        else
+            var.Ymax = <src.p.y>
+            var.Ymin = <p.y>
+        endif
+        if (<p.x> > <src.p.x>)
+                var.Xmax = <p.x>
+                var.Xmin = <src.p.x>
+            else
+                var.Xmax = <src.p.x>
+                var.Xmin = <p.x>
+        endif
+        src.tag.passe_total = <eval 0<src.tag.passe_total>+1>
+        var.lanceur = <src.tag.equipe>
+        // src.say Pecho ca gamin! // =)
+        var.passe_chance = <eval (Rand(40)+(<eval <distance>*5>)  - <eval 0<src.findid(m_boost_basket_accuracy).more1> *7>>
+        var.passe_src = <src.uid>
+        //tryp 0 src.findlayer(layer_robe).link.f_link_players f_test_intercept
+        act = findlayer(layer_robe).link
+        act.f_link_players f_test_intercept
+        src.anim 11
+        if (0<var.intercepted>)
+            var.intercepted=
+            return 1
+        endif
+        SYSMESSAGEUA 0481 1 1 0 <src.name> vous passe la balle.
+        src.SYSMESSAGEUA 0481 1 1 0 Vous passez la balle a <name>.
+        if (<src.dir> < 4)
+                dir = (<src.dir>+4)
+            else
+                dir = (<src.dir>-4)
+            endif
+        fix
+        effect 0,i_cannon_ball,5,45
+        if (<eval (Rand(40)+(<eval <distance>*5>))> >= 60)
+            anim 20
+            bark 3
+            newitem 0122c
+            act.timer 10
+            act.attr = 0012
+            act.p <p>
+            src.findid(i_balle_basket).p = <p>
+            newitem i_mem_para_basket
+            act.tag.msg Vous etes dans les vappes
+            act.timer 2
+            equip <act>
+        else
+            src.tag.passe = <eval 0<src.tag.passe>+1>
+            src.findid(i_balle_basket).cont = <uid>
+            SYSMESSAGEUA 0481 1 1 0 <src.name> vous passe la balle.
+            src.SYSMESSAGEUA 0481 1 1 0 Vous passez la balle a <name>.
+            src.newitem i_mem_para_basket
+            src.act.timer 1
+            src.act.equip
+        endif  
+    endif
+    return 1
+endif
+if !(<findid(i_balle_basket)>)
+    return 1
+endif
+// Prise de balle
+if (<distance> == 1)
+    tag.esquive_total = <eval 0<tag.esquive_total>+1>
+    src.tag.prise_total = <eval 0<src.tag.prise_total>+1>
+    if (<findid(m_boost_basket_unblock)>)
+        var.rand = <eval Rand(4)>
+    else
+        var.rand = <eval Rand(2)>
+    endif
+    if (<eval <var.rand>>)
+        src.tag.prise = <eval 0<src.tag.prise>+1>
+        findid(i_balle_basket).cont = <src.uid>
+        SYSMESSAGEUA 0481 1 1 0 <src.name> vous prend la balle.
+        src.SYSMESSAGEUA 0481 1 1 0 Vous prenez la balle à <name>.
+    else
+        tag.esquive = <eval 0<tag.esquive>+1>
+        SYSMESSAGEUA 0481 1 1 0 <src.name> tente de vous prendre la balle.
+        src.SYSMESSAGEUA 0481 1 1 0 Vous n'arrivez pas a prendre la balle a <name>.
+    endif
+// lance une pierre
+elseif ( (<distance> < 5) || !(<src.findid(i_mem_para_basket)>) )
+    src.newitem i_mem_para_basket
+    src.act.timer 1
+    src.act.equip
+    tag.esquive_total = <eval 0<tag.esquive_total>+1>
+    src.tag.prise_total = <eval 0<src.tag.prise_total>+1>
+    effect 0,0136c,5,45
+    if (<findid(m_boost_basket_unblock)>)
+        var.rand = <eval Rand(80)>
+    else
+        var.rand = <eval Rand(50)>
+    endif
+    if (<eval (<var.rand>+(<eval <distance>*5>))> <= 30)
+        src.tag.prise = <eval 0<src.tag.prise>+1>
+        anim 20
+        bark 3
+        newitem 0122c
+        act.timer 10
+        act.attr = 0012
+        act.p <p>
+        findid(i_balle_basket).p = <p>
+        newitem i_mem_para_basket
+        act.tag.msg Vous etes dans les vappes
+        act.timer 2
+        equip <act>
+    else
+        tag.esquive = <eval 0<tag.esquive>+1>
+        sound 0239
+endif
+endif
+return 1
+ 
+[ITEMDEF i_targ_basket] 
+type=t_script 
+id=i_memory
+ 
+ON=@Create
+attr=attr_invis
+timer 10 
+ 
+On=@Timer
+var.tag_basket=
+remove
+return 1
+ 
+On=@DClick
+src.SYSMESSAGEUA 0481 1 1 0 Ciblez l'endroit choisi.
+targetg
+src.resend 
+return 1 
+ 
+On=@TargOn_Ground
+tryp 0 link.<var.tag_basket> = <src.targp>
+src.SYSMESSAGEUA 0481 1 1 0 Point defini : <src.targp>
+return 1
+ 
+On=@TargOn_Item
+tryp 0 link.<var.tag_basket> = <src.targp>
+src.SYSMESSAGEUA 0481 1 1 0 Point defini : <src.targp>
+return 1
+ 
+[ITEMDEF i_stats_player] 
+Name=statistiques personnelles
+type=t_script 
+id=014ef
+
+On=@Click
+message <name> de <tag.name>
+return 1
+ 
+On=@dclick
+dialog d_stats_player
+return 1
+
+[function f_boost_basket]
+if (rand(2))
+  newitem m_boost_basket_accuracy
+else
+  newitem m_boost_basket_unblock
+endif
+equip <act>
+
+[itemdef m_boost_basket_accuracy]
+ID=020c0
+NAME=Accuracy
+TYPE=t_eq_script
+LAYER=32
+ 
+On=@Equip
+cont.message Accuracy boost !
+cont.effect 3,0374a,0,16,0
+more2 = 4
+timer 2
+ 
+On=@Timer
+if (<eval <more2>> > 0)
+  cont.effect 3,0374a,0,16,0
+  more2 = <eval <more2> -1>
+  timer 3
+else
+  remove
+endif
+return 1
+
+
+[itemdef m_boost_basket_unblock]
+ID=02095
+NAME=Unblockable
+TYPE=t_eq_script
+LAYER=32
+ 
+On=@Equip
+cont.message Unblockable boost !
+cont.effect 3,03779,0,16,0
+more2 = 4
+timer 2
+ 
+On=@Timer
+if (<eval <more2>> > 0)
+  cont.effect 3,03779,0,16,0
+  more2 = <eval <more2> -1>
+  timer 3
+else
+  remove
+endif
+return 1

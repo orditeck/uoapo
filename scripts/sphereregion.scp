@@ -1,0 +1,508 @@
+[ITEMDEF i_stats_dropp]
+NAME=é
+ID=i_gold
+TYPE=T_EQ_SCRIPT
+
+ON=@Create
+TIMER=1
+ATTR=00082
+
+ON=@Timer
+REMOVE
+RETURN 1
+
+[REGIONRESOURCE mr_nothing]
+SKILL=0.0
+REAP=i_stats_dropp
+REGEN=60*60*2
+
+ON=@RESSOURCEFOUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne trouvez rien d'interressant !
+RETURN 1
+
+[REGIONRESOURCE mr_fish1]
+SKILL=60.0,120.0
+AMOUNT=9,18
+REAP=i_fish_big_1
+REGEN=60*60*2
+
+ON=@ResourceFound
+IF !<SRC.IS_DEJA_TRAVAIL>
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.NEWITEM m_timer_peche
+	SRC.ACT.TAG.RIEN = 1
+	SRC.ACT.CONT=<SRC.UID>
+	SRC.ACT.TIMER=2
+	SRC.ACT=<VAR.ACTSAVE>
+	VAR.ACTSAVE
+	RETURN 0
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous faites deja quelque chose !
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.ACT=<ARGO.UID>
+	SRC.ACT.REMOVE
+	SRC.ACT=<VAR.ACTSAVE>
+	VAR.ACTSAVE
+	RETURN 1
+ENDIF
+
+[REGIONRESOURCE mr_fish2]
+SKILL=60.0,120.0
+AMOUNT=9,18
+REAP=i_fish_big_2
+REGEN=60*60*2
+
+ON=@ResourceFound
+IF !<SRC.IS_DEJA_TRAVAIL>
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.NEWITEM m_timer_peche
+	SRC.ACT.TAG.RIEN = 1
+	SRC.ACT.CONT=<SRC.UID>
+	SRC.ACT.TIMER=2
+	SRC.ACT=<VAR.ACTSAVE>
+	VAR.ACTSAVE
+	RETURN 0
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous faites deja quelque chose !
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.ACT=<ARGO.UID>
+	SRC.ACT.REMOVE
+	SRC.ACT=<VAR.ACTSAVE>
+	VAR.ACTSAVE
+	RETURN 1
+ENDIF
+
+[REGIONRESOURCE mr_fish3]
+SKILL=60.0,120.0
+AMOUNT=9,18
+REAP=i_fish_big_3
+REGEN=60*60*2
+
+ON=@ResourceFound
+IF !<SRC.IS_DEJA_TRAVAIL>
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.NEWITEM m_timer_peche
+	SRC.ACT.TAG.RIEN = 1
+	SRC.ACT.CONT=<SRC.UID>
+	SRC.ACT.TIMER=2
+	SRC.ACT=<VAR.ACTSAVE>
+	VAR.ACTSAVE
+	RETURN 0
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous faites deja quelque chose !
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.ACT=<ARGO.UID>
+	SRC.ACT.REMOVE
+	SRC.ACT=<VAR.ACTSAVE>
+	VAR.ACTSAVE
+	RETURN 1
+ENDIF
+
+[REGIONRESOURCE mr_fish4]
+SKILL=60.0,120.0
+AMOUNT=9,18
+REAP=i_fish_big_4
+REGEN=60*60*2
+
+ON=@ResourceFound
+IF !<SRC.IS_DEJA_TRAVAIL>
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.NEWITEM m_timer_peche
+	SRC.ACT.TAG.RIEN = 1
+	SRC.ACT.CONT=<SRC.UID>
+	SRC.ACT.TIMER=2
+	SRC.ACT=<VAR.ACTSAVE>
+	VAR.ACTSAVE
+	RETURN 0
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous faites deja quelque chose !
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.ACT=<ARGO.UID>
+	SRC.ACT.REMOVE
+	SRC.ACT=<VAR.ACTSAVE>
+	VAR.ACTSAVE
+	RETURN 1
+ENDIF
+
+[REGIONRESOURCE mr_tresor_peche]
+SKILL=30.0,30.0
+AMOUNT=6,12
+REAP=i_fish_big_4
+REGEN=60*60*2
+
+ON=@ResourceFound
+IF !<SRC.IS_DEJA_TRAVAIL>
+	IF <ARGO.MORE2> == 0
+		VAR.ACTSAVE=<SRC.ACT.UID>
+		SRC.ACT=<ARGO.UID>
+		SRC.ACT.SET_TRESOR_RESSOURCE <SRC.FISHING>
+		VAR.TEMP_MORE1 = <SRC.ACT.MORE1>
+		VAR.TEMP_UID = <SRC.ACT.UID>
+		SRC.NEWITEM m_timer_peche
+		SRC.ACT.TAG.TEMPLATE_TRESOR = <VAR.TEMP_MORE1>
+		SRC.ACT.LINK = <VAR.TEMP_UID>
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.ACT=<VAR.ACTSAVE>
+		VAR.ACTSAVE
+		VAR.TEMP_MORE1
+		VAR.TEMP_UID
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il n'y a rien d'interressant a cet endroit
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous faites deja quelque chose !
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.ACT=<ARGO.UID>
+	SRC.ACT.REMOVE
+	SRC.ACT=<VAR.ACTSAVE>
+	VAR.ACTSAVE
+	RETURN 1
+ENDIF
+RETURN 0
+
+[REGIONRESOURCE mr_tree]
+SKILL=50.0,50.0
+AMOUNT=6,12
+REAP=i_log
+REGEN=60*60*2
+
+ON=@ResourceFound
+IF <SRC.ACTION> == SKILL_LUMBERJACK
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.ACT=<ARGO.UID>
+	SRC.ACT.RESSOURCEAMOUNT_BOIS <SRC.LUMBERJACKING>
+	SRC.ACT=<VAR.ACTSAVE>
+	RETURN 0
+ELSE
+	RETURN 1
+ENDIF
+
+[REGIONRESOURCE mr_tree_billot]
+SKILL=100.0,120.0
+AMOUNT=1,1
+REAP=i_billot
+REGEN=60*60*2
+
+ON=@ResourceFound
+IF <SRC.ACTION> == SKILL_LUMBERJACK
+	VAR.ACTSAVE=<SRC.ACT.UID>
+	SRC.ACT=<ARGO.UID>
+	SRC.ACT.RESSOURCEAMOUNT_BILLOT <SRC.LUMBERJACKING>
+	SRC.ACT=<VAR.ACTSAVE>
+	RETURN 0
+ELSE
+	RETURN 1
+ENDIF
+
+[REGIONRESOURCE mr_grass]
+// grazing animals
+// t_grass
+AMOUNT=9,30
+REGEN=60*60*2
+REAP=i_hay_sheaf
+
+[REGIONTYPE r_default]
+// Unclaimed regions.
+ON=@ENTER
+	SRC.MIDILIST=midi_britain1,midi_ForestA,midi_JungleA,midi_MountainA,midi_Plains,midi_Victory
+
+ON=@CLIPERIODIC
+	SRC.MIDILIST=midi_britain1,midi_ForestA,midi_JungleA,midi_MountainA,midi_Plains,midi_Victory
+
+[REGIONTYPE r_default_rock t_rock]
+RESOURCES=100.0 mr_rusty
+RESOURCES=100.0 mr_bronze
+RESOURCES=100.0 mr_copper
+RESOURCES=50.0 mr_gold
+RESOURCES=50.0 mr_shadow
+RESOURCES=50.0 mr_rose
+RESOURCES=50.0 mr_agapite
+RESOURCES=25.0 mr_bloodrock
+RESOURCES=25.0 mr_verite
+RESOURCES=25.0 mr_Valorite
+RESOURCES=25.0 mr_mytheril
+RESOURCES=20.0 mr_iron
+RESOURCES=12.0 mr_blackrock
+RESOURCES=12.0 mr_adulaire
+RESOURCES=12.0 mr_epidote
+RESOURCES=12.0 mr_calcite
+RESOURCES=7.0 mr_crocoite
+RESOURCES=7.0 mr_barytine
+RESOURCES=7.0 mr_pyromorphite
+RESOURCES=7.0 mr_morganite
+RESOURCES=3.0 mr_chrysoprase
+RESOURCES=3.0 mr_fluorite
+RESOURCES=3.0 mr_vanadinite
+RESOURCES=3.0 mr_autunite
+RESOURCES=2.0 mr_silver
+RESOURCES=2.0 mr_aqua
+RESOURCES=2.0 mr_heliodor
+RESOURCES=2.0 mr_goshenite
+RESOURCES=1.0 mr_aventurine
+RESOURCES=1.0 mr_grenat
+RESOURCES=1.0 mr_azurite
+RESOURCES=1.0 mr_citrine
+RESOURCES=0.1 mr_diamant
+RESOURCES=0.1 mr_piscium
+RESOURCES=0.1 mr_aquarii
+RESOURCES=0.1 mr_capricorni
+RESOURCES=0.1 mr_sagittae
+RESOURCES=0.1 mr_scorpii
+RESOURCES=0.1 mr_librae
+RESOURCES=0.1 mr_virginis
+RESOURCES=0.1 mr_leoni
+RESOURCES=0.1 mr_cancri
+RESOURCES=0.1 mr_geminorum
+RESOURCES=0.1 mr_tauri
+RESOURCES=0.1 mr_arietis
+RESOURCES=0.1 mr_titane
+RESOURCES=0.1 mr_nothing
+
+[REGIONTYPE r_default_water t_water]
+// Not really ocean area.
+RESOURCES=1.0 mr_tresor_peche
+RESOURCES=1.0 mr_fish1
+RESOURCES=1.0 mr_fish2
+RESOURCES=1.0 mr_fish3
+RESOURCES=1.0 mr_fish4
+RESOURCES=1.0 mr_nothing
+
+[REGIONTYPE r_default_tree t_tree]
+// All tress produce wood by default.
+RESOURCES=1000.0 mr_tree
+RESOURCES=1.0 mr_tree_billot
+
+[REGIONTYPE r_default_grass t_grass]
+// All grass can be eaten by default.
+RESOURCES=1.0 mr_grass
+
+[REGIONTYPE r_water t_water]
+// Water/Ocean boat sounds
+RESOURCES=1.0 mr_tresor_peche
+RESOURCES=1.0 mr_fish1
+RESOURCES=1.0 mr_fish2
+RESOURCES=1.0 mr_fish3
+RESOURCES=1.0 mr_fish4
+RESOURCES=1.0 mr_nothing
+
+ON=@REGPERIODIC
+	src.SFX={025,1,026,1,027,1,010,1,011,1,012,1,013,1}
+
+[REGIONTYPE r_brit t_rock]
+// Brit
+RESOURCES=100.0 mr_nothing
+RESOURCES=30.0 mr_iron
+
+ON=@ENTER
+	SRC.MIDILIST=midi_britain1,midi_britain2
+ON=@CLIPERIODIC
+	SRC.MIDILIST=midi_britain1,midi_britain2
+
+[REGIONTYPE r_brit_castle]
+// Lord brit castle.
+ON=@ENTER
+	SRC.MIDILIST=midi_LBCastle
+ON=@CLIPERIODIC
+	SRC.MIDILIST=midi_LBCastle
+
+[REGIONTYPE r_guard_tower]
+// Guard tower.
+ON=@ENTER
+	SRC.MIDILIST=midi_ForestA
+ON=@CLIPERIODIC
+	SRC.MIDILIST=midi_ForestA
+
+[REGIONTYPE r_black_castle]
+// Lord Blackthorne's Castle
+ON=@ENTER
+	SRC.MIDILIST=midi_BtCastle
+ON=@CLIPERIODIC
+	SRC.MIDILIST=midi_BtCastle
+
+[REGIONTYPE r_bucs_den]
+// Bucs den
+
+ON=@ENTER
+	IF <SRC.KILLS> > 5
+		SRC.MESSAGE Welcome to Bucs Den <SRC.NAME> You are a murderer and you feel at home here
+		SRC.MIDILIST=midi_BucsDen
+		RETURN 1
+	ELSE
+		SRC.MIDILIST=midi_BucsDen
+	ENDIF
+
+ON=@CLIPERIODIC
+	SRC.MIDILIST=midi_BucsDen
+
+[REGIONTYPE r_spooky t_rock]
+// Spooky outdoor area.
+RESOURCES=1000.0 mr_nothing
+RESOURCES=30.0 mr_iron
+RESOURCES=5.0 mr_shadow
+
+ON=@ENTER
+	SRC.MIDILIST=midi_Approach
+ON=@CLIPERIODIC
+	SRC.MIDILIST=midi_Approach
+
+[REGIONTYPE r_dungeon t_rock]
+// Dungeon sounds same day or night.
+// Shadow ore is only found here.
+RESOURCES=1000.0 mr_nothing
+RESOURCES=30.0 mr_iron
+RESOURCES=5.0 mr_shadow
+
+ON=@REGPERIODIC
+	src.SFX={021f,1,0243,1,0244,1,0245,1}
+
+[REGIONTYPE r_plains]
+// Plains night and day.
+ON=@REGPERIODIC
+	src.SFX={0a,1,0b,1}
+
+[REGIONTYPE r_forests]
+// Forest Day and night.
+
+ON=@REGPERIODIC
+	IF <src.sector.ISNIGHTTIME>
+		src.SFX={00,2,01,2,02,2,07d,1}
+	ELSE
+		src.SFX={08,10,09,10,0219,1,07d,1}
+	ENDIF
+
+[REGIONTYPE r_jungle]
+// Jungle Day and night.
+
+ON=@REGPERIODIC
+	IF <src.sector.ISNIGHTTIME>
+		src.SFX={0c,2,0d,2,0b3,1}
+	ELSE
+		src.SFX={03,2,04,2,05,2,0b3,1}
+	ENDIF
+
+[REGIONTYPE r_swamp t_rock]
+// Swamp Day and night.
+// Never anything to mine here.
+
+ON=@REGPERIODIC
+	src.SFX={0e,10,0f,10,022,1,023,1,024,1,0267,1}
+
+//****************************************
+//**************AMOUNT MINERAI************
+//****************************************
+//<ARGS> = LUMBERJACKING ; DEFAULT = WORLDGEM
+//****************************************
+[FUNCTION RESSOURCEAMOUNT_BOIS]
+IF <ARGS> < 40.0
+	AMOUNT=9
+ELSEIF <ARGS> < 50.0
+	AMOUNT=RAND(9,12)
+ELSEIF <ARGS> < 60.0
+	AMOUNT=RAND(10,12)
+ELSEIF <ARGS> < 70.0
+	AMOUNT=RAND(10,15)
+ELSEIF <ARGS> < 80.0
+	AMOUNT=RAND(12,15)
+ELSEIF <ARGS> < 90.0
+	AMOUNT=RAND(12,18)
+ELSEIF <ARGS> < 100.0
+	AMOUNT=RAND(15,18)
+ELSEIF <ARGS> < 110.0
+	AMOUNT=RAND(15,21)
+ELSEIF <ARGS> < 120.0
+	AMOUNT=RAND(18,21)
+ELSEIF <ARGS> < 140.0
+	AMOUNT=RAND(18,24)
+ELSEIF <ARGS> < 160.0
+	AMOUNT=RAND(21,24)
+ELSEIF <ARGS> < 180.0
+	AMOUNT=RAND(21,27)
+ELSE
+	AMOUNT=RAND(24,27)
+ENDIF
+
+[FUNCTION RESSOURCEAMOUNT_BILLOT]
+IF <ARGS> < 80.0
+	AMOUNT=1
+ELSEIF <ARGS> < 90.0
+	IF RAND(1,32) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 100.0
+	IF RAND(1,28) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 115.0
+	IF RAND(1,24) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 130.0
+	IF RAND(1,20) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 140.0
+	IF RAND(1,16) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 150.0
+	IF RAND(1,13) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 160.0
+	IF RAND(1,9) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 170.0
+	IF RAND(1,8) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 180.0
+	IF RAND(1,6) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSE
+	IF RAND(1,5) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ENDIF
+
+//<ARGS> = FISHING ; default = worldgem
+[FUNCTION SET_TRESOR_RESSOURCE]
+IF <EVAL RAND( 1878000 / <ARGS> )> == 0
+	MORE1=tm_immense_tresor
+ELSEIF <EVAL RAND( 1236000 / <ARGS> )> == 0
+	MORE1=tm_tres_gros_tresor
+ELSEIF <EVAL RAND( 450000 / <ARGS> )> == 0
+	MORE1=tm_gros_tresor
+ELSEIF <EVAL RAND( 90000 / <ARGS> )> == 0
+	MORE1=tm_moyen_tresor
+ELSEIF <EVAL RAND( 21000 / <ARGS> )> == 0
+	MORE1=tm_petit_tresor
+ELSEIF <EVAL RAND( 8000 / <ARGS> )> == 0
+	MORE1=tm_tres_petit_tresor
+ELSE
+	MORE1=0
+ENDIF
+MORE2=1//DEJA VU
+AMOUNT=1
+RETURN 1

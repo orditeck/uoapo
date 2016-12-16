@@ -1,0 +1,480 @@
+[ITEMDEF i_dalle_enleve_event]
+DEFNAME=i_dalle_enleve_event
+NAME=Dalle enleve event
+ID=049b
+
+ON=@CREATE
+COLOR=0abf
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D2
+	SRC.P=1998,81,7
+	SRC.UPDATE
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-2
+DESCRIPTION=Dalle enleve event
+
+[CHARDEF c_beryan] 
+DEFNAME=c_beryan
+NAME=Beryan
+ID=c_man
+ 
+TSPEECH=spk_beryan
+
+ON=@create
+COLOR=083ea
+FOOD=9999 
+SPEECHCOLOR=0480
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Specialiste des arcanes
+
+ITEMNEWBIE=01f03
+NAME=Robe arcanique
+COLOR=0c1
+ITEMNEWBIE=0df0
+NAME=Baton arcanique
+COLOR=0c1
+
+ON=@NPCSEENEWPLAYER
+IF ( <EVAL 0<SRC.TAG.RENAISSANCE>> <= 1 )
+	IF <EVAL 0<SRC.TAG.BERYAN>> < 1
+		SAY Halte la <SRC.SEX Messire/Madame> je suis Beryan gardien de l'antre des glaces !
+	ELSE
+		SAY Ravi de vous revoir <SRC.NAME> ! 
+	ENDIF
+ELSE
+	SAY Ravi de vous revoir <SRC.NAME> !
+ENDIF
+
+ON=@NPCHearUnknown
+IF ( <EVAL 0<SRC.TAG.RENAISSANCE>> == 1 )
+	IF (<EVAL(RAND(10))>=0) 
+		SAY Nom d'un collier arcanique vous allez cesser de m'importuner ?
+	ELSE
+		SAY Soyez plus clair ou taisez vous !
+	ENDIF
+ELSE
+	SAY ah...?
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-2
+DESCRIPTION=BERYAN
+
+[SPEECH spk_beryan]
+
+ON=*collier*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 0
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 1
+		IF <EVAL 0<SRC.TAG.BERYAN>> < 1
+			IF <SRC.RESTEST 1 i_collier_arcanique>
+				SRC.FINDID.i_collier_arcanique.REMOVE
+				SRC.TAG.BERYAN=1
+				EMOTE chuchotter
+				SAY Merci infiniment, j'en ai toujours reve c'est pourquoi j'accepte vous laisser entrer si vous le desirez ... mais n'en toucher mot a personne !
+			ELSE
+				SAY On dit que ces colliers augmentent considerablement les competences arcaniques de ceux qui les portent ...
+			ENDIF
+		ELSE
+			SAY Chut ! Ceci doit rester entre nous ...
+		ENDIF
+	ELSE
+		SAY Chut ! Cela doit rester notre petit secret ...
+	ENDIF
+ELSE
+	SAY Je n'evoquerai quoi que ce soit a ce sujet a un humain ...
+ENDIF
+
+ON=*entre*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 1
+	IF !<SRC.FINDLAYER.25>
+		SAY Bonne chance ... et revenez vivant !
+		SRC.EVENTS +e_anti_mark_recall
+		IF <SRC.FINDLAYER.40>
+			SRC.FINDLAYER.40.REMOVE
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+		SRC.TAG.anti_mark_recall=1
+		SRC.TAG.INSIDE_D2=1
+		SRC.P=5880,243
+		SRC.UPDATE
+	ELSE
+		SAY Vous feriez mieux de laisser votre monture ici, les claquements de ses sabots entraineraient les habitants de ces cavernes dans une colere noire !
+	ENDIF
+ELSE
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 0
+		IF <EVAL <SRC.TAG.BERYAN>> == 1
+			IF <EVAL 0<SRC.TAG.LEVEL>> >99
+				IF !<SRC.FINDLAYER.25>
+					SAY Bonne chance ... et revenez vivant !
+					SRC.EVENTS +e_anti_mark_recall
+					IF <SRC.FINDLAYER.40>
+						SRC.FINDLAYER.40.REMOVE
+					ENDIF
+					IF <SRC.FINDID.i_rune_delay_g>
+						SRC.FINDID.i_rune_delay_g.REMOVE
+						SRC.EFFECT 3,i_fx_smoke_small,0,60
+						SRC.SFX 01ed
+						SRC.EVENTS -e_casse_gate
+					ENDIF
+					SRC.TAG.anti_mark_recall=1
+					SRC.TAG.INSIDE_D2=1
+					SRC.P=5880,243
+					SRC.UPDATE
+				ELSE
+					SAY Vous feriez mieux de laisser votre monture ici, les claquements de ses sabots entraineraient les habitants de ces cavernes dans une colere noire !
+				ENDIF
+			ELSE
+				SAY Allons allons soyez raisonnable vous entrerez quand vous serez robuste !
+			ENDIF
+		ELSE
+			SAY Desole <SRC.SEX Messire/Madame> mais j'ai pour mission d'empecher quiconque de penetrer l'antre des glaces ...
+		ENDIF
+	ELSE
+		SAY Vous, pauvre humain, entrer ?
+		EMOTE eclater de rire
+	ENDIF
+ENDIF
+
+ON=*relique*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 0
+	IF (<EVAL 0<SRC.TAG.BERYAN>> == 1) || ( <EVAL 0<SRC.TAG.RENAISSANCE>> > 1 )
+		IF (<EVAL 0<SRC.TAG.LEVEL>> >99) || ( <EVAL 0<SRC.TAG.RENAISSANCE>> > 1 )
+			IF (<SRC.FINDID.i_relique_de_neige>) && (<SRC.FINDID.i_relique_de_glace>)
+				SAY Fantastique, ces reliques etaient la seule condition que l'oracle m'ait demande pour autoriser l'acces a son refuge, tenez voici les clefs qui vous permettront de passer les portes gelees !
+				SRC.NEWITEM i_cle_porte_gelee
+				SRC.ACT.BOUNCE
+				SRC.FINDID.i_relique_de_neige.REMOVE
+				SRC.FINDID.i_relique_de_glace.REMOVE
+			ELSEIF (<SRC.FINDID.i_relique_de_neige>)
+				SAY Bravo, vous possedez la relique de neiges mais n'en avez pas trouve une autre ?
+			ELSEIF (<SRC.FINDID.i_relique_de_glace>)
+				SAY Bravo, vous possedez la relique de glace mais n'en avez pas trouve une autre ?
+			ELSE
+				SAY On dit que deux de ces reliques se trouvent dans ces grottes ... Mais je n'en ai encore jamais vu ...
+			ENDIF
+		ELSE
+			SAY Des reliques ? Quelles reliques ?
+		ENDIF
+	ELSE
+		EMOTE prendre un air naif
+		SAY Des reliques ? Quelles reliques ?
+	ENDIF
+ELSE
+	SAY Ne parlez pas de choses dont vous ne connaissez rien pauvre humain !
+ENDIF
+
+[ITEMDEF i_cle_porte_gelee]
+DEFNAME=i_cle_porte_gelee
+NAME=Cle gelee
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0481
+LINK=0400041fb
+MORE1=0400041fb
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.UID>==0400041fb)
+	SRC.TARG.TYPE=t_door
+	SRC.SYSMESSAGEUA 0481 1 1 0 La porte est deverouillee
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-2
+DESCRIPTION=Cle gelee
+
+[ITEMDEF i_coffre_de_neige_ice]
+DEFNAME=i_coffre_de_neige_ice
+NAME=Coffre de neige
+ID=0e43
+TYPE=T_SCRIPT
+
+ON=@CREATE
+COLOR=0481
+
+ON=@DCLICK
+RETURN 1
+
+[ITEMDEF i_relique_de_neige]
+DEFNAME=i_relique_de_neige
+NAME=Relique de neige
+ID=01869
+
+ON=@CREATE
+COLOR=0481
+
+[ITEMDEF i_coffre_de_glace_ice]
+DEFNAME=i_coffre_de_glace_ice
+NAME=Coffre de glace
+ID=0e43
+TYPE=T_SCRIPT
+
+ON=@CREATE
+COLOR=0480
+
+ON=@DCLICK
+RETURN 1
+
+[ITEMDEF i_relique_de_glace]
+DEFNAME=i_relique_de_glace
+NAME=Relique de glace
+ID=01869
+
+ON=@CREATE
+COLOR=0486
+
+[ITEMDEF i_cle_de_glace_ice]
+DEFNAME=i_cle_de_glace_ice
+NAME=Cle de glace
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0480
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Que souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.BASEID>==i_coffre_de_glace_ice
+	SRC.TARG.TAG.PX=<SRC.TARG.P.X>
+	SRC.TARG.TAG.PY=<SRC.TARG.P.Y> + 1
+	SRC.TARG.TAG.PZ=<SRC.TARG.P.Z>
+	SRC.TARG.TAG.POSITION=<EVAL <SRC.TARG.TAG.PX>>,<EVAL <SRC.TARG.TAG.PY>>,<EVAL <SRC.TARG.TAG.PZ>>
+	IF (<EVAL(RAND(2))>=0)
+		SRC.NEWITEM i_relique_de_glace
+		SRC.ACT.P <SRC.TARG.TAG.POSITION>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+	ENDIF
+	EMOTE se desagreger
+	REMOVE
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-2
+DESCRIPTION=Cle de glace
+
+[ITEMDEF i_cle_de_neige_ice]
+DEFNAME=i_cle_de_neige_ice
+NAME=Cle de neige
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0481
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Que souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.BASEID>==i_coffre_de_neige_ice
+	SRC.TARG.TAG.PX=<SRC.TARG.P.X>
+	SRC.TARG.TAG.PY=<SRC.TARG.P.Y> + 1
+	SRC.TARG.TAG.PZ=<SRC.TARG.P.Z>
+	SRC.TARG.TAG.POSITION=<EVAL <SRC.TARG.TAG.PX>>,<EVAL <SRC.TARG.TAG.PY>>,<EVAL <SRC.TARG.TAG.PZ>>
+	IF (<EVAL(RAND(2))>=0)
+		SRC.NEWITEM i_relique_de_neige
+		SRC.ACT.P <SRC.TARG.TAG.POSITION>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+	ENDIF
+	EMOTE se desagreger
+	REMOVE
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-2
+DESCRIPTION=Cle de neige
+
+[ITEMDEF i_coffre_ice]
+DEFNAME=i_coffre_ice
+NAME=Coffre ice
+ID=0e43
+TYPE=T_SCRIPT
+
+ON=@CREATE
+TIMER=43200
+TAG.REMPLI=0
+
+ON=@DCLICK
+IF (<EVAL 0<TAG.REMPLI>> == 1)
+	TAG.REMPLI=0
+	TAG.PX=<P.X>
+	TAG.PY=<P.Y> + 1
+	TAG.PZ=<P.Z>
+	TAG.POSITION=<EVAL <TAG.PX>>,<EVAL <TAG.PY>>,<EVAL <TAG.PZ>>
+	TAG.TEMPSRESPAWN={43200 172800}
+	TIMER=<TAG.TEMPSRESPAWN>
+	SRC.NEWITEM { i_stats_dropp 15 i_epee_des_neiges 1 i_arc_des_neiges 1 }
+	SRC.ACT.P <TAG.POSITION>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TAG.REMPLI=1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-2
+DESCRIPTION=Coffre Ice
+
+[CHARDEF c_venerable_de_ice] 
+DEFNAME=c_venerable_de_ice
+NAME=Venerable de Ice
+ID=c_man
+ 
+TSPEECH=spk_venerable_de_ice
+
+ON=@create
+COLOR=03f1
+FOOD=9999 
+SPEECHCOLOR=0afa
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=01f03
+COLOR=0afa
+ITEMNEWBIE=0170d
+COLOR=0afa
+ITEMNEWBIE=013f8
+COLOR=0afa
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 1
+	SAY Bienvenue dans mon antre <SRC.NAME> !
+ELSE
+	SAY Votre destin est ailleurs <SRC.NAME>
+ENDIF
+
+ON=@NPCHearUnknown
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 1
+	IF <EVAL 0<SRC.TAG.VDICE>> == 0
+		SRC.TAG.VDICE=1
+		SAY J'ai ouie dire que vous etiez <SRC.SEX un/une> <SRC.SEX aventurier/aventuriere> des plus <SRC.SEX courageux/courageuses> ...
+	ELSEIF <EVAL 0<SRC.TAG.VDICE>> == 1
+		SRC.TAG.VDICE=2
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			SAY C'est pourquoi je tiens a contribuer a votre reussite en vous proposant de poursuivre la voie du bien ...
+		ELSE
+			SAY C'est pourquoi je tiens a contribuer a votre reussite en vous proposant de poursuivre la voie du mal ...
+		ENDIF
+	ELSE
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			SAY Si vous etes pret confirmez moi que vous desirez poursuivre la voie du bien
+		ELSE
+			SAY Si vous etes pret confirmez moi que vous desirez poursuivre la voie du mal
+		ENDIF
+	ENDIF
+ELSE
+	SAY Votre destin est ailleurs <SRC.NAME>
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-2
+DESCRIPTION=Venerable de Ice
+
+[SPEECH spk_venerable_de_ice]
+
+ON=Je desire poursuivre la voie du bien
+IF (<EVAL <SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D2>>==1)
+	IF <EVAL 0<SRC.TAG.COTE>> == 1
+		IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 1
+			IF <SRC.FINDID.03f0c>
+				SRC.TAG.RENAISSANCE=2
+				SRC.FINDID.03f0c.COLOR=0B19
+				SRC.COLOR=0B20
+				SRC.OSKIN=0B20
+				SRC.RENAITRE
+				SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie d'elu avec sa deuxieme renaissance !
+			ELSE
+				SAY Un elu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+			ENDIF
+		ELSE
+			SAY Votre destin est ailleurs <SRC.NAME>
+		ENDIF
+	ELSE
+		SAY Vous avez deja prete serment pour servir le mal
+	ENDIF
+ELSE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D2
+	SRC.P=1998,81,7
+	SRC.UPDATE
+ENDIF
+
+ON=Je desire poursuivre la voie du mal
+IF (<EVAL 0<SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D2>>==1)
+	IF <EVAL 0<SRC.TAG.COTE>> == 2
+		IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 1
+			IF <SRC.FINDID.03f0c>
+				SRC.TAG.RENAISSANCE=2
+				SRC.FINDID.03f0c.COLOR=0B27
+				SRC.COLOR=0B27
+				SRC.OSKIN=0B27
+				SRC.RENAITRE
+				SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie de dechu avec sa deuxieme renaissance !
+			ELSE
+				SAY Un dechu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+			ENDIF
+		ELSE
+			SAY Votre destin est ailleurs <SRC.NAME>
+		ENDIF
+	ELSE
+		SAY Vous avez deja prete serment pour servir le bien
+	ENDIF
+ELSE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D2
+	SRC.P=1998,81,7
+	SRC.UPDATE
+ENDIF
+
+ON=*colise*
+ON=*colyse*
+SAY Seul le venerable de Wrong pourra vous y emmener ...

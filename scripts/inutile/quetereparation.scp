@@ -1,0 +1,88 @@
+[itemdef i_memoire_reparation]
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@DCLICK
+TARGET Que voulez vous reparer ? 
+RETURN 1 
+
+on=@targon_item
+IF (<SRC.RESTEST 1 i_perle_enchantement>)
+IF <SRC.TARG.BASEID>==i_epee_d_os
+SRC.SYSMESSAGE Cet objet est trop complexe pour etre repare
+ELSE
+IF (<src.targ.type>==t_weapon_sword )||(<src.targ.type>== t_weapon_bow) ||(<src.targ.type>== t_weapon_fence)||(<src.targ.type>==t_weapon_mace_smith)||(<src.targ.type>==t_armor)||(<src.targ.type>==t_shield)||(<src.targ.type>==t_armor_leather)
+src.targ.more1h=<src.targ.more1l>
+SRC.TARG.EMOTE briller de mille feux
+SRC.CONSUME 1 i_perle_enchantement
+else
+src.sysmessage Ceci n'est pas une arme ni une armure
+RETURN 1
+endif
+ENDIF
+ELSE
+src.sysmessage Vous n'avez pas de perle d'enchantement
+ENDIF
+REMOVE
+return 1
+
+[SPEECH spk_quete_reparation]
+on=*bonjour*
+SAY Bonjour <SRC.SEX Damoiseau/Damoiselle> que me vaut votre visite ?
+on=*repar*
+IF (<SRC.RESTEST 1 i_perle_enchantement>)
+SAY Accepteriez vous de me donner une de vos perles d'enchantement contre la reparation ?
+ELSE
+SAY Je ne travaille jamais gratuitement ! Donnez moi une perle d'enchantement et je vous repare l'objet de votre choix .
+ENDIF
+on=oui
+IF (<SRC.RESTEST 1 i_perle_enchantement>)
+SRC.NEWITEM i_memoire_reparation
+SRC.ACT.CONT=<SRC.UID> 
+SRC.ACT.MOREP=<SRC.P> 
+SRC.ACT.USE
+ELSE
+SAY Je ne travaille jamais gratuitement ! Donnez moi une perle d'enchantement et je vous repare l'objet de votre choix .
+ENDIF
+on=non
+SAY Eh bien tant pis !
+
+[CHARDEF c_quete_reparateur]
+DEFNAME=c_quete_reparateur
+NAME=Arthur
+ID=C_MAN
+
+TSPEECH=spk_quete_reparation
+
+ON=@Create
+NPC=brain_human
+COLOR=colors_skin
+STR=9999
+DEX=9999
+INT=9999
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=013e3
+COLOR=0481
+ITEMNEWBIE=i_robe
+COLOR=000c3
+ITEMNEWBIE=i_sandals
+COLOR=000c3
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+ON=@NPCHEARUNKNOWN
+SAY Que racontez vous ? je n'y comprends rien ! Vous voulez reparer quelque chose n'est ce pas ?
+
+CATEGORY=Genese
+SUBSECTION=Quete
+DESCRIPTION=Reparateur

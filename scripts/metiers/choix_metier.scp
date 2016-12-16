@@ -1,0 +1,29 @@
+[ITEMDEF i_pierre_de_metier]
+ID=i_guildstone
+TYPE=t_normal
+NAME=Pierre de metier
+
+ON=@CLICK
+MESSAGE Pierre de metier(<TAG.METIER>)
+RETURN 1
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 5
+
+ELSEIF <SRC.ACCOUNT.PLEVEL> < 3
+	IF 0<SRC.TAG.CHOIX_METIER1> == 0
+
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja choisi un metier !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'etes pas autorise a utiliser cette pierre!
+ENDIF
+RETURN 1
+
+[DIALOG D_PIERRE_METIER_GM]
+0,0
+PAGE 0
+resizepic 0 0 2620 400 520
+PAGE 1
+text 130 20 1152 1//Voulez vous vraiment choisir le metier : <TAG.METIER> ?

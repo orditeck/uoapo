@@ -1,0 +1,481 @@
+[SPEECH jobALCHEMIST]
+
+ON=*job*
+ON=*work*
+ON=*what*do*do*
+ON=*profession*
+ON=*occupation*
+	// SAY=I mix potions and other concoctions of great value.
+
+	IF ( <SRC.KARMA.WICKED> || <SRC.KARMA.BELLIGERANT> )
+		IF ( <COMPLEXITY.HIGH> )
+			DORAND 3
+				SAY Je suis un Alchimiste ...
+				SAY Je fais parti de l'universite d'alchimie de Britannia
+				SAY Je pratique regulierement l'alchimie
+			ENDDO
+		ELSE
+			DORAND 2
+				SAY Je suis un Alchimiste ...
+				SAY Je fais parti de l'universite d'alchimie de Britannia
+			ENDDO
+		ENDIF
+	ELIF ( <SRC.KARMA.NEUTRAL> )
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 2
+				SAY Je suis un Alchimiste ...
+				SAY Je fais parti de l'universite d'alchimie de Britannia
+			ENDDO
+		ELSE
+			DORAND 2
+				SAY De l'alchimie ? eh oui c'est l'alchimie que je pratique !
+				SAY J'etudie l'alchimie
+			ENDDO
+		ENDIF
+	ELSE
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 2
+				SAY Je suis un fondu d'alchimie
+				SAY J'ai devoue ma vie a l'alchimie
+			ENDDO
+		ELSE
+			DORAND 2
+				SAY Je suis alchimiste
+				SAY Je pratique l'alchimie
+			ENDDO
+		ENDIF
+	ENDIF
+ON=*alchem*
+	IF ( <SRC.KARMA.WICKED> || <SRC.KARMA.BELLIGERANT> )
+		IF ( <COMPLEXITY.HIGH> )
+			DORAND 3
+				SAY L'alchimie se transmet de bouches a oreilles c'est pourquoi cet art est si secret.
+				SAY Je vous vends des potions mais je ne vous devoilerai pas mes secrets !
+				SAY Quoi ? Vous voulez connaitre mes secrets ? *Grogne* Des annees que je pratique cet art ! Ce n'est pas en un jour que vous apprendrez !
+			ENDDO
+		ELIF ( <COMPLEXITY.MEDIUM>)
+			DORAND 2
+				SAY L'alchimie se transmet de bouches a oreilles c'est pourquoi cet art est si secret.
+				SAY Je vous vends des potions mais je ne vous devoilerai pas mes secrets !
+			ENDDO
+		ELSE
+			DORAND 2
+				SAY Quoi ? Vous voulez connaitre mes secrets ? *Grogne* Des annees que je pratique cet art ! Ce n'est pas en un jour que vous apprendrez !
+				SAY Je suis la pour vendre des potions pas pour vous servir d'encyclopedie !
+			ENDDO
+		ENDIF
+	ELIF ( <SRC.KARMA.NEUTRAL> )
+		IF ( <COMPLEXITY.HIGH> )
+			DORAND 3
+				SAY Desole , la profession veut que je ne devoile mes secrets a personne ... 
+				SAY Ah non ! Je ne vosu devoilerai pas mes secrets ! Meme pour de l'argent !
+				SAY J'ai passe tant d'annees a etudier et a souffrir pour en arriver a mon niveau actuel ... je ne vous devoilerai donc rien !
+			ENDDO
+		ELIF ( <COMPLEXITY.MEDIUM>)
+			DORAND 2
+				SAY Desole , la profession veut que je ne devoile mes secrets a personne ...
+				SAY Ah non ! Je ne vous devoilerai pas mes secrets ! Meme pour de l'argent !
+			ENDDO
+		ELSE
+			DORAND 2
+				SAY Desole , la profession veut que je ne devoile mes secrets a personne ...
+				SAY Ah non ! Je ne vous devoilerai pas mes secrets ! Meme pour de l'argent !
+			ENDDO
+		ENDIF
+	ELSE
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 2
+				SAY L'alchimie sert autant le bien que la mort ...
+				SAY Pour reussir en alchimie , laissez vous guider par votre coeur !
+			ENDDO
+		ELSE
+			DORAND 2
+				SAY L'alchimie sert autant le bien que la mort ...
+				SAY Pour reussir en alchimie , laissez vous guider par votre coeur !
+			ENDDO
+		ENDIF
+	ENDIF
+ON=*secret*
+	IF ( <SRC.KARMA.WICKED> || <SRC.KARMA.BELLIGERANT> )
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 3
+				SAY Du vent ! Rien , je ne vous devoilerai rien !
+				SAY Je ne vous apprendrai rien ... rien !
+				SAY Quoi ? Vous voulez connaitre mes secrets ? *Grogne* Des annees que je pratique cet art ! Ce n'est pas en un jour que vous apprendrez !
+			ENDDO
+		ELSE
+			DORAND 3
+				SAY Du vent ! Et ne tentez pas de me redemander quoi que ce soit
+				SAY Rien , je ne dirai rien de mes secrets !
+				SAY Non mais vous plaisantez *rit* je ne vous expliquerez rien de mes techniques ...
+			ENDDO
+		ENDIF
+	ELIF ( <SRC.KARMA.NEUTRAL> )
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 3
+				SAY Je ne peux pas vous devoilez ca ... Desole .
+				SAY Meme contre de l'or je ne vous apprendrez rien !
+				SAY Je ne peux rien vous devoiler ce serait contre le reglement !
+			ENDDO
+		ELSE
+			DORAND 3
+				SAY Je ne peux pas vous devoiler mes secrets , laissez moi en paix !
+				SAY Je n'ai aucun secret a vous partager
+				SAY Je ne peux rien vous expliquer sur mon art , c'est contre le reglement !
+			ENDDO
+		ENDIF
+	ELSE
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 2
+				SAY I can tell thee nothing of our secrets.  Sorry.
+				SAY The secrets are mine to keep.  Not to share.
+			ENDDO
+		ELSE
+			DORAND 2
+				SAY I can tell thee nothing of our secrets. Sorry.
+				SAY The secrets are mine. I can't share them.
+			ENDDO
+		ENDIF
+	ENDIF
+ON=*magic*
+ON=*mage*
+	IF ( <SRC.KARMA.WICKED> || <SRC.KARMA.BELLIGERANT> )
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 2
+				SAY Je ne suis pas mage , sombre idiot ! je suis alchimiste
+				SAY L'alchimie est bien plus complexe que la magie , idiot soit tu !
+			ENDDO
+		ELSE
+			SAY je ne pratique pas la magie !! Je suis alchimiste !
+		ENDIF
+	ELIF ( <SRC.KARMA.NEUTRAL> )
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 2
+				SAY Oh la magie ... *soupire* c'est bien pour les debutants ... moi je pratique un art plus complexe
+				SAY La magie ? non non , moi je ne touche pas a cet art de debutant
+			ENDDO
+		ELSE
+			SAY Ah la magie ? non , moi je prefere un art plus noble ...
+		ENDIF
+	ELSE
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			SAY L'alchimie est a la magie ce que l'eau est au mercure , bien que ces deux activites ont des points communs ... 
+		ELSE
+			SAY L'alchimiste et le mage sont aussi differents ... aussi differents que ... *hesitant* ... que deux personnes !
+		ENDIF
+	ENDIF
+ON=*skill*
+		IF ( <COMPLEXITY.HIGH> )
+			DORAND 3
+				SAY Vous avez besoin de vous ameliorer en alchimie ? Bien sur je peux vous aider ...
+				SAY Mhhh vous pourrez bientot faire de belles potions , mais vous devez encore vous ameliorer ...
+				SAY *Sourit* Oui je pourrai ameliorer votre competence ... *ricane* mais ne sous estimez pas mes prix !
+			ENDDO
+		ELSE
+			DORAND 3
+				SAY Vous avez besoin de vous ameliorer en alchimie ? Bien sur je peux vous aider ...
+				SAY Mhhh vous pourrez bientot faire de belles potions , mais vous devez encore vous ameliorer ...
+				SAY *Sourit* Oui je pourrai ameliorer votre competence ... *ricane* mais ne sous estimez pas mes prix !
+			ENDDO
+		ENDIF
+ON=*mortar*
+ON=*pestle*
+ON=*vial*
+	IF ( <SRC.KARMA.WICKED> || <SRC.KARMA.BELLIGERANT> )
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 2
+				SAY Je peux vous vendre du materiel d'alchimie si vous le desirez ...
+				SAY Que desirez vous ? Un tube a essai , une fiole ? Des reactifs ?
+			ENDDO
+		ELSE
+			SAY Je peux vous vendre toute sorte de recipients et ingredients ...
+		ENDIF
+	ELIF ( <SRC.KARMA.NEUTRAL> )
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 2
+				SAY J'ai de vieux recipients que je n'utilise pas , les desirez vous ?
+				SAY Je peux vous vendre un necessaire a alchimie si vous le voulez ...
+			ENDDO
+		ELSE
+			SAY J'ai de vieux recipients que je n'utilise pas , les desirez vous ?
+		ENDIF
+	ELSE
+		SAY Je n'ai pas l'habitude de ceder du materiel aux inconnus , mais vous me paraissez correct ...
+	ENDIF
+ON=*potion*
+	IF ( <SRC.KARMA.WICKED> || <SRC.KARMA.BELLIGERANT> )
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 10
+				SAY Ah vous cherchez des potions !! eh bien regardez ce que j'ai !
+				SAY La potion bleu augmente l'agilite de celui qui la boit
+			        SAY Ne buvez pas la potion noire ... Donnez la plutot a un ennemi ...
+			        SAY La potion jaune a des proprietes guerisseuses ...
+			        SAY La potion rouge est assez rafraichissante ...
+			        SAY Vous voulez etre plus fort ? Buvez donc de la potion blanche !
+			        SAY Souvenez vous , la potion verte c'est du poison !
+			        SAY Les insomniaques raffolent de mes potions oranges *sourire sadique*
+			        SAY Hehe la potion violette , dangereuse a utiliser mais efficace , n'oubliez pas de la lancer loin de vous *sourit*
+
+			        SAY J'ai tous les types de potions regardez vous meme !
+			ENDDO
+		ENDIF
+	ELIF ( <SRC.KARMA.NEUTRAL> )
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 10
+			        SAY Ah vous cherchez des potions !! eh bien regardez ce que j'ai !
+				SAY La potion bleu augmente l'agilite de celui qui la boit
+			        SAY Ne buvez pas la potion noire ... Donnez la plutot a un ennemi ...
+			        SAY La potion jaune a des proprietes guerisseuses ...
+			        SAY La potion rouge est assez rafraichissante ...
+			        SAY Vous voulez etre plus fort ? Buvez donc de la potion blanche !
+			        SAY Souvenez vous , la potion verte c'est du poison !
+			        SAY Les insomniaques raffolent de mes potions oranges *sourire sadique*
+			        SAY Hehe la potion violette , dangereuse a utiliser mais efficace , n'oubliez pas de la lancer loin de vous *sourit*
+			ENDDO
+		ENDIF
+	ELSE
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 10
+				SAY Ah vous cherchez des potions !! eh bien regardez ce que j'ai !
+				SAY La potion bleu augmente l'agilite de celui qui la boit
+			        SAY Ne buvez pas la potion noire ... Donnez la plutot a un ennemi ...
+			        SAY La potion jaune a des proprietes guerisseuses ...
+			        SAY La potion rouge est assez rafraichissante ...
+			        SAY Vous voulez etre plus fort ? Buvez donc de la potion blanche !
+			        SAY Souvenez vous , la potion verte c'est du poison !
+			        SAY Les insomniaques raffolent de mes potions oranges *sourire sadique*
+			        SAY Hehe la potion violette , dangereuse a utiliser mais efficace , n'oubliez pas de la lancer loin de vous *sourit*
+			ENDDO
+		ENDIF
+	ENDIF
+ON=*black pearl*
+ON=*red potion*
+ON=*refresh*
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 3
+				SAY Pour faire une potion rouge , vous avez besoin de perles noires .
+				SAY La potion vous permet de recuperer du souffle lorsque vous etes trop fatigues
+				SAY Mes potions rouges sont faites a partir de perles noires ...
+			ENDDO
+		ENDIF
+ON=*garlic*
+ON=*black potion*
+ON=*blind*
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 3
+				SAY La potion noire est faite a partir de garlic
+				SAY La potion noire est vraiment facile a faire !
+				SAY La potion noire est vraiment facile a faire : elle est composee de garlic
+			ENDDO
+		ENDIF
+ON=*ginsing*
+ON=*yellow potion*
+ON=*heal*
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 3
+				SAY Boire une potion jaune vous redonnera de la vie ...
+				SAY J'utilise du ginseng pour faire des potions jaunes .
+				SAY Si vous etes blesse , alors buvez une potion jaune elle vous redonnera un peu de vie
+			ENDDO
+
+		ENDIF
+ON=*bloodmoss*
+ON=*blue potion*
+ON=*agility*
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 3
+				SAY La potion bleu est realisee a partir de bloodmoss , elle augmentera votre dexterite
+				SAY Votre dexterite sera augmentee si vous buvez de la potion bleue
+				SAY En buvant une potion bleue vous serez beaucoup plus rapide
+			ENDDO
+
+		ENDIF
+ON=*nightshade*
+ON=*green potion*
+ON=*poison*
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 3
+				SAY Evitez de boire la potion verte , elle vous tuerai a petit feu
+				SAY Le reactif mortel qu'est le nightshade est le principal ingredient pour la potion verte 
+				SAY Thou can make thy own poison, if thou dost have the skill and the nightshade.
+			ENDDO
+		ENDIF
+ON=*mandrake*
+ON=*white potion*
+ON=*strength*
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 3
+				SAY Utilisez du mandrake pour faire des potions qui augmente la force
+				SAY La potion blanche sert a augmenter votre force
+				SAY L'utilisation de mandrake dans vos potions resultera en un brevage qui augmentera votre force
+			ENDDO
+		ENDIF
+ON=*sulphurous ash*
+ON=*purple potion*
+ON=*explode*
+ON=*explosion*
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 3
+				SAY La potion violette est tres ... dangereuse
+				SAY manipulez soigneusement la potion violette , elle pourrait bien vous sauter a la figure !
+				SAY Le Sulphurous ash permet la creation de potion violette
+			ENDDO
+		ENDIF
+ON=*spider silk*
+ON=*orange potion*
+ON=*sleep*
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 3
+				SAY Ma potion orange endormira quiconque la boira ...
+				SAY La soie d'araignee est l'ingredient pour realiser la potion orange
+				SAY Utilisez de la soie d'araignee pour concocter votre propre potion orange
+			ENDDO
+		ENDIF
+ON=*reagents*
+	IF ( <SRC.KARMA.WICKED> || <SRC.KARMA.BELLIGERANT> )
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 2
+				SAY Je prefere acheter vos reactifs que de vous vendre les miens
+				SAY Je vend rarement des reactifs , je prefere les acheter
+			ENDDO
+		ENDIF
+	ELIF ( <SRC.KARMA.NEUTRAL> )
+			DORAND 2
+				SAY Les reactifs sont essentiels a l'alchimie , peut etre en auriez vous a me vendre ?
+				SAY Si vous me vendez des reactifs je pourrai peut etre vous devoiler quelques un de mes secrets ...
+			ENDDO
+	ELSE
+		IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
+			DORAND 2
+				SAY Les reactifs sont essentiels a l'alchimie , peut etre en auriez vous a me vendre ?
+				SAY Si vous me vendez des reactifs je pourrai peut etre vous devoiler quelques un de mes secrets ...
+			ENDDO
+		ELSE
+			DORAND 2
+				SAY Oh des reactifs , vous m'en vendez ?
+				SAY Je recolte souvent mes propres reactifs , mais si vous en avez pour moi ... je pourrai peut etre vous en acheter ...
+			ENDDO
+		ENDIF
+	ENDIF
+
+ON=Hail
+ON=Hi
+ON=Greet
+ON=Hello
+	SAY=Bonjour *sourit*
+
+ON=Bye
+ON=Goodbye
+ON=Farewell
+	SAY=Farewell.
+	BYE
+	return 1
+
+ON=AGILITY
+	SAY=vous cherchez la potion bleu ? j'en ai en stock ...
+
+ON=ALCHEM*
+ON=ALECHEMIST
+ON=ALCHEMY
+	SAY=Science et magie ne font qu'un ...
+
+ON=BLACK PEARL
+	SAY=Ah oui , des perles noires ... ehm un reactif assez rare ...
+
+ON=BLACK POTION
+	SAY=Vous pouvez voir dans le noir avec ce breuvage ... sisi !
+
+ON=BLIND
+	SAY=J'ai de bons yeux , merci ...
+
+ON=BLOODMOSS
+	SAY=Bloodmoss une plante de la famille des cocphoris us delanctus ...
+
+ON=BLUE POTION
+	SAY=Ca augmentera votre dexterite , et veinard que vous etes , j'en ai encore a vendre
+
+ON=EXPLOSION
+ON=EXPLODE
+	SAY=Ah, vous cherchez la potion violette *sourit*
+
+ON=GARLIC
+	SAY=Le garlic apporte des bienfaits au corps humain ...
+
+ON=GINSENG
+	SAY=La guerison est la propriete principale du ginseng
+
+ON=GREEN POTION
+	SAY=Attention a ca c'est tres toxique
+
+ON=HEAL
+	SAY=La potion de soin avancee est tres benefique pour le corps ...
+
+ON=MAGE
+	SAY=Les mages se servent souvent de mes potions ...
+
+ON=MAGIC
+	SAY=La magie c'est bien , mais l'alchimie c'est mieux *sourit*
+
+ON=MANDRAKE
+	SAY=Mandrake is the reagent of power and energy.  Quite hard to find.
+
+ON=MORTAR
+	SAY=My mortar has been in my family for generations.
+
+ON=NIGHTSHADE
+	SAY=Did you know that the Nightshade's flower only blooms at night?
+
+ON=ORANGE POTION
+	SAY=This, my friend, will counteract poison.
+
+ON=PESTLE
+	SAY=Hmm, looks like I need pestle myself.  Black Pearl is awfully harsh.
+
+ON=POISON
+	SAY=Be very careful with Green Potions.
+
+ON=POTION
+	SAY=Oh yes, I have all kinds!
+
+ON=PURPLE POTION
+	SAY=Very explosive things indeed.
+
+ON=REAGENTS
+	SAY=You can find them yourself.  But it may be easier to buy a few from me.
+
+ON=RED POTION
+	SAY=This will refresh your stamina.
+
+ON=REFRESH
+	SAY=Is thou asking me of the Red Potion?
+
+ON=SECRET
+	SAY=I cannot share the secrets with you, my friend.
+
+ON=SKILL
+	SAY=The more skillful an alchemist is, the more powerful the potion he creates.
+
+ON=SLEEP
+	SAY=An Orange Potion will bring a curing sleep.
+
+ON=SPIDER SILK
+	SAY=This is known as the binding reagent.  And quite light-weight actually.
+
+ON=STRENGTH
+	SAY=You would use the White Potion to gain this attribute.
+
+ON=SULPHUROUS ASH
+	SAY=An explosive reagent.  Very foul-smelling.
+
+ON=VIAL
+	SAY=All of my vials are shatter-proof.
+
+ON=WHITE POTION
+	SAY=It improves one's Strength.
+
+ON=YELLOW POTION
+	SAY=A healing potion.  Never travel without a few.
+//RANDOM=Have potions, will travel.  That's my motto.
+// DEFAULT=I do not understand thee.
+
+[EOF]

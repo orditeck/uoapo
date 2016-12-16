@@ -1,0 +1,2578 @@
+//********************************
+//**********PARAMETRES************
+//********************************
+
+[FUNCTION COULEUR_JOKER]
+RETURN 050
+
+[FUNCTION COULEUR_COEUR]
+RETURN 025
+
+[FUNCTION COULEUR_CARREAU]
+RETURN 030
+
+[FUNCTION COULEUR_TREFLE]
+RETURN 0b10
+
+[FUNCTION COULEUR_PIQUE]
+RETURN 03b2
+
+
+//*******************************
+//***********PAQUET**************
+//*******************************
+
+//TAG.CARTE1_pi = 1 ==> as de pique deja utilise
+[ITEMDEF i_paquet_de_cartes] 
+NAME=Paquet de carte
+ID=i_spellbook
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Paquet de cartes
+
+
+//DEFAULT : i_paquet_de_cartes
+//RETOURNE UNE CARTE AU HASARD
+//1...13 : pique
+//14...26 : trefle
+//27...39 : carreau
+//40...52 : coeur
+//53 : JOKER COULEUR
+//54 : JOKER BLANC
+[FUNCTION PROCHAINE_CARTE_ALEATOIRE]
+ARGS = 0
+IF <BASEID> != i_paquet_de_cartes
+	RETURN 0
+ELSEIF <NB_CARTES_DANS_PAQUET> == 0
+	RETURN 0
+ENDIF
+WHILE (<ARGS> == 0)
+	ARGS = <EVAL RAND(54) + 1>
+	IF ((<ARGS> == 1) && (0<TAG.CARTE1_pi> == 0))
+		TAG.CARTE1_pi = 1
+	ELSEIF ((<ARGS> == 2) && (0<TAG.CARTE2_pi> == 0))
+		TAG.CARTE2_pi = 1
+	ELSEIF ((<ARGS> == 3) && (0<TAG.CARTE3_pi> == 0))
+		TAG.CARTE3_pi = 1
+	ELSEIF ((<ARGS> == 4) && (0<TAG.CARTE4_pi> == 0))
+		TAG.CARTE4_pi = 1
+	ELSEIF ((<ARGS> == 5) && (0<TAG.CARTE5_pi> == 0))
+		TAG.CARTE5_pi = 1
+	ELSEIF ((<ARGS> == 6) && (0<TAG.CARTE6_pi> == 0))
+		TAG.CARTE6_pi = 1
+	ELSEIF ((<ARGS> == 7) && (0<TAG.CARTE7_pi> == 0))
+		TAG.CARTE7_pi = 1
+	ELSEIF ((<ARGS> == 8) && (0<TAG.CARTE8_pi> == 0))
+		TAG.CARTE8_pi = 1
+	ELSEIF ((<ARGS> == 9) && (0<TAG.CARTE9_pi> == 0))
+		TAG.CARTE9_pi = 1
+	ELSEIF ((<ARGS> == 10) && (0<TAG.CARTE10_pi> == 0))
+		TAG.CARTE10_pi = 1
+	ELSEIF ((<ARGS> == 11) && (0<TAG.CARTE11_pi> == 0))
+		TAG.CARTE11_pi = 1
+	ELSEIF ((<ARGS> == 12) && (0<TAG.CARTE12_pi> == 0))
+		TAG.CARTE12_pi = 1
+	ELSEIF ((<ARGS> == 13) && (0<TAG.CARTE13_pi> == 0))
+		TAG.CARTE13_pi = 1
+	ELSEIF ((<ARGS> == 14) && (0<TAG.CARTE1_tr> == 0))
+		TAG.CARTE1_tr = 1
+	ELSEIF ((<ARGS> == 15) && (0<TAG.CARTE2_tr> == 0))
+		TAG.CARTE2_tr = 1
+	ELSEIF ((<ARGS> == 16) && (0<TAG.CARTE3_tr> == 0))
+		TAG.CARTE3_tr = 1
+	ELSEIF ((<ARGS> == 17) && (0<TAG.CARTE4_tr> == 0))
+		TAG.CARTE4_tr = 1
+	ELSEIF ((<ARGS> == 18) && (0<TAG.CARTE5_tr> == 0))
+		TAG.CARTE5_tr = 1
+	ELSEIF ((<ARGS> == 19) && (0<TAG.CARTE6_tr> == 0))
+		TAG.CARTE6_tr = 1
+	ELSEIF ((<ARGS> == 20) && (0<TAG.CARTE7_tr> == 0))
+		TAG.CARTE7_tr = 1
+	ELSEIF ((<ARGS> == 21) && (0<TAG.CARTE8_tr> == 0))
+		TAG.CARTE8_tr = 1
+	ELSEIF ((<ARGS> == 22) && (0<TAG.CARTE9_tr> == 0))
+		TAG.CARTE9_tr = 1
+	ELSEIF ((<ARGS> == 23) && (0<TAG.CARTE10_tr> == 0))
+		TAG.CARTE10_tr = 1
+	ELSEIF ((<ARGS> == 24) && (0<TAG.CARTE11_tr> == 0))
+		TAG.CARTE11_tr = 1
+	ELSEIF ((<ARGS> == 25) && (0<TAG.CARTE12_tr> == 0))
+		TAG.CARTE12_tr = 1
+	ELSEIF ((<ARGS> == 26) && (0<TAG.CARTE13_tr> == 0))
+		TAG.CARTE13_tr = 1
+	ELSEIF ((<ARGS> == 27) && (0<TAG.CARTE1_ca> == 0))
+		TAG.CARTE1_ca = 1
+	ELSEIF ((<ARGS> == 28) && (0<TAG.CARTE2_ca> == 0))
+		TAG.CARTE2_ca = 1
+	ELSEIF ((<ARGS> == 29) && (0<TAG.CARTE3_ca> == 0))
+		TAG.CARTE3_ca = 1
+	ELSEIF ((<ARGS> == 30) && (0<TAG.CARTE4_ca> == 0))
+		TAG.CARTE4_ca = 1
+	ELSEIF ((<ARGS> == 31) && (0<TAG.CARTE5_ca> == 0))
+		TAG.CARTE5_ca = 1
+	ELSEIF ((<ARGS> == 32) && (0<TAG.CARTE6_ca> == 0))
+		TAG.CARTE6_ca = 1
+	ELSEIF ((<ARGS> == 33) && (0<TAG.CARTE7_ca> == 0))
+		TAG.CARTE7_ca = 1
+	ELSEIF ((<ARGS> == 34) && (0<TAG.CARTE8_ca> == 0))
+		TAG.CARTE8_ca = 1
+	ELSEIF ((<ARGS> == 35) && (0<TAG.CARTE9_ca> == 0))
+		TAG.CARTE9_ca = 1
+	ELSEIF ((<ARGS> == 36) && (0<TAG.CARTE10_ca> == 0))
+		TAG.CARTE10_ca = 1
+	ELSEIF ((<ARGS> == 37) && (0<TAG.CARTE11_ca> == 0))
+		TAG.CARTE11_ca = 1
+	ELSEIF ((<ARGS> == 38) && (0<TAG.CARTE12_ca> == 0))
+		TAG.CARTE12_ca = 1
+	ELSEIF ((<ARGS> == 39) && (0<TAG.CARTE13_ca> == 0))
+		TAG.CARTE13_ca = 1
+	ELSEIF ((<ARGS> == 40) && (0<TAG.CARTE1_co> == 0))
+		TAG.CARTE1_co = 1
+	ELSEIF ((<ARGS> == 41) && (0<TAG.CARTE2_co> == 0))
+		TAG.CARTE2_co = 1
+	ELSEIF ((<ARGS> == 42) && (0<TAG.CARTE3_co> == 0))
+		TAG.CARTE3_co = 1
+	ELSEIF ((<ARGS> == 43) && (0<TAG.CARTE4_co> == 0))
+		TAG.CARTE4_co = 1
+	ELSEIF ((<ARGS> == 44) && (0<TAG.CARTE5_co> == 0))
+		TAG.CARTE5_co = 1
+	ELSEIF ((<ARGS> == 45) && (0<TAG.CARTE6_co> == 0))
+		TAG.CARTE6_co = 1
+	ELSEIF ((<ARGS> == 46) && (0<TAG.CARTE7_co> == 0))
+		TAG.CARTE7_co = 1
+	ELSEIF ((<ARGS> == 47) && (0<TAG.CARTE8_co> == 0))
+		TAG.CARTE8_co = 1
+	ELSEIF ((<ARGS> == 48) && (0<TAG.CARTE9_co> == 0))
+		TAG.CARTE9_co = 1
+	ELSEIF ((<ARGS> == 49) && (0<TAG.CARTE10_co> == 0))
+		TAG.CARTE10_co = 1
+	ELSEIF ((<ARGS> == 50) && (0<TAG.CARTE11_co> == 0))
+		TAG.CARTE11_co = 1
+	ELSEIF ((<ARGS> == 51) && (0<TAG.CARTE12_co> == 0))
+		TAG.CARTE12_co = 1
+	ELSEIF ((<ARGS> == 52) && (0<TAG.CARTE13_co> == 0))
+		TAG.CARTE13_co = 1
+	ELSEIF ((<ARGS> == 53) && (0<TAG.JOKER_CO> == 0))
+		TAG.JOKER_CO = 1
+	ELSEIF ((<ARGS> == 54) && (0<TAG.JOKER_BL> == 0))
+		TAG.JOKER_BL = 1
+	ELSE
+		ARGS = 0
+	ENDIF
+ENDWHILE
+RETURN <ARGS>
+
+
+//DEFAULT : i_paquet_de_cartes
+[FUNCTION NB_CARTES_DANS_PAQUET]
+ARGS = 0
+IF !<TAG.CARTE1_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE2_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE3_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE4_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE5_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE6_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE7_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE8_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE9_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE10_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE11_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE12_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE13_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE1_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE2_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE3_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE4_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE5_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE6_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE7_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE8_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE9_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE10_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE11_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE12_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE13_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE1_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE2_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE3_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE4_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE5_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE6_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE7_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE8_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE9_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE10_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE11_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE12_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE13_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE1_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE2_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE3_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE4_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE5_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE6_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE7_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE8_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE9_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE10_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE11_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE12_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.CARTE13_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.JOKER_CO>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF !<TAG.JOKER_BL>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : i_paquet_de_cartes
+[FUNCTION RESET_JEU_DE_CARTE]
+TAG.CARTE1_pi
+TAG.CARTE2_pi
+TAG.CARTE3_pi
+TAG.CARTE4_pi
+TAG.CARTE5_pi
+TAG.CARTE6_pi
+TAG.CARTE7_pi
+TAG.CARTE8_pi
+TAG.CARTE9_pi
+TAG.CARTE10_pi
+TAG.CARTE11_pi
+TAG.CARTE12_pi
+TAG.CARTE13_pi
+TAG.CARTE1_tr
+TAG.CARTE2_tr
+TAG.CARTE3_tr
+TAG.CARTE4_tr
+TAG.CARTE5_tr
+TAG.CARTE6_tr
+TAG.CARTE7_tr
+TAG.CARTE8_tr
+TAG.CARTE9_tr
+TAG.CARTE10_tr
+TAG.CARTE11_tr
+TAG.CARTE12_tr
+TAG.CARTE13_tr
+TAG.CARTE1_co
+TAG.CARTE2_co
+TAG.CARTE3_co
+TAG.CARTE4_co
+TAG.CARTE5_co
+TAG.CARTE6_co
+TAG.CARTE7_co
+TAG.CARTE8_co
+TAG.CARTE9_co
+TAG.CARTE10_co
+TAG.CARTE11_co
+TAG.CARTE12_co
+TAG.CARTE13_co
+TAG.CARTE1_ca
+TAG.CARTE2_ca
+TAG.CARTE3_ca
+TAG.CARTE4_ca
+TAG.CARTE5_ca
+TAG.CARTE6_ca
+TAG.CARTE7_ca
+TAG.CARTE8_ca
+TAG.CARTE9_ca
+TAG.CARTE10_ca
+TAG.CARTE11_ca
+TAG.CARTE12_ca
+TAG.CARTE13_ca
+IF !<TAG.NOJOKER>
+	TAG.JOKER_BL
+	TAG.JOKER_CO
+ENDIF
+RETURN 1
+
+[FUNCTION SET_JEU_DE_CARTES_NO_JOKER]
+TAG.JOKER_BL=1
+TAG.JOKER_CO=1
+TAG.NOJOKER=1
+RETURN 1
+
+
+//DEFAULT : JOUEUR
+//ARGS : NUMERO DE CARTE A AJOUTER
+[FUNCTION AJOUTER_CARTE_NUMERO_ARGS_AU_JOUEUR]
+IF <ARGS> == 1
+	NEWITEM i_carte_as_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 2
+	NEWITEM i_carte_2_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 3
+	NEWITEM i_carte_3_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 4
+	NEWITEM i_carte_4_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 5
+	NEWITEM i_carte_5_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 6
+	NEWITEM i_carte_6_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 7
+	NEWITEM i_carte_7_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 8
+	NEWITEM i_carte_8_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 9
+	NEWITEM i_carte_9_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 10
+	NEWITEM i_carte_10_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 11
+	NEWITEM i_carte_valet_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 12
+	NEWITEM i_carte_dame_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 13
+	NEWITEM i_carte_roi_pi
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 14
+	NEWITEM i_carte_as_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 15
+	NEWITEM i_carte_2_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 16
+	NEWITEM i_carte_3_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 17
+	NEWITEM i_carte_4_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 18
+	NEWITEM i_carte_5_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 19
+	NEWITEM i_carte_6_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 20
+	NEWITEM i_carte_7_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 21
+	NEWITEM i_carte_8_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 22
+	NEWITEM i_carte_9_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 23
+	NEWITEM i_carte_10_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 24
+	NEWITEM i_carte_valet_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 25
+	NEWITEM i_carte_dame_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 26
+	NEWITEM i_carte_roi_tr
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 27
+	NEWITEM i_carte_as_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 28
+	NEWITEM i_carte_2_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 29
+	NEWITEM i_carte_3_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 30
+	NEWITEM i_carte_4_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 31
+	NEWITEM i_carte_5_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 32
+	NEWITEM i_carte_6_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 33
+	NEWITEM i_carte_7_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 34
+	NEWITEM i_carte_8_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 35
+	NEWITEM i_carte_9_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 36
+	NEWITEM i_carte_10_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 37
+	NEWITEM i_carte_valet_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 38
+	NEWITEM i_carte_dame_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 39
+	NEWITEM i_carte_roi_ca
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 40
+	NEWITEM i_carte_as_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 41
+	NEWITEM i_carte_2_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 42
+	NEWITEM i_carte_3_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 43
+	NEWITEM i_carte_4_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 44
+	NEWITEM i_carte_5_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 45
+	NEWITEM i_carte_6_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 46
+	NEWITEM i_carte_7_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 47
+	NEWITEM i_carte_8_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 48
+	NEWITEM i_carte_9_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 49
+	NEWITEM i_carte_10_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 50
+	NEWITEM i_carte_valet_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 51
+	NEWITEM i_carte_dame_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 52
+	NEWITEM i_carte_roi_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 53
+	NEWITEM i_carte_joker_co
+	ACT.CONT = <FINDLAYER.21.UID>
+ELSEIF <ARGS> == 54
+	NEWITEM i_carte_joker_bl
+	ACT.CONT = <FINDLAYER.21.UID>
+ENDIF
+RETURN <ACT.UID>
+
+
+//MORE1 : FRIC SUR LA MISE
+[ITEMDEF i_mise_cartes]
+ID=0eef
+NAME=Mise
+TYPE=t_normal
+
+ON=@CLICK
+MESSAGE <EVAL <MORE1>> Pieces
+RETURN 1
+
+ON=@CREATE
+COLOR=025
+
+ON=@TIMER
+TIMER=-1
+RETURN 1
+
+
+//*******************************
+//***********PIQUE***************
+//*******************************
+
+[ITEMDEF i_carte_as_pi] 
+NAME=As de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=As de pique
+
+[ITEMDEF i_carte_2_pi] 
+NAME=2 de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=2 de pique
+
+[ITEMDEF i_carte_3_pi] 
+NAME=3 de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=3 de pique
+
+[ITEMDEF i_carte_4_pi] 
+NAME=4 de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=4 de pique
+
+[ITEMDEF i_carte_5_pi] 
+NAME=5 de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=5 de pique
+
+[ITEMDEF i_carte_6_pi] 
+NAME=6 de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=6 de pique
+
+[ITEMDEF i_carte_7_pi] 
+NAME=7 de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=7 de pique
+
+[ITEMDEF i_carte_8_pi] 
+NAME=8 de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=8 de pique
+
+[ITEMDEF i_carte_9_pi] 
+NAME=9 de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=9 de pique
+
+[ITEMDEF i_carte_10_pi] 
+NAME=10 de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=10 de pique
+
+[ITEMDEF i_carte_valet_pi] 
+NAME=Valet de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Valet de pique
+
+[ITEMDEF i_carte_dame_pi] 
+NAME=Dame de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Dame de pique
+
+[ITEMDEF i_carte_roi_pi] 
+NAME=Roi de pique
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_PIQUE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Roi de pique
+
+
+//***************************************
+//****************TREFLE*****************
+//***************************************
+
+[ITEMDEF i_carte_as_tr] 
+NAME=As de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=As de trefle
+
+[ITEMDEF i_carte_2_tr] 
+NAME=2 de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=2 de trefle
+
+[ITEMDEF i_carte_3_tr] 
+NAME=3 de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=3 de trefle
+
+[ITEMDEF i_carte_4_tr] 
+NAME=4 de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=4 de trefle
+
+[ITEMDEF i_carte_5_tr] 
+NAME=5 de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=5 de trefle
+
+[ITEMDEF i_carte_6_tr] 
+NAME=6 de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=6 de trefle
+
+[ITEMDEF i_carte_7_tr] 
+NAME=7 de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=7 de trefle
+
+[ITEMDEF i_carte_8_tr] 
+NAME=8 de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=8 de trefle
+
+[ITEMDEF i_carte_9_tr] 
+NAME=9 de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=9 de trefle
+
+[ITEMDEF i_carte_10_tr] 
+NAME=10 de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=10 de trefle
+
+[ITEMDEF i_carte_valet_tr] 
+NAME=Valet de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Valet de trefle
+
+[ITEMDEF i_carte_dame_tr] 
+NAME=Dame de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Dame de trefle
+
+[ITEMDEF i_carte_roi_tr] 
+NAME=Roi de trefle
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_TREFLE>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Roi de trefle
+
+//***************************************
+//****************CARREAU****************
+//***************************************
+
+[ITEMDEF i_carte_as_ca] 
+NAME=As de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=As de carreau
+
+[ITEMDEF i_carte_2_ca] 
+NAME=2 de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=2 de carreau
+
+[ITEMDEF i_carte_3_ca] 
+NAME=3 de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=3 de carreau
+
+[ITEMDEF i_carte_4_ca] 
+NAME=4 de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=4 de carreau
+
+[ITEMDEF i_carte_5_ca] 
+NAME=5 de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=5 de carreau
+
+[ITEMDEF i_carte_6_ca] 
+NAME=6 de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=6 de carreau
+
+[ITEMDEF i_carte_7_ca] 
+NAME=7 de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=7 de carreau
+
+[ITEMDEF i_carte_8_ca] 
+NAME=8 de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=8 de carreau
+
+[ITEMDEF i_carte_9_ca] 
+NAME=9 de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=9 de carreau
+
+[ITEMDEF i_carte_10_ca] 
+NAME=10 de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=10 de carreau
+
+[ITEMDEF i_carte_valet_ca] 
+NAME=Valet de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Valet de carreau
+
+[ITEMDEF i_carte_dame_ca] 
+NAME=Dame de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Dame de carreau
+
+[ITEMDEF i_carte_roi_ca] 
+NAME=Roi de carreau
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_CARREAU>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Roi de carreau
+
+//***************************************
+//****************COEUR******************
+//***************************************
+
+[ITEMDEF i_carte_as_co] 
+NAME=As de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=As de coeur
+
+[ITEMDEF i_carte_2_co] 
+NAME=2 de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=2 de coeur
+
+[ITEMDEF i_carte_3_co] 
+NAME=3 de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=3 de coeur
+
+[ITEMDEF i_carte_4_co] 
+NAME=4 de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=4 de coeur
+
+[ITEMDEF i_carte_5_co] 
+NAME=5 de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=5 de coeur
+
+[ITEMDEF i_carte_6_co] 
+NAME=6 de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=6 de coeur
+
+[ITEMDEF i_carte_7_co] 
+NAME=7 de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=7 de coeur
+
+[ITEMDEF i_carte_8_co] 
+NAME=8 de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=8 de coeur
+
+[ITEMDEF i_carte_9_co] 
+NAME=9 de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=9 de coeur
+
+[ITEMDEF i_carte_10_co] 
+NAME=10 de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=10 de coeur
+
+[ITEMDEF i_carte_valet_co] 
+NAME=Valet de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Valet de coeur
+
+[ITEMDEF i_carte_dame_co] 
+NAME=Dame de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Dame de coeur
+
+[ITEMDEF i_carte_roi_co] 
+NAME=Roi de coeur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_COEUR>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Roi de coeur
+
+//************************************
+//***************JOKER****************
+//************************************
+
+[ITEMDEF i_carte_joker_co] 
+NAME=Joker de couleur
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_JOKER>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Joker de couleur
+
+[ITEMDEF i_carte_joker_bl] 
+NAME=Joker blanc
+ID=012ab
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=<COULEUR_JOKER>
+TIMER=-1
+
+CATEGORY=Cartes
+SUBSECTION=Jeu de carte
+DESCRIPTION=Joker blanc
+
+
+//**************************************
+//*************FONCTIONS****************
+//**************************************
+
+
+//**************************************
+//*******************IS*****************
+//**************************************
+
+[FUNCTION IS_CARTE_AS]
+IF (<BASEID> == i_carte_as_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_as_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_as_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_as_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_2]
+IF (<BASEID> == i_carte_2_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_2_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_2_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_2_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_3]
+IF (<BASEID> == i_carte_3_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_3_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_3_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_3_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_4]
+IF (<BASEID> == i_carte_4_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_4_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_4_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_4_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_5]
+IF (<BASEID> == i_carte_5_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_5_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_5_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_5_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_6]
+IF (<BASEID> == i_carte_6_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_6_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_6_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_6_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_7]
+IF (<BASEID> == i_carte_7_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_7_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_7_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_7_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_8]
+IF (<BASEID> == i_carte_8_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_8_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_8_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_8_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_9]
+IF (<BASEID> == i_carte_9_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_9_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_9_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_9_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_10]
+IF (<BASEID> == i_carte_10_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_10_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_10_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_10_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_VALET]
+IF (<BASEID> == i_carte_valet_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_valet_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_valet_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_valet_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_DAME]
+IF (<BASEID> == i_carte_dame_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_dame_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_dame_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_dame_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_ROI]
+IF (<BASEID> == i_carte_roi_tr)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_roi_ca)
+	RETURN 2
+ELSEIF (<BASEID> == i_carte_roi_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_roi_co)
+	RETURN 4
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_JOKER]
+IF (<BASEID> == i_carte_joker_co)
+	RETURN 1
+ELSEIF (<BASEID> == i_carte_joker_bl)
+	RETURN 2
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_PIQUE]
+IF (<BASEID> == i_carte_as_pi)
+	RETURN 14
+ELSEIF (<BASEID> == i_carte_roi_pi))
+	RETURN 13
+ELSEIF (<BASEID> == i_carte_dame_pi)
+	RETURN 12
+ELSEIF (<BASEID> == i_carte_valet_pi)
+	RETURN 11
+ELSEIF (<BASEID> == i_carte_10_pi)
+	RETURN 10
+ELSEIF (<BASEID> == i_carte_9_pi)
+	RETURN 9
+ELSEIF (<BASEID> == i_carte_8_pi)
+	RETURN 8
+ELSEIF (<BASEID> == i_carte_7_pi)
+	RETURN 7
+ELSEIF (<BASEID> == i_carte_6_pi)
+	RETURN 6
+ELSEIF (<BASEID> == i_carte_5_pi)
+	RETURN 5
+ELSEIF (<BASEID> == i_carte_4_pi)
+	RETURN 4
+ELSEIF (<BASEID> == i_carte_3_pi)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_2_pi)
+	RETURN 2
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_TREFLE]
+IF (<BASEID> == i_carte_as_tr)
+	RETURN 14
+ELSEIF (<BASEID> == i_carte_roi_tr))
+	RETURN 13
+ELSEIF (<BASEID> == i_carte_dame_tr)
+	RETURN 12
+ELSEIF (<BASEID> == i_carte_valet_tr)
+	RETURN 11
+ELSEIF (<BASEID> == i_carte_10_tr)
+	RETURN 10
+ELSEIF (<BASEID> == i_carte_9_tr)
+	RETURN 9
+ELSEIF (<BASEID> == i_carte_8_tr)
+	RETURN 8
+ELSEIF (<BASEID> == i_carte_7_tr)
+	RETURN 7
+ELSEIF (<BASEID> == i_carte_6_tr)
+	RETURN 6
+ELSEIF (<BASEID> == i_carte_5_tr)
+	RETURN 5
+ELSEIF (<BASEID> == i_carte_4_tr)
+	RETURN 4
+ELSEIF (<BASEID> == i_carte_3_tr)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_2_tr)
+	RETURN 2
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_CARREAU]
+IF (<BASEID> == i_carte_as_ca)
+	RETURN 14
+ELSEIF (<BASEID> == i_carte_roi_ca))
+	RETURN 13
+ELSEIF (<BASEID> == i_carte_dame_ca)
+	RETURN 12
+ELSEIF (<BASEID> == i_carte_valet_ca)
+	RETURN 11
+ELSEIF (<BASEID> == i_carte_10_ca)
+	RETURN 10
+ELSEIF (<BASEID> == i_carte_9_ca)
+	RETURN 9
+ELSEIF (<BASEID> == i_carte_8_ca)
+	RETURN 8
+ELSEIF (<BASEID> == i_carte_7_ca)
+	RETURN 7
+ELSEIF (<BASEID> == i_carte_6_ca)
+	RETURN 6
+ELSEIF (<BASEID> == i_carte_5_ca)
+	RETURN 5
+ELSEIF (<BASEID> == i_carte_4_ca)
+	RETURN 4
+ELSEIF (<BASEID> == i_carte_3_ca)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_2_ca)
+	RETURN 2
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_COEUR]
+IF (<BASEID> == i_carte_as_co)
+	RETURN 14
+ELSEIF (<BASEID> == i_carte_roi_co))
+	RETURN 13
+ELSEIF (<BASEID> == i_carte_dame_co)
+	RETURN 12
+ELSEIF (<BASEID> == i_carte_valet_co)
+	RETURN 11
+ELSEIF (<BASEID> == i_carte_10_co)
+	RETURN 10
+ELSEIF (<BASEID> == i_carte_9_co)
+	RETURN 9
+ELSEIF (<BASEID> == i_carte_8_co)
+	RETURN 8
+ELSEIF (<BASEID> == i_carte_7_co)
+	RETURN 7
+ELSEIF (<BASEID> == i_carte_6_co)
+	RETURN 6
+ELSEIF (<BASEID> == i_carte_5_co)
+	RETURN 5
+ELSEIF (<BASEID> == i_carte_4_co)
+	RETURN 4
+ELSEIF (<BASEID> == i_carte_3_co)
+	RETURN 3
+ELSEIF (<BASEID> == i_carte_2_co)
+	RETURN 2
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_ROUGE]
+IF (<IS_CARTE_CARREAU> || <IS_CARTE_COEUR>)
+	RETURN 1
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_NOIRE]
+IF (<IS_CARTE_PIQUE> || <IS_CARTE_TREFLE>)
+	RETURN 1
+ENDIF
+RETURN 0
+
+[FUNCTION IS_CARTE_A_JOUER]
+IF (<IS_CARTE_NOIRE> || <IS_CARTE_ROUGE>)
+	RETURN 1
+ENDIF
+RETURN 0
+
+//**************************************
+//****************POSSEDE***************
+//**************************************
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_AS]
+ARGS=0
+IF <FINDID.i_carte_as_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_as_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_as_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_as_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_2]
+ARGS=0
+IF <FINDID.i_carte_2_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_2_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_2_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_2_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_3]
+ARGS=0
+IF <FINDID.i_carte_3_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_3_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_3_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_3_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_4]
+ARGS=0
+IF <FINDID.i_carte_4_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_4_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_4_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_4_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_5]
+ARGS=0
+IF <FINDID.i_carte_5_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_5_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_5_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_5_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_6]
+ARGS=0
+IF <FINDID.i_carte_6_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_6_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_6_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_6_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_7]
+ARGS=0
+IF <FINDID.i_carte_7_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_7_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_7_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_7_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_8]
+ARGS=0
+IF <FINDID.i_carte_8_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_8_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_8_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_8_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_9]
+ARGS=0
+IF <FINDID.i_carte_9_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_9_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_9_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_9_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_10]
+ARGS=0
+IF <FINDID.i_carte_10_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_10_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_10_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_10_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_VALET]
+ARGS=0
+IF <FINDID.i_carte_valet_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_valet_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_valet_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_valet_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_DAME]
+ARGS=0
+IF <FINDID.i_carte_dame_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_dame_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_dame_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_dame_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_ROI]
+ARGS=0
+IF <FINDID.i_carte_roi_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_roi_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_roi_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_roi_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_JOKER]
+ARGS=0
+IF <FINDID.i_carte_joker_bl>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_joker_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_PIQUE]
+ARGS=0
+IF <FINDID.i_carte_as_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_roi_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_dame_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_valet_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_10_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_9_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_8_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_7_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_6_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_5_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_4_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_3_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_2_pi>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_TREFLE]
+ARGS=0
+IF <FINDID.i_carte_as_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_roi_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_dame_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_valet_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_10_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_9_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_8_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_7_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_6_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_5_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_4_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_3_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_2_tr>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_CARREAU]
+ARGS=0
+IF <FINDID.i_carte_as_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_roi_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_dame_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_valet_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_10_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_9_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_8_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_7_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_6_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_5_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_4_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_3_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_2_ca>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+//DEFAULT : JOUEUR
+[FUNCTION JOUEUR_POSSEDE_COEUR]
+ARGS=0
+IF <FINDID.i_carte_as_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_roi_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_dame_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_valet_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_10_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_9_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_8_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_7_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_6_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_5_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_4_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_3_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+IF <FINDID.i_carte_2_co>
+	ARGS = <EVAL <ARGS> + 1>
+ENDIF
+RETURN <ARGS>
+
+
+//**********************************************
+//*****************PLUS HAUT********************
+//**********************************************
+
+//DEFAULT : JOUEUR
+//ARGS = Xe PLUS HAUTE EN COEUR ; ARGS = 0 ==> 1
+[FUNCTION JOUEUR_PLUS_HAUT_COEUR]
+IF (!<ARGS> || (<ARGS> < 0))
+	ARGS = 1
+ENDIF
+IF <FINDID.i_carte_as_co>
+	IF <ARGS> == 1
+		RETURN 14
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_roi_co>
+	IF <ARGS> == 1
+		RETURN 13
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_dame_co>
+	IF <ARGS> == 1
+		RETURN 12
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_valet_co>
+	IF <ARGS> == 1
+		RETURN 11
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_10_co>
+	IF <ARGS> == 1
+		RETURN 10
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_9_co>
+	IF <ARGS> == 1
+		RETURN 9
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_8_co>
+	IF <ARGS> == 1
+		RETURN 8
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_7_co>
+	IF <ARGS> == 1
+		RETURN 7
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_6_co>
+	IF <ARGS> == 1
+		RETURN 6
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_5_co>
+	IF <ARGS> == 1
+		RETURN 5
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_4_co>
+	IF <ARGS> == 1
+		RETURN 4
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_3_co>
+	IF <ARGS> == 1
+		RETURN 3
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_2_co>
+	IF <ARGS> == 1
+		RETURN 2
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+RETURN 0
+
+//DEFAULT : JOUEUR
+//ARGS = Xe PLUS HAUTE EN CARREAU ; ARGS = 0 ==> 1
+[FUNCTION JOUEUR_PLUS_HAUT_CARREAU]
+IF (!<ARGS> || (<ARGS> < 0))
+	ARGS = 1
+ENDIF
+IF <FINDID.i_carte_as_ca>
+	IF <ARGS> == 1
+		RETURN 14
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_roi_ca>
+	IF <ARGS> == 1
+		RETURN 13
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_dame_ca>
+	IF <ARGS> == 1
+		RETURN 12
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_valet_ca>
+	IF <ARGS> == 1
+		RETURN 11
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_10_ca>
+	IF <ARGS> == 1
+		RETURN 10
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_9_ca>
+	IF <ARGS> == 1
+		RETURN 9
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_8_ca>
+	IF <ARGS> == 1
+		RETURN 8
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_7_ca>
+	IF <ARGS> == 1
+		RETURN 7
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_6_ca>
+	IF <ARGS> == 1
+		RETURN 6
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_5_ca>
+	IF <ARGS> == 1
+		RETURN 5
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_4_ca>
+	IF <ARGS> == 1
+		RETURN 4
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_3_ca>
+	IF <ARGS> == 1
+		RETURN 3
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_2_ca>
+	IF <ARGS> == 1
+		RETURN 2
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+RETURN 0
+
+
+//DEFAULT : JOUEUR
+//ARGS = Xe PLUS HAUTE EN TREFLE ; ARGS = 0 ==> 1
+[FUNCTION JOUEUR_PLUS_HAUT_TREFLE]
+IF (!<ARGS> || (<ARGS> < 0))
+	ARGS = 1
+ENDIF
+IF <FINDID.i_carte_as_tr>
+	IF <ARGS> == 1
+		RETURN 14
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_roi_tr>
+	IF <ARGS> == 1
+		RETURN 13
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_dame_tr>
+	IF <ARGS> == 1
+		RETURN 12
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_valet_tr>
+	IF <ARGS> == 1
+		RETURN 11
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_10_tr>
+	IF <ARGS> == 1
+		RETURN 10
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_9_tr>
+	IF <ARGS> == 1
+		RETURN 9
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_8_tr>
+	IF <ARGS> == 1
+		RETURN 8
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_7_tr>
+	IF <ARGS> == 1
+		RETURN 7
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_6_tr>
+	IF <ARGS> == 1
+		RETURN 6
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_5_tr>
+	IF <ARGS> == 1
+		RETURN 5
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_4_tr>
+	IF <ARGS> == 1
+		RETURN 4
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_3_tr>
+	IF <ARGS> == 1
+		RETURN 3
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_2_tr>
+	IF <ARGS> == 1
+		RETURN 2
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+RETURN 0
+
+//DEFAULT : JOUEUR
+//ARGS = Xe PLUS HAUTE EN PIQUE ; ARGS = 0 ==> 1
+[FUNCTION JOUEUR_PLUS_HAUT_PIQUE]
+IF (!<ARGS> || (<ARGS> < 0))
+	ARGS = 1
+ENDIF
+IF <FINDID.i_carte_as_pi>
+	IF <ARGS> == 1
+		RETURN 14
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_roi_pi>
+	IF <ARGS> == 1
+		RETURN 13
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_dame_pi>
+	IF <ARGS> == 1
+		RETURN 12
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_valet_pi>
+	IF <ARGS> == 1
+		RETURN 11
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_10_pi>
+	IF <ARGS> == 1
+		RETURN 10
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_9_pi>
+	IF <ARGS> == 1
+		RETURN 9
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_8_pi>
+	IF <ARGS> == 1
+		RETURN 8
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_7_pi>
+	IF <ARGS> == 1
+		RETURN 7
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_6_pi>
+	IF <ARGS> == 1
+		RETURN 6
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_5_pi>
+	IF <ARGS> == 1
+		RETURN 5
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_4_pi>
+	IF <ARGS> == 1
+		RETURN 4
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_3_pi>
+	IF <ARGS> == 1
+		RETURN 3
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+IF <FINDID.i_carte_2_pi>
+	IF <ARGS> == 1
+		RETURN 2
+	ELSE
+		ARGS = <EVAL <ARGS> - 1>
+	ENDIF
+ENDIF
+RETURN 0
+
+
+//DEFAULT : JOUEUR
+[FUNCTION SUPPRIMER_TOUTES_CARTES_DU_JOUEUR]
+ARGS = 0
+WHILE (<ARGS> == 0)
+	ARGS = 1
+	FORCONT <findlayer.21.uid>
+		IF <IS_CARTE_A_JOUER>
+			ARGS = 0
+			REMOVE
+		ENDIF
+	ENDFOR
+ENDWHILE
+RETURN 1
+
+
+//DEFAULT : JOUEUR
+//ARGS : NB D'OR QUE LE JOUEUR DOIT AVOIR
+[FUNCTION IS_JOUEUR_ASSEZ_D_OR]
+IF !<ARGS>
+	ARGS = 0
+ENDIF
+IF <EVAL (<RESCOUNT i_piece_diamant>*1000) + <RESCOUNT i_gold>> >= <ARGS>
+	RETURN 1
+ENDIF
+RETURN 0
+
+//DEFAULT : JOUEUR
+//ARGS : NB D'OR QUE LE JOUEUR DOIT PAYER (IL FAUT VERIFIER AVANT)
+[FUNCTION PAYER_QUE_DU_SAC_CARTES]
+IF !<IS_JOUEUR_ASSEZ_D_OR <ARGS>>
+	RETURN 0
+ENDIF
+VAR.A_PAYER_DU_SAC = <EVAL <ARGS>>
+WHILE ( (<VAR.A_PAYER_DU_SAC> > 0) && ( <FINDID.i_gold> || <FINDID.i_piece_diamant>) )
+	IF <FINDID.i_gold>
+		IF <FINDID.i_gold.AMOUNT> <= <VAR.A_PAYER_DU_SAC>
+			VAR.A_PAYER_DU_SAC = <EVAL <VAR.A_PAYER_DU_SAC> - <FINDID.i_gold.AMOUNT>>
+			FINDID.i_gold.REMOVE
+		ELSE
+			FINDID.i_gold.AMOUNT = <EVAL <FINDID.i_gold.AMOUNT> - <VAR.A_PAYER_DU_SAC>>
+			FINDID.i_gold.UPDATE
+			VAR.A_PAYER_DU_SAC = 0
+		ENDIF
+	ELSE
+		IF <EVAL <FINDID.i_piece_diamant.AMOUNT> * 1000> <= <EVAL <VAR.A_PAYER_DU_SAC>>
+			VAR.A_PAYER_DU_SAC = <EVAL <VAR.A_PAYER_DU_SAC> - <FINDID.i_piece_diamant.AMOUNT>*1000>
+			FINDID.i_piece_diamant.REMOVE
+		ELSE
+			FINDID.i_piece_diamant.AMOUNT = <EVAL <FINDID.i_piece_diamant.AMOUNT> - <VAR.A_PAYER_DU_SAC>/1000>
+			VAR.A_PAYER_DU_SAC = <EVAL <VAR.A_PAYER_DU_SAC> - (<VAR.A_PAYER_DU_SAC>/1000)*1000>
+			IF <VAR.A_PAYER_DU_SAC> > 0
+				NEWITEM i_gold
+				ACT.AMOUNT = <EVAL 1000 - <VAR.A_PAYER_DU_SAC>>
+				ACT.CONT = <FINDID.i_piece_diamant.CONT.UID>
+				CONSUME 1 i_piece_diamant
+				VAR.A_PAYER_DU_SAC = 0
+			ENDIF
+		ENDIF
+	ENDIF
+ENDWHILE
+VAR.A_PAYER_DU_SAC
+RETURN 1
+
+//DEFAULT : JOUEUR
+[FUNCTION GET_TOTAL_PIECES_D_OR]
+RETURN <EVAL (<RESCOUNT i_piece_diamant>*1000) + <RESCOUNT i_gold>>
+
+
+//DEFAULT : i_mise_cartes
+//ARGS : NB D'OR A DECREMENTER LA MISE
+[FUNCTION DECREMENTER_MISE_CARTES]
+IF <ARGS>
+	IF <MORE1> >= <ARGS>
+		MORE1 = <EVAL <MORE1> - <ARGS>>
+		RETURN <ARGS>
+	ELSE
+		ARGS = <MORE1>
+		MORE1 = 0
+		RETURN <ARGS>
+	ENDIF
+ENDIF
+RETURN 0

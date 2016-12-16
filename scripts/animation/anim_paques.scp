@@ -1,0 +1,105 @@
+[TYPEDEF t_cachette_paques]
+ON=@CREATE
+TIMER=-1
+ATTR=08010
+
+ON=@CLICK
+IF <TIMER> == -1
+	MESSAGE * Vous semblez apercevoir un objet cache *
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <TIMER> == -1
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous trouvez un oeuf de Paques !
+	SRC.NEWITEM i_oeuf_de_paques
+	SRC.ACT.CONT = <SRC.UID>
+	TIMER = 1200
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TIMER=-1
+RETURN 1
+
+[ITEMDEF i_rocher_paques_1]
+ID=01772
+TYPE=t_cachette_paques
+
+CATEGORY=Anims
+SUBSECTION=Paques
+DESCRIPTION=Rocher de Paques 1
+
+[ITEMDEF i_rocher_paques_2]
+ID=01779
+TYPE=t_cachette_paques
+
+CATEGORY=Anims
+SUBSECTION=Paques
+DESCRIPTION=Rocher de Paques 2
+
+[ITEMDEF i_plante_paques_1]
+ID=0cc0
+TYPE=t_cachette_paques
+
+CATEGORY=Anims
+SUBSECTION=Paques
+DESCRIPTION=Plante de Paques 1
+
+[ITEMDEF i_plante_paques_2]
+ID=0cae
+TYPE=t_cachette_paques
+
+CATEGORY=Anims
+SUBSECTION=Paques
+DESCRIPTION=Plante de Paques 2
+
+[ITEMDEF i_plante_paques_3]
+ID=0d3f
+TYPE=t_cachette_paques
+
+CATEGORY=Anims
+SUBSECTION=Paques
+DESCRIPTION=Plante de Paques 3
+
+[ITEMDEF i_oeuf_de_paques]
+ID=09b5
+NAME=Oeuf de Paques
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0ba2
+
+ON=@DCLICK
+IF <SRC.FINDID.m_bonus_oeuf_paques>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'un oeuf de Paques!
+ELSE
+	REMOVE
+	SRC.NEWITEM m_bonus_oeuf_paques
+	SRC.EQUIP
+ENDIF
+RETURN 1
+
+CATEGORY=Anims
+SUBSECTION=Paques
+DESCRIPTION=Oeuf de Paques
+
+[ITEMDEF m_bonus_oeuf_paques]
+NAME=Bonus Oeuf paques
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=300
+
+ON=@EQUIP
+SRC.STR = <EVAL <SRC.STR> + <SRC.STR>/10>
+SRC.DEX = <EVAL <SRC.DEX> + <SRC.DEX>/10>
+SRC.INT = <EVAL <SRC.INT> + <SRC.INT>/10>
+
+ON=@TIMER
+SRC.STR = <EVAL <SRC.STR> - <SRC.STR>/10>
+SRC.DEX = <EVAL <SRC.DEX> - <SRC.DEX>/10>
+SRC.INT = <EVAL <SRC.INT> - <SRC.INT>/10>
+REMOVE
+RETURN 1

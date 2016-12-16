@@ -1,0 +1,212 @@
+[PLEVEL 2]
+PRISON
+
+[FUNCTION prison]
+IF <ARGS> >= 0
+	IF !(STRCMPI("<ARGS>",""))
+		SYSMESSAGEUA 0481 1 1 0 Tapez .Prison suivi d'un nombre d'heures pendant lesquelles le joueur sera emprisonne
+	ELSEIF !(STRCMPI("<ARGS>","0"))
+		NEWITEM i_combien_prison
+		ACT.EQUIP
+		ACT.USE
+	ELSE
+		NEWITEM i_jaileur
+		ACT.TAG.HEURES=<ARGS>
+		ACT.EQUIP
+		ACT.USE
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Veuillez saisir un nombre d'heures positif
+ENDIF
+
+[ITEMDEF i_desemprisonne] 
+ID=i_memory 
+NAME=mem_prison
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@TIMER
+IF <EVAL <TAG.VOYAGES_RESTANTS>> > 0
+	TOPOBJ.SYSMESSAGEUA 0481 1 1 0 Veuillez pager un GM pour initialiser votre peine
+	TIMER=60
+ELSE
+	IF <EVAL <TAG.HEURES>> > 0
+		TAG.HEURES=<EVAL <TAG.HEURES>-1>
+		TIMER=3600
+		TOPOBJ.DISCONNECT
+	ELSE
+		TOPOBJ.FORGIVE
+		TOPOBJ.P=2464,514,15
+		TOPOBJ.UPDATE
+		SERV.B <TOPOBJ.NAME> a ete libere de prison apres une peine de <EVAL <TAG.HEURESORIGINAL>> heures
+		REMOVE
+	ENDIF
+ENDIF
+
+RETURN 1
+
+//DEFAULT : JOUEUR EMPRISONNE
+//SRC = MODERATEUR
+//ARGS = NOMBRE D'HEURE DE JAIL
+[FUNCTION EMPRISONNE_JOUEUR]
+REMOVE_MAUVAIS_TAGS
+EVENTS -e_anti_mark_recall
+TAG.anti_mark_recall=0
+ENLEVE_OBJETS_D7
+SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez reporter ces informations dans le systeme de gestion des peines
+SRC.SYSMESSAGEUA 0481 1 1 0 Nom de compte : <ACCOUNT>
+SRC.SYSMESSAGEUA 0481 1 1 0 Numero de serie : <UID>
+SRC.SYSMESSAGEUA 0481 1 1 0 Premiere adresse IP : <ACCOUNT.FIRSTIP>
+SRC.SYSMESSAGEUA 0481 1 1 0 Derniere adresse IP : <ACCOUNT.LASTIP>
+IF <FINDID.i_desemprisonne>
+	FINDID.i_desemprisonne.TAG.HEURESORIGINAL=<EVAL <FINDID.i_desemprisonne.TAG.HEURESORIGINAL> + <ARGS>>
+	FINDID.i_desemprisonne.TAG.HEURES=<EVAL <FINDID.i_desemprisonne.TAG.HEURES> + <ARGS>>
+	SYSMESSAGEUA 0481 1 1 0 <SRC.NAME> vous rajoute <EVAL <ARGS>> heures de prison supplementaires
+	SERV.B <NAME> est condamne a <EVAL <ARGS>> heures supplementaires de prison
+ELSE
+	NEWITEM i_desemprisonne
+	ACT.TAG.HEURESORIGINAL=<ARGS>
+	ACT.TAG.HEURES=<EVAL <ARGS> - 1>
+	ACT.TIMER=3600
+	ACT.CONT=<UID>
+	JAIL
+	SYSMESSAGEUA 0481 1 1 0 <SRC.NAME> vous condamne a <EVAL <ARGS>> heures de prison
+	SERV.B <NAME> est condamne a <EVAL <ARGS>> heures de prison
+ENDIF
+SERV.LOG <SRC.NAME> condamne <NAME> a <EVAL <ARGS>> heures de travaux
+RETURN 1
+
+[ITEMDEF i_jaileur] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur a emprisonner
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.TARG.EMPRISONNE_JOUEUR <TAG.HEURES>
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_combien_prison] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur a qui vous souhaitez consulter le temps de prison restant
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <SRC.TARG.FINDID.i_desemprisonne>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Il reste <EVAL <SRC.TARG.FINDID.i_desemprisonne.TAG.HEURES>> heures <EVAL <SRC.TARG.FINDID.i_desemprisonne.TIMER>/60> minutes a <SRC.TARG.NAME> avant de pouvoir sortir
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> peut etre sorti de prison
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[CHARDEF c_gardien_des_geoles] 
+DEFNAME=c_gardien_des_geoles
+NAME=Sankraint
+ID=C_MAN
+ 
+TSPEECH=spk_gardien_des_geoles
+
+ON=@create
+COLOR=083ea
+FOOD=9999
+SPEECHCOLOR=0481
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Gardien des geoles
+
+ITEMNEWBIE=i_robe
+DISPID=i_robe_gm
+COLOR=00ac0
+NAME=Robe crasseuse
+ITEMNEWBIE=i_bardiche
+COLOR=00abf
+NAME=Bardiche
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <SRC.FINDID.i_desemprisonne>
+	SAY Ah ah ah ! Alors <SRC.NAME> comment se passe votre sejour en prison ?
+ENDIF
+
+ON=@NPCHearUnknown
+DORAND 2
+	SAY Purgez votre peine en silence !
+	SAY Vous desirez peut etre connaitre la peine qu'il vous reste a purger ?
+ENDDO
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Prison
+DESCRIPTION=Sankraint
+
+[SPEECH spk_gardien_des_geoles]
+
+ON=*oui*
+IF <SRC.FINDID.i_desemprisonne>
+	SAY Il vous reste <EVAL <SRC.FINDID.i_desemprisonne.TAG.HEURES>> heures <EVAL <SRC.FINDID.i_desemprisonne.TIMER>/60> minutes avant de retrouver la liberte
+ELSE
+	SAY Vu la gravite des infractions que vous avez commises je ne sais pas combien de temps je vais vous garder ici ...
+ENDIF
+
+on=*non*
+SAY Alors taisez vous !
+
+ON=*peine*
+IF <SRC.FINDID.i_desemprisonne>
+	IF <EVAL <SRC.FINDID.i_desemprisonne.TAG.VOYAGES_RESTANTS>> > 0
+		SAY Il vous reste <EVAL <SRC.FINDID.i_desemprisonne.TAG.VOYAGES_RESTANTS>> voyages restants.
+		SAY Veuillez contacter un GM afin de faire reinitialiser votre peine en heures plutot qu'en travaux!
+		TIMER=60
+	ELSE
+		SAY Il vous reste <EVAL <SRC.FINDID.i_desemprisonne.TAG.HEURES>> heures <EVAL <SRC.FINDID.i_desemprisonne.TIMER>/60> minutes avant de retrouver la liberte
+	ENDIF
+ELSE
+	SAY Vu la gravite des infractions que vous avez commises je ne sais pas combien de temps je vais vous garder ici ...
+ENDIF
+
+ON=*mal*
+SAY Tant mieux !
+
+ON=*bien*
+SAY Je vais finir par allonger votre peine de quelques jours, vous verrez si c'est si agreable que ca !

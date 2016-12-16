@@ -1,0 +1,163 @@
+[ITEMDEF i_cle_speciale_001]
+NAME=Cle speciale 001
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0751
+
+[ITEMDEF i_coffre_special_001]
+NAME=Coffre special 001
+ID=0e43
+TYPE=T_NORMAL
+
+ON=@CREATE
+TIMER=43200
+TAG.REMPLI=0
+ATTR=08010
+
+ON=@DCLICK
+IF <SRC.FINDID.i_cle_speciale_001>
+	IF <TAG.REMPLI> == 1
+		SRC.CONSUME 1 i_cle_speciale_001
+		TAG.REMPLI=0
+		SRC.NEWITEM tm_coffre_special_001
+		SRC.ACT.CONT = <SRC.UID>
+		TIMER=<EVAL RAND(43200) + 20000>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas la cle de ce coffre !
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TAG.REMPLI=1
+RETURN 1
+
+[TEMPLATE tm_coffre_special_001]
+CONTAINER=i_bag
+ITEM=i_gold
+AMOUNT={1500 2500}
+ITEM={i_perle_enchantement 1 0 19}
+ITEM={i_pierre_jaune 1 0 19}
+
+[ITEMDEF i_pierre_jaune]
+ID=01366
+NAME=Pierre Jaune
+WEIGHT=5
+
+ON=@CREATE
+COLOR=0bb6
+
+[ITEMDEF i_pierre_verte]
+ID=i_rock_3
+NAME=Pierre Verte
+WEIGHT=5
+
+ON=@CREATE
+COLOR=0aab
+
+[ITEMDEF i_pierre_bleue]
+ID=01369
+NAME=Pierre Bleue
+WEIGHT=5
+
+ON=@CREATE
+COLOR=0afa
+
+[ITEMDEF i_pierre_rouge]
+ID=i_rock_7
+NAME=Pierre Rouge
+WEIGHT=5
+
+ON=@CREATE
+COLOR=0995
+
+[CHARDEF c_darius_moonglow]
+NAME=Darius Moonglow
+ID=C_MAN
+TSPEECH=spk_pnj_quete_habit
+
+ON=@Create
+COLOR=colors_skin
+STR=100
+DEX=100
+INT=100
+INVUL
+ALLSKILLS=1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@NPCHearUnknown
+IF <EVAL RAND(5)> == 0
+	SAY Peut-etre voulez-vous parler de pierres magiques...
+ELSE
+	SAY Je vous comprends mal
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_pants
+COLOR=colors_all
+ITEM=i_robe
+COLOR=colors_green
+ITEM=random_shoes
+COLOR=colors_neutral
+
+CATEGORY=PNJ
+SUBSECTION=quete habit
+DESCRIPTION=Darius Moonglow
+
+[SPEECH spk_pnj_quete_habit]
+ON=*Bonjour*
+ON=*Salut*
+SAY=Hmm? Oh, bonjour, <SRC.NAME>
+RETURN 1
+
+ON=*pierre*
+SAY Il y'a 4 sortes de pierre, une de couleur bleue, une verte, une jaune et une rouge !
+RETURN 1
+
+ON=*bleu*
+SAY Les pierres bleues ont deja ete trouvees sur des corps de chauve souris.
+RETURN 1
+
+ON=*vert*
+SAY Les pierres vertes ont deja ete trouvees sur des corps d'orcs.
+RETURN 1
+
+ON=*jaune*
+SAY Les pierres jaunes sont assez meconnues. On dit qu'elles se trouvent dans certains coffres ouvrables avec une cle speciale!
+RETURN 1
+
+ON=*rouge*
+SAY Les pierres rouges ont deja ete trouvees sur certains cannibales.
+RETURN 1
+
+ON=*travail*
+ON=*quete*
+ON=*aide*
+IF (<SRC.FINDID.i_pierre_jaune> && <SRC.FINDID.i_pierre_verte> && <SRC.FINDID.i_pierre_bleue> && <SRC.FINDID.i_pierre_rouge> )
+	SAY=Ho ! Merci beaucoup, <SRC.NAME>. J'ai un petit quelque chose pour vous.
+	SRC.NEWITEM=i_robe_d_entrainement
+	SRC.ACT.BOUNCE
+	SRC.CONSUME 1 i_pierre_jaune
+	SRC.CONSUME 1 i_pierre_verte
+	SRC.CONSUME 1 i_pierre_bleue
+	SRC.CONSUME 1 i_pierre_rouge
+ELSE
+	SAY J'aurais un petit service à vous demander. Je ne peux pas quitter ce lieu, mais il me faut absolument certaines pierres. Si vous me les apportez, vous aurez droit a une recompense tres interressante !
+ENDIF
+RETURN 1

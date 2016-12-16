@@ -1,0 +1,107 @@
+// Tips, Books and scrolls.
+[SCROLL SCROLL_MOTD]	// normal entry
+Pour gagner de nombreux lots tout en aidant l'equipe
+UO-Apocalypse, utilisez le systeme des bonnes actions
+en tapant .BA
+
+Orditeck
+
+[SCROLL SCROLL_GUEST]
+Pour gagner de nombreux lots tout en aidant l'equipe
+UO-Apocalypse, utilisez le systeme des bonnes actions
+en tapant .BA
+Orditeck
+
+[SCROLL SCROLL_NEWBIE]
+Pour gagner de nombreux lots tout en aidant l'equipe
+UO-Apocalypse, utilisez le systeme des bonnes actions
+en tapant .BA
+
+Orditeck
+
+[TIP 1]
+Pour gagner de nombreux lots tout en aidant l'equipe
+UO-Apocalypse, utilisez le systeme des bonnes actions
+en tapant .BA
+
+Orditeck
+
+[TIP 2]
+Pour gagner de nombreux lots tout en aidant l'equipe
+UO-Apocalypse, utilisez le systeme des bonnes actions
+en tapant .BA
+
+Orditeck
+
+[TIP 3]
+Pour gagner de nombreux lots tout en aidant l'equipe
+UO-Apocalypse, utilisez le systeme des bonnes actions
+en tapant .BA
+
+Orditeck
+
+[BOOK 3]
+DEFNAME=b_ArrowSong
+PAGES=1
+TITLE=The Arrow and the Song
+AUTHOR=Longfellow
+
+[BOOK b_ArrowSong 1]
+I shot an arrow into the air,
+It fell to earth, I knew not where;
+For, so swiftly it flew, the sight
+Could not follow in its flight.
+
+[BOOK b_ArrowSong 2]
+I breathed a song into the air,
+It fell to earth, I knew not where;
+For who has sight so keen and strong,
+That it can follow the flight of song?
+
+[BOOK b_ArrowSong 3]
+Long, long afterward, in an oak
+I found the arrow, still unbroke;
+And the song, from beginning to end,
+I found again in the heart of a friend.
+
+[CRYSTALBALL]	// Random messages turned up by a crystal ball.
+4
+Help I'm trapped in a crystal ball !
+What did you expect to see?
+It is clear as crystal
+Check out the goblins caves.
+
+[EMAILMSG EMAIL_NONUSEWARN]
+Date: <SERV.RTIMETEXT>
+From: <SERV.SERVNAME> <<SERV.ADMINEMAIL>>
+Subject:  <SERV.SERVNAME> Account <ACCOUNT> non-use warning.
+To: <EMAIL>
+
+This is an automated email from <SERV.SERVNAME> to <EMAIL>
+We need to warn you that your account <ACCOUNT>
+has not been used since <LASTCONNECTDATE>.
+Since we are a free test server our policy is to delete accounts
+that have not been used in roughly 60 days.
+Please check the main page at <SERV.URL> or
+contact us at <SERV.ADMINEMAIL> if you want to put a hold on your account.
+Thank You
+<SERV.ADMINEMAIL>
+
+[EMAILMSG EMAIL_NEWTHANKS]
+This is an automated email from <SERV.SERVNAME> to <EMAIL>
+Thank you for registering your new account <ACCOUNT>
+Your new password is <PASSWORD>
+You registered your account on <LASTCONNECTDATE>
+Since we are a free test server our policy is to delete accounts
+that have not been used in roughly 60 days.
+Please check the main page at <SERV.URL> or
+contact us at <SERV.ADMINEMAIL>
+Thank You
+<SERV.ADMINEMAIL>
+
+[EMAILMSG EMAIL_TEST]
+One line test from <SERV.SERVNAME>
+
+
+[EOF]
+

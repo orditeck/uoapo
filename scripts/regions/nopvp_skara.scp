@@ -1,0 +1,233 @@
+//*** DÉBUT SKARA BRAE COTÉ OUEST ***
+
+[AREA MAISON_SKARA1]
+CLASS=11
+RECT=600,2287,608,2272
+RECT=592,2279,600,2272
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA2]
+CLASS=11
+RECT=592,2255,623,2240
+RECT=600,2240,616,2232
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA3]
+CLASS=11
+RECT=608,2224,631,2215
+RECT=616,2215,631,2208
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA4]
+CLASS=11
+RECT=576,2239,583,2231
+RECT=576,2231,592,2224
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA5]
+CLASS=11
+RECT=544,2215,552,2208
+RECT=552,2223,567,2200
+RECT=567,2215,576,2208
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA6]
+CLASS=11
+RECT=584,2216,600,2200
+RECT=600,2207,607,2200
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA7]
+CLASS=11
+RECT=648,2192,655,2176
+RECT=640,2183,648,2176
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA8]
+CLASS=11
+RECT=616,2199,639,2192
+RECT=624,2192,632,2184
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA9]
+CLASS=11
+RECT=600,2191,607,2184
+RECT=600,2184,615,2176
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA10]
+CLASS=11
+RECT=576,2192,592,2184
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA11]
+CLASS=11
+RECT=552,2191,568,2168
+RECT=568,2175,575,2168
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA12]
+CLASS=11
+RECT=552,2159,567,2136
+RECT=567,2151,576,2144
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA13]
+CLASS=11
+RECT=568,2128,583,2120
+RECT=568,2120,575,2112
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA14]
+CLASS=11
+RECT=584,2175,592,2160
+RECT=592,2167,599,2160
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA15]
+CLASS=11
+RECT=608,2168,616,2152
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA16]
+CLASS=11
+RECT=584,2152,599,2144
+RECT=584,2144,591,2136
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA17]
+//MARCHÉ DE SKARA
+CLASS=11
+RECT=608,2135,631,2120
+RECT=616,2144,624,2112
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA18]
+CLASS=11
+RECT=624,2175,631,2168
+RECT=624,2168,639,2152
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA19]
+CLASS=11
+RECT=648,2168,663,2160
+RECT=648,2160,655,2152
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA20]
+CLASS=11
+RECT=656,2144,671,2136
+RECT=664,2151,671,2144
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+//*** DÉBUT COTÉ EST DE SKARA ***
+
+
+[AREA MAISON_SKARA21]
+CLASS=11
+RECT=744,2160,751,2151
+RECT=736,2151,759,2136
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA22]
+CLASS=11
+RECT=784,2224,791,2216
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA23]
+CLASS=11
+RECT=808,2200,823,2192
+RECT=808,2192,815,2184
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA24]
+CLASS=11
+RECT=744,2271,752,2264
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA25]
+CLASS=11
+RECT=792,2272,807,2264
+RECT=800,2279,807,2272
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA26]
+CLASS=11
+RECT=736,2351,744,2344
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA27]
+CLASS=11
+RECT=808,2335,816,2320
+RECT=816,2335,823,2328
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA28]
+CLASS=11
+RECT=864,2320,871,2312
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_SKARA29]
+CLASS=11
+RECT=888,2399,896,2384
+RECT=896,2399,903,2392
+DEFNAME=maison_skara
+GROUP=Skara
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out

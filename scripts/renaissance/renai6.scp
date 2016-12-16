@@ -1,0 +1,596 @@
+[CHARDEF c_brennen] 
+DEFNAME=c_brennen
+NAME=Brennen
+ID=c_man
+ 
+TSPEECH=spk_brennen
+
+ON=@create
+COLOR=083b
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Specialiste des armes de taille
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+COLOR=0ab2
+NAME=Armure de tenebres
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0ab2
+NAME=Armure de tenebres
+ITEMNEWBIE=I_PLATEMAIL_HELM
+COLOR=0ab2
+NAME=Armure de tenebres
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+COLOR=0ab2
+NAME=Armure de tenebres
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+COLOR=0ab2
+NAME=Armure de tenebres
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+COLOR=0ab2
+NAME=Armure de tenebres
+ITEMNEWBIE=I_SWORD_VIKING
+NAME=Glaive
+ITEMNEWBIE=i_CAPE
+COLOR=0ab2
+
+ON=@NPCSEENEWPLAYER
+IF (<EVAL 0<SRC.TAG.brennen>> < 1) && (<EVAL 0<SRC.TAG.RENAISSANCE>> < 6)
+	SAY Qui va la ?
+ELSE
+	SAY Heureux de voir que vous etes encore des notres <SRC.NAME> !
+ENDIF
+
+ON=@NPCHearUnknown
+IF (<EVAL 0<SRC.TAG.brennen>> < 1) && (<EVAL 0<SRC.TAG.RENAISSANCE>> < 6)
+	IF (<EVAL(RAND(20))>=0)
+		SAY Si j'avais une epee de la rose noire vous seriez deja mort ...
+	ELSE
+		SAY J'ai pour ordre de ne laisser entrer personne, fuyez ou vous trepasserez !
+	ENDIF
+ELSE
+	SAY Vous n'avez qu'une chose à me demander pour entrer
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-6
+DESCRIPTION=Brennen
+
+[SPEECH spk_brennen]
+
+ON=*rose*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 4
+	IF (<EVAL 0<SRC.TAG.brennen>> < 1) && (<EVAL 0<SRC.TAG.RENAISSANCE>> == 5)
+		IF <SRC.RESTEST 1 i_epee_de_la_rose_noire>
+			SRC.FINDID.i_epee_de_la_rose_noire.REMOVE
+			SRC.TAG.brennen=1
+			EMOTE arracher l'epee de la rose noire des mains de <SRC.NAME>
+			SAY Quelle merveille ... Comment vous convaincre de me la laisser ?
+		ELSE
+			SAY On dit que cette lame est plus tranchante et solide qu'un diamant mais je n'en ai encore jamais vu ...
+		ENDIF
+	ELSE
+		SAY Je vous serai a jamais reconnaissant pour votre offrande ...
+	ENDIF
+ELSE
+	SAY Vous n'avez rien a faire ici <SRC.SEX humain/humaine> !
+ENDIF
+
+ON=*entre*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 5
+	IF !<SRC.FINDLAYER.25>
+		SAY Puisqu'il en soit ainsi ... Mais vous ne savez pas ce que vous risquez  !
+		SRC.EVENTS +e_anti_mark_recall
+		IF <SRC.FINDLAYER.40>
+			SRC.FINDLAYER.40.REMOVE
+		ENDIF
+		IF (<SRC.FLAGS>&statf_hidden)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+		ENDIF
+		IF (<SRC.FLAGS>&statf_invisible)
+			SRC.FLAGS=<SRC.FLAGS>&~invisible
+		ENDIF
+		IF (<SRC.FLAGS>&statf_insubstantial)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+		SRC.TAG.anti_mark_recall=1
+		SRC.TAG.INSIDE_D6=1
+		SRC.P=5790,1416,40
+		SRC.UPDATE
+	ELSE
+		SAY Les plafonds de cette grotte sont bien trop bas pour un cavalier, vous devriez descendre de votre monture ...
+	ENDIF
+ELSE
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 4
+		IF <EVAL <SRC.TAG.brennen>> == 1
+			IF <EVAL 0<SRC.TAG.LEVEL>> >99
+				IF !<SRC.FINDLAYER.25>
+					SAY Puisqu'il en soit ainsi ... Mais vous ne savez pas ce que vous risquez  !
+					SRC.EVENTS +e_anti_mark_recall
+					IF <SRC.FINDLAYER.40>
+						SRC.FINDLAYER.40.REMOVE
+					ENDIF
+					IF (<SRC.FLAGS>&statf_hidden)
+						SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+					ENDIF
+					IF (<SRC.FLAGS>&statf_invisible)
+						SRC.FLAGS=<SRC.FLAGS>&~invisible
+					ENDIF
+					IF (<SRC.FLAGS>&statf_insubstantial)
+						SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+					ENDIF
+					IF <SRC.FINDID.i_rune_delay_g>
+						SRC.FINDID.i_rune_delay_g.REMOVE
+						SRC.EFFECT 3,i_fx_smoke_small,0,60
+						SRC.SFX 01ed
+						SRC.EVENTS -e_casse_gate
+					ENDIF
+					SRC.TAG.anti_mark_recall=1
+					SRC.TAG.INSIDE_D6=1
+					SRC.P=5790,1416,40
+					SRC.UPDATE
+				ELSE
+					SAY Les plafonds de cette grotte sont bien trop bas pour un cavalier, vous devriez descendre de votre monture ...
+				ENDIF
+			ELSE
+				SAY Allons, soyez raisonnables : Les monstres de cette grotte ne feraient qu'une bouchee de vous !
+			ENDIF
+		ELSE
+			DORAND 2
+			ANIM 13
+			ANIM 14
+			ENDDO
+			SAY J'ai pour ordre de ne laisser entrer personne, fuyez ou vous trepasserez !
+		ENDIF
+	ELSE
+		SAY Si vous saviez le nombre d'humains que j'ai empale sur mon glaive, vous seriez deja tres loin ...
+	ENDIF
+ENDIF
+
+[ITEMDEF i_dalle_enleve_event5]
+DEFNAME=i_dalle_enleve_event5
+NAME=Dalle enleve event 5
+ID=049b
+
+ON=@CREATE
+COLOR=0abf
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D6
+	SRC.P=5761,2908,15
+	SRC.UPDATE
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle enleve event
+
+[ITEMDEF i_fire_cle1]
+DEFNAME=i_fire_cle1
+NAME=Cle de lave 1
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b7b
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.UID>==0400ab558
+	SRC.TARG.TYPE=t_door
+	SRC.SYSMESSAGEUA 0481 1 1 0 La porte est deverouillee
+	EMOTE tomber en poussiere
+	REMOVE
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-6
+DESCRIPTION=Cle de lave 1
+
+[ITEMDEF i_fire_cle2]
+DEFNAME=i_fire_cle2
+NAME=Cle de lave 2
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b7b
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.UID>==0400a1683
+	SRC.TARG.TYPE=t_door
+	SRC.SYSMESSAGEUA 0481 1 1 0 La porte est deverouillee
+	EMOTE tomber en poussiere
+	REMOVE
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-6
+DESCRIPTION=Cle de lave 2
+
+[ITEMDEF i_fire_cle3]
+DEFNAME=i_fire_cle3
+NAME=Cle de lave 3
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b7b
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.UID>==04009ccf5
+	SRC.TARG.TYPE=t_door
+	SRC.SYSMESSAGEUA 0481 1 1 0 La porte est deverouillee
+	EMOTE tomber en poussiere
+	REMOVE
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-6
+DESCRIPTION=Cle de lave 3
+
+[ITEMDEF i_flamme_dalle_piegee_d6_1]
+ID=i_fx_Glacier_effect
+NAME=Lave
+TYPE=t_script
+
+ON=@CREATE
+TIMER=1
+COLOR=0b7b
+ATTR=08010
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_dalle_piegee_d6_1]
+DEFNAME=i_dalle_piegee_d6_1
+NAME=Dalle piegee [Lave]
+ID=049b
+
+ON=@CREATE
+COLOR=0b7b
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.NEWITEM i_flamme_dalle_piegee_d6_1
+	SRC.ACT.P=<EVAL <SRC.P.X>+2>,<SRC.P.Y>,<SRC.P.Z>
+	SRC.DAMAGE {600 700} 0008
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-6
+DESCRIPTION=Dalle piegee [Lave]
+
+[ITEMDEF i_dalle_teleporte_d6]
+DEFNAME=i_dalle_teleporte_d6
+NAME=Dalle teleporte
+ID=049b
+
+ON=@CREATE
+COLOR=0b99
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	DORAND 4
+		SRC.GO 5769,1365
+		SRC.GO 5768,1362
+		SRC.GO 5780,1349,2
+		SRC.GO 5788,1351,2
+	ENDDO
+ENDIF
+
+[CHARDEF c_venerable_de_fire] 
+DEFNAME=c_venerable_de_fire
+NAME=Venerable de Fire
+ID=c_man
+ 
+TSPEECH=spk_venerable_de_fire
+
+ON=@create
+COLOR=03f1
+FOOD=9999
+SPEECHCOLOR=0b7f
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=01f03
+COLOR=0b7f
+ITEMNEWBIE=0170d
+COLOR=0b7f
+ITEMNEWBIE=013f8
+COLOR=0b7f
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 5
+	SAY Approchez <SRC.NAME> !
+ELSE
+	SAY Que venez-vous faire ici <SRC.NAME>?
+ENDIF
+
+ON=@NPCHearUnknown
+IF <EVAL <DISTANCE>> < 3
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 5
+		IF <EVAL 0<SRC.TAG.VDEFIRE>> == 0
+			SRC.TAG.VDEFIRE=1
+			IF <EVAL 0<SRC.TAG.COTE>> == 1
+				SAY Votre croisade vers la purete touche presque a sa fin, cependant le plus dur reste a venir ...
+			ELSE
+				SAY Votre croisade vers l'impurete touche presque a sa fin, cependant le plus dur reste a venir ...
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.VDEFIRE>> == 1
+			SRC.TAG.VDEFIRE=2
+			SAY Rares sont ceux et celles qui y sont parvenus. Audace et courage devront donc desormais etre vos seuls allies.
+		ELSE
+			IF <EVAL 0<SRC.TAG.COTE>> == 1
+				SAY Il est desormais temps de me dire si vous vous sentez toujours apte a continuer sur le chemin de la bonte
+			ELSE
+				SAY Il est desormais temps de me dire si vous vous sentez toujours apte a continuer sur le chemin de la tourmente
+			ENDIF
+		ENDIF
+	ELSE
+		IF <EVAL RAND(10)> < 1
+			SAY Venez vous chercher un tresor <SRC.NAME> ?
+		ELSE
+			SAY Votre destin est ailleurs <SRC.NAME>
+		ENDIF
+	ENDIF
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-6
+DESCRIPTION=Venerable de Fire
+
+[SPEECH spk_venerable_de_fire]
+
+ON=*bonte*
+IF <EVAL <DISTANCE>> < 3
+	IF (<EVAL 0<SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D6>>==1)
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 5
+				IF <SRC.FINDID.03f0c>
+					IF <EVAL 0<SRC.TAG.DRAGONNETD>> < 5
+						SRC.TAG.TRICHEUR_D6=1
+					ENDIF
+					SRC.TAG.RENAISSANCE=6
+					SRC.FINDID.03f0c.COLOR=0B0D
+					SRC.COLOR=0B13
+					SRC.OSKIN=0B13
+					SRC.RENAITRE
+					SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie d'elu avec sa sixieme renaissance !
+				ELSE
+					SAY Un elu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+				ENDIF
+			ELSE
+				SAY Votre destin est ailleurs <SRC.NAME>
+			ENDIF
+		ELSE
+			SAY Vous avez deja prete serment pour servir le mal
+		ENDIF
+	ELSE
+		SRC.SORTIE_D6
+	ENDIF
+ENDIF
+
+ON=*tourmente*
+IF <EVAL <DISTANCE>> < 3
+	IF (<EVAL 0<SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D6>>==1)
+		IF <EVAL 0<SRC.TAG.COTE>> == 2
+			IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 5
+				IF <SRC.FINDID.03f0c>
+					IF <EVAL 0<SRC.TAG.DRAGONNETD>> < 5
+						SRC.TAG.TRICHEUR_D6=1
+					ENDIF
+					SRC.TAG.RENAISSANCE=6
+					SRC.FINDID.03f0c.COLOR=0B33
+					SRC.COLOR=0B33
+					SRC.OSKIN=0B33
+					SRC.RENAITRE
+					SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie de dechu avec sa sixieme renaissance !
+				ELSE
+					SAY Un dechu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+				ENDIF
+			ELSE
+				SAY Votre destin est ailleurs <SRC.NAME>
+			ENDIF
+		ELSE
+			SAY Vous avez deja prete serment pour servir le bien
+		ENDIF
+	ELSE
+		SRC.SORTIE_D6
+	ENDIF
+ENDIF
+
+ON=*colise*
+ON=*colyse*
+SAY Seul le venerable de Wrong pourra vous y emmener ...
+
+ON=*tresor*
+SAY Je peux vous amener gratuitement a la salle du tresor, vous ne pourrez toutefois plus revenir ici. Voulez-vous que je vous y mene?
+SRC.TAG.OUITRESOR=1
+
+ON=oui*
+IF 0<SRC.TAG.OUITRESOR> == 1
+	EMOTE prononcer des paroles incomprehensibles
+	SRC.GO 
+	SRC.TAG.OUITRESOR
+ELSE
+	SAY Non quoi?
+ENDIF
+
+ON=non*
+IF 0<SRC.TAG.OUITRESOR> == 1
+	SAY C'est vous qui decidez...
+	SRC.TAG.OUITRESOR
+ELSE
+	SAY Non quoi?
+ENDIF
+
+[ITEMDEF i_fire_porte_finale_1]
+DEFNAME=i_fire_porte_finale_1
+ID=068d
+
+ON=@CREATE
+TYPE=t_door_locked
+MORE1=0400A31B2
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-6
+DESCRIPTION=Porte finale 1
+
+[ITEMDEF i_fire_porte_finale_2]
+DEFNAME=i_fire_porte_finale_2
+ID=0689
+
+ON=@CREATE
+TYPE=t_door_locked
+MORE1=0400A31B2
+TIMER=10
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-6
+DESCRIPTION=Porte finale 2
+
+[ITEMDEF i_fire_cle_finale]
+DEFNAME=i_fire_cle_finale
+NAME=Cle de lave durcie
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b7b
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.BASEID>==i_fire_porte_finale_1) || (<SRC.TARG.BASEID>==i_fire_porte_finale_2)
+	SRC.TARG.TYPE=t_door
+	SRC.SYSMESSAGEUA 0481 1 1 0 La porte est deverouillee
+	EMOTE tomber en poussiere
+	REMOVE
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-6
+DESCRIPTION=Cle de lave finale
+
+[ITEMDEF i_portail_sortie_d6]
+NAME=Sortie du dongeon 6
+ID=0dda
+
+ON=@CREATE
+COLOR=0b38
+
+//SEULS LES JOUEURS + que X5 PEUVENT SORTIR
+ON=@STEP
+IF ((!<SRC.BRAIN>) && (<EVAL 0<SRC.TAG.RENAISSANCE>> >= 6))
+	SRC.SORTIE_D6
+ENDIF
+RETURN 1
+
+[ITEMDEF i_coffre_de_fire]
+NAME=Coffre de Fire
+ID=0e43
+TYPE=T_SCRIPT
+
+ON=@CLICK
+MESSAGE <NAME>
+SRC.EMOTE remarquer un portail sur la serrure du coffre...
+RETURN 1
+
+ON=@CREATE
+TIMER=43200
+TAG.REMPLI=0
+
+ON=@DCLICK
+IF (<EVAL 0<TAG.REMPLI>> == 1)
+	TAG.REMPLI=0
+	TIMER=<EVAL RAND(86400) + 43200>
+	IF <EVAL RAND(10)> < 1
+		SRC.NEWITEM { i_arbalete_lourde_du_lynx 3 i_cimeterre_de_lave_du_lynx 1 i_lave_PLATEMAIL 1 i_lave_FEMALE_PLATEMAIL 1 i_lave_PLATEMAIL_leggings 1 i_lave_HEATER_SHIELD 1 i_lave_PLATEMAIL_ARMS 2 i_lave_PLATE_HELM 1 i_lave_PLATE_HELM_2 1 i_lave_PLATE_HELM_3 1 i_lave_PLATE_HELM_4 1 i_lave_PLATE_HELM_5 1 i_lave_PLATEMAIL_GAUNTLETS 3 i_lave_PLATEMAIL_GORGET 3 i_lave_CHAINMAIL_TUNIC 1 i_lave_CHAINMAIL_LEGGINGS 1 i_lave_METAL_SHIELD 2 i_lave_CHAINMAIL_COIF 3 i_lave_RINGMAIL_TUNIC 2 i_lave_RINGMAIL_LEGGINGS 2 i_lave_RINGMAIL_SLEEVES 3 i_lave_BUCKLER_SHIELD 3 i_lave_RINGMAIL_GLOVES 3 i_ingot_lave 15 }
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez trouve un <SRC.ACT.NAME> !
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+ENDIF
+SRC.SORTIE_D6
+RETURN 1
+
+ON=@TIMER
+TAG.REMPLI=1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Dalle teleportatrice
+
+[ITEMDEF i_ingot_lave]
+ID=i_ingot_iron
+NAME=Lingot de lave
+TYPE=T_INGOT
+VALUE=1
+WEIGHT=10
+
+ON=@Create
+COLOR=0835
+
+//DEFAULT : JOUEUR A SORTIR
+[FUNCTION SORTIE_D6]
+EVENTS -e_anti_mark_recall
+TAG.anti_mark_recall=0
+TAG.INSIDE_D6
+GO 5761,2908,15
+RETURN 1

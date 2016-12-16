@@ -1,0 +1,20 @@
+[ITEMDEF m_anti_rez_kill]
+NAME=anti rez
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//DEFAULT = JOUEUR QUI ATTAQUE ; <args> = nom du joueur insulte
+[FUNCTION REZ]
+DORAND 4
+	EMOTE insulter <ARGS>
+	EMOTE narguer <ARGS>
+	EMOTE pousser <ARGS>
+	EMOTE tasser <ARGS>
+ENDDO

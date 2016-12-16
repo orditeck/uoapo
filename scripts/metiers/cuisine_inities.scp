@@ -1,0 +1,145 @@
+//*************************************************
+//***************RECETTES INITIES******************
+//*************************************************
+
+[ITEMDEF i_saute_au_poulet_cru]
+NAME=Saute au poulet cru
+ID=i_plate_food
+TYPE=t_nourriture_crue
+RESOURCES=2 i_bird_raw, 1 m_sac_de_sel, 1 m_sac_d_epices, 1 i_champignon, 1 i_fruit_carrot
+SKILLMAKE=TINKERING 30.0, COOKING 71.0, i_livre_de_recettes_3
+
+ON=@CREATE
+MORE1=i_saute_au_poulet
+MORE2=71.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Saute au poulet cru
+
+[ITEMDEF i_saute_au_poulet]
+NAME=Saute au poulet
+ID=i_plate_food
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=5
+MORE2=6
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Saute au poulet
+
+[ITEMDEF i_gateau_au_fromage_a_la_creme]
+NAME=Gateau au fromage a la creme
+ID=i_cake
+TYPE=t_nourriture
+RESOURCES=1 i_gateau_blanc, 2 m_cruche_de_creme, 1 m_sac_de_sucre, 1 i_brique_de_fromage
+SKILLMAKE=TINKERING 30.0, COOKING 71.0, i_livre_de_recettes_3
+
+ON=@CREATE
+MORE1=5
+MORE2=5
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Gateau au fromage a la creme
+
+[ITEMDEF i_gratin_de_carottes_et_patates_cru]
+NAME=Gratin de carottes et patates cru
+ID=i_bowl_pewter_potatoes
+TYPE=t_nourriture_crue
+RESOURCES=1 i_champignon, 1 i_brique_de_fromage, 1 i_piment_jalapeno, 1 i_bowl_pewter_potatoes, 2 i_fruit_carrot, 1 m_sac_de_sel
+SKILLMAKE=TINKERING 30.0, COOKING 74.0, i_livre_de_recettes_3
+
+ON=@CREATE
+MORE1=i_gratin_de_carottes_et_patates
+MORE2=74.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Gratin de carottes et patates cru
+
+[ITEMDEF i_gratin_de_carottes_et_patates]
+NAME=Gratin de carottes et patates
+ID=i_bowl_pewter_potatoes
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=5
+MORE2=6
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Gratin de carottes et patates
+
+[ITEMDEF i_pizza_quebecoise_crue]
+NAME=Pizza quebecoise crue
+ID=i_pizza_uncooked
+TYPE=t_nourriture_crue
+RESOURCES=1 i_brique_de_fromage, 1 i_preparation_a_pain, 2 i_tranche_de_bacon, 4 i_champignon
+SKILLMAKE=TINKERING 30.0, COOKING 78.0, i_livre_de_recettes_3
+
+ON=@CREATE
+MORE1=i_pizza_quebecoise
+MORE2=78.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Pizza quebecoise crue
+
+[ITEMDEF i_pizza_quebecoise]
+NAME=Pizza quebecoise
+ID=i_pizza
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=4
+MORE2=6
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Pizza quebecoise
+
+[ITEMDEF i_chili_con_carne_cru]
+NAME=Chili con carne cru
+ID=i_bowl_stew_lg
+TYPE=t_nourriture_crue
+RESOURCES=1 i_sac_de_haricots, 2 i_piment_jalapeno, 1 i_piment_habanero, 1 i_ribs_raw, 1 m_sac_de_sel, 1 m_sac_d_epices
+SKILLMAKE=TINKERING 30.0, COOKING 82.0, i_livre_de_recettes_3
+
+ON=@CREATE
+MORE1=i_chili_con_carne
+MORE2=82.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Chili con carne cru
+
+[ITEMDEF i_chili_con_carne]
+NAME=Chili con carne
+ID=i_bowl_stew_lg
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=4
+MORE2=7
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Chili con carne
+
+[ITEMDEF i_salade_jardiniere]
+NAME=Salade jardiniere
+ID=i_bowl_wood_lettuce
+TYPE=t_nourriture
+RESOURCES=1 i_fruit_lettuce, i_fruit_carrot, 1 i_piment_doux, 1 i_sac_de_haricots, 1 m_sac_de_sel, 1 i_tomate
+SKILLMAKE=TINKERING 30.0, COOKING 84.0, i_livre_de_recettes_3
+
+ON=@CREATE
+MORE1=4
+MORE2=7
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Salade jardiniere

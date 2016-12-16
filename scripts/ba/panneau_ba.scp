@@ -1,0 +1,411 @@
+[FUNCTION ba]
+SRC.DIALOG panneau_ba
+
+[DIALOG panneau_ba]
+0, 0
+PAGE 0
+gumppic 205 160 3600
+gumppic 219 174 3604
+gumppic 347 174 3604
+gumppic 219 302 3604
+gumppic 347 302 3604
+gumppic 205 174 3603
+gumppic 220 339 3604
+gumppic 347 339 3604
+gumppic 475 174 3604
+gumppic 220 466 3607
+gumppic 205 466 3606
+gumppic 327 466 3607
+gumppic 475 301 3604
+gumppic 436 466 3607
+gumppic 475 338 3604
+gumppic 480 466 3607
+gumppic 603 466 3608
+gumppic 480 160 3601
+gumppic 603 160 3602
+gumppic 378 160 3601
+gumppic 287 160 3601
+gumppic 219 160 3601
+gumppic 603 174 3605
+text 225 198 995 0//Gestion des sponsors
+text 505 198 995 1//Infos
+text 546 198 995 2//Visiter
+text 225 216 1313 3//SPONSOR1
+text 225 233 1313 4
+text 225 250 1313 5
+text 225 267 1313 6
+text 225 285 1313 7
+text 225 302 1313 8//SPONSOR6
+button 516 223 2103 2104 1 0 1//SPONSOR1
+button 573 223 2103 2104 1 0 2
+button 516 240 2103 2104 1 0 3//SPONSOR2
+button 573 240 2103 2104 1 0 4
+button 516 257 2103 2104 1 0 5//SPONSOR3
+button 573 257 2103 2104 1 0 6
+button 516 274 2103 2104 1 0 7//SPONSOR4
+button 573 274 2103 2104 1 0 8
+button 516 291 2103 2104 1 0 9//SPONSOR5
+button 573 291 2103 2104 1 0 10
+button 516 308 2103 2104 1 0 11//SPONSOR6
+button 573 308 2103 2104 1 0 12
+text 506 324 1313 9//<CLICKS TOTAUX>
+text 225 324 32 10//Nombre de clicks total effectues
+text 225 341 32 11//Nombre total de cadavres brules
+text 225 358 32 12//Nombre total de points de recompense
+text 506 341 1313 13//<TOTALCADAVRES>
+text 506 358 1313 14//<POINTS BA>
+text 225 375 995 15//Acquerir une recompense
+button 516 380 2103 2104 1 0 14//acquerir une recompense
+text 282 179 1152 16//Panneau de gestion des bonnes actions
+text 225 392 995 17//Fureteur
+text 295 392 1313 18//IE(defaut)
+text 405 392 1313 19//firefox/autres
+button 380 397 2103 2104 1 0 15//IE
+button 515 397 2103 2104 1 0 16//firefox
+
+[DIALOG panneau_ba TEXT]
+Gestion des sponsors
+Infos
+Visiter
+Anyresa//SPONSOR 1
+Voter pour Apo
+vote et publicite
+Captain price
+N/A
+Conrad//SPONSOR 6
+<EVAL 0<SRC.TAG.CLICKTOTAL>>
+Nombre de clicks total effectues
+Nombre total de cadavres brules
+Nombre total de points de recompense
+<EVAL 0<SRC.TAG.TOTALCADAVRE>>
+<EVAL 0<SRC.TAG.POINTSBA>>
+Acquerir une recompense
+Panneau de gestion des bonnes actions
+Fureteur
+IE(defaut)
+firefox/autres
+
+[DIALOG panneau_ba BUTTON]
+
+//***SPONSOR 1***
+
+on=1
+SRC.DIALOG panneau_ba
+SRC.SYSMESSAGEUA 0481 1 1 0 Campagne et jeu Anyresa !
+on=2
+IF !<SRC.FINDID.m_limitateur_entrepub>
+	IF <SRC.FINDID.m_limitateur_publicite1>
+		SRC.DIALOG panneau_ba
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pourrez revisiter ce sponsor que dans <EVAL <SRC.FINDID.m_limitateur_publicite1.TIMER>/60> minutes
+	ELSE
+		SRC.NEWITEM=m_limitateur_entrepub
+		SRC.ACT.EQUIP
+		SRC.NEWITEM=m_limitateur_publicite1
+		SRC.ACT.EQUIP
+		IF <SRC.ACCOUNT.PLEVEL> > 6
+			SRC.PAGEWEB uoapo.com
+		ENDIF
+		SRC.PAGEWEB banniere.reussissonsensemble.fr/view.asp?ref=354908&site=6068&b=85
+		SRC.PAGEWEB clic.reussissonsensemble.fr/click.asp?ref=354908&site=6068&type=b85&bnb=85
+		SRC.DONNER_POINT_BA
+		SRC.SYSMESSAGEUA 0481 1 1 0 Merci de bien visiter nos sponsors, ils valent plus qu'une simple ba
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez attendre <EVAL <SRC.FINDID.m_limitateur_entrepub.TIMER>> secondes avant de pouvoir re-visiter un sponsor !
+ENDIF
+
+//***SPONSOR 2***
+
+on=3
+SRC.DIALOG panneau_ba
+SRC.SYSMESSAGEUA 0481 1 1 0 Votez pour UO-Apocalypse
+on=4
+IF !<SRC.FINDID.m_limitateur_entrepub>
+	IF <SRC.FINDID.m_limitateur_publicite2>
+		SRC.DIALOG panneau_ba
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pourrez revisiter ce sponsor que dans <EVAL <SRC.FINDID.m_limitateur_publicite2.TIMER>/60> minutes
+	ELSE
+		SRC.NEWITEM=m_limitateur_entrepub
+		SRC.ACT.EQUIP
+		SRC.NEWITEM=m_limitateur_publicite2
+		SRC.ACT.EQUIP
+		DORAND 4
+			SRC.PAGEWEB www.rpg-paradize.com/index.php?page=vote&vote=483
+			SRC.PAGEWEB www.gamesites200.com/ultimaonline/in.php?id=253
+			SRC.PAGEWEB www.xtremetop100.com/in.php?site=1132188563
+			SRC.PAGEWEB vote.weborama.fr/fcgi-bin/vote.fcgi?261042 
+		ENDDO
+		SRC.DONNER_POINT_BA
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez attendre <EVAL <SRC.FINDID.m_limitateur_entrepub.TIMER>> secondes avant de pouvoir re-visiter un sponsor !
+ENDIF
+
+//***SPONSOR 3***
+
+on=5
+SRC.DIALOG panneau_ba
+SRC.SYSMESSAGEUA 0481 1 1 0 Visitez une pub, faites un don et/ou votez pour apo!
+on=6
+IF !<SRC.FINDID.m_limitateur_entrepub>
+	IF <SRC.FINDID.m_limitateur_publicite3>
+		SRC.DIALOG panneau_ba
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pourrez revisiter ce sponsor que dans <EVAL <SRC.FINDID.m_limitateur_publicite3.TIMER>/60> minutes
+	ELSE
+		SRC.NEWITEM=m_limitateur_entrepub
+		SRC.ACT.EQUIP
+		SRC.NEWITEM=m_limitateur_publicite3
+		SRC.ACT.EQUIP
+		SRC.PAGEWEB http:\\www.uoapo.com/sponsor.asp
+		SRC.DONNER_POINT_BA
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez attendre <EVAL <SRC.FINDID.m_limitateur_entrepub.TIMER>> secondes avant de pouvoir re-visiter un sponsor !
+ENDIF
+
+//***SPONSOR 4***
+
+on=7
+SRC.DIALOG panneau_ba
+SRC.SYSMESSAGEUA 0481 1 1 0 Jeux concours Captainprice
+on=8
+IF !<SRC.FINDID.m_limitateur_entrepub>
+	IF <SRC.FINDID.m_limitateur_publicite4>
+		SRC.DIALOG panneau_ba
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pourrez revisiter ce sponsor que dans <EVAL <SRC.FINDID.m_limitateur_publicite4.TIMER>/60> minutes
+	ELSE
+		SRC.NEWITEM=m_limitateur_entrepub
+		SRC.ACT.EQUIP
+		SRC.NEWITEM=m_limitateur_publicite4
+		SRC.ACT.EQUIP
+		SRC.PAGEWEB banniere.reussissonsensemble.fr/view.asp?ref=354908&site=4480&b=10
+		SRC.PAGEWEB clic.reussissonsensemble.fr/click.asp?ref=354908&site=4480&type=b10&bnb=10
+		SRC.DONNER_POINT_BA
+		SRC.SYSMESSAGEUA 0481 1 1 0 Merci de bien visiter nos sponsors, ils valent plus qu'une simple ba
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez attendre <EVAL <SRC.FINDID.m_limitateur_entrepub.TIMER>> secondes avant de pouvoir re-visiter un sponsor !
+ENDIF
+
+//***SPONSOR 5***
+
+on=9
+SRC.DIALOG panneau_ba
+//SRC.SYSMESSAGEUA 0481 1 1 0 Site de rencontres Meetic
+
+on=10
+//IF !<SRC.FINDID.m_limitateur_entrepub>
+//	IF <SRC.FINDID.m_limitateur_publicite5>
+//		SRC.DIALOG panneau_ba
+//		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pourrez revisiter ce sponsor que dans <EVAL <SRC.FINDID.m_limitateur_publicite5.TIMER>/60> minutes
+//	ELSE
+//		SRC.NEWITEM=m_limitateur_entrepub
+//		SRC.ACT.EQUIP
+//		SRC.NEWITEM=m_limitateur_publicite5
+//		SRC.ACT.EQUIP
+//		SRC.PAGEWEB banniere.reussissonsensemble.fr/view.asp?ref=354908&site=4565&b=167
+//		SRC.PAGEWEB clic.reussissonsensemble.fr/click.asp?ref=354908&site=4565&type=b167&bnb=167
+//		SRC.DONNER_POINT_BA
+//		SRC.SYSMESSAGEUA 0481 1 1 0 Merci de cliquer sur un lien du site!
+//	ENDIF
+//ELSE
+//	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez attendre <EVAL <SRC.FINDID.m_limitateur_entrepub.TIMER>> secondes avant de pouvoir re-visiter un sponsor !
+//ENDIF
+
+//***SPONSOR 6***
+
+on=11
+SRC.DIALOG panneau_ba
+SRC.SYSMESSAGEUA 0481 1 1 0 Site de ventes en ligne
+on=12
+IF !<SRC.FINDID.m_limitateur_entrepub>
+	IF <SRC.FINDID.m_limitateur_publicite6>
+		SRC.DIALOG panneau_ba
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pourrez revisiter ce sponsor que dans <EVAL <SRC.FINDID.m_limitateur_publicite6.TIMER>/60> minutes
+	ELSE
+		SRC.NEWITEM=m_limitateur_entrepub
+		SRC.ACT.EQUIP
+		SRC.NEWITEM=m_limitateur_publicite6
+		SRC.ACT.EQUIP
+		SRC.PAGEWEB banniere.reussissonsensemble.fr/view.asp?ref=354908&site=5202&b=93
+		SRC.PAGEWEB clic.reussissonsensemble.fr/click.asp?ref=354908&site=5202&type=b93&bnb=93
+		SRC.DONNER_POINT_BA
+		SRC.SYSMESSAGEUA 0481 1 1 0 Merci de cliquer sur un lien du site!
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez attendre <EVAL <SRC.FINDID.m_limitateur_entrepub.TIMER>> secondes avant de pouvoir re-visiter un sponsor !
+ENDIF
+
+on=13
+SRC.BRULER
+
+on=14
+SRC.DIALOG panneau_re
+
+//IE
+ON=15
+SRC.TAG.FIREFOX
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous navigateur est maintenant configure comme etant Internet Explorer!
+
+//FIREFOX
+ON=16
+SRC.TAG.FIREFOX=1
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous navigateur est maintenant configure comme etant Firefox ou autres!
+
+[ITEMDEF m_compteur_temps]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=60
+
+ON=@TIMER
+TOPOBJ.TAG.MINUTESJOUEES=<EVAL 0<TOPOBJ.TAG.MINUTESJOUEES> +1>
+IF <EVAL 0<TOPOBJ.TAG.MINUTESJOUEES>>==60
+	TOPOBJ.TAG.MINUTESJOUEES=0
+	TOPOBJ.TAG.HEURESJOUEES=<EVAL 0<TOPOBJ.TAG.HEURESJOUEES> +1>
+ENDIF
+TIMER=60
+RETURN 1
+
+[ITEMDEF m_limitateur_publicite1]
+ID=i_memory
+NAME=pub1
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=82800
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_limitateur_publicite2]
+ID=i_memory
+NAME=pub2
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=82800
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_limitateur_publicite3]
+ID=i_memory
+NAME=pub3
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=82800
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_limitateur_publicite4]
+ID=i_memory
+NAME=pub4
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=82800
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_limitateur_publicite5]
+ID=i_memory
+NAME=pub5
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=82800
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_limitateur_publicite6]
+ID=i_memory
+NAME=pub6
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=82800
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_limitateur_entrepub]
+ID=i_memory
+NAME=entrepub
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=30
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[FUNCTION BRULER]
+SRC.NEWITEM i_bruleur
+SRC.ACT.CONT=<SRC.UID>
+SRC.ACT.USE
+
+[ITEMDEF i_bruleur] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30 
+
+ON=@CREATE 
+TIMER=10 
+
+ON=@TIMER 
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quel cadavre de creature desirez vous bruler ?
+TARGET
+RETURN 1 
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas mort !
+RETURN 1 
+
+ON=@TARGON_ITEM
+IF <SRC.FINDID.i_torch> || <SRC.FINDID.i_torche>
+	IF (<SRC.TARG.TYPE>==T_CORPSE) && (<SRC.TARG.LINK>==04FFFFFFF)
+		IF (<EVAL(RAND(10))>=0) 
+			IF <SRC.FINDID.i_torch>
+				SRC.CONSUME 1 i_torch
+			ELSE
+				SRC.CONSUME 1 i_torche
+			ENDIF
+		ENDIF
+		SRC.TARG.REMOVE
+		SRC.TAG.TOTALCADAVRE=<EVAL 0<SRC.TAG.TOTALCADAVRE>+1>
+		SRC.TAG.CADAVRE=<EVAL 0<SRC.TAG.CADAVRE>+1>
+		IF <EVAL <SRC.TAG.CADAVRE>> > 499
+			SRC.TAG.CADAVRE=0
+			SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>+1>
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous gagnez un point de recompense !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un cadavre de monstre !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Il vous manque une torche !
+ENDIF
+RETURN 1
+
+
+[FUNCTION DONNER_POINT_BA]
+TAG.CLICKTOTAL=<EVAL 0<SRC.TAG.CLICKTOTAL>+1>
+TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>+1>
+TAG.VERIFCLICK=<EVAL 0<SRC.TAG.VERIFCLICK>+1>

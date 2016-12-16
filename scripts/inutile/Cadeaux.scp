@@ -1,0 +1,27 @@
+[FUNCTION DECLENCHEUNAN]
+SERV.B Pour les retardataires ... Joyeux anniversaire a UO-Apocalypse pour ses 2 ans :)
+SERV.ALLCLIENTS UNAN
+
+[FUNCTION UNAN]
+NEWNPC c_a_mustang_black
+ACT.P=<P>
+ACT.NAME Mustang chamarre
+ACT.COLOR {0ba2 0bb8}
+ACT.NEWITEM i_memory_animaux
+ACT.ACT.NAME=<NAME>
+ACT.ACT.LINK=<UID> 
+ACT.ACT.MORE2=<TIME>
+ACT.ACT.MOREP=<ACT.P> 
+ACT.ACT.CONT=<ACT.UID>
+
+[FUNCTION Artifice1]
+SERV.ALLCLIENTS EFFECT 0,i_fx_soins,1,15,0
+
+[FUNCTION Artifice2]
+SERV.ALLCLIENTS EFFECT 0,i_fx_soins_avances,1,15,0
+
+[FUNCTION Artifice3]
+SERV.ALLCLIENTS EFFECT 0,i_fx_flare,1,15,0
+
+[FUNCTION Artifice4]
+SERV.ALLCLIENTS EFFECT 0,i_fx_teleportation,1,15,0

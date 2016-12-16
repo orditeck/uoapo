@@ -1,0 +1,364 @@
+//Réalisé par Picot
+//BANQUIER ==> C_BANQUIER
+//OBJETS ==> I_PIECE_DIAMANT
+//MEMORY ==> I_TIMER_BANQUIER_CANCEL
+//FUNCTION UTILE ==> METTRE_CASH_DANS_SAC_1000
+
+[CHARDEF C_BANQUIER]
+DEFNAME=C_BANQUIER
+NAME=#NAMES_HUMANMALE Le Banquier
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=job_banquier
+
+ON=@Create
+COLOR=colors_skin
+STR=2000
+DEX=1
+INT=1
+INVUL
+NPC=BRAIN_BANKER
+NEED=i_gold
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_fancy
+COLOR=colors_green
+ITEM=i_pants_long
+COLOR=colors_yellow
+ITEM=random_shoes
+COLOR=colors_neutral
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Banquier (male)
+
+
+[SPEECH job_banquier]
+ON=*Equilibre*
+SAY=Vous avez <SRC.BANKBALANCE> pieces d'or en banque.
+RETURN 1
+
+ON=*Banq*
+ON=*Bank*
+IF ((<EVAL <DISTANCE>> < 3) && (<CANSEE>))
+	DORAND 2
+		SAY Voici le contenu de votre coffre de banque <SRC.NAME>
+		SAY Bonjour <SRC.NAME> voila tout ce que vous possedez en banque
+	ENDDO
+	SRC.BANKSELF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes trop eloigne de <NAME> pour lui adresser la parole !
+ENDIF
+RETURN 1
+
+ON=*Bonjour*
+SAY=Bonjour <SRC.NAME>
+RETURN 1
+
+ON=*buy*
+ON=*acheter*
+ON=*achat*
+IF <EVAL <DISTANCE>> < 3
+	IF <SRC.FINDID.i_timer_banquier_cancel>
+		SRC.FINDID.i_timer_banquier_cancel.REMOVE
+	ENDIF
+	SRC.NEWITEM i_timer_banquier_cancel
+	SRC.ACT.EQUIP
+	SRC.FINDID.i_timer_banquier_cancel.LINK = <UID>
+	SRC.DIALOG piece_diamant_achat
+ELSE
+	SAY Approchez vous mon ami!
+ENDIF
+RETURN 1
+
+ON=*sell*
+ON=*vendre*
+ON=*vente*
+IF <EVAL <DISTANCE>> < 3
+	IF <SRC.FINDID.i_timer_banquier_cancel>
+		SRC.FINDID.i_timer_banquier_cancel.REMOVE
+	ENDIF
+	SRC.NEWITEM i_timer_banquier_cancel
+	SRC.ACT.EQUIP
+	SRC.FINDID.i_timer_banquier_cancel.LINK = <UID>
+	SRC.DIALOG piece_diamant_vente
+ELSE
+	SAY Approchez vous mon ami!
+ENDIF
+RETURN 1
+
+ON=*bye*
+ON=*revoir*
+DORAND 2
+	SAY A bientot <SRC.NAME>
+	SAY Au revoir <SRC.NAME>
+ENDDO
+BYE
+RETURN 1
+
+
+//CANCEL LA VENTE SI TROP LONG
+[ITEMDEF i_timer_banquier_cancel]
+ID=i_memory
+NAME=banquier_cancel
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=60
+TAG.DIAMANTS=0
+
+ON=@TIMER
+REMOVE
+return 0
+
+
+[ITEMDEF i_piece_diamant]
+ID=I_GOLD
+NAME=Pieces de diamant
+TYPE=T_NORMAL
+VALUE=1000
+
+CATEGORY=Provisions - Miscellaneous 
+SUBSECTION=Coins
+DESCRIPTION=Piece de diamant
+
+ON=@CREATE
+COLOR=0482
+
+//AJOUTER DES PIECES DE DIAMANT À ACHETER AU PANIER
+[FUNCTION ACHAT_DIAMANT]
+IF <SRC.FINDID.i_timer_banquier_cancel>
+	SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS = <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS> + <ARGS>
+	DIALOG piece_diamant_achat
+ELSE
+	SRC.NEWITEM i_timer_banquier_cancel
+	SRC.ACT.EQUIP
+	DIALOG piece_diamant_achat
+ENDIF
+RETURN 1
+
+//EFFECTUER L'ACHAT
+[FUNCTION EFFECTUER_ACHAT_BANQUIER]
+IF <SRC.FINDID.i_timer_banquier_cancel>
+	IF <EVAL 0<SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS>> > 0
+		IF <TOTAL_ACHAT_VENTE_BANQUIER> <= 10000000
+			SRC.PAYUP_NODIAMANT <TOTAL_ACHAT_VENTE_BANQUIER>
+			IF ( !<VAR.ENOUGH> ) 
+				BANQUIER_DIRE Vous ne possedez pas <TOTAL_ACHAT_VENTE_BANQUIER> pieces d'or ...
+			ELSE
+				SRC.NEWITEM i_piece_diamant
+				SRC.ACT.AMOUNT <EVAL <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS>>
+				SRC.ACT.BOUNCE
+				BANQUIER_DIRE <SRC.NAME>, voici vos <EVAL <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS>> pieces de diamant
+			ENDIF
+		ELSE
+			BANQUIER_DIRE Je ne fais pas d'echange d'une valeur aussi elevee!
+		ENDIF
+	ELSE
+		BANQUIER_DIRE Vous voulez vraiment acheter 0 piece?
+	ENDIF
+	SRC.FINDID.i_timer_banquier_cancel.REMOVE
+ELSE
+	BANQUIER_DIRE Quoi <SRC.NAME>, vous avez dit quelque chose?
+ENDIF
+RETURN 0
+
+[FUNCTION TOTAL_ACHAT_VENTE_BANQUIER]
+RETURN <EVAL <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS>*1000 >
+
+[DIALOG piece_diamant_achat] 
+0,0
+
+page 0
+resizepic 0 0 2620 420 260
+
+page 1
+text 20 20 1152 1//Piece
+text 75 20 1152 2//Cout/unit
+text 170 20 1152 3//+1
+text 220 20 1152 4//+10
+text 270 20 1152 5//+100
+text 320 20 1152 6//+1000
+text 20 100 1152 7//Diamant
+text 90 100 1152 8//1000
+text 20 125 1152 9//Diamants achetés : <DIAMANTS>
+text 20 220 1152 10//Cout total : <DIAmANT*1000> po
+text 300 220 1152 11//Acheter
+button 170 100 2473 2472 1 0 1//ACHETER 1 PIECE DE DIAMANT
+button 220 100 2473 2472 1 0 2//ACHETER 10 PIECES DE DIAMANT
+button 270 100 2473 2472 1 0 3//ACHETER 100 PIECES DE DIAMANT
+button 320 100 2473 2472 1 0 4//ACHETER 1000 PIECES DE DIAMANT
+button 380 220 2473 2472 1 0 5//ACHAT
+
+[DIALOG piece_diamant_achat TEXT]
+<VAR.BLANKLINE>
+//1
+Piece
+Cout/unit
++1
++10
+//5
++100
++1000
+
+Diamant
+1000po
+Diamants achetes : <EVAL <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS> >
+//10
+Cout total : <TOTAL_ACHAT_VENTE_BANQUIER> pieces d'or
+Acheter
+
+[DIALOG piece_diamant_achat BUTTON]
+ONBUTTON=1
+ACHAT_DIAMANT 1
+ONBUTTON=2
+ACHAT_DIAMANT 10
+ONBUTTON=3
+ACHAT_DIAMANT 100
+ONBUTTON=4
+ACHAT_DIAMANT 1000
+ONBUTTON=5
+EFFECTUER_ACHAT_BANQUIER
+
+//VENTE
+[FUNCTION EFFECTUER_VENTE_BANQUIER]
+IF ( <EVAL 0<SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS>> > 0 )
+	IF <SRC.FINDID.i_piece_diamant>
+		IF <TOTAL_ACHAT_VENTE_BANQUIER> <= 10000000
+			IF <SRC.FINDID.i_piece_diamant.AMOUNT> >= <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS>
+				IF <SRC.FINDID.i_piece_diamant.AMOUNT> == <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS>
+					SRC.FINDID.i_piece_diamant.REMOVE
+				ELSE
+					SRC.FINDID.i_piece_diamant.AMOUNT = <EVAL <SRC.FINDID.i_piece_diamant.AMOUNT> - <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS>>
+				ENDIF
+				IF <EVAL <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS>> < 500
+					VAR.CONTAINER_PO = <UID>
+					SRC.FINDID.i_timer_banquier_cancel.LINK.SAY Voici vos <TOTAL_ACHAT_VENTE_BANQUIER> pieces d'or
+					METTRE_CASH_DANS_SAC_1000 <EVAL <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS>>
+				ELSE
+					SRC.NEWITEM i_bourse_de_cuir
+					SRC.ACT.BOUNCE
+					VAR.CONTAINER_PO = <SRC.ACT.UID>
+					SRC.FINDID.i_timer_banquier_cancel.LINK.SAY Voici vos <TOTAL_ACHAT_VENTE_BANQUIER> pieces d'or, moins 2000 pour la bourse
+					METTRE_CASH_DANS_SAC_1000 <EVAL <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS> - 2>
+				ENDIF
+			ELSE
+				BANQUIER_DIRE <SRC.NAME>, vous n'avez pas autant de pieces de diamants que vous le pretendez!
+			ENDIF
+		ELSE
+			BANQUIER_DIRE Je ne fais pas d'echange d'une valeur aussi elevee!
+		ENDIF
+	ELSE
+		BANQUIER_DIRE Vous n'avez aucune piece de diamant
+	ENDIF
+ENDIF
+SRC.FINDID.i_timer_banquier_cancel.REMOVE
+
+//VAR.CONTAINER_PO = joueur si < 500k et dans une bourse si > 500k
+//args = cash * 1000 a mettre dans le sac
+[FUNCTION METTRE_CASH_DANS_SAC_1000]
+IF <ARGS> == 0
+	RETURN 0
+ENDIF
+VAR.PAQUETS_1000_RESTANTS=<ARGS>
+WHILE (<VAR.PAQUETS_1000_RESTANTS> > 0)
+	IF <VAR.PAQUETS_1000_RESTANTS> <= 50
+		SRC.NEWITEM i_gold
+		SRC.ACT.AMOUNT = <EVAL <VAR.PAQUETS_1000_RESTANTS> * 1000>
+		SRC.ACT.CONT = <VAR.CONTAINER_PO>
+		VAR.PAQUETS_1000_RESTANTS = 0
+	ELSE
+		SRC.NEWITEM i_gold
+		SRC.ACT.AMOUNT = 50000
+		SRC.ACT.CONT = <VAR.CONTAINER_PO>
+		VAR.PAQUETS_1000_RESTANTS = <EVAL <VAR.PAQUETS_1000_RESTANTS> - 50>
+	ENDIF
+ENDWHILE
+RETURN 1
+
+
+//Ajouter des diamants a vendre au panier
+[FUNCTION VENTE_DIAMANT]
+IF <SRC.FINDID.i_timer_banquier_cancel>
+	SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS = <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS> + <ARGS>
+	DIALOG piece_diamant_vente
+ELSE
+	SRC.NEWITEM i_timer_banquier_cancel
+	SRC.ACT.EQUIP
+	DIALOG piece_diamant_vente
+ENDIF
+RETURN 1
+
+[FUNCTION BANQUIER_DIRE]
+SRC.FINDID.i_timer_banquier_cancel.LINK.SAY <args>
+RETURN 1
+
+[DIALOG piece_diamant_vente] 
+0,0
+
+page 0
+resizepic 0 0 2620 420 260
+
+page 1
+text 20 20 1152 1//Piece
+text 75 20 1152 2//Revenu/unit
+text 170 20 1152 3//+1
+text 220 20 1152 4//+10
+text 270 20 1152 5//+100
+text 320 20 1152 6//+1000
+text 20 100 1152 7//Diamant
+text 90 100 1152 8//1000
+text 20 125 1152 9//Diamants vendus : <DIAMANTS>
+text 20 220 1152 10//Revenu total : <DIAmANT*1000> po
+text 300 220 1152 11//Vendre
+button 170 100 2473 2472 1 0 1//VENDRE 1 PIECE DE DIAMANT
+button 220 100 2473 2472 1 0 2//VENDRE 10 PIECES DE DIAMANT
+button 270 100 2473 2472 1 0 3//VENDRE 100 PIECES DE DIAMANT
+button 320 100 2473 2472 1 0 4//VENDRE 1000 PIECES DE DIAMANT
+button 380 220 2473 2472 1 0 5//VENTE
+
+[DIALOG piece_diamant_vente TEXT]
+<VAR.BLANKLINE>
+//1
+Piece
+Revenu/unit
++1
++10
+//5
++100
++1000
+
+Diamant
+1000po
+Diamants vendus : <EVAL <SRC.FINDID.i_timer_banquier_cancel.TAG.DIAMANTS> >
+//10
+Revenu total : <TOTAL_ACHAT_VENTE_BANQUIER> pieces d'or
+Vendre
+
+[DIALOG piece_diamant_vente BUTTON]
+ONBUTTON=1
+VENTE_DIAMANT 1
+ONBUTTON=2
+VENTE_DIAMANT 10
+ONBUTTON=3
+VENTE_DIAMANT 100
+ONBUTTON=4
+VENTE_DIAMANT 1000
+ONBUTTON=5
+EFFECTUER_VENTE_BANQUIER

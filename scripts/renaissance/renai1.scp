@@ -1,0 +1,644 @@
+[CHARDEF c_cadhus] 
+NAME=Cadhus
+ID=c_man
+ 
+TSPEECH=spk_cadhus
+
+ON=@create
+COLOR=03f1
+FOOD=9999 
+SPEECHCOLOR=0ab8
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Specialiste des armes de choc
+
+ITEMNEWBIE=01410
+COLOR=0ab8
+ITEMNEWBIE=01411
+COLOR=0ab8
+ITEMNEWBIE=01412
+COLOR=0ab8
+ITEMNEWBIE=01413
+COLOR=0ab8
+ITEMNEWBIE=01415
+COLOR=0ab8
+ITEMNEWBIE=01b74
+COLOR=0ab8
+ITEMNEWBIE=i_cape
+COLOR=0ab8
+ITEMNEWBIE=013b3
+NAME=Casse tete
+
+ON=@NPCSEENEWPLAYER
+IF ( <EVAL 0<SRC.TAG.RENAISSANCE>> > 0 )
+	SAY Ah bien le bonjour <SRC.NAME> ! <SRC.SEX Pret/Prete> pour de nouvelles aventures ?
+ELSE
+	IF <EVAL <SRC.TAG.CADHUS>> < 4
+		SAY <SRC.SEX Sire/Dame> je ne puis vous laisser passer ...
+	ELSE
+		SAY Ah bien le bonjour <SRC.NAME> ! <SRC.SEX Pret/Prete> pour de nouvelles aventures ?
+	ENDIF
+ENDIF
+
+ON=@NPCHearUnknown
+IF ( <EVAL 0<SRC.TAG.RENAISSANCE>> > 0 )
+	SAY Pour rentrer il vous suffit de me le demander ...
+ELSE
+	IF <EVAL 0<SRC.TAG.CADHUS>> == 0
+		SRC.TAG.CADHUS=1
+		SAY Je viens de vous dire que vous ne passerez pas, n'insistez pas !
+	ELSEIF <EVAL 0<SRC.TAG.CADHUS>> == 1
+		SRC.TAG.CADHUS=2
+		SAY Vous ne tirerez rien de moi en insistant ...
+	ELSEIF <EVAL 0<SRC.TAG.CADHUS>> == 2
+		SRC.TAG.CADHUS=3
+		SAY Cessez donc de m'importuner
+	ELSEIF <EVAL 0<SRC.TAG.CADHUS>> == 4
+		SAY Pour rentrer il vous suffit de me le demander ...
+	ELSE
+		SAY Tres bien vous avez gagne ... rapportez moi un casse-tete digne de ce nom et vous rentrerez !
+	ENDIF
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Cadhus
+
+[SPEECH spk_cadhus]
+
+ON=*casse*
+ON=*tete*
+IF (<EVAL 0<SRC.TAG.RENAISSANCE>> == 0) && (<EVAL 0<SRC.TAG.CADHUS>> < 4)
+	IF <SRC.RESTEST 1 i_gourdin_du_gobelin>
+		SRC.FINDID.i_gourdin_du_gobelin.REMOVE
+		SRC.TAG.CADHUS=4
+		SAY Merveilleux, c'est exactement ce qu'il me fallait !
+	ELSE
+		SAY Vous n'entrerez pas sans m'en avoir donne un digne de ce nom !
+	ENDIF
+ELSE
+	SAY Jamais je ne vous remercierai assez pour ce sublime gourdin !
+ENDIF
+
+ON=*entre*
+IF !<SRC.FINDLAYER.25>
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 0
+		SAY Si vous desirez ressortir faites moi signe !
+		SRC.EVENTS +e_anti_mark_recall
+		IF <SRC.FINDLAYER.40>
+			SRC.FINDLAYER.40.REMOVE
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+		SRC.TAG.anti_mark_recall=1
+		SRC.TAG.INSIDE_D1 = 1
+		SRC.P=2041,217,14
+		SRC.UPDATE
+	ELSE
+		IF <EVAL <SRC.TAG.CADHUS>> >= 4
+			IF <EVAL 0<SRC.TAG.LEVEL>> >99
+				SAY Si vous desirez ressortir faites moi signe !
+				SRC.EVENTS +e_anti_mark_recall
+				IF <SRC.FINDLAYER.40>
+					SRC.FINDLAYER.40.REMOVE
+				ENDIF
+				IF <SRC.FINDID.i_rune_delay_g>
+					SRC.FINDID.i_rune_delay_g.REMOVE
+					SRC.EFFECT 3,i_fx_smoke_small,0,60
+					SRC.SFX 01ed
+					SRC.EVENTS -e_casse_gate
+				ENDIF
+				SRC.TAG.anti_mark_recall=1
+				SRC.TAG.INSIDE_D1 = 1
+				SRC.P=2041,217,14
+				SRC.UPDATE
+			ELSE
+				SAY Vous ne semblez pas encore assez experimente pour affronter une telle epreuve ... Revenez plus tard !
+			ENDIF
+		ELSE
+			SAY Rapportez moi un casse-tete digne de ce nom et vous rentrerez !
+		ENDIF
+	ENDIF
+ELSE
+	SAY Ce serait dangereux de vous laisser entrer avec une monture, le plafond etant bas !
+ENDIF
+
+ON=*sortir*
+IF 0<SRC.TAG.INSIDE_D1> == 1
+	SAY Vous revenez de loin !
+	IF <SRC.FINDID.i_rune_delay_g>
+		SRC.FINDID.i_rune_delay_g.REMOVE
+		SRC.EFFECT 3,i_fx_smoke_small,0,60
+		SRC.SFX 01ed
+		SRC.EVENTS -e_casse_gate
+	ENDIF
+	SRC.P=2041,223,14
+	SRC.UPDATE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D1
+ELSE
+	SAY Ce n'est pas moi qui vous retiens ...
+ENDIF
+
+[ITEMDEF i_dalle_piegee]
+DEFNAME=i_dalle_piegee
+NAME=Dalle piegee
+ID=049b
+
+ON=@CREATE
+COLOR=0b7e
+ATTR=08090
+
+ON=@STEP
+IF <TIMER> == -1
+	IF !<SRC.BRAIN>
+		IF <EVAL <SRC.HITS>> > 30
+			SRC.TAG.VIERESTANTE
+			SRC.HITS=<EVAL <SRC.HITS>/2>
+			SRC.EFFECT 2,i_fire_column,0,30
+		ELSE
+			SRC.HITS=0
+		ENDIF
+		TIMER = 1
+	ENDIF
+ENDIF
+
+ON=@TIMER
+TIMER=-1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Dalle piegee
+
+[ITEMDEF i_wrong_cle1]
+DEFNAME=i_wrong_cle1
+NAME=Cle de pierre 1
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0751
+LINK=04000cd69
+MORE1=04000cd69
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.UID>==04000cd69
+SRC.TARG.TYPE=t_door
+SRC.SYSMESSAGEUA 0481 1 1 0 La porte est deverouillee
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Cle de pierre 1
+
+[ITEMDEF i_wrong_cle2]
+DEFNAME=i_wrong_cle2
+NAME=Cle de pierre 2
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0751
+LINK=04000593b
+MORE1=04000593b
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.UID>==04000593b
+SRC.TARG.TYPE=t_door
+SRC.SYSMESSAGEUA 0481 1 1 0 La porte est deverouillee
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Cle de pierre 2
+
+[ITEMDEF i_wrong_cle3]
+DEFNAME=i_wrong_cle3
+NAME=Cle de pierre 3
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0751
+LINK=04000a1fb
+MORE1=04000a1fb
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.UID>==04000a1fb
+SRC.TARG.TYPE=t_door
+SRC.SYSMESSAGEUA 0481 1 1 0 La porte est deverouillee
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Cle de pierre 3
+
+[ITEMDEF i_wrong_cle4]
+DEFNAME=i_wrong_cle4
+NAME=Cle de pierre 4
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0751
+LINK=04000f8fe
+MORE1=04000f8fe
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.UID>==04000f8fe
+SRC.TARG.TYPE=t_door
+SRC.SYSMESSAGEUA 0481 1 1 0 La porte est deverouillee
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Cle de pierre 4
+
+[ITEMDEF i_wrong_cle5]
+DEFNAME=i_wrong_cle5
+NAME=Cle de pierre 5
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0751
+LINK=040008b4d
+MORE1=040008b4d
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle porte souhaitez vous deverouiller ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.UID>==040008b4d
+SRC.TARG.TYPE=t_door
+SRC.SYSMESSAGEUA 0481 1 1 0 La porte est deverouillee
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Cle de pierre 5
+
+[ITEMDEF i_dalle_lockeuse]
+NAME=Dalle lockeuse
+ID=049b
+
+ON=@CREATE
+COLOR=0be4
+ATTR=08090
+
+ON=@STEP
+LINK.TYPE=t_door_locked
+LINK.UPDATE
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Dalle lockeuse
+
+[ITEMDEF i_coffre_wrong]
+NAME=Coffre wrong
+ID=0e43
+TYPE=T_SCRIPT
+
+ON=@CREATE
+TIMER=43200
+TAG.REMPLI=0
+
+ON=@DCLICK
+IF (<EVAL 0<TAG.REMPLI>> == 1)
+	TAG.REMPLI=0
+	TAG.PX=<P.X>
+	TAG.PY=<P.Y> + 1
+	TAG.PZ=<P.Z>
+	TAG.POSITION=<EVAL <TAG.PX>>,<EVAL <TAG.PY>>,<EVAL <TAG.PZ>>
+	TAG.TEMPSRESPAWN={43200 172800}
+	TIMER=<TAG.TEMPSRESPAWN>
+	SRC.NEWITEM { i_stats_dropp 15 i_epee_courte_tetrapode 1 i_hache_de_guerre_tetrapode 1 i_fleau_tetrapode 1 i_arbalete_tetrapode 1 }
+	SRC.ACT.P <TAG.POSITION>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TAG.REMPLI=1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Dalle teleportatrice
+
+[CHARDEF c_venerable_de_wrong] 
+DEFNAME=c_venerable_de_wrong
+NAME=Venerable de Wrong
+ID=c_man
+ 
+TSPEECH=spk_venerable_de_wrong
+
+ON=@create
+COLOR=03f1
+FOOD=9999 
+SPEECHCOLOR=07d6
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=01f03
+COLOR=07d6
+ITEMNEWBIE=0170d
+COLOR=07d6
+ITEMNEWBIE=013f8
+COLOR=07d6
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 0
+	SAY Enfin vous voila <SRC.NAME> ...
+ELSE
+	SAY Votre destin est ailleurs <SRC.NAME>
+ENDIF
+
+ON=@NPCHearUnknown
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 0
+	IF <EVAL 0<SRC.TAG.VDWRONG>> == 0
+		SRC.TAG.VDWRONG=1
+		SAY Vous avez reussi a passer toutes ces epreuves et me prouvez ainsi que vous meritez votre place parmis les elus ou les dechus ...
+	ELSEIF <EVAL 0<SRC.TAG.VDWRONG>> == 2
+		SAY Si vous desirez devenir elu dites moi : Je desire devenir elu
+	ELSEIF <EVAL 0<SRC.TAG.VDWRONG>> == 3
+		SAY Si vous desirez devenir dechu dites moi : Je desire devenir dechu
+	ELSE
+		SAY Si je le savais ...
+	ENDIF
+ELSE
+	SAY Moi aussi je suis heureux de vous revoir <SRC.NAME>!
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Venerable de Wrong
+
+[SPEECH spk_venerable_de_wrong]
+
+ON=elu
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 0
+	SAY Les elus sont des etres vertueux, ils pronent l'honneur, l'honnetete et la justice ... Si tel est votre dessein dites moi que vous desirez devenir elu .
+	SRC.TAG.VDWRONG=2
+ENDIF
+
+ON=dechu
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 0
+	SAY Les dechus sont des etres demoniaques, ils prechent la corruption, l'immoralite et le vice ... Si tel est votre dessein dites moi que vous desirez devenir dechu .
+	SRC.TAG.VDWRONG=3
+ENDIF
+
+ON=Je desire devenir elu
+IF (<EVAL <SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D1>> == 1)
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 0
+		SRC.TAG.RENAISSANCE=1
+		SRC.TAG.COTE=1
+		SRC.NEWITEM 03f0c
+		SRC.ACT.COLOR=0B22
+		SRC.ACT.NAME Ailes d'elu
+		SRC.ACT.LINK=<SRC.UID>
+		SRC.ACT.EQUIP
+		SRC.TAG.UIDAILES=<SRC.ACT.UID>
+		SRC.COLOR=0B24
+		SRC.OSKIN=0B24
+		SRC.RENAITRE
+		SERV.B Felicitation a <SRC.NAME> qui devient elu avec sa premiere renaissance !
+	ELSE
+		SAY Votre destin est ailleurs <SRC.NAME>
+	ENDIF	
+ELSE
+	SRC.P=2041,223,14
+	SRC.UPDATE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D1
+ENDIF
+
+ON=Je desire devenir dechu
+IF (<EVAL <SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D1>> == 1)
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 0
+		SRC.TAG.RENAISSANCE=1
+		SRC.TAG.COTE=2
+		SRC.NEWITEM 03f0c
+		SRC.ACT.COLOR=0B22
+		SRC.ACT.NAME Ailes de dechu
+		SRC.ACT.LINK=<SRC.UID>
+		SRC.ACT.EQUIP
+		SRC.TAG.UIDAILES=<SRC.ACT.UID>
+		SRC.COLOR=0B24
+		SRC.OSKIN=0B24
+		SRC.RENAITRE
+		SERV.B Felicitation a <SRC.NAME> qui devient dechu avec sa premiere renaissance !
+	ELSE
+		SAY Votre destin est ailleurs <SRC.NAME>
+	ENDIF
+ELSE
+	SRC.P=2041,223,14
+	SRC.UPDATE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D1
+ENDIF
+
+ON=*colise*
+ON=*colyse*
+SRC.TAG.OUICOCO=1
+SAY Vous voulez certainement parler du coliseeum, l'arene des demis dieux. Desirez vous vous y rendre ?
+
+ON=*oui*
+IF <EVAL 0<SRC.TAG.OUICOCO>>
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D1
+	SRC.P=4597,3631,30
+	SRC.FIX
+	SRC.TAG.OUICOCO
+ELSEIF <EVAL 0<SRC.TAG.OUIENLEVER>>
+	IF !<SRC.FINDID.m_aura_timer>
+		EMOTE fermer son poing fermement et le poser sur votre tete tout en marmonnant d'etranges paroles
+		SAY Vous n'etes desormais plus protege par une aura !
+		SRC.ENLEVER_AURA
+	ELSE
+		SAY Vous ne pouvez pas changer d'aura pour l'instant...
+	ENDIF
+	SRC.TAG.OUIENLEVER
+ENDIF
+
+ON=*non*
+IF <EVAL 0<SRC.TAG.OUICOCO>>
+	SAY D'accord
+	SRC.TAG.OUICOCO
+ELSEIF <EVAL 0<SRC.TAG.OUIENLEVER>>
+	SAY D'accord
+	SRC.TAG.OUIENLEVER
+ELSE
+	SAY Si je le savais ...
+ENDIF
+
+ON=*plume*
+SRC.TAG.OUICOCO
+SRC.TAG.OUIENLEVER
+IF <EVAL 0<SRC.TAG.QUELLEAURA>> == 0
+	IF 0<SRC.TAG.FOSSOYEUROUI>==7
+		SRC.TAG.FOSSOYEUROUI=8
+		NEWITEM m_dialogue_oracle_aura
+		ACT.CONT=<UID>
+	ELSE
+		SAY Si je le savais ...
+	ENDIF
+ELSE
+	SAY Vous avez deja utilise une plume
+ENDIF
+
+ON=*aura*
+IF 0<SRC.TAG.FOSSOYEUROUI>==8
+SAY Il vous faut maintenant choisir par quel type d'aura vous souhaitez etre protege
+ELSE
+SAY Si je le savais ...
+ENDIF
+
+ON=*defens*
+SRC.TAG.OUICOCO
+SRC.TAG.OUIENLEVER
+IF <EVAL 0<SRC.TAG.QUELLEAURA>> == 0
+	IF 0<SRC.TAG.FOSSOYEUROUI>==8
+		IF <SRC.FINDID.i_plume_oiseau_blanc_paradis>
+			SRC.TAG.FOSSOYEUROUI
+			SRC.TAG.QUELLEAURA=2
+			SRC.CONSUME 1 i_plume_oiseau_blanc_paradis
+			EMOTE fermer son poing fermement et le poser sur votre tete tout en marmonnant d'etranges paroles
+			SAY Vous voila maintenant protege par une aura defensive, qu'elle vous porte chance !
+			SERV.B Felicitation a <SRC.NAME> qui est desormais protege par une aura defensive !
+			SRC.DIALOG D_BOOST_AURA
+		ELSE
+			SAY Je ne peux proceder au rituel si vous ne possedez pas de plume d'oiseau blanc du paradis
+		ENDIF
+	ELSE
+		SAY Si je le savais ...
+	ENDIF
+ELSE
+	SAY Vous avez deja accompli le rituel
+ENDIF
+
+ON=*offens*
+SRC.TAG.OUICOCO
+SRC.TAG.OUIENLEVER
+IF <EVAL 0<SRC.TAG.QUELLEAURA>> == 0
+	IF 0<SRC.TAG.FOSSOYEUROUI>==8
+		IF <SRC.FINDID.i_plume_oiseau_noir_paradis>
+			SRC.TAG.FOSSOYEUROUI
+			SRC.TAG.TROUVEGRIMOIRE
+			SRC.TAG.COFFRE_QUETE_AURA
+			SRC.TAG.QUELLEAURA=1
+			SRC.CONSUME 1 i_plume_oiseau_noir_paradis
+			EMOTE fermer son poing fermement et le poser sur votre tete tout en marmonnant d'etranges paroles
+			SAY Vous voila maintenant protege par une aura offensive, qu'elle vous porte chance !
+			SERV.B Felicitation a <SRC.NAME> qui est desormais protege par une aura offensive !
+			SRC.DIALOG D_BOOST_AURA
+		ELSE
+			SAY Je ne peux proceder au rituel si vous ne possedez pas de plume d'oiseau noir du paradis
+		ENDIF
+	ELSE
+		SAY Si je le savais ...
+	ENDIF
+ELSE
+	SAY Vous avez deja accompli le rituel
+ENDIF
+
+ON=*changer*
+SRC.TAG.OUICOCO
+SRC.TAG.OUIENLEVER
+IF 0<SRC.TAG.QUELLEAURA> > 0
+	SAY Choisissez maintenant la competence que cette aura augmentera...
+	SRC.DIALOG D_BOOST_AURA
+ELSE
+	SAY Si je le savais ...
+ENDIF
+
+ON=*retirer*
+ON=*enlever*
+SRC.TAG.OUICOCO
+SRC.TAG.OUIENLEVER
+IF 0<SRC.TAG.QUELLEAURA> > 0
+	IF <SRC.TAG.QUELLEAURA> == 1
+		SAY Etes vous certain de vouloir enlever votre aura offensive de facon permanente?
+	ELSE
+		SAY Etes vous certain de vouloir enlever votre aura defensive de facon permanente?
+	ENDIF
+	SRC.TAG.OUIENLEVER = 1
+ELSE
+	SAY Si je le savais ...
+ENDIF
+
+
+[ITEMDEF m_dialogue_oracle_aura]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=2
+TAG.DIALOGUE=0
+
+ON=@TIMER
+IF 0<TAG.DIALOGUE> <1
+	TIMER=3
+	TAG.DIALOGUE=<TAG.DIALOGUE>+1
+	CONT.SAY Les plumes dont vous me parlez possedent des proprietes magiques hors du commun
+ELSEIF <TAG.DIALOGUE>==1
+	TIMER=3
+	TAG.DIALOGUE=<TAG.DIALOGUE>+1
+	CONT.SAY Selon le type de plume il m'est possible de doter n'importe quelle creature d'une aura d'une puissance demesuree
+ELSE
+	CONT.SAY Une plume blanche donnera lieu a une aura defensive, une plume noire quant a elle engendrera une aura offensive ...
+	REMOVE
+ENDIF
+RETURN 1

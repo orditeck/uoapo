@@ -1,0 +1,235 @@
+// ***YEW, DÉPART NORD OUEST ***
+
+[AREA MAISON_YEW1]
+CLASS=11
+RECT=280,992,295,976
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW2]
+CLASS=11
+RECT=320,1063,328,1048
+RECT=328,1063,335,1056
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW3]
+CLASS=11
+RECT=416,1040,431,1032
+RECT=424,1047,431,1040
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW4]
+CLASS=11
+RECT=448,968,463,960
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW5]
+CLASS=11
+RECT=472,856,487,840
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW6]
+CLASS=11
+RECT=544,832,559,813
+RECT=544,815,551,808
+RECT=559,823,567,808
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW7]
+CLASS=11
+RECT=608,895,624,872
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW8]
+//CHATEAU CHAOS
+CLASS=11
+RECT=624,856,647,832
+RECT=600,831,624,808
+RECT=624,832,648,816
+RECT=648,831,671,808
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW9]
+CLASS=11
+RECT=640,944,655,936
+RECT=648,951,655,944
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW10]
+CLASS=11
+RECT=728,888,743,880
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+// ***YEW CENTRE***
+
+
+[AREA MAISON_YEW11]
+CLASS=11
+RECT=512,1000,520,984
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW12]
+CLASS=11
+RECT=528,975,544,960
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW13]
+CLASS=11
+RECT=560,976,575,960
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW14]
+CLASS=11
+RECT=552,1000,560,984
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW15]
+CLASS=11
+RECT=528,1016,544,1008
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW16]
+CLASS=11
+RECT=560,1016,576,1008
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+// ***CONTINUATION VERS LE SUD***
+
+
+[AREA MAISON_YEW17]
+CLASS=11
+RECT=608,984,623,976
+RECT=602,992,607,976
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW18]
+CLASS=11
+RECT=656,1008,671,1000
+RECT=664,1015,671,1008
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW19]
+CLASS=11
+RECT=624,1040,639,1032
+RECT=632,1047,639,1040
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW20]
+CLASS=11
+RECT=640,1095,648,1080
+RECT=648,1087,655,1080
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW21]
+CLASS=11
+RECT=672,1208,687,1200
+RECT=680,1215,687,1208
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW22]
+CLASS=11
+RECT=552,1223,560,1208
+RECT=560,1223,567,1216
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW23]
+CLASS=11
+RECT=592,1191,608,1184
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW24]
+CLASS=11
+RECT=616,1152,631,1144
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW25]
+CLASS=11
+RECT=568,1128,583,1120
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW26]
+CLASS=11
+RECT=448,1119,456,1104
+RECT=456,1119,463,1112
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW27]
+CLASS=11
+RECT=456,1143,463,1128
+RECT=448,1135,456,1128
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+// ***2 MAISONS DU SUD***
+
+
+[AREA MAISON_YEW28]
+CLASS=11
+RECT=392,1231,399,1224
+RECT=392,1224,407,1216
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_YEW29]
+CLASS=11
+RECT=328,1255,336,1240
+RECT=320,1247,328,1240
+DEFNAME=maison_skara
+GROUP=Yew
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out

@@ -1,0 +1,2264 @@
+//**********************************
+//*************PECHEUR**************
+//**********************************
+
+[CHARDEF C_ACHETEUR_PECHEUR]
+NAME=Martin Pecheur
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ACHETEUR
+TSPEECH=SPEECH_ACHETEUR_PECHEUR
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=Le grand pecheur
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_canne_a_peche
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_hat_straw
+ITEMNEWBIE=i_boots_thigh
+ITEMNEWBIE=i_ringmail_leggings_decoration
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Acheteur pecheur
+
+[SPEECH SPEECH_ACHETEUR_PECHEUR]
+
+ON=*poisson*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_fish_cut_raw
+SRC.ACT.MORE2 = 5
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tout le poisson tranche que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+//**********************************
+//************CUISINIER*************
+//**********************************
+
+[CHARDEF C_ACHETEUR_CUISINIER]
+NAME=Alexandre Bourdas
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ACHETEUR
+TSPEECH=SPEECH_ACHETEUR_CUISINIER
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=Le grand cuisinier
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_casquette
+COLOR=0b16
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=01
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=0b16
+ITEMNEWBIE=i_pantalon
+COLOR=01
+ITEMNEWBIE=i_chaussures
+COLOR=01
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Acheteur cuisinier
+
+[SPEECH SPEECH_ACHETEUR_CUISINIER]
+
+ON=*poisson*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_fish_cut_cooked
+SRC.ACT.MORE2 = 15
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tout le poisson tranche cuit que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*viande*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ribs_cooked
+SRC.ACT.MORE2 = 15
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toute la viande cuite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+//**********************************
+//************BRICOLEUR*************
+//**********************************
+
+[CHARDEF C_ACHETEUR_BRICOLEUR]
+NAME=Bob le bricoleur
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ACHETEUR
+TSPEECH=SPEECH_ACHETEUR_BRICOLEUR
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=Le grand bricoleur
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_casquette
+COLOR=09af
+ITEMNEWBIE=i_shirt_fancy
+COLOR=09af
+ITEMNEWBIE=i_pants_long
+COLOR=09af
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Acheteur cuisinier
+
+[SPEECH SPEECH_ACHETEUR_BRICOLEUR]
+
+ON=*cle*cuivre*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_clef_de_cuivre
+SRC.ACT.MORE2 = 10
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les cles vierges en cuivre que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*cle*fer*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_clef_de_fer
+SRC.ACT.MORE2 = 25
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les cles vierges en fer que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*cle*or*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_clef_en_or
+SRC.ACT.MORE2 = 15
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les cles vierges en or que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*cle*
+SAY Quelle sorte de cle voulez-vous me vendre?
+RETURN 1
+
+ON=*petite bougie*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_petite_bougie
+SRC.ACT.MORE2 = 14
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les petites bougies que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*grande bougie*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_grande_bougie
+SRC.ACT.MORE2 = 16
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les grandes bougies que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*bougie*
+SAY Petite bougie ou grande bougie?
+RETURN 1
+
+//**********************************
+//*************FORGERON*************
+//**********************************
+
+[CHARDEF C_ACHETEUR_FORGERON]
+NAME=Pierre Bedard
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ACHETEUR
+TSPEECH=SPEECH_ACHETEUR_FORGERON
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=Le grand forgeron
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_hammer_war
+COLOR=0b10
+ITEMNEWBIE=i_shirt_plain
+ITEMNEWBIE=i_platemail_leggings
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Acheteur forgeron
+
+[SPEECH SPEECH_ACHETEUR_FORGERON]
+
+ON=*poignard*rouille*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_poignard_rouille
+SRC.ACT.MORE2 = 10
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les poignards rouilles que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*dague*rouille*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_dague_rouillee
+SRC.ACT.MORE2 = 10
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les dagues rouillees que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*poignard*poli*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_poignard_poli
+SRC.ACT.MORE2 = 25
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les poignards polis que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*dague*poli*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_dague_polie
+SRC.ACT.MORE2 = 25
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les dagues polies que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*dague*acier trempe*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_dague_en_acier_trempe
+SRC.ACT.MORE2 = 35
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les dagues en acier trempe que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*dague*qualite*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_dague_de_qualite
+SRC.ACT.MORE2 = 26
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les dagues de qualite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*dague*mit*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_dague_de_mithril
+SRC.ACT.MORE2 = 31
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les dagues de mithril que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*lame ancienne*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_lame_ancienne
+SRC.ACT.MORE2 = 26
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les lames anciennes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*kryss ancien*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_kryss_ancienne
+SRC.ACT.MORE2 = 27
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les kryss anciennes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*kryss antique*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_kryss_antique
+SRC.ACT.MORE2 = 27
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les kryss antiques que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*kryss*
+SAY Quelle sorte de kryss voulez-vous me vendre?
+RETURN 1
+
+ON=*lame*
+SAY Quelle sorte de lame voulez-vous me vendre?
+RETURN 1
+
+ON=*poignard*
+SAY Quelle sorte de poignard voulez-vous me vendre?
+RETURN 1
+
+ON=*dague*
+SAY Quelle sorte de dague voulez-vous me vendre?
+RETURN 1
+
+ON=*epee*
+SAY Je n'achete pas d'epee !
+RETURN 1
+
+ON=*hache*
+SAY Je n'achete pas de hache !
+RETURN 1
+
+ON=*masse*
+SAY Je n'achete pas de masse !
+RETURN 1
+
+ON=*fleau*
+SAY Je n'achete pas de fleau !
+RETURN 1
+
+ON=*armure*
+SAY Je n'achete que des pieces d'armure de petite taille !
+RETURN 1
+
+ON=*protege*rouille*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_RUSTY_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 55
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en rouille que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*cuivre*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_COPPER_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 55
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en cuivre que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*bronze*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_BRONZE_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 55
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en bronze que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*or
+ON=*protege*or *
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_GOLDEN_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 85
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en or que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*cobalt*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ROSE_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 85
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en cobalt que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*ombre*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_SHADOW_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 85
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en ombre que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*realg*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_AGAPITE_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 85
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en realgar que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*sang*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_BLOODROCK_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 220
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en sang que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*mith*
+ON=*protege*myth*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_MYTHERIL_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 220
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en mithril que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*verite*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_VERITE_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 220
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en verite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*valorite*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_VALORITE_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 220
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en valorite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*adu*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_adulaire_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 400
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en adulaire que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*calcite*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_calcite_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 400
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en calcite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*epid*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_epidote_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 400
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en epidote que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*protege*teneb*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_BLACKROCK_PLATEMAIL_GORGET
+SRC.ACT.MORE2 = 400
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les protege cou en tenebre que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+//**********************************
+//************COUTURIER*************
+//**********************************
+
+[CHARDEF C_ACHETEUR_COUTURIER]
+NAME=Reinaldo Alvarez
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ACHETEUR
+TSPEECH=SPEECH_ACHETEUR_COUTURIER
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=Le grand couturier
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=0afc
+ITEMNEWBIE=i_pantalon
+COLOR=0add
+ITEMNEWBIE=i_chaussures
+COLOR=0b36
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Acheteur couturier
+
+[SPEECH SPEECH_ACHETEUR_COUTURIER]
+
+ON=*capeline*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_capeline
+SRC.ACT.MORE2 = 7
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les capelines que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*bicorne*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_bicorne
+SRC.ACT.MORE2 = 7
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les bicornes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*casquette*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_casquette
+SRC.ACT.MORE2 = 7
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les casquettes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*chapeau*pecheur*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_chapeau_de_pecheur
+SRC.ACT.MORE2 = 7
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les chapeaux de pecheur que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*chapeau*paille*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_chapeau_de_paille
+SRC.ACT.MORE2 = 7
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les chapeaux de paille que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*chapeau*enchanteur*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_chapeau_d_enchanteur
+SRC.ACT.MORE2 = 7
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les chapeaux d'enchanteur que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*beret*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_beret
+SRC.ACT.MORE2 = 7
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les berets que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*borsalino*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_chapeau_a_plume
+SRC.ACT.MORE2 = 10
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les borsalinos a plume que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*tricorne*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_tricorne
+SRC.ACT.MORE2 = 7
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les tricornes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*chapeau*fou*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_chapeau_de_fou
+SRC.ACT.MORE2 = 27
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les chapeaux de fou que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*petit*bandana*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_petit_bandana
+SRC.ACT.MORE2 = 7
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les petits bandanas que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*grand*bandana*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_grand_bandana
+SRC.ACT.MORE2 = 7
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les grands bandanas que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*maillot*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_maillot
+SRC.ACT.MORE2 = 9
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les maillots que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*tunique*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_tunique
+SRC.ACT.MORE2 = 8
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les tuniques que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*jupe*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_longue_jupe
+SRC.ACT.MORE2 = 10
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les longues jupes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*sandale*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_sandales
+SRC.ACT.MORE2 = 26
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les sandales que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*chaussure*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_chaussures
+SRC.ACT.MORE2 = 8
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les chaussures que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*petite*botte*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_petites_bottes
+SRC.ACT.MORE2 = 26
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les petites bottes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*grande*botte*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_grandes_bottes
+SRC.ACT.MORE2 = 47
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les grandes bottes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*robe*femme*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_robe_de_femme
+SRC.ACT.MORE2 = 17
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les robes pour femmes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*robe*homme*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_robe_d_homme
+SRC.ACT.MORE2 = 17
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les robes pour hommes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*robe*brode*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_robe_brodee
+SRC.ACT.MORE2 = 18
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les robes brodees que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*bandana*
+SAY Voulez-vous me vendre vos petits bandanas ou vos grands bandanas?
+RETURN 1
+
+ON=*chapeau*
+SAY Quelle sorte de chapeau voulez-vous me vendre?
+RETURN 1
+
+ON=*vetement*
+SAY J'achete divers types de vetements, mais j'apprecie particulierement les couvres chef!
+RETURN 1
+
+ON=*couvre chef*
+SAY Les couvres chef, c'est ce que vous mettez sur votre tete...
+RETURN 1
+
+ON=*botte*
+SAY Voulez-vous me vendre vos petites bottes ou vos grandes bottes?
+RETURN 1
+
+ON=*robe*
+SAY Quelle sorte de robe voulez-vous me vendre?
+RETURN 1
+
+//**********************************
+//*************MINEUR***************
+//**********************************
+
+[CHARDEF C_ACHETEUR_MINEUR]
+NAME=Cerro Rico
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ACHETEUR
+TSPEECH=SPEECH_ACHETEUR_MINEUR
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=Le grand mineur
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_pioche_de_carriere
+COLOR=0386
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_pantalon
+COLOR=0abc
+ITEMNEWBIE=i_chaussures
+COLOR=0abc
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Acheteur mineur
+
+[SPEECH SPEECH_ACHETEUR_MINEUR]
+
+ON=*rouille*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_rusty
+SRC.ACT.MORE2 = 5
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de rouille que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*cuivre*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_copper
+SRC.ACT.MORE2 = 5
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de cuivre que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*bronze*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_bronze
+SRC.ACT.MORE2 = 5
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de bronze que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*cobalt*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_rose
+SRC.ACT.MORE2 = 10
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de cobalt que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*ombre*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_shadow
+SRC.ACT.MORE2 = 10
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots d'ombre que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*or
+ON=*or *
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_gold
+SRC.ACT.MORE2 = 10
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots d'or que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*realgar*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_agapite
+SRC.ACT.MORE2 = 10
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de realgar que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*mith*
+ON=*myth*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_mytheril
+SRC.ACT.MORE2 = 25
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de mithril que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*sang*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_bloodrock
+SRC.ACT.MORE2 = 25
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de sang que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*valorite*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_valorite
+SRC.ACT.MORE2 = 25
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de valorite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*verite*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_verite
+SRC.ACT.MORE2 = 25
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de verite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*adulaire*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_adulaire
+SRC.ACT.MORE2 = 50
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots d'adulaire que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*calcite*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_calcite
+SRC.ACT.MORE2 = 50
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de calcite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*epidote*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_epidote
+SRC.ACT.MORE2 = 50
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots d'epidote que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*tenebre*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_blackrock
+SRC.ACT.MORE2 = 50
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de tenebre que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*bary*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_barytine
+SRC.ACT.MORE2 = 100
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de barytine que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*croco*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_crocoite
+SRC.ACT.MORE2 = 100
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de crocoite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*morga*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_morganite
+SRC.ACT.MORE2 = 100
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de morganite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*pyro*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_pyromorphite
+SRC.ACT.MORE2 = 100
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de pyromorphite que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*fer*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_ingot_iron
+SRC.ACT.MORE2 = 20
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les lingots de fer que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*diamant*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_diamant
+SRC.ACT.MORE2 = 50000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les diamants que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*arietis*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_arietis
+SRC.ACT.MORE2 = 750000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les arietis que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*tauri*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_tauri
+SRC.ACT.MORE2 = 100000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les tauris que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*geminorum*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_geminorum
+SRC.ACT.MORE2 = 50000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les geminorums que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*cancri*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_cancri
+SRC.ACT.MORE2 = 150000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les cancris que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*leoni*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_leoni
+SRC.ACT.MORE2 = 100000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les leonis que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*virginis*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_virginis
+SRC.ACT.MORE2 = 50000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les virginis que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*librae*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_librae
+SRC.ACT.MORE2 = 100000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les libraes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*sagittae*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_sagittae
+SRC.ACT.MORE2 = 500000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les sagittaes que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*aquarii*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_aquarii
+SRC.ACT.MORE2 = 750000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les aquariis que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*piscium*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_gemme_piscium
+SRC.ACT.MORE2 = 750000
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les pisciums que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+
+ON=*mine*
+ON=*minerai*
+SAY Je n'achete que des lingots et des gemmes!
+RETURN 1
+
+
+//**********************************
+//************BUCHERON**************
+//**********************************
+
+[CHARDEF C_ACHETEUR_BUCHERON]
+NAME=Elzear Rioux
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ACHETEUR
+TSPEECH=SPEECH_ACHETEUR_BUCHERON
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=Le grand bucheron
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_axe
+NAME=Hache de bucheron expert
+COLOR=0b02
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=07d2
+ITEMNEWBIE=i_casquette
+COLOR=07d2
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=07d2
+ITEMNEWBIE=i_pantalon
+COLOR=07d2
+ITEMNEWBIE=i_chaussures
+COLOR=07d2
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Acheteur bucheron
+
+[SPEECH SPEECH_ACHETEUR_BUCHERON]
+
+ON=*bois*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_log
+SRC.ACT.MORE2 = 10
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les buches que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*brindi*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_kindling
+SRC.ACT.MORE2 = 2
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les brindilles que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*entrepot*
+ON=*coupon*
+ON=*ticket*
+IF <EVAL <DISTANCE>> < 3
+	IF <SRC.FINDID.i_timer_bucheron_cancel>
+		SRC.FINDID.i_timer_bucheron_cancel.REMOVE
+	ENDIF
+	SRC.NEWITEM i_timer_bucheron_cancel
+	SRC.ACT.EQUIP
+	SRC.FINDID.i_timer_bucheron_cancel.LINK = <UID>
+	SRC.DIALOG coupon_bois_achat
+ELSE
+	SAY Approchez vous mon ami!
+ENDIF
+RETURN 1
+
+
+//**********************************
+//************MENUISIER*************
+//**********************************
+
+[CHARDEF C_ACHETEUR_MENUISIER]
+NAME=Yves Lessard
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ACHETEUR
+TSPEECH=SPEECH_ACHETEUR_MENUISIER
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=Le grand menuisier
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_apron_full
+COLOR=0abe
+ITEMNEWBIE=i_boots_calf
+COLOR=0b28
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Acheteur menuisier
+
+[SPEECH SPEECH_ACHETEUR_MENUISIER]
+
+ON=*planche*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_board
+SRC.ACT.MORE2 = 20
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les planches que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+//**********************************
+//**************ARCHER**************
+//**********************************
+
+[CHARDEF C_ACHETEUR_ARCHER]
+NAME=Lucille Lessard
+ID=C_WOMAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ACHETEUR
+TSPEECH=SPEECH_ACHETEUR_ARCHER
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=La grande archere
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_bow
+ITEMNEWBIE=i_tunic
+COLOR=0ad6
+ITEMNEWBIE=i_boots_thigh
+COLOR=0b28
+ITEMNEWBIE=i_cape
+COLOR=0ad6
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Acheteur archere
+
+[SPEECH SPEECH_ACHETEUR_ARCHER]
+
+ON=*arc*frene*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_arc_en_frene
+SRC.ACT.MORE2 = 20
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les arcs en frene que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*arc*orme*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_arc_en_orme
+SRC.ACT.MORE2 = 20
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les arcs en orme que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*arc*noyer*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_arc_en_noyer_blanc
+SRC.ACT.MORE2 = 20
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les arcs en noyer blanc que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*arc*chene*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_arc_en_chene
+SRC.ACT.MORE2 = 20
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les arcs en chene que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*arc*cedre*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_arc_en_cedre
+SRC.ACT.MORE2 = 21
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les arcs en cedre que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*arc*oxandre*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_arc_en_oxandre
+SRC.ACT.MORE2 = 21
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les arcs en oxandre que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*arc*fevier*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_arc_en_fevier_epineux
+SRC.ACT.MORE2 = 21
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les arcs en fevier epineux que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*shaft*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_arrow_shaft
+SRC.ACT.MORE2 = 20
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les shafts que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*fevrier*
+SAY Fevrier est un mois, c'est du FEVIER epineux, qui lui est un grand arbre!
+RETURN 1
+
+ON=*arc*
+SAY Quelle sorte d'arc voulez-vous me vendre?
+RETURN 1
+
+//**********************************
+//************ALCHIMISTE************
+//**********************************
+
+[CHARDEF C_ACHETEUR_ALCHIMISTE]
+NAME=Santiago
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ACHETEUR
+TSPEECH=SPEECH_ACHETEUR_ALCHIMISTE
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=Le grand alchimiste
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_robe
+COLOR=0ab8
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Acheteur alchimiste
+
+[SPEECH SPEECH_ACHETEUR_ALCHIMISTE]
+
+ON=*guerison legere*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_guerison_legere
+SRC.ACT.MORE2 = 51
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de guerison legeres que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*guerison divine*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_guerison_divine
+SRC.ACT.MORE2 = 83
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de guerison divines que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*guerison*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_guerison
+SRC.ACT.MORE2 = 55
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de guerison que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*elixir*vie*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_elixir_de_vie
+SRC.ACT.MORE2 = 65
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les elixirs de vie que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*mana legere*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_mana_legere
+SRC.ACT.MORE2 = 51
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de mana legeres que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*mana divine*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_mana_divine
+SRC.ACT.MORE2 = 83
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de mana divines que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*mana*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_mana
+SRC.ACT.MORE2 = 55
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de mana que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*elixir*mana*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_elixir_de_mana
+SRC.ACT.MORE2 = 65
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les elixirs de mana que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*rajeu*legere*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_rajeunissement_legere
+SRC.ACT.MORE2 = 54
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de rajeunissement legeres que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*rajeu*divine*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_rajeunissement_divine
+SRC.ACT.MORE2 = 113
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de rajeunissement divines que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*rajeu*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_rajeunissement
+SRC.ACT.MORE2 = 61
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de rajeunissement que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*elixir*rajeu*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_elixir_de_rajeunissement
+SRC.ACT.MORE2 = 80
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre tous les elixirs de rajeunissement que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*clairvoyance*leger*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_clairvoyance_legere
+SRC.ACT.MORE2 = 52
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de clairvoyance legeres que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*clairvoyance*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_clairvoyance
+SRC.ACT.MORE2 = 54
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de clairvoyance que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*dexte*leger*
+ON=*agi*leger*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_dexterite_legere
+SRC.ACT.MORE2 = 52
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de dexterite legeres que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*dexte*
+ON=*agi*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_dexterite
+SRC.ACT.MORE2 = 54
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de dexterite legeres que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*force*leger*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_force_legere
+SRC.ACT.MORE2 = 52
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de force legeres que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*force*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_force
+SRC.ACT.MORE2 = 54
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de force que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*magique*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_d_accroissement_magique
+SRC.ACT.MORE2 = 67
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions d'accroissement magique que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+ON=*pierre*
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+ENDIF
+SRC.NEWITEM m_quoi_acheter
+SRC.ACT.MORE1 = i_potion_de_peau_de_pierre
+SRC.ACT.MORE2 = 59
+SRC.ACT.EQUIP
+SAY Voulez-vous me vendre toutes les potions de peau de pierre que vous avez sur vous pour <EVAL <SRC.ACT.MORE2>> po la piece?
+RETURN 1
+
+//**********************************
+//*************GENERAL**************
+//**********************************
+
+//MORE1 = BASEID DE L'OBJET A ACHETER
+//MORE2 = PRIX PAR ITEM
+[ITEMDEF m_quoi_acheter]
+NAME=quoi acheter
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=15
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+[SPEECH SPEECH_ACHETEUR]
+ON=non
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.FINDID.m_quoi_acheter.REMOVE
+	SAY Votre commande a ete annulee !
+ELSE
+	SAY Vous n'aviez pourtant rien commande...
+ENDIF
+RETURN 1
+
+ON=oui
+IF <SRC.FINDID.m_quoi_acheter>
+	SRC.NPC_ACHETER_TOUT <SRC.FINDID.m_quoi_acheter.UID>
+ELSE
+	SAY Vous n'aviez pourtant rien commande...
+ENDIF
+RETURN 1
+
+ON=*sell*
+ON=*vendre*
+SAY Que voulez-vous me vendre?
+RETURN 1
+
+ON=salut*
+ON=bonjour*
+DORAND 3
+	SAY Quel bon vent vous amene <SRC.NAME>?
+	SAY Salutations !
+	SAY Qu'est-ce qui ferait votre bonheur ?
+ENDDO
+RETURN 1
+
+ON=*acheter*
+ON=*buy*
+SAY Je ne vends rien, j'achete seulement !
+RETURN 1
+
+//DEFAULT = JOUEUR
+//ARGS = UID DU MEMORY m_quoi_acheter
+[FUNCTION NPC_ACHETER_TOUT]
+VAR.MORE1 = <FINDID.m_quoi_acheter.MORE1>
+IF !(STRCMPI("<VAR.MORE1>","i_clef_de_cuivre")) || !(STRCMPI("<VAR.MORE1>","i_clef_de_fer")) || !(STRCMPI("<VAR.MORE1>","i_clef_en_or"))
+	VAR.NB_ACHETE = <NPC_ENLEVER_CLES <FINDID.m_quoi_acheter.MORE1>>
+ELSE
+	VAR.NB_ACHETE = <NPC_ENLEVER_TOUT <FINDID.m_quoi_acheter.MORE1>>
+ENDIF
+VAR.PRIX_PAR_ITEM = <FINDID.m_quoi_acheter.MORE2>
+IF <VAR.NB_ACHETE> > 0
+	DEPOSER_CASH <EVAL <VAR.NB_ACHETE> * <VAR.PRIX_PAR_ITEM>>
+ENDIF
+FINDID.m_quoi_acheter.REMOVE
+VAR.NB_ACHETE
+VAR.PRIX_PAR_ITEM
+RETURN 1
+
+//DEFAULT = JOUEUR
+//ARGS = BASEID DES OBJETS A EFFACER
+//RETOURNE LE NOMBRE D'OBJETS EFFACES
+[FUNCTION NPC_ENLEVER_TOUT]
+VAR.TEMP = <EVAL <RESCOUNT <ARGS>>>
+IF <VAR.TEMP> > 0
+	CONSUME <VAR.TEMP> <ARGS>
+	RETURN <VAR.TEMP>
+ELSE
+	RETURN 0
+ENDIF
+
+//DEFAULT = JOUEUR
+//ARGS = BASEID DES CLES VIERGES A EFFACER
+//RETOURNE LE NOMBRE D'OBJETS EFFACES
+[FUNCTION NPC_ENLEVER_CLES]
+VAR.TEMP = 0
+VAR.UID_CLE_REMOVE
+FORCONT <FINDLAYER.21.UID>
+	IF <BASEID> == <ARGS>
+		IF <MORE1> == 0
+			VAR.UID_CLE_REMOVE = <UID>
+		ENDIF
+	ENDIF
+	IF <UID.<VAR.UID_CLE_REMOVE>>
+		<UID.<VAR.UID_CLE_REMOVE>.REMOVE>
+		VAR.UID_CLE_REMOVE
+		VAR.TEMP = <EVAL <VAR.TEMP> + 1>
+	ENDIF
+ENDFOR
+IF <UID.<VAR.UID_CLE_REMOVE>>
+	<UID.<VAR.UID_CLE_REMOVE>.REMOVE>
+	VAR.UID_CLE_REMOVE
+	VAR.TEMP = <EVAL <VAR.TEMP> + 1>
+ENDIF
+RETURN <VAR.TEMP>
+
+
+//******************************
+//****ACHAT TICKETS DE BOIS*****
+//******************************
+
+[ITEMDEF i_coupon_bois] 
+NAME=Coupon de bois
+ID=i_scroll_blank
+TYPE=T_NORMAL
+WEIGHT=0.1
+
+ON=@CREATE
+COLOR=0
+
+ON=@CLICK
+MESSAGE coupons de bois : <EVAL <AMOUNT>>
+RETURN 1
+
+
+//CANCEL LA VENTE SI TROP LONG
+[ITEMDEF i_timer_bucheron_cancel]
+ID=i_memory
+NAME=bucheron cancel
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=60
+TAG.ACHAT=0
+TAG.VENTE=0
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[DIALOG coupon_bois_achat]
+0,0
+
+page 0
+resizepic 0 0 2620 420 260
+
+page 1
+text 80 20 1152 1//Achat de coupons de bois
+text 20 50 1152 2//-10
+text 60 50 1152 3//-100
+text 120 50 1152 4//-1000
+text 200 80 1152 5//<NB_ACHAT>
+text 275 50 1152 6//+1000
+text 330 50 1152 7//+100
+text 380 50 1152 8//+10
+text 150 120 1152 9//coupons(moi)
+text 150 160 1152 10//buches(vous)
+text 40 140 1152 11//contre
+text 80 120 1152 12//<NB_COUPONS>
+text 80 160 1152 13//<NB_BOIS> + 10%
+button 25 80 56 56 1 0 1//MOINS 10 COUPONS
+button 70 80 56 56 1 0 2//MOINS 100 COUPONS
+button 130 80 56 56 1 0 3//MOINS 1000 COUPONS
+button 290 80 55 55 1 0 4//PLUS 1000 COUPONS
+button 340 80 55 55 1 0 5//PLUS 100 COUPONS
+button 390 80 55 55 1 0 6//PLUS 10 COUPONS
+button 200 180 249 248 1 0 7//OKAY
+button 270 20 2473 2472 1 0 8//CANCEL
+
+[DIALOG coupon_bois_achat TEXT] 
+<VAR.BLANKLINE>
+Achat de coupons de bois
+-10
+-100
+-1000
+<EVAL <FINDID.i_timer_bucheron_cancel.TAG.ACHAT>>
++1000
++100
++10
+coupons(moi)
+buches(vous)
+contre
+<EVAL <FINDID.i_timer_bucheron_cancel.TAG.ACHAT>>
+<EVAL (<FINDID.i_timer_bucheron_cancel.TAG.ACHAT> * 11) / 10>
+
+[DIALOG coupon_bois_achat BUTTON]
+ON=1
+REDUIRE_ACHAT_COUPONS_BOIS 10
+RETURN 1
+
+ON=2
+REDUIRE_ACHAT_COUPONS_BOIS 100
+RETURN 1
+
+ON=3
+REDUIRE_ACHAT_COUPONS_BOIS 1000
+RETURN 1
+
+ON=4
+AJOUT_ACHAT_COUPONS_BOIS 1000
+RETURN 1
+
+ON=5
+AJOUT_ACHAT_COUPONS_BOIS 100
+RETURN 1
+
+ON=6
+AJOUT_ACHAT_COUPONS_BOIS 10
+RETURN 1
+
+ON=7
+EFFECTUER_ACHAT_COUPONS_BOIS
+RETURN 1
+
+ON=8
+RETURN 1
+
+[DIALOG coupon_bois_vente] 
+0,0
+
+page 0
+resizepic 0 0 2620 420 260
+
+page 1
+text 80 20 1152 1//Vente de coupons de bois
+text 20 50 1152 2//-10
+text 60 50 1152 3//-100
+text 120 50 1152 4//-1000
+text 200 80 1152 5//<NB_VENTE>
+text 275 50 1152 6//+1000
+text 330 50 1152 7//+100
+text 380 50 1152 8//+10
+text 150 120 1152 9//buches(moi)
+text 150 160 1152 10//coupons(vous)
+text 40 140 1152 11//contre
+text 80 120 1152 12//<NB_BUCHES>
+text 80 160 1152 13//<NB_COUPONS>
+button 25 80 56 56 1 0 1//MOINS 10 COUPONS
+button 70 80 56 56 1 0 2//MOINS 100 COUPONS
+button 130 80 56 56 1 0 3//MOINS 1000 COUPONS
+button 290 80 55 55 1 0 4//PLUS 1000 COUPONS
+button 340 80 55 55 1 0 5//PLUS 100 COUPONS
+button 390 80 55 55 1 0 6//PLUS 10 COUPONS
+button 200 180 249 248 1 0 7//OKAY
+button 270 20 2473 2472 1 0 8//CANCEL
+
+[DIALOG coupon_bois_vente TEXT] 
+<VAR.BLANKLINE>
+Vente de coupons de bois
+-10
+-100
+-1000
+<EVAL <FINDID.i_timer_bucheron_cancel.TAG.VENTE>>
++1000
++100
++10
+buches(moi)
+coupons(vous)
+contre
+<EVAL <FINDID.i_timer_bucheron_cancel.TAG.VENTE>>
+<EVAL <FINDID.i_timer_bucheron_cancel.TAG.VENTE>>
+
+[DIALOG coupon_bois_vente BUTTON]
+ON=1
+REDUIRE_ACHAT_COUPONS_BOIS 10
+RETURN 1
+
+ON=2
+REDUIRE_ACHAT_COUPONS_BOIS 100
+RETURN 1
+
+ON=3
+REDUIRE_ACHAT_COUPONS_BOIS 1000
+RETURN 1
+
+ON=4
+AJOUT_ACHAT_COUPONS_BOIS 1000
+RETURN 1
+
+ON=5
+AJOUT_ACHAT_COUPONS_BOIS 100
+RETURN 1
+
+ON=6
+AJOUT_ACHAT_COUPONS_BOIS 10
+RETURN 1
+
+ON=7
+EFFECTUER_ACHAT_COUPONS_BOIS
+RETURN 1
+
+ON=8
+RETURN 1
+
+//DEFAULT : JOUEUR
+//ARGS : NB DE COUPONS DE BOIS A ACHETER
+[FUNCTION AJOUT_ACHAT_COUPONS_BOIS]
+IF <FINDID.i_timer_bucheron_cancel>
+	IF <FINDID.i_timer_bucheron_cancel.TAG.VENTE> > 0
+		IF <FINDID.i_timer_bucheron_cancel.TAG.VENTE> > <ARGS>
+			FINDID.i_timer_bucheron_cancel.TAG.VENTE = <EVAL <FINDID.i_timer_bucheron_cancel.TAG.VENTE> - <ARGS>>
+		ELSE
+			FINDID.i_timer_bucheron_cancel.TAG.ACHAT = <EVAL <ARGS> - <FINDID.i_timer_bucheron_cancel.TAG.VENTE>>
+			FINDID.i_timer_bucheron_cancel.TAG.VENTE = 0
+		ENDIF
+	ELSE
+		FINDID.i_timer_bucheron_cancel.TAG.ACHAT = <EVAL <FINDID.i_timer_bucheron_cancel.TAG.ACHAT> + <ARGS>>
+	ENDIF
+	FINDID.i_timer_bucheron_cancel.TIMER = 60
+	IF <FINDID.i_timer_bucheron_cancel.TAG.VENTE> > 0
+		DIALOG coupon_bois_vente
+	ELSE
+		DIALOG coupon_bois_achat
+	ENDIF
+ENDIF
+RETURN 1
+
+//DEFAULT : JOUEUR
+//ARGS : NB DE COUPONS DE BOIS A VENDRE
+[FUNCTION REDUIRE_ACHAT_COUPONS_BOIS]
+IF <FINDID.i_timer_bucheron_cancel>
+	IF <FINDID.i_timer_bucheron_cancel.TAG.VENTE> > 0
+		FINDID.i_timer_bucheron_cancel.TAG.VENTE = <EVAL <FINDID.i_timer_bucheron_cancel.TAG.VENTE> + <ARGS>>
+	ELSE
+		IF <FINDID.i_timer_bucheron_cancel.TAG.ACHAT> < <ARGS>
+			FINDID.i_timer_bucheron_cancel.TAG.VENTE = <EVAL <ARGS> - <FINDID.i_timer_bucheron_cancel.TAG.ACHAT>>
+			FINDID.i_timer_bucheron_cancel.TAG.ACHAT = 0
+		ELSE
+			FINDID.i_timer_bucheron_cancel.TAG.ACHAT = <EVAL <FINDID.i_timer_bucheron_cancel.TAG.ACHAT> - <ARGS>>
+		ENDIF
+	ENDIF
+	FINDID.i_timer_bucheron_cancel.TIMER = 60
+	IF <FINDID.i_timer_bucheron_cancel.TAG.VENTE> > 0
+		DIALOG coupon_bois_vente
+	ELSE
+		DIALOG coupon_bois_achat
+	ENDIF
+ENDIF
+RETURN 1
+
+//DEFAULT : JOUEUR
+[FUNCTION EFFECTUER_ACHAT_COUPONS_BOIS]
+IF <FINDID.i_timer_bucheron_cancel>
+	IF 0<FINDID.i_timer_bucheron_cancel.TAG.VENTE> > 0
+		IF <RESCOUNT i_coupon_bois> >= <FINDID.i_timer_bucheron_cancel.TAG.VENTE>
+			IF <FINDID.i_timer_bucheron_cancel.TAG.VENTE> > 2000
+				FINDID.i_timer_bucheron_cancel.LINK.SAY Vous ne pouvez pas vendre plus de 2000 coupons, cela represente une charge trop lourde !
+			ELSE
+				CONSUME <FINDID.i_timer_bucheron_cancel.TAG.VENTE> i_coupon_bois
+				NEWITEM i_log
+				ACT.AMOUNT = <FINDID.i_timer_bucheron_cancel.TAG.VENTE>
+				ACT.CONT = <UID>
+				FINDID.i_timer_bucheron_cancel.LINK.SAY Je vous remercie, voila vos buches.
+			ENDIF
+		ELSE
+			FINDID.i_timer_bucheron_cancel.LINK.SAY Vous n'avez pas <EVAL <FINDID.i_timer_bucheron_cancel.TAG.VENTE>> coupons sur vous !
+		ENDIF
+	ELSEIF 0<FINDID.i_timer_bucheron_cancel.TAG.ACHAT> > 0
+		IF <RESCOUNT i_log> >= <EVAL (<FINDID.i_timer_bucheron_cancel.TAG.ACHAT> * 11) / 10>
+			IF <FINDID.i_timer_bucheron_cancel.TAG.ACHAT> > 50000
+				FINDID.i_timer_bucheron_cancel.LINK.SAY Diantre! Cela represente beaucoup trop de bois! Moins de 50 000 je vous pris!
+			ELSE
+				CONSUME <EVAL (<FINDID.i_timer_bucheron_cancel.TAG.ACHAT> * 11) / 10> i_log
+				NEWITEM i_coupon_bois
+				ACT.AMOUNT = <FINDID.i_timer_bucheron_cancel.TAG.ACHAT>
+				ACT.CONT = <UID>
+				FINDID.i_timer_bucheron_cancel.LINK.SAY Je vous remercie, voila vos coupons.
+			ENDIF
+		ELSE
+			FINDID.i_timer_bucheron_cancel.LINK.SAY Vous n'avez pas <EVAL (<FINDID.i_timer_bucheron_cancel.TAG.ACHAT> * 11) / 10> buches sur vous !
+		ENDIF
+	ELSE
+		FINDID.i_timer_bucheron_cancel.LINK.SAY Vous voulez vendre ou bien acheter 0 buche dites-moi ?
+	ENDIF
+	FINDID.i_timer_bucheron_cancel.REMOVE
+ENDIF
+RETURN 1

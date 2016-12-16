@@ -1,0 +1,137 @@
+[EVENTS e_general]
+
+ON=@SKILLSTART
+IF (<SRC.ACTION>==Skill_Snooping) || (<SRC.ACTION>==Skill_Stealing) || (<SRC.ACTION>==Skill_provocation)
+    SRC.ACTION=-1
+ENDIF
+IF <SRC.ACTION>==Skill_meditation
+    IF !(<EVAL (<SRC.MANA>+1)> > <SRC.INT>)
+        IF !(<SRC.FINDID.m_regagne_mana>)
+            IF !(<SRC.FINDID.m_limitateur_meditation>)
+                SRC.NEWITEM=m_limitateur_meditation
+                SRC.ACT.EQUIP
+                IF <SRC.MEDITATION> > 149.9
+                    SRC.EMOTE entrer en meditation
+                    SRC.NEWITEM=m_regagne_mana
+                    SRC.ACT.EQUIP
+                    SRC.ACT.USE
+                    SRC.EVENTS +e_casse_meditation
+                ELSE
+                //condition de meditation selon skill
+                    SRC.TAG.REUSSIMEDIT=<EVAL (150 - <EVAL <SRC.MEDITATION>/10>)/15>
+                    IF (<EVAL(RAND(<EVAL <SRC.TAG.REUSSIMEDIT>>))>==0)
+                        SRC.EMOTE entrer en meditation
+                        SRC.NEWITEM=m_regagne_mana
+                        SRC.ACT.EQUIP
+                        SRC.ACT.USE
+                        SRC.EVENTS +e_casse_meditation
+                    ELSE
+                        SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne parvenez pas a entrer en meditation
+                    ENDIF
+                ENDIF
+            ELSE
+                SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes encore eprouve par votre derniere tentative de meditation
+            ENDIF
+        ENDIF
+    ELSE
+        SRC.SYSMESSAGEUA 0481 1 1 0 Nulle peine de mediter, vous possedez toutes vos reserves de mana
+    ENDIF
+    SRC.ACTION=-1
+    RETURN 1
+ENDIF
+IF <SRC.ACTION>==Skill_Musicianship
+    IF <SRC.FINDID.m_timer_musique>
+        SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez terminer votre melodie avant de rejouer !
+        RETURN 1
+    ELSEIF <SRC.IS_DEJA_TRAVAIL>
+        SRC.SYSMESSAGEUA 0481 1 1 0 Vous faites deja quelque chose !
+        RETURN 1
+    ELSE
+        VAR.ACTSAVE = <SRC.ACT.UID>
+        SRC.NEWITEM m_timer_musique
+        SRC.ACT.EQUIP
+        SRC.ACT = <VAR.ACTSAVE>
+    ENDIF
+ENDIF
+RETURN 0
+
+
+ON=@GETHIT
+//SRC = attaquant
+//SRC.ACT = victime
+IF (<SRC.ACT.ISCHAR> && <SRC.ISCHAR>)
+    VAR.RD = <EVAL (<ARGN1> * <GET_REDUCTION_DEGATS>) / 100>
+    ARGN1 = <EVAL <ARGN1> - <VAR.RD>>
+    VAR.RD
+    SRC.AURA_OFF
+    AURA_DEF
+ENDIF
+RETURN 0
+
+
+ON=@SkillSelect
+IF (<SRC.ACTION>==Skill_Snooping) || (<SRC.ACTION>==Skill_Stealing)
+    SRC.ACTION=-1
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@SPELLCAST
+IF (<SRC.ACCOUNT.PLEVEL> <3)
+    IF ( <ARGN> == 2 ) || ( <ARGN> == 14 ) || ( <ARGN> == 22 ) || ( <ARGN> == 23 ) || ( <ARGN> == 28 ) || ( <ARGN> == 33 ) || ( <ARGN> == 39 ) || ( <ARGN> == 40 ) || ( <ARGN> == 47 ) || ( <ARGN> == 50 ) || ( <ARGN> == 56 ) || ( <ARGN> == 58 ) || ( <ARGN> == 60 ) || ( <ARGN> == 61 ) || ( <ARGN> == 62 ) || ( <ARGN> == 63 ) || ( <ARGN> == 64 )
+        SRC.SYSMESSAGEUA 0481 1 1 0 Fonction desactivee
+        RETURN 1
+    ENDIF
+    IF (<SRC.REGION.FLAGS>&00004)
+        IF ( <ARGN> == 22 ) || ( <ARGN> == 52 )
+            SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas lancer ce sortilege en ces lieux !
+            RETURN 1
+        ENDIF
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+//SRC = ATTAQUANT
+//[] = SRC.ACT = VICTIME
+//BONUS SANTE + BONHEUR
+IF <IS_SORT_BLESSURES <ARGN>>
+    ARGN2 = <SRC.CALCULATE_BONUS_DOMMAGES <ARGN2>>
+ENDIF
+IF <IS_SORT_AGRESSIF <ARGN>>
+    SRC.AURA_OFF
+    AURA_DEF
+ENDIF
+RETURN 0
+
+ON=@ITEMTARGON_ITEM
+IF (<SRC.ACT.TYPE>=t_weapon_sword) || (<SRC.ACT.TYPE>=t_weapon_mace_sharp) || (<SRC.ACT.TYPE>=t_weapon_fence) || (<SRC.ACT.TYPE>=t_weapon_axe)
+    IF (<SRC.TARG.BASEID>=i_corpse) && (<SRC.TARG.LINK.UID>) && (<SRC.TARG.MORE1>)
+         IF !(<SRC.TARG.LINK.UID>=<SRC.UID>)
+            SRC.NEWITEM i_flesh_head
+            SRC.ACT.LINK=<SRC.TARG.LINK>
+            SRC.ACT.NAME=Tete de <SRC.TARG.LINK.NAME>
+            SRC.ACT.BOUNCE
+        ELSE
+            SRC.SYSMESSAGE Vous decoupez le corps sans y trouver quoi que ce soit d'interessant.
+        ENDIF
+        SRC.TARG.MORE1=0
+        SRC.TARG.MORE2=<SRC.TIME>
+        SRC.BOW
+        SRC.NEWITEM i_blood_pool_large
+        SRC.ACT.ATTR=00002
+        SRC.ACT.P=<SRC.TARG.P>
+        RETURN 1
+    ELSEIF (<SRC.TARG.BASEID>=i_corpse) && (<SRC.TARG.LINK.UID>) &! (<SRC.TARG.MORE1>)
+        SRC.BOW
+        SRC.SYSMESSAGE Vous decoupez le corps sans y trouver quoi que ce soit d'interessant.
+        RETURN 1
+    ELSEIF (<SRC.TARG.BASEID>=i_flesh_head) && (<SRC.TARG.LINK>)
+        SRC.NEWITEM i_flesh_brain
+        SRC.ACT.LINK=<SRC.TARG.LINK>
+        SRC.ACT.NAME Cerveau de <SRC.TARG.LINK.NAME>
+        SRC.ACT.BOUNCE
+        SRC.TARG.REMOVE
+        RETURN 1
+    ENDIF
+ENDIF

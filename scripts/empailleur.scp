@@ -1,0 +1,109 @@
+[ITEMDEF i_kit_d_empailleur]
+NAME=Kit d'empailleur
+ID=i_toolcase
+RESOURCES=5 i_ingot_iron, 1 i_hide
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+ON=@DClick
+TARGET Quel animal voulez vous empailler ?
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.TYPE>=T_CORPSE) && (<SRC.TARG.MOREX>=0ea) && (<SRC.TARG.MORE1>!=00)
+	IF (50.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 60.0)
+		VAR.CHANCE_TEMP = 20
+	ELSEIF (60.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 70.0)
+		VAR.CHANCE_TEMP = 10
+	ELSEIF (70.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 80.0)
+		VAR.CHANCE_TEMP = 5
+	ELSEIF (80.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 99.9)
+		VAR.CHANCE_TEMP = 3
+	ELSEIF <SRC.TAILORING> > 99.9
+		VAR.CHANCE_TEMP = 1
+	ELSE
+		VAR.CHANCE_TEMP = 100
+	ENDIF
+	IF <EVAL RAND(<VAR.CHANCE_TEMP>) >= 0
+		SRC.NEWITEM i_masque_de_cerf
+		SRC.ACT.BOUNCE
+		SRC.SYSMESSAGE Vous depecez la tete du cerf et reussissez a en faire un masque
+	ELSE
+		SRC.SYSMESSAGE Malgre votre concentration vous ne tirez rien du corps de ce cerf
+	ENDIF
+	SRC.TARG.REMOVE
+ELSEIF (<SRC.TARG.TYPE>=T_CORPSE) && (<SRC.TARG.MOREX>=0d3) && (<SRC.TARG.MORE1>!=00)
+	IF (50.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 60.0)
+		VAR.CHANCE_TEMP = 20
+	ELSEIF (60.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 70.0)
+		VAR.CHANCE_TEMP = 10
+	ELSEIF (70.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 80.0)
+		VAR.CHANCE_TEMP = 5
+	ELSEIF (80.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 99.9)
+		VAR.CHANCE_TEMP = 3
+	ELSEIF <SRC.TAILORING> > 99.9
+		VAR.CHANCE_TEMP = 1
+	ELSE
+		VAR.CHANCE_TEMP = 100
+	ENDIF
+	IF <EVAL RAND(<VAR.CHANCE_TEMP>) >= 0
+		SRC.NEWITEM i_masque_d_ours
+		SRC.ACT.BOUNCE
+		SRC.SYSMESSAGE Vous depecez la tete de l'ours et reussissez a en faire un masque
+	ELSE
+		SRC.SYSMESSAGE Malgre votre concentration vous ne tirez rien du corps de l'ours
+	ENDIF
+	SRC.TARG.REMOVE
+ELSEIF (<SRC.TARG.TYPE>=T_CORPSE) && (<SRC.TARG.MOREX>=011) && (<SRC.TARG.MORE1>!=00)
+	IF (50.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 60.0)
+		VAR.CHANCE_TEMP = 20
+	ELSEIF (60.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 70.0)
+		VAR.CHANCE_TEMP = 10
+	ELSEIF (70.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 80.0)
+		VAR.CHANCE_TEMP = 5
+	ELSEIF (80.0 < <SRC.TAILORING>)&&(<SRC.TAILORING> < 99.9)
+		VAR.CHANCE_TEMP = 3
+	ELSEIF <SRC.TAILORING> > 99.9
+		VAR.CHANCE_TEMP = 1
+	ELSE
+		VAR.CHANCE_TEMP = 100
+	ENDIF
+	IF <EVAL RAND(<VAR.CHANCE_TEMP>) >= 0
+		SRC.NEWITEM i_masque_d_orc
+		SRC.ACT.BOUNCE
+		SRC.SYSMESSAGE Vous depecez la tete de l'orc et reussissez a en faire un masque
+	ELSE
+		SRC.SYSMESSAGE Malgre votre concentration vous ne tirez rien du corps de l'orc
+	ENDIF
+	SRC.TARG.REMOVE
+ELSE
+	SRC.SYSMESSAGE Vous ne pouvez rien tirer de cet animal
+ENDIF
+VAR.CHANCE_TEMP
+RETURN 1
+
+[ITEMDEF i_masque_de_cerf]
+DEFNAME=i_masque_de_cerf
+NAME=Masque de cerf
+ID=i_mask_deer
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Masque de cerf
+
+[ITEMDEF i_masque_d_ours]
+DEFNAME=i_masque_d_ours
+NAME=Masque d'ours
+ID=i_mask_bear
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Masque d'ours
+
+[ITEMDEF i_masque_d_orc]
+DEFNAME=i_masque_d_orc
+NAME=Masque d'orc
+ID=0141b
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Masque d'orc

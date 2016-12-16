@@ -1,0 +1,560 @@
+//*****************************************
+//************CLES ET SERRURES*************
+//*****************************************
+
+//CLE D'EPREUVES
+[ITEMDEF i_cle_d7_finale]
+NAME=Cle
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0516
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Sur quoi voulez-vous utiliser la cle ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF ((<SRC.TARG.BASEID>==i_serrure_d7_nord) || (<SRC.TARG.BASEID>==i_serrure_d7_ouest))
+	IF ((<EVAL <SRC.TARG.MORE1>> == <EVAL 0<SRC.TAG.EPREUVE_A_FAIRE_D7>>) && (<EVAL <SRC.TARG.MORE1>> == <EVAL <MORE1>>))
+		EMOTE tomber en poussiere
+		REMOVE
+		SRC.GO <SRC.TARG.MOREP>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Votre cle ne rentre pas dans cette serrure
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Impossible d'utiliser cette cle a cet endroit
+ENDIF
+RETURN 1
+
+[ITEMDEF i_cle_d7_salle8_1]
+NAME=Cle 801
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0516
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Sur quoi voulez-vous utiliser la cle ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.BASEID>==i_porte_d7_salle8_1)
+	IF <EVAL <SRC.TARG.MORE1>> == 0
+		EMOTE tomber en poussiere
+		REMOVE
+		SRC.TARG.TIMER=1
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 La serrure est coincee
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Impossible d'utiliser cette cle a cet endroit
+ENDIF
+RETURN 1
+
+[ITEMDEF i_cle_d7_salle8_2]
+NAME=Cle 802
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0516
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Sur quoi voulez-vous utiliser la cle ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.BASEID>==i_porte_d7_salle8_2)
+	IF <EVAL <SRC.TARG.MORE1>> == 0
+		EMOTE tomber en poussiere
+		REMOVE
+		SRC.TARG.TIMER=1
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 La serrure est coincee
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Impossible d'utiliser cette cle a cet endroit
+ENDIF
+RETURN 1
+
+//CLE POUR OUVRIR LA PORTE DE PRISON A LA TOUTE FIN AVANT LE BOSS
+[ITEMDEF i_cle_d7_final_prison]
+NAME=Cle
+ID=01012
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0586
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Sur quoi voulez-vous utiliser la cle ?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.BASEID>==i_porte_d7_final_prison)
+	IF <EVAL <SRC.TARG.MORE1>> == 0
+		EMOTE tomber en poussiere
+		REMOVE
+		SRC.TARG.TIMER=1
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 La serrure est coincee
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Impossible d'utiliser cette cle a cet endroit
+ENDIF
+RETURN 1
+
+
+
+//*****************************************
+//******************PORTES*****************
+//*****************************************
+
+[ITEMDEF i_porte_d7_salle8_1]
+NAME=grille
+ID=0687
+TYPE=t_normal
+
+//MORE1=1 MONTE  MORE1=2 DESCEND
+//MORE2=NOMBRE RESTANT A MONTER OU DESCENDRE
+ON=@Create
+ATTR=08010
+MORE1=0
+TIMER=-1
+
+ON=@DCLICK
+SAY 801
+RETURN 1
+
+ON=@TIMER
+IF <MORE1>==0
+	MORE1=1
+	TIMER=10
+	P=<EVAL <P.X> - 1>,<EVAL <P.Y>>,<EVAL <P.Z>>
+	UPDATE
+ELSE
+	MORE1=0
+	TIMER=-1
+	P=<EVAL <P.X> + 1>,<EVAL <P.Y>>,<EVAL <P.Z>>
+	UPDATE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_porte_d7_salle8_2]
+NAME=grille
+ID=068F
+TYPE=t_normal
+
+//MORE1=1 MONTE  MORE1=2 DESCEND
+//MORE2=NOMBRE RESTANT A MONTER OU DESCENDRE
+ON=@Create
+ATTR=08010
+MORE1=0
+TIMER=-1
+
+ON=@DCLICK
+SAY 802
+RETURN 1
+
+ON=@TIMER
+IF <MORE1>==0
+	MORE1=1
+	TIMER=10
+	P=<EVAL <P.X>>,<EVAL <P.Y> + 1>,<EVAL <P.Z>>
+	UPDATE
+ELSE
+	MORE1=0
+	TIMER=-1
+	P=<EVAL <P.X>>,<EVAL <P.Y> - 1>,<EVAL <P.Z>>
+	UPDATE
+ENDIF
+RETURN 1
+
+//MORE1=0(ferme)1(ouvert)
+[ITEMDEF i_porte_d7_final_prison]
+NAME=grille
+ID=068F
+TYPE=t_door_locked
+
+ON=@Create
+ATTR=08010
+MORE1=0
+TIMER=-1
+
+ON=@DCLICK
+SAY Cette porte est verrouillee
+RETURN 1
+
+ON=@TIMER
+IF <MORE1>==0
+	MORE1=1
+	DISPID=0690
+	P=<EVAL <P.X> + 1>,<EVAL <P.Y> - 1>,<EVAL <P.Z>>
+	UPDATE
+	TIMER=10
+ELSE
+	MORE1=0
+	DISPID=068f
+	P=<EVAL <P.X> - 1>,<EVAL <P.Y> + 1>,<EVAL <P.Z>>
+	UPDATE
+	TIMER=-1
+ENDIF
+RETURN 1
+
+[ITEMDEF i_barriere_venerable_d7]
+ID=i_lava_wall
+NAME=Barriere
+TYPE=t_normal
+
+ON=@CREATE
+ATTR=08010
+COLOR=0b0f
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 6
+	MOREP=<SRC.P>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Coordonnee enregistree pour teleportation
+	RETURN 1
+ENDIF
+RETURN 0
+
+ON=@STEP
+IF ( (<EVAL 0<SRC.TAG.BOSS_FINAL_TUE>> == 1) || (<EVAL 0<SRC.TAG.RENAISSANCE>> > 6) )
+	RETURN 1
+ELSE
+	IF <MOREX> > 0
+		SRC.GO <MOREP>
+		SRC.SYSMESSAGEUA 021 1 1 0 Une force vous repousse !
+	ENDIF
+ENDIF
+RETURN 1
+
+
+
+
+//***********************************************
+//*************SERRURES ET CADENAS***************
+//***********************************************
+
+[ITEMDEF i_serrure_d7_nord]
+NAME=serrure
+ID=01ed6
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0516
+ATTR=08010
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 6
+	IF <MOREX> == 0
+		MOREP=<SRC.P>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Coordonnees enregistrees pour la serrure
+	ENDIF
+	SRC.SYSMESSAGEUA 0481 1 1 0 porte numero <EVAL <MORE1>>
+	RETURN 1
+ENDIF
+RETURN 0
+
+[ITEMDEF i_serrure_d7_ouest]
+NAME=serrure
+ID=01ed4
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0516
+ATTR=08010
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 6
+	IF <MOREX> == 0
+		MOREP=<SRC.P>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Coordonnees enregistrees pour la serrure
+	ENDIF
+	SRC.SYSMESSAGEUA 0481 1 1 0 porte numero <EVAL <MORE1>>
+	RETURN 1
+ENDIF
+RETURN 0
+
+[ITEMDEF i_cadenas_porte_d7_yew]
+NAME=Cadenas
+ID=i_fishing_weight
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+COLOR=0b10
+TIMER=-1
+TAG.CHIFFRE1=0
+TAG.CHIFFRE2=0
+TAG.CHIFFRE3=0
+TAG.CHIFFRE4=0
+TAG.CHIFFRE5=0
+
+ON=@DCLICK
+DIALOG D_CADENAS_ENTREE_D7
+RETURN 1
+
+
+
+
+//***********************************************
+//********************COFFRES********************
+//***********************************************
+
+[ITEMDEF i_coffre_d7_salle8]
+NAME=Coffre
+ID=0e43
+TYPE=T_NORMAL
+
+ON=@CREATE
+TIMER=-1
+TAG.REMPLI=1
+COLOR=0b33
+
+ON=@DCLICK
+IF ((<EVAL 0<TAG.REMPLI>> == 1) && (!<SRC.FINDID.i_cle_d7_salle8_2>))
+	TAG.REMPLI=0
+	TIMER=10
+	SRC.NEWITEM i_cle_d7_salle8_2
+	SRC.ACT.BOUNCE
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TAG.REMPLI=1
+TIMER=-1
+RETURN 1
+
+[ITEMDEF i_coffre_d7_final_prison]
+NAME=Coffre
+ID=0e43
+TYPE=t_normal
+
+ON=@CREATE
+TIMER=-1
+COLOR=0586
+TAG.BARRE=1
+
+ON=@CLICK
+IF <TAG.BARRE> == 1
+	MESSAGE Coffre verrouille
+ELSE
+	MESSAGE Coffre
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <TAG.BARRE> == 0
+	TAG.BARRE = 1
+	SRC.NEWITEM i_cle_d7_final_prison
+	SRC.ACT.BOUNCE
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est verrouille !
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TIMER=-1
+ATTR=08010
+RETURN 1
+
+[ITEMDEF i_coffre_livre_de_sacrifice]
+NAME=Coffre
+ID=0e43
+TYPE=T_NORMAL
+
+ON=@CREATE
+TIMER=-1
+TAG.REMPLI=1
+ATTR=08010
+COLOR=0ba0
+
+ON=@DCLICK
+IF <DISTANCE> < 2
+	IF ((<EVAL 0<TAG.REMPLI>> == 1) && (!<SRC.FINDID.i_livre_de_sacrifice>))
+		TAG.REMPLI=0
+		TIMER=3600
+		SRC.NEWITEM i_livre_de_sacrifice
+		SRC.ACT.LINK=<SRC.UID>
+		SRC.ACT.BOUNCE
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes trop loin du coffre!
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TAG.REMPLI=1
+TIMER=-1
+RETURN 1
+
+
+
+//***********************************************
+//*************TOMBES ET PEDESTALS***************
+//***********************************************
+
+[ITEMDEF i_tombe_rachidis_d7]
+NAME=R.I.P. Rachidis le hero aventurier
+ID=i_gravestone_8
+TYPE=t_normal
+
+ON=@CREATE
+TAG.CHIFFRE1=0
+TAG.CHIFFRE2=0
+TAG.CHIFFRE3=0
+
+ON=@DCLICK
+DIALOG D_TOMBE_RACHIDIS
+RETURN 1
+
+[ITEMDEF i_tombeau_1_d7]
+NAME=Tombeau poussiereux
+ID=i_grave_stone_4
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+COLOR=0482
+
+ON=@DCLICK
+SRC.SFX 0118
+SRC.EMOTE entendre un leger son
+IF <LINK.BASEID>==i_levier_d7
+	IF <LINK.MORE1>==1
+		LINK.MORE1=2
+	ELSEIF <LINK.MORE1> != 2
+		LINK.MORE1=0
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise config, contactez votre admin!	
+ENDIF
+RETURN 1
+
+[ITEMDEF i_tombeau_2_d7]
+NAME=Tombeau poussiereux
+ID=i_grave_stone_4
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+COLOR=0482
+
+ON=@DCLICK
+SRC.SFX 0107
+SRC.EMOTE entendre un leger son
+IF <LINK.BASEID>==i_levier_d7
+	IF <LINK.MORE1>==2
+		LINK.MORE1=3
+	ELSEIF <LINK.MORE1> != 3
+		LINK.MORE1=0
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise config, contactez votre admin!	
+ENDIF
+RETURN 1
+
+[ITEMDEF i_tombeau_3_d7]
+NAME=Tombeau poussiereux
+ID=i_grave_stone_4
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+COLOR=0482
+
+ON=@DCLICK
+SRC.SFX 01dd
+SRC.EMOTE entendre un leger son
+IF <LINK.BASEID>==i_levier_d7
+	IF <LINK.MORE1>==3
+		LINK.MORE1=4
+	ELSEIF <LINK.MORE1> != 4
+		LINK.MORE1=0
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise config, contactez votre admin!	
+ENDIF
+RETURN 1
+
+[ITEMDEF i_tombeau_4_d7]
+NAME=Tombeau poussiereux
+ID=0edc
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+COLOR=0482
+
+ON=@DCLICK
+SRC.SFX 0181
+SRC.EMOTE se sentir faible
+IF !<SRC.FINDID.i_rune_curse_piege_d7>
+	SRC.NEWITEM i_rune_curse_piege_d7
+	SRC.ACT.LINK=<SRC.UID>
+	SRC.ACT.EQUIP
+	SRC.ACT.TIMER=240
+ENDIF
+IF <LINK.BASEID>==i_levier_d7
+	IF <LINK.MORE1>==4
+		LINK.MORE1=5
+	ELSEIF <LINK.MORE1> != 5
+		LINK.MORE1=0
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise config, contactez votre admin!	
+ENDIF
+RETURN 1
+
+[ITEMDEF i_pedestal_d7]
+NAME=pedistral
+ID=i_PEDESTAL_MARBLE
+TYPE=t_normal
+
+//MORE1=1 MONTE  MORE1=2 DESCEND
+//MORE2=NOMBRE RESTANT A MONTER OU DESCENDRE
+ON=@Create
+ATTR=08010
+MORE1=1
+TIMER=-1
+MORE2=10
+
+ON=@DCLICK
+RETURN 1
+
+ON=@TIMER
+IF <MORE2>==0
+	IF <MORE1>==1
+		MORE1=2
+		MORE2=10
+		TIMER=20
+	ELSE
+		MORE1=1
+		MORE2=10
+		TIMER=-1
+	ENDIF
+ELSE
+	MORE2=<EVAL <MORE2> - 1>
+	TIMER=1
+	IF <MORE1>==1
+		P=<EVAL <P.X>>,<EVAL <P.Y>>,<EVAL <P.Z> + 2>
+		UPDATE
+	ELSE
+		P=<EVAL <P.X>>,<EVAL <P.Y>>,<EVAL <P.Z> - 2>
+		UPDATE
+	ENDIF
+ENDIF
+RETURN 1

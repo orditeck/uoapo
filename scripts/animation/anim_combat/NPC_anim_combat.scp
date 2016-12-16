@@ -1,0 +1,946 @@
+//******************************************
+//******************SUMMONER****************
+//******************************************
+
+[CHARDEF C_SUMMONNER1_COMBAT]
+NAME=L'invocateur
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=job_summonner1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+COLOR=colors_skin
+STR=1
+DEX=1
+INT=1
+INVUL
+ALLSKILLS=1
+
+NPC=BRAIN_VENDOR
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_robe_gm_anim
+COLOR=0750
+ITEMNEWBIE=i_petit_bouclier
+COLOR=0482
+ITEMNEWBIE=i_fleau_d_arme
+COLOR=0750
+
+
+ON=@NPCHearUnknown
+SAY vous pouvez me demander d'augmenter la difficulte, de diminuer la difficulte ou de lancer un monstre
+
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Invocateur1
+
+[SPEECH job_summonner1]
+
+ON=position
+IF <SRC.ACCOUNT.PLEVEL> > 3
+	TAG.POSITION=<SRC.P>
+	SAY position <SRC.P> enregistree
+ELSE
+	SAY ma position favorite? Ca ne vous regarde pas!
+ENDIF
+
+ON=augmenter
+IF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> < 9
+	SRC.TAG.SUMMONNER1_LEVEL = <EVAL <SRC.TAG.SUMMONNER1_LEVEL> + 1>
+	SAY Monstres niveau <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> On se croit puissant hein?
+ELSE
+	SAY Allez voir l'invocateur avance pour avoir des monstres plus puissants
+ENDIF
+
+ON=diminuer
+IF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> > 0
+	SRC.TAG.SUMMONNER1_LEVEL = <EVAL <SRC.TAG.SUMMONNER1_LEVEL> - 1>
+	SAY Les monstres niveau <EVAL <SRC.TAG.SUMMONNER2_LEVEL> + 1> sont trop forts pour vous <SEX mon garcon/ma petite>?
+ELSE
+	SAY Vous avez deja le monstre le plus faible disponible
+ENDIF
+
+ON=lancer
+IF <EVAL 0<TAG.POSITION>> != 0
+	IF !<FINDID.i_temps_avant_respawn>
+		NEWITEM i_temps_avant_respawn
+		ACT.CONT=<UID>
+		IF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> == 0
+			SRC.NEWNPC c_rat_brun
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> == 1
+			SRC.NEWNPC c_chauve_souris
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> == 2
+			SRC.NEWNPC c_eclaireur_gobelin
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> == 3
+			SRC.NEWNPC c_serpent_venimeux
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> == 4
+			SRC.NEWNPC c_araignee_noire
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> == 5
+			SRC.NEWNPC c_guerrier_orc
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> == 6
+			SRC.NEWNPC c_kraanian_mille_pattes
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> == 7
+			SRC.NEWNPC c_anthropophage
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER1_LEVEL>> == 8
+			SRC.NEWNPC c_horreur_railleuse
+			placer_monstre_events
+		ELSE
+			SRC.NEWNPC c_rat_garou
+			placer_monstre_events
+		ENDIF
+	ELSE
+		SAY Laissez moi respirer!
+	ENDIF
+ELSE
+	SAY Coordonnees de spawn non ajustee
+ENDIF
+
+
+[CHARDEF C_SUMMONNER2_COMBAT]
+NAME=L'invocateur experimente
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=job_summonner2
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+COLOR=colors_skin
+STR=1
+DEX=1
+INT=1
+INVUL
+ALLSKILLS=1
+
+NPC=BRAIN_VENDOR
+
+ON=@NPCRestock
+ITEMNEWBIE=i_bassinet
+COLOR=0bb6
+ITEMNEWBIE=i_protege_cou_en_cuir
+COLOR=0bb6
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0bb6
+ITEMNEWBIE=i_brassieres_en_cuir
+COLOR=0bb6
+ITEMNEWBIE=i_jambieres_en_cuir
+COLOR=0bb6
+ITEMNEWBIE=i_armure_en_cuir
+COLOR=0bb6
+ITEMNEWBIE=i_pavois
+COLOR=0b66
+ITEMNEWBIE=i_hachette
+COLOR=0bb6
+
+ON=@NPCHearUnknown
+SAY vous pouvez me demander d'augmenter la difficulte, de diminuer la difficulte ou de lancer un monstre
+
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Invocateur2
+
+[SPEECH job_summonner2]
+
+ON=position
+IF <SRC.ACCOUNT.PLEVEL> > 3
+	TAG.POSITION=<SRC.P>
+	SAY position <SRC.P> enregistree
+ELSE
+	SAY ma position favorite? Ca ne vous regarde pas!
+ENDIF
+
+ON=augmenter
+IF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> < 9
+	SRC.TAG.SUMMONNER2_LEVEL = <EVAL <SRC.TAG.SUMMONNER2_LEVEL> + 1>
+	SAY Monstre niveau <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> On se croit puissant hein?
+ELSE
+	SAY Allez voir l'invocateur elite pour avoir des monstres plus puissants
+ENDIF
+
+ON=diminuer
+IF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> > 0
+	SRC.TAG.SUMMONNER2_LEVEL = <EVAL <SRC.TAG.SUMMONNER2_LEVEL> - 1>
+	SAY Les monstres niveau <EVAL <SRC.TAG.SUMMONNER2_LEVEL> + 1> sont trop forts pour vous <SEX mon garcon/ma petite>?
+ELSE
+	SAY Allez voir l'invocateur pour avoir des monstres plus faibles
+ENDIF
+
+ON=lancer
+IF <EVAL 0<TAG.POSITION>> != 0
+	IF !<FINDID.i_temps_avant_respawn>
+		NEWITEM i_temps_avant_respawn
+		ACT.CONT=<UID>
+		IF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> == 0
+			SRC.NEWNPC c_fataliste
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> == 1
+			SRC.NEWNPC c_arpenteur_de_la_nuit
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> == 2
+			SRC.NEWNPC c_chien_loup
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> == 3
+			SRC.NEWNPC c_skraug_protekterritor
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> == 4
+			SRC.NEWNPC c_skraug_bigworviktor
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> == 5
+			SRC.NEWNPC c_guerrier_ophidien
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> == 6
+			SRC.NEWNPC c_reine_ophidien
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> == 7
+			SRC.NEWNPC c_harpie_demoniaque
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER2_LEVEL>> == 8
+			SRC.NEWNPC c_appendice_des_marecages
+			placer_monstre_events
+		ELSE
+			SRC.NEWNPC c_tentacule_des_marecages
+			placer_monstre_events
+		ENDIF
+	ELSE
+		SAY Laissez moi respirer!
+	ENDIF
+ELSE
+	SAY Coordonnees de spawn non ajustee
+ENDIF
+
+
+[CHARDEF C_SUMMONNER3_COMBAT]
+NAME=L'invocateur elite
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=job_summonner3
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+COLOR=colors_skin
+STR=1
+DEX=1
+INT=1
+INVUL
+ALLSKILLS=1
+
+NPC=BRAIN_VENDOR
+
+ON=@NPCRestock
+ITEMNEWBIE=i_casque_maille
+COLOR=0b36
+ITEMNEWBIE=i_armure_maille
+COLOR=0b36
+ITEMNEWBIE=i_jambiere_maille
+COLOR=0b36
+ITEMNEWBIE=i_epee_batarde
+COLOR=0b36
+
+ON=@NPCHearUnknown
+SAY vous pouvez me demander d'augmenter la difficulte, de diminuer la difficulte ou de lancer un monstre
+
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Invocateur3
+
+[SPEECH job_summonner3]
+
+ON=position
+IF <SRC.ACCOUNT.PLEVEL> > 3
+	TAG.POSITION=<SRC.P>
+	SAY position <SRC.P> enregistree
+ELSE
+	SAY ma position favorite? Ca ne vous regarde pas!
+ENDIF
+
+ON=augmenter
+IF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> < 2
+	SRC.TAG.SUMMONNER3_LEVEL = <EVAL <SRC.TAG.SUMMONNER3_LEVEL> + 1>
+	SAY Monstres niveau <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> On se croit puissant hein?
+ELSE
+	SAY Vous avez deja les monstres les plus puissants sur le marche!
+ENDIF
+
+ON=diminuer
+IF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> > 0
+	SRC.TAG.SUMMONNER3_LEVEL = <EVAL <SRC.TAG.SUMMONNER3_LEVEL> - 1>
+	SAY Les monstres niveau <EVAL <SRC.TAG.SUMMONNER2_LEVEL> + 1> sont trop forts pour vous <SEX mon garcon/ma petite>?
+ELSE
+	SAY Allez voir l'invocateur avance pour avoir des monstres plus faibles
+ENDIF
+
+ON=lancer
+IF <EVAL 0<TAG.POSITION>> != 0
+	IF !<FINDID.i_temps_avant_respawn>
+		NEWITEM i_temps_avant_respawn
+		ACT.CONT=<UID>
+		IF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> == 0
+			SRC.NEWNPC c_troll_normal
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> == 1
+			SRC.NEWNPC c_lieutenant_troll
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> == 2
+			SRC.NEWNPC c_heretique
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> == 3
+			SRC.NEWNPC c_envouteur_heretique
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> == 4
+			SRC.NEWNPC c_megachiroptere
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> == 5
+			SRC.NEWNPC c_hobgobelin
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> == 6
+			SRC.NEWNPC c_Hydrophis_Belcheris
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> == 7
+			SRC.NEWNPC c_Latrodecte
+			placer_monstre_events
+		ELSEIF <EVAL <SRC.TAG.SUMMONNER3_LEVEL>> == 8
+			SRC.NEWNPC c_emanation_putride
+			placer_monstre_events
+		ELSE
+			SRC.NEWNPC c_hexapode
+			placer_monstre_events
+		ENDIF
+	ELSE
+		SAY Laissez moi respirer!
+	ENDIF
+ELSE
+	SAY Coordonnees de spawn non ajustee
+ENDIF
+
+//5 SECONDES ENTRE CHAQUE SPAWN
+[ITEMDEF i_temps_avant_respawn]
+ID=i_memory
+NAME=Temps avant respawn
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=5
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_temps_avant_remove]
+ID=i_memory
+NAME=Temps avant remove
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=120
+
+ON=@TIMER
+IF <TOPOBJ.BRAIN>
+	TOPOBJ.REMOVE
+ENDIF
+REMOVE
+RETURN 1
+
+//PLACE LE MONSTRE AU BON ENDROIT ET LUI MET LES EVENTS NÉCESSAIRES
+[FUNCTION placer_monstre_events]
+SRC.ACT.EVENTS -e_xpmonstre
+SRC.ACT.EVENTS +e_xpanimcombat
+SRC.ACT.P=<TAG.POSITION>
+SRC.ACT.UPDATE
+SRC.ACT.NEWITEM m_temps_avant_remove
+SRC.ACT.ACT.CONT = <SRC.ACT.UID>
+
+
+//****************************************
+//***************HEALER*******************
+//****************************************
+
+[CHARDEF C_HEALER_COMBAT]
+DEFNAME=C_HEALER_COMBAT
+NAME=Jean-Paul
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=job_healer_combat
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+COLOR=colors_skin
+STR=1
+DEX=1
+INT=1
+INVUL
+ALLSKILLS=1
+
+NPC=BRAIN_VENDOR
+
+ON=@NPCRestock
+ITEMNEWBIE=i_robe
+COLOR=0b10
+
+ON=@NPCHearUnknown
+SAY Demandez moi de vous guerir, de vous benir ou vous lancer une protection
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Healer
+
+[SPEECH job_healer_combat]
+ON=*heal*
+ON=*guer*
+IF !<FINDID.m_temps_avant_guerison_combat>
+	SAY Amen!
+	IF (<EVAL <SRC.HITS> + 50>) < (<EVAL <SRC.STR>>)
+		SRC.HITS = <EVAL <SRC.HITS> + 50>
+	ELSE
+		SRC.HITS = <EVAL <SRC.STR>>
+	ENDIF
+	NEWITEM m_temps_avant_guerison_combat
+	ACT.CONT = <UID>
+ELSE
+	SAY Laissez moi respirer <SEX mon fils/ma fille>!
+ENDIF
+
+ON=bless*
+ON=bene*
+ON=beni*
+IF !<FINDID.m_temps_avant_guerison_combat>
+	SAY Alleluiah!
+	SRC.NEWITEM i_rune_bless_combat
+	SRC.ACT.LINK=<SRC.UID>
+	SRC.ACT.EQUIP
+	SRC.ACT.TIMER=240
+	NEWITEM m_temps_avant_guerison_combat
+	ACT.CONT = <UID>
+ELSE
+	SAY Laissez moi respirer <SEX mon fils/ma fille>!
+ENDIF
+
+ON=protec*
+ON=proto
+IF !<FINDID.m_temps_avant_guerison_combat>
+	SAY Allez en paix!
+	SRC.NEWITEM i_rune_protection_combat
+	SRC.ACT.LINK=<SRC.UID>
+	SRC.ACT.EQUIP
+	SRC.ACT.TIMER=240
+	NEWITEM m_temps_avant_guerison_combat
+	ACT.CONT = <UID>
+ELSE
+	SAY Laissez moi respirer <SEX mon fils/ma fille>!
+ENDIF
+
+[ITEMDEF i_rune_bless_combat]
+DEFNAME=i_rune_bless_combat
+NAME=Rune Bless Combat
+ID=i_rune_bless
+TYPE=t_spell
+LAYER=32
+
+ON=@Create
+MORE2=01
+MOREX=17
+MOREY={300.0 400.0}
+ATTR=026
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_rune_protection_combat]
+DEFNAME=i_rune_protection_combat
+NAME=Rune Protection Combat
+ID=i_rune_protection
+TYPE=t_spell
+LAYER=35
+
+ON=@Create
+MORE2=01
+MOREX=15
+MOREY={150.0 220.0}
+ATTR=026
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_temps_avant_guerison_combat]
+ID=i_memory
+NAME=timer combat guerison
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=2
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+//****************************************
+//***************VENDEURS*****************
+//****************************************
+
+[SPEECH VENDEUR_ANIM_COMBAT]
+
+ON=*sell*
+ON=*vendre*
+SAY l'argent entre dans mes poches, mais n'en sort pas!
+
+ON=*buy*
+ON=*achete*
+DORAND 3
+	SAY Voici ce que j'ai a vous vendre
+	SAY Voila ce dont je possede en stock
+	SAY Voici la marchandise dont je dispose
+ENDDO
+BUY
+
+ON=*bonjour*
+DORAND 2
+	SAY Salutations !
+	SAY Bonjour !
+ENDDO
+
+
+ON=Bye
+ON=*revoir*
+DORAND 2
+	SAY A bientot !
+	SAY Au revoir !
+ENDDO
+
+//CUIRS, BOIS, TISSU, PERLES, REGS(UTILES)
+[CHARDEF C_VENDEUR_MATIERE_PREMIERE]
+DEFNAME=C_VENDEUR_MATIERE_PREMIERE
+NAME=Vendeur de matiere premiere
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=020
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_pantalon
+COLOR=0750
+ITEMNEWBIE=i_casquette
+COLOR=020
+ITEMNEWBIE=i_chaussures
+COLOR=0b36
+
+SELL=i_cuir_d_harpie,999
+SELL=i_cuir_de_tetrapode,999
+SELL=i_cuir_d_ophidien,999
+SELL=i_cuir_de_loup,999
+SELL=i_cuir_de_gobelin,999
+SELL=i_cuir_de_rat,999
+SELL=i_cloth,999
+SELL=i_log,999
+SELL=i_reag_ginseng,999
+SELL=i_reag_mandrake_root,999
+SELL=i_reag_blood_moss,999
+SELL=i_reag_eye_of_newt,999
+SELL=i_reag_nightshade,999
+SELL=i_reag_blackmoor,999
+SELL=i_reag_sulfur_ash,999
+SELL=i_reag_spider_silk,999
+SELL=i_reag_sulfur_ash,999
+SELL=i_reag_black_pearl,999
+SELL=i_reag_garlic,999
+
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Vendeur de matiere premiere
+
+//OUTILS BRICOLEUR, KIT DE COUTURE, BOUTEILLES, MARTEAU, MORTAR, RABOT
+[CHARDEF C_VENDEUR_PRODUITS_FINIS]
+DEFNAME=C_VENDEUR_PRODUITS_FINIS
+NAME=Vendeur de produits finis
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=020
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_pantalon
+COLOR=0750
+ITEMNEWBIE=i_casquette
+COLOR=020
+ITEMNEWBIE=i_chaussures
+COLOR=0b36
+
+SELL=i_scroll_enchantement,999
+SELL=i_outils_de_bricoleur,999
+SELL=i_rabot_a_replanir,999
+SELL=i_marteau_de_forgeron,999
+SELL=i_kit_de_couture,999
+SELL=i_bottle_empty,999
+SELL=i_pilon,999
+SELL=i_arrow,999
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Vendeur de matiere premiere
+
+//PARCHEMINS VIERGES + LES AUTRES( JUSQU'A CERCLE 4)
+[CHARDEF C_VENDEUR_DE_PARCHEMINS_DEBUTANT]
+DEFNAME=C_VENDEUR_DE_PARCHEMINS_DEBUTANT
+NAME=Vendeur de parchemins debutant
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=020
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_pantalon
+COLOR=0750
+ITEMNEWBIE=i_casquette
+COLOR=020
+ITEMNEWBIE=i_chaussures
+COLOR=0b36
+
+SELL=i_scroll_mana_drain,999
+SELL=i_scroll_lightning,999
+SELL=i_scroll_greater_heal,999
+SELL=i_scroll_fire_field,999
+SELL=i_scroll_curse,999
+SELL=i_scroll_archprotection,999
+SELL=i_scroll_archcure,999
+SELL=i_scroll_poison,999
+SELL=i_scroll_fireball,999
+SELL=i_scroll_bless,999
+SELL=i_scroll_strength,999
+SELL=i_scroll_protection,999
+SELL=i_scroll_harm,999
+SELL=i_scroll_cure,999
+SELL=i_scroll_cunning,999
+SELL=i_scroll_agility,999
+SELL=i_scroll_weaken,999
+SELL=i_scroll_magic_arrow,999
+SELL=i_scroll_heal,999
+SELL=i_scroll_feeblemind,999
+SELL=i_scroll_create_food,999
+SELL=i_scroll_clumsy,999
+SELL=i_scroll_reactive_armor,999
+SELL=i_scroll_blank,999
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Vendeur de matiere premiere
+
+//CERCLE 5 À 8
+[CHARDEF C_VENDEUR_DE_PARCHEMINS_EXPERT]
+DEFNAME=C_VENDEUR_DE_PARCHEMINS_EXPERT
+NAME=Vendeur de parchemins expert
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=020
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_pantalon
+COLOR=0750
+ITEMNEWBIE=i_casquette
+COLOR=020
+ITEMNEWBIE=i_chaussures
+COLOR=0b36
+
+SELL=i_scroll_summon_elem_water,999
+SELL=i_scroll_summon_elem_fire,999
+SELL=i_scroll_summon_elem_earth,999
+SELL=i_scroll_summon_daemon,999
+SELL=i_scroll_summon_elem_air,999
+SELL=i_scroll_energy_vortex,999
+SELL=i_scroll_earthquake,999
+SELL=i_scroll_meteor_swarm,999
+SELL=i_scroll_mass_dispel,999
+SELL=i_scroll_mana_vampire,999
+SELL=i_scroll_flamestrike,999
+SELL=i_scroll_chain_lightning,999
+SELL=i_scroll_reveal,999
+SELL=i_scroll_mass_curse,999
+SELL=i_scroll_invisibility,999
+SELL=i_scroll_explosion,999
+SELL=i_scroll_energy_bolt,999
+SELL=i_scroll_paralyze,999
+SELL=i_scroll_mind_blast,999
+SELL=i_scroll_magic_reflection,999
+SELL=i_scroll_dispel_field,999
+SELL=i_scroll_blade_spirits,999
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Vendeur de matiere premiere
+
+//CLASSE 1 À 5 + FER
+[CHARDEF C_VENDEUR_LINGOTS_DEBUTANT]
+DEFNAME=C_VENDEUR_LINGOTS_DEBUTANT
+NAME=Vendeur de lingots debutant
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=100
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=020
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_pantalon
+COLOR=0750
+ITEMNEWBIE=i_casquette
+COLOR=020
+ITEMNEWBIE=i_chaussures
+COLOR=0b36
+
+SELL=i_ingot_barytine,999
+SELL=i_ingot_pyromorphite,999
+SELL=i_ingot_crocoite,999
+SELL=i_ingot_morganite,999
+SELL=i_ingot_blackrock,999
+SELL=i_ingot_epidote,999
+SELL=i_ingot_calcite,999
+SELL=i_ingot_adulaire,999
+SELL=i_ingot_iron,999
+SELL=i_ingot_verite,999
+SELL=i_ingot_valorite,999
+SELL=i_ingot_bloodrock,999
+SELL=i_ingot_mytheril,999
+SELL=i_ingot_agapite,999
+SELL=i_ingot_gold,999
+SELL=i_ingot_shadow,999
+SELL=i_ingot_rose,999
+SELL=i_ingot_rusty,999
+SELL=i_ingot_copper,999
+SELL=i_ingot_bronze,999
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Vendeur de matiere premiere
+
+//CLASSE 6 À 8 + GEMMES
+[CHARDEF C_VENDEUR_LINGOTS_EXPERT]
+DEFNAME=C_VENDEUR_LINGOTS_EXPERT
+NAME=Vendeur de lingots expert
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=100
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_maillot_manches_longues
+COLOR=020
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0b36
+ITEMNEWBIE=i_pantalon
+COLOR=0750
+ITEMNEWBIE=i_casquette
+COLOR=020
+ITEMNEWBIE=i_chaussures
+COLOR=0b36
+
+SELL=i_gemme_diamant,999
+SELL=i_gemme_piscium,999
+SELL=i_gemme_aquarii,999
+SELL=i_gemme_capricorni,999
+SELL=i_gemme_sagittae,999
+SELL=i_gemme_scorpii,999
+SELL=i_gemme_librae,999
+SELL=i_gemme_virginis,999
+SELL=i_gemme_leoni,999
+SELL=i_gemme_cancri,999
+SELL=i_gemme_geminorum,999
+SELL=i_gemme_tauri,999
+SELL=i_gemme_arietis,999
+SELL=i_ingot_grenat,999
+SELL=i_ingot_citrine,999
+SELL=i_ingot_azurite,999
+SELL=i_ingot_aventurine,999
+SELL=i_ingot_heliodor,999
+SELL=i_ingot_goshenite,999
+SELL=i_ingot_silver,999
+SELL=i_ingot_aqua,999
+SELL=i_ingot_vanadinite,999
+SELL=i_ingot_fluorite,999
+SELL=i_ingot_chrysoprase,999
+SELL=i_ingot_autunite,999
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Vendeur de matiere premiere

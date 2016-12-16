@@ -1,0 +1,363 @@
+[ITEMDEF i_deed_capture_the_flag]
+DEFNAME=i_deed_capture_the_flag
+NAME=Deed de capture the flag
+ID=i_deed
+TYPE=t_eq_script
+
+ON=@DCLICK
+SERV.B <SRC.NAME> demarre une partie de "CAPTURE THE FLAG"
+SERV.B Pour y participer rendez vous a <SRC.REGION.NAME>
+
+SRC.NEWITEM i_gate_equipe_bleue_ctf
+TAG.UIDGATEBLEUE=<SRC.ACT.UID>
+SRC.ACT.P=<EVAL <SRC.P.X>-2>,<EVAL <SRC.P.Y>>,<EVAL <SRC.P.Z>>
+
+SRC.NEWITEM i_gate_equipe_rouge_ctf
+TAG.UIDGATEROUGE=<SRC.ACT.UID>
+SRC.ACT.P=<EVAL <SRC.P.X>+2>,<EVAL <SRC.P.Y>>,<EVAL <SRC.P.Z>>
+SRC.ACT.LINK=<TAG.UIDGATEBLEUE>
+
+SRC.ACT=<TAG.UIDGATEBLEUE>
+SRC.ACT.LINK=<TAG.UIDGATEROUGE>
+
+SRC.NEWITEM i_porte_drapeau_bleu_ctf
+TAG.UIDPDBLEUE=<SRC.ACT.UID>
+SRC.ACT.P 5364,1290,46
+
+SRC.NEWITEM i_porte_drapeau_rouge_ctf
+TAG.UIDPDROUGE=<SRC.ACT.UID>
+SRC.ACT.P 5364,1322,46
+SRC.ACT.LINK=<TAG.UIDPDBLEUE>
+
+SRC.ACT=<TAG.UIDPDBLEUE>
+SRC.ACT.LINK=<TAG.UIDPDROUGE>
+
+SRC.NEWITEM i_drapeau_bleu_ctf
+SRC.ACT.P 5364,1291,48
+SRC.NEWITEM i_drapeau_rouge_ctf
+SRC.ACT.P 5364,1323,48
+REMOVE
+RETURN 1
+
+CATEGORY=Anims
+SUBSECTION=Capture the flag
+DESCRIPTION=Deed Capture the flag
+
+[FUNCTION gate_equipe_bleue_ctf]
+SRC.TAG.EQUIPECTF=1
+SRC.TAG.UIDGATECTF=<UID>
+SRC.TAG.CTFNOM=<SRC.NAME>
+SRC.NAME=[Bleue] <SRC.NAME>
+SRC.EVENTS -e_pertexp
+SRC.EVENTS +e_equipe_bleue_ctf
+SRC.TAG.anti_mark_recall=1
+SRC.EVENTS +e_anti_mark_recall
+SRC.P 5366,1296
+SRC.UPDATE
+SRC.REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> rejoint l'equipe bleue
+
+[ITEMDEF i_gate_equipe_bleue_ctf]
+DEFNAME=i_gate_equipe_bleue_ctf
+NAME=[Inscription Equipe bleue]
+ID=i_moongate_red
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=07
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	IF !<SRC.FINDLAYER.25>
+		IF <EVAL 0<TAG.COMPTEUR>> > <EVAL <LINK.TAG.COMPTEUR>>
+			SRC.SYSMESSAGEUA 0481 1 1 0 Le nombre de joueurs bleu est superieur au nombre de joueurs rouges, veuillez vous inscrire dans l'equipe rouge
+		ELSE
+			TAG.COMPTEUR=<EVAL 0<TAG.COMPTEUR>+1>
+			NAME=[Inscription Equipe bleue] - <EVAL <TAG.COMPTEUR>> joueurs
+			gate_equipe_bleue_ctf
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas entrer avec une monture!
+	ENDIF
+ENDIF
+
+CATEGORY=Anims
+SUBSECTION=Capture the flag
+DESCRIPTION=Gate equipe bleue
+
+[FUNCTION gate_equipe_rouge_ctf]
+SRC.TAG.EQUIPECTF=2
+SRC.TAG.UIDGATECTF=<UID>
+SRC.TAG.CTFNOM=<SRC.NAME>
+SRC.NAME=[Rouge] <SRC.NAME>
+SRC.EVENTS -e_pertexp
+SRC.EVENTS +e_equipe_rouge_ctf
+SRC.TAG.anti_mark_recall=1
+SRC.EVENTS +e_anti_mark_recall
+SRC.P 5366,1328
+SRC.UPDATE
+SRC.REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> rejoint l'equipe rouge
+
+[ITEMDEF i_gate_equipe_rouge_ctf]
+DEFNAME=i_gate_equipe_rouge_ctf
+NAME=[Inscription Equipe rouge]
+ID=i_moongate_red
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=0AB8
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	IF !<SRC.FINDLAYER.25>
+		IF <EVAL 0<TAG.COMPTEUR>> > <EVAL <LINK.TAG.COMPTEUR>>
+			SRC.SYSMESSAGEUA 0481 1 1 0 Le nombre de joueurs rouge est superieur au nombre de joueurs rouges, veuillez vous inscrire dans l'equipe bleue
+		ELSE
+			TAG.COMPTEUR=<EVAL 0<TAG.COMPTEUR>+1>
+			NAME=[Inscription Equipe rouge] - <EVAL <TAG.COMPTEUR>> joueurs
+			gate_equipe_rouge_ctf
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas entrer avec une monture!
+	ENDIF
+ENDIF
+
+CATEGORY=Anims
+SUBSECTION=Capture the flag
+DESCRIPTION=Gate equipe rouge
+
+
+[EVENTS e_equipe_bleue_ctf]
+ON=@DEATH
+HITS=<EVAL 0<SRC.TAG.FORPURE> + 1>
+EMOTE Mourir
+debogage
+IF <SRC.FINDID.i_rune_poison>
+	SRC.FINDID.i_rune_poison.remove
+ENDIF
+
+IF <FINDID.i_drapeau_bleu_ctf>
+	FINDID.i_drapeau_bleu_ctf.P=<P>
+ENDIF
+IF <FINDID.i_drapeau_rouge_ctf>
+	FINDID.i_drapeau_rouge_ctf.P=<P>
+ENDIF
+GO 5366,1296
+RETURN 1
+
+//PAS SUPPOSÉ ARRIVER
+ON=@DEATHCORPSE
+debogage
+
+ON=@LOGOUT
+SRC.gate_sortie_ctf
+
+
+[EVENTS e_equipe_rouge_ctf]
+ON=@DEATH
+HITS=<EVAL <SRC.TAG.FORPURE> + 1>
+EMOTE Mourir
+debogage
+IF <SRC.FINDID.i_rune_poison>
+	SRC.FINDID.i_rune_poison.remove
+ENDIF
+
+IF <FINDID.i_drapeau_bleu_ctf>
+	FINDID.i_drapeau_bleu_ctf.P=<P>
+ENDIF
+IF <FINDID.i_drapeau_rouge_ctf>
+	FINDID.i_drapeau_rouge_ctf.P=<P>
+ENDIF
+GO 5366,1328
+RETURN 1
+
+//PAS SUPPOSÉ ARRIVER
+ON=@DEATHCORPSE
+debogage
+
+ON=@LOGOUT
+SRC.gate_sortie_ctf
+
+
+[FUNCTION gate_sortie_ctf]
+IF <FINDID.i_drapeau_bleu_ctf>
+	FINDID.i_drapeau_bleu_ctf.P=5364,1291,48
+ENDIF
+IF <FINDID.i_drapeau_rouge_ctf>
+	FINDID.i_drapeau_rouge_ctf.P=5364,1323,48
+ENDIF
+GO Minoc
+TAG.LOGOUTGREENACRES=2458,518,16
+NAME=<TAG.CTFNOM>
+EVENTS +e_pertexp
+EVENTS -e_equipe_bleue_ctf
+EVENTS -e_equipe_rouge_ctf
+TAG.anti_mark_recall=0
+EVENTS -e_anti_mark_recall
+ACT=<TAG.UIDGATECTF>
+ACT.TAG.COMPTEUR=<EVAL <ACT.TAG.COMPTEUR>-1>
+IF <EVAL <TAG.EQUIPECTF>> == 1
+	ACT.NAME=[Inscription Equipe bleue] - <EVAL <ACT.TAG.COMPTEUR>> joueurs
+ELSE
+	ACT.NAME=[Inscription Equipe rouge] - <EVAL <ACT.TAG.COMPTEUR>> joueurs
+ENDIF
+TAG.UIDGATECTF
+TAG.EQUIPECTF
+TAG.CTFNOM
+
+
+[ITEMDEF i_gate_sortie_ctf]
+DEFNAME=i_gate_sortie_ctf
+NAME=[Sortir de l'aire de jeu]
+ID=i_moongate_red
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=08010
+COLOR=0aab
+
+ON=@STEP
+IF <EVAL 0<SRC.TAG.EQUIPECTF>>>0
+	SRC.gate_sortie_ctf
+ELSE
+	SRC.GO Minoc
+ENDIF
+
+[ITEMDEF i_porte_drapeau_bleu_ctf]
+DEFNAME=i_porte_drapeau_bleu_ctf
+NAME=Porte drapeau bleu
+ID=i_sign_post
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=10
+ATTR=00010
+COLOR=07
+
+ON=@DCLICK
+IF <EVAL <SRC.TAG.EQUIPECTF>>==1
+	IF <SRC.FINDID.i_drapeau_bleu_ctf>
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> ramene le drapeau de son equipe dans sa forteresse
+		SRC.FINDID.i_drapeau_bleu_ctf.REMOVE
+		SRC.NEWITEM i_drapeau_bleu_ctf
+		SRC.ACT.P 5364,1291,48
+	ENDIF
+	IF <SRC.FINDID.i_drapeau_rouge_ctf>
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> ramene le drapeau de l'equipe adverse dans sa forteresse
+		TAG.POINTS=<EVAL 0<TAG.POINTS>+1>
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 Equipe bleue <EVAL <TAG.POINTS>>
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 Equipe rouge <EVAL <LINK.TAG.POINTS>>
+		SRC.FINDID.i_drapeau_rouge_ctf.REMOVE
+		SRC.NEWITEM i_drapeau_rouge_ctf
+		SRC.ACT.P 5364,1323,48
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TIMER
+REGION.FLAGS 00800
+TIMER=10
+RETURN 1
+
+[ITEMDEF i_porte_drapeau_rouge_ctf]
+DEFNAME=i_porte_drapeau_rouge_ctf
+NAME=Porte drapeau rouge
+ID=i_sign_post
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=10
+ATTR=00010
+COLOR=0ab8
+
+ON=@DCLICK
+IF <EVAL <SRC.TAG.EQUIPECTF>>==2
+	IF <SRC.FINDID.i_drapeau_rouge_ctf>
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> ramene le drapeau de son equipe dans sa forteresse
+		SRC.FINDID.i_drapeau_rouge_ctf.REMOVE
+		SRC.NEWITEM i_drapeau_rouge_ctf
+		SRC.ACT.P 5364,1323,48
+	ENDIF
+	IF <SRC.FINDID.i_drapeau_bleu_ctf>
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> ramene le drapeau de l'equipe adverse dans sa forteresse
+		TAG.POINTS=<EVAL 0<TAG.POINTS>+1>
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 Equipe bleue <EVAL <LINK.TAG.POINTS>>
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 Equipe rouge <EVAL <TAG.POINTS>>
+		SRC.FINDID.i_drapeau_bleu_ctf.REMOVE
+		SRC.NEWITEM i_drapeau_bleu_ctf
+		SRC.ACT.P 5364,1291,48
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TIMER
+REGION.FLAGS 00800
+TIMER=10
+RETURN 1
+
+[ITEMDEF i_drapeau_bleu_ctf]
+DEFNAME=i_drapeau_bleu_ctf
+NAME=Drapeau bleu
+ID=i_banner_post_7_ne
+
+ON=@CREATE
+ATTR=00010
+COLOR=07
+
+ON=@DCLICK
+IF <EVAL <SRC.TAG.EQUIPECTF>>==1
+	IF <P>==5364,1291,48
+		RETURN 1
+	ELSE
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> ramasse le drapeau de son equipe
+		SRC.NEWITEM i_drapeau_bleu_ctf
+		SRC.ACT.CONT=<SRC.UID>
+		REMOVE
+	ENDIF
+ELSE
+	IF <P>==5364,1291,48
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> capture le drapeau de l'equipe adverse
+		SRC.NEWITEM i_drapeau_bleu_ctf
+		SRC.ACT.CONT=<SRC.UID>
+		REMOVE
+	ELSE
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> ramasse le drapeau de l'equipe adverse
+		SRC.NEWITEM i_drapeau_bleu_ctf
+		SRC.ACT.CONT=<SRC.UID>
+		REMOVE
+	ENDIF
+ENDIF
+
+[ITEMDEF i_drapeau_rouge_ctf]
+DEFNAME=i_drapeau_rouge_ctf
+NAME=Drapeau rouge
+ID=i_banner_post_7_ne
+
+ON=@CREATE
+ATTR=00010
+COLOR=0ab8
+
+ON=@DCLICK
+IF <EVAL <SRC.TAG.EQUIPECTF>>==2
+	IF <P>==5364,1323,48
+		RETURN 1
+	ELSE
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> ramasse le drapeau de son equipe
+		SRC.NEWITEM i_drapeau_rouge_ctf
+		SRC.ACT.CONT=<SRC.UID>
+		REMOVE
+	ENDIF
+ELSE
+	IF <P>==5364,1323,48
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> capture le drapeau de l'equipe adverse
+		SRC.NEWITEM i_drapeau_rouge_ctf
+		SRC.ACT.CONT=<SRC.UID>
+		REMOVE
+	ELSE
+		REGION.ALLCLIENTS SYSMESSAGEUA 025 1 1 0 <SRC.NAME> ramasse le drapeau de l'equipe adverse
+		SRC.NEWITEM i_drapeau_rouge_ctf
+		SRC.ACT.CONT=<SRC.UID>
+		REMOVE
+	ENDIF
+ENDIF

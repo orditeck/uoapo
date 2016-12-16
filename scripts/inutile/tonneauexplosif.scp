@@ -1,0 +1,110 @@
+//Scripted By Cep 9-01-02
+//Special thanks for the Help given to add the animation go out to
+//Belgar, Melen, and the Gang! 
+[ITEMDEF i_powder_keg] 
+DEFNAME=i_powder_keg 
+ID=0fae 
+Name=Tonneau explosif 
+type=t_normal
+
+RESOURCES=5 i_poudre_canon, 1 i_BARREL_open, 1 i_barrel_lid //mettre dans tinker le tonneaux et capuchon
+SKILLMAKE=ALCHEMY 80.0, t_mortar
+
+on=@create 
+MORE1=11 
+
+on=@click 
+if (<src.restest i_torch_lit> ) 
+src.message Vous pouvez allumer le tonneau avec votre torche ...
+else 
+dorand 3 
+src.message Ce tonneau est plein de poudre explosive ... 
+src.message Une flamme pourrait declencher l'explosion de ce tonneau ...
+src.message Ce tonneau plein de poudre ne demande qu'a exploser
+enddo 
+endif 
+return 1 
+
+on=@dclick 
+if (<src.restest i_torch_lit> ) 
+src.consume=i_torch_lit 
+src.message Vous avez enclanche l'explosion
+src.newitem=i_keg_timer 
+src.act.link=<uid> 
+src.act.equip 
+timer=1 
+else 
+if (<src.restest i_torch> ) 
+src.message Allumez d'abord la torche ! 
+else 
+src.message Vous n'avez pas de torche pour faire exploser ce baril ... 
+endif 
+endif 
+return 1 
+
+on=@timer 
+if ( <more1> ) 
+more1=<more1>-1 
+TIMER=1 
+return 1 
+else 
+//NEWITEM = i_fx_explode 
+TYPE = T_EXPLOSION 
+//ATTR = ATTR_MOVE_NEVER | ATTR_CAN_DECAY 
+LINK = <uid> 
+morex = 100 // damage 
+morey = 090 // wFlags DAMAGE_GENERAL 
+morez = 8 // iDist 
+p = <p> 
+TIMERD = 1 // immediate decay 
+SOUND=snd_SPELL_EXPLOSION 
+Remove 
+
+CATEGORY=Genese
+SUBSECTION=Explosives 
+DESCRIPTION=Powder Keg 
+
+[itemdef new_ex] 
+id=i_fx_explode 
+
+on=@create 
+more2=0 
+morep=0,0,0 
+timer=10
+attr=02 
+type=t_explosion 
+
+on=@timer 
+remove 
+
+[ITEMDEF i_keg_timer] 
+NAME=keg timer 
+ID=i_worldgem_bit 
+TYPE=T_EQ_SCRIPT 
+WEIGHT=0 
+LAYER=layer_special 
+
+ON=@Create 
+ATTR=attr_invis|attr_decay 
+MORE1=10
+
+ON=@Equip 
+TIMER=1 
+
+ON=@Timer 
+if ( <cont> ) 
+if ( <more1> ) 
+cont.MESSAGE <VALSTR(<more1> )> 
+more1=<more1>-1 
+TIMER=1 
+return 1 
+else 
+CONT.MESSAGE L'explosion a fait d'enormes degats !
+cont.newitem new_ex 
+cont.act.p=<link.p> 
+Remove 
+RETURN 1 
+
+CATEGORY=Ceps 
+SUBSECTION=Explosives 
+DESCRIPTION=Keg timer memory

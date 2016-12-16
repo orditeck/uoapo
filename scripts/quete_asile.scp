@@ -1,0 +1,58 @@
+[CHARDEF c_gardien_vortimer]
+NAME=Gardien Vortimer
+ID=c_man
+TSPEECH=spk_gardien_vortimer
+
+ON=@Create
+COLOR=03ea
+FOOD=9999
+STR=1000
+DEX=10
+INT=100
+TITLE=Gardien de l'asile
+
+ITEMNEWBIE=i_spear
+COLOR=0afb
+ITEMNEWBIE=i_shirt_fancy
+COLOR=0852
+ITEMNEWBIE=i_platemail_gloves
+COLOR=0aab
+ITEMNEWBIE=i_platemail_leggings
+COLOR=0aab
+
+ON=@NPCSEENEWPLAYER
+SAY Qui ose vouloir entrer en ces lieux?
+
+ON=@NPCHearUnknown
+SAY Pourriez-vous repeter? Je n'ai pas tres bien compris!
+RETURN 1
+
+ON=@GETHIT
+HITS=1000
+RETURN 1
+
+ON=@SPELLEFFECT
+HITS=1000
+RETURN 1
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 120 i_perle_enchantement 1}
+
+CATEGORY=PNJ
+SUBSECTION=Asile
+DESCRIPTION=Gardien Vortimer
+
+[SPEECH spk_gardien_vortimer]
+
+
+[ITEMDEF i_autorisation_h4]
+NAME=Autorisation H4
+ID=i_scroll_blank
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0ac9
+
+ON=@TIMER
+REMOVE
+RETURN 1

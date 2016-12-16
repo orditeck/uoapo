@@ -1,0 +1,4373 @@
+//*******************MODIFIE JUSQUA LIGNE 639******************
+//EXP par monstre = 10 x HITS x 1.4(par skill) x 1.2(par arme poche)
+//A PARTIR DE 2000 FORCE, AJOUTER 1 PV PAR 2 FORCE DE + DE 2000 (4000 force = 5000 vie)
+//A PARTIR DE 6000 FORCE, AJOUTER 1 PV PAR 1 FORCE DE + DE 5000 (6000 force = 7000 vie)
+//+1 PV = +5 EXP
+//TACTICS + WRESTLING = FORCE SI < 1000
+//SINON TACTICS + WRESTLING = 1000 + (FORCE-1000)/4
+//0-200 PV ==> 4 COUPS
+//201-1000 PV ==> 8 COUPS
+//1001-5000 PV ==> 12 COUPS
+//+ DE 5000 PV ==> 16 COUPS
+
+[CHARDEF c_rat_brun]
+NAME=Rat brun
+ID=0D7
+RESOURCES=2 i_ribs_raw, 1 i_hide
+
+ON=@Create
+STR=2
+DEX=2
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=10
+TAG.XPCOUP=<EVAL (RAND(1,2))>
+TAG.TAPER=4
+TAG.NIVEAU=1
+
+TACTICS=2.0
+WRESTLING=2.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_cuir_de_rat 100 i_perle_enchantement 68 i_epee_infecte 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Rat
+
+[CHARDEF c_rat_geant]
+NAME=Rat geant
+ID=0D7
+RESOURCES=4 i_ribs_raw, 2 i_hide
+
+ON=@Create
+COLOR=0745
+STR=5
+DEX=5
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=25
+TAG.XPCOUP=<EVAL (RAND(3,6))>
+TAG.TAPER=4
+TAG.NIVEAU=1
+
+TACTICS=5.0
+WRESTLING=5.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_cuir_de_rat 100 i_perle_enchantement 68 i_epee_infecte 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Rat geant
+
+[CHARDEF c_rat_pestifere]
+NAME=Rat pestifere
+ID=0D7
+RESOURCES=10 i_ribs_raw, 5 i_hide
+
+ON=@Create
+COLOR=0aa6
+STR=10
+DEX=10
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_resistance_magie
+TAG.XPMORT=50
+TAG.XPCOUP=<EVAL (RAND(6,12))>
+TAG.TAPER=4
+TAG.NIVEAU=1
+
+TACTICS=10.0
+WRESTLING=10.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_pioche_de_titus 500 i_cuir_de_rat 100 i_perle_enchantement 68 i_epee_infecte 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Rat pestifere
+
+[CHARDEF c_bouffon_morbide]
+NAME=Bouffon morbide
+ID=039
+
+ON=@Create
+COLOR=0b7c
+STR=150
+DEX=150
+INT=150
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=2520
+TAG.XPCOUP=<EVAL (RAND(315,630))>
+TAG.TAPER=4
+TAG.NIVEAU=16
+
+KARMA=-9999
+
+TACTICS=150.0
+SWORDSMANSHIP=150.0
+MAGERY=160.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000800
+MORE2=00000000
+ITEMNEWBIE=I_SWORD_BROAD
+
+ON=@NPCRestock
+ITEM={ i_crane_du_bouffon_morbide 100 i_perle_enchantement 15 i_fleau_de_guerre_de_lord_british 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Bouffon morbide
+
+[CHARDEF c_chauve_souris]
+NAME=Chauve souris
+ID=027
+
+ON=@Create
+STR=25
+DEX=25
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=125
+TAG.XPCOUP=<EVAL (RAND(15,31))>
+TAG.TAPER=4
+TAG.NIVEAU=3
+
+TACTICS=25.0
+WRESTLING=25.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_pierre_bleue 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Chauve souris
+
+[CHARDEF c_squelette]
+NAME=Squelette
+ID=032
+
+ON=@Create
+STR=35
+DEX=35
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=175
+TAG.XPCOUP=<EVAL (RAND(21,43))>
+TAG.TAPER=4
+TAG.NIVEAU=4
+
+TACTICS=35.0
+WRESTLING=35.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Squelette
+
+[CHARDEF c_gobelin1]
+NAME=Gobelin
+ID=011
+
+ON=@Create
+COLOR=029
+STR=35
+DEX=35
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=175
+TAG.XPCOUP=<EVAL (RAND(21,43))>
+TAG.TAPER=4
+TAG.NIVEAU=4
+
+TACTICS=35.0
+WRESTLING=35.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 991 i_perle_enchantement 27 i_cuir_de_gobelin 15 i_gourdin_du_gobelin 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Gobelin
+
+[CHARDEF c_eclaireur_gobelin]
+NAME=Eclaireur gobelin
+ID=011
+
+ON=@Create
+COLOR=028
+STR=45
+DEX=45
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=225
+TAG.XPCOUP=<EVAL (RAND(28,56))>
+TAG.TAPER=4
+TAG.NIVEAU=5
+
+TACTICS=45.0
+WRESTLING=45.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 991 i_perle_enchantement 27 i_cuir_de_gobelin 10 i_gourdin_du_gobelin 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Eclaireur gobelin
+
+[CHARDEF c_eclaireur_orc]
+NAME=Eclaireur orc
+ID=07
+
+ON=@Create
+COLOR=0171
+STR=40
+DEX=40
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=200
+TAG.XPCOUP=<EVAL (RAND(25,50))>
+TAG.TAPER=4
+TAG.NIVEAU=6
+
+TACTICS=40.0
+WRESTLING=40.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_pierre_verte 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Eclaireur orc
+
+[CHARDEF c_serpent_venimeux]
+NAME=Serpent venimeux
+ID=015
+
+ON=@Create
+COLOR=0ab6
+STR=30
+DEX=30
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=150
+TAG.XPCOUP=<EVAL (RAND(18,37))>
+TAG.TAPER=4
+TAG.NIVEAU=7
+
+TACTICS=30.0
+WRESTLING=30.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Serpent venimeux
+
+[CHARDEF c_chauve_souris_charognarde]
+NAME=Chauve souris charognarde
+ID=027
+
+ON=@Create
+COLOR=08fd
+STR=60
+DEX=60
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=300
+TAG.XPCOUP=<EVAL (RAND(37,75))>
+TAG.TAPER=4
+TAG.NIVEAU=7
+
+TACTICS=60.0
+WRESTLING=60.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_pierre_bleue 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Chauve souris charognarde
+
+[CHARDEF c_araignee_noire]
+NAME=Araignee noire
+ID=01c
+
+ON=@Create
+COLOR=0ab2
+STR=60
+DEX=60
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=300
+TAG.XPCOUP=<EVAL (RAND(37,75))>
+TAG.TAPER=4
+TAG.NIVEAU=7
+
+TACTICS=60.0
+WRESTLING=60.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Araignee noire
+
+[CHARDEF c_guerrier_gobelin]
+NAME=Guerrier gobelin
+ID=011
+
+ON=@Create
+COLOR=027
+STR=60
+DEX=60
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=300
+TAG.XPCOUP=<EVAL (RAND(37,75))>
+TAG.TAPER=4
+TAG.NIVEAU=8
+
+TACTICS=60.0
+WRESTLING=60.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 495 i_perle_enchantement 14 i_cuir_de_gobelin 5 i_gourdin_du_gobelin 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Guerrier gobelin
+
+[CHARDEF c_guerrier_orc]
+NAME=Guerrier orc
+ID=07
+
+ON=@Create
+COLOR=0170
+STR=50
+DEX=50
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=250
+TAG.XPCOUP=<EVAL (RAND(31,62))>
+TAG.TAPER=4
+TAG.NIVEAU=8
+
+TACTICS=50.0
+WRESTLING=50.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_pierre_verte 30 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Guerrier orc
+
+[CHARDEF c_cadavre_anime]
+NAME=Cadavre anime
+ID=01a
+
+ON=@Create
+COLOR=0ae2
+STR=60
+DEX=70
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=300
+TAG.XPCOUP=<EVAL (RAND(37,75))>
+TAG.TAPER=4
+TAG.NIVEAU=9
+
+TACTICS=60.0
+WRESTLING=60.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Cadavre anime
+
+[CHARDEF c_ouvrier_kraanian]
+NAME=Ouvrier Kraanian
+ID=047
+
+ON=@Create
+COLOR=084f
+STR=60
+DEX=60
+INT=80
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=420
+TAG.XPCOUP=<EVAL (RAND(52,105))>
+TAG.TAPER=4
+TAG.NIVEAU=9
+
+KARMA=-9999
+
+TACTICS=60.0
+WRESTLING=60.0
+MAGERY=120.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000800
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Ouvrier Kraanian
+
+[CHARDEF c_assassin]
+NAME=Assassin
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=60
+DEX=75
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=300
+TAG.XPCOUP=<EVAL (RAND(37,75))>
+TAG.TAPER=4
+TAG.NIVEAU=9
+
+KARMA=-9999
+
+TACTICS=60.0
+FENCING=60.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_robe
+COLOR={0529 052a 052b 052c 052d 052e 052f 012e 012f 025a 025b 025c 025d 025e 01f1}
+ITEMNEWBIE=i_skull_cap
+COLOR={0529 052a 052b 052c 052d 052e 052f 012e 012f 025a 025b 025c 025d 025e 01f1}
+ITEMNEWBIE=i_boots_thigh
+COLOR={0529 052a 052b 052c 052d 052e 052f 012e 012f 025a 025b 025c 025d 025e 01f1}
+ITEMNEWBIE=i_dagger
+COLOR=0afb
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 991 i_perle_enchantement 27 i_dague_de_l_assassin 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Assassin
+
+[CHARDEF c_rat_pestifere_2]
+NAME=Rat pestifere
+ID=0D7
+
+ON=@Create
+COLOR=0aa6
+STR=70
+DEX=70
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=350
+TAG.XPCOUP=<EVAL (RAND(43,87))>
+TAG.TAPER=4
+TAG.NIVEAU=9
+
+TACTICS=70.0
+WRESTLING=70.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_cuir_de_rat 50 i_perle_enchantement 68 i_epee_infecte 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Rat pestifere (2)
+
+[CHARDEF c_lieutenant_gobelin]
+NAME=Lieutenant gobelin
+ID=011
+
+ON=@Create
+COLOR=026
+STR=70
+DEX=70
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=350
+TAG.XPCOUP=<EVAL (RAND(43,87))>
+TAG.TAPER=4
+TAG.NIVEAU=10
+
+TACTICS=70.0
+WRESTLING=70.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 495 i_perle_enchantement 14 i_cuir_de_gobelin 10 i_gourdin_du_gobelin 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Lieutenant Gobelin
+
+[CHARDEF c_shaman_orc]
+NAME=Shaman orc
+ID=07
+
+ON=@Create
+COLOR=016f
+STR=50
+DEX=50
+INT=70
+
+KARMA=-9999
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=350
+TAG.XPCOUP=<EVAL (RAND(43,87))>
+TAG.TAPER=4
+TAG.NIVEAU=10
+
+TACTICS=50.0
+WRESTLING=50.0
+MAGERY=100.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000800
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_pierre_verte 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Shaman orc
+
+[CHARDEF c_guerrier_squelette]
+NAME=Guerrier squelette
+ID=039
+
+ON=@Create
+COLOR=0
+STR=70
+DEX=70
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=350
+TAG.XPCOUP=<EVAL (RAND(43,87))>
+TAG.TAPER=4
+TAG.NIVEAU=10
+
+TACTICS=70.0
+WRESTLING=70.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_rapiere_du_bretteur 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Guerrier squelette
+
+[CHARDEF c_chef_gobelin]
+NAME=Chef gobelin
+ID=011
+
+ON=@Create
+COLOR=025
+STR=80
+DEX=70
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=400
+TAG.XPCOUP=<EVAL (RAND(50,100))>
+TAG.TAPER=4
+TAG.NIVEAU=11
+
+TACTICS=80.0
+WRESTLING=80.0
+
+NPC=BRAIN_MONSTER
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_cuir_de_gobelin 100 i_gourdin_du_gobelin 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Chef gobelin
+
+[CHARDEF c_kraanian_mille_pattes]
+NAME=Kraanian a milles pattes
+ID=048
+
+ON=@Create
+COLOR=084f
+STR=80
+DEX=75
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=800
+TAG.XPCOUP=<EVAL (RAND(100,200))>
+TAG.TAPER=4
+TAG.NIVEAU=11
+
+KARMA=-9999
+
+TACTICS=80.0
+WRESTLING=80.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Kraanian a milles pattes
+
+[CHARDEF c_chef_de_guerre_gobelin]
+NAME=Chef de guerre gobelin
+ID=011
+
+ON=@Create
+COLOR=0ab8
+STR=80
+DEX=75
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=800
+TAG.XPCOUP=<EVAL (RAND(100,200))>
+TAG.TAPER=4
+TAG.NIVEAU=11
+
+TACTICS=80.0
+WRESTLING=80.0
+
+NPC=BRAIN_MONSTER
+
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_cuir_de_gobelin 50 i_gourdin_du_gobelin 20 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=Chef de guerre gobelin
+
+[CHARDEF c_general_gobelin]
+NAME=General gobelin
+ID=011
+
+ON=@Create
+COLOR=0ab2
+STR=90
+DEX=80
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=900
+TAG.XPCOUP=<EVAL (RAND(112,225))>
+TAG.TAPER=4
+TAG.NIVEAU=12
+
+TACTICS=90.0
+WRESTLING=90.0
+
+NPC=BRAIN_MONSTER
+
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_gourdin_du_gobelin 20 }
+
+CATEGORY=Monstres
+SUBSECTION=Premiere ile
+DESCRIPTION=General gobelin
+
+[CHARDEF c_orc_deserteur]
+NAME=Orc deserteur
+ID=07
+
+ON=@Create
+COLOR=01dd
+STR=70
+DEX=70
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=700
+TAG.XPCOUP=<EVAL (RAND(87,175))>
+TAG.TAPER=4
+TAG.NIVEAU=12
+
+TACTICS=70.0
+WRESTLING=70.0
+
+NPC=BRAIN_MONSTER
+
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_pierre_verte 20 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Orc deserteur
+
+[CHARDEF c_arbre_demoniaque]
+NAME=Arbre demoniaque
+ID=02f
+
+ON=@Create
+COLOR=0
+STR=70
+DEX=70
+INT=100
+
+KARMA=-9999
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=980
+TAG.XPCOUP=<EVAL (RAND(122,245))>
+TAG.TAPER=4
+TAG.NIVEAU=13
+
+TACTICS=70.0
+WRESTLING=70.0
+MAGERY=100.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000800
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_cognee_du_bucheron 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Arbre demoniaque
+
+[CHARDEF c_garde_de_l_ombre]
+NAME=Garde de l'ombre
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=80
+DEX=80
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=960
+TAG.XPCOUP=<EVAL (RAND(120,240))>
+TAG.TAPER=4
+TAG.NIVEAU=14
+
+KARMA=-9999
+
+TACTICS=80.0
+SWORDSMANSHIP=80.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+color=0ab2
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_HELM
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+COLOR=0ab2
+ITEMNEWBIE=I_SWORD_VIKING
+COLOR=0ab2
+ITEMNEWBIE=i_CAPE
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 495 i_perle_enchantement 14 i_epee_de_la_rose_noire 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Garde de l'ombre
+
+[CHARDEF c_mage_rodeur]
+NAME=Mage rodeur
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=70
+DEX=70
+INT=100
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=980
+TAG.XPCOUP=<EVAL (RAND(122,245))>
+TAG.TAPER=4
+TAG.NIVEAU=14
+
+KARMA=-9999
+
+TACTICS=70.0
+WRESTLING=50.0
+MAGERY=100.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000800
+MORE2=00000000
+
+ITEMNEWBIE=i_robe
+COLOR=0ab2
+ITEMNEWBIE=i_sandals
+COLOR=0ab2
+ITEMNEWBIE=i_staff_gnarled
+ITEMNEWBIE=i_hair_short
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Mage rodeur
+
+[CHARDEF c_pillard_des_dunes]
+NAME=Pillard des dunes
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=80
+DEX=90
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=960
+TAG.XPCOUP=<EVAL (RAND(120,240))>
+TAG.TAPER=4
+TAG.NIVEAU=14
+
+KARMA=-9999
+
+TACTICS=80.0
+SWORDSMANSHIP=80.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+ITEMNEWBIE=I_PLATEMAIL_HELM
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+ITEMNEWBIE=I_SCIMITAR
+ITEMNEWBIE=i_CAPE
+COLOR=0ab8
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Pillard des dunes
+
+[CHARDEF c_prisonnier_desepere]
+NAME=Prisonnier desespere
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=90
+DEX=80
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=1080
+TAG.XPCOUP=<EVAL (RAND(135,270))>
+TAG.TAPER=4
+TAG.NIVEAU=14
+
+KARMA=-9999
+
+TACTICS=90.0
+SWORDSMANSHIP=90.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+ITEMNEWBIE=I_PLATEMAIL_HELM
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+ITEMNEWBIE=I_SWORD_BROAD
+ITEMNEWBIE=i_CAPE
+COLOR=0ab8
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_cle_speciale_001 30 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Prisonnier desespere
+
+[CHARDEF c_scorpion_geant]
+NAME=Scorpion geant
+ID=030
+
+ON=@Create
+COLOR=0
+STR=100
+DEX=90
+INT=100
+
+KARMA=-9999
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=1400
+TAG.XPCOUP=<EVAL (RAND(175,350))>
+TAG.TAPER=4
+TAG.NIVEAU=16
+
+TACTICS=100.0
+WRESTLING=100.0
+MAGERY=140.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000800
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Scorpion geant
+
+[CHARDEF c_anthropophage]
+NAME=Anthropophage
+ID=03
+
+ON=@Create
+COLOR=0481
+STR=90
+DEX=90
+INT=120
+
+KARMA=-9999
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1260
+TAG.XPCOUP=<EVAL (RAND(157,315))>
+TAG.TAPER=4
+TAG.NIVEAU=16
+
+TACTICS=90.0
+WRESTLING=90.0
+MAGERY=200.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00200000
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_pierre_rouge 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Anthropophage
+
+[CHARDEF c_cavalier_des_dunes]
+NAME=Cavalier des dunes
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=100
+DEX=90
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1680
+TAG.XPCOUP=<EVAL (RAND(210,420))>
+TAG.TAPER=4
+TAG.MONTURE={1 2}
+TAG.NIVEAU=18
+
+KARMA=-9999
+
+TACTICS=100.0
+SWORDSMANSHIP=100.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+ITEMNEWBIE=I_PLATEMAIL_HELM
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+ITEMNEWBIE=I_SCIMITAR
+ITEMNEWBIE=i_CAPE
+COLOR=0ab8
+
+ON=@EnvironChange
+IF <TAG.MONTURE>==1
+    IF <SRC.RESTEST 1 i_mt_llama>
+        return 1 
+    ELSE
+        newitem=i_mt_llama
+        act.name=Lama1
+        act.equip
+        return 0
+    endif
+ELSE
+    if <SRC.RESTEST 1 i_mt_horse_tan>
+        return 1
+    else
+        newitem=i_mt_horse_tan
+        act.name=Cheval1
+        act.equip
+        return 0
+    endif
+ENDIF
+
+ON=@NPCRESTOCK
+IF <TAG.MONTURE>==1
+    IF !<FINDID.i_pet_llama>
+        NEWITEM i_pet_llama
+        ACT.CONT=<UID>
+    ENDIF
+ELSE
+    IF !<FINDID.i_pet_horse_tan>
+        NEWITEM i_pet_horse_tan
+        ACT.CONT=<UID>
+    ENDIF
+ENDIF
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+ON=@DEATH
+IF <FINDID.i_mt_horse_tan>
+    FINDID.i_mt_horse_tan.REMOVE
+ENDIF
+IF <FINDID.i_mt_llama>
+    FINDID.i_mt_llama.REMOVE
+ENDIF
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Cavalier des dunes
+
+[CHARDEF c_gardien_de_prison_baraque]
+NAME=Gardien de prison baraque
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=110
+DEX=90
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1320
+TAG.XPCOUP=<EVAL (RAND(165,330))>
+TAG.TAPER=4
+TAG.NIVEAU=18
+
+KARMA=-9999
+
+TACTICS=110.0
+FENCING=110.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+color=0ab2
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_HELM
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+COLOR=0ab2
+ITEMNEWBIE=I_KRYSS
+COLOR=0ab2
+ITEMNEWBIE=i_CAPE
+COLOR=0ab2
+ITEMNEWBIE=01bc3
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_cle_speciale_001 30 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Gardien de prison baraque
+
+[CHARDEF c_horreur_railleuse]
+NAME=Horreur railleuse
+ID=04
+
+ON=@Create
+COLOR=09af
+STR=100
+DEX=100
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=1000
+TAG.XPCOUP=<EVAL (RAND(125,250))>
+TAG.TAPER=4
+TAG.NIVEAU=18
+
+KARMA=-9999
+
+TACTICS=100.0
+WRESTLING=100.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Horreur railleuse
+
+[CHARDEF c_tarentule]
+NAME=Tarentule
+ID=01c
+
+ON=@Create
+COLOR=0af7
+STR=100
+DEX=110
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1000
+TAG.XPCOUP=<EVAL (RAND(125,250))>
+TAG.TAPER=4
+TAG.NIVEAU=19
+
+KARMA=-9999
+
+TACTICS=100.0
+WRESTLING=100.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_oeil_tata 50 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Tarentule
+
+[CHARDEF c_orc_beserker]
+NAME=Orc beserker
+ID=07
+
+ON=@Create
+COLOR=07d6
+STR=120
+DEX=100
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1200
+TAG.XPCOUP=<EVAL (RAND(150,300))>
+TAG.TAPER=4
+TAG.NIVEAU=19
+
+TACTICS=120.0
+WRESTLING=120.0
+
+NPC=BRAIN_MONSTER
+
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2477 i_perle_enchantement 68 i_pierre_verte 20 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Orc beserker
+
+[CHARDEF c_orc_mage_guerrier]
+NAME=Orc mage guerrier
+ID=07
+
+ON=@Create
+COLOR=0ab2
+STR=100
+DEX=100
+INT=100
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1000
+TAG.XPCOUP=<EVAL (RAND(125,250))>
+TAG.TAPER=4
+TAG.NIVEAU=20
+
+KARMA=-9999
+
+TACTICS=100.0
+WRESTLING=100.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000000
+MORE2=00010000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 i_pierre_verte 20 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Orc mage guerrier
+
+[CHARDEF c_rat_garou]
+NAME=Rat garou
+ID=0D7
+RESOURCES=20 i_ribs_raw, 10 i_hide
+
+ON=@Create
+COLOR=0ab2
+STR=100
+DEX=100
+INT=110
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=1400
+TAG.XPCOUP=<EVAL (RAND(175,350))>
+TAG.TAPER=4
+TAG.NIVEAU=21
+
+KARMA=-9999
+
+TACTICS=100.0
+WRESTLING=100.0
+MAGERY=200.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00080000
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Rat garou
+
+[CHARDEF c_chauve_souris_vampire]
+NAME=Chauve souris vampire
+ID=027
+
+ON=@Create
+COLOR=0ab2
+STR=130
+DEX=130
+INT=115
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1820
+TAG.XPCOUP=<EVAL (RAND(227,455))>
+TAG.TAPER=4
+TAG.NIVEAU=23
+
+KARMA=-9999
+
+TACTICS=130.0
+WRESTLING=130.0
+MAGERY=200.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00080000
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 i_pierre_bleue 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Chauve souris vampire
+
+[CHARDEF c_loup_de_la_meute]
+NAME=Loup de la meute
+ID=0e1
+RESOURCES=15 i_ribs_raw, 7 i_hide
+
+ON=@Create
+COLOR=0835
+STR=140
+DEX=120
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=1400
+TAG.XPCOUP=<EVAL (RAND(175,350))>
+TAG.TAPER=4
+TAG.NIVEAU=24
+
+KARMA=-9999
+
+TACTICS=140.0
+WRESTLING=140.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_cuir_de_loup 50 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Loup de la meute
+
+[CHARDEF c_arpenteur_de_la_nuit]
+NAME=Arpenteur de la nuit
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=140
+DEX=120
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1680
+TAG.XPCOUP=<EVAL (RAND(210,420))>
+TAG.TAPER=4
+TAG.NIVEAU=24
+
+KARMA=-9999
+
+TACTICS=140.0
+FENCING=140.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_leather_sleeves
+color=0ab2
+ITEMNEWBIE=i_leather_gloves
+COLOR=0ab2
+ITEMNEWBIE=i_leather_gorget
+COLOR=0ab2
+ITEMNEWBIE=i_leather_leggings
+COLOR=0ab2
+ITEMNEWBIE=i_leather_tunic
+COLOR=0ab2
+ITEMNEWBIE=i_boots_thigh
+COLOR=0ab2
+ITEMNEWBIE=random_male_hair
+COLOR=0ab2
+ITEMNEWBIE=i_shield_buckler
+COLOR=0ab2
+ITEMNEWBIE=i_kryss
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Arpenteur de la nuit
+
+[CHARDEF c_fataliste]
+NAME=Fataliste
+ID=039
+
+ON=@Create
+COLOR=0afb
+STR=120
+DEX=100
+INT=100
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=1680
+TAG.XPCOUP=<EVAL (RAND(210,420))>
+TAG.TAPER=4
+TAG.NIVEAU=25
+
+KARMA=-9999
+
+TACTICS=120.0
+WRESTLING=120.0
+MAGERY=450.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000000
+MORE2=00000020
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Fataliste
+
+[CHARDEF c_skraug_gubbringah]
+NAME=Skraug gubbringah
+ID=02a
+
+ON=@Create
+COLOR=024
+STR=150
+DEX=120
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1500
+TAG.XPCOUP=<EVAL (RAND(187,375))>
+TAG.TAPER=4
+TAG.NIVEAU=26
+
+KARMA=-9999
+
+TACTICS=150.0
+WRESTLING=150.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Skraug gubbringah
+
+[CHARDEF c_skraug_munchhuntor]
+NAME=Skraug munchhuntor
+ID=02a
+
+ON=@Create
+COLOR=07d1
+STR=150
+DEX=130
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=1500
+TAG.XPCOUP=<EVAL (RAND(187,375))>
+TAG.TAPER=4
+TAG.NIVEAU=27
+
+KARMA=-9999
+
+TACTICS=150.0
+WRESTLING=150.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Skraug munchhuntor
+
+[CHARDEF c_chapardeur]
+NAME=Chapardeur
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=150
+DEX=120
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=2100
+TAG.XPCOUP=<EVAL (RAND(262,525))>
+TAG.TAPER=4
+TAG.NIVEAU=28
+
+KARMA=-9999
+
+TACTICS=150.0
+FENCING=150.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_leather_sleeves
+color=0ab2
+ITEMNEWBIE=i_leather_gloves
+COLOR=0ab2
+ITEMNEWBIE=i_leather_gorget
+COLOR=0ab2
+ITEMNEWBIE=i_leather_leggings
+COLOR=0ab2
+ITEMNEWBIE=i_leather_tunic
+COLOR=0ab2
+ITEMNEWBIE=i_boots_thigh
+COLOR=0ab2
+ITEMNEWBIE=random_male_hair
+COLOR=0ab2
+ITEMNEWBIE=i_kryss
+COLOR=0ab2
+ITEMNEWBIE=i_shield_round_metal
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 }
+
+ON=@HIT
+IF <SRC.MANA> > 0
+    SRC.MANA=<EVAL (<SRC.MANA>-(<SRC.MANA> * 15)/100))>
+ENDIF
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Chapardeur
+
+[CHARDEF c_sorcier_squelette]
+NAME=Sorcier squelette
+ID=032
+
+ON=@Create
+COLOR=0ab2
+STR=110
+DEX=110
+INT=120
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1540
+TAG.XPCOUP=<EVAL (RAND(192,385))>
+TAG.TAPER=4
+TAG.NIVEAU=29
+
+KARMA=-9999
+
+TACTICS=110.0
+WRESTLING=110.0
+MAGERY=250.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000800
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Deuxieme ile
+DESCRIPTION=Sorcier squelette
+
+[CHARDEF c_chien_loup]
+NAME=Chien loup
+ID=0e1
+RESOURCES=20 i_ribs_raw, 10 i_hide
+
+ON=@Create
+COLOR=083a
+STR=160
+DEX=130
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=1600
+TAG.XPCOUP=<EVAL (RAND(200,400))>
+TAG.TAPER=4
+TAG.NIVEAU=31
+
+KARMA=-9999
+
+TACTICS=160.0
+WRESTLING=160.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_cuir_de_loup 10 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Chien loup
+
+[CHARDEF c_skraug_protekterritor]
+NAME=Skraug protekterritor
+ID=02d
+
+ON=@Create
+COLOR=07d2
+STR=170
+DEX=150
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1700
+TAG.XPCOUP=<EVAL (RAND(212,425))>
+TAG.TAPER=4
+TAG.NIVEAU=37
+
+KARMA=-9999
+
+TACTICS=170.0
+WRESTLING=170.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Skraug protekterritor
+
+[CHARDEF c_skraug_standanbonkah]
+NAME=Skraug standanbonkah
+ID=02d
+
+ON=@Create
+COLOR=023
+STR=180
+DEX=160
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=1800
+TAG.XPCOUP=<EVAL (RAND(225,450))>
+TAG.TAPER=4
+TAG.NIVEAU=39
+
+KARMA=-9999
+
+TACTICS=180.0
+WRESTLING=180.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 2177 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Skraug standanbonkah
+
+[CHARDEF c_chevalier_spectral_p]
+NAME=Chevalier spectral
+ID=c_man
+
+ON=@Create
+COLOR=01
+STR=180
+DEX=170
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1800
+TAG.XPCOUP=<EVAL (RAND(225,450))>
+TAG.TAPER=4
+TAG.NIVEAU=41
+
+KARMA=-9999
+
+TACTICS=180.0
+SWORDSMANSHIP=180.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=I_SWORD_BROAD
+COLOR=0ab2
+ITEMNEWBIE=i_CAPE
+COLOR=0ab2
+ITEMNEWBIE=i_robe
+DISPID=i_deathshroud
+COLOR=0ab2
+
+ON=@NPCRESTOCK
+ITEM={ i_stats_dropp 1877 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Chevalier spectral pied
+
+[CHARDEF c_chevalier_spectral]
+NAME=Chevalier spectral
+ID=c_man
+
+ON=@Create
+COLOR=01
+STR=180
+DEX=170
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=2160
+TAG.XPCOUP=<EVAL (RAND(270,540))>
+TAG.TAPER=4
+TAG.NIVEAU=41
+
+KARMA=-9999
+
+TACTICS=180.0
+SWORDSMANSHIP=180.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=I_SWORD_BROAD
+COLOR=0ab2
+ITEMNEWBIE=i_CAPE
+COLOR=0ab2
+ITEMNEWBIE=i_robe
+DISPID=i_deathshroud
+COLOR=0ab2
+
+ON=@EnvironChange
+if <SRC.RESTEST 1 i_mt_horse_brown_dk>
+    return 1
+else
+    newitem=i_mt_horse_brown_dk
+    act.name=Cheval1
+    act.equip
+    return 0
+endif
+
+ON=@NPCRESTOCK
+IF !<FINDID.i_mt_horse_brown_dk>
+    NEWITEM i_mt_horse_brown_dk
+    ACT.CONT=<UID>
+ENDIF
+ITEM={ i_stats_dropp 1877 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Chevalier spectral
+
+[CHARDEF c_loup_geant]
+NAME=Loup geant
+ID=0e1
+RESOURCES=25 i_ribs_raw, 12 i_hide
+
+ON=@Create
+COLOR=0ab2
+STR=190
+DEX=170
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1900
+TAG.XPCOUP=<EVAL (RAND(237,475))>
+TAG.TAPER=4
+TAG.NIVEAU=42
+
+KARMA=-9999
+
+TACTICS=190.0
+WRESTLING=190.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1877 i_cuir_de_loup 80 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Loup geant
+
+[CHARDEF c_skraug_clangbangah]
+NAME=Skraug clangbangah
+ID=02d
+
+ON=@Create
+COLOR=022
+STR=190
+DEX=180
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=1900
+TAG.XPCOUP=<EVAL (RAND(237,475))>
+TAG.TAPER=4
+TAG.NIVEAU=43
+
+KARMA=-9999
+
+TACTICS=190.0
+WRESTLING=190.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1877 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Skraug clangbangah
+
+[CHARDEF c_skraug_bludfightor]
+NAME=Skraug bludfightor
+ID=02d
+
+ON=@Create
+COLOR=07d3
+STR=200
+DEX=180
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=2000
+TAG.XPCOUP=<EVAL (RAND(125,250))>
+TAG.TAPER=8
+TAG.NIVEAU=44
+
+KARMA=-9999
+
+TACTICS=200.0
+WRESTLING=200.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1877 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Skraug bludfightor
+
+[CHARDEF c_skraug_madlimbmanglor]
+NAME=Skraug madlimbmanglor
+ID=02c
+
+ON=@Create
+COLOR=07d4
+STR=210
+DEX=190
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=2100
+TAG.XPCOUP=<EVAL (RAND(131,262))>
+TAG.TAPER=8
+TAG.NIVEAU=48
+
+KARMA=-9999
+
+TACTICS=210.0
+WRESTLING=210.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1877 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Skraug madlimbmanglor
+
+[CHARDEF c_skraug_moonfiredansah]
+NAME=Skraug moonfiredansah
+ID=02a
+
+ON=@Create
+COLOR=021
+STR=210
+DEX=190
+INT=195
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=2940
+TAG.XPCOUP=<EVAL (RAND(183,367))>
+TAG.TAPER=8
+TAG.NIVEAU=49
+
+KARMA=-9999
+
+TACTICS=210.0
+WRESTLING=210.0
+MAGERY=450.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=020000000
+MORE2=00000000 
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1877 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Skraug moonfiredansah
+
+[CHARDEF c_skraug_totemherbdoktor]
+NAME=Skraug totemherbdoktor
+ID=02a
+
+ON=@Create
+COLOR=07d5
+STR=220
+DEX=190
+INT=195
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=3080
+TAG.XPCOUP=<EVAL (RAND(192,385))>
+TAG.TAPER=8
+TAG.NIVEAU=49
+
+KARMA=-9999
+
+TACTICS=220.0
+WRESTLING=220.0
+MAGERY=450.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=020000000
+MORE2=00000000 
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1877 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Skraug totemherbdoktor
+
+[CHARDEF c_skraug_bigworviktor]
+NAME=Skraug bigworviktor
+ID=02c
+
+ON=@Create
+COLOR=07d6
+STR=250
+DEX=200
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=2500
+TAG.XPCOUP=<EVAL (RAND(156,312))>
+TAG.TAPER=8
+TAG.NIVEAU=54
+
+KARMA=-9999
+
+TACTICS=250.0
+WRESTLING=250.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1877 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Troisieme ile
+DESCRIPTION=Skraug bigworviktor
+
+[CHARDEF c_ophidien]
+NAME=Ophidien
+ID=056
+
+ON=@Create
+COLOR=05dd
+STR=230
+DEX=200
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=2300
+TAG.XPCOUP=<EVAL (RAND(143,287))>
+TAG.TAPER=8
+TAG.NIVEAU=54
+
+KARMA=-9999
+
+TACTICS=230.0
+WRESTLING=230.0
+MAGICRESISTANCE=115.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1877 i_cuir_d_ophidien 50 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Ophidien
+
+[CHARDEF c_guerrier_ophidien]
+NAME=Guerrier Ophidien
+ID=056
+
+ON=@Create
+COLOR=05e0
+STR=250
+DEX=220
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=2500
+TAG.XPCOUP=<EVAL (RAND(156,312))>
+TAG.TAPER=8
+TAG.NIVEAU=56
+
+KARMA=-9999
+
+TACTICS=250.0
+WRESTLING=250.0
+MAGICRESISTANCE=125.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1877 i_cuir_d_ophidien 50 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Guerrier Ophidien
+
+[CHARDEF c_sorcier_ophidien]
+NAME=Sorcier ophidien
+ID=055
+
+ON=@Create
+COLOR=05e5
+STR=240
+DEX=240
+INT=300
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=3360
+TAG.XPCOUP=<EVAL (RAND(210,420))>
+TAG.TAPER=8
+TAG.NIVEAU=60
+
+KARMA=-9999
+
+MAGERY=400.0
+TACTICS=240.0
+WRESTLING=240.0
+MAGICRESISTANCE=120.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000800
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_cuir_d_ophidien 50 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Sorcier ophidien
+
+[CHARDEF c_harpie]
+NAME=Harpie
+ID=01e
+RESOURCES=5 i_feather
+
+ON=@Create
+COLOR=08ad
+STR=350
+DEX=300
+INT=300
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=3500
+TAG.XPCOUP=<EVAL (RAND(218,437))>
+TAG.TAPER=8
+TAG.NIVEAU=60
+
+KARMA=-9999
+
+TACTICS=350.0
+WRESTLING=350.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_cuir_d_harpie 50 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Harpie
+
+[CHARDEF c_reine_ophidien]
+NAME=Reine ophidien
+ID=057
+
+ON=@Create
+COLOR=0abe
+STR=320
+DEX=300
+INT=200
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=4480
+TAG.XPCOUP=<EVAL (RAND(280,560))>
+TAG.TAPER=8
+TAG.NIVEAU=64
+
+KARMA=-9999
+
+TACTICS=320.0
+WRESTLING=320.0
+MAGICRESISTANCE=320.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_perle_enchantement 68 i_cuir_d_ophidien 170 i_lame_ophidienne 20 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Reine ophidien
+
+[CHARDEF c_sentinelle_harpie]
+NAME=Sentinelle harpie
+ID=01e
+RESOURCES=10 i_feather
+
+ON=@Create
+COLOR=08ae
+STR=400
+DEX=350
+INT=350
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=4000
+TAG.XPCOUP=<EVAL (RAND(250,500))>
+TAG.TAPER=8
+TAG.NIVEAU=64
+
+KARMA=-9999
+
+TACTICS=400.0
+WRESTLING=400.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_cuir_d_harpie 50 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Sentinelle harpie
+
+[CHARDEF c_matriarche_harpie]
+NAME=Matriarche harpie
+ID=01e
+RESOURCES=15 i_feather
+
+ON=@Create
+COLOR=08af
+STR=450
+DEX=400
+INT=400
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=4500
+TAG.XPCOUP=<EVAL (RAND(281,562))>
+TAG.TAPER=8
+TAG.NIVEAU=67
+
+KARMA=-9999
+
+TACTICS=450.0
+WRESTLING=450.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_cuir_d_harpie 50 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Matriarche harpie
+
+[CHARDEF c_harpie_demoniaque]
+NAME=Harpie demoniaque
+ID=01e
+RESOURCES=20 i_feather
+
+ON=@Create
+COLOR=08b0
+STR=500
+DEX=450
+INT=450
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=5000
+TAG.XPCOUP=<EVAL (RAND(312,625))>
+TAG.TAPER=8
+TAG.NIVEAU=71
+
+KARMA=-9999
+
+TACTICS=500.0
+WRESTLING=500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_cuir_d_harpie 50 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Harpie demoniaque
+
+[CHARDEF c_appendice_des_marecages]
+NAME=Appendice des marecages
+ID=c_corpser
+
+ON=@Create
+COLOR=07d7
+STR=900
+DEX=700
+INT=900
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=12600
+TAG.XPCOUP=<EVAL (RAND(787,1575))>
+TAG.TAPER=8
+TAG.NIVEAU=76
+
+KARMA=-9999
+
+TACTICS=900.0
+WRESTLING=900.0
+MAGERY=900.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=020000000
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Appendice des marecages
+
+[CHARDEF c_cephalopode_des_marecages]
+NAME=Cephalopode des marecages
+ID=c_corpser
+
+ON=@Create
+COLOR=06b0
+STR=1000
+DEX=800
+INT=1000
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=14000
+TAG.XPCOUP=<EVAL (RAND(583,1166))>
+TAG.TAPER=12
+TAG.NIVEAU=81
+
+KARMA=-9999
+
+TACTICS=1000.0
+WRESTLING=1000.0
+MAGERY=1000.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=020000000
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1277 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Cephalopode des marecages
+
+[CHARDEF c_pieuvre_des_marecages]
+NAME=Pieuvre des marecages
+ID=c_corpser
+
+ON=@Create
+COLOR=0750
+STR=1100
+DEX=900
+INT=1100
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=15400
+TAG.XPCOUP=<EVAL (RAND(641,1283))>
+TAG.TAPER=12
+TAG.NIVEAU=86
+
+KARMA=-9999
+
+TACTICS=1033.0
+WRESTLING=1033.0
+MAGERY=1100.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=020000000
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1277 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Pieuvre des marecages
+
+[CHARDEF c_tentacule_des_marecages]
+NAME=Tentacule des marecages
+ID=c_corpser
+
+ON=@Create
+COLOR=047d
+STR=1200
+DEX=1000
+INT=1200
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=16800
+TAG.XPCOUP=<EVAL (RAND(700,1400))>
+TAG.TAPER=12
+TAG.NIVEAU=90
+
+KARMA=-9999
+
+TACTICS=1050.0
+WRESTLING=1050.0
+MAGERY=1200.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=020000000
+MORE2=00000000
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1277 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Tentacule des marecages
+
+[CHARDEF c_troll_normal]
+NAME=Troll
+ID=c_troll
+BLOODCOLOR=0835
+
+ON=@Create
+COLOR=0835
+STR=1400
+DEX=1400
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=14000
+TAG.XPCOUP=<EVAL (RAND(583,1166))>
+TAG.TAPER=12
+TAG.NIVEAU=95
+
+KARMA=-9999
+
+TACTICS=1100.0
+WRESTLING=1100.0
+
+NPC=BRAIN_MONSTER
+
+ON=@SPELLEFFECT
+IF <ARGN>==38
+    SRC.SYSMESSAGEUA 0481 1 1 0 Ce sort n'affecte pas la creature
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1277 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Troll
+
+[CHARDEF c_eclaireur_troll]
+NAME=Eclaireur troll
+ID=c_troll_w_axe
+BLOODCOLOR=0836
+
+ON=@Create
+COLOR=0836
+STR=1700
+DEX=1700
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=17000
+TAG.XPCOUP=<EVAL (RAND(708,1416))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1175.0
+WRESTLING=1175.0
+
+NPC=BRAIN_MONSTER
+
+ON=@SPELLEFFECT
+IF <ARGN>==38
+    SRC.SYSMESSAGEUA 0481 1 1 0 Ce sort n'affecte pas la creature
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Eclaireur troll
+
+[CHARDEF c_guerrier_troll]
+NAME=Guerrier troll
+ID=c_troll_w_mace
+BLOODCOLOR=0839
+
+ON=@Create
+COLOR=0839
+STR=2000
+DEX=2000
+INT=0
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=20000
+TAG.XPCOUP=<EVAL (RAND(833,1666))>
+TAG.TAPER=12
+TAG.NIVEAU=105
+
+KARMA=-9999
+
+TACTICS=1250.0
+WRESTLING=1250.0
+
+NPC=BRAIN_MONSTER
+
+ON=@SPELLEFFECT
+IF ((<ARGN>==20)||(<ARGN>==28)||(<ARGN>==38)||(<ARGN>==39)
+    SRC.SYSMESSAGEUA 0481 1 1 0 Ce sort n'affecte pas la creature
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Guerrier troll
+
+[CHARDEF c_lieutenant_troll]
+NAME=Lieutenant troll
+ID=c_cyclops
+BLOODCOLOR=0ab3
+
+ON=@Create
+COLOR=0ab3
+STR=2200
+DEX=2200
+INT=0
+MAXHITS=2300
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=23000
+TAG.XPCOUP=<EVAL (RAND(958,1916))>
+TAG.TAPER=12
+TAG.NIVEAU=110
+
+KARMA=-9999
+
+TACTICS=1300.0
+WRESTLING=1300.0
+
+NPC=BRAIN_MONSTER
+
+ON=@SPELLEFFECT
+IF <ARGN>==38
+    SRC.SYSMESSAGEUA 0481 1 1 0 Ce sort n'affecte pas la creature
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=Lieutenant troll
+
+[CHARDEF c_general_troll]
+NAME=General troll
+ID=c_titan
+BLOODCOLOR=0ab2
+
+ON=@Create
+COLOR=0ab2
+STR=3000
+DEX=3000
+INT=0
+MAXHITS=3500
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=35000
+TAG.XPCOUP=<EVAL (RAND(1458,2916))>
+TAG.TAPER=12
+TAG.NIVEAU=115
+
+KARMA=-9999
+
+TACTICS=1500.0
+WRESTLING=1500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@SPELLEFFECT
+IF <ARGN>==38
+    SRC.SYSMESSAGEUA 0481 1 1 0 Ce sort n'affecte pas la creature
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quatrieme ile
+DESCRIPTION=General troll
+
+[ITEMDEF m_rend_invis]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=20
+
+ON=@TIMER
+IF !(<CONT.HITS>==<CONT.STR>)
+    CONT.EFFECT 3,i_fx_heal_effect,0,30
+    IF <EVAL <CONT.HITS>> > <EVAL (<CONT.STR> - 250)>
+        CONT.HITS=<EVAL <CONT.STR>>
+    ELSE
+        CONT.HITS=<EVAL <CONT.HITS> + 250>
+    ENDIF
+    CONT.ANIM 6
+ENDIF
+TIMER=30
+RETURN 1
+
+[ITEMDEF m_rend_invis2]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=20
+
+ON=@TIMER
+IF !(<CONT.HITS>==<CONT.STR>)
+    CONT.EFFECT 3,i_fx_heal_effect,0,30
+    IF <EVAL <CONT.HITS>> > <EVAL (<CONT.STR> - 300)>
+        CONT.HITS=<EVAL <CONT.STR>>
+    ELSE
+        CONT.HITS=<EVAL <CONT.HITS> + 300>
+    ENDIF
+    CONT.ANIM 6
+ENDIF
+TIMER=30
+RETURN 1
+
+[ITEMDEF m_rend_invis3]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=20
+
+ON=@TIMER
+IF !(<CONT.HITS>==<CONT.STR>)
+    CONT.EFFECT 3,i_fx_heal_effect,0,30
+    IF <EVAL <CONT.HITS>> > <EVAL (<CONT.STR> - 350)>
+        CONT.HITS=<EVAL <CONT.STR>>
+    ELSE
+        CONT.HITS=<EVAL <CONT.HITS> + 350>
+    ENDIF
+    CONT.ANIM 6
+ENDIF
+TIMER=30
+RETURN 1
+
+[ITEMDEF m_rend_invis4]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=20
+
+ON=@TIMER
+IF !(<CONT.HITS>==<CONT.STR>)
+    CONT.EFFECT 3,i_fx_heal_effect,0,30
+    IF <EVAL <CONT.HITS>> > <EVAL (<CONT.STR> - 400)>
+        CONT.HITS=<EVAL <CONT.STR>>
+    ELSE
+        CONT.HITS=<EVAL <CONT.HITS> + 400>
+    ENDIF
+    CONT.ANIM 6
+ENDIF
+TIMER=30
+RETURN 1
+
+[ITEMDEF m_rend_invis5]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=20
+
+ON=@TIMER
+IF !(<CONT.HITS>==<CONT.STR>)
+    CONT.EFFECT 3,i_fx_heal_effect,0,30
+    IF <EVAL <CONT.HITS>> > <EVAL (<CONT.STR> - 450)>
+        CONT.HITS=<EVAL <CONT.STR>>
+    ELSE
+        CONT.HITS=<EVAL <CONT.HITS> + 450>
+    ENDIF
+    CONT.ANIM 6
+ENDIF
+TIMER=30
+RETURN 1
+
+[ITEMDEF m_rend_invis6]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=20
+
+ON=@TIMER
+IF !(<CONT.HITS>==<CONT.STR>)
+    CONT.EFFECT 3,i_fx_heal_effect,0,30
+    IF <EVAL <CONT.HITS>> > <EVAL (<CONT.STR> - 500)>
+        CONT.HITS=<EVAL <CONT.STR>>
+    ELSE
+        CONT.HITS=<EVAL <CONT.HITS> + 500>
+    ENDIF
+    CONT.ANIM 6
+ENDIF
+TIMER=30
+RETURN 1
+
+[ITEMDEF m_rend_invis7]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=20
+
+ON=@TIMER
+IF !(<CONT.HITS>==<CONT.STR>)
+    CONT.EFFECT 3,i_fx_heal_effect,0,30
+    IF <EVAL <CONT.HITS>> > <EVAL (<CONT.STR> - 600)>
+        CONT.HITS=<EVAL <CONT.STR>>
+    ELSE
+        CONT.HITS=<EVAL <CONT.HITS> + 600>
+    ENDIF
+    CONT.ANIM 6
+ENDIF
+TIMER=30
+RETURN 1
+
+[ITEMDEF i_hache_heretique]
+NAME=Trancheuse de tetes
+ID=i_axe_exec
+TYPE=t_weapon_sword
+SKILL=Swordsmanship
+REQSTR=0
+WEIGHT=0
+TWOHANDS=N
+
+ON=@CREATE
+HITPOINTS=5000
+COLOR=0ab6
+
+[CHARDEF c_heretique]
+NAME=Heretique
+ID=c_man
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3500
+DEX=3500
+INT=0
+MAXHITS=4250
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=51000
+TAG.XPCOUP=<EVAL (RAND(2125,4250))>
+TAG.TAPER=12
+TAG.NIVEAU=120
+
+KARMA=-9999
+
+TACTICS=1625.0
+SWORDSMANSHIP=1625.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_bone_helmet
+COLOR=0ab6
+NAME=Heaume d'heretique
+ITEMNEWBIE=i_platemail_gorget
+COLOR=0ab6
+NAME=Armure d'heretique
+ITEMNEWBIE=i_platemail_arms
+COLOR=0ab6
+NAME=Armure d'heretique
+ITEMNEWBIE=i_platemail_gloves
+COLOR=0ab6
+NAME=Armure d'heretique
+ITEMNEWBIE=i_platemail_chest
+COLOR=0ab6
+NAME=Armure d'heretique
+ITEMNEWBIE=i_platemail_leggings
+COLOR=0ab6
+NAME=Armure d'heretique
+ITEMNEWBIE=i_hache_heretique
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Cinquieme ile
+DESCRIPTION=Heretique
+
+[ITEMDEF i_robe_heretique]
+NAME=Robe heretique
+ID=i_robe
+
+ON=@CREATE
+DISPID=i_deathshroud
+HITPOINTS=5000
+COLOR=0ab6
+
+[CHARDEF c_sorcier_heretique]
+NAME=Sorcier heretique
+ID=c_man
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3500
+DEX=1000
+INT=4000
+MAXHITS=4250
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=59500
+TAG.XPCOUP=<EVAL (RAND(2479,4958))>
+TAG.TAPER=12
+TAG.NIVEAU=120
+
+KARMA=-9999
+
+TACTICS=1625.0
+WRESTLING=1625.0
+MAGERY=2200.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_bone_helmet
+COLOR=0ab6
+NAME=Heaume d'heretique
+ITEMNEWBIE=i_sandals
+COLOR=0ab6
+NAME=Sandales
+ITEMNEWBIE=i_robe_heretique
+ITEMNEWBIE=i_spellbook
+NAME=Grimoire heretique
+MORE1=00000800
+MORE2=00000000
+COLOR=0ab6
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Cinquieme ile
+DESCRIPTION=Sorcier heretique
+
+[ITEMDEF i_hachoir_heretique]
+NAME=Hachoir heretique
+ID=0ec2
+REQSTR=0
+WEIGHT=0
+TWOHANDS=N
+
+ON=@CREATE
+HITPOINTS=5000
+COLOR=0ab6
+
+[CHARDEF c_envouteur_heretique]
+NAME=Envouteur Heretique
+ID=c_man
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3800
+DEX=3800
+INT=0
+MAXHITS=4400
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=73920
+TAG.XPCOUP=<EVAL (RAND(3080,6160))>
+TAG.TAPER=12
+TAG.NIVEAU=120
+
+KARMA=-9999
+
+TACTICS=1700.0
+SWORDSMANSHIP=1700.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_bone_helmet
+COLOR=0ab6
+NAME=Heaume d'heretique
+ITEMNEWBIE=i_platemail_gloves
+COLOR=0ab6
+NAME=Armure d'heretique
+ITEMNEWBIE=i_platemail_leggings
+COLOR=0ab6
+NAME=Armure d'heretique
+ITEMNEWBIE=i_hachoir_heretique
+ITEMNEWBIE=i_robe_heretique
+
+ON=@NPCSEENEWPLAYER
+EMOTE envouter <SRC.NAME>
+SRC.GO <P>
+
+ON=@GETHIT
+IF <EVAL <SRC.ACT.DISTANCE>> >3
+    SRC.GO <P>
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL <SRC.ACT.DISTANCE>> >3
+    SRC.GO <P>
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Cinquieme ile
+DESCRIPTION=Envouteur heretique
+
+
+//*****************************************Cr�ature du colys�e*****************************************
+
+[CHARDEF c_myopotame]
+NAME=Myopotame
+ID=0D7
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=00b60
+STR=3000
+DEX=3000
+INT=0
+MAXHITS=3500
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=35000
+TAG.XPCOUP=<EVAL (RAND(1458,2916))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+TACTICS=1500.0
+WRESTLING=1500.0
+
+NPC=BRAIN_MONSTER
+
+KARMA=-9999
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 985 i_perle_enchantement 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Colysee
+DESCRIPTION=Myopotame
+
+[ITEMDEF i_rune_megachiroptere]
+NAME=Rune megachiroptere
+ID=i_rune_weaken
+TYPE=t_spell
+LAYER=32
+
+ON=@Create
+TIMER=-1
+MORE2=01
+MOREX=08
+MOREY={2000.0 3000.0}
+ATTR=024
+
+[CHARDEF c_megachiroptere]
+NAME=Megachiroptere
+ID=027
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0995
+STR=3000
+DEX=3000
+INT=0
+MAXHITS=3500
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=49000
+TAG.XPCOUP=<EVAL (RAND(2041,4083))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+WRESTLING=1500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@GETHIT
+IF (<EVAL(RAND(10))> == 0)
+    IF !<SRC.FINDID.i_rune_megachiroptere>
+        SRC.EFFECT 3,i_fx_curse,0,15
+        SRC.NEWITEM i_rune_megachiroptere
+        SRC.ACT.LINK=<UID>
+        SRC.ACT.EQUIP
+        ANIM 10
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF (<EVAL(RAND(10))> == 0)
+    IF !<SRC.FINDID.i_rune_megachiroptere>
+        SRC.EFFECT 3,i_fx_curse,0,15
+        SRC.NEWITEM i_rune_megachiroptere
+        SRC.ACT.LINK=<UID>
+        SRC.ACT.EQUIP
+        ANIM 10
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 985 i_perle_enchantement 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Colysee
+DESCRIPTION=Megachiroptere
+
+[ITEMDEF i_rune_ectoplasme]
+NAME=Rune ectoplasme
+ID=i_rune_curse
+TYPE=t_spell
+LAYER=32
+
+ON=@Create
+TIMER=-1
+MORE2=01
+MOREX=01b
+MOREY={2000.0 2500.0}
+ATTR=026
+
+[CHARDEF c_ectoplasme]
+NAME=Ectoplasme
+ID=039
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0ab5
+STR=3500
+DEX=3500
+INT=0
+MAXHITS=4250
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=83300
+TAG.XPCOUP=<EVAL (RAND(3470,6941))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1625.0
+WRESTLING=1625.0
+
+NPC=BRAIN_MONSTER
+
+ON=@GETHIT
+IF (<EVAL(RAND(10))> == 0)
+    IF !<SRC.FINDID.i_rune_ectoplasme>
+        SRC.EFFECT 3,i_fx_curse,0,15
+        SRC.NEWITEM i_rune_ectoplasme
+        SRC.ACT.LINK=<UID>
+        SRC.ACT.EQUIP
+        ANIM 17
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF (<EVAL(RAND(10))> == 0)
+    IF !<SRC.FINDID.i_rune_ectoplasme>
+        SRC.EFFECT 3,i_fx_curse,0,15
+        SRC.NEWITEM i_rune_ectoplasme
+        SRC.ACT.LINK=<UID>
+        SRC.ACT.EQUIP
+        ANIM 17
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 985 i_perle_enchantement 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Colysee
+DESCRIPTION=Ectoplasme
+
+[CHARDEF c_hobgobelin]
+NAME=Hobgobelin
+ID=c_orc_lord
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0af7
+STR=4200
+DEX=4200
+INT=0
+MAXHITS=5300
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=74200
+TAG.XPCOUP=<EVAL (RAND(3090,6183))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1800.0
+WRESTLING=1800.0
+
+NPC=BRAIN_MONSTER
+
+ON=@GETHIT
+IF (<EVAL(RAND(10))> == 0)
+    SRC.EFFECT 3,i_fx_explode,0,13
+    SRC.DAMAGE 200 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF (<EVAL(RAND(10))> == 0)
+    SRC.EFFECT 3,i_fx_explode,0,13
+    SRC.DAMAGE 200 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 985 i_perle_enchantement 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Colysee
+DESCRIPTION=Hobgobelin
+
+[ITEMDEF i_fumee_belcheris]
+ID=i_fx_smoke
+NAME=Venin d'Hydrophis Belcheris
+TYPE=t_script
+
+ON=@CREATE
+TIMER=4
+COLOR=0B60
+ATTR=08010
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[CHARDEF c_Hydrophis_Belcheris]
+NAME=Hydrophis Belcheris
+ID=015
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0b60
+STR=4600
+DEX=4600
+INT=0
+MAXHITS=5900
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=82600
+TAG.XPCOUP=<EVAL (RAND(3441,6883))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1900.0
+WRESTLING=1900.0
+
+NPC=BRAIN_MONSTER
+
+ON=@GETHIT
+IF (<EVAL(RAND(10))> == 0)
+    SRC.EFFECT 3,i_fx_curse,15,0
+    SRC.NEWITEM i_fumee_belcheris
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE 300 0008 <UID>
+    ANIM 17
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF (<EVAL(RAND(10))> == 0)
+    SRC.EFFECT 3,i_fx_curse,0,15
+    SRC.NEWITEM i_fumee_belcheris
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE 300 0008 <UID>
+    ANIM 17
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 985 i_perle_enchantement 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Colysee
+DESCRIPTION=Hydrophis Belcheris
+
+[ITEMDEF i_rune_Latrodecte]
+NAME=Rune Latrodecte
+ID=i_rune_paralyze
+TYPE=t_spell
+LAYER=38
+
+ON=@Create
+TIMER=30
+MORE2=01
+MOREX=026
+MOREY={5000.0 6000.0}
+ATTR=026
+
+[ITEMDEF i_toile_latrodecte]
+ID=010d5
+NAME=Toile de Latrodecte
+TYPE=t_script
+
+ON=@CREATE
+TIMER=10
+ATTR=08010
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[CHARDEF c_Latrodecte]
+NAME=Latrodecte
+ID=c_spider_giant
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0ab8
+STR=5000
+DEX=5000
+INT=0
+MAXHITS=6500
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=91000
+TAG.XPCOUP=<EVAL (RAND(2483,5687))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=2000.0
+WRESTLING=2000.0
+
+NPC=BRAIN_MONSTER
+
+ON=@GETHIT
+IF (<EVAL(RAND(10))> == 0)
+    IF !<SRC.FINDID.i_rune_Latrodecte>
+        SRC.NEWITEM i_rune_Latrodecte
+        SRC.ACT.LINK=<UID>
+        SRC.ACT.EQUIP
+        SRC.NEWITEM i_toile_latrodecte
+        SRC.ACT.P=<SRC.P>
+        ANIM 12
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF (<EVAL(RAND(10))> == 0)
+    IF !<SRC.FINDID.i_rune_Latrodecte>
+        SRC.NEWITEM i_rune_Latrodecte
+        SRC.ACT.LINK=<UID>
+        SRC.ACT.EQUIP
+        SRC.NEWITEM i_toile_latrodecte
+        SRC.ACT.P=<SRC.P>
+        ANIM 12
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 985 i_perle_enchantement 2 }
+
+CATEGORY=Monstres
+SUBSECTION=Colysee
+DESCRIPTION=Latrodecte
+
+[CHARDEF c_emanation_putride]
+NAME=Emanation putride
+ID=01a
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0bab
+STR=5400
+DEX=5400
+INT=0
+MAXHITS=7100
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=99400
+TAG.XPCOUP=<EVAL (RAND(3106,6212))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=2100.0
+WRESTLING=2100.0
+
+NPC=BRAIN_MONSTER
+
+ON=@GETHIT
+IF (<EVAL(RAND(10))> == 0)
+    SRC.EFFECT 3,i_fx_blade_field,0,30
+    SRC.DAMAGE 400 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF (<EVAL(RAND(10))> == 0)
+    SRC.EFFECT 3,i_fx_blade_field,0,30
+    SRC.DAMAGE 400 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 985 i_perle_enchantement 2 }
+
+CATEGORY=Monstres
+SUBSECTION=Colysee
+DESCRIPTION=Emanation putride
+
+[ITEMDEF i_effet_hexapode]
+ID=i_fx_sparkle_2
+NAME=Acide hexapode
+TYPE=t_script
+
+ON=@CREATE
+TIMER=2
+ATTR=08010
+COLOR=0b7c
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[CHARDEF c_hexapode]
+NAME=Hexapode
+ID=047
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0b7c
+STR=6200
+DEX=6200
+INT=0
+MAXHITS=7400
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=145040
+TAG.XPCOUP=<EVAL (RAND(4532,9065))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=2300.0
+WRESTLING=2300.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+SRC.NEWITEM i_effet_hexapode
+SRC.ACT.P=<SRC.P>
+SRC.DAMAGE 500 0008 <UID>
+ANIM 6
+
+ON=@GETHIT
+IF (<EVAL(RAND(10))>=0)
+    SRC.NEWITEM i_effet_hexapode
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE 500 0008 <UID>
+    ANIM 6
+ENDIF
+IF (<EVAL(RAND(10))>=0)
+    SRC.ACT.EFFECT 3,i_fx_heal_effect,0,30
+    IF <EVAL <SRC.ACT.HITS>> > <EVAL (<SRC.ACT.STR> - 500)>
+        SRC.ACT.HITS=<EVAL <SRC.ACT.STR>>
+    ELSE
+        SRC.ACT.HITS=<EVAL <SRC.ACT.HITS> + 500>
+    ENDIF
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF (<EVAL(RAND(10))>=0)
+    SRC.NEWITEM i_effet_hexapode
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE 500 0008 <UID>
+    ANIM 6
+ENDIF
+IF (<EVAL(RAND(10))>=0)
+    SRC.ACT.EFFECT 3,i_fx_heal_effect,0,30
+    IF <EVAL <SRC.ACT.HITS>> > <EVAL (<SRC.ACT.STR> - 500)>
+        SRC.ACT.HITS=<EVAL <SRC.ACT.STR>>
+    ELSE
+        SRC.ACT.HITS=<EVAL <SRC.ACT.HITS> + 500>
+    ENDIF
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 985 i_perle_enchantement 5 }
+
+CATEGORY=Monstres
+SUBSECTION=Colysee
+DESCRIPTION=Hexapode
+
+[CHARDEF c_urgal]
+NAME=Urgal
+ID=c_troll
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@CREATE
+COLOR=0aab
+STR=6600
+DEX=6600
+INT=0
+MAXHITS=8200
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=160720
+TAG.XPCOUP=<EVAL (RAND(5022,10045))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=3000.0
+WRESTLING=3000.0
+NPC=BRAIN_MONSTER
+
+ON=@HIT
+IF <EVAL RAND(10)> == 0
+    IF <ARGN1> < 300
+        ARGN1 = <EVAL <ARGN1> * 2>
+    ENDIF
+    ARGN2=01
+    SRC.SYSMESSAGEUA 0481 1 1 0 <NAME> vous brise les os
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 984 i_cuir_de_troll 1 i_perle_enchantement 5}
+
+
+//******************************
+//********DONGEON HUMAIN********
+//******************************
+
+[CHARDEF c_ashigaru]
+NAME=ashigaru
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=2100
+DEX=1000
+INT=0
+HITS=2150
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=25800
+TAG.XPCOUP=<EVAL (RAND(1075,2150))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1275.0
+SWORDSMANSHIP=1275.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+color=0ab2
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_HELM
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+COLOR=0ab2
+ITEMNEWBIE=i_epee_longue
+COLOR=0ab2
+ITEMNEWBIE=i_pavois
+COLOR=0ab2
+ITEMNEWBIE=01bc3
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 4000 i_perle_enchantement 48 i_pavois_incube 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Dongeon humain
+DESCRIPTION=ashigaru
+
+
+[CHARDEF c_kaizoku]
+NAME=kaizoku
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=2300
+DEX=1000
+INT=0
+MAXHITS=2450
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=29400
+TAG.XPCOUP=<EVAL (RAND(1225,2450))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1325.0
+SWORDSMANSHIP=1325.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+color=0ab2
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0ab2
+ITEMNEWBIE=i_grand_bandana
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+COLOR=0ab2
+ITEMNEWBIE=i_cimeterre
+COLOR=0ab2
+ITEMNEWBIE=i_petit_bouclier
+COLOR=0ab2
+ITEMNEWBIE=01bc3
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 175 i_perle_enchantement 3 }
+
+CATEGORY=Monstres
+SUBSECTION=Dongeon humain
+DESCRIPTION=kaizoku
+
+
+[CHARDEF c_kunoichi]
+NAME=kaizoku
+ID=c_woman
+
+ON=@Create
+COLOR=03ea
+STR=3200
+DEX=1000
+INT=0
+MAXHITS=3800
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=38000
+TAG.XPCOUP=<EVAL (RAND(1583,3166))>
+TAG.TAPER=12
+TAG.NIVEAU=115
+
+KARMA=-9999
+
+TACTICS=1550.0
+WRESTLING=1550.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+color=0ab2
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0ab2
+ITEMNEWBIE=i_grand_bandana
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+COLOR=0ab2
+ITEMNEWBIE=01bc3
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 150 i_perle_enchantement 3}
+
+CATEGORY=Monstres
+SUBSECTION=Dongeon humain
+DESCRIPTION=kunoichi
+
+
+[CHARDEF c_hatamoto]
+NAME=hatamoto
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=3000
+DEX=3000
+INT=0
+//MAXHITS=3500
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=115
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+color=0ab2
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0ab2
+ITEMNEWBIE=i_grand_bandana
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+COLOR=0ab2
+ITEMNEWBIE=i_arc
+COLOR=0ab2
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+ITEMNEWBIE=01bc3
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 150 i_perle_enchantement 3}
+
+CATEGORY=Monstres
+SUBSECTION=Dongeon humain
+DESCRIPTION=katamoto
+
+
+[CHARDEF c_shinobi]
+NAME=shinobi
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=4500
+DEX=1000
+INT=0
+MAXHITS=5750
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=57500
+TAG.XPCOUP=<EVAL (RAND(2395,4791))>
+TAG.TAPER=12
+TAG.NIVEAU=130
+
+KARMA=-9999
+
+TACTICS=1875.0
+WRESTLING=1875.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+color=0ab2
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0ab2
+ITEMNEWBIE=i_grand_bandana
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+COLOR=0ab2
+ITEMNEWBIE=01bc3
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 140 i_perle_enchantement 3}
+
+CATEGORY=Monstres
+SUBSECTION=Dongeon humain
+DESCRIPTION=shinobi
+
+
+[CHARDEF c_yamabushi]
+NAME=yamabushi
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=3000
+DEX=1000
+INT=2000
+//MAXHITS=3500
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=68600
+TAG.XPCOUP=<EVAL (RAND(2858,5716))>
+TAG.TAPER=12
+TAG.NIVEAU=130
+
+KARMA=-9999
+
+TACTICS=1500.0
+WRESTLING=1500.0
+MAGERY=1000.0
+EVALUATINGINTEL=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+color=0ab2
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0ab2
+ITEMNEWBIE=i_grand_bandana
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+COLOR=0ab2
+ITEMNEWBIE=i_spellbook
+MORE1=00000800
+MORE2=00000000
+ITEMNEWBIE=01bc3
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 140 i_perle_enchantement 3}
+
+CATEGORY=Monstres
+SUBSECTION=Dongeon humain
+DESCRIPTION=shinobi
+
+
+[CHARDEF c_adepte_de_Sun_Tzu]
+NAME=Adepte de Sun Tzu
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=6500
+DEX=1000
+INT=0
+MAXHITS=9000
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=85000
+TAG.XPCOUP=<EVAL (RAND(2656,5312))>
+TAG.TAPER=16
+TAG.NIVEAU=130
+
+KARMA=-9999
+
+TACTICS=2375.0
+WRESTLING=2375.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_PLATEMAIL_ARMS
+color=0ab2
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0ab2
+ITEMNEWBIE=i_grand_bandana
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GORGET
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_GLOVES
+COLOR=0ab2
+ITEMNEWBIE=I_PLATEMAIL_CHEST
+COLOR=0ab2
+ITEMNEWBIE=01bc3
+COLOR=0ab2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 120 i_perle_enchantement 3}
+
+CATEGORY=Monstres
+SUBSECTION=Dongeon humain
+DESCRIPTION=Adepte de Sun Tzu
+
+
+//*************************************
+//************QUETE ASILE**************
+//*************************************
+
+[CHARDEF c_madrigan]
+NAME=Madrigan
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=9000
+DEX=1000
+INT=0
+MAXHITS=18000
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TITLE=Proprietaire de l'asile
+TAG.XPMORT=217000
+TAG.XPCOUP=<EVAL (RAND(6781,13562))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=3000.0
+WRESTLING=3000.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_leather_tunic_decoration
+color=0af2
+ITEMNEWBIE=I_PLATEMAIL_LEGGINGS
+COLOR=0af2
+ITEMNEWBIE=i_ring_silver
+ITEMNEWBIE=i_cap
+COLOR=0851
+ITEMNEWBIE=i_shield_kite_wood
+COLOR=0af2
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 118 i_perle_enchantement 5}
+
+CATEGORY=Monstres
+SUBSECTION=Asile
+DESCRIPTION=Madrigan
+
+[CHARDEF c_docteur_Vertebrus]
+NAME=Dr Vertebrus
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=8300
+DEX=1000
+INT=0
+MAXHITS=16600
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TITLE=Docteur
+TAG.XPMORT=236880
+TAG.XPCOUP=<EVAL (RAND(7402,14805))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=2825.0
+WRESTLING=2825.0
+MACEFIGHTING=2825.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_upron_full
+COLOR=0845
+NAME=Tablier imbibe de sang
+ITEMNEWBIE=i_shirt_fancy
+COLOR=0abe
+ITEMNEWBIE=i_boots_thigh
+ITEMNEWBIE=i_studded_leggings
+ITEMNEWBIE=i_skull_cap
+COLOR=0abe
+ITEMNEWBIE=i_studded_gloves
+COLOR=0abe
+ITEMNEWBIE=i_hammer_war
+COLOR=0afb
+NAME=Casse-os
+
+ON=@HIT
+IF !<ACT.FINDID.i_rune_de_poison>
+    ACT.EFFECT 3,i_fx_curse,0,15
+    ACT.NEWITEM i_rune_de_poison
+    ACT.ACT.MOREY=800.0
+    ACT.ACT.LINK=<UID>
+    ACT.ACT.CONT=<ACT.UID>
+    ACT.ACT.TIMER=5
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 118 i_perle_enchantement 5}
+
+CATEGORY=Monstres
+SUBSECTION=Asile
+DESCRIPTION=Dr Vertebrus
+
+[CHARDEF c_docteur_Van_Pyre]
+NAME=Dr Van Pyre
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=7500
+DEX=1000
+INT=0
+MAXHITS=13000
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TITLE=Anesthesiste
+TAG.XPMORT=193200
+TAG.XPCOUP=<EVAL (RAND(6037,12075))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=2625.0
+WRESTLING=2625.0
+SWORDSMANSHIP=2625.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_hache_heretique
+COLOR=0b17
+NAME=Buveuse de sang
+ITEMNEWBIE=i_upron_full
+COLOR=0845
+NAME=Tablier imbibe de sang
+ITEMNEWBIE=i_shirt_fancy
+ITEMNEWBIE=i_boots_thigh
+ITEMNEWBIE=i_studded_leggings
+ITEMNEWBIE=i_studded_gloves
+
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 118 i_perle_enchantement 5}
+
+CATEGORY=Monstres
+SUBSECTION=Asile
+DESCRIPTION=Dr Van Pyre
+
+[CHARDEF c_derange]
+NAME=Derange
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=5300
+DEX=1000
+INT=0
+MAXHITS=5600
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TITLE=Fou
+TAG.XPMORT=67200
+TAG.XPCOUP=<EVAL (RAND(2100,4200))>
+TAG.TAPER=16
+TAG.NIVEAU=1
+
+KARMA=-9999
+
+TACTICS=2075.0
+WRESTLING=2075.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_club
+COLOR=0abe
+NAME=Casse-tete
+ITEMNEWBIE=i_studded_tunic_decoration
+COLOR=0b10
+NAME=Camisole de force
+ITEMNEWBIE=i_studded_gloves
+ITEMNEWBIE=i_boots_calf
+
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 118 i_perle_enchantement 5}
+
+CATEGORY=Monstres
+SUBSECTION=Asile
+DESCRIPTION=Derange
+
+[CHARDEF c_infirmiere_psychotique]
+NAME=Infirmiere psychotique
+ID=c_woman
+
+ON=@Create
+COLOR=03ea
+STR=3500
+DEX=1000
+INT=0
+//MAXHITS=4250
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TITLE=Bandit
+TAG.XPMORT=99960
+TAG.XPCOUP=<EVAL (RAND(4165,8330))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1625.0
+WRESTLING=1625.0
+MAGERY=1625.0
+FENCING=1625.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_dagger
+COLOR=0afb
+NAME=Scalpel
+ITEMNEWBIE=i_dress_plain
+COLOR=0b16
+NAME=Robe blanche
+ITEMNEWBIE=i_boots_calf
+ITEMNEWBIE=i_hair_long
+COLOR=0b17
+ITEMNEWBIE=i_spellbook
+MORE1=00000000
+MORE2=00000110
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 118 i_perle_enchantement 5}
+
+CATEGORY=Monstres
+SUBSECTION=Asile
+DESCRIPTION=Infirmiere psychotique
+
+[CHARDEF c_barjot]
+NAME=Barjot
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=4600
+DEX=1000
+INT=0
+MAXHITS=5900
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TITLE=Combattant
+TAG.XPMORT=70800
+TAG.XPCOUP=<EVAL (RAND(2950,5900))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1900.0
+WRESTLING=1900.0
+MACEFIGHTING=1900.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_mace_war
+COLOR=0abe
+ITEMNEWBIE=i_studded_tunic_decoration
+COLOR=0b10
+NAME=Camisole de force
+ITEMNEWBIE=i_studded_gloves
+ITEMNEWBIE=i_boots_calf
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 118 i_perle_enchantement 5}
+
+CATEGORY=Monstres
+SUBSECTION=Asile
+DESCRIPTION=Barjot
+
+[CHARDEF c_patient_fou]
+NAME=Patient fou
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=4100
+DEX=1000
+INT=0
+MAXHITS=5150
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TITLE=Combattant
+TAG.XPMORT=61800
+TAG.XPCOUP=<EVAL (RAND(2575,5150))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1775.0
+WRESTLING=1775.0
+SWORDSMANSHIP=1775.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_cleaver_meat
+NAME=Scalpel
+ITEMNEWBIE=i_boots_calf
+ITEMNEWBIE=i_tunic
+COLOR=0b16
+NAME=Tunique de fou
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 118 i_perle_enchantement 5}
+
+CATEGORY=Monstres
+SUBSECTION=Asile
+DESCRIPTION=Patient fou
+
+[CHARDEF c_patient_en_fuite]
+NAME=Patient en fuite
+ID=c_man
+
+ON=@Create
+COLOR=03ea
+STR=3700
+DEX=1000
+INT=0
+MAXHITS=4550
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TITLE=Combattant
+TAG.XPMORT=54600
+TAG.XPCOUP=<EVAL (RAND(2275,4550))>
+TAG.TAPER=12
+TAG.NIVEAU=1
+
+KARMA=-9999
+
+TACTICS=1675.0
+WRESTLING=1675.0
+SWORDSMANSHIP=1675.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_cleaver_meat
+NAME=Scalpel
+ITEMNEWBIE=i_boots_calf
+ITEMNEWBIE=i_tunic
+COLOR=0b16
+NAME=Tunique de fou
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 118 i_perle_enchantement 5}
+
+CATEGORY=Monstres
+SUBSECTION=Asile
+DESCRIPTION=Patient en fuite

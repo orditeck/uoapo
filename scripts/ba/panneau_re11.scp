@@ -1,0 +1,174 @@
+[ITEMDEF i_bon_pour_un_niveau] 
+NAME=Bon pour un niveau
+ID=i_deed
+TYPE=T_SCRIPT
+
+ON=@DCLICK
+IF <LINK>==<SRC.UID>
+	IF <EVAL <SRC.TAG.LEVEL>> > 10
+		SRC.SYSMESSAGEUA 0481 1 1 0 Objet desactive pour l'instant
+		SRC.SYSMESSAGEUA 0481 1 1 0 Contactez un GM pour consommer votre bon!
+		RETURN 1
+		SRC.TAG.XPDEBUTLVL = <EVAL (<SRC.TAG.XPDEBUTLVL> * 1074) / 1000>
+		SRC.TAG.LEVEL = <EVAL <SRC.TAG.LEVEL> + 1>
+		SRC.TAG.XP=0
+		SRC.TAG.MILLEXP=0
+		SRC.TITLE= * Level 
+		SRC.TITLE=<SRC.TITLE> <EVAL <SRC.TAG.LEVEL>> *
+		SRC.TAG.PTSSKILLS = <EVAL <SRC.TAG.PTSSKILLS> + 5>
+		SRC.TAG.PTSSTAT=<EVAL <SRC.TAG.PTSSTAT> + 5>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez gagne un niveau !
+		REMOVE
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez etre au moins niveau 10 pour l'utiliser
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Ce bon ne vous appartient pas !
+ENDIF
+RETURN 1
+
+[DIALOG panneau_re11]
+0, 0
+PAGE 0
+gumppic 205 160 3600
+gumppic 219 174 3604
+gumppic 347 174 3604
+gumppic 219 302 3604
+gumppic 347 302 3604
+gumppic 205 174 3603
+gumppic 220 339 3604
+gumppic 347 339 3604
+gumppic 475 174 3604
+gumppic 220 466 3607
+gumppic 205 466 3606
+gumppic 327 466 3607
+gumppic 475 301 3604
+gumppic 436 466 3607
+gumppic 475 338 3604
+gumppic 480 466 3607
+gumppic 603 466 3608
+gumppic 480 160 3601
+gumppic 603 160 3602
+gumppic 378 160 3601
+gumppic 287 160 3601
+gumppic 219 160 3601
+gumppic 603 174 3605
+text 225 230 1313 0
+text 225 247 1313 1
+text 225 264 1313 2
+text 225 281 1313 3
+text 225 298 1313 4
+text 289 179 1152 5
+text 225 212 995 6
+text 507 212 995 7
+text 546 212 995 8
+text 225 414 32 9
+text 225 315 1313 10
+text 225 332 1313 11
+text 225 349 1313 12
+text 225 366 1313 13
+text 225 383 1313 14
+text 546 414 1313 15
+button 572 443 4005 4006 1 0 1
+text 510 230 1313 16
+text 510 247 1313 17
+text 510 264 1313 18
+text 510 281 1313 19
+text 510 298 1313 20
+text 510 315 1313 21
+text 510 332 1313 22
+text 510 349 1313 23
+text 510 366 1313 24
+text 510 383 1313 25
+button 570 235 2103 2104 1 0 2
+button 570 252 2103 2104 1 0 3
+button 570 269 2103 2104 1 0 4
+button 570 286 2103 2104 1 0 5
+button 570 303 2103 2104 1 0 6
+button 570 320 2103 2104 1 0 7
+button 570 337 2103 2104 1 0 8
+button 570 354 2103 2104 1 0 9
+button 570 371 2103 2104 1 0 10
+button 570 388 2103 2104 1 0 11
+button 221 443 4014 4015 1 0 12
+
+[DIALOG panneau_re11 TEXT]
+Grande caravelle
+Grande caravelle ornee
+Bon pour un niveau
+n/a
+n/a
+Panneau de gestion des recompenses
+Nom de l'objet
+Cout
+Acquerir
+Nombre de points de recompense disponibles
+n/a
+n/a
+n/a
+n/a
+n/a
+
+<EVAL 0<SRC.TAG.POINTSBA>>
+175
+200
+200
+n/a
+n/a
+n/a
+n/a
+n/a
+n/a
+n/a
+
+
+[DIALOG panneau_re11 BUTTON]
+on=1
+SRC.DIALOG panneau_re11
+on=2
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 174
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-175>
+SRC.NEWITEM i_deed_ship_medium_n
+SRC.ACT.NAME Bon pour une caravelle
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re10
+ENDIF
+on=3
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 199
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-200>
+SRC.NEWITEM i_deed_ship_dragon_medium_n
+SRC.ACT.NAME Bon pour une caravelle ornee
+SRC.ACT.BOUNCE
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re10
+ENDIF
+on=4
+IF <EVAL 0<SRC.TAG.POINTSBA>> > 199
+SRC.TAG.POINTSBA=<EVAL 0<SRC.TAG.POINTSBA>-200>
+SRC.NEWITEM i_bon_pour_un_niveau
+SRC.ACT.NAME Bon pour un niveau [<SRC.NAME>]
+SRC.ACT.BOUNCE
+SRC.ACT.LINK=<SRC.UID>
+ELSE
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas assez de points de recompenses pour acquerir cet objet !
+SRC.DIALOG panneau_re10
+ENDIF
+on=5
+SRC.DIALOG panneau_re11
+on=6
+SRC.DIALOG panneau_re11
+on=7
+SRC.DIALOG panneau_re11
+on=8
+SRC.DIALOG panneau_re11
+on=9
+SRC.DIALOG panneau_re11
+on=10
+SRC.DIALOG panneau_re11
+on=11
+SRC.DIALOG panneau_re11
+on=12
+SRC.DIALOG panneau_re10

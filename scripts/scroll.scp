@@ -1,0 +1,29 @@
+[ITEMDEF i_perle_enchantement]
+DEFNAME=i_perle_enchantement
+NAME=Perle d'enchantement
+ID=i_reag_eye_of_newt
+VALUE=25000
+
+ON=@Create
+COLOR=0480
+
+CATEGORY=Genese
+SUBSECTION=Scroll - Exceptional
+DESCRIPTION=Scroll d'enchantement
+
+[ITEMDEF i_scroll_enchantement]
+DEFNAME=i_scroll_enchantement
+NAME=Parchemin d'enchantement
+ID=i_scroll_clumsy
+TYPE=t_normal
+VALUE=25000
+
+RESOURCES=1 i_scroll_blank, 1 i_scroll_bless, 1 i_scroll_curse, 1 i_perle_enchantement
+SKILLMAKE=INSCRIPTION 60.0, MAGERY 60.0
+
+CATEGORY=Genese
+SUBSECTION=Scroll - Exceptional
+DESCRIPTION=Scroll d'enchantement
+
+ON=@Create
+COLOR=0480

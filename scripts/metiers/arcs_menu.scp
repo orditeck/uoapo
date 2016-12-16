@@ -1,0 +1,249 @@
+[SKILLMENU sm_BOWCRAFT]
+Fabrication d'arcs
+
+ON=i_KINDLING <name> (<resmake>)
+MAKEITEM=i_KINDLING
+
+ON=i_ARROW_SHAFT <name> (<resmake>)
+MAKEITEM=i_ARROW_SHAFT
+
+ON=i_bow Arcs communs
+SKILLMENU=sm_arcs
+
+ON=i_bow Arcs enchantes
+SKILLMENU=sm_arcs1
+
+ON=i_bow Arcs runiques
+SKILLMENU=sm_arcs2
+
+[SKILLMENU sm_bolts]
+// combine shafts with feathers.
+Select arrow type
+
+ON=i_arrow <name> (<resmake>)
+MAKEITEM=i_arrow
+
+[SKILLMENU sm_arcs]
+Arcs communs
+
+ON=i_arc_en_frene <name> (<resmake>)
+MAKEITEM=i_arc_en_frene
+
+ON=i_arbalete_en_frene <name> (<resmake>)
+MAKEITEM=i_arbalete_en_frene
+
+ON=i_arbalete_lourde_en_frene <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_frene
+
+ON=i_arc_en_orme <name> (<resmake>)
+MAKEITEM=i_arc_en_orme
+
+ON=i_arbalete_en_orme <name> (<resmake>)
+MAKEITEM=i_arbalete_en_orme
+
+ON=i_arbalete_lourde_en_orme <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_orme
+
+ON=i_arc_en_noyer_blanc <name> (<resmake>)
+MAKEITEM=i_arc_en_noyer_blanc
+
+ON=i_arbalete_en_noyer_blanc <name> (<resmake>)
+MAKEITEM=i_arbalete_en_noyer_blanc
+
+ON=i_arbalete_lourde_en_noyer_blanc <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_noyer_blanc
+
+ON=i_arc_en_chene <name> (<resmake>)
+MAKEITEM=i_arc_en_chene
+
+ON=i_arbalete_en_chene <name> (<resmake>)
+MAKEITEM=i_arbalete_en_chene
+
+ON=i_arbalete_lourde_en_chene <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_chene
+
+ON=i_arc_en_cedre <name> (<resmake>)
+MAKEITEM=i_arc_en_cedre
+
+ON=i_arbalete_en_cedre <name> (<resmake>)
+MAKEITEM=i_arbalete_en_cedre
+
+ON=i_arbalete_lourde_en_cedre <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_cedre
+
+ON=i_arc_en_oxandre <name> (<resmake>)
+MAKEITEM=i_arc_en_oxandre
+
+ON=i_arbalete_en_oxandre <name> (<resmake>)
+MAKEITEM=i_arbalete_en_oxandre
+
+ON=i_arbalete_lourde_en_oxandre <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_oxandre
+
+ON=i_arc_en_fevier_epineux <name> (<resmake>)
+MAKEITEM=i_arc_en_fevier_epineux
+
+ON=i_arbalete_en_fevier_epineux <name> (<resmake>)
+MAKEITEM=i_arbalete_en_fevier_epineux
+
+ON=i_arbalete_lourde_en_fevier_epineux <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_fevier_epineux
+
+ON=i_arc_legendaire <name> (<resmake>)
+MAKEITEM=i_arc_legendaire
+
+ON=i_arbalete_legendaire <name> (<resmake>)
+MAKEITEM=i_arbalete_legendaire
+
+ON=i_arbalete_lourde_legendaire <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_legendaire
+
+[SKILLMENU sm_arcs1]
+Arcs enchantes
+
+ON=i_arc_en_frene_enchantee <name> (<resmake>)
+MAKEITEM=i_arc_en_frene_enchantee
+
+ON=i_arbalete_en_frene_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_en_frene_enchantee
+
+ON=i_arbalete_lourde_en_frene_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_frene_enchantee
+
+ON=i_arc_en_orme_enchante <name> (<resmake>)
+MAKEITEM=i_arc_en_orme_enchante
+
+ON=i_arbalete_en_orme_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_en_orme_enchantee
+
+ON=i_arbalete_lourde_en_orme_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_orme_enchantee
+
+ON=i_arc_en_noyer_blanc_enchante <name> (<resmake>)
+MAKEITEM=i_arc_en_noyer_blanc_enchante
+
+ON=i_arbalete_en_noyer_blanc_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_en_noyer_blanc_enchantee
+
+ON=i_arbalete_lourde_en_noyer_blanc_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_noyer_blanc_enchantee
+
+ON=i_arc_en_chene_enchante <name> (<resmake>)
+MAKEITEM=i_arc_en_chene_enchante
+
+ON=i_arbalete_en_chene_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_en_chene_enchantee
+
+ON=i_arbalete_lourde_en_chene_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_chene_enchantee
+
+ON=i_arc_en_cedre_enchante <name> (<resmake>)
+MAKEITEM=i_arc_en_cedre_enchante
+
+ON=i_arbalete_en_cedre_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_en_cedre_enchantee
+
+ON=i_arbalete_lourde_en_cedre_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_cedre_enchantee
+
+ON=i_arc_en_oxandre_enchante <name> (<resmake>)
+MAKEITEM=i_arc_en_oxandre_enchante
+
+ON=i_arbalete_en_oxandre_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_en_oxandre_enchantee
+
+ON=i_arbalete_lourde_en_oxandre_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_oxandre_enchantee
+
+ON=i_arc_en_fevier_epineux_enchante <name> (<resmake>)
+MAKEITEM=i_arc_en_fevier_epineux_enchante
+
+ON=i_arbalete_en_fevier_epineux_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_en_fevier_epineux_enchantee
+
+ON=i_arbalete_lourde_en_fevier_epineux_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_fevier_epineux_enchantee
+
+ON=i_arc_legendaire_enchante <name> (<resmake>)
+MAKEITEM=i_arc_legendaire_enchante
+
+ON=i_arbalete_legendaire_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_legendaire_enchantee
+
+ON=i_arbalete_lourde_legendaire_enchantee <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_legendaire_enchantee
+
+[SKILLMENU sm_arcs2]
+Arcs runiques
+
+ON=i_arc_en_frene_runique <name> (<resmake>)
+MAKEITEM=i_arc_en_frene_runique
+
+ON=i_arbalete_en_frene_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_en_frene_runique
+
+ON=i_arbalete_lourde_en_frene_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_frene_runique
+
+ON=i_arc_en_orme_runique <name> (<resmake>)
+MAKEITEM=i_arc_en_orme_runique
+
+ON=i_arbalete_en_orme_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_en_orme_runique
+
+ON=i_arbalete_lourde_en_orme_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_orme_runique
+
+ON=i_arc_en_noyer_blanc_runique <name> (<resmake>)
+MAKEITEM=i_arc_en_noyer_blanc_runique
+
+ON=i_arbalete_en_noyer_blanc_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_en_noyer_blanc_runique
+
+ON=i_arbalete_lourde_en_noyer_blanc_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_noyer_blanc_runique
+
+ON=i_arc_en_chene_runique <name> (<resmake>)
+MAKEITEM=i_arc_en_chene_runique
+
+ON=i_arbalete_en_chene_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_en_chene_runique
+
+ON=i_arbalete_lourde_en_chene_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_chene_runique
+
+ON=i_arc_en_cedre_runique <name> (<resmake>)
+MAKEITEM=i_arc_en_cedre_runique
+
+ON=i_arbalete_en_cedre_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_en_cedre_runique
+
+ON=i_arbalete_lourde_en_cedre_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_cedre_runique
+
+ON=i_arc_en_oxandre_runique <name> (<resmake>)
+MAKEITEM=i_arc_en_oxandre_runique
+
+ON=i_arbalete_en_oxandre_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_en_oxandre_runique
+
+ON=i_arbalete_lourde_en_oxandre_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_oxandre_runique
+
+ON=i_arc_en_fevier_epineux_runique <name> (<resmake>)
+MAKEITEM=i_arc_en_fevier_epineux_runique
+
+ON=i_arbalete_en_fevier_epineux_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_en_fevier_epineux_runique
+
+ON=i_arbalete_lourde_en_fevier_epineux_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_en_fevier_epineux_runique
+
+ON=i_arc_legendaire_runique <name> (<resmake>)
+MAKEITEM=i_arc_legendaire_runique
+
+ON=i_arbalete_legendaire_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_legendaire_runique
+
+ON=i_arbalete_lourde_legendaire_runique <name> (<resmake>)
+MAKEITEM=i_arbalete_lourde_legendaire_runique

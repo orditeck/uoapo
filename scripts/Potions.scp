@@ -1,0 +1,1572 @@
+[ITEMDEF i_conteneur_potion]
+NAME=Conteneur de potions
+ID=i_KEG_WOOD
+TYPE=t_script
+VALUE=2000
+WEIGHT=90
+RESOURCES=20 i_log, 10 i_ingot_iron
+SKILLMAKE=CARPENTRY 90.0, t_carpentry
+
+ON=@Create
+TAG.POTIONID=0 //BASEID DES POTIONS QUE LE CONTENEUR CONTIENT(i_potion_heal)
+TAG.POTIONNAME=Nil //NOM DES POTIONS QUE LE CONTENEUR CONTIENT
+MORE1=0 //QUANTITE DE POTIONS A L'INTERIEUR
+
+ON=@CLICK
+MESSAGE Conteneur de <TAG.POTIONNAME> (<EVAL <MORE1>>)
+RETURN 1
+
+ON=@DCLICK
+IF !<SRC.FINDID.m_anti_popotage>
+	TARGET Sur quelle bouteille voulez-vous utiliser le conteneur?
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez attendre avant de reutiliser le conteneur
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.ACTION> != -1 )
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas utiliser le conteneur pour le moment
+	RETURN 1
+ELSEIF <SRC.TARG.TOPOBJ.UID> != <SRC.UID>
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas dans votre sac !
+	RETURN 1
+ENDIF
+IF <SRC.TARG.BASEID> == i_bottle_empty
+	IF <MORE1> > 0
+		SRC.TARG.CONSUME 1
+		SRC.NEWITEM <TAG.POTIONID>
+		SRC.ACT.BOUNCE
+		SRC.SOUND=snd_Z_END_LIQUID
+		MORE1 = <MORE1> - 1
+		IF <MORE1> == 0
+			TAG.POTIONID = 0
+			TAG.POTIONNAME = Nil
+		ENDIF
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.ACT.TIMER = 1
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Le conteneur est vide !
+	ENDIF
+ELSEIF <SRC.TARG.DISPID> == i_bottle_empty
+	IF <MORE1> == 0
+		TAG.POTIONID = <SRC.TARG.BASEID>
+		TAG.POTIONNAME = <SRC.TARG.NAME>
+		MORE1=1
+		SRC.TARG.CONSUME 1
+		SRC.NEWITEM i_bottle_empty
+		SRC.ACT.BOUNCE
+		SRC.SOUND=snd_Z_END_LIQUID
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.ACT.TIMER = 1
+	ELSEIF !STRCMPI(<SRC.TARG.BASEID>,<TAG.POTIONID>)
+		MORE1 = <MORE1> + 1
+		SRC.TARG.CONSUME 1
+		SRC.NEWITEM i_bottle_empty
+		SRC.ACT.BOUNCE
+		SRC.SOUND=snd_Z_END_LIQUID
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.ACT.TIMER = 1
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas faire de melange !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez utiliser que des bouteilles avec le conteneur !
+ENDIF
+WEIGHT = <EVAL <MORE1> + 90>
+RETURN 1
+
+CATEGORY=Unique Items
+SUBSECTION=Tinker
+DESCRIPTION=Conteneur de potions
+
+
+[ITEMDEF i_potion_de_guerison_legere]
+ID=i_bottle_empty
+NAME=Potion de guerison legere
+TYPE=t_script
+WEIGHT=1
+RESOURCES=1 i_reag_ginseng, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 30.0
+
+ON=@Create
+COLOR=0af3
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.HITS> < <SRC.STR>
+			SRC.HITS=<EVAL <SRC.HITS> + 50>
+			IF <SRC.HITS> > <SRC.STR>
+				SRC.HITS=<SRC.STR>
+			ENDIF
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potions de guerison
+DESCRIPTION=Potion de guerison legere
+
+[ITEMDEF i_potion_de_guerison]
+ID=i_bottle_empty
+NAME=Potion de guerison
+TYPE=t_script
+WEIGHT=2
+RESOURCES=2 i_reag_ginseng, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 50.0
+
+ON=@Create
+COLOR=0af3
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.HITS> < <SRC.STR>
+			SRC.HITS=<EVAL <SRC.HITS> + 150>
+			IF <SRC.HITS> > <SRC.STR>
+				SRC.HITS=<SRC.STR>
+			ENDIF
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potions de guerison
+DESCRIPTION=Potion de guerison
+
+[ITEMDEF i_elixir_de_vie]
+ID=i_bottle_empty
+NAME=Elixir de vie
+TYPE=t_script
+WEIGHT=4
+RESOURCES=5 i_reag_ginseng, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 70.0
+
+ON=@Create
+COLOR=0af3
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.HITS> < <SRC.STR>
+			SRC.HITS=<EVAL <SRC.HITS> + 500>
+			IF <SRC.HITS> > <SRC.STR>
+				SRC.HITS=<SRC.STR>
+			ENDIF
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potions de guerison
+DESCRIPTION=Elixir de vie
+
+[ITEMDEF i_potion_de_guerison_divine]
+ID=i_bottle_empty
+NAME=Potion de guerison divine
+TYPE=t_script
+WEIGHT=8
+RESOURCES=10 i_reag_ginseng, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 100.0
+
+ON=@Create
+COLOR=0af3
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.HITS> < <SRC.STR>
+			SRC.HITS=<SRC.STR>
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potions de guerison
+DESCRIPTION=Potion de guerison divine
+
+[ITEMDEF i_potion_de_mana_legere]
+ID=i_bottle_empty
+NAME=Potion de mana legere
+TYPE=t_script
+WEIGHT=1
+RESOURCES=1 i_reag_eye_of_newt, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 30.0
+
+ON=@Create
+COLOR=0b64
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.MANA> < <SRC.INT>
+			SRC.MANA=<EVAL <SRC.MANA> + 50>
+			IF <SRC.MANA> > <SRC.INT>
+				SRC.MANA=<SRC.INT>
+			ENDIF
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion de mana
+DESCRIPTION=Potion de mana legere
+
+[ITEMDEF i_potion_de_mana]
+ID=i_bottle_empty
+NAME=Potion de mana
+TYPE=t_script
+WEIGHT=2
+RESOURCES=2 i_reag_eye_of_newt, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 50.0
+
+ON=@Create
+COLOR=0b64
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.MANA> < <SRC.INT>
+			SRC.MANA=<EVAL <SRC.MANA> + 150>
+			IF <SRC.MANA> > <SRC.INT>
+				SRC.MANA=<SRC.INT>
+			ENDIF
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion de mana
+DESCRIPTION=Potion de mana
+
+[ITEMDEF i_elixir_de_mana]
+ID=i_bottle_empty
+NAME=Elixir de mana
+TYPE=t_script
+WEIGHT=4
+RESOURCES=5 i_reag_eye_of_newt, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 70.0
+
+ON=@Create
+COLOR=0b64
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.MANA> < <SRC.INT>
+			SRC.MANA=<EVAL <SRC.MANA> + 500>
+			IF <SRC.MANA> > <SRC.INT>
+				SRC.MANA=<SRC.INT>
+			ENDIF
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion de mana
+DESCRIPTION=Elixir de mana
+
+[ITEMDEF i_potion_de_mana_divine]
+ID=i_bottle_empty
+NAME=Potion de mana divine
+TYPE=t_script
+WEIGHT=8
+RESOURCES=10 i_reag_eye_of_newt, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 100.0
+
+ON=@Create
+COLOR=0b64
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.MANA> < <SRC.INT>
+			SRC.MANA=<EVAL <SRC.INT>>
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion de mana
+DESCRIPTION=Potion de mana divine
+
+[ITEMDEF i_potion_de_rajeunissement_legere]
+ID=i_bottle_empty
+NAME=Potion de rajeunissement legere
+TYPE=t_script
+WEIGHT=2
+RESOURCES=1 i_reag_ginseng, 1 i_reag_eye_of_newt, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 30.0
+
+ON=@Create
+COLOR=0abe
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.HITS> < <SRC.STR>
+			SRC.HITS=<EVAL <SRC.HITS> + 50>
+			IF <SRC.HITS> > <SRC.STR>
+				SRC.HITS=<SRC.STR>
+			ENDIF
+		ENDIF
+		IF <SRC.MANA> < <SRC.INT>
+			SRC.MANA=<EVAL <SRC.MANA> + 50>
+			IF <SRC.MANA> > <SRC.INT>
+				SRC.MANA=<SRC.INT>
+			ENDIF
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potions de rajeunissement
+DESCRIPTION=Potion de rajeunissement legere
+
+[ITEMDEF i_potion_de_rajeunissement]
+ID=i_bottle_empty
+NAME=Potion de rajeunissement
+TYPE=t_script
+WEIGHT=4
+RESOURCES=2 i_reag_ginseng, 2 i_reag_eye_of_newt, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 50.0
+
+ON=@Create
+COLOR=0abe
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.HITS> < <SRC.STR>
+			SRC.HITS=<EVAL <SRC.HITS> + 150>
+			IF <SRC.HITS> > <SRC.STR>
+				SRC.HITS=<SRC.STR>
+			ENDIF
+		ENDIF
+		IF <SRC.MANA> < <SRC.INT>
+			SRC.MANA=<EVAL <SRC.MANA> + 150>
+			IF <SRC.MANA> > <SRC.INT>
+				SRC.MANA=<SRC.INT>
+			ENDIF
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potions de rajeunissement
+DESCRIPTION=Potion de rajeunissement
+
+[ITEMDEF i_elixir_de_rajeunissement]
+ID=i_bottle_empty
+NAME=Elixir de rajeunissement
+TYPE=t_script
+WEIGHT=8
+RESOURCES=5 i_reag_ginseng, 5 i_reag_eye_of_newt, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 70.0
+
+ON=@Create
+COLOR=0abe
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.HITS> < <SRC.STR>
+			SRC.HITS=<EVAL <SRC.HITS> + 500>
+			IF <SRC.HITS> > <SRC.STR>
+				SRC.HITS=<SRC.STR>
+			ENDIF
+		ENDIF
+		IF <SRC.MANA> < <SRC.INT>
+			SRC.MANA=<EVAL <SRC.MANA> + 500>
+			IF <SRC.MANA> > <SRC.INT>
+				SRC.MANA=<SRC.INT>
+			ENDIF
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potions de rajeunissement
+DESCRIPTION=Elixir de rajeunissement
+
+[ITEMDEF i_potion_de_rajeunissement_divine]
+ID=i_bottle_empty
+NAME=Potion de rajeunissement divine
+TYPE=t_script
+WEIGHT=16
+RESOURCES=10 i_reag_ginseng, 10 i_reag_eye_of_newt, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 100.0
+
+ON=@Create
+COLOR=0abe
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.HITS> < <SRC.STR>
+			SRC.HITS=<EVAL <SRC.STR>>
+		ENDIF
+		IF <SRC.MANA> < <SRC.INT>
+			SRC.MANA=<EVAL <SRC.INT>>
+		ENDIF
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez digerer la potion avant d'en boire une autre
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potions de rajeunissement
+DESCRIPTION=Potion de rajeunissement divine
+
+[ITEMDEF i_potion_de_vitamines]
+ID=i_bottle_empty
+NAME=Potion de vitamines
+TYPE=t_script
+WEIGHT=18
+RESOURCES=10 i_reag_blood_vial, 10 i_reag_blood_moss, 1 i_potion_de_rajeunissement_divine
+SKILLMAKE=ALCHEMY 105.0
+
+ON=@Create
+COLOR=03f
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.m_anti_popotage>
+		IF <SRC.STAM> < <SRC.DEX>
+			SRC.STAM=<EVAL <SRC.STAM> + 100>
+			IF <SRC.STAM> > <SRC.DEX>
+				SRC.STAM = <SRC.DEX>
+			ENDIF
+		ENDIF
+		IF <AMOUNT> > 1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_anti_popotage
+		SRC.ACT.CONT = <SRC.UID>
+	ELSE
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion d'endurance
+DESCRIPTION=Potion de vitamines
+
+[ITEMDEF i_potion_de_clairvoyance_legere]
+ID=i_bottle_empty
+NAME=Potion de clairvoyance legere
+TYPE=t_script
+WEIGHT=4
+RESOURCES=2 i_reag_garlic, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 35.0
+
+ON=@Create
+COLOR=08a5
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_clairvoyance>
+		SRC.NEWITEM i_rune_clairvoyance
+		SRC.ACT.MORE1 = 10
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion de clairvoyance !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion de clairvoyance legere
+
+[ITEMDEF i_potion_de_clairvoyance]
+ID=i_bottle_empty
+NAME=Potion de clairvoyance
+TYPE=t_script
+WEIGHT=4
+RESOURCES=2 i_reag_garlic, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 40.0
+
+ON=@Create
+COLOR=08a5
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_clairvoyance>
+		SRC.NEWITEM i_rune_clairvoyance
+		SRC.ACT.MORE1 = 25
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion de clairvoyance !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion de clairvoyance
+
+//MORE1 = % DE INT AUGMENTEE
+[ITEMDEF i_rune_clairvoyance]
+ID=i_memory
+NAME=Rune de clairvoyance
+TYPE=t_eq_script
+
+ON=@Create
+TIMER=300
+
+ON=@EQUIP
+IF <MORE1> > 0
+	CONT.INT=<EVAL <CONT.INT> + (<CONT.TAG.INTPURE>*<MORE1>)/100>
+ENDIF
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+ON=@UNEQUIP
+IF <MORE1> > 0
+	CONT.INT=<EVAL <CONT.INT> - (<CONT.TAG.INTPURE>*<MORE1>)/100>
+ENDIF
+
+[ITEMDEF i_potion_de_dexterite_legere]
+ID=i_bottle_empty
+NAME=Potion d'agilite legere
+TYPE=t_script
+WEIGHT=4
+RESOURCES=2 i_reag_blood_moss, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 40.0
+
+ON=@Create
+COLOR=0afb
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_dexterite>
+		SRC.NEWITEM i_rune_dexterite
+		SRC.ACT.MORE1 = 10
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion d'agilite !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion de dexterite legere
+
+[ITEMDEF i_potion_de_dexterite]
+ID=i_bottle_empty
+NAME=Potion d'agilite
+TYPE=t_script
+WEIGHT=4
+RESOURCES=2 i_reag_blood_moss, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 60.0
+
+ON=@Create
+COLOR=0afb
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_dexterite>
+		SRC.NEWITEM i_rune_dexterite
+		SRC.ACT.MORE1 = 25
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion d'agilite !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion de dexterite
+
+//MORE1 = % DE DEX AUGMENTEE
+[ITEMDEF i_rune_dexterite]
+ID=i_memory
+NAME=Rune de dexterite
+TYPE=t_eq_script
+
+ON=@Create
+TIMER=300
+
+ON=@EQUIP
+IF <MORE1> > 0
+	CONT.DEX=<EVAL <CONT.DEX> + (<CONT.TAG.DEXPURE>*<MORE1>)/100>
+ENDIF
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+ON=@UNEQUIP
+IF <MORE1> > 0
+	CONT.DEX=<EVAL <CONT.DEX> - (<CONT.TAG.DEXPURE>*<MORE1>)/100>
+ENDIF
+
+[ITEMDEF i_potion_de_force_legere]
+ID=i_bottle_empty
+NAME=Potion de force legere
+TYPE=t_script
+WEIGHT=4
+RESOURCES=2 i_reag_mandrake_root, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 45.0
+
+ON=@Create
+COLOR=0847
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_force>
+		SRC.NEWITEM i_rune_force
+		SRC.ACT.MORE1=10
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion de force !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion de force legere
+
+[ITEMDEF i_potion_de_force]
+ID=i_bottle_empty
+NAME=Potion de force
+TYPE=t_script
+WEIGHT=4
+RESOURCES=2 i_reag_mandrake_root, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 80.0
+
+ON=@Create
+COLOR=0847
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_force>
+		SRC.NEWITEM i_rune_force
+		SRC.ACT.MORE1=25
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion de force !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion de force
+
+//MORE1 = % de force augmentee
+[ITEMDEF i_rune_force]
+ID=i_memory
+NAME=Rune de force
+TYPE=t_eq_script
+
+ON=@Create
+TIMER=300
+
+ON=@EQUIP
+IF <MORE1> > 0
+	CONT.STR=<EVAL <CONT.STR> + (<CONT.TAG.FORPURE>*<MORE1>)/100>
+ENDIF
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+ON=@UNEQUIP
+IF <MORE1> > 0
+	CONT.STR=<EVAL <CONT.STR> - (<CONT.TAG.FORPURE>*<MORE1>)/100>
+ENDIF
+
+[ITEMDEF i_potion_de_peau_de_pierre]
+ID=i_bottle_empty
+NAME=Potion de peau de pierre
+TYPE=t_script
+WEIGHT=4
+RESOURCES=1 i_reag_Garlic, 1 i_reag_ginseng, 1 i_reag_mandrake_root, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 90.0
+
+ON=@Create
+COLOR=0908
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_de_peau_de_pierre>
+		SRC.NEWITEM i_rune_de_peau_de_pierre
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion de peau de pierre !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion de peau de pierre
+
+[ITEMDEF i_rune_de_peau_de_pierre]
+ID=i_rune_protection
+NAME=Rune de peau de pierre
+TYPE=t_spell
+LAYER=44
+
+ON=@Create
+MOREX=s_stoneskin
+MOREY=865
+TIMER=300
+
+[ITEMDEF i_potion_de_peau_de_fer]
+ID=i_bottle_empty
+NAME=Potion de peau de fer
+TYPE=t_script
+WEIGHT=4
+RESOURCES=1 i_reag_garlic, 1 i_reag_ginseng, 2 i_reag_mandrake_root, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 100.0
+
+ON=@Create
+COLOR=0ae4
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_de_peau_de_fer>
+		SRC.NEWITEM i_rune_de_peau_de_fer
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion de peau de fer !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion de peau de fer
+
+[ITEMDEF i_rune_de_peau_de_fer]
+ID=i_rune_protection
+NAME=Rune de peau de fer
+TYPE=t_spell
+LAYER=44
+
+ON=@Create
+MOREX=s_stoneskin
+MOREY=1280
+TIMER=300
+
+[ITEMDEF i_potion_d_empoisonnement_legere]
+ID=i_bottle_empty
+NAME=Potion d'empoisonnement legere
+TYPE=t_script
+WEIGHT=2
+RESOURCES=3 i_reag_sulfur_ash, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 50.0
+
+ON=@Create
+COLOR=011
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	TARGET Sur qui desirez vous lancer la potion d'empoisonnement ?
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <SRC.TARG.CANSEELOS>==1
+	SRC.ANIM 9
+	IF <AMOUNT> >1
+		AMOUNT=<EVAL <AMOUNT>-1>
+		UPDATE
+	ELSE
+		REMOVE
+	ENDIF
+	SRC.TARG.EFFECT 0,0f0d,15,0,0
+	SRC.NEWITEM i_empoisonnement
+	SRC.ACT.P=<SRC.TARG.P>
+	SRC.NEWITEM i_rune_poison_leger
+	SRC.ACT.CONT=<SRC.TARG.UID>
+	IF (<SRC.TARG.FLAGS>&000000004)
+		SRC.TARG.FLAGS=<SRC.TARG.FLAGS>&~000000004
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas viser une cible qui n'est pas dans votre champ de vision !
+ENDIF
+
+CATEGORY=Potions
+SUBSECTION=Potions d'empoisonnement
+DESCRIPTION=Potion d'empoisonnement legere
+
+[ITEMDEF i_empoisonnement]
+ID=i_bottle_empty
+NAME=Potion d'empoisonnement legere
+TYPE=t_script
+
+ON=@CREATE
+TIMER=1
+COLOR=011
+ATTR=08010
+MORE1=1
+
+ON=@TIMER
+IF <MORE1>==1
+	DISPID i_fx_smoke
+	FIX
+	MORE1=2
+	TIMER=3
+ELSE
+	REMOVE
+	ENDIF
+RETURN 1
+
+[ITEMDEF i_rune_poison_leger]
+ID=i_rune_poison
+LAYER=42
+TYPE=t_spell
+
+ON=@CREATE
+TIMER=3
+MOREX=s_poison
+MOREY=500
+MORE2=3
+
+[ITEMDEF i_potion_d_empoisonnement]
+ID=i_bottle_empty
+NAME=Potion d'empoisonnement
+TYPE=t_script
+WEIGHT=4
+RESOURCES=5 i_reag_sulfur_ash, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 75.0
+
+ON=@Create
+COLOR=011
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	TARGET Sur qui desirez vous lancer la potion d'empoisonnement ?
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <SRC.TARG.CANSEELOS>==1
+	SRC.ANIM 9
+	IF <AMOUNT> >1
+		AMOUNT=<EVAL <AMOUNT>-1>
+		UPDATE
+	ELSE
+		REMOVE
+	ENDIF
+	SRC.TARG.EFFECT 0,0f0d,15,0,0
+	SRC.NEWITEM i_empoisonnement
+	SRC.ACT.P=<SRC.TARG.P>
+	SRC.NEWITEM i_rune_poison_normal
+	SRC.ACT.CONT=<SRC.TARG.UID>
+	IF (<SRC.TARG.FLAGS>&000000004)
+		SRC.TARG.FLAGS=<SRC.TARG.FLAGS>&~000000004
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas viser une cible qui n'est pas dans votre champ de vision !
+ENDIF
+
+CATEGORY=Potions
+SUBSECTION=Potions d'empoisonnement
+DESCRIPTION=Potion d'empoisonnement
+
+[ITEMDEF i_rune_poison_normal]
+ID=i_rune_poison
+LAYER=42
+TYPE=t_spell
+
+ON=@CREATE
+TIMER=3
+MOREX=s_poison
+MOREY=1000
+MORE2=3
+
+[ITEMDEF i_potion_d_empoisonnement_grave]
+ID=i_bottle_empty
+NAME=Potion d'empoisonnement grave
+TYPE=t_script
+WEIGHT=8
+RESOURCES=7 i_reag_sulfur_ash, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 100.0
+
+ON=@Create
+COLOR=011
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	TARGET Sur qui desirez vous lancer la potion d'empoisonnement ?
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <SRC.TARG.CANSEELOS>==1
+	SRC.ANIM 9
+	IF <AMOUNT> >1
+		AMOUNT=<EVAL <AMOUNT>-1>
+		UPDATE
+	ELSE
+		REMOVE
+	ENDIF
+	SRC.TARG.EFFECT 0,0f0d,15,0,0
+	SRC.NEWITEM i_empoisonnement
+	SRC.ACT.P=<SRC.TARG.P>
+	SRC.NEWITEM i_rune_poison_grave
+	SRC.ACT.CONT=<SRC.TARG.UID>
+	IF (<SRC.TARG.FLAGS>&000000004)
+		SRC.TARG.FLAGS=<SRC.TARG.FLAGS>&~000000004
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas viser une cible qui n'est pas dans votre champ de vision !
+ENDIF
+
+CATEGORY=Potions
+SUBSECTION=Potions d'empoisonnement
+DESCRIPTION=Potion d'empoisonnement grave
+
+[ITEMDEF i_rune_poison_grave]
+ID=i_rune_poison
+LAYER=42
+TYPE=t_spell
+
+ON=@CREATE
+TIMER=3
+MOREX=s_poison
+MOREY=2000
+MORE2=3
+
+[ITEMDEF i_potion_d_instinct_de_combat_mineur]
+ID=i_bottle_empty
+NAME=Potion d'instinct de combat mineur
+TYPE=t_script
+WEIGHT=4
+RESOURCES=2 i_reag_blood_moss, 2 i_reag_ginseng, 2 i_reag_mandrake_root, 2 i_reag_blackmoor, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 70.0
+
+ON=@Create
+COLOR=0594
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_d_instinct_de_combat_mineur>
+		SRC.NEWITEM i_rune_d_instinct_de_combat_mineur
+		SRC.ACT.EQUIP
+		IF <SRC.FINDID.i_potion_d_instinct_de_combat_mineur.amount> >1
+			SRC.FINDID.i_potion_d_instinct_de_combat_mineur.amount=<EVAL <SRC.FINDID.i_potion_d_instinct_de_combat_mineur.amount>-1>
+			FIX
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion d'instinct de combat mineur !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion d'instinct de combat mineur
+
+[ITEMDEF i_rune_d_instinct_de_combat_mineur]
+ID=i_memory
+NAME=Rune d'instinct de combat mineur
+TYPE=t_eq_script
+
+ON=@Create
+TIMER=60
+
+ON=@EQUIP
+CONT.FENCING=<EVAL <CONT.FENCING> + <CONT.TAG.FENCINGPURE> * 2>
+CONT.SWORDSMANSHIP=<EVAL <CONT.SWORDSMANSHIP> + <CONT.TAG.SWORDSMANSHIPPURE> * 2>
+CONT.MACEFIGHTING=<EVAL <CONT.MACEFIGHTING> + <CONT.TAG.MACEFIGHTINGPURE> * 2>
+CONT.PARRYING=<EVAL <CONT.PARRYING> + <CONT.TAG.PARRYINGPURE> * 2>
+CONT.ARCHERY=<EVAL <CONT.ARCHERY> + <CONT.TAG.ARCHERYPURE> * 2>
+CONT.WRESTLING=<EVAL <CONT.WRESTLING> + <CONT.TAG.WRESTLINGPURE> * 2>
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+ON=@UNEQUIP
+CONT.FENCING=<EVAL <CONT.FENCING> - <CONT.TAG.FENCINGPURE> * 2>
+CONT.SWORDSMANSHIP=<EVAL <CONT.SWORDSMANSHIP> - <CONT.TAG.SWORDSMANSHIPPURE> * 2>
+CONT.MACEFIGHTING=<EVAL <CONT.MACEFIGHTING> - <CONT.TAG.MACEFIGHTINGPURE> * 2>
+CONT.PARRYING=<EVAL <CONT.PARRYING> - <CONT.TAG.PARRYINGPURE> * 2>
+CONT.ARCHERY=<EVAL <CONT.ARCHERY> - <CONT.TAG.ARCHERYPURE> * 2>
+CONT.WRESTLING=<EVAL <CONT.WRESTLING> - <CONT.TAG.WRESTLINGPURE> * 2>
+
+[ITEMDEF i_potion_d_instinct_de_combat_majeur]
+ID=i_bottle_empty
+NAME=Potion d'instinct de combat majeur
+TYPE=t_script
+WEIGHT=4
+RESOURCES=3 i_reag_blood_moss, 3 i_reag_ginseng, 3 i_reag_mandrake_root, 3 i_reag_blackmoor, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 100.0
+
+ON=@Create
+COLOR=0594
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_d_instinct_de_combat_majeur>
+		SRC.NEWITEM i_rune_d_instinct_de_combat_majeur
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion d'instinct de combat majeur !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion d'instinct de combat majeur
+
+[ITEMDEF i_rune_d_instinct_de_combat_majeur]
+ID=i_memory
+NAME=Rune d'instinct de combat majeur
+TYPE=t_eq_script
+
+ON=@Create
+TIMER=300
+
+ON=@EQUIP
+CONT.FENCING=<EVAL <CONT.FENCING> + <CONT.TAG.FENCINGPURE> * 3>
+CONT.SWORDSMANSHIP=<EVAL <CONT.SWORDSMANSHIP> + <CONT.TAG.SWORDSMANSHIPPURE> * 3>
+CONT.MACEFIGHTING=<EVAL <CONT.MACEFIGHTING> + <CONT.TAG.MACEFIGHTINGPURE> * 3>
+CONT.PARRYING=<EVAL <CONT.PARRYING> + <CONT.TAG.PARRYINGPURE> * 3>
+CONT.ARCHERY=<EVAL <CONT.ARCHERY> + <CONT.TAG.ARCHERYPURE> * 3>
+CONT.WRESTLING=<EVAL <CONT.WRESTLING> + <CONT.TAG.WRESTLINGPURE> * 3>
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+ON=@UNEQUIP
+CONT.FENCING=<EVAL <CONT.FENCING> - <CONT.TAG.FENCINGPURE> * 3>
+CONT.SWORDSMANSHIP=<EVAL <CONT.SWORDSMANSHIP> - <CONT.TAG.SWORDSMANSHIPPURE> * 3>
+CONT.MACEFIGHTING=<EVAL <CONT.MACEFIGHTING> - <CONT.TAG.MACEFIGHTINGPURE> * 3>
+CONT.PARRYING=<EVAL <CONT.PARRYING> - <CONT.TAG.PARRYINGPURE> * 3>
+CONT.ARCHERY=<EVAL <CONT.ARCHERY> - <CONT.TAG.ARCHERYPURE> * 3>
+CONT.WRESTLING=<EVAL <CONT.WRESTLING> - <CONT.TAG.WRESTLINGPURE> * 3>
+
+[ITEMDEF i_potion_d_accroissement_magique]
+ID=i_bottle_empty
+NAME=Potion d'accroissement magique
+TYPE=t_script
+WEIGHT=4
+RESOURCES=3 i_reag_sulfur_ash, 3 i_reag_blackmoor, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 85.0
+
+ON=@Create
+COLOR=08b0
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_d_accroissement_magique>
+		SRC.NEWITEM i_rune_d_accroissement_magique
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion d'accroissement magique !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion d'accroissement magique
+
+[ITEMDEF i_rune_d_accroissement_magique]
+ID=i_memory
+NAME=Rune d'accroissement magique
+TYPE=t_eq_script
+
+ON=@Create
+TIMER=180
+
+ON=@EQUIP
+CONT.MAGERY=<EVAL <CONT.MAGERY> + (<CONT.TAG.MAGIEPURE> * 5)/2>
+CONT.MEDITATION=<EVAL <CONT.MEDITATION> + (<CONT.TAG.MEDITATIONPURE> * 5)/2>
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+ON=@UNEQUIP
+CONT.MAGERY=<EVAL <CONT.MAGERY> - (<CONT.TAG.MAGIEPURE> * 5)/2>
+CONT.MEDITATION=<EVAL <CONT.MEDITATION> - (<CONT.TAG.MEDITATIONPURE> * 5)/2>
+
+[ITEMDEF i_potion_de_bouclier_de_mana]
+ID=i_bottle_empty
+NAME=Potion de bouclier de mana
+TYPE=t_script
+WEIGHT=4
+RESOURCES=3 i_reag_garlic, 3 i_reag_blackmoor, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 60.0
+
+ON=@Create
+COLOR=04b1
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !<SRC.FINDID.i_rune_de_bouclier_de_mana>
+		SRC.NEWITEM i_rune_de_bouclier_de_mana
+		SRC.ACT.EQUIP
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion de bouclier de mana !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion de bouclier de mana
+
+[ITEMDEF i_rune_de_bouclier_de_mana]
+ID=i_memory
+NAME=Rune de bouclier de mana
+TYPE=t_eq_script
+
+ON=@Create
+TIMER=300
+
+ON=@EQUIP
+CONT.MagicResistance=<EVAL <CONT.MagicResistance> + <CONT.TAG.MAGICRESISTANCEPURE> * 5>
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+ON=@UNEQUIP
+CONT.MagicResistance=<EVAL <CONT.MagicResistance> - <CONT.TAG.MAGICRESISTANCEPURE> * 5>
+
+[ITEMDEF i_potion_de_reduction]
+ID=i_bottle_empty
+NAME=Potion de reduction
+TYPE=t_script
+WEIGHT=2
+RESOURCES=6 i_reag_brimstone, 2 i_reag_pig_iron, 1 i_bottle_EMPTY
+SKILLMAKE=ALCHEMY 65.0
+
+ON=@Create
+COLOR=0ad9
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Quelle creature desirez vous reduire ?
+	TARGET
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> ne peut etre reduit !
+RETURN 1
+
+ON=@TARGON_CHAR
+IF (<SRC.TARG.BODY>==c_man) || (<SRC.TARG.BODY>==c_woman) || (<SRC.TARG.NPC>==0)
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> ne peut etre reduit !
+ELSEIF <src.targ.flags>&statf_conjured
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas reduire une creature invoquee !
+ELSEIF <src.targ.flags>&statf_war
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas reduire une creature engagee dans un combat !
+ELSEIF (<SRC.TARG.OBODY>=c_llama_pack) || (<SRC.TARG.OBODY>=c_horse_pack)
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas reduire un animal de trait !
+ELSEIF <SRC.TARG.ISMYPET>
+	IF <SRC.TARG.HITS> < <SRC.TARG.STR>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas reduire une creature blessee !
+	ELSE
+		IF <AMOUNT> >1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+		SRC.TARG.SHRINK
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> est reduit !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas reduire une creature qui ne vous appartient pas !
+ENDIF
+RETURN 1
+
+//**************************************
+//********POTIONS SPECIALES APO2********
+//**************************************
+
+[ITEMDEF i_potion_prismatique]
+ID=i_bottle_empty
+NAME=Potion prismatique
+TYPE=t_script
+WEIGHT=4
+
+ON=@Create
+COLOR=0847
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF ((<SRC.FINDID.i_rune_force>) && (<SRC.FINDID.i_rune_dexterite>) && (<SRC.FINDID.i_rune_clairvoyance>))
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion prismatique !
+	ELSEIF <SRC.FINDID.i_rune_force>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion de force !
+	ELSEIF <SRC.FINDID.i_rune_dexterite>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion d'agilite !
+	ELSEIF <SRC.FINDID.i_rune_clairvoyance>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja sous l'effet d'une potion de clairvoyance !
+	ELSE
+		SRC.NEWITEM i_rune_force
+		SRC.ACT.MORE1=10
+		SRC.ACT.EQUIP
+		SRC.NEWITEM i_rune_dexterite
+		SRC.ACT.MORE1=10
+		SRC.ACT.EQUIP
+		SRC.NEWITEM i_rune_clairvoyance
+		SRC.ACT.MORE1=10
+		SRC.ACT.EQUIP
+		IF <AMOUNT> > 1
+			AMOUNT=<EVAL <AMOUNT>-1>
+			UPDATE
+		ELSE
+			REMOVE
+		ENDIF
+		SRC.NEWITEM i_bottle_EMPTY
+		SRC.ACT.EQUIP
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper les potions avant de les utiliser !
+ENDIF
+RETURN 1
+
+CATEGORY=Potions
+SUBSECTION=Potion diverses
+DESCRIPTION=Potion prismatique
+
+
+//*****************************
+//**********MEMORY*************
+//*****************************
+
+[ITEMDEF m_anti_popotage]
+ID=i_memory
+NAME=limiteur popo
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=5
+
+ON=@TIMER
+REMOVE
+RETURN 1

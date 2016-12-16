@@ -1,0 +1,139 @@
+<DIV CLASS="titre">
+    Statistiques du serveur
+</DIV>
+<BR/>
+
+<DIV CLASS="corps">
+    <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+        <TR>
+            <TD>Nombre de joueurs connect&eacute;s :</TD>
+            <TD>%STATCLIENTS%</TD>
+        </TR>
+        <TR><b></b>
+            <TD>Nombre de personnages non joueurs :</TD>
+            <TD>%STATNPCS%</TD>
+        </TR>
+        <TR>
+            <TD>Nombre total de comptes :</TD>
+            <TD>%STATACCOUNTS%</TD>
+        </TR>
+        <TR>
+            <TD>Nombre de guildes :</TD>
+            <TD>%STATGUILDS%</TD>
+        </TR>
+    </TABLE>
+</DIV>
+
+
+<br>
+<br>
+
+<div class="titre">Personnages l&eacute;gendaires</div>
+<br>
+
+<div class="corps">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>Niveau :</td>
+            <td>%UID.04003aaf0.TAG.LEVELNOM%</td>
+        </tr>
+        <tr>
+            <td>D&eacute;g&acirc;ts :</td>
+            <td>%UID.04003aaf0.TAG.CHAMPION% : %EVAL <UID.04003aaf0.TAG.DEGATS> % points de d&eacute;g&acirc;ts
+            </td>
+        </tr>
+        <tr>
+            <td>Force :</td>
+            <td>%UID.04003aaf0.TAG.FORPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Dexterit&eacute; :</td>
+            <td>%UID.04003aaf0.TAG.DEXPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Intellect :</td>
+            <td>%UID.04003aaf0.TAG.INTPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Anatomie :</td>
+            <td>%UID.04003aaf0.TAG.ANATOMYPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Armes d'estoc :</td>
+            <td>%UID.04003aaf0.TAG.FENCINGPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Armes de choc :</td>
+            <td>%UID.04003aaf0.TAG.MACEFIGHTINGPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Armes de taille :</td>
+            <td>%UID.04003aaf0.TAG.SWORDSMANSHIPPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Esquive :</td>
+            <td>%UID.04003aaf0.TAG.PARRYINGPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Evaluation de l'intellect :</td>
+            <td>%UID.04003aaf0.TAG.EvaluatingIntelPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Gu&eacute;rison :</td>
+            <td>%UID.04003aaf0.TAG.HEALINGPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Lutte :</td>
+            <td>%UID.04003aaf0.TAG.WRESTLINGPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Magie :</td>
+            <td>%UID.04003aaf0.TAG.MAGIEPURENOM%</td>
+        </tr>
+        <tr>
+            <td>M&eacute;ditation :</td>
+            <td>%UID.04003aaf0.TAG.MEDITATIONPURENOM%</td>
+        </tr>
+        <tr>
+            <td>R&eacute;sistance aux sortil&egrave;ges
+                :
+            </td>
+            <td>%UID.04003aaf0.TAG.MAGICRESISTANCEPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Tactique :</td>
+            <td>%UID.04003aaf0.TAG.TACTICSPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Tir &agrave; l'arc :</td>
+            <td>%UID.04003aaf0.TAG.ARCHERYPURENOM%</td>
+        </tr>
+        <tr>
+            <td>Incin&eacute;rateur :</td>
+            <td>%UID.04003aaf0.TAG.TOTALCADAVRENOM% cadavres brul&eacute;s</td>
+        </tr>
+        <tr>
+            <td>Participation :</td>
+            <td>%UID.04003aaf0.TAG.CLICKTOTALNOM%</td>
+        </tr>
+    </table>
+
+
+    <BR><BR>
+
+    <div id="sphere">
+        <DIV CLASS="titre">
+            Joueurs connect&eacute;s
+        </DIV>
+        &nbsp;
+        <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" style="width: 100%;">
+            <tr>
+                <th style="text-align:left;">Personnage</th>
+                <th style="text-align:center;">&nbsp;Meutres&nbsp;</th>
+                <th style="text-align:center;">&nbsp;&nbsp;Morts&nbsp;&nbsp;</th>
+            </tr>
+            <script language="Sphere">
+            CLIENTLIST <tr><td><a href="http://server.uoapo2.com/%NAME%" target="_blank"><font size="1" color="%tag.couleurnom%">%NAME%</font></a> <img SRC="http://www.uoapo.com/images/%tag.image%"><img SRC="http://www.uoapo.com/images/%tag.image3%"></td><td style="text-align:center;"><font size="1" color="red">%kills%</font></td><td style="text-align:center;"><font size="1" color="#00D8FF">%deaths%</font></td></tr>
+        </script>
+        </TABLE>
+    </div>

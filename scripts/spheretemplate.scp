@@ -1,0 +1,389 @@
+[TEMPLATE 102100]
+DEFNAME=VENDOR_S_DEED_TEMPLATE
+CATEGORY=Vendor Templates
+SUBSECTION=Sell Templates
+DESCRIPTION=Deed Vendor
+SELL=i_deed_house_stone_plaster_small,{2 6}
+SELL=i_deed_House_stone_small,{2 6}
+SELL=i_deed_House_stone_brick_small,{2 6}
+SELL=i_deed_House_stone_wood_small,{2 6}
+SELL=i_deed_House_wood_plaster_small,{2 6}
+SELL=i_deed_House_wood_thatched_small,{2 6}
+SELL=i_deed_tent_blue,{2 6}
+SELL=i_deed_tent_green,{2 6}
+SELL=i_deed_house_3room,{2 6}
+SELL=i_deed_house_wood_plaster_2story,{2 6}
+SELL=i_deed_house_stone_plaster_2story,{2 6}
+SELL=i_deed_tower,{2 6}
+SELL=i_deed_keep,{2 6}
+SELL=i_deed_Castle,{2 6}
+SELL=i_deed_shop_blacksmithy_large,{2 6}
+SELL=i_deed_evil_compound,{5 10}
+SELL=i_deed_house_wheat_cottage,{10 20}
+SELL=i_deed_shop_marble_small,{10 20}
+SELL=i_deed_shop_stone_small,{10 20}
+SELL=i_deed_villa_2story,{10 20}
+SELL=i_deed_house_patio_sand,{10 20}
+SELL=i_deed_cabin_log_2story,{10 20}
+SELL=i_deed_house_patio_marble,{10 20}
+
+[TEMPLATE 102101]
+DEFNAME=VENDOR_B_DEED_TEMPLATE
+CATEGORY=Vendor Templates
+SUBSECTION=Buy Templates
+DESCRIPTION=Deed Vendor
+BUY=i_deed_house_stone_plaster_small,{2 6}
+BUY=i_deed_House_stone_small,{2 6}
+BUY=i_deed_House_stone_brick_small,{2 6}
+BUY=i_deed_House_stone_wood_small,{2 6}
+BUY=i_deed_House_wood_plaster_small,{2 6}
+BUY=i_deed_House_wood_thatched_small,{2 6}
+BUY=i_deed_tent_blue,{2 6}
+BUY=i_deed_tent_green,{2 6}
+BUY=i_deed_house_3room,{2 6}
+BUY=i_deed_house_wood_plaster_2story,{2 6}
+BUY=i_deed_house_stone_plaster_2story,{2 6}
+BUY=i_deed_tower,{2 6}
+BUY=i_deed_keep,{2 6}
+BUY=i_deed_Castle,{2 6}
+BUY=i_deed_shop_blacksmithy_large,{2 6}
+BUY=i_deed_house_wheat_cottage,{10 20}
+BUY=i_deed_shop_marble_small,{10 20}
+BUY=i_deed_shop_stone_small,{10 20}
+BUY=i_deed_villa_2story,{10 20}
+BUY=i_deed_house_patio_sand,{10 20}
+BUY=i_deed_cabin_log_2story,{10 20}
+BUY=i_deed_house_patio_marble,{10 20}
+BUY=i_deed_evil_compound,R3
+
+[TEMPLATE VENDOR_S_LEGUMES]
+SELL=i_fruit_carrot,{5 20}
+SELL=i_fruit_lettuce,{5 20}
+SELL=i_fruit_onion,{2 10}
+SELL=i_champignon,{2 10}
+SELL=i_bowl_pewter_potatoes,{2 10}
+SELL=i_sac_de_haricots,{1 4}
+SELL=i_tomate,{2 10}
+SELL=i_piment_doux,{2 10}
+SELL=i_piment_jalapeno,{1 2}
+SELL=i_piment_habanero,{0 1}
+
+[TEMPLATE VENDOR_S_FRUITS]
+SELL=i_fruit_honeydewmelon,{2 10}
+SELL=i_fruit_peach,{5 20}
+SELL=i_fruit_pear,{5 20}
+SELL=i_fruit_lemon,{2 10}
+SELL=i_fruit_lime,{2 10}
+SELL=i_fruit_grapes,{5 20}
+SELL=i_fruit_apple,{5 20}
+SELL=i_orange,{2 10}
+SELL=i_fruit_banana,{1 4}
+CATEGORY=Vendor Templates
+SUBSECTION=Sell Templates
+DESCRIPTION=Vendeur de fruits
+
+[TEMPLATE VENDOR_S_ALIMENTS]
+SELL=i_eggs_fresh,{2 10}
+SELL=i_jar_honey,{1 4}
+SELL=i_cruche_de_creme,{1 2}
+SELL=i_cruche_de_lait,{1 4}
+SELL=i_sac_de_sel,{0 1}
+SELL=i_sac_de_farine,{0 1}
+SELL=i_sac_de_sucre,{0 1}
+SELL=i_sac_d_epices,{0 1}
+SELL=i_levure,{5 15}
+CATEGORY=Vendor Templates
+SUBSECTION=Sell Templates
+DESCRIPTION=Vendeur d'aliments
+
+[TEMPLATE 102120]
+DEFNAME=VENDOR_S_VET
+CATEGORY=Vendor Templates
+SUBSECTION=Sell Templates
+DESCRIPTION=Veterinarian
+SELL=i_bandage,{6 66}
+SELL=i_pet_horse_tan,{0 2}
+SELL=i_pet_horse_gray,{0 2}
+SELL=i_pet_horse_brown_lt,{0 2}
+SELL=i_pet_horse_brown_dk,{0 2}
+SELL=i_pet_horse_pack,{0 3}
+SELL=i_pet_llama_pack,{0 3}
+SELL=i_pet_dog,{2 13}
+SELL=i_pet_cat,{2 13}
+
+[TEMPLATE 102121]
+DEFNAME=VENDOR_B_VET
+CATEGORY=Vendor Templates
+SUBSECTION=Buy Templates
+DESCRIPTION=Veterinarian
+BUY=i_cloth,{6 26}
+BUY=i_bandage,{6 26}
+BUY=i_hay_sheaf,{6 26}
+BUY=i_fruit_apple,{6 26}
+BUY=i_fruit_carrot,{6 26}
+BUY=I_FRUIT_LETTUCE,{6 26}
+BUY=i_ribs_raw,{6 26}
+BUY=I_BIRD_RAW,{6 26}
+BUY=i_CARCASS_BEEF,{6 26}
+BUY=i_CARCASS_OTHER,{6 26}
+
+[TEMPLATE 102130]
+DEFNAME=VENDOR_S_WEAVER
+CATEGORY=Vendor Templates
+SUBSECTION=Sell Templates
+DESCRIPTION=Weaver
+SELL=i_DYES,{3 38}
+SELL=i_dye_tub,{3 38}
+SELL=i_cloth,{3 38}
+SELL=i_cloth_bolt,{3 38}
+SELL=i_yarn_ball,{3 38}
+SELL=i_scissors,{3 38}
+
+[TEMPLATE 102131]
+DEFNAME=VENDOR_B_WEAVER
+CATEGORY=Vendor Templates
+SUBSECTION=Buy Templates
+DESCRIPTION=Weaver
+BUY=i_scissors,{3 38}
+BUY=i_DYES,{3 38}
+BUY=i_dye_tub,{3 38}
+BUY=i_cloth,{3 38}
+BUY=i_cotton,{3 38}
+BUY=I_WOOL,{3 38}
+BUY=i_yarn_ball,{3 38}
+
+[TEMPLATE 102142]
+DEFNAME=VENDOR_S_SHIP
+CATEGORY=Vendor Templates
+SUBSECTION=Sell Templates
+DESCRIPTION=Shipmaster
+SELL=i_SEXTANT,{5 20}
+SELL=i_deed_ship_small_N,{1 2}
+SELL=i_deed_ship_dragon_small_N,{1 2}
+SELL=i_deed_ship_medium_N,{1 2}
+SELL=i_deed_ship_dragon_medium_N,{1 2}
+SELL=i_deed_ship_long_N,{1 2}
+SELL=i_deed_ship_dragon_long_N,{1 2}
+
+[TEMPLATE 102143]
+DEFNAME=VENDOR_B_SHIP
+CATEGORY=Vendor Templates
+SUBSECTION=Buy Templates
+DESCRIPTION=Shipmaster
+BUY=i_SEXTANT,{5 20}
+BUY=i_deed_ship_small_N,{1 2}
+BUY=i_deed_ship_dragon_small_N,{1 2}
+BUY=i_deed_ship_medium_N,{1 2}
+BUY=i_deed_ship_dragon_medium_N,{1 2}
+BUY=i_deed_ship_long_N,{1 2}
+BUY=i_deed_ship_dragon_long_N,{1 2}
+
+[TEMPLATE 102150]
+DEFNAME=VENDOR_S_TAVERNKEEPER
+CATEGORY=Vendor Templates
+SUBSECTION=Sell Templates
+DESCRIPTION=Tavernkeeper
+SELL=i_ale_amber,{6 26}
+SELL=i_ale_honey,{6 26}
+SELL=i_ale_brown,{6 26}
+SELL=i_ale_spiced,{6 26}
+SELL=i_ale_smoked,{6 26}
+SELL=i_ale_stout,{6 26}
+SELL=i_ale_oktoberfest,{6 26}
+SELL=i_bottle_ale,{6 26}
+SELL=i_bottle_wine,{6 26}
+SELL=i_bottle_liquor,{6 26}
+SELL=i_JUG_CIDER,{6 26}
+SELL=i_pitcher_ale,{6 26}
+SELL=i_pitcher_cider,{6 26}
+SELL=i_pitcher_glass,{6 26}
+SELL=i_pitcher_liquor,{6 26}
+SELL=i_pitcher_milk,{6 26}
+SELL=i_pitcher_wine,{6 26}
+SELL=i_pitcher_water,{6 26}
+SELL=i_bread_loaf,{6 26}
+SELL=i_cheese_wheel,{6 26}
+SELL=i_bird_cooked,{6 26}
+SELL=i_lamb_leg,{6 26}
+SELL=i_bird_cooked,{6 26}
+SELL=i_bowl_wood_carrots,{6 26}
+SELL=i_bowl_wood_corn,{6 26}
+SELL=i_bowl_wood_lettuce,{6 26}
+SELL=i_bowl_wood_peas,{6 26}
+SELL=i_bowl_pewter_potatoes,{6 26}
+SELL=i_bowl_stew_lg,{6 26}
+SELL=i_bowl_TOMATO_SOUP,{6 26}
+SELL=i_pie_baked,{6 26}
+SELL=i_chessboard,{6 26}
+SELL=i_checkerboard,{6 26}
+SELL=i_backgammon_game,{6 26}
+SELL=i_dice_cup,{6 26}
+
+[TEMPLATE 102151]
+DEFNAME=VENDOR_B_TAVERNKEEPER
+CATEGORY=Vendor Templates
+SUBSECTION=Buy Templates
+DESCRIPTION=Tavernkeeper
+BUY=i_ale_amber,{6 26}
+BUY=i_ale_honey,{6 26}
+BUY=i_ale_brown,{6 26}
+BUY=i_ale_spiced,{6 26}
+BUY=i_ale_smoked,{6 26}
+BUY=i_ale_stout,{6 26}
+BUY=i_ale_oktoberfest,{6 26}
+BUY=i_chessboard,{6 26}
+BUY=i_checkerboard,{6 26}
+BUY=i_dice_cup,{6 26}
+BUY=i_backgammon_game,{6 26}
+BUY=i_bottle_ale,{6 26}
+BUY=i_bottle_wine,{6 26}
+BUY=i_bottle_liquor,{6 26}
+BUY=i_JUG_CIDER,{6 26}
+BUY=i_pitcher_ale,{6 26}
+BUY=i_pitcher_cider,{6 26}
+BUY=i_pitcher_glass,{6 26}
+BUY=i_pitcher_liquor,{6 26}
+BUY=i_pitcher_milk,{6 26}
+BUY=i_pitcher_wine,{6 26}
+BUY=i_pitcher_water,{6 26}
+BUY=i_bread_loaf,{6 26}
+BUY=i_cheese_wheel,{6 26}
+BUY=i_bird_cooked,{6 26}
+BUY=i_lamb_leg,{6 26}
+BUY=i_bird_cooked,{6 26}
+BUY=i_bowl_wood_carrots,{6 26}
+BUY=i_bowl_wood_corn,{6 26}
+BUY=i_bowl_wood_lettuce,{6 26}
+BUY=i_bowl_wood_peas,{6 26}
+BUY=i_bowl_pewter_potatoes,{6 26}
+BUY=i_bowl_stew_lg,{6 26}
+BUY=i_bowl_TOMATO_SOUP,{6 26}
+BUY=i_pie_baked,{6 26}
+
+[TEMPLATE 102154]
+DEFNAME=VENDOR_S_TRAINER
+CATEGORY=Vendor Templates
+SUBSECTION=Sell Templates
+DESCRIPTION=Animal Trainer
+SELL=i_pet_cat,{2 18}
+SELL=i_pet_dog,{2 18}
+SELL=i_pet_horse_tan,{0 2}
+SELL=i_pet_horse_gray,{0 2}
+SELL=i_pet_horse_brown_lt,{0 2}
+SELL=i_pet_horse_brown_dk,{0 2}
+SELL=i_pet_horse_pack,{1 5}
+SELL=i_pet_llama_pack,{1 5}
+SELL=i_pet_raven,{2 18}
+SELL=i_pet_rat,{2 18}
+SELL=i_pet_rabbit,{2 18}
+SELL=i_pet_wolf,{2 18}
+SELL=i_pet_bear_black,{2 18}
+SELL=i_pet_grizzly,{2 18}
+SELL=i_pet_eagle,{2 18}
+SELL=i_pet_panther,{2 18}
+
+[TEMPLATE 102155]
+DEFNAME=VENDOR_B_TRAINER
+CATEGORY=Vendor Templates
+SUBSECTION=Buy Templates
+DESCRIPTION=Animal Trainer
+BUY=i_hay_sheaf,{22 48}
+BUY=i_fruit_apple,{22 48}
+BUY=i_fruit_carrot,{22 48}
+BUY=i_fruit_lettuce,{22 48}
+BUY=i_ribs_raw,{22 48}
+BUY=i_bird_raw,{22 48}
+BUY=i_CARCASS_BEEF,{22 48}
+BUY=i_CARCASS_OTHER,{22 48}
+
+[TEMPLATE VENDOR_S_FLEURISTE]
+SELL=i_flower_campion,1
+SELL=i_flower_foxglove,1
+SELL=i_flower_foxglove_2,1
+SELL=i_flower_orfluer,1
+SELL=i_flower_redpoppies,1
+SELL=i_flower_snowdrops,1
+SELL=i_flower_campion_3,1
+SELL=i_flower_white,1
+SELL=i_flower_white_2,1
+
+CATEGORY=Vendor Templates
+SUBSECTION=Sell Templates
+DESCRIPTION=Fleuriste
+
+
+//***AUTRE***
+
+
+[TEMPLATE tm_rocks]
+ITEM={i_rock_plain i_rock_plain_x}
+
+[TEMPLATE tm_boulders]
+ITEM={i_boulder i_boulder_x}
+
+[TEMPLATE 101709]
+DEFNAME=FILTHY_RICH_MONSTER_BACKPACK
+CATEGORY=Item Templates
+SUBSECTION=Loot Templates
+DESCRIPTION=Filthy Rich Monster Backpack
+CONTAINER=i_backpack
+ITEM={ random_meat 1 0 2 },{ 2 6 }
+ITEM={ i_torch 1 0 1 },{ 1 3 }
+ITEM={ random_filthy_rich_magic_loot 1 0 20 }
+ITEM=FILTHY_RICH_GOLD_PILE
+
+[TEMPLATE tm_minerai_classe_6]
+ITEM={i_ore_autunite 1 i_ore_chrysoprase 1 i_ore_fluorite 1 i_ore_vanadinite 1}
+
+[TEMPLATE tm_minerai_classe_7]
+ITEM={i_ore_aqua 1 i_ore_silver 1 i_ore_goshenite 1 i_ore_heliodor 1}
+
+[TEMPLATE tm_minerai_classe_8]
+ITEM={i_ore_aventurine 1 i_ore_azurite 1 i_ore_citrine 1 i_ore_grenat 1}
+
+[TEMPLATE tm_tres_petit_tresor]
+ITEM=i_gold
+AMOUNT={500 2500}
+
+[TEMPLATE tm_petit_tresor]
+CONTAINER=i_bag
+ITEM=i_gold,{1000 3500}
+ITEM={i_piece_diamant 1 0 4},{1 10}
+ITEM={tm_minerai_classe_6 1 0 40},1
+
+[TEMPLATE tm_moyen_tresor]
+CONTAINER=i_bag
+ITEM=i_gold,{1000 4000}
+ITEM={i_ingot_gold 1 0 1},{10 50}
+ITEM={tm_minerai_classe_6 1 0 20},{1 2}
+ITEM={tm_minerai_classe_7 1 0 40},1
+ITEM={i_hache_benie 1 0 2500},1
+
+[TEMPLATE tm_gros_tresor]
+CONTAINER=i_backpack
+ITEM=i_gold,{200 10000}
+ITEM={ 0 98 i_perle_enchantement 2 },{1 2}
+ITEM={tm_minerai_classe_6 1 0 10},{1 2}
+ITEM={tm_minerai_classe_7 1 0 20},1
+ITEM={tm_minerai_classe_8 1 0 40},1
+ITEM={i_piece_diamant 4 0 1},{1 8}
+ITEM={i_ore_titane 1 0 1000},1
+ITEM={i_hache_lormyrienne 1 0 2500},1
+ITEM={i_epee_d_adamandite_incrustee_de_saphirs 1 i_hache_benie 2 0 2500},1
+
+[TEMPLATE tm_tres_gros_tresor]
+CONTAINER=i_grand_coffre_en_fer
+ITEM=i_piece_diamant,{10 80}
+ITEM={ 0 98 i_perle_enchantement 2 },{1 3}
+ITEM={tm_minerai_classe_7 1 0 10},1
+ITEM={tm_minerai_classe_8 1 0 20},1
+ITEM={i_ore_titane 1 0 700},1
+ITEM={i_epee_ancienne_des_hauts_elfes 1 i_hache_ancienne_des_hauts_elfes 1 i_fleau_d_arme_antique_des_hauts_elfes 1 i_epieu_forlane 1 i_arbalete_composite_des_hauts_elfes 1 i_l_assomeur 1 0 2000},1
+
+[TEMPLATE tm_immense_tresor]
+CONTAINER=i_grand_coffre_en_fer_orne
+ITEM=i_piece_diamant,{15 150}
+ITEM={i_piece_diamant 1 0 100},{150 1000}
+ITEM={ 0 98 i_perle_enchantement 2 },{1 5}
+ITEM={i_ore_titane 1 0 250},1
+ITEM={i_epee_ancienne_des_hauts_elfes 1 i_hache_ancienne_des_hauts_elfes 1 i_fleau_d_arme_antique_des_hauts_elfes 1 i_epieu_forlane 1 i_arbalete_composite_des_hauts_elfes 1 i_l_assomeur 1 0 200},1

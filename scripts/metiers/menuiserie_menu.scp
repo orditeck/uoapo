@@ -1,0 +1,517 @@
+//*****BASE*****
+
+[SKILLMENU sm_carpentry]
+Carpentry
+
+ON=i_board Planches
+MAKEITEM=i_board
+
+ON=i_PAPER Papier
+MAKEITEM=i_PAPER
+
+ON=i_scroll_blank
+MAKEITEM=i_scroll_blank
+
+ON=i_armoir_dk Meubles
+SKILLMENU=sm_meubles_carpentry
+
+ON=i_chest_wooden_brass Boites et coffres
+SKILLMENU=sm_boites_coffres
+
+ON=i_portrait_7 Tableaux
+SKILLMENU=sm_tableaux
+
+ON=0df1 Objets magiques
+SKILLMENU=sm_carpentry_objets_magiques
+
+ON=i_deed Bateaux
+SKILLMENU=sm_bateaux_carpentry
+
+ON=i_deed Autres
+SKILLMENU=sm_autres_carpentry_1
+
+//*****MEUBLES*****
+
+[SKILLMENU sm_meubles_carpentry]
+Meubles
+
+ON=i_chair_throne Chaises //fait
+SKILLMENU=sm_chaises_carpentry
+
+ON=i_table_runner_snowflake Tables
+SKILLMENU=sm_tables_carpentry
+
+ON=i_deed Autres
+SKILLMENU=sm_autres_carpentry_2
+
+
+//*****CHAISES*****
+
+
+[SKILLMENU sm_chaises_carpentry]
+Chaises
+
+ON=i_petit_tabouret <name> (<resmake>)
+MAKEITEM=i_petit_tabouret
+
+ON=i_tabouret_simple <name> (<resmake>)
+MAKEITEM=i_tabouret_simple
+
+ON=i_tabouret_bar <name> (<resmake>)
+MAKEITEM=i_tabouret_bar
+
+ON=i_petit_banc_ouest <name> (<resmake>)
+MAKEITEM=i_petit_banc_ouest
+
+ON=i_petit_banc_nord <name> (<resmake>)
+MAKEITEM=i_petit_banc_nord
+
+ON=i_deed_banc_deux_places_nord <name> (<resmake>)
+MAKEITEM=i_deed_banc_deux_places_nord
+
+ON=i_deed_banc_deux_places_ouest <name> (<resmake>)
+MAKEITEM=i_deed_banc_deux_places_ouest
+
+ON=i_deed_banc_deux_places_luxueux_nord <name> (<resmake>)
+MAKEITEM=i_deed_banc_deux_places_luxueux_nord
+
+ON=i_deed_banc_deux_places_luxueux_ouest <name> (<resmake>)
+MAKEITEM=i_deed_banc_deux_places_luxueux_ouest
+
+ON=i_deed_grand_banc <name> (<resmake>)
+MAKEITEM=i_deed_grand_banc
+
+ON=i_chaise_rustique_nord <name> (<resmake>)
+MAKEITEM=i_chaise_rustique_nord
+
+ON=i_chaise_rustique_ouest <name> (<resmake>)
+MAKEITEM=i_chaise_rustique_ouest
+
+ON=i_chaise_rustique_est <name> (<resmake>)
+MAKEITEM=i_chaise_rustique_est
+
+ON=i_chaise_rustique_sud <name> (<resmake>)
+MAKEITEM=i_chaise_rustique_sud
+
+ON=i_chaise_frene_nord <name> (<resmake>)
+MAKEITEM=i_chaise_frene_nord
+
+ON=i_chaise_frene_ouest <name> (<resmake>)
+MAKEITEM=i_chaise_frene_ouest
+
+ON=i_chaise_frene_est <name> (<resmake>)
+MAKEITEM=i_chaise_frene_est
+
+ON=i_chaise_frene_sud <name> (<resmake>)
+MAKEITEM=i_chaise_frene_sud
+
+ON=i_chaise_ouest <name> (<resmake>)
+MAKEITEM=i_chaise_ouest
+
+ON=i_chaise_nord <name> (<resmake>)
+MAKEITEM=i_chaise_nord
+
+ON=i_chaise_sud <name> (<resmake>)
+MAKEITEM=i_chaise_sud
+
+ON=i_chaise_est <name> (<resmake>)
+MAKEITEM=i_chaise_est
+
+ON=i_chaise_moderne_1_ouest <name> (<resmake>)
+MAKEITEM=i_chaise_moderne_1_ouest
+
+ON=i_chaise_moderne_1_nord <name> (<resmake>)
+MAKEITEM=i_chaise_moderne_1_nord
+
+ON=i_chaise_moderne_1_sud <name> (<resmake>)
+MAKEITEM=i_chaise_moderne_1_sud
+
+ON=i_chaise_moderne_1_est <name> (<resmake>)
+MAKEITEM=i_chaise_moderne_1_est
+
+ON=i_chaise_moderne_2_ouest <name> (<resmake>)
+MAKEITEM=i_chaise_moderne_2_ouest
+
+ON=i_chaise_moderne_2_nord <name> (<resmake>)
+MAKEITEM=i_chaise_moderne_2_nord
+
+ON=i_chaise_moderne_2_sud <name> (<resmake>)
+MAKEITEM=i_chaise_moderne_2_sud
+
+ON=i_chaise_moderne_2_est <name> (<resmake>)
+MAKEITEM=i_chaise_moderne_2_est
+
+ON=i_trone_nord <name> (<resmake>)
+MAKEITEM=i_trone_nord
+
+ON=i_trone_ouest <name> (<resmake>)
+MAKEITEM=i_trone_ouest
+
+
+//*****TABLES*****
+
+
+[SKILLMENU sm_tables_carpentry]
+Tables
+
+ON=i_table_chevet_rustique_nord <name> (<resmake>)
+MAKEITEM=i_table_chevet_rustique_nord
+
+ON=i_table_chevet_rustique_ouest <name> (<resmake>)
+MAKEITEM=i_table_chevet_rustique_ouest
+
+ON=i_table_rustique_nord <name> (<resmake>)
+MAKEITEM=i_table_rustique_nord
+
+ON=i_deed_table_mauvaise_facture_nord <name> (<resmake>)
+MAKEITEM=i_deed_table_mauvaise_facture_nord
+
+ON=i_deed_table_mauvaise_facture_ouest <name> (<resmake>)
+MAKEITEM=i_deed_table_mauvaise_facture_ouest
+
+ON=i_table_bois_nord <name> (<resmake>)
+MAKEITEM=i_table_bois_nord
+
+ON=i_table_bois_ouest <name> (<resmake>)
+MAKEITEM=i_table_bois_ouest
+
+ON=i_table_rustique_ouest <name> (<resmake>)
+MAKEITEM=i_table_rustique_ouest
+
+ON=i_table_ecriture_ouest <name> (<resmake>)
+MAKEITEM=i_table_ecriture_ouest
+
+ON=i_table_ecriture_sud <name> (<resmake>)
+MAKEITEM=i_table_ecriture_sud
+
+ON=i_table_ecriture_nord <name> (<resmake>)
+MAKEITEM=i_table_ecriture_nord
+
+ON=i_table_ecriture_est <name> (<resmake>)
+MAKEITEM=i_table_ecriture_est
+
+ON=i_deed_table_rondin_nord <name> (<resmake>)
+MAKEITEM=i_deed_table_rondin_nord
+
+ON=i_deed_table_rondin_ouest <name> (<resmake>)
+MAKEITEM=i_deed_table_rondin_ouest
+
+ON=i_deed_bureau_nord <name> (<resmake>)
+MAKEITEM=i_deed_bureau_nord
+
+ON=i_deed_bureau_ouest <name> (<resmake>)
+MAKEITEM=i_deed_bureau_ouest
+
+ON=i_table_tissus_violet_nord <name> (<resmake>)
+MAKEITEM=i_table_tissus_violet_nord
+
+ON=i_table_tissus_violet_ouest <name> (<resmake>)
+MAKEITEM=i_table_tissus_violet_ouest
+
+ON=i_table_tissus_rouge_nord <name> (<resmake>)
+MAKEITEM=i_table_tissus_rouge_nord
+
+ON=i_table_tissus_rouge_ouest <name> (<resmake>)
+MAKEITEM=i_table_tissus_rouge_ouest
+
+ON=i_petite_table_tissus_vert_ouest <name> (<resmake>)
+MAKEITEM=i_petite_table_tissus_vert_ouest
+
+ON=i_petite_table_tissus_vert_nord <name> (<resmake>)
+MAKEITEM=i_petite_table_tissus_vert_nord
+
+ON=i_deed_table_moderne_tissus_nord <name> (<resmake>)
+MAKEITEM=i_deed_table_moderne_tissus_nord
+
+ON=i_deed_table_moderne_tissus_ouest <name> (<resmake>)
+MAKEITEM=i_deed_table_moderne_tissus_ouest
+
+
+//*****AUTRES MEUBLES*****
+
+
+[SKILLMENU sm_autres_carpentry_2]
+Autres
+
+ON=i_bibliotheque_pleine_nord1 <name> (<resmake>)
+MAKEITEM=i_bibliotheque_pleine_nord1
+
+ON=i_bibliotheque_pleine_nord2 <name> (<resmake>)
+MAKEITEM=i_bibliotheque_pleine_nord2
+
+ON=i_bibliotheque_pleine_nord3 <name> (<resmake>)
+MAKEITEM=i_bibliotheque_pleine_nord3
+
+ON=i_bibliotheque_pleine_ouest1 <name> (<resmake>)
+MAKEITEM=i_bibliotheque_pleine_ouest1
+
+ON=i_bibliotheque_pleine_ouest2 <name> (<resmake>)
+MAKEITEM=i_bibliotheque_pleine_ouest2
+
+ON=i_bibliotheque_pleine_ouest3 <name> (<resmake>)
+MAKEITEM=i_bibliotheque_pleine_ouest3
+
+ON=i_bibliotheque_vide_nord <name> (<resmake>)
+MAKEITEM=i_bibliotheque_vide_nord
+
+ON=i_bibliotheque_vide_ouest <name> (<resmake>)
+MAKEITEM=i_bibliotheque_vide_ouest
+
+ON=i_petite_armoire_orme_nord <name> (<resmake>)
+MAKEITEM=i_petite_armoire_orme_nord
+
+ON=i_petite_armoire_orme_ouest <name> (<resmake>)
+MAKEITEM=i_petite_armoire_orme_ouest
+
+ON=i_petite_armoire_chene_nord <name> (<resmake>)
+MAKEITEM=i_petite_armoire_chene_nord
+
+ON=i_petite_armoire_chene_ouest <name> (<resmake>)
+MAKEITEM=i_petite_armoire_chene_ouest
+
+ON=i_grande_armoire_orme_nord <name> (<resmake>)
+MAKEITEM=i_grande_armoire_orme_nord
+
+ON=i_grande_armoire_orme_ouest <name> (<resmake>)
+MAKEITEM=i_grande_armoire_orme_ouest
+
+ON=i_grande_armoire_chene_nord <name> (<resmake>)
+MAKEITEM=i_grande_armoire_chene_nord
+
+ON=i_grande_armoire_chene_ouest <name> (<resmake>)
+MAKEITEM=i_grande_armoire_chene_ouest
+
+ON=i_deed_maquilleuse_ouest <name> (<resmake>)
+MAKEITEM=i_deed_maquilleuse_ouest
+
+ON=i_deed_maquilleuse_nord <name> (<resmake>)
+MAKEITEM=i_deed_maquilleuse_nord
+
+ON=i_deed_grande_vitrine_nord <name> (<resmake>)
+MAKEITEM=i_deed_grande_vitrine_nord
+
+ON=i_deed_grande_vitrine_ouest <name> (<resmake>)
+MAKEITEM=i_deed_grande_vitrine_ouest
+
+ON=i_deed_petit_lit_marron_ouest <name> (<resmake>)
+MAKEITEM=i_deed_petit_lit_marron_ouest
+
+ON=i_deed_petit_lit_marron_nord <name> (<resmake>)
+MAKEITEM=i_deed_petit_lit_marron_nord
+
+ON=i_deed_petit_lit_gris_nord <name> (<resmake>)
+MAKEITEM=i_deed_petit_lit_gris_nord
+
+ON=i_deed_petit_lit_gris_ouest <name> (<resmake>)
+MAKEITEM=i_deed_petit_lit_gris_ouest
+
+ON=i_deed_lit_luxueux_blanc_nord <name> (<resmake>)
+MAKEITEM=i_deed_lit_luxueux_blanc_nord
+
+ON=i_deed_lit_luxueux_blanc_ouest <name> (<resmake>)
+MAKEITEM=i_deed_lit_luxueux_blanc_ouest
+
+ON=i_deed_lit_luxueux_bleu_ouest <name> (<resmake>)
+MAKEITEM=i_deed_lit_luxueux_bleu_ouest
+
+ON=i_deed_lit_luxueux_bleu_nord <name> (<resmake>)
+MAKEITEM=i_deed_lit_luxueux_bleu_nord
+
+ON=i_deed_bar_ouest <name> (<resmake>)
+MAKEITEM=i_deed_bar_ouest
+
+ON=i_deed_bar_nord <name> (<resmake>)
+MAKEITEM=i_deed_bar_nord
+
+
+//*****BOITES ET COFFRES*****
+
+
+[SKILLMENU sm_boites_coffres]
+Boites et coffres
+
+ON=i_petite_boite_bois_1 <name> (<resmake>)
+MAKEITEM=i_petite_boite_bois_1
+
+ON=i_moyenne_boite_bois_1 <name> (<resmake>)
+MAKEITEM=i_moyenne_boite_bois_1
+
+ON=i_grosse_boite_bois_1 <name> (<resmake>)
+MAKEITEM=i_grosse_boite_bois_1
+
+ON=i_petit_coffre_de_bois <name> (<resmake>)
+MAKEITEM=i_petit_coffre_de_bois
+
+ON=i_grand_coffre_de_bois <name> (<resmake>)
+MAKEITEM=i_grand_coffre_de_bois
+
+ON=i_boite_a_crane <name> (<resmake>)
+MAKEITEM=i_boite_a_crane
+
+ON=i_conteneur_potion <name> (<resmake>)
+MAKEITEM=i_conteneur_potion
+
+
+//*****TABLEAUX*****
+
+
+[SKILLMENU sm_tableaux]
+Tableaux
+
+ON=i_portrait_femme_ouest_1 <name> (<resmake>)
+MAKEITEM=i_portrait_femme_ouest_1
+
+ON=i_portrait_femme_ouest_2 <name> (<resmake>)
+MAKEITEM=i_portrait_femme_ouest_2
+
+ON=i_portrait_ouest_1 <name> (<resmake>)
+MAKEITEM=i_portrait_ouest_1
+
+ON=i_grand_tableau_ouest_1 <name> (<resmake>)
+MAKEITEM=i_grand_tableau_ouest_1
+
+ON=i_portrait_femme_nord_2 <name> (<resmake>)
+MAKEITEM=i_portrait_femme_nord_2
+
+ON=i_portrait_femme_nord_3 <name> (<resmake>)
+MAKEITEM=i_portrait_femme_nord_3
+
+ON=i_portrait_femme_nord_1 <name> (<resmake>)
+MAKEITEM=i_portrait_femme_nord_1
+
+
+//*****OBJETS MAGIQUES*****
+
+
+[SKILLMENU sm_carpentry_objets_magiques]
+Objets magiques
+
+ON=i_baton_arcanique <name> (<resmake>)
+MAKEITEM=i_baton_arcanique
+
+ON=i_baton_d_ogam <name> (<resmake>)
+MAKEITEM=i_baton_d_ogam
+
+ON=i_baton_de_clairvoyance <name> (<resmake>)
+MAKEITEM=i_baton_de_clairvoyance
+
+ON=i_baton_du_guerisseur <name> (<resmake>)
+MAKEITEM=i_baton_du_guerisseur
+
+ON=i_baton_de_solidite <name> (<resmake>)
+MAKEITEM=i_baton_de_solidite
+
+ON=i_baton_de_lavage_spirituel <name> (<resmake>)
+MAKEITEM=i_baton_de_lavage_spirituel
+
+
+//*****BATEAUX*****
+
+[SKILLMENU sm_bateaux_carpentry]
+Bateaux
+
+ON=i_deed_ship_small_n <name> (<resmake>)
+MAKEITEM=i_deed_ship_small_n
+
+ON=i_deed_ship_dragon_small_n <name> (<resmake>)
+MAKEITEM=i_deed_ship_dragon_small_n
+
+ON=i_deed_ship_medium_n <name> (<resmake>)
+MAKEITEM=i_deed_ship_medium_n
+
+ON=i_deed_ship_dragon_medium_n <name> (<resmake>)
+MAKEITEM=i_deed_ship_dragon_medium_n
+
+
+//*****AUTRES*****
+
+
+[SKILLMENU sm_autres_carpentry_1]
+Autres
+
+ON=i_torche <name> (<resmake>)
+MAKEITEM=i_torche
+
+ON=i_rune_vierge <name> (<resmake>)
+MAKEITEM=i_rune_vierge
+
+ON=i_rune_de_bateau <name> (<resmake>)
+MAKEITEM=i_rune_de_bateau
+
+ON=i_bibliotheque_porte_manteau_nord <name> (<resmake>)
+MAKEITEM=i_bibliotheque_porte_manteau_nord
+
+ON=i_bibliotheque_porte_manteau_ouest <name> (<resmake>)
+MAKEITEM=i_bibliotheque_porte_manteau_ouest
+
+ON=i_trophee_ours_nord <name> (<resmake>)
+MAKEITEM=i_trophee_ours_nord
+
+ON=i_trophee_ours_ouest <name> (<resmake>)
+MAKEITEM=i_trophee_ours_ouest
+
+ON=i_trophee_cerf_nord <name> (<resmake>)
+MAKEITEM=i_trophee_cerf_nord
+
+ON=i_trophee_cerf_ouest <name> (<resmake>)
+MAKEITEM=i_trophee_cerf_ouest
+
+ON=i_trophee_poisson_nord <name> (<resmake>)
+MAKEITEM=i_trophee_poisson_nord
+
+ON=i_trophee_poisson_ouest <name> (<resmake>)
+MAKEITEM=i_trophee_poisson_ouest
+
+ON=i_trophee_gorille_nord <name> (<resmake>)
+MAKEITEM=i_trophee_gorille_nord
+
+ON=i_trophee_gorille_ouest <name> (<resmake>)
+MAKEITEM=i_trophee_gorille_ouest
+
+ON=i_trophee_orc_nord <name> (<resmake>)
+MAKEITEM=i_trophee_orc_nord
+
+ON=i_trophee_orc_ouest <name> (<resmake>)
+MAKEITEM=i_trophee_orc_ouest
+
+ON=i_trophee_ours_polaire_nord <name> (<resmake>)
+MAKEITEM=i_trophee_ours_polaire_nord
+
+ON=i_trophee_ours_polaire_ouest <name> (<resmake>)
+MAKEITEM=i_trophee_ours_polaire_ouest
+
+ON=i_trophee_troll_nord <name> (<resmake>)
+MAKEITEM=i_trophee_troll_nord
+
+ON=i_trophee_troll_ouest <name> (<resmake>)
+MAKEITEM=i_trophee_troll_ouest
+
+ON=i_cible_archer_ouest <name> (<resmake>)
+MAKEITEM=i_cible_archer_ouest
+
+ON=i_cible_archer_nord <name> (<resmake>)
+MAKEITEM=i_cible_archer_nord
+
+ON=i_mannequin_combat_nord <name> (<resmake>)
+MAKEITEM=i_mannequin_combat_nord
+
+ON=i_mannequin_combat_ouest <name> (<resmake>)
+MAKEITEM=i_mannequin_combat_ouest
+
+ON=i_mannequin_pickpocket_nord <name> (<resmake>)
+MAKEITEM=i_mannequin_pickpocket_nord
+
+ON=i_mannequin_pickpocket_ouest <name> (<resmake>)
+MAKEITEM=i_mannequin_pickpocket_ouest
+
+ON=i_portiere_en_frene_est <name> (<resmake>)
+MAKEITEM=i_portiere_en_frene_est
+
+ON=i_portiere_en_frene_ouest <name> (<resmake>)
+MAKEITEM=i_portiere_en_frene_ouest
+
+ON=i_portiere_en_frene_nord <name> (<resmake>)
+MAKEITEM=i_portiere_en_frene_nord
+
+ON=i_portiere_en_frene_sud <name> (<resmake>)
+MAKEITEM=i_portiere_en_frene_sud

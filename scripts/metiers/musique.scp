@@ -1,0 +1,74 @@
+[ITEMDEF m_timer_musique]
+NAME=musique timer
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=3
+
+ON=@TIMER
+IF <CONT.MUSICIANSHIP> > 2500// [250.0 , ...]
+	VAR.CREE_OEUVRE = 1
+ELSEIF <CONT.Musicianship> > 1000// [100.0 , 249.9]
+	IF <EVAL RAND( (2510 - <CONT.MUSICIANSHIP>) / 10 )> == 0
+		VAR.CREE_OEUVRE = 1
+	ENDIF
+ELSEIF <CONT.MUSICIANSHIP> > 500// [50.0 , 99.9]
+	IF <EVAL RAND( 1500 - <CONT.MUSICIANSHIP> )> == 0
+		VAR.CREE_OEUVRE = 1
+	ENDIF
+ELSE// [30.0 , 49.9]
+	IF <EVAL RAND( (1000 - <CONT.MUSICIANSHIP>)*2 )> == 0
+		VAR.CREE_OEUVRE = 1
+	ENDIF
+ENDIF
+IF 0<VAR.CREE_OEUVRE> == 1
+	CONT.NEWITEM i_chef_d_oeuvre
+	CONT.ACT.NAME = Chef d'oeuvre de <CONT.NAME>
+	CONT.ACT.CONT = <CONT.UID>
+ENDIF
+VAR.CREE_OEUVRE
+REMOVE
+RETURN 1
+
+//MORE1 = USURE
+[ITEMDEF i_chef_d_oeuvre]
+NAME=Chef d'oeuvre
+ID=i_map
+TYPE=t_normal
+VALUE=10000
+
+ON=@CREATE
+COLOR=0b10
+MORE1=0//USURE
+
+ON=@CLICK
+IF <MORE1> > 0
+	MESSAGE <NAME> [use]
+ELSE
+	MESSAGE <NAME> [neuf]
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.m_timer_general>
+		MORE1 = <MORE1> + 1
+		SRC.FINDID.m_timer_general.TAG.BONHEUR = <EVAL <SRC.FINDID.m_timer_general.TAG.BONHEUR> + 5>
+		IF <SRC.FINDID.m_timer_general.TAG.BONHEUR> > 100
+			SRC.FINDID.m_timer_general.TAG.BONHEUR = 100
+		ENDIF
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous vous sentez plus serein !
+		IF <EVAL RAND(<EVAL 100 - <MORE1>>)> < 10
+			EMOTE se desintegrer !
+			REMOVE
+		ENDIF
+	ELSE
+		SRC.NEWITEM m_timer_general
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.ACT.EQUIP
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper le chef d'oeuvre pour pouvoir le lire !
+ENDIF
+RETURN 1

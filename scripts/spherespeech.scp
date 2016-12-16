@@ -1,0 +1,100 @@
+[SPEECH spk_player]
+// All players speech filtered through here.
+ON=home home home	//	Ghosts can go home.
+if <statf> & STATF_DEAD
+	go <home>
+endif
+RETURN 0
+
+ON=I must consider my sins
+RETURN 0
+
+ON=I resign from my guild
+RETURN 0
+
+ON=I resign from my town
+RETURN 0
+
+ON=Guard help *
+ON=Guards*
+ON=Help Guards*
+SAYUA 025 0 0 0 Gardes!!!
+RETURN 1
+
+ON=bene
+SAYUA 025 0 0 0 Puis-je avoir une benediction?
+RETURN 1
+
+ON=proto
+SAYUA 025 0 0 0 Puis-je avoir une protection?
+RETURN 1
+
+
+
+[SPEECH spk_pet]
+// Pets that cannot talk
+ON=ATTACK
+ON=COME
+ON=DEFEND ME
+ON=DISMISS
+ON=DROP	// "GIVE" ?
+ON=DROP ALL
+ON=FETCH
+ON=FOLLOW
+ON=FOLLOW ME
+ON=FRIEND
+ON=GO
+ON=GUARD
+ON=GUARD ME
+ON=KILL
+ON=RELEASE
+ON=SPEAK
+ON=STAY
+ON=STAY HERE
+ON=STOP
+RETURN 0
+
+ON=TRANSFER
+IF <FINDID.i_vire_creature>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas transferer une creature invoquee !
+	RETURN 1
+ENDIF
+RETURN 0
+
+
+[SPEECH spk_hireling]
+// Pets that can talk.
+ON=ATTACK
+ON=BOUGHT
+ON=CASH
+ON=COME
+ON=DEFEND ME
+ON=DISMISS
+ON=DROP	// "GIVE" ?
+ON=DROP ALL
+ON=EQUIP
+ON=EQUIP ALL
+ON=FETCH
+ON=FOLLOW
+ON=FOLLOW ME
+ON=FRIEND
+ON=GET DRESSED
+ON=GO
+ON=GUARD
+ON=GUARD ME
+ON=INVENTORY
+ON=KILL
+ON=PRICE	// may have args ?
+ON=RECIEVED
+ON=RELEASE
+ON=SAMPLES
+ON=SPEAK
+ON=STATUS
+ON=STAY
+ON=STAY HERE
+ON=STOCK
+ON=STOP
+ON=SUIT UP
+ON=TRANSFER
+
+[EOF]

@@ -1,0 +1,291 @@
+[ITEMDEF i_deed_plaque_mairie_nord]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de plaque de mairie [Nord]
+
+ON=@DCLICK
+SRC.NEWITEM=i_plaque_mairie
+SRC.ACT.ATTR=08010
+SRC.ACT.LINK=<SRC.UID>
+SRC.ACT.TIMER=86000
+SRC.ACT.BOUNCE
+REMOVE
+RETURN 1
+
+[ITEMDEF i_deed_plaque_mairie_ouest]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de plaque mairie [Ouest]
+
+ON=@DCLICK
+SRC.NEWITEM=i_plaque_mairie
+SRC.ACT.DISPID 0bcf
+SRC.ACT.UPDATE
+SRC.ACT.ATTR=08010
+SRC.ACT.LINK=<SRC.UID>
+SRC.ACT.TIMER=86000
+SRC.ACT.BOUNCE
+REMOVE
+RETURN 1
+
+//LINK=maire
+//MORE2=nb candidats enregistres
+[ITEMDEF i_plaque_mairie] 
+NAME=Plaque
+ID=0bd0
+TYPE=t_eq_script
+
+ON=@CREATE
+TAG.ELECTION=0
+TAG.ELECTIONSTATUS=normal
+
+ON=@CLICK
+MESSAGE Plaque <LINK.SEX du maire/de la mairesse> <LINK.NAME>
+RETURN 1
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	DIALOG MENU_CHOIX_GM_PLAQUE_MAIRIE
+ELSEIF <LINK.UID> == <SRC.UID>
+	DIALOG MENU_CHOIX_PLAQUE_MAIRIE
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Cette plaque ne vous appartient pas !
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez choisir une personne comme maire
+RETURN 1
+
+ON=@TARGON_CHAR
+TAG.ELECTION=0
+TAG.ELECTIONSTATUS=Normal
+LINK=<SRC.TARG.UID>
+SERV.B <LINK.NAME> devient <LINK.SEX le nouveau maire/la nouvelle mairesse> de <TAG.VILLE>
+RETURN 1
+
+ON=@TIMER
+ATTR=08010
+TIMER=-1
+RETURN 1
+
+[DIALOG MENU_CHOIX_PLAQUE_MAIRIE]
+0,0
+
+page 0
+resizepic 0 0 2620 500 400
+
+page 1
+text 140 20 1152 1//Plaque de la mairie de <TAG.VILLE>
+text 125 40 1152 2//Pieces d'or dans la caisse :
+text 40 70 1152 3//OBTENIR UN BATON DE MAIRE
+text 40 90 1152 4//CHANGER LA COULEUR
+text 40 110 1152 5//COLORER UN OBJET (COMME LA PLAQUE)
+text 270 110 38 6//(5000 po)
+text 40 130 1152 7//ACHETER UN OBJET
+text 40 150 1152 8//TAXES
+text 120 150 1152 9//08%
+button 20 75 2103 2104 1 0 1//GET BATON
+button 20 95 2103 2104 1 0 2//CHANGER COULEUR
+button 20 115 2103 2104 1 0 3//COLORER UN OBJET
+button 20 135 2103 2104 1 0 4//ACHETER UN OBJET (DIALOG)
+button 90 150 56 56 1 0 5//-1% TAXES
+button 150 150 55 55 1 0 6//+1% TAXES
+
+[DIALOG MENU_CHOIX_PLAQUE_MAIRIE TEXT]
+<VAR.BLANKLINE>
+Plaque de la mairie de <TAG.VILLE>
+Pieces d'or dans la caisse : <EVAL 0<TAG.CAISSE>>
+Obtenir un baton de maire
+Changer la couleur
+Colorer un objet comme la plaque
+(5000 pieces d'or)
+Acheter un objet
+Taxes
+<EVAL 0<TAG.TAXES>>%
+
+[DIALOG MENU_CHOIX_PLAQUE_MAIRIE BUTTON]
+ON=1
+IF <UID.<TAG.UIDBATON>.BASEID> == i_baton_mairie
+	VAR.SAVEACT = <SRC.ACT.UID>
+	SRC.ACT = <TAG.UIDBATON>
+	SRC.ACT.CONT = <SRC.UID>
+	SRC.ACT = <VAR.SAVEACT>
+ELSE
+	SRC.NEWITEM i_baton_mairie
+	SRC.ACT.CONT = <SRC.UID>
+	SRC.ACT.LINK = <UID>
+	TAG.UIDBATON = <SRC.ACT.UID>
+ENDIF
+
+ON=2
+INPDLG COLOR 5
+
+ON=3
+IF <EVAL 0<TAG.CAISSE>> >= 5000
+	SRC.NEWITEM i_selectionneur_changer_couleur
+	SRC.ACT.EQUIP
+	SRC.ACT.LINK = <UID>
+	SRC.ACT.USE
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 La mairie ne possede pas les 5000 pieces d'or necessaires !
+ENDIF
+
+ON=4
+DIALOG ACHETE_OBJET_MAIRIE
+
+ON=5
+IF <EVAL 0<TAG.TAXES>> > 0
+	TAG.TAXES = <EVAL <TAG.TAXES> - 1>
+ENDIF
+DIALOG MENU_CHOIX_PLAQUE_MAIRIE
+
+ON=6
+IF <EVAL 0<TAG.TAXES>> < 50
+	TAG.TAXES = <EVAL <TAG.TAXES> + 1>
+ENDIF
+DIALOG MENU_CHOIX_PLAQUE_MAIRIE
+
+
+
+[DIALOG MENU_CHOIX_GM_PLAQUE_MAIRIE]
+0,0
+
+page 0
+resizepic 0 0 2620 400 400
+
+page 1
+text 120 20 1152 1//Menu : Plaque de mairie
+text 120 50 1152 2//Ville : <VILLE>
+text 20 100 1152 3//Candidat 1 : <CANDIDAT1>
+text 20 120 1152 4//Candidat 2 : <CANDIDAT2>
+text 20 140 1152 5//Candidat 3 : <CANDIDAT3>
+text 20 160 1152 6//Candidat 4 : <CANDIDAT4>
+text 20 180 1152 7//Candidat 5 : <CANDIDAT5>
+text 20 200 1152 8//Candidat 6 : <CANDIDAT6>
+text 50 240 1152 9//Effacer la liste
+text 50 260 1152 10//Ajouter un candidat
+text 50 280 1152 11//Entamer de nouvelles elections
+text 50 300 1152 12//Changer le nom de la ville
+text 50 320 1152 13//Elir le nouveau maire
+button 20 245 2103 2104 1 0 1//EFFACER LA LISTE
+button 20 265 2103 2104 1 0 2//AJOUTER UN CANDIDAT
+button 20 285 2103 2104 1 0 3//COMMENCER LES ELECTIONS
+button 20 305 2103 2104 1 0 4//Changer le nom de la ville
+button 20 325 2103 2104 1 0 5//Elir le nouveau maire
+
+[DIALOG MENU_CHOIX_GM_PLAQUE_MAIRIE TEXT]
+<VAR.BLANKLINE>
+Plaque de mairie
+Ville : <TAG.VILLE> (<TAG.ELECTIONSTATUS>)
+<TAG.CANDIDAT1>
+<TAG.CANDIDAT2>
+<TAG.CANDIDAT3>
+<TAG.CANDIDAT4>
+<TAG.CANDIDAT5>
+<TAG.CANDIDAT6>
+Effacer la liste
+Ajouter un candidat
+Entamer les elections
+Changer le nom de la ville
+Elir le nouveau maire
+
+[DIALOG MENU_CHOIX_GM_PLAQUE_MAIRIE BUTTON]
+ON=1
+TAG.ELECTION=0
+TAG.ELECTIONSTATUS=normal
+TAG.CANDIDAT1=Vide
+TAG.CANDIDAT2=Vide
+TAG.CANDIDAT3=Vide
+TAG.CANDIDAT4=Vide
+TAG.CANDIDAT5=Vide
+TAG.CANDIDAT6=Vide
+MORE2=1
+SRC.SYSMESSAGEUA 0481 1 1 0 Liste des elections supprimee
+DIALOG MENU_CHOIX_GM_PLAQUE_MAIRIE
+
+ON=2
+IF <MORE2> == 1
+	INPDLG TAG.CANDIDAT1 20
+	MORE2=2
+ELSEIF <MORE2> == 2
+	INPDLG TAG.CANDIDAT2 20
+	MORE2=3
+ELSEIF <MORE2> == 3
+	INPDLG TAG.CANDIDAT3 20
+	MORE2=4
+ELSEIF <MORE2> == 4
+	INPDLG TAG.CANDIDAT4 20
+	MORE2=5
+ELSEIF <MORE2> == 5
+	INPDLG TAG.CANDIDAT5 20
+	MORE2=6
+ELSEIF <MORE2> == 6
+	INPDLG TAG.CANDIDAT6 20
+	MORE2=7
+ELSEIF <MORE2> > 6
+	SRC.SYSMESSAGEUA 0481 1 1 0 Liste deja complete!
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Supprimez la liste d'abord!
+ENDIF
+RETURN 1
+
+ON=3
+IF <EVAL 0<TAG.ELECTION>> == 0
+	TAG.ELECTION=1
+	TAG.ELECTIONSTATUS=En election
+	TAG.POLL_NUMBER=<EVAL (rand(9999)) + 1>
+	SERV.B <SRC.NAME> entame les elections de <TAG.VILLE>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Elections deja entamees !
+ENDIF
+
+ON=4
+IF <EVAL 0<TAG.ELECTION>> == 0
+	INPDLG TAG.VILLE 20
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Impossible de changer le nom de la ville durant les elections
+ENDIF
+
+ON=5
+IF <EVAL 0<TAG.ELECTION>> == 1
+	TARGET
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Impossible de nommer un maire sans elections !
+ENDIF
+
+
+//LINK = i_plaque_mairie
+[ITEMDEF i_selectionneur_changer_couleur] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez l'objet de mairie dont vous voulez changer la couleur
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <EVAL 0<SRC.TARG.TAG.OBJET_MAIRIE>> == 1
+	IF <EVAL 0<LINK.TAG.CAISSE>> >= 5000
+		SRC.TARG.COLOR = <LINK.COLOR>
+		LINK.TAG.CAISSE = <EVAL <LINK.TAG.CAISSE> - 5000>
+		SRC.SYSMESSAGEUA 0481 1 1 0 L'objet a ete colore avec succes. 5000 pieces d'or ont ete retirees des caisses de la ville !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un objet de mairie !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un objet de mairie !
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1

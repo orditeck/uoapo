@@ -1,0 +1,275 @@
+[ITEMDEF i_oeil_tata]
+DEFNAME= i_oeil_tata
+ID=0f87
+NAME=Oeil de tarentule
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0ab8
+DISPID=01ea7
+
+[ITEMDEF m_emote_starbolt]
+ID=i_memory
+NAME=Emote Starbolt
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=60
+
+ON=@TIMER
+TOPOBJ.BOW
+DORAND 3
+TOPOBJ.EMOTE cueillir des nightshades
+TOPOBJ.EMOTE cueillir du ginseng
+TOPOBJ.EMOTE cueillir des mandrakes
+ENDDO
+TIMER=60
+RETURN 1
+
+[CHARDEF c_Starbolt] 
+DEFNAME=c_Starbolt 
+NAME=Filandrus
+ID=C_MAN
+
+TSPEECH=spk_Starbolt
+
+ON=@create 
+COLOR=083ea 
+SPEECHCOLOR=0ae4
+STR=2000
+DEX=1
+INT=1
+TITLE=Saronide
+
+ITEMNEWBIE=0203c
+COLOR=0ac0
+ITEMNEWBIE=i_robe
+COLOR=0ac0 
+ITEMNEWBIE=i_sandals
+NAME=Sandales 
+COLOR=0ac0
+ITEMNEWBIE=i_dagger
+NAME=Serpette
+COLOR=0ac0
+
+ON=@NPCHearUnknown
+SAY Que dites-vous ? Je ne comprends absolument rien a votre charabia !
+
+ON=@GetHit 
+HITS=9999
+RETURN 1 
+
+ON=@SpellEffect
+HITS=9999 
+RETURN 1
+
+CATEGORY=PNJ 
+SUBSECTION=Quetes 
+DESCRIPTION=Starbolt
+
+[SPEECH spk_Starbolt]
+
+ON=*bonjour*
+SAY Plutot que de me deranger, trouvez moi les ingredients necessaires a ma preparation !
+
+ON=*yeux de tarentule*
+IF <EVAL 0<SRC.TAG.STARBOLT>> == 0
+	SRC.TAG.STARBOLT = 1
+	IF <SRC.RESTEST 1 i_oeil_tata>
+		EMOTE se pencher
+		SAY Ne seraient ce pas des yeux de tarentules que j'appercois dans votre besace ? Seriez vous d'accord pour me les echanger contre quelques piecettes ?
+	ELSE
+		SAY C'est le seul ingredient qui me manque pour mettre au point un anti venin capable de neutraliser le poison de tarentules, apportez en moi et vous serez recompense.
+	ENDIF
+ELSE
+	IF <SRC.RESTEST 1 i_oeil_tata>
+		SAY Oh vous etes venu m'apporter l'ingredient que je recherche ... Seriez vous d'accord pour me les echanger contre quelques piecettes ?
+	ELSE
+		SAY C'est le seul ingredient qui me manque pour mettre au point un anti venin capable de neutraliser le poison de tarentules, apportez en moi et vous serez recompense.
+	ENDIF
+ENDIF
+
+ON=*oui*
+IF (<EVAL <SRC.TAG.STARBOLT>> == 1) && (<SRC.RESTEST 1 i_oeil_tata>)
+	SRC.CONSUME 1 i_oeil_tata
+	EMOTE tendre une bourse d'or
+	SAY Voici votre recompense <SRC.NAME> !
+	SRC.NEWITEM i_gold
+	SRC.ACT.AMOUNT {1 10000}
+	SRC.ACT.BOUNCE
+ELSEIF (<EVAL <SRC.TAG.STARBOLT>> == 1) && !(<SRC.RESTEST 1 i_oeil_tata>)
+	SAY vous ne possedez pas d'yeux de tarentule !
+ELSE
+	SAY Que dites vous ?
+ENDIF
+
+ON=secret
+IF <EVAL 0<SRC.TAG.ANANKE>> == 1
+	IF ( (!<FINDID.i_conversation_starbolt>) && (!<FINDID.i_enigme_starbolt>) )
+		NEWITEM i_conversation_starbolt
+		ACT.CONT = <UID>
+		ACT.TIMER=1
+	ENDIF
+ELSEIF ( (<EVAL 0<SRC.TAG.ANANKE>> > 1) || (<EVAL 0<SRC.TAG.RENAISSANCE>> > 6) )
+	SAY Vous savez deja, partez avant que quelqu'un n'entende !
+ELSE
+	SAY Shut! C'est un secret!
+ENDIF
+RETURN 1
+
+ON=enigme
+IF <EVAL 0<SRC.TAG.ANANKE>> == 1
+	IF ( (!<FINDID.i_conversation_starbolt>) && (!<FINDID.i_enigme_starbolt>) )
+		NEWITEM i_enigme_starbolt
+		ACT.CONT = <UID>
+		ACT.TIMER=1
+	ENDIF
+ELSEIF ( (<EVAL 0<SRC.TAG.ANANKE>> > 1) || (<EVAL 0<SRC.TAG.RENAISSANCE>> > 6) )
+	SAY Elle vous est dorénavent inutile !
+ELSE
+	SAY Vous en connaissez une bonne?
+ENDIF
+RETURN 1
+
+ON=*livre de sacrifice*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 5
+	IF <EVAL 0<SRC.TAG.ANANKE>> == 1
+		IF <SRC.FINDID.i_livre_de_sacrifice>
+			IF <SRC.FINDID.i_livre_de_sacrifice.LINK.UID> == <SRC.UID>
+				SRC.FINDID.i_livre_de_sacrifice.REMOVE
+				SRC.TAG.ANANKE=2
+				SAY Je vous remercie, pour 100 pieces de diamant, je prepare votre ame pour le rituel!
+			ELSE
+				SAY Ce livre ne vous appartient pas ! Tenez-vous vraiment a mourir?
+			ENDIF
+		ELSE
+			SAY Non, vous ne l'avez pas !
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.ANANKE>> == 2
+		SAY Pour 100 pieces de diamant, je prepare votre ame pour le rituel!
+	ELSE
+		SAY Vous etes pret pour le sacrifice, que Gaia vous garde!
+	ENDIF
+ELSE
+	SAY Ne parlez pas de ce qui ne vous concerne pas!
+ENDIF
+
+ON=*pieces*
+ON=*diamant*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 5
+	IF <EVAL 0<SRC.TAG.ANANKE>> == 2
+		IF <EVAL 0<SRC.TAG.LEVEL>> > 99
+			IF <SRC.RESTEST 100 i_piece_diamant>
+				SRC.CONSUME 100 i_piece_diamant
+				SRC.TAG.ANANKE=3
+				ANIM 16
+				SAY Vous etes maintenant pret pour le sacrifice, que Gaia vous garde!
+				SRC.NEWITEM i_protection_filandrus
+				SRC.ACT.COLOR=0aa4
+				SRC.ACT.P=<SRC.P>
+				SRC.ACT.UPDATE
+				SRC.ACT.TIMER=2
+			ELSE
+				SAY Vous n'avez pas 100 pieces de diamant sur vous !
+			ENDIF
+		ELSE
+			SAY Vous n'etes pas suffisamment entraine pour survivre au rituel !
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.ANANKE>> == 3
+		SAY Vous etes pret pour le sacrifice, que Gaia vous garde!
+	ELSE
+		SAY Vous savez... pour devenir riche, il faut travailler dur!
+	ENDIF
+ELSE
+	SAY Vous savez... pour devenir riche, il faut travailler dur!
+ENDIF	
+
+[ITEMDEF i_conversation_starbolt]
+ID=i_memory
+NAME=conversation starbolt
+TYPE=t_eq_script
+
+ON=@CREATE
+MORE1=0
+
+ON=@TIMER
+IF <MORE1> == 0
+	CONT.SAY Quoi? mais... ahhhh! Il me le paiera ce Ananke!
+	CONT.EMOTE froncer les sourcils
+	MORE1=1
+	TIMER=6
+ELSEIF <MORE1> == 1
+	CONT.SAY D'accord, il y'a tres longtemps, je fus temoin du grand Rituel, qui mis l'humanite a feu et a sang!
+	CONT.EMOTE prendre un air grave
+	MORE1=2
+	TIMER=8
+ELSEIF <MORE1> == 2
+	CONT.SAY Il y'a eu peu de survivants... si je suis toujours en vie, c'est grace a mon pacte avec Kali
+	MORE1=3
+	TIMER=8
+ELSEIF <MORE1> == 3
+	CONT.SAY Cela fait je ne sais plus combien de centaines d'annees que je m'occupe de ce champ, je devrai y rester pour toujours, toujours !
+	CONT.EMOTE respirer bruyamment
+	MORE1=4
+	TIMER=12
+ELSEIF <MORE1> == 4
+	CONT.SAY Kali n'a plus le temps de me surveiller, je peux donc vous aider...
+	CONT.EMOTE penser
+	MORE1=5
+	TIMER=8
+ELSE
+	CONT.SAY Je ne peux pas vous donner la reponse, mais une enigme menant a la reponse, demandez moi la quand vous aurez le temps...
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_enigme_starbolt]
+ID=i_memory
+NAME=enigme starbolt
+TYPE=t_eq_script
+
+ON=@CREATE
+MORE1=0
+
+ON=@TIMER
+IF <MORE1> == 0
+	CONT.SAY Il vous faut suivre la droite, tel est votre chemin vers la reussite. Une entree blanche vous indiquera la proximite de ce que vous cherchez.
+	MORE1=1
+	TIMER=10
+ELSEIF <MORE1> == 1
+	CONT.SAY Vous heurterez une epreuve, prenez cette charade en note, elle vous sera utile...
+	MORE1=2
+	TIMER=8
+ELSEIF <MORE1> == 2
+	CONT.SAY Mon premier represente l'ambition et l'audace
+	MORE1=3
+	TIMER=8
+ELSEIF <MORE1> == 3
+	CONT.SAY Mon deuxieme represente le vide
+	MORE1=4
+	TIMER=8
+ELSEIF <MORE1> == 4
+	CONT.SAY Mon troisieme represente la droiture et le respect
+	MORE1=5
+	TIMER=8
+ELSEIF <MORE1> == 5
+	CONT.SAY Mon tout est la division des noms, l'evaluation des lettres et l'addition des chiffres.
+	MORE1=6
+	TIMER=10
+ELSE
+	CONT.SAY Vous avez tous les outils pour reussir, je vous souhaite bonne chance!
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_protection_filandrus]
+NAME=Protection bleue
+ID=i_fx_protection_bleue
+TYPE=t_normal
+
+ON=@CREATE
+ATTR=08010
+
+ON=@TIMER
+REMOVE
+RETURN 1

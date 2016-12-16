@@ -1,0 +1,4064 @@
+//RENDU LIGNE 3435
+
+//*** DONGEON 1 ***
+
+[CHARDEF c_tetrapode]
+NAME=Tetrapode
+ID=021
+
+ON=@Create
+COLOR=07d1
+STR=600
+DEX=300
+INT=200
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=6000
+TAG.XPCOUP=<EVAL (RAND(375,750))>
+TAG.TAPER=8
+TAG.NIVEAU=67
+
+KARMA=-9999
+
+TACTICS=600.0
+WRESTLING=600.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.P=2041,223,14
+    SRC.UPDATE
+    SRC.EVENTS -e_anti_mark_recall
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_perle_enchantement 68 i_cuir_de_tetrapode 30 i_wrong_cle1 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 1
+DESCRIPTION=Tetrapode
+
+[CHARDEF c_patrouilleur_tetrapode]
+NAME=Patrouilleur Tetrapode
+ID=021
+
+ON=@Create
+COLOR=07d2
+STR=650
+DEX=350
+INT=300
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=6500
+TAG.XPCOUP=<EVAL (RAND(406,812))>
+TAG.TAPER=8
+TAG.NIVEAU=71
+
+KARMA=-9999
+
+TACTICS=650.0
+WRESTLING=650.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.P=2041,223,14
+    SRC.UPDATE
+    SRC.EVENTS -e_anti_mark_recall
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_perle_enchantement 68 i_cuir_de_tetrapode 40 i_wrong_cle2 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 1
+DESCRIPTION=Patrouilleur Tetrapode
+
+[CHARDEF c_guerrier_tetrapode]
+NAME=Guerrier Tetrapode
+ID=023
+
+ON=@Create
+COLOR=07d3
+STR=700
+DEX=400
+INT=300
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=7000
+TAG.XPCOUP=<EVAL (RAND(437,875))>
+TAG.TAPER=8
+TAG.NIVEAU=74
+
+KARMA=-9999
+
+TACTICS=700.0
+WRESTLING=700.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.P=2041,223,14
+    SRC.UPDATE
+    SRC.EVENTS -e_anti_mark_recall
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_perle_enchantement 68 i_cuir_de_tetrapode 40 i_wrong_cle3 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 1
+DESCRIPTION=Guerrier Tetrapode
+
+[CHARDEF c_sorcier_tetrapode]
+NAME=Sorcier Tetrapode
+ID=021
+
+ON=@Create
+COLOR=07d4
+STR=700
+DEX=400
+INT=700
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=9800
+TAG.XPCOUP=<EVAL (RAND(612,1225))>
+TAG.TAPER=8
+TAG.NIVEAU=77
+
+KARMA=-9999
+
+TACTICS=700.0
+WRESTLING=700.0
+MAGERY=700.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=020000000
+MORE2=00000000
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.P=2041,223,14
+    SRC.UPDATE
+    SRC.EVENTS -e_anti_mark_recall
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_perle_enchantement 68 i_cuir_de_tetrapode 40 i_wrong_cle4 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 1
+DESCRIPTION=Sorcier Tetrapode
+
+[CHARDEF c_seigneur_tetrapode]
+NAME=Seigneur Tetrapode
+ID=024
+
+ON=@Create
+COLOR=07d6
+STR=800
+DEX=500
+INT=400
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=8000
+TAG.XPCOUP=<EVAL (RAND(500,1000))>
+TAG.TAPER=8
+TAG.NIVEAU=78
+
+KARMA=-9999
+
+TACTICS=800.0
+WRESTLING=800.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.P=2041,223,14
+    SRC.UPDATE
+    SRC.EVENTS -e_anti_mark_recall
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1577 i_perle_enchantement 68 i_cuir_de_tetrapode 40 i_wrong_cle5 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 1
+DESCRIPTION=Seigneur Tetrapode
+
+
+//*** DONGEON 2 ***
+
+
+[CHARDEF c_golem_de_givre]
+NAME=Golem de givre
+ID=0e
+BLOODCOLOR=0482
+
+ON=@Create
+COLOR=0482
+STR=800
+DEX=500
+INT=400
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=8000
+TAG.XPCOUP=<EVAL (RAND(500,1000))>
+TAG.TAPER=8
+TAG.NIVEAU=71
+
+KARMA=-9999
+
+TACTICS=800.0
+WRESTLING=800.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1998,81,7
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 315 i_perle_enchantement 14 i_cle_de_glace_ice 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 2
+DESCRIPTION=Golem de givre
+
+[CHARDEF c_golem_de_gel]
+NAME=Golem de gel
+ID=0e
+BLOODCOLOR=0484
+
+ON=@Create
+COLOR=0484
+STR=950
+DEX=650
+INT=500
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=9500
+TAG.XPCOUP=<EVAL (RAND(593,1187))>
+TAG.TAPER=8
+TAG.NIVEAU=78
+
+KARMA=-9999
+
+TACTICS=950.0
+WRESTLING=950.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1998,81,7
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 315 i_perle_enchantement 14 i_cle_de_glace_ice 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 2
+DESCRIPTION=Golem de gel
+
+[CHARDEF c_golem_de_crystal]
+NAME=Golem de crystal
+ID=0e
+BLOODCOLOR=0487
+
+ON=@Create
+COLOR=0487
+STR=1100
+DEX=800
+INT=600
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=11000
+TAG.XPCOUP=<EVAL (RAND(458,916))>
+TAG.TAPER=12
+TAG.NIVEAU=84
+
+KARMA=-9999
+
+TACTICS=1025.0
+WRESTLING=1025.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1998,81,7
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 255 i_perle_enchantement 14 i_cle_de_glace_ice 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 2
+DESCRIPTION=Golem de crystal
+
+[CHARDEF c_golem_de_glace]
+NAME=Golem de glace
+ID=0e
+BLOODCOLOR=0488
+
+ON=@Create
+COLOR=0488
+STR=1250
+DEX=950
+INT=700
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=12500
+TAG.XPCOUP=<EVAL (RAND(520,1041))>
+TAG.TAPER=12
+TAG.NIVEAU=90
+
+KARMA=-9999
+
+TACTICS=1062.0
+WRESTLING=1062.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1998,81,7
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 255 i_perle_enchantement 14 i_cle_de_glace_ice 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 2
+DESCRIPTION=Golem de glace
+
+[CHARDEF c_colosse_de_neige]
+NAME=Colosse de neige
+ID=010
+BLOODCOLOR=0481
+
+ON=@Create
+COLOR=0481
+STR=600
+DEX=400
+INT=600
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=11760
+TAG.XPCOUP=<EVAL (RAND(735,1470))>
+TAG.TAPER=8
+TAG.NIVEAU=71
+
+KARMA=-9999
+
+TACTICS=600.0
+WRESTLING=600.0
+MAGERY=600.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=04200000
+MORE2=00000000
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1998,81,7
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 255 i_perle_enchantement 14 i_cle_de_neige_ice 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 2
+DESCRIPTION=Colosse de neige
+
+[CHARDEF c_colosse_de_congere]
+NAME=Colosse de congere
+ID=010
+BLOODCOLOR=048b
+
+ON=@Create
+COLOR=048b
+STR=900
+DEX=700
+INT=900
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=17640
+TAG.XPCOUP=<EVAL (RAND(1102,2205))>
+TAG.TAPER=8
+TAG.NIVEAU=84
+
+KARMA=-9999
+
+TACTICS=900.0
+WRESTLING=900.0
+MAGERY=900.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=04200000
+MORE2=00000000
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1998,81,7
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 255 i_perle_enchantement 14 i_cle_de_neige_ice 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 2
+DESCRIPTION=Colosse de congere
+
+[CHARDEF c_colosse_de_blizzard]
+NAME=Colosse de blizzard
+ID=010
+BLOODCOLOR=0afb
+
+ON=@Create
+COLOR=0afb
+STR=1200
+DEX=1000
+INT=1200
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=23520
+TAG.XPCOUP=<EVAL (RAND(980,1960))>
+TAG.TAPER=12
+TAG.NIVEAU=95
+
+KARMA=-9999
+
+TACTICS=1050.0
+WRESTLING=1050.0
+MAGERY=1200.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=04200000
+MORE2=00000000
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1998,81,7
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 255 i_perle_enchantement 14 i_cle_de_neige_ice 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 2
+DESCRIPTION=Colosse de blizzard
+
+[CHARDEF c_furie_des_hauteurs]
+NAME=Furie des hauteurs
+ID=0d
+BLOODCOLOR=0ae2
+
+ON=@Create
+COLOR=0afb
+STR=1500
+DEX=1300
+INT=1500
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=21000
+TAG.XPCOUP=<EVAL (RAND(875,1750))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1125.0
+WRESTLING=1125.0
+MAGERY=800.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=0200000
+MORE2=020
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>>==0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1998,81,7
+    SRC.UPDATE
+ENDIF
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 2
+DESCRIPTION=Furie des hauteurs
+
+
+//*** DONGEON 3 ***
+
+
+[CHARDEF c_esclave_amazone]
+NAME=Esclave amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=1500
+DEX=1500
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=18000
+TAG.XPCOUP=<EVAL (RAND(750,1500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1125.0
+ARCHERY=1125.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_leather
+COLOR=07d1
+ITEMNEWBIE=i_sandals
+COLOR=07d1
+ITEMNEWBIE=i_bow
+COLOR=07d1
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Esclave amazone
+
+[CHARDEF c_amazone]
+NAME=Amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=1800
+DEX=1800
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=21600
+TAG.XPCOUP=<EVAL (RAND(900,1800))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1200.0
+ARCHERY=1200.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_studded
+COLOR=07d2
+ITEMNEWBIE=i_sandals
+COLOR=07d2
+ITEMNEWBIE=i_bow
+COLOR=07d2
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>>==0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Amazone
+
+[CHARDEF c_eclaireuse_amazone]
+NAME=Eclaireuse amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=2100
+DEX=2100
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=25800
+TAG.XPCOUP=<EVAL (RAND(1075,2150))>
+TAG.TAPER=12
+TAG.NIVEAU=105
+
+KARMA=-9999
+
+TACTICS=1275.0
+ARCHERY=1275.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_bustier_studded
+COLOR=07d4
+ITEMNEWBIE=i_armor_female_skirt
+COLOR=07d4
+ITEMNEWBIE=i_sandals
+COLOR=07d4
+ITEMNEWBIE=i_bow
+COLOR=07d4
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>>==0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Eclaireuse amazone
+
+[CHARDEF c_cheftaine_amazone]
+NAME=Cheftaine amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=2500
+DEX=2500
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=33000
+TAG.XPCOUP=<EVAL (RAND(1375,2750))>
+TAG.TAPER=12
+TAG.NIVEAU=110
+
+KARMA=-9999
+
+TACTICS=1375.0
+ARCHERY=1375.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=07d6
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=07d6
+ITEMNEWBIE=i_sandals
+COLOR=07d6
+ITEMNEWBIE=i_bow
+COLOR=07d6
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Cheftaine amazone
+
+[CHARDEF c_imperatrice_amazone_1]
+NAME=Imperatrice amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3000
+DEX=3000
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=0ab3
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=0ab3
+ITEMNEWBIE=i_sandals
+COLOR=0ab3
+ITEMNEWBIE=i_bow
+COLOR=0ab3
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_cle_donjon3_1
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Imperatrice amazone 1
+
+[CHARDEF c_imperatrice_amazone_2]
+NAME=Imperatrice amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3000
+DEX=3000
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=0ab3
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=0ab3
+ITEMNEWBIE=i_sandals
+COLOR=0ab3
+ITEMNEWBIE=i_bow
+COLOR=0ab3
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_cle_donjon3_2
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Imperatrice amazone 2
+
+[CHARDEF c_imperatrice_amazone_3]
+NAME=Imperatrice amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3000
+DEX=3000
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=0ab3
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=0ab3
+ITEMNEWBIE=i_sandals
+COLOR=0ab3
+ITEMNEWBIE=i_bow
+COLOR=0ab3
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_cle_donjon3_3
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Imperatrice amazone 3
+
+[CHARDEF c_imperatrice_amazone_4]
+NAME=Imperatrice amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3000
+DEX=3000
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=0ab3
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=0ab3
+ITEMNEWBIE=i_sandals
+COLOR=0ab3
+ITEMNEWBIE=i_bow
+COLOR=0ab3
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_cle_donjon3_4
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Imperatrice amazone 4
+
+[CHARDEF c_imperatrice_amazone_5]
+NAME=Imperatrice amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3000
+DEX=3000
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=0ab3
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=0ab3
+ITEMNEWBIE=i_sandals
+COLOR=0ab3
+ITEMNEWBIE=i_bow
+COLOR=0ab3
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_cle_donjon3_5
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Imperatrice amazone 5
+
+[CHARDEF c_imperatrice_amazone_6]
+NAME=Imperatrice amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3000
+DEX=3000
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=0ab3
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=0ab3
+ITEMNEWBIE=i_sandals
+COLOR=0ab3
+ITEMNEWBIE=i_bow
+COLOR=0ab3
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_cle_donjon3_6
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Imperatrice amazone 6
+
+[CHARDEF c_imperatrice_amazone_7]
+NAME=Imperatrice amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3000
+DEX=3000
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=0ab3
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=0ab3
+ITEMNEWBIE=i_sandals
+COLOR=0ab3
+ITEMNEWBIE=i_bow
+COLOR=0ab3
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_cle_donjon3_7
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Imperatrice amazone 7
+
+[CHARDEF c_imperatrice_amazone_8]
+NAME=Imperatrice amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3000
+DEX=3000
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=0ab3
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=0ab3
+ITEMNEWBIE=i_sandals
+COLOR=0ab3
+ITEMNEWBIE=i_bow
+COLOR=0ab3
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_cle_donjon3_8
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Imperatrice amazone 8
+
+[CHARDEF c_imperatrice_amazone_9]
+NAME=Imperatrice amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3000
+DEX=3000
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=0ab3
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=0ab3
+ITEMNEWBIE=i_sandals
+COLOR=0ab3
+ITEMNEWBIE=i_bow
+COLOR=0ab3
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_cle_donjon3_9
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Imperatrice amazone 9
+
+[CHARDEF c_imperatrice_amazone_10]
+NAME=Imperatrice amazone
+ID=c_woman
+BLOODCOLOR=0ab8
+
+ON=@Create
+STR=3000
+DEX=3000
+INT=0
+
+COLOR=colors_skin
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=42000
+TAG.XPCOUP=<EVAL (RAND(1750,3500))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1500.0
+ARCHERY=1500.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_armor_female_plate
+COLOR=0ab3
+ITEMNEWBIE=i_armor_female_shorts
+COLOR=0ab3
+ITEMNEWBIE=i_sandals
+COLOR=0ab3
+ITEMNEWBIE=i_bow
+COLOR=0ab3
+NAME=Arc de lierres
+ITEMNEWBIE=i_fleche_newbifiee
+AMOUNT=100
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=2498,922
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM=i_cle_donjon3_10
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 3
+DESCRIPTION=Imperatrice amazone 10
+
+
+//*** DONGEON 4 ***
+
+
+[CHARDEF c_gazer_streum]
+NAME=Gazer
+ID=c_gazer
+BLOODCOLOR=0BB7
+
+ON=@Create
+STR=2100
+DEX=2100
+INT=0
+MAXHITS=2150
+
+COLOR=0BB7
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=30100
+TAG.XPCOUP=<EVAL (RAND(1254,2508))>
+TAG.TAPER=12
+TAG.NIVEAU=105
+
+KARMA=-9999
+
+TACTICS=1275.0
+WRESTLING=1275.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1176,2640,2
+    SRC.UPDATE
+ELSE
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {30 50} 0008 <UID>
+    ANIM 6
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {30 50} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {30 50} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 i_cerveau_gazer 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 4
+DESCRIPTION=Gazer
+
+[CHARDEF c_gazer_subalterne]
+NAME=Gazer subalterne
+ID=c_gazer
+BLOODCOLOR=0BB6
+
+ON=@Create
+STR=2500
+DEX=2500
+INT=0
+MAXHITS=2750
+
+COLOR=0BB6
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=38500
+TAG.XPCOUP=<EVAL (RAND(1604,3208))>
+TAG.TAPER=12
+TAG.NIVEAU=105
+
+KARMA=-9999
+
+TACTICS=1375.0
+WRESTLING=1375.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1176,2640,2
+    SRC.UPDATE
+ELSE
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {40 65} 0008 <UID>
+    ANIM 6
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {40 65} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {40 65} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 i_cerveau_gazer_subalterne 20 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 4
+DESCRIPTION=Gazer subalterne
+
+[CHARDEF c_guerrier_gazer]
+NAME=Guerrier gazer
+ID=c_gazer
+BLOODCOLOR=0BB5
+
+ON=@Create
+STR=2900
+DEX=2900
+INT=0
+MAXHITS=3350
+
+COLOR=0BB5
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=46900
+TAG.XPCOUP=<EVAL (RAND(1954,3908))>
+TAG.TAPER=12
+TAG.NIVEAU=110
+
+KARMA=-9999
+
+TACTICS=1475.0
+WRESTLING=1475.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1176,2640,2
+    SRC.UPDATE
+ELSE
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {70 100} 0008 <UID>
+    ANIM 6
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {70 100} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {70 100} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_cerveau_guerrier_gazer 40 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 4
+DESCRIPTION=Guerrier gazer
+
+[CHARDEF c_champion_gazer]
+NAME=Champion gazer
+ID=c_gazer
+BLOODCOLOR=0BB4
+
+ON=@Create
+STR=3300
+DEX=3300
+INT=0
+MAXHITS=3950
+
+COLOR=0BB4
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=55300
+TAG.XPCOUP=<EVAL (RAND(2304,4608))>
+TAG.TAPER=12
+TAG.NIVEAU=110
+
+KARMA=-9999
+
+TACTICS=1575.0
+WRESTLING=1575.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1176,2640,2
+    SRC.UPDATE
+ELSE
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {100 140} 0008 <UID>
+    ANIM 6
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {100 140} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {100 140} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_cerveau_champion_gazer 80 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 4
+DESCRIPTION=Champion gazer
+
+[CHARDEF c_prince_gazer]
+NAME=Prince gazer
+ID=c_gazer
+BLOODCOLOR=0BB3
+
+ON=@Create
+STR=4000
+DEX=4000
+INT=0
+MAXHITS=5000
+
+COLOR=0BB3
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=70000
+TAG.XPCOUP=<EVAL (RAND(2916,5833))>
+TAG.TAPER=12
+TAG.NIVEAU=110
+
+KARMA=-9999
+
+TACTICS=1750.0
+WRESTLING=1750.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1176,2640,2
+    SRC.UPDATE
+ELSE
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {120 160} 0008 <UID>
+    ANIM 6
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {120 160} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {120 160} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_cerveau_prince_gazer 200 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 4
+DESCRIPTION=Prince gazer
+
+[CHARDEF c_seigneur_gazer]
+NAME=Seigneur gazer
+ID=c_gazer
+BLOODCOLOR=0BB2
+
+ON=@Create
+STR=4500
+DEX=4500
+INT=0
+MAXHITS=5750
+
+COLOR=0BB2
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=80500
+TAG.XPCOUP=<EVAL (RAND(3354,6708))>
+TAG.TAPER=12
+TAG.NIVEAU=115
+
+KARMA=-9999
+
+TACTICS=1875.0
+WRESTLING=1875.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1176,2640,2
+    SRC.UPDATE
+ELSE
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {140 170} 0008 <UID>
+    ANIM 6
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {140 170} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {140 170} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_cerveau_seigneur_gazer 330 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 4
+DESCRIPTION=Seigneur gazer
+
+[CHARDEF c_dieu_gazer]
+NAME=Dieu gazer
+ID=c_gazer
+BLOODCOLOR=0BB1
+
+ON=@Create
+STR=5000
+DEX=5000
+INT=0
+MAXHITS=6500
+
+COLOR=0BB1
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=91000
+TAG.XPCOUP=<EVAL (RAND(3791,7583))>
+TAG.TAPER=12
+TAG.NIVEAU=115
+
+KARMA=-9999
+
+TACTICS=2000.0
+WRESTLING=2000.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.TAG.anti_mark_recall=0
+    SRC.P=1176,2640,2
+    SRC.UPDATE
+ELSE
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {200 250} 0008 <UID>
+    ANIM 6
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {170 220} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.EFFECT 1,0
+    SRC.DAMAGE {170 220} 0008 <SRC.ACT.UID>
+    SRC.ACT.ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_cerveau_dieu_gazer 500 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 4
+DESCRIPTION=Dieu gazer
+
+
+
+//***DONGEON 5***
+
+
+
+[CHARDEF c_damne_de_terre]
+NAME=Damne de terre
+ID=c_headless
+BLOODCOLOR=0ab7
+
+ON=@Create
+STR=3800
+DEX=3800
+INT=0
+MAXHITS=4700
+
+COLOR=0ab7
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=65800
+TAG.XPCOUP=<EVAL (RAND(2741,5483))>
+TAG.TAPER=12
+TAG.NIVEAU=110
+
+KARMA=-9999
+
+TACTICS=1700.0
+WRESTLING=1700.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=4722,3823,1
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL(RAND(10))> == 0
+    ACT.STAM=0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous assomme !
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL <SRC.ACT.DISTANCE>> > 3
+    SRC.GO <P>
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 195 i_teleporteur_d5_1 10 i_perle_enchantement 14 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 5
+DESCRIPTION=Damne de terre
+
+[CHARDEF c_damne_d_air]
+NAME=Damne d'air
+ID=c_headless
+BLOODCOLOR=008ab
+
+ON=@Create
+STR=4200
+DEX=4200
+INT=0
+MAXHITS=5300
+
+COLOR=008ab
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=74200
+TAG.XPCOUP=<EVAL (RAND(3091,6183))>
+TAG.TAPER=12
+TAG.NIVEAU=110
+
+KARMA=-9999
+
+TACTICS=1800.0
+WRESTLING=1800.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=4722,3823,1
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL(RAND(8))> == 0
+    ACT.STAM=0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous assomme !
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL <SRC.ACT.DISTANCE>> > 3
+    SRC.GO <P>
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 195 i_teleporteur_d5_2 10 i_perle_enchantement 14 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 5
+DESCRIPTION=Damne d'air
+
+[CHARDEF c_damne_d_eau]
+NAME=Damne d'eau
+ID=c_headless
+BLOODCOLOR=0ba8
+
+ON=@Create
+STR=4700
+DEX=4700
+INT=0
+MAXHITS=6050
+
+COLOR=0ba8
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=84700
+TAG.XPCOUP=<EVAL (RAND(3529,7058))>
+TAG.TAPER=12
+TAG.NIVEAU=115
+
+KARMA=-9999
+
+TACTICS=1925.0
+WRESTLING=1925.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=4722,3823,1
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL(RAND(6))> == 0
+    ACT.STAM=0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous assomme !
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL <SRC.ACT.DISTANCE>> > 3
+    SRC.GO <P>
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 195 i_teleporteur_d5_3 10 i_perle_enchantement 14 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 5
+DESCRIPTION=Damne d'eau
+
+[CHARDEF c_damne_de_feu]
+NAME=Damne de feu
+ID=c_headless
+BLOODCOLOR=0b7e
+
+ON=@Create
+STR=5000
+DEX=5000
+INT=0
+MAXHITS=6500
+
+COLOR=0b7e
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=91000
+TAG.XPCOUP=<EVAL (RAND(3791,7583))>
+TAG.TAPER=12
+TAG.NIVEAU=115
+
+KARMA=-9999
+
+TACTICS=2000.0
+WRESTLING=2000.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=4722,3823,1
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL(RAND(4))> == 0
+    ACT.STAM=0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous assomme !
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL <SRC.ACT.DISTANCE>> > 3
+    SRC.GO <P>
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 195 i_teleporteur_d5_4 10 i_perle_enchantement 14 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 5
+DESCRIPTION=Damne de feu
+
+[CHARDEF c_demon_de_terre]
+NAME=Demon de terre
+ID=09
+BLOODCOLOR=0ab7
+
+ON=@Create
+STR=5000
+DEX=1000
+INT=0
+MAXHITS=7500
+
+COLOR=0ab7
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=140000
+TAG.XPCOUP=<EVAL (RAND(5833,11666))>
+TAG.TAPER=12
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=2000.0
+WRESTLING=2000.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=4722,3823,1
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL(RAND(10))> == 0
+    ACT.STAM=0
+    ACT.HITS=1
+    ACT.MANA=0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous terrorise !
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL <SRC.ACT.DISTANCE>> > 3
+    SRC.GO <P>
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+SRC.ACT.TAG.DEMON1=1
+IF (<EVAL <SRC.ACT.TAG.DEMON1>>==1) && (<EVAL <SRC.ACT.TAG.DEMON2>>==1) && (<EVAL <SRC.ACT.TAG.DEMON3>>==1) && (<EVAL <SRC.ACT.TAG.DEMON4>>==1)
+    SRC.ACT.GO 5995,97
+ELSE
+    SRC.ACT.GO 5939,177,22
+ENDIF
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 5
+DESCRIPTION=Demon de terre
+
+[CHARDEF c_demon_d_air]
+NAME=Demon d'air
+ID=09
+BLOODCOLOR=0afb
+
+ON=@Create
+STR=5250
+DEX=1000
+INT=0
+MAXHITS=8500
+
+COLOR=07fff
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=153750
+TAG.XPCOUP=<EVAL (RAND(4804,9609))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=2062.0
+WRESTLING=2062.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=4722,3823,1
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL(RAND(10))> == 0
+    ACT.STAM=0
+    ACT.HITS=1
+    ACT.MANA=0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous terrorise !
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL <SRC.ACT.DISTANCE>> > 3
+    SRC.GO <P>
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+SRC.ACT.TAG.DEMON2=1
+IF (<EVAL <SRC.ACT.TAG.DEMON1>>==1) && (<EVAL <SRC.ACT.TAG.DEMON2>>==1) && (<EVAL <SRC.ACT.TAG.DEMON3>>==1) && (<EVAL <SRC.ACT.TAG.DEMON4>>==1)
+    SRC.ACT.GO 5995,97
+ELSE
+    SRC.ACT.GO 6050,203,22
+ENDIF
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 5
+DESCRIPTION=Demon d'air
+
+[CHARDEF c_demon_d_eau]
+NAME=Demon d'eau
+ID=09
+BLOODCOLOR=0ba8
+
+ON=@Create
+STR=5500
+DEX=1000
+INT=0
+MAXHITS=9500
+
+COLOR=0ba8
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=167500
+TAG.XPCOUP=<EVAL (RAND(5234,10468))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=1125.0
+WRESTLING=1125.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=4722,3823,1
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL(RAND(10))> == 0
+    ACT.STAM=0
+    ACT.HITS=1
+    ACT.MANA=0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous terrorise !
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL <SRC.ACT.DISTANCE>> > 3
+    SRC.GO <P>
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+SRC.ACT.TAG.DEMON3=1
+IF (<EVAL <SRC.ACT.TAG.DEMON1>>==1) && (<EVAL <SRC.ACT.TAG.DEMON2>>==1) && (<EVAL <SRC.ACT.TAG.DEMON3>>==1) && (<EVAL <SRC.ACT.TAG.DEMON4>>==1)
+    SRC.ACT.GO 5995,97
+ELSE
+    SRC.ACT.GO 6073,83,22
+ENDIF
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 5
+DESCRIPTION=Demon d'eau
+
+[CHARDEF c_demon_de_feu]
+NAME=Demon de feu
+ID=09
+BLOODCOLOR=0b7e
+
+ON=@Create
+STR=5750
+DEX=5750
+INT=0
+MAXHITS=10500
+
+COLOR=0b7e
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=181250
+TAG.XPCOUP=<EVAL (RAND(5664,11328))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS=2187.0
+WRESTLING=2187.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=4722,3823,1
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL(RAND(10))> == 0
+    ACT.STAM=0
+    ACT.HITS=1
+    ACT.MANA=0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous terrorise !
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL <SRC.ACT.DISTANCE>> > 3
+    SRC.GO <P>
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+SRC.ACT.TAG.DEMON4=1
+IF (<EVAL <SRC.ACT.TAG.DEMON1>>==1) && (<EVAL <SRC.ACT.TAG.DEMON2>>==1) && (<EVAL <SRC.ACT.TAG.DEMON3>>==1) && (<EVAL <SRC.ACT.TAG.DEMON4>>==1)
+    SRC.ACT.GO 5995,97
+ELSE
+    SRC.ACT.GO 5909,27,44
+ENDIF
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 5
+DESCRIPTION=Demon de feu
+
+
+
+//*** DONGEON 6 ***
+
+
+
+[ITEMDEF i_explosion_lynx]
+ID=i_fx_Grosse_Explosion_effect
+NAME=Explosion
+TYPE=t_script
+
+ON=@CREATE
+TIMER=2
+COLOR=0B7B
+ATTR=08010
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[CHARDEF c_lynx_de_lave_entree]
+NAME=Lynx de lave
+ID=0d6
+BLOODCOLOR=0b7b
+
+ON=@Create
+STR=5500
+DEX=5500
+INT=0
+MAXHITS=7250
+
+COLOR=0b7b
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=101500
+TAG.XPCOUP=<EVAL (RAND(3171,6343))>
+TAG.TAPER=16
+TAG.NIVEAU=115
+KARMA=-9999
+
+TACTICS=2125.0
+WRESTLING=2125.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ELSE
+    NEWITEM i_explosion_lynx
+    ACT.P=<P>
+    P=<SRC.P>
+    UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 i_fire_cle1 30 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Lynx de lave [Entree]
+
+[CHARDEF c_lynx_de_lave_maison]
+NAME=Lynx de lave
+ID=0d6
+BLOODCOLOR=0b7b
+
+ON=@Create
+STR=5500
+DEX=5500
+INT=0
+MAXHITS=7250
+
+COLOR=0b7b
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=101500
+TAG.XPCOUP=<EVAL (RAND(3171,6343))>
+TAG.TAPER=16
+TAG.NIVEAU=115
+KARMA=-9999
+
+TACTICS=2125.0
+WRESTLING=2125.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ELSE
+    NEWITEM i_explosion_lynx
+    ACT.P=<P>
+    P=<SRC.P>
+    UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 i_fire_cle2 30 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Lynx de lave [Maison]
+
+[CHARDEF c_lynx_de_lave_escaliers]
+NAME=Lynx de lave
+ID=0d6
+BLOODCOLOR=0b7b
+
+ON=@Create
+STR=5500
+DEX=5500
+INT=0
+MAXHITS=7250
+
+COLOR=0b7b
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=101500
+TAG.XPCOUP=<EVAL (RAND(3171,6343))>
+TAG.TAPER=16
+TAG.NIVEAU=115
+KARMA=-9999
+
+TACTICS=2125.0
+WRESTLING=2125.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ELSE
+    NEWITEM i_explosion_lynx
+    ACT.P=<P>
+    P=<SRC.P>
+    UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 i_fire_cle3 10 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Lynx de lave [escaliers]
+
+[CHARDEF c_lynx_de_lave]
+NAME=Lynx de lave
+ID=0d6
+BLOODCOLOR=0b7b
+
+ON=@Create
+STR=5500
+DEX=5500
+INT=0
+MAXHITS=7250
+
+COLOR=0b7b
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=101500
+TAG.XPCOUP=<EVAL (RAND(3171,6343))>
+TAG.TAPER=16
+TAG.NIVEAU=115
+KARMA=-9999
+
+TACTICS=2125.0
+WRESTLING=2125.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ELSE
+    NEWITEM i_explosion_lynx
+    ACT.P=<P>
+    P=<SRC.P>
+    UPDATE    
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Lynx de lave
+
+[ITEMDEF i_attaque_abjection]
+ID=i_fx_Eboulement_effect
+NAME=Explosion
+TYPE=t_script
+
+ON=@CREATE
+TIMER=2
+COLOR=0B7B
+ATTR=08010
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[CHARDEF c_abjection_de_lave]
+NAME=Abjection de lave
+ID=033
+BLOODCOLOR=0b7b
+
+ON=@Create
+STR=5400
+DEX=5400
+INT=0
+MAXHITS=7100
+
+COLOR=0b7b
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=99400
+TAG.XPCOUP=<EVAL (RAND(3106,6212))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+KARMA=-9999
+
+TACTICS=2100.0
+WRESTLING=2100.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ENDIF
+SRC.NEWITEM=i_attaque_abjection
+SRC.ACT.P=<SRC.P>
+SRC.DAMAGE {150 300} 0008 <UID>
+ANIM 6
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_abjection
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {150 300} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_abjection
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {150 300} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Abjection de lave
+
+[CHARDEF c_abjection_de_lave_finale]
+NAME=Abjection de lave
+ID=033
+BLOODCOLOR=0b7b
+
+ON=@Create
+STR=5400
+DEX=5400
+INT=0
+MAXHITS=7100
+
+COLOR=0b7b
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=99400
+TAG.XPCOUP=<EVAL (RAND(3106,6212))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+KARMA=-9999
+
+TACTICS=2100.0
+WRESTLING=2100.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ENDIF
+SRC.NEWITEM=i_attaque_abjection
+SRC.ACT.P=<SRC.P>
+SRC.DAMAGE {150 300} 0008 <UID>
+ANIM 6
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_abjection
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {150 300} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_abjection
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {150 300} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 10 i_fire_cle_finale 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Abjection de lave finale
+
+[ITEMDEF i_eclair_dragonnet]
+ID=i_fx_Eclair_effect
+NAME=Eclair
+TYPE=t_script
+
+ON=@CREATE
+TIMER=2
+COLOR=0B7B
+ATTR=08010
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_attaque_dragonnet]
+ID=i_fx_Meteorite_effect
+NAME=Meteorite
+TYPE=t_script
+
+ON=@CREATE
+TIMER=2
+COLOR=0B7B
+ATTR=08010
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[CHARDEF c_dragonnet_d6_1]
+NAME=Dragonnet
+ID=03c
+BLOODCOLOR=0BB6
+
+ON=@Create
+STR=7000
+DEX=7000
+INT=0
+MAXHITS=10000
+
+COLOR=0BB6
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=133000
+TAG.XPCOUP=<EVAL (RAND(4156,8312))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+KARMA=-9999
+
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_dragonnet
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {200 400} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_dragonnet
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {200 400} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+IF (<EVAL 0<SRC.ACT.TAG.DRAGONNETD>> == 5) || (<EVAL 0<SRC.ACT.TAG.RENAISSANCE>> > 5 )
+    SRC.ACT.NEWITEM=i_eclair_dragonnet
+    SRC.ACT.ACT.P=<SRC.ACT.P>
+    SRC.ACT.SYSMESSAGEUA 0481 1 1 0 L'air, trop charge en souffre, provoque une explosion qui vous ejecte dans un lieu inconnu ...
+    SRC.ACT.GO 5657,1402
+ELSEIF <EVAL 0<SRC.ACT.TAG.RANDOMDRAGON>>==0
+    SRC.ACT.NEWITEM=i_eclair_dragonnet
+    SRC.ACT.ACT.P=<SRC.ACT.P>
+    SRC.ACT.SYSMESSAGEUA 0481 1 1 0 Vous sentez l'air se charger de souffre
+    SRC.ACT.TAG.DRAGONNETD=<EVAL 0<SRC.ACT.TAG.DRAGONNETD>+1>
+    SRC.ACT.TAG.RANDOMDRAGON=<EVAL (RAND(5))>
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 147 i_perle_enchantement 9 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Dragonnet 1
+
+[CHARDEF c_dragonnet_d6_2]
+NAME=Dragonnet
+ID=03c
+BLOODCOLOR=0AF7
+
+ON=@Create
+STR=7000
+DEX=7000
+INT=0
+MAXHITS=10000
+
+COLOR=0BB6
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=133000
+TAG.XPCOUP=<EVAL (RAND(4156,8312))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+KARMA=-9999
+
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_dragonnet
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {200 400} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_dragonnet
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {200 400} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+IF (<EVAL 0<SRC.ACT.TAG.DRAGONNETD>> == 5) || (<EVAL 0<SRC.ACT.TAG.RENAISSANCE>> > 5 )
+    SRC.ACT.NEWITEM=i_eclair_dragonnet
+    SRC.ACT.ACT.P=<SRC.ACT.P>
+    SRC.ACT.SYSMESSAGEUA 0481 1 1 0 L'air, trop charge en souffre, provoque une explosion qui vous ejecte dans un lieu inconnu ...
+    SRC.ACT.GO 5657,1402
+ELSEIF <EVAL 0<SRC.ACT.TAG.RANDOMDRAGON>>==1
+    SRC.ACT.NEWITEM=i_eclair_dragonnet
+    SRC.ACT.ACT.P=<SRC.ACT.P>
+    SRC.ACT.SYSMESSAGEUA 0481 1 1 0 Vous sentez l'air se charger de souffre
+    SRC.ACT.TAG.DRAGONNETD=<EVAL 0<SRC.ACT.TAG.DRAGONNETD>+1>
+    SRC.ACT.TAG.RANDOMDRAGON=<EVAL (RAND(5))>
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 147 i_perle_enchantement 9 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Dragonnet 2
+
+[CHARDEF c_dragonnet_d6_3]
+NAME=Dragonnet
+ID=03c
+BLOODCOLOR=09A2
+
+ON=@Create
+STR=7000
+DEX=7000
+INT=0
+MAXHITS=10000
+
+COLOR=0BB6
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=133000
+TAG.XPCOUP=<EVAL (RAND(4156,8312))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+KARMA=-9999
+
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_dragonnet
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {200 400} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_dragonnet
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {200 400} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+IF (<EVAL 0<SRC.ACT.TAG.DRAGONNETD>> == 5) || (<EVAL 0<SRC.ACT.TAG.RENAISSANCE>> > 5 )
+    SRC.ACT.NEWITEM=i_eclair_dragonnet
+    SRC.ACT.ACT.P=<SRC.ACT.P>
+    SRC.ACT.SYSMESSAGEUA 0481 1 1 0 L'air, trop charge en souffre, provoque une explosion qui vous ejecte dans un lieu inconnu ...
+    SRC.ACT.GO 5657,1402
+ELSEIF <EVAL 0<SRC.ACT.TAG.RANDOMDRAGON>>==2
+    SRC.ACT.NEWITEM=i_eclair_dragonnet
+    SRC.ACT.ACT.P=<SRC.ACT.P>
+    SRC.ACT.SYSMESSAGEUA 0481 1 1 0 Vous sentez l'air se charger de souffre
+    SRC.ACT.TAG.DRAGONNETD=<EVAL 0<SRC.ACT.TAG.DRAGONNETD>+1>
+    SRC.ACT.TAG.RANDOMDRAGON=<EVAL (RAND(5))>
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 147 i_perle_enchantement 9 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Dragonnet 3
+
+[CHARDEF c_dragonnet_d6_4]
+NAME=Dragonnet
+ID=03c
+BLOODCOLOR=0AAC
+
+ON=@Create
+STR=7000
+DEX=7000
+INT=0
+MAXHITS=10000
+
+COLOR=0BB6
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=133000
+TAG.XPCOUP=<EVAL (RAND(4156,8312))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+KARMA=-9999
+
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_dragonnet
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {200 400} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_dragonnet
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {200 400} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+IF (<EVAL 0<SRC.ACT.TAG.DRAGONNETD>> == 5) || (<EVAL 0<SRC.ACT.TAG.RENAISSANCE>> > 5 )
+    SRC.ACT.NEWITEM=i_eclair_dragonnet
+    SRC.ACT.ACT.P=<SRC.ACT.P>
+    SRC.ACT.SYSMESSAGEUA 0481 1 1 0 L'air, trop charge en souffre, provoque une explosion qui vous ejecte dans un lieu inconnu ...
+    SRC.ACT.GO 5657,1402
+ELSEIF <EVAL 0<SRC.ACT.TAG.RANDOMDRAGON>>==3
+    SRC.ACT.NEWITEM=i_eclair_dragonnet
+    SRC.ACT.ACT.P=<SRC.ACT.P>
+    SRC.ACT.SYSMESSAGEUA 0481 1 1 0 Vous sentez l'air se charger de souffre
+    SRC.ACT.TAG.DRAGONNETD=<EVAL 0<SRC.ACT.TAG.DRAGONNETD>+1>
+    SRC.ACT.TAG.RANDOMDRAGON=<EVAL (RAND(5))>
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 147 i_perle_enchantement 9 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Dragonnet 4
+
+[CHARDEF c_dragonnet_d6_5]
+NAME=Dragonnet
+ID=03c
+BLOODCOLOR=0BA3
+
+ON=@Create
+STR=7000
+DEX=7000
+INT=0
+MAXHITS=10000
+
+COLOR=0BB6
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=133000
+TAG.XPCOUP=<EVAL (RAND(4156,8312))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+KARMA=-9999
+
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.anti_mark_recall>> == 0
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=5761,2908,15
+    SRC.UPDATE
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_dragonnet
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {200 400} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@SPELLEFFECT
+IF <EVAL(RAND(10))> == 0
+    SRC.NEWITEM=i_attaque_dragonnet
+    SRC.ACT.P=<SRC.P>
+    SRC.DAMAGE {200 400} 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+IF (<EVAL 0<SRC.ACT.TAG.DRAGONNETD>> == 5) || (<EVAL 0<SRC.ACT.TAG.RENAISSANCE>> > 5 )
+    SRC.ACT.NEWITEM=i_eclair_dragonnet
+    SRC.ACT.ACT.P=<SRC.ACT.P>
+    SRC.ACT.SYSMESSAGEUA 0481 1 1 0 L'air, trop charge en souffre, provoque une explosion qui vous ejecte dans un lieu inconnu ...
+    SRC.ACT.GO 5657,1402
+ELSEIF <EVAL 0<SRC.ACT.TAG.RANDOMDRAGON>>==4
+    SRC.ACT.NEWITEM=i_eclair_dragonnet
+    SRC.ACT.ACT.P=<SRC.ACT.P>
+    SRC.ACT.SYSMESSAGEUA 0481 1 1 0 Vous sentez l'air se charger de souffre
+    SRC.ACT.TAG.DRAGONNETD=<EVAL 0<SRC.ACT.TAG.DRAGONNETD>+1>
+    SRC.ACT.TAG.RANDOMDRAGON=<EVAL (RAND(5))>
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 147 i_perle_enchantement 9 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 6
+DESCRIPTION=Dragonnet 5
+
+
+
+//*** DONGEON 7 ***
+
+
+
+[CHARDEF c_seigneur_des_abysses]
+NAME=Seigneur des abysses
+ID=04
+CAN=MT_WALK
+
+ON=@Create
+COLOR=0ab8
+STR=5300
+DEX=500
+INT=3000
+MAXHITS=7400
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=103600
+TAG.XPCOUP=<EVAL (RAND(3237,6475))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+KARMA=-9999
+
+TACTICS=2150.0
+WRESTLING=2150.0
+MAGERY=2800.0
+NPC=BRAIN_MONSTER
+
+//FIREBALL + MAGICARROW
+ITEMNEWBIE=i_spellbook
+MORE1=00020010
+MORE2=00000000
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Seigneur des abysses
+
+
+[CHARDEF c_briseur_de_sorts]
+NAME=Briseur de sorts
+ID=056
+CAN=MT_WALK|MT_RUN
+
+ON=@Create
+COLOR=0ab8
+STR=5300
+DEX=500
+INT=0
+MAXHITS=7400
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=103600
+TAG.XPCOUP=<EVAL (RAND(3237,6475))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+KARMA=-9999
+
+TACTICS=2150.0
+WRESTLING=2150.0
+MAGICRESISTANCE=3000.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Briseur de sorts
+
+
+[CHARDEF c_liche_demoniaque]
+NAME=Liche demoniaque
+ID=c_Liche
+CAN=MT_WALK|MT_RUN
+
+ON=@Create
+COLOR=0b1f
+STR=4900
+DEX=500
+INT=3000
+//MAXHITS=6650
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=93100
+TAG.XPCOUP=<EVAL (RAND(2909,5818))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+KARMA=-9999
+
+TACTICS=2025.0
+WRESTLING=2025.0
+MAGERY=2600.0
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_spellbook
+MORE1=00000000
+MORE2=00000110
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Liche demoniaque
+
+
+[CHARDEF c_mangeur_intestinal]
+NAME=Mangeur intestinal
+ID=03
+CAN=MT_WALK|MT_RUN
+
+ON=@Create
+COLOR=0151
+STR=6600
+DEX=600
+INT=0
+MAXHITS=9000
+KARMA=-9999
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=180000
+TAG.XPCOUP=<EVAL (RAND(5625,11250))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+TAG.NBHEAL=4
+
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@SPELLEFFECT
+IF ( (<EVAL <HITS>> < 3000) && (<EVAL <TAG.NBHEAL>> > 0) )
+    HITS=<HITS>+5000
+    TAG.NBHEAL=<TAG.NBHEAL>-1
+    Effect 2,0376a,6,15,0
+    Spelleffect 29,500
+    Sound snd_SPELL_Heal
+    DORAND 3
+        SAY HAHAHAHAH
+        SAY Je vais t'etriper!
+        SAY Meurs!
+    ENDDO
+ENDIF
+RETURN 0
+
+ON=@GETHIT
+IF ( (<EVAL <HITS>> < 3000) && (<EVAL <TAG.NBHEAL>> > 0) )
+    HITS=<HITS>+5000
+    TAG.NBHEAL=<TAG.NBHEAL>-1
+    Effect 2,0376a,6,15,0
+    Spelleffect 29,500
+    Sound snd_SPELL_Heal
+    DORAND 3
+        SAY HAHAHAHAH
+        SAY Je vais t'etriper!
+        SAY Meurs!
+    ENDDO
+ENDIF
+RETURN 0    
+
+ON=@NPCRestock
+ITEM=i_intestins_rachidis 1
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Mangeur intestinal
+
+
+[CHARDEF c_mangeur_cardiaque]
+NAME=Mangeur cardiaque
+ID=03
+CAN=MT_WALK|MT_RUN
+
+ON=@Create
+COLOR=025
+STR=6600
+DEX=600
+INT=0
+KARMA=-9999
+MAXHITS=9000
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=180000
+TAG.XPCOUP=<EVAL (RAND(5625,11250))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL <HITS> + <STR>/100> > <EVAL <STR>>
+    HITS=<STR>
+ELSE
+    HITS = <EVAL <HITS> + <STR>/100 >
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM=i_coeur_rachidis 1
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Mangeur cardiaque
+
+
+[CHARDEF c_mangeur_cervical]
+NAME=Mangeur cervical
+ID=03
+CAN=MT_WALK|MT_RUN
+
+ON=@Create
+COLOR=01b9
+STR=6600
+DEX=600
+INT=0
+MAXHITS=9000
+KARMA=-9999
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=180000
+TAG.XPCOUP=<EVAL (RAND(5625,11250))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL(RAND(5))> == 0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> transperce votre armure!
+    IF <EVAL <ACT.HITS> - <STR>/20> > 0
+        ACT.HITS = <EVAL <ACT.HITS> - <STR>/25 >
+    ELSE
+        ACT.HITS = 1
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM=i_cerveau_rachidis 1
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Mangeur cervical
+
+
+[CHARDEF c_mangeur_lombaire]
+NAME=Mangeur lombaire
+ID=03
+CAN=MT_WALK|MT_RUN
+
+ON=@Create
+COLOR=0175
+STR=6600
+DEX=600
+INT=0
+MAXHITS=9000
+KARMA=-9999
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=180000
+TAG.XPCOUP=<EVAL (RAND(5625,11250))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@GETHIT
+IF <EVAL(RAND(5))> == 0
+    SRC.SYSMESSAGEUA 0481 1 1 0 <NAME> bloque critiquement votre coup!
+    SRC.HITS = <EVAL <SRC.HITS> - <STR>/25 >
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM=i_thorax_rachidis 1
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Mangeur lombaire
+
+
+[CHARDEF c_mangeur_inferieur]
+NAME=Mangeur inferieur
+ID=03
+CAN=MT_WALK|MT_RUN
+
+ON=@Create
+COLOR=0368
+STR=6600
+DEX=600
+INT=0
+KARMA=-9999
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=180000
+TAG.XPCOUP=<EVAL (RAND(5625,11250))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF (<EVAL(RAND(3))>=0)
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous assome!
+    ACT.STAM=0
+ENDIF
+RETURN 0
+
+ON=@GETHIT
+IF <DISTANCE> > 2
+    SRC.NEWITEM i_effet_hexapode
+    SRC.ACT.P=<SRC.P>
+    DORAND 3
+        SAY Un probleme?
+        SAY je te tiens!
+        SAY t'inquiete, ce sera bientot fini!
+    ENDDO
+    IF !<SRC.FINDID.m_clumsy_mangeur_inferieur>
+        SRC.NEWITEM m_clumsy_mangeur_inferieur
+        SRC.ACT.TAG.DEXPERDU = <EVAL <SRC.DEX>>
+        SRC.ACT.EQUIP
+        SRC.DEX=0
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM=i_jambes_rachidis 1
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Mangeur inferieur
+
+[ITEMDEF m_clumsy_mangeur_inferieur]
+NAME=Clumsy mangeur inferieur
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=2
+
+ON=@TIMER
+CONT.DEX = <EVAL <CONT.DEX> + <TAG.DEXPERDU>>
+REMOVE
+RETURN 1
+
+[CHARDEF c_archer_de_l_apocalypse]
+NAME=Archer de l'apocalypse
+ID=c_SKELETON_W_AXE
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=099c
+NPC=brain_undead
+STR=3600
+DEX=600
+INT=0
+//MAXHITS=5000
+TAG.DEXPURE=600
+TAG.ARCHERYPURE=200
+TAG.FORPURE=800
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=84000
+TAG.XPCOUP=<EVAL (RAND(3500,7000))>
+TAG.TAPER=12
+TAG.NIVEAU=120
+
+ARCHERY=1000.0
+TACTICS=350.0
+KARMA=-9999
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEMNEWBIE=i_arbalete_en_orme
+ITEMNEWBIE=i_arrow,100
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Archer de l'apocalypse
+
+[CHARDEF c_juggernaut_infernal]
+NAME=Juggernaut infernal
+ID=c_SKELETON_W_SWORD
+CAN=MT_WALK|MT_RUN
+
+ON=@Create
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=120000
+TAG.XPCOUP=<EVAL (RAND(3750,7500))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+
+COLOR=0aaa
+NPC=brain_undead
+STR=5600
+DEX=1000
+INT=0
+MAXHITS=17000
+
+TACTICS=2250.0
+WRESTLING=2250.0
+KARMA=-9999
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@SPELLEFFECT
+HITS=<EVAL <HITS> - <SRC.INT> * 3>
+ANIM 2
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Juggernaut infernal
+
+[CHARDEF c_tortureur_de_l_esprit]
+NAME=Tortureur de l'esprit
+ID=c_SKELETON
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=98000
+TAG.XPCOUP=<EVAL (RAND(4083,8166))>
+TAG.TAPER=12
+TAG.NIVEAU=120
+
+COLOR=0996
+NPC=brain_undead
+STR=3800
+DEX=800
+INT=3000
+MAXHITS=8000
+
+MAGERY=1800.0
+TACTICS=1750.0
+WRESTLING=1750.0
+KARMA=-9999
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEMNEWBIE=i_spellbook
+MORE1=00000000
+MORE2=00000110
+
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Tortureur de l'esprit
+
+[CHARDEF c_demon_venimeux]
+NAME=Demon venimeux
+ID=c_SPIDER_GIANT
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=175000
+TAG.XPCOUP=<EVAL (RAND(5468,10937))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+
+COLOR=0664
+NPC=brain_undead
+STR=7100
+DEX=2000
+INT=0
+MAXHITS=15000
+
+TACTICS=2625.0
+WRESTLING=2625.0
+KARMA=-9999
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF !<ACT.FINDID.i_rune_de_poison>
+    ACT.EFFECT 3,i_fx_curse,0,15
+    ACT.NEWITEM i_rune_de_poison
+    ACT.ACT.MOREY=1200.0
+    ACT.ACT.LINK=<UID>
+    ACT.ACT.CONT=<ACT.UID>
+    ACT.ACT.TIMER=5
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 27 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Demon venimeux
+
+[ITEMDEF i_rune_de_poison]
+NAME=Rune Poison
+ID=i_rune_poison
+TYPE=t_spell
+LAYER=42
+
+ON=@Create
+TIMER=-1
+MORE2=10
+MOREX=20
+MOREY={100.0 200.0}
+ATTR=026
+
+[CHARDEF c_tentatrice_abyssale]
+NAME=Tentatrice abyssale
+ID=01e
+CAN=MT_FLY|MT_WALK|MT_FEMALE
+
+ON=@Create
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=149800
+TAG.XPCOUP=<EVAL (RAND(4681,9362))>
+TAG.TAPER=16
+TAG.NIVEAU=120
+
+COLOR=0b9d
+NPC=BRAIN_MONSTER
+STR=6200
+DEX=2000
+INT=2000
+MAXHITS=13200
+
+MAGERY=1000.0
+TACTICS=2400.0
+WRESTLING=2400.0
+KARMA=-9999
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEMNEWBIE=i_spellbook
+MORE1=00000085
+MORE2=00000000
+
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Tentatrice abyssale
+
+[CHARDEF c_suppot_de_satan]
+NAME=Suppot de Satan
+ID=c_orc_lord
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0bb1
+STR=3900
+DEX=400
+INT=400
+//MAXHITS=5000
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=117600
+TAG.XPCOUP=<EVAL (RAND(4900,9800))>
+TAG.TAPER=12
+TAG.NIVEAU=120
+TAG.FORPURE=590
+
+KARMA=-9999
+MAGERY=200.0
+TACTICS=100.0
+SWORDSMANSHIP=400.0
+
+NPC=BRAIN_MONSTER
+
+IF <EVAL (rand(4))> == 0
+    NEWITEM i_spellbook
+    ACT.MORE1=00004000
+    ACT.MORE2=00000000
+    ACT.ATTR=024
+    ACT.CONT=<UID>
+ENDIF
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@NPCRestock
+ITEMNEWBIE=i_hache_antique_a_deux_tranchants
+ITEM={ i_stats_dropp 977 i_perle_enchantement 68 }
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Suppot de Satan
+
+[CHARDEF c_emanation_demoniaque]
+NAME=Emanation demoniaque
+ID=01a
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0bb1
+STR=5700
+DEX=6000
+INT=0
+MAXHITS=9000
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+TAG.XPMORT=112000
+TAG.XPCOUP=<EVAL (RAND(3500,7000))>
+TAG.TAPER=16
+TAG.NIVEAU=100
+
+KARMA=-9999
+INVIS
+
+TACTICS=2250.0
+WRESTLING=2250.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF <EVAL 0<TAG.VISIBLE>> == 0
+    IF <EVAL (rand(5))> == 0
+        INVIS
+        TAG.VISIBLE=1
+        NEWITEM m_remettre_visible
+        ACT.CONT=<UID>
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@NPCRestock
+ITEM=i_cle_d7_salle8_1 1
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Emanation demoniaque
+
+[ITEMDEF m_remettre_visible]
+ID=i_memory
+NAME=remettre visible
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=2
+
+ON=@TIMER
+CONT.INVIS
+CONT.TAG.VISIBLE
+REMOVE
+RETURN 1
+
+[CHARDEF c_deimos]
+NAME=Deimos
+ID=c_daemon_w_sword
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0b15
+STR=5700
+DEX=6000
+INT=0
+
+EVENTS +e_regenere_vie
+EVENTS +e_resistance_magie
+TAG.REGENEREVIE=8000
+
+KARMA=-9999
+TACTICS=2250.0
+WRESTLING=2250.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF (<EVAL(RAND(8))>==0) 
+    ACT.STAM=0
+    IF (<ACT.HITS> > <EVAL <ACT.MAXHITS> / 4>)
+        ACT.HITS=<EVAL <ACT.MAXHITS> / 4>
+    ENDIF
+    ACT.MANA=0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous terrorise !
+    RETURN 1
+ELSEIF (<EVAL(RAND(20))>==0) 
+    IF !<ACT.FINDID.i_rune_curse_piege_d7>
+        ACT.NEWITEM i_rune_curse_piege_d7
+        ACT.ACT.LINK=<UID>
+        ACT.ACT.EQUIP
+        ACT.ACT.TIMER=240
+        ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous maudit !
+    ENDIF
+    RETURN 1
+ELSEIF (<EVAL(RAND(20))>==0) 
+    IF <ACT.FINDID.i_rune_protection>
+        ACT.FINDID.i_rune_protection.REMOVE
+        ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> detruit l'effet de votre protection !
+    ENDIF
+    RETURN 1
+ENDIF
+RETURN 0
+
+ON=@GETHIT
+IF <EVAL <DISTANCE>> > 2
+    IF <EVAL (rand(6))> == 0
+        GO <SRC.P>
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+IF <EVAL 0<SRC.ACT.TAG.INSIDE_D7>> < 8
+    //TRICHEUR
+    IF <EVAL 0<SRC.ACT.TAG.INSIDE_D7> + 2> <= 8
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME voir tags
+        UID.09903F.ACT.TAG.RTIME=<SERV.RTIME>
+        UID.09903F.ACT.TAG.PERSO_ACCOUNT=<SRC.ACT.NAME> acc:<SRC.ACT.ACCOUNT>
+        UID.09903F.ACT.TAG.POSITION=<SRC.ACT.P>
+        UID.09903F.ACT.TAG.ETAITMORE=<SRC.ACT.TAG.INSIDE_D7>
+        UID.09903F.ACT.TAG.DEVIENTMORE=8
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    IF <SRC.ACT.TAG.INSIDE_D7> < 8
+        SRC.ACT.TAG.INSIDE_D7=8
+    ENDIF
+ENDIF
+SRC.ACT.GO 5582,794,60
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Deimos
+
+[CHARDEF c_phobos]
+NAME=Phobos
+ID=c_daemon_w_sword
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=099c
+STR=6500
+DEX=7000
+INT=0
+
+EVENTS +e_regenere_vie
+EVENTS +e_resistance_magie
+TAG.REGENEREVIE=8000
+
+KARMA=-9999
+TACTICS=2500.0
+WRESTLING=2500.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCSEENEWPLAYER
+IF ( (<EVAL 0<SRC.TAG.anti_mark_recall>>==0) || (<EVAL 0<SRC.TAG.INSIDE_D7>>==0) )
+    IF <SRC.ACCOUNT.PLEVEL> < 2
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME <SERV.RTIME> <SRC.NAME> acc:<SRC.ACCOUNT> au <SRC.P> a vu <NAME>
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    SRC.EVENTS -e_anti_mark_recall
+    SRC.P=1357,1065
+    SRC.UPDATE
+ENDIF
+
+ON=@HIT
+IF (<EVAL(RAND(8))>==0) 
+    ACT.STAM=0
+    IF (<ACT.HITS> > <EVAL <ACT.MAXHITS> / 4>)
+        ACT.HITS=<EVAL <ACT.MAXHITS> / 4>
+    ENDIF
+    ACT.MANA=0
+    ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous terrorise !
+    RETURN 1
+ELSEIF (<EVAL(RAND(20))>==0) 
+    IF !<ACT.FINDID.i_rune_curse_piege_d7>
+        ACT.NEWITEM i_rune_curse_piege_d7
+        ACT.ACT.LINK=<UID>
+        ACT.ACT.EQUIP
+        ACT.ACT.TIMER=240
+        ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> vous maudit !
+    ENDIF
+    RETURN 1
+ELSEIF (<EVAL(RAND(20))>==0) 
+    IF <ACT.FINDID.i_rune_protection>
+        ACT.FINDID.i_rune_protection.REMOVE
+        ACT.SYSMESSAGEUA 0481 1 1 0 <NAME> detruit l'effet de votre protection !
+    ENDIF
+    RETURN 1
+ELSEIF (<EVAL(RAND(20))>==0) 
+    IF !<ACT.FINDID.i_rune_de_poison>
+        ACT.EFFECT 3,i_fx_curse,0,15
+        ACT.NEWITEM i_rune_de_poison
+        ACT.ACT.MOREY=2400.0
+        ACT.ACT.LINK=<UID>
+        ACT.ACT.CONT=<ACT.UID>
+        ACT.ACT.TIMER=5
+    ENDIF
+    RETURN 1
+ELSEIF (<EVAL(RAND(4))>==0) 
+    ACT.NEWITEM=i_attaque_dragonnet
+    ACT.ACT.P=<SRC.P>
+    ACT.DAMAGE 200 0008 <UID>
+    ANIM 6
+ENDIF
+RETURN 0
+
+ON=@GETHIT
+IF <EVAL <DISTANCE>> > 2
+    IF <EVAL (rand(6))> == 0
+        GO <SRC.P>
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@DEATH
+//AU CAS L'AURA OFFENSIVE LE TUE
+IF <EVAL 0<SRC.ACT.TAG.PROPRIO_UID>>
+    SRC.ACT=<SRC.ACT.TAG.PROPRIO_UID>
+ENDIF
+IF <EVAL 0<SRC.ACT.TAG.INSIDE_D7>> < 9
+    //TRICHEUR
+    IF <EVAL 0<SRC.ACT.TAG.INSIDE_D7> + 2> <= 9
+        UID.09903F.NEWITEM 0bd0
+        UID.09903F.ACT.NAME voir tags
+        UID.09903F.ACT.TAG.RTIME=<SERV.RTIME>
+        UID.09903F.ACT.TAG.PERSO_ACCOUNT=<SRC.ACT.NAME> acc:<SRC.ACT.ACCOUNT>
+        UID.09903F.ACT.TAG.POSITION=<SRC.ACT.P>
+        UID.09903F.ACT.TAG.ETAITMORE=<SRC.ACT.TAG.INSIDE_D7>
+        UID.09903F.ACT.TAG.DEVIENTMORE=9
+        UID.09903F.ACT.COLOR=025
+        UID.09903F.ACT.ATTR=08010
+        UID.09903F.ACT.CONT=06377f
+    ENDIF
+    IF <SRC.ACT.TAG.INSIDE_D7> < 9
+        SRC.ACT.TAG.INSIDE_D7=9
+    ENDIF
+ENDIF
+SRC.ACT.GO 5588,891,30
+RETURN 0
+
+CATEGORY=Monstres
+SUBSECTION=Quete renaissance 7
+DESCRIPTION=Phobos

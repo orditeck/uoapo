@@ -1,0 +1,161 @@
+[ITEMDEF i_guild_metier]
+NAME=metier
+TYPE=t_normal
+
+ON=@CREATE
+ATTR = 08010
+
+ON=@CLICK
+MESSAGE metier : <TAG.METIER>
+RETURN 1
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 3
+	DIALOG D_GM_SETMETIER
+ELSEIF <SRC.ACCOUNT.PLEVEL> == 3
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'etes pas autorise a utiliser ceci
+ELSE
+	IF (!STRCMPI("<SRC.TAG.METIER1>",""))
+		SRC.GO MINOC
+	ELSE
+		IF <TIMER> == -1
+			SRC.SYSMESSAGEUA 0481 1 1 0 Doublez cliquez a nouveau pour devenir un <TAG.METIER>
+			SRC.SYSMESSAGEUA 025 1 1 0 (Une fois choisi, vous ne pourrez plus changer)
+			TIMER = 2
+		ELSE
+			SRC.TAG.METIER1 = <TAG.METIER>
+			SRC.SKILL.<MORE1> = 300
+			SRC.SYSMESSAGEUA 0481 1 1 0 Felicitation, vous etes maintenant un <TAG.METIER>
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TIMER=-1
+ATTR=08010
+RETURN 1
+
+
+[ITEMDEF m_timer_antimusique]
+NAME=timer antimusique
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=3
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+[DIALOG D_GM_SETMETIER]
+0,0
+PAGE 0
+resizepic 0 0 2620 300 120
+PAGE 1
+text 40 20 1152 1//Choisir le metier que donnera la pierre
+text 100 40 1152 2//Actuel : <TAG.METIER>
+text 50 60 1152 3//Alchimie
+text 50 80 1152 4//Bricolage
+text 50 100 1152 5//Bucheronnage
+text 50 120 1152 6//Couture
+text 50 140 1152 7//Cuisine
+text 50 160 1152 8//Extraction
+text 50 180 1152 9//Fabrication d'arcs
+text 50 200 1152 10//Ferronnerie
+text 50 220 1152 11//Inscription
+text 50 240 1152 12//Menuiserie
+text 50 260 1152 13//Musique
+text 50 280 1152 14//Peche
+button 20 65 2473 2472 1 0 1//Alchimie
+button 20 85 2473 2472 1 0 2//Bricolage
+button 20 105 2473 2472 1 0 3//Bucheronnage
+button 20 125 2473 2472 1 0 4//Couture
+button 20 145 2473 2472 1 0 5//Cuisine
+button 20 165 2473 2472 1 0 6//Extraction
+button 20 185 2473 2472 1 0 7//Fabrication d'arcs
+button 20 205 2473 2472 1 0 8//Ferronnerie
+button 20 225 2473 2472 1 0 9//Inscription
+button 20 245 2473 2472 1 0 10//Menuiserie
+button 20 265 2473 2472 1 0 11//Musique
+button 20 285 2473 2472 1 0 12//Peche
+button 180 320 1150 1151 1 0 20// X SORTIE
+
+
+[DIALOG D_GM_SETMETIER TEXT]
+<VAR.BLANKLINE>
+Choisir le metier que donnera la pierre
+Actuel : <TAG.METIER>
+Alchimie
+Bricolage
+Couture
+Cuisine
+Extraction
+Fabrication d'arcs
+Ferronnerie
+Inscription
+Menuiserie
+Musique
+Peche
+
+[DIALOG D_GM_SETMETIER BUTTON]
+ON=1
+TAG.METIER = "Alchimie"
+MORE1 = SKILL_ALCHEMY
+DIALOG D_GM_SET_METIER
+
+ON=2
+TAG.METIER = "Bricolage"
+MORE1 = Skill_Tinkering
+DIALOG D_GM_SET_METIER
+
+ON=3
+TAG.METIER = "Bucheronnage"
+MORE1 = SKILL_LUMBERJACK
+DIALOG D_GM_SET_METIER
+
+ON=4
+TAG.METIER = "Couture"
+MORE1 = Skill_Tailoring
+DIALOG D_GM_SET_METIER
+
+ON=5
+TAG.METIER = "Cuisine"
+MORE1 = Skill_Cooking
+DIALOG D_GM_SET_METIER
+
+ON=6
+TAG.METIER = "Extraction"
+MORE1 = SKILL_MINING
+DIALOG D_GM_SET_METIER
+
+ON=7
+TAG.METIER = "Fabrication d'arcs"
+MORE1 = Skill_Bowcraft
+DIALOG D_GM_SET_METIER
+
+ON=8
+TAG.METIER = "Ferronnerie"
+MORE1 = SKILL_Blacksmith
+DIALOG D_GM_SET_METIER
+
+ON=9
+TAG.METIER = "Inscription"
+MORE1 = Skill_Inscription
+DIALOG D_GM_SET_METIER
+
+ON=10
+TAG.METIER = "Menuiserie"
+MORE1 = Skill_Carpentry
+DIALOG D_GM_SET_METIER
+
+ON=11
+TAG.METIER = "Musique"
+MORE1 = Skill_Musicianship
+DIALOG D_GM_SET_METIER
+
+ON=12
+TAG.METIER = "Peche"
+MORE1 = Skill_Fishing
+DIALOG D_GM_SET_METIER

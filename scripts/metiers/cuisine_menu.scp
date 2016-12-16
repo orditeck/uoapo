@@ -1,0 +1,138 @@
+[SKILLMENU sm_cook]
+Cuisine
+
+ON=i_bread_loaf cuisine de nuls
+SKILLMENU=sm_cuisine_nuls
+
+ON=i_bread_loaf cuisine d'apprentis
+SKILLMENU=sm_cuisine_apprentis
+
+ON=i_bread_loaf cuisine d'inities
+SKILLMENU=sm_cuisine_inities
+
+ON=i_bread_loaf cuisine de chefs
+SKILLMENU=sm_cuisine_chefs
+
+//***************************
+//***********NULS************
+//***************************
+
+[SKILLMENU sm_cuisine_nuls]
+Cuisine de nuls
+
+ON=i_preparation_a_pain <name> (<resmake>)
+MAKEITEM=i_preparation_a_pain
+
+ON=i_muffin_avec_coquilles_d_oeuf <name> (<resmake>)
+MAKEITEM=i_muffin_avec_coquilles_d_oeuf
+
+ON=i_tranche_de_bacon_crue <name> (<resmake>)
+MAKEITEM=i_tranche_de_bacon_crue
+
+ON=i_baguette_de_pain_crue <name> (<resmake>)
+MAKEITEM=i_baguette_de_pain_crue
+
+ON=i_bol_de_soupe_au_poulet_froid <name> (<resmake>)
+MAKEITEM=i_bol_de_soupe_au_poulet_froid
+
+ON=i_assiette_de_viande_crue <name> (<resmake>)
+MAKEITEM=i_assiette_de_viande_crue
+
+ON=i_bol_de_poisson_a_l_oignon_cru <name> (<resmake>)
+MAKEITEM=i_bol_de_poisson_a_l_oignon_cru
+
+ON=i_beignet_a_la_farine_cru <name> (<resmake>)
+MAKEITEM=i_beignet_a_la_farine_cru
+
+ON=i_beignet_a_la_farine <name> (<resmake>)
+MAKEITEM=i_beignet_a_la_farine
+
+ON=i_gateau_a_la_creme <name> (<resmake>)
+MAKEITEM=i_gateau_a_la_creme
+
+ON=i_bol_de_pates_fraiches <name> (<resmake>)
+MAKEITEM=i_bol_de_pates_fraiches
+
+ON=i_assiette_de_fruits <name> (<resmake>)
+MAKEITEM=i_assiette_de_fruits
+
+ON=i_bol_de_sauce_tomate <name> (<resmake>)
+MAKEITEM=i_bol_de_sauce_tomate
+
+
+//***************************
+//*********APPRENTIS*********
+//***************************
+
+[SKILLMENU sm_cuisine_apprentis]
+Cuisine d'apprentis
+
+ON=i_brique_de_fromage <name> (<resmake>)
+MAKEITEM=i_brique_de_fromage
+
+ON=i_gateau_blanc_cru <name> (<resmake>)
+MAKEITEM=i_gateau_blanc_cru
+
+ON=i_pizza_au_fromage_crue <name> (<resmake>)
+MAKEITEM=i_pizza_au_fromage_crue
+
+ON=i_petit_gateau_a_la_banane_cru <name> (<resmake>)
+MAKEITEM=i_petit_gateau_a_la_banane_cru
+
+ON=i_pizza_a_la_viande_crue <name> (<resmake>)
+MAKEITEM=i_pizza_a_la_viande_crue
+
+ON=i_tarte_au_citron_crue <name> (<resmake>)
+MAKEITEM=i_tarte_au_citron_crue
+
+ON=i_salade_a_l_oignon_doux <name> (<resmake>)
+MAKEITEM=i_salade_a_l_oignon_doux
+
+ON=i_assiette_de_fruits_au_miel <name> (<resmake>)
+MAKEITEM=i_assiette_de_fruits_au_miel
+
+ON=i_salade_au_poulet <name> (<resmake>)
+MAKEITEM=i_salade_au_poulet
+
+ON=i_assiette_de_lasagne_crue <name> (<resmake>)
+MAKEITEM=i_assiette_de_lasagne_crue
+
+
+//***************************
+//**********INITIES**********
+//***************************
+
+[SKILLMENU sm_cuisine_inities]
+Cuisine inities
+
+ON=i_saute_au_poulet_cru <name> (<resmake>)
+MAKEITEM=i_saute_au_poulet_cru
+
+ON=i_gateau_au_fromage_a_la_creme <name> (<resmake>)
+MAKEITEM=i_gateau_au_fromage_a_la_creme
+
+ON=i_gratin_de_carottes_et_patates_cru <name> (<resmake>)
+MAKEITEM=i_gratin_de_carottes_et_patates_cru
+
+ON=i_pizza_quebecoise_crue <name> (<resmake>)
+MAKEITEM=i_pizza_quebecoise_crue
+
+ON=i_chili_con_carne_cru <name> (<resmake>)
+MAKEITEM=i_chili_con_carne_cru
+
+ON=i_salade_jardiniere <name> (<resmake>)
+MAKEITEM=i_salade_jardiniere
+
+
+//***************************
+//***********CHEFS***********
+//***************************
+
+[SKILLMENU sm_cuisine_chefs]
+Cuisine de chefs
+
+ON=i_assiette_de_veau_parmigiana_crue <name> (<resmake>)
+MAKEITEM=i_assiette_de_veau_parmigiana_crue
+
+ON=i_assiette_de_canard_a_l_orange_crue <name> (<resmake>)
+MAKEITEM=i_assiette_de_canard_a_l_orange_crue

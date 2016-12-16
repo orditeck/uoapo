@@ -1,0 +1,259 @@
+[ITEMDEF i_robe_animateur]
+ID=i_ROBE
+NAME=Robe
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Robe d'animateur
+
+[ITEMDEF i_armure_animateur]
+ID=01415
+NAME=Armure
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Armure d'animateur
+
+[ITEMDEF i_cou_animateur]
+ID=01413
+NAME=Armure
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Cou d'animateur
+
+[ITEMDEF i_gantelets_animateur]
+ID=01414
+NAME=Armure
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Gantelets d'animateur
+
+[ITEMDEF i_casque_animateur]
+ID=01412
+NAME=Armure
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Casque d'animateur
+
+[ITEMDEF i_Jambieres_animateur]
+ID=01411
+NAME=Armure
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Jambieres d'animateur
+
+[ITEMDEF i_brassieres_animateur]
+ID=01410
+NAME=Armure
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Brassieres d'animateur
+
+[ITEMDEF i_bagette_orc_animateur]
+ID=0df2
+NAME=Baguette d'orc
+DYE=1
+
+ON=@CREATE
+HITPOINTS=9000
+
+ON=@DCLICK
+SRC.BODY=c_orc
+SRC.TITLE=l'orc
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Baguette d'orc d'animateur
+
+[ITEMDEF i_bagette_homme_animateur]
+ID=0df2
+NAME=Baguette d'homme
+DYE=1
+
+ON=@CREATE
+HITPOINTS=9000
+
+ON=@DCLICK
+SRC.BODY=c_man
+SRC.TITLE=é
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Baguette d'homme d'animateur
+
+[ITEMDEF i_bagette_femme_animateur]
+ID=0df2
+NAME=Baguette de femme
+DYE=1
+
+ON=@CREATE
+HITPOINTS=9000
+
+ON=@DCLICK
+SRC.BODY=c_woman
+SRC.TITLE=é
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Baguette de femme d'animateur
+
+[ITEMDEF i_bagette_titan_animateur]
+ID=0df2
+NAME=Baguette de titan
+DYE=1
+
+ON=@CREATE
+HITPOINTS=9000
+
+ON=@DCLICK
+SRC.BODY=c_titan
+SRC.TITLE=le titan
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Baguette de titan d'animateur
+
+[ITEMDEF i_bagette_squelette_animateur]
+ID=0df2
+NAME=Baguette de squelette
+DYE=1
+
+ON=@CREATE
+HITPOINTS=9000
+
+ON=@DCLICK
+SRC.BODY=c_skeleton
+SRC.TITLE=le squelette
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Baguette de squelette d'animateur
+
+[ITEMDEF i_cape_animateur]
+ID=01515
+NAME=Cape
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Cape d'animateur
+
+[ITEMDEF i_robe_femme_animateur]
+ID=01eff
+NAME=Robe
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Robe de femme d'animateur
+
+[ITEMDEF i_epee_animateur]
+ID=i_sword_broad
+NAME=Epee
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Epee d'animateur
+
+[ITEMDEF i_arc_animateur]
+ID=i_bow
+NAME=Arc
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Arc d'animateur
+
+[ITEMDEF i_hallebarde_animateur]
+ID=0143f
+NAME=Hallebarde
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Hallebarde d'animateur
+
+[ITEMDEF i_Kryss_animateur]
+ID=01400
+NAME=Kryss
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Kryss d'animateur
+
+[ITEMDEF i_bottes_animateur]
+ID=01711
+NAME=Bottes
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Bottes d'animateur
+
+[ITEMDEF i_sandales_animateur]
+ID=0170d
+NAME=Sandales
+DYE=1
+
+ON=@Create
+HITPOINTS=9000
+
+CATEGORY=Genese
+SUBSECTION=Equipement animateur
+DESCRIPTION=Sandales d'animateur

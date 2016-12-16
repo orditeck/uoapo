@@ -1,0 +1,139 @@
+// ****************************************
+// *
+// * ANIM PROPOSE PAR ARCADION LE 21 JUILLET 2015
+// *
+// * Script : Un vieux livre appelé Carnet de commandes déposé au sol 
+// * pres de la banque de Vesper et lorsque les gens cliquent dessus, 
+// * ils recoivent une information. un pnj nommé Blafard au milieu des
+// * Assassins qui droperaient un coeur de Elidyne (nom de la fille). 
+// * Ils devraient respawn tout le temps.
+// *
+// ****************************************
+
+[ITEMDEF i_ao1_carnet_commande]
+NAME=Carnet de commandes
+ID=i_BOOK_OPEN_two_brown
+
+ON=@Create
+ATTR=08010
+
+ON=@DCLICK
+IF ( <EVAL 0<SRC.TAG.AO1.CLICK_COUNT>> <= 0 )
+	SRC.MESSAGE Du sang...
+	SRC.EMOTE Nettoyer afin de voir les caracteres
+	SRC.TAG.AO1.CLICK_COUNT = 1
+ELSE
+	SRC.MESSAGE Ugh...
+	SRC.EMOTE Frissoner en lisant
+	SRC.SYSMESSAGEUA 025 1 1 0 Je detiens votre fille. Amenez les pieces d'or ou vous ne reverrez jamais votre fille. Blafard.
+	SOUND=0f8
+	SRC.TAG.AO1.CLICK_COUNT = 2
+ENDIF 
+RETURN 1
+
+CATEGORY=Anims
+SUBSECTION=orditeck
+DESCRIPTION=Carnet de commandes (AO1)
+
+
+[ITEMDEF i_ao1_corps_elidyne]
+DEFNAME=i_ao1_corps_elidyne
+NAME=Corps d'Elidyne
+ID=i_corpse_blank
+WEIGHT=2
+
+ON=@Create
+COLOR=0028b
+ATTR=08010
+
+ON=@CLICK
+MESSAGE Corps d'Elidyne
+RETURN 1
+
+ON=@DCLICK
+IF ( <EVAL 0<SRC.TAG.AO1.HAD_HEART>> <= 0 )
+	SRC.MESSAGE Ugh...
+	IF ( ( <EVAL 0<SRC.TAG.AO1.CLICK_COUNT>> >= 2 ) && ( <EVAL 0<SRC.TAG.AO1.KILLED_NPC>> > 0 ) )
+		SRC.EMOTE Faufiller ses mains dans le cadavre et en ressortir un coeur
+		SRC.NEWITEM i_ao1_coeur_elidyne
+		SRC.ACT.CONT=<SRC.UID> 
+		SRC.TAG.AO1.HAD_HEART = 1
+	ELSE
+		SRC.EMOTE Chercher en vain au travers du sang
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous avez deja eu le coeur!
+ENDIF
+RETURN 1
+
+CATEGORY=Anims
+SUBSECTION=orditeck
+DESCRIPTION=Corps d'Elidyne
+
+[ITEMDEF i_ao1_coeur_elidyne]
+DEFNAME=i_ao1_coeur_elidyne
+NAME=Coeur d'Elidyne
+ID=i_flesh_heart
+WEIGHT=2
+
+ON=@Create
+COLOR=00021
+
+ON=@DCLICK
+RETURN 1
+
+CATEGORY=Anims
+SUBSECTION=orditeck
+DESCRIPTION=Coeur d'Elidyne
+
+
+[CHARDEF c_blafard_ao1]
+NAME=Blafard
+ID=c_woman
+
+ON=@Create
+COLOR=03ea
+STR=60
+DEX=75
+INT=0
+TITLE=é
+
+EVENTS +e_xpmonstre
+EVENTS +e_resistance_magie
+EVENTS +e_quete_chasse
+TAG.XPMORT=300
+TAG.XPCOUP=<EVAL (RAND(37,75))>
+TAG.TAPER=4
+TAG.NIVEAU=9
+
+KARMA=-9999
+
+TACTICS=60.0
+FENCING=60.0
+
+NPC=BRAIN_MONSTER
+
+ITEMNEWBIE=i_robe
+COLOR={0529 052a 052b 052c 052d 052e 052f 012e 012f 025a 025b 025c 025d 025e 01f1}
+ITEMNEWBIE=i_skull_cap
+COLOR={0529 052a 052b 052c 052d 052e 052f 012e 012f 025a 025b 025c 025d 025e 01f1}
+ITEMNEWBIE=i_boots_thigh
+COLOR={0529 052a 052b 052c 052d 052e 052f 012e 012f 025a 025b 025c 025d 025e 01f1}
+ITEMNEWBIE=i_dagger
+COLOR=0afb
+
+ON=@NPCSEENEWPLAYER
+SAY Avez-vous mon or? Sinon rebroussez chemin avant de vous faire eventrer par ma dague...
+
+ON=@NPCHearUnknown
+SAY Hors de ma vue ou vous mourrez!
+
+ON=@NPCRestock
+RETURN 1
+
+ON=@DEATH
+SRC.ACT.TAG.AO1.KILLED_NPC = 1
+
+CATEGORY=Anims
+SUBSECTION=orditeck
+DESCRIPTION=Assassin (AO1)

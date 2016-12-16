@@ -1,0 +1,1492 @@
+[CHARDEF c_boghardan] 
+DEFNAME=c_boghardan
+NAME=Boghardan
+ID=C_MAN
+ 
+TSPEECH=spk_boghardan
+
+ON=@create
+COLOR=083ea
+FOOD=9999
+SPEECHCOLOR=0ac0
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Forgeron legendaire
+
+ITEMNEWBIE=i_robe
+NAME=Robe poussiereuse
+DISPID=i_deathshroud
+COLOR=0ac0
+ITEMNEWBIE=i_hammer_war
+COLOR=0b7d
+NAME=Marteau de Boghardan
+
+ON=@NPCHearUnknown
+//Je ne comprends pas un mot de ce que vous dites !
+SAY Mh qh frpsuhqgv sdv xq prw gh fh txh yrxv glwhv !
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes
+DESCRIPTION=Boghardan
+
+//http://trucsmaths.free.fr/js_crypt_cesar.htm
+
+[SPEECH spk_boghardan]
+
+ON=*erqmrxu*
+IF <EVAL <DISTANCE>> < 3
+//Bonjour <NOM> ! Desirez vous acquerir une de mes creations ?
+SAY Erqmrxu <SRC.SEX phvvluh/pdgdph> ! Ghvluhc yrxv dftxhulu xqh gh phv fuhdwlrqv ?
+ELSE
+SAY Mh q'hqwhqg ulhq gh fh txh yrxv glwhv, dssurfkhc yrxv !
+ENDIF
+
+ON=*fuhdwlrq*
+IF <EVAL <DISTANCE>> < 3
+//Je possede un large panel d armes de taille, armes d estoc et de choc ainsi que de nombreuses haches et arcs, mais je reserve mes meilleures creations au bons clients
+SAY Mh srvvhgh xq odujh sdqho g duphv gh wdlooh, duphv g hvwrf hw gh fkrf dlqvl txh gh qrpeuhxvhv kdfkhv hw dufv, pdlv mh uhvhuyh phv phloohxuhv fuhdwlrqv dx erqv folhqwv
+ELSE
+SAY Mh q'hqwhqg ulhq gh fh txh yrxv glwhv, dssurfkhc yrxv !
+ENDIF
+
+ON=*kdfkh*
+//HACHES
+IF <EVAL <DISTANCE>> < 3
+	SRC.TAG.BOGHARDANCHOIX=5
+	IF <EVAL 0<SRC.TAG.BOGHARDANH>>==0
+		SAY M'dl od xqh Kdfkhwwh urxloohh vdfuhh ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==1
+		SAY M'dl od xqh Kdfkhwwh srolh vdfuhh ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==2
+		SAY M'dl od xqh Kdfkhwwh hq dflhu wuhpsh vdfuhh ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==3
+		SAY M'dl od xqh Kdfkh gh jxhuuh hq dflhu wuhpsh vdfuhh ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==4
+		SAY M'dl od xqh Kdfkh gh jxhuuh gh txdolwh vdfuhh ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==5
+		SAY M'dl od xqh Kdfkh gh txdolwh d ghxa wudqfkdqwv vdfuhh ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==6
+		SAY M'dl od xqh Kdfkh gh jxhuuh gh plwkulo vdfuhh ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==7
+		SAY M'dl od xqh Kdfkh d ghxa wudqfkdqwv gh plwkulo vdfuhh ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==8
+		SAY M'dl od xqh Kdfkh dqwltxh d ghxa wudqfkdqwv vdfuhh ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSE
+		SAY M'dl od xqh Kdfkhwwh ohjhqgdluh vdfuhh ghvluhc-yrxv hq idluh o'dftxlvlwlrq ?
+	ENDIF
+ELSE
+	SAY Mh q'hqwhqg ulhq gh fh txh yrxv glwhv, dssurfkhc yrxv !
+ENDIF
+
+ON=*wdlooh*
+//TAILLE
+IF <EVAL <DISTANCE>> < 3
+	SRC.TAG.BOGHARDANCHOIX=1
+	IF <EVAL 0<SRC.TAG.BOGHARDANT>>==0
+		SAY M'dl od xqh hshh frxuwh urxloohh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==1
+		SAY M'dl od xqh hshh orqjxh urxloohh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==2
+		SAY M'dl od xqh hshh frxuwh srolh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==3
+		SAY M'dl od xqh hshh orqjxh srolh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==4
+		SAY M'dl od xq jodlyh srol vdfuh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==5
+		SAY M'dl od xqh hshh frxuwh hq dflhu wuhpsh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==6
+		SAY M'dl od xqh hshh orqjxh hq dflhu wuhpsh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==7
+		SAY M'dl od xq jodlyh hq dflhu wuhpsh vdfuh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==8
+		SAY M'dl od xq flphwhuuh hq dflhu wuhpsh vdfuh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==9
+		SAY M'dl od xqh hshh frxuwh gh txdolwhh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==10
+		SAY M'dl od xqh hshh orqjxh gh txdolwhh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==11
+		SAY M'dl od xq jodlyh gh txdolwh vdfuh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==12
+		SAY M'dl od xq flphwhuuh uhqirufh vdfuh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==13
+		SAY M'dl od xqh hshh edwdugh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==14
+		SAY M'dl od xqh hshh orqjxh gh plwkulo vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==15
+		SAY M'dl od xq jodlyh gh plwkulo vdfuh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==16
+		SAY M'dl od xq flphwhuuh gh plwkulo vdfuh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==17
+		SAY M'dl od xqh hshh edwdugh gh plwkulo vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==18
+		SAY M'dl od xq jodlyh g'dgdpdqglwh vdfuh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==19
+		SAY M'dl od xq flphwhuuh g'dgdpdqglwh vdfuh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==20
+		SAY M'dl od xqh hshh edwdugh g'dgdpdqglwh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==21
+		SAY M'dl od xq flphwhuuh dqflhq vdfuh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==22
+		SAY M'dl od xqh hshh edwdugh dqflhqqh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==23
+		SAY M'dl od xqh hshh dqwltxh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSE
+		SAY M'dl od xqh hshh edwdugh ohjhqgdluh vdfuhh ghvluhc-yrxv hq idluh o'dftxlvlwlrq ?
+	ENDIF
+ELSE
+	SAY Mh q'hqwhqg ulhq gh fh txh yrxv glwhv, dssurfkhc yrxv !
+ENDIF
+
+ON=*hvwrf*
+//ESTOC
+IF <EVAL <DISTANCE>> < 3
+	SRC.TAG.BOGHARDANCHOIX=2
+	IF <EVAL 0<SRC.TAG.BOGHARDANE>>==0
+		SAY M'dl od xq srljqdug urxlooh vdfuh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==1
+		SAY M'dl od xqh gdjxh urxloohh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==2
+		SAY M'dl od xq srljqdug srol vdfuh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==3
+		SAY M'dl od xqh gdjxh srolh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==4
+		SAY M'dl od xqh gdjxh hq dflhu wuhpsh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==5
+		SAY M'dl od xqh gdjxh gh txdolwhh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==6
+		SAY M'dl od xqh gdjxh gh plwkulo vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==7
+		SAY M'dl od xqh odph dqflhqqh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==8
+		SAY M'dl od xqh nubvv g'dgdpdqglwh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==9
+		SAY M'dl od xqh nubvv dqflhqqh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==10
+		SAY M'dl od xqh nubvv dqwltxh vdfuhh, ghvluhc yrxv hq idluh o dftxlvlwlrq ?
+	ELSE
+		SAY M'dl od xqh odph ohjhqgdluh vdfuhh, ghvluhc-yrxv hq idluh o'dftxlvlwlrq ?
+	ENDIF
+ELSE
+	SAY Mh q'hqwhqg ulhq gh fh txh yrxv glwhv, dssurfkhc yrxv !
+ENDIF
+
+ON=*fkrf*
+//CHOC
+IF <EVAL <DISTANCE>> < 3
+	SRC.TAG.BOGHARDANCHOIX=3
+	IF <EVAL 0<SRC.TAG.BOGHARDANC>>==0
+		SAY M'dl od xq pduwhdx gh jxhuuh uhqirufh vdfuh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==1
+		SAY M'dl od xq pduwhdx gh jxhuuh hq dflhu wuhpsh vdfuh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==2
+		SAY M'dl od xqh pdvvh hq dflhu wuhpsh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==3
+		SAY M'dl od xqh pdvvh gh txdolwh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==4
+		SAY M'dl od xq iohdx gh txdolwh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==5
+		SAY M'dl od xq iohdx gh plwkulo, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==6
+		SAY M'dl od xq iohdx gcduph gh plwkulo, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==7
+		SAY M'dl od xq iohdx gcduph dqwltxh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSE
+		SAY M'dl od xq pduwhdx gh jxhuuh ohjhqgdluh vdfuh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ENDIF
+ELSE
+	SAY Mh q'hqwhqg ulhq gh fh txh yrxv glwhv, dssurfkhc yrxv !
+ENDIF
+
+ON=*duf*
+//ARCS
+IF <EVAL <DISTANCE>> < 3
+	SRC.TAG.BOGHARDANCHOIX=4
+	IF <EVAL 0<SRC.TAG.BOGHARDANA>>==0
+		SAY M'dl od xq duf hq iuhqh vdfuh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==1
+		SAY M'dl od xqh duedohwh hq iuhqh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==2
+		SAY M'dl od xqh duedohwh orxugh hq iuhqh vdfuhh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==3
+		SAY M'dl od xq duf hq ruph vdfuh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==4
+		SAY M'dl od xqh duedohwh hq ruph vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==5
+		SAY M'dl od xqh duedohwh orxugh hq ruph vdfuhh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==6
+		SAY M'dl od xq duf hq qrbhu eodqf vdfuh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==7
+		SAY M'dl od xqh duedohwh hq qrbhu eodqf vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==8
+		SAY M'dl od xqh duedohwh orxugh hq qrbhu eodqf vdfuhh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==9
+		SAY M'dl od xq duf hq fkhqh vdfuh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==10
+		SAY M'dl od xqh duedohwh hq fkhqh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==11
+		SAY M'dl od xqh duedohwh orxugh hq fkhqh vdfuhh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==12
+		SAY M'dl od xq duf hq fhguh vdfuh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==13
+		SAY M'dl od xqh duedohwh hq fhguh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==14
+		SAY M'dl od xqh duedohwh orxugh hq fhguh vdfuhh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==15
+		SAY M'dl od xq duf hq radqguh vdfuh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==16
+		SAY M'dl od xqh duedohwh hq radqguh vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==17
+		SAY M'dl od xqh duedohwh orxugh hq radqguh vdfuhh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==18
+		SAY M'dl od xq duf hq ihylhu hslqhxa vdfuh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==19
+		SAY M'dl od xqh duedohwh hq ihylhu hslqhxa vdfuhh, ghvluhc yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==20
+		SAY M'dl od xqh duedohwh orxugh hq ihylhu hslqhxa vdfuhh, ghvluhc yrxv hq idluh ocdftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==21
+		SAY M'dl od xq duf ohjhqgdluh vdfuh, ghvluhc-yrxv hq idluh o'dftxlvlwlrq ?
+	ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==22
+		SAY M'dl od xqh duedohwh ohjhqgdluh vdfuhh, ghvluhc-yrxv hq idluh o'dftxlvlwlrq
+	ELSE
+		SAY M'dl od xqh duedohwh orxugh ohjhqgdluh vdfuhh, ghvluhc-yrxv hq idluh o'dftxlvlwlrq
+	ENDIF
+ELSE
+	SAY Mh q'hqwhqg ulhq gh fh txh yrxv glwhv, dssurfkhc yrxv !
+ENDIF
+
+ON=*qrq*
+IF <EVAL <DISTANCE>> < 3
+	SAY Yrxv qh vdyhc sdv fh txh yrxv shughc !
+ELSE
+	SAY Mh q'hqwhqg ulhq gh fh txh yrxv glwhv, dssurfkhc yrxv !
+ENDIF
+
+ON=*rxl*
+IF <EVAL <DISTANCE>> < 3
+	//oui
+	IF <EVAL <SRC.TAG.BOGHARDANCHOIX>>==1
+		//Armes de taille
+		IF <EVAL 0<SRC.TAG.BOGHARDANT>>==0
+			IF (<SRC.FINDID.i_epee_courte_rouillee> && <SRC.FINDID.i_epee_courte_rouillee_enchantee> && <SRC.FINDID.i_epee_courte_rouillee_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=1
+				SRC.CONSUME 1 i_epee_courte_rouillee
+				SRC.CONSUME 1 i_epee_courte_rouillee_enchantee
+				SRC.CONSUME 1 i_epee_courte_rouillee_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_courte_rouillee_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==1
+			IF (<SRC.FINDID.i_epee_longue_rouillee> && <SRC.FINDID.i_epee_longue_rouillee_enchantee> && <SRC.FINDID.i_epee_longue_rouillee_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_longue_rouillee
+				SRC.CONSUME 1 i_epee_longue_rouillee_enchantee
+				SRC.CONSUME 1 i_epee_longue_rouillee_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_longue_rouillee_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==2
+			IF (<SRC.FINDID.i_epee_courte_polie> && <SRC.FINDID.i_epee_courte_polie_enchantee> && <SRC.FINDID.i_epee_courte_polie_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_courte_polie
+				SRC.CONSUME 1 i_epee_courte_polie_enchantee
+				SRC.CONSUME 1 i_epee_courte_polie_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_courte_polie_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==3
+			IF (<SRC.FINDID.i_epee_longue_polie> && <SRC.FINDID.i_epee_longue_polie_enchantee> && <SRC.FINDID.i_epee_longue_polie_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_longue_polie
+				SRC.CONSUME 1 i_epee_longue_polie_enchantee
+				SRC.CONSUME 1 i_epee_longue_polie_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_longue_polie_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==4
+			IF (<SRC.FINDID.i_glaive_poli> && <SRC.FINDID.i_glaive_poli_enchante> && <SRC.FINDID.i_glaive_poli_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_glaive_poli
+				SRC.CONSUME 1 i_glaive_poli_enchante
+				SRC.CONSUME 1 i_glaive_poli_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_glaive_poli_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==5
+			IF (<SRC.FINDID.i_epee_courte_en_acier_trempe> && <SRC.FINDID.i_epee_courte_en_acier_trempe_enchantee> && <SRC.FINDID.i_epee_courte_en_acier_trempe_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_courte_en_acier_trempe
+				SRC.CONSUME 1 i_epee_courte_en_acier_trempe_enchantee
+				SRC.CONSUME 1 i_epee_courte_en_acier_trempe_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_courte_en_acier_trempe_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==6
+			IF (<SRC.FINDID.i_epee_longue_en_acier_trempe> && <SRC.FINDID.i_epee_longue_en_acier_trempe_enchantee> && <SRC.FINDID.i_epee_longue_en_acier_trempe_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_longue_en_acier_trempe
+				SRC.CONSUME 1 i_epee_longue_en_acier_trempe_enchantee
+				SRC.CONSUME 1 i_epee_longue_en_acier_trempe_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_longue_en_acier_trempe_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==7
+			IF (<SRC.FINDID.i_glaive_en_acier_trempe> && <SRC.FINDID.i_glaive_en_acier_trempe_enchante> && <SRC.FINDID.i_glaive_en_acier_trempe_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_glaive_en_acier_trempe
+				SRC.CONSUME 1 i_glaive_en_acier_trempe_enchante
+				SRC.CONSUME 1 i_glaive_en_acier_trempe_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_glaive_en_acier_trempe_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==8
+			IF (<SRC.FINDID.i_cimeterre_en_acier_trempe> && <SRC.FINDID.i_cimeterre_en_acier_trempe_enchante> && <SRC.FINDID.i_cimeterre_en_acier_trempe_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_cimeterre_en_acier_trempe
+				SRC.CONSUME 1 i_cimeterre_en_acier_trempe_enchante
+				SRC.CONSUME 1 i_cimeterre_en_acier_trempe_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_cimeterre_en_acier_trempe_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==9
+			IF (<SRC.FINDID.i_epee_courte_de_qualite> && <SRC.FINDID.i_epee_courte_de_qualite_enchantee> && <SRC.FINDID.i_epee_courte_de_qualite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_courte_de_qualite
+				SRC.CONSUME 1 i_epee_courte_de_qualite_enchantee
+				SRC.CONSUME 1 i_epee_courte_de_qualite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_courte_de_qualite_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==10
+			IF (<SRC.FINDID.i_epee_longue_de_qualite> && <SRC.FINDID.i_epee_longue_de_qualite_enchantee> && <SRC.FINDID.i_epee_longue_de_qualite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_longue_de_qualite
+				SRC.CONSUME 1 i_epee_longue_de_qualite_enchantee
+				SRC.CONSUME 1 i_epee_longue_de_qualite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_longue_de_qualite_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==11
+			IF (<SRC.FINDID.i_glaive_de_qualite> && <SRC.FINDID.i_glaive_de_qualite_enchante> && <SRC.FINDID.i_glaive_de_qualite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_glaive_de_qualite
+				SRC.CONSUME 1 i_glaive_de_qualite_enchante
+				SRC.CONSUME 1 i_glaive_de_qualite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_glaive_de_qualite_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==12
+			IF (<SRC.FINDID.i_cimeterre_renforce> && <SRC.FINDID.i_cimeterre_renforce_enchante> && <SRC.FINDID.i_cimeterre_renforce_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_cimeterre_renforce
+				SRC.CONSUME 1 i_cimeterre_renforce_enchante
+				SRC.CONSUME 1 i_cimeterre_renforce_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_cimeterre_renforce_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==13
+			IF (<SRC.FINDID.i_epee_batarde> && <SRC.FINDID.i_epee_batarde_enchantee> && <SRC.FINDID.i_epee_batarde_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_batarde
+				SRC.CONSUME 1 i_epee_batarde_enchantee
+				SRC.CONSUME 1 i_epee_batarde_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_batarde_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==14
+			IF (<SRC.FINDID.i_epee_longue_de_mithril> && <SRC.FINDID.i_epee_longue_de_mithril_enchantee> && <SRC.FINDID.i_epee_longue_de_mithril_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_longue_de_mithril
+				SRC.CONSUME 1 i_epee_longue_de_mithril_enchantee
+				SRC.CONSUME 1 i_epee_longue_de_mithril_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_longue_de_mithril_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==15
+			IF (<SRC.FINDID.i_glaive_de_mithril> && <SRC.FINDID.i_glaive_de_mithril_enchante> && <SRC.FINDID.i_glaive_de_mithril_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_glaive_de_mithril
+				SRC.CONSUME 1 i_glaive_de_mithril_enchante
+				SRC.CONSUME 1 i_glaive_de_mithril_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_glaive_de_mithril_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==16
+			IF (<SRC.FINDID.i_cimeterre_de_mithril> && <SRC.FINDID.i_cimeterre_de_mithril_enchante> && <SRC.FINDID.i_cimeterre_de_mithril_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_cimeterre_de_mithril
+				SRC.CONSUME 1 i_cimeterre_de_mithril_enchante
+				SRC.CONSUME 1 i_cimeterre_de_mithril_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_cimeterre_de_mithril_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==17
+			IF (<SRC.FINDID.i_epee_batarde_de_mithril> && <SRC.FINDID.i_epee_batarde_de_mithril_enchantee> && <SRC.FINDID.i_epee_batarde_de_mithril_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_batarde_de_mithril
+				SRC.CONSUME 1 i_epee_batarde_de_mithril_enchantee
+				SRC.CONSUME 1 i_epee_batarde_de_mithril_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_batarde_de_mithril_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==18
+			IF (<SRC.FINDID.i_glaive_d_adamandite> && <SRC.FINDID.i_glaive_d_adamandite_enchante> && <SRC.FINDID.i_glaive_d_adamandite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_glaive_d_adamandite
+				SRC.CONSUME 1 i_glaive_d_adamandite_enchante
+				SRC.CONSUME 1 i_glaive_d_adamandite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_glaive_d_adamandite_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==19
+			IF (<SRC.FINDID.i_cimeterre_d_adamandite> && <SRC.FINDID.i_cimeterre_d_adamandite_enchante> && <SRC.FINDID.i_cimeterre_d_adamandite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_cimeterre_d_adamandite
+				SRC.CONSUME 1 i_cimeterre_d_adamandite_enchante
+				SRC.CONSUME 1 i_cimeterre_d_adamandite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_cimeterre_d_adamandite_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==20
+			IF (<SRC.FINDID.i_epee_batarde_d_adamandite> && <SRC.FINDID.i_epee_batarde_d_adamandite_enchantee> && <SRC.FINDID.i_epee_batarde_d_adamandite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_batarde_d_adamandite
+				SRC.CONSUME 1 i_epee_batarde_d_adamandite_enchantee
+				SRC.CONSUME 1 i_epee_batarde_d_adamandite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_batarde_d_adamandite_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==21
+			IF (<SRC.FINDID.i_cimeterre_ancien> && <SRC.FINDID.i_cimeterre_ancien_enchante> && <SRC.FINDID.i_cimeterre_ancien_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_cimeterre_ancien
+				SRC.CONSUME 1 i_cimeterre_ancien_enchante
+				SRC.CONSUME 1 i_cimeterre_ancien_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_cimeterre_ancien_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==22
+			IF (<SRC.FINDID.i_epee_batarde_ancienne> && <SRC.FINDID.i_epee_batarde_ancienne_enchantee> && <SRC.FINDID.i_epee_batarde_ancienne_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_batarde_ancienne
+				SRC.CONSUME 1 i_epee_batarde_ancienne_enchantee
+				SRC.CONSUME 1 i_epee_batarde_ancienne_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_batarde_ancienne_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANT>>==23
+			IF (<SRC.FINDID.i_epee_antique> && <SRC.FINDID.i_epee_antique_enchantee> && <SRC.FINDID.i_epee_antique_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT=<EVAL <SRC.TAG.BOGHARDANT> + 1>
+				SRC.CONSUME 1 i_epee_antique
+				SRC.CONSUME 1 i_epee_antique_enchantee
+				SRC.CONSUME 1 i_epee_antique_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_antique_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSE
+			IF (<SRC.FINDID.i_epee_batarde_legendaire> && <SRC.FINDID.i_epee_batarde_legendaire_enchantee> && <SRC.FINDID.i_epee_batarde_legendaire_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANT
+				SRC.CONSUME 1 i_epee_batarde_legendaire
+				SRC.CONSUME 1 i_epee_batarde_legendaire_enchantee
+				SRC.CONSUME 1 i_epee_batarde_legendaire_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_epee_batarde_legendaire_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ENDIF
+	ELSEIF <EVAL <SRC.TAG.BOGHARDANCHOIX>>==2
+		//Armes d'estoc
+		IF <EVAL 0<SRC.TAG.BOGHARDANE>>==0
+			IF (<SRC.FINDID.i_poignard_rouille> && <SRC.FINDID.i_poignard_rouille_enchante> && <SRC.FINDID.i_poignard_rouille_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=1
+				SRC.CONSUME 1 i_poignard_rouille
+				SRC.CONSUME 1 i_poignard_rouille_enchante
+				SRC.CONSUME 1 i_poignard_rouille_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_poignard_rouille_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==1
+			IF (<SRC.FINDID.i_dague_rouillee> && <SRC.FINDID.i_dague_rouillee_enchantee> && <SRC.FINDID.i_dague_rouillee_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=<EVAL <SRC.TAG.BOGHARDANE> + 1>
+				SRC.CONSUME 1 i_dague_rouillee
+				SRC.CONSUME 1 i_dague_rouillee_enchantee
+				SRC.CONSUME 1 i_dague_rouillee_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_dague_rouillee_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==2
+			IF (<SRC.FINDID.i_poignard_poli> && <SRC.FINDID.i_poignard_poli_enchante> && <SRC.FINDID.i_poignard_poli_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=<EVAL <SRC.TAG.BOGHARDANE> + 1>
+				SRC.CONSUME 1 i_poignard_poli
+				SRC.CONSUME 1 i_poignard_poli_enchante
+				SRC.CONSUME 1 i_poignard_poli_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_poignard_poli_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==3
+			IF (<SRC.FINDID.i_dague_polie> && <SRC.FINDID.i_dague_polie_enchantee> && <SRC.FINDID.i_dague_polie_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=<EVAL <SRC.TAG.BOGHARDANE> + 1>
+				SRC.CONSUME 1 i_dague_polie
+				SRC.CONSUME 1 i_dague_polie_enchantee
+				SRC.CONSUME 1 i_dague_polie_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_dague_polie_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==4
+			IF (<SRC.FINDID.i_dague_en_acier_trempe> && <SRC.FINDID.i_dague_en_acier_trempe_enchantee> && <SRC.FINDID.i_dague_en_acier_trempe_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=<EVAL <SRC.TAG.BOGHARDANE> + 1>
+				SRC.CONSUME 1 i_dague_en_acier_trempe
+				SRC.CONSUME 1 i_dague_en_acier_trempe_enchantee
+				SRC.CONSUME 1 i_dague_en_acier_trempe_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_dague_en_acier_trempe_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==5
+			IF (<SRC.FINDID.i_dague_de_qualite> && <SRC.FINDID.i_dague_de_qualite_enchantee> && <SRC.FINDID.i_dague_de_qualite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=<EVAL <SRC.TAG.BOGHARDANE> + 1>
+				SRC.CONSUME 1 i_dague_de_qualite
+				SRC.CONSUME 1 i_dague_de_qualite_enchantee
+				SRC.CONSUME 1 i_dague_de_qualite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_dague_de_qualite_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==6
+			IF (<SRC.FINDID.i_dague_de_mithril> && <SRC.FINDID.i_dague_de_mithril_enchantee> && <SRC.FINDID.i_dague_de_mithril_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=<EVAL <SRC.TAG.BOGHARDANE> + 1>
+				SRC.CONSUME 1 i_dague_de_mithril
+				SRC.CONSUME 1 i_dague_de_mithril_enchantee
+				SRC.CONSUME 1 i_dague_de_mithril_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_dague_de_mithril_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==7
+			IF (<SRC.FINDID.i_lame_ancienne> && <SRC.FINDID.i_lame_ancienne_enchantee> && <SRC.FINDID.i_lame_ancienne_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=<EVAL <SRC.TAG.BOGHARDANE> + 1>
+				SRC.CONSUME 1 i_lame_ancienne
+				SRC.CONSUME 1 i_lame_ancienne_enchantee
+				SRC.CONSUME 1 i_lame_ancienne_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_lame_ancienne_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==8
+			IF (<SRC.FINDID.i_kryss_d_adamandite> && <SRC.FINDID.i_kryss_d_adamandite_enchantee> && <SRC.FINDID.i_kryss_d_adamandite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=<EVAL <SRC.TAG.BOGHARDANE> + 1>
+				SRC.CONSUME 1 i_kryss_d_adamandite
+				SRC.CONSUME 1 i_kryss_d_adamandite_enchantee
+				SRC.CONSUME 1 i_kryss_d_adamandite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_kryss_d_adamandite_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==9
+			IF (<SRC.FINDID.i_kryss_ancienne> && <SRC.FINDID.i_kryss_ancienne_enchantee> && <SRC.FINDID.i_kryss_ancienne_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=<EVAL <SRC.TAG.BOGHARDANE> + 1>
+				SRC.CONSUME 1 i_kryss_ancienne
+				SRC.CONSUME 1 i_kryss_ancienne_enchantee
+				SRC.CONSUME 1 i_kryss_ancienne_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_kryss_ancienne_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANE>>==10
+			IF (<SRC.FINDID.i_kryss_antique> && <SRC.FINDID.i_kryss_antique_enchantee> && <SRC.FINDID.i_kryss_antique_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE=<EVAL <SRC.TAG.BOGHARDANE> + 1>
+				SRC.CONSUME 1 i_kryss_antique
+				SRC.CONSUME 1 i_kryss_antique_enchantee
+				SRC.CONSUME 1 i_kryss_antique_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_kryss_antique_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSE
+			IF (<SRC.FINDID.i_lame_legendaire> && <SRC.FINDID.i_lame_legendaire_enchantee> && <SRC.FINDID.i_lame_legendaire_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANE
+				SRC.CONSUME 1 i_lame_legendaire
+				SRC.CONSUME 1 i_lame_legendaire_enchantee
+				SRC.CONSUME 1 i_lame_legendaire_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_lame_legendaire_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ENDIF
+	ELSEIF <EVAL <SRC.TAG.BOGHARDANCHOIX>>==3
+		//Armes de choc
+		IF <EVAL 0<SRC.TAG.BOGHARDANC>>==0
+			IF (<SRC.FINDID.i_marteau_de_guerre_renforce> && <SRC.FINDID.i_marteau_de_guerre_renforce_enchante> && <SRC.FINDID.i_marteau_de_guerre_renforce_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANC=1
+				SRC.CONSUME 1 i_marteau_de_guerre_renforce
+				SRC.CONSUME 1 i_marteau_de_guerre_renforce_enchante
+				SRC.CONSUME 1 i_marteau_de_guerre_renforce_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_marteau_de_guerre_renforce_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==1
+			IF (<SRC.FINDID.i_marteau_de_guerre_en_acier_trempe> && <SRC.FINDID.i_marteau_de_guerre_en_acier_trempe_enchante> && <SRC.FINDID.i_marteau_de_guerre_en_acier_trempe_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANC=<EVAL <SRC.TAG.BOGHARDANC> + 1>
+				SRC.CONSUME 1 i_marteau_de_guerre_en_acier_trempe
+				SRC.CONSUME 1 i_marteau_de_guerre_en_acier_trempe_enchante
+				SRC.CONSUME 1 i_marteau_de_guerre_en_acier_trempe_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_marteau_de_guerre_en_acier_trempe_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==2
+			IF (<SRC.FINDID.i_masse_en_acier_trempe> && <SRC.FINDID.i_masse_en_acier_trempe_enchantee> && <SRC.FINDID.i_masse_en_acier_trempe_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANC=<EVAL <SRC.TAG.BOGHARDANC> + 1>
+				SRC.CONSUME 1 i_masse_en_acier_trempe
+				SRC.CONSUME 1 i_masse_en_acier_trempe_enchantee
+				SRC.CONSUME 1 i_masse_en_acier_trempe_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_masse_en_acier_trempe_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==3
+			IF (<SRC.FINDID.i_masse_de_qualite> && <SRC.FINDID.i_masse_de_qualite_enchantee> && <SRC.FINDID.i_masse_de_qualite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANC=<EVAL <SRC.TAG.BOGHARDANC> + 1>
+				SRC.CONSUME 1 i_masse_de_qualite
+				SRC.CONSUME 1 i_masse_de_qualite_enchantee
+				SRC.CONSUME 1 i_masse_de_qualite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_masse_de_qualite_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==4
+			IF (<SRC.FINDID.i_fleau_de_qualite> && <SRC.FINDID.i_fleau_de_qualite_enchante> && <SRC.FINDID.i_fleau_de_qualite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANC=<EVAL <SRC.TAG.BOGHARDANC> + 1>
+				SRC.CONSUME 1 i_fleau_de_qualite
+				SRC.CONSUME 1 i_fleau_de_qualite_enchante
+				SRC.CONSUME 1 i_fleau_de_qualite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_fleau_de_qualite_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==5
+			IF (<SRC.FINDID.i_fleau_de_mithril> && <SRC.FINDID.i_fleau_de_mithril_enchante> && <SRC.FINDID.i_fleau_de_mithril_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANC=<EVAL <SRC.TAG.BOGHARDANC> + 1>
+				SRC.CONSUME 1 i_fleau_de_mithril
+				SRC.CONSUME 1 i_fleau_de_mithril_enchante
+				SRC.CONSUME 1 i_fleau_de_mithril_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_fleau_de_mithril_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==6
+			IF (<SRC.FINDID.i_fleau_d_arme_de_mithril> && <SRC.FINDID.i_fleau_d_arme_de_mithril_enchante> && <SRC.FINDID.i_fleau_d_arme_de_mithril_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANC=<EVAL <SRC.TAG.BOGHARDANC> + 1>
+				SRC.CONSUME 1 i_fleau_d_arme_de_mithril
+				SRC.CONSUME 1 i_fleau_d_arme_de_mithril_enchante
+				SRC.CONSUME 1 i_fleau_d_arme_de_mithril_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_fleau_d_arme_de_mithril_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANC>>==7
+			IF (<SRC.FINDID.i_fleau_d_arme_antique> && <SRC.FINDID.i_fleau_d_arme_antique_enchante> && <SRC.FINDID.i_fleau_d_arme_antique_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANC=<EVAL <SRC.TAG.BOGHARDANC> + 1>
+				SRC.CONSUME 1 i_fleau_d_arme_antique
+				SRC.CONSUME 1 i_fleau_d_arme_antique_enchante
+				SRC.CONSUME 1 i_fleau_d_arme_antique_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_fleau_d_arme_antique_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSE
+			IF (<SRC.FINDID.i_marteau_de_guerre_legendaire> && <SRC.FINDID.i_marteau_de_guerre_legendaire_enchante> && <SRC.FINDID.i_marteau_de_guerre_legendaire_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANC
+				SRC.CONSUME 1 i_marteau_de_guerre_legendaire
+				SRC.CONSUME 1 i_marteau_de_guerre_legendaire_enchante
+				SRC.CONSUME 1 i_marteau_de_guerre_legendaire_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_marteau_de_guerre_legendaire_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ENDIF
+	ELSEIF <EVAL <SRC.TAG.BOGHARDANCHOIX>>==4
+		//Arcs
+		IF <EVAL 0<SRC.TAG.BOGHARDANA>>==0
+			IF (<SRC.FINDID.i_arc_en_frene> && <SRC.FINDID.i_arc_en_frene_enchantee> && <SRC.FINDID.i_arc_en_frene_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=1
+				SRC.CONSUME 1 i_arc_en_frene
+				SRC.CONSUME 1 i_arc_en_frene_enchantee
+				SRC.CONSUME 1 i_arc_en_frene_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arc_en_frene_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==1
+			IF (<SRC.FINDID.i_arbalete_en_frene> && <SRC.FINDID.i_arbalete_en_frene_enchantee> && <SRC.FINDID.i_arbalete_en_frene_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_en_frene
+				SRC.CONSUME 1 i_arbalete_en_frene_enchantee
+				SRC.CONSUME 1 i_arbalete_en_frene_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_en_frene_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==2
+			IF (<SRC.FINDID.i_arbalete_lourde_en_frene> && <SRC.FINDID.i_arbalete_lourde_en_frene_enchantee> && <SRC.FINDID.i_arbalete_lourde_en_frene_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_lourde_en_frene
+				SRC.CONSUME 1 i_arbalete_lourde_en_frene_enchantee
+				SRC.CONSUME 1 i_arbalete_lourde_en_frene_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_lourde_en_frene_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==3
+			IF (<SRC.FINDID.i_arc_en_orme> && <SRC.FINDID.i_arc_en_orme_enchante> && <SRC.FINDID.i_arc_en_orme_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arc_en_orme
+				SRC.CONSUME 1 i_arc_en_orme_enchante
+				SRC.CONSUME 1 i_arc_en_orme_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arc_en_orme_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==4
+			IF (<SRC.FINDID.i_arbalete_en_orme> && <SRC.FINDID.i_arbalete_en_orme_enchantee> && <SRC.FINDID.i_arbalete_en_orme_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_en_orme
+				SRC.CONSUME 1 i_arbalete_en_orme_enchantee
+				SRC.CONSUME 1 i_arbalete_en_orme_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_en_orme_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==5
+			IF (<SRC.FINDID.i_arbalete_lourde_en_orme> && <SRC.FINDID.i_arbalete_lourde_en_orme_enchantee> && <SRC.FINDID.i_arbalete_lourde_en_orme_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_lourde_en_orme
+				SRC.CONSUME 1 i_arbalete_lourde_en_orme_enchantee
+				SRC.CONSUME 1 i_arbalete_lourde_en_orme_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_lourde_en_orme_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==6
+			IF (<SRC.FINDID.i_arc_en_noyer_blanc> && <SRC.FINDID.i_arc_en_noyer_blanc_enchante> && <SRC.FINDID.i_arc_en_noyer_blanc_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arc_en_noyer_blanc
+				SRC.CONSUME 1 i_arc_en_noyer_blanc_enchante
+				SRC.CONSUME 1 i_arc_en_noyer_blanc_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arc_en_noyer_blanc_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==7
+			IF (<SRC.FINDID.i_arbalete_en_noyer_blanc> && <SRC.FINDID.i_arbalete_en_noyer_blanc_enchantee> && <SRC.FINDID.i_arbalete_en_noyer_blanc_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_en_noyer_blanc
+				SRC.CONSUME 1 i_arbalete_en_noyer_blanc_enchantee
+				SRC.CONSUME 1 i_arbalete_en_noyer_blanc_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_en_noyer_blanc_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==8
+			IF (<SRC.FINDID.i_arbalete_lourde_en_noyer_blanc> && <SRC.FINDID.i_arbalete_lourde_en_noyer_blanc_enchantee> && <SRC.FINDID.i_arbalete_lourde_en_noyer_blanc_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_lourde_en_noyer_blanc
+				SRC.CONSUME 1 i_arbalete_lourde_en_noyer_blanc_enchantee
+				SRC.CONSUME 1 i_arbalete_lourde_en_noyer_blanc_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_lourde_en_noyer_blanc_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==9
+			IF (<SRC.FINDID.i_arc_en_chene> && <SRC.FINDID.i_arc_en_chene_enchante> && <SRC.FINDID.i_arc_en_chene_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arc_en_chene
+				SRC.CONSUME 1 i_arc_en_chene_enchante
+				SRC.CONSUME 1 i_arc_en_chene_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arc_en_chene_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==10
+			IF (<SRC.FINDID.i_arbalete_en_chene> && <SRC.FINDID.i_arbalete_en_chene_enchantee> && <SRC.FINDID.i_arbalete_en_chene_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_en_chene
+				SRC.CONSUME 1 i_arbalete_en_chene_enchantee
+				SRC.CONSUME 1 i_arbalete_en_chene_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_en_chene_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==11
+			IF (<SRC.FINDID.i_arbalete_lourde_en_chene> && <SRC.FINDID.i_arbalete_lourde_en_chene_enchantee> && <SRC.FINDID.i_arbalete_lourde_en_chene_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_lourde_en_chene
+				SRC.CONSUME 1 i_arbalete_lourde_en_chene_enchantee
+				SRC.CONSUME 1 i_arbalete_lourde_en_chene_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_lourde_en_chene_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==12
+			IF (<SRC.FINDID.i_arc_en_cedre> && <SRC.FINDID.i_arc_en_cedre_enchante> && <SRC.FINDID.i_arc_en_cedre_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arc_en_cedre
+				SRC.CONSUME 1 i_arc_en_cedre_enchante
+				SRC.CONSUME 1 i_arc_en_cedre_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arc_en_cedre_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==13
+			IF (<SRC.FINDID.i_arbalete_en_cedre> && <SRC.FINDID.i_arbalete_en_cedre_enchantee> && <SRC.FINDID.i_arbalete_en_cedre_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_en_cedre
+				SRC.CONSUME 1 i_arbalete_en_cedre_enchantee
+				SRC.CONSUME 1 i_arbalete_en_cedre_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_en_cedre_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==14
+			IF (<SRC.FINDID.i_arbalete_lourde_en_cedre> && <SRC.FINDID.i_arbalete_lourde_en_cedre_enchantee> && <SRC.FINDID.i_arbalete_lourde_en_cedre_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_lourde_en_cedre
+				SRC.CONSUME 1 i_arbalete_lourde_en_cedre_enchantee
+				SRC.CONSUME 1 i_arbalete_lourde_en_cedre_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_lourde_en_cedre_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==15
+			IF (<SRC.FINDID.i_arc_en_oxandre> && <SRC.FINDID.i_arc_en_oxandre_enchante> && <SRC.FINDID.i_arc_en_oxandre_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arc_en_oxandre
+				SRC.CONSUME 1 i_arc_en_oxandre_enchante
+				SRC.CONSUME 1 i_arc_en_oxandre_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arc_en_oxandre_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==16
+			IF (<SRC.FINDID.i_arbalete_en_oxandre> && <SRC.FINDID.i_arbalete_en_oxandre_enchantee> && <SRC.FINDID.i_arbalete_en_oxandre_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_en_oxandre
+				SRC.CONSUME 1 i_arbalete_en_oxandre_enchantee
+				SRC.CONSUME 1 i_arbalete_en_oxandre_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_en_oxandre_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==17
+			IF (<SRC.FINDID.i_arbalete_lourde_en_oxandre> && <SRC.FINDID.i_arbalete_lourde_en_oxandre_enchantee> && <SRC.FINDID.i_arbalete_lourde_en_oxandre_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_lourde_en_oxandre
+				SRC.CONSUME 1 i_arbalete_lourde_en_oxandre_enchantee
+				SRC.CONSUME 1 i_arbalete_lourde_en_oxandre_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_lourde_en_oxandre_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==18
+			IF (<SRC.FINDID.i_arc_en_fevier_epineux> && <SRC.FINDID.i_arc_en_fevier_epineux_enchante> && <SRC.FINDID.i_arc_en_fevier_epineux_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arc_en_fevier_epineux
+				SRC.CONSUME 1 i_arc_en_fevier_epineux_enchante
+				SRC.CONSUME 1 i_arc_en_fevier_epineux_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arc_en_fevier_epineux_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+				ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==19
+			IF (<SRC.FINDID.i_arbalete_en_fevier_epineux> && <SRC.FINDID.i_arbalete_en_fevier_epineux_enchantee> && <SRC.FINDID.i_arbalete_en_fevier_epineux_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_en_fevier_epineux
+				SRC.CONSUME 1 i_arbalete_en_fevier_epineux_enchantee
+				SRC.CONSUME 1 i_arbalete_en_fevier_epineux_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_en_fevier_epineux_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==20
+			IF (<SRC.FINDID.i_arbalete_lourde_en_fevier_epineux> && <SRC.FINDID.i_arbalete_lourde_en_fevier_epineux_enchantee> && <SRC.FINDID.i_arbalete_lourde_en_fevier_epineux_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_lourde_en_fevier_epineux
+				SRC.CONSUME 1 i_arbalete_lourde_en_fevier_epineux_enchantee
+				SRC.CONSUME 1 i_arbalete_lourde_en_fevier_epineux_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_lourde_en_fevier_epineux_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==21
+			IF (<SRC.FINDID.i_arc_legendaire> && <SRC.FINDID.i_arc_legendaire_enchante> && <SRC.FINDID.i_arc_legendaire_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arc_legendaire
+				SRC.CONSUME 1 i_arc_legendaire_enchante
+				SRC.CONSUME 1 i_arc_legendaire_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arc_legendaire_sacre
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANA>>==22
+			IF (<SRC.FINDID.i_arbalete_legendaire> && <SRC.FINDID.i_arbalete_legendaire_enchantee> && <SRC.FINDID.i_arbalete_legendaire_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA=<EVAL <SRC.TAG.BOGHARDANA> + 1>
+				SRC.CONSUME 1 i_arbalete_legendaire
+				SRC.CONSUME 1 i_arbalete_legendaire_enchantee
+				SRC.CONSUME 1 i_arbalete_legendaire_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_legendaire_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSE
+			IF (<SRC.FINDID.i_arbalete_lourde_legendaire> && <SRC.FINDID.i_arbalete_lourde_legendaire_enchantee> && <SRC.FINDID.i_arbalete_lourde_legendaire_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANA
+				SRC.CONSUME 1 i_arbalete_lourde_legendaire
+				SRC.CONSUME 1 i_arbalete_lourde_legendaire_enchantee
+				SRC.CONSUME 1 i_arbalete_lourde_legendaire_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_arbalete_lourde_legendaire_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ENDIF
+	ELSE
+		//Haches
+		IF <EVAL 0<SRC.TAG.BOGHARDANH>>==0
+			IF (<SRC.FINDID.i_hachette_rouillee> && <SRC.FINDID.i_hachette_rouillee_enchantee> && <SRC.FINDID.i_hachette_rouillee_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANH=1
+				SRC.CONSUME 1 i_hachette_rouillee
+				SRC.CONSUME 1 i_hachette_rouillee_enchantee
+				SRC.CONSUME 1 i_hachette_rouillee_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_hachette_rouillee_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==1
+			IF (<SRC.FINDID.i_hachette_polie> && <SRC.FINDID.i_hachette_polie_enchantee> && <SRC.FINDID.i_hachette_polie_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANH=<EVAL <SRC.TAG.BOGHARDANH> + 1>
+				SRC.CONSUME 1 i_hachette_polie
+				SRC.CONSUME 1 i_hachette_polie_enchantee
+				SRC.CONSUME 1 i_hachette_polie_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_hachette_polie_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==2
+			IF (<SRC.FINDID.i_hachette_en_acier_trempe> && <SRC.FINDID.i_hachette_en_acier_trempe_enchantee> && <SRC.FINDID.i_hachette_en_acier_trempe_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANH=<EVAL <SRC.TAG.BOGHARDANH> + 1>
+				SRC.CONSUME 1 i_hachette_en_acier_trempe
+				SRC.CONSUME 1 i_hachette_en_acier_trempe_enchantee
+				SRC.CONSUME 1 i_hachette_en_acier_trempe_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_hachette_en_acier_trempe_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==3
+			IF (<SRC.FINDID.i_hache_de_guerre_en_acier_trempe> && <SRC.FINDID.i_hache_de_guerre_en_acier_trempe_enchantee> && <SRC.FINDID.i_hache_de_guerre_en_acier_trempe_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANH=<EVAL <SRC.TAG.BOGHARDANH> + 1>
+				SRC.CONSUME 1 i_hache_de_guerre_en_acier_trempe
+				SRC.CONSUME 1 i_hache_de_guerre_en_acier_trempe_enchantee
+				SRC.CONSUME 1 i_hache_de_guerre_en_acier_trempe_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_hache_de_guerre_en_acier_trempe_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==4
+			IF (<SRC.FINDID.i_hache_de_guerre_de_qualite> && <SRC.FINDID.i_hache_de_guerre_de_qualite_enchantee> && <SRC.FINDID.i_hache_de_guerre_de_qualite_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANH=<EVAL <SRC.TAG.BOGHARDANH> + 1>
+				SRC.CONSUME 1 i_hache_de_guerre_de_qualite
+				SRC.CONSUME 1 i_hache_de_guerre_de_qualite_enchantee
+				SRC.CONSUME 1 i_hache_de_guerre_de_qualite_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_hache_de_guerre_de_qualite_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==5
+			IF (<SRC.FINDID.i_hache_de_qualite_a_deux_tranchants> && <SRC.FINDID.i_hache_de_qualite_a_deux_tranchants_enchantee> && <SRC.FINDID.i_hache_de_qualite_a_deux_tranchants_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANH=<EVAL <SRC.TAG.BOGHARDANH> + 1>
+				SRC.CONSUME 1 i_hache_de_qualite_a_deux_tranchants
+				SRC.CONSUME 1 i_hache_de_qualite_a_deux_tranchants_enchantee
+				SRC.CONSUME 1 i_hache_de_qualite_a_deux_tranchants_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_hache_de_qualite_a_deux_tranchants_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==6
+			IF (<SRC.FINDID.i_hache_de_guerre_de_mithril> && <SRC.FINDID.i_hache_de_guerre_de_mithril_enchantee> && <SRC.FINDID.i_hache_de_guerre_de_mithril_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANH=<EVAL <SRC.TAG.BOGHARDANH> + 1>
+				SRC.CONSUME 1 i_hache_de_guerre_de_mithril
+				SRC.CONSUME 1 i_hache_de_guerre_de_mithril_enchantee
+				SRC.CONSUME 1 i_hache_de_guerre_de_mithril_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_hache_de_guerre_de_mithril_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==7
+			IF (<SRC.FINDID.i_hache_a_deux_tranchants_de_mithril> && <SRC.FINDID.i_hache_a_deux_tranchants_de_mithril_enchantee> && <SRC.FINDID.i_hache_a_deux_tranchants_de_mithril_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANH=<EVAL <SRC.TAG.BOGHARDANH> + 1>
+				SRC.CONSUME 1 i_hache_a_deux_tranchants_de_mithril
+				SRC.CONSUME 1 i_hache_a_deux_tranchants_de_mithril_enchantee
+				SRC.CONSUME 1 i_hache_a_deux_tranchants_de_mithril_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_hache_a_deux_tranchants_de_mithril_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSEIF <EVAL 0<SRC.TAG.BOGHARDANH>>==8
+			IF (<SRC.FINDID.i_hache_antique_a_deux_tranchants> && <SRC.FINDID.i_hache_antique_a_deux_tranchants_enchantee> && <SRC.FINDID.i_hache_antique_a_deux_tranchants_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANH=<EVAL <SRC.TAG.BOGHARDANH> + 1>
+				SRC.CONSUME 1 i_hache_antique_a_deux_tranchants
+				SRC.CONSUME 1 i_hache_antique_a_deux_tranchants_enchantee
+				SRC.CONSUME 1 i_hache_antique_a_deux_tranchants_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_hache_antique_a_deux_tranchants_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ELSE
+			IF (<SRC.FINDID.i_hachette_legendaire> && <SRC.FINDID.i_hachette_legendaire_enchantee> && <SRC.FINDID.i_hachette_legendaire_runique> && <SRC.RESTEST 4 i_scroll_enchantement>)
+				SRC.TAG.BOGHARDANH
+				SRC.CONSUME 1 i_hachette_legendaire
+				SRC.CONSUME 1 i_hachette_legendaire_enchantee
+				SRC.CONSUME 1 i_hachette_legendaire_runique
+				SRC.CONSUME 4 i_scroll_enchantement
+				SRC.NEWITEM i_hachette_legendaire_sacree
+				SRC.ACT.BOUNCE
+				//Voila votre du ! A tres bientot <NOM>
+				SAY Yrlod yrwuh gx ! D wuhv elhqwrw <SRC.NAME>
+			ELSE
+				//Pour obtenir cette arme rapportez la moi dans sa version normale enchantee et runique accompagnee de 4 parchemins d enchantements
+				SAY Srxu rewhqlu fhwwh duph, udssruwhc od prl gdqv vd yhuvlrq qrupdoh, hqfkdqwhh, hw uxqltxh dffrpsdjqhh gh 4 sdufkhplqv g hqfkdqwhphqwv
+			ENDIF
+		ENDIF
+	ENDIF
+ELSE
+	SAY Mh q'hqwhqg ulhq gh fh txh yrxv glwhv, dssurfkhc yrxv !
+ENDIF

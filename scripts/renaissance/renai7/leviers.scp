@@ -1,0 +1,657 @@
+//MORE1 ET MORE2 ==> 2 PORTES ; TAG.CADENAS_UID ==> LE CADENAS
+[ITEMDEF i_levier_porte_d7_yew]
+NAME=Levier
+ID=01095
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+COLOR=0b10
+TIMER=-1
+
+ON=@DCLICK
+IF ((<MORE2> > 0 ) && (<MORE1> > 0) && (0<TAG.CADENAS_UID> > 0))
+	IF <TIMER> == -1
+		LINK=<TAG.CADENAS_UID>
+		IF ( (<EVAL 0<LINK.TAG.CHIFFRE1>> == 7) && (<EVAL 0<LINK.TAG.CHIFFRE2>> == 6) && (<EVAL 0<LINK.TAG.CHIFFRE3>> == 0) && (<EVAL 0<LINK.TAG.CHIFFRE4>> == 3) && (<EVAL 0<LINK.TAG.CHIFFRE5>> == 4) )
+			LINK.TAG.CHIFFRE1
+			LINK.TAG.CHIFFRE2
+			LINK.TAG.CHIFFRE3
+			LINK.TAG.CHIFFRE4
+			LINK.TAG.CHIFFRE5
+			LINK=<MORE1>
+			IF <LINK.TYPE> == t_door_locked
+				LINK.TYPE=t_door
+				LINK.USE
+				LINK.TIMER=5
+				LINK.TYPE=t_door_locked
+			ENDIF
+			LINK=<MORE2>
+			IF <LINK.TYPE> == t_door_locked
+				LINK.TYPE=t_door
+				LINK.USE
+				LINK.TIMER=5
+				LINK.TYPE=t_door_locked
+			ENDIF
+		ELSE
+			SRC.NEWITEM i_effet_piege_laby_d7
+			SRC.ACT.P=<EVAL <SRC.P.X>+1>,<EVAL <SRC.P.Y>+1>,<SRC.P.Z>
+			SRC.DAMAGE 600 0008
+			IF !<SRC.FINDID.i_rune_curse_piege_d7>
+				SRC.NEWITEM i_rune_curse_piege_d7
+				SRC.ACT.LINK=<SRC.UID>
+				SRC.ACT.EQUIP
+				SRC.ACT.TIMER=600
+			ENDIF
+		ENDIF
+		DISPID=01094
+		UPDATE
+		TIMER=5
+	ELSE
+		EMOTE etre coince
+	ENDIF
+ELSEIF <SRC.ACCOUNT.PLEVEL> > 6
+	IF <MORE1> == 0
+		SRC.SYSMESSAGEUA 0481 1 1 0 Premiere porte a ouvrir
+		TARGET
+	ELSEIF <MORE2> == 0
+		SRC.SYSMESSAGEUA 0481 1 1 0 Deuxieme porte a ouvrir
+		TARGET
+	ELSEIF 0<TAG.CADENAS_UID> == 0
+		SRC.SYSMESSAGEUA 0481 1 1 0 Selectionner le cadenas
+		TARGET
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise config, contactez votre admin!
+ENDIF
+RETURN 1
+
+ON=@TIMER
+DISPID=01095
+UPDATE
+TIMER=-1
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <MORE1> == 0
+	IF <SRC.TARG.TYPE> == t_door_locked
+		MORE1=<SRC.TARG.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner une porte verrouillee
+	ENDIF
+ELSEIF <MORE2> == 0
+	IF <SRC.TARG.TYPE> == t_door_locked
+		MORE2=<SRC.TARG.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner une porte verrouillee
+	ENDIF
+ELSEIF 0<TAG.CADENAS_UID> == 0
+	IF <SRC.TARG.BASEID> == i_cadenas_porte_d7_yew
+		TAG.CADENAS_UID=<SRC.TARG.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner le cadenas
+	ENDIF
+ENDIF
+RETURN 1
+
+
+[ITEMDEF i_levier_de_sacrifice_d7]
+NAME=Levier de sacrifice
+ID=01095
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+TIMER=-1
+
+ON=@DCLICK
+DISPID=01094
+UPDATE
+TIMER=2
+IF <EVAL 0<SRC.TAG.ANANKE>> == 3
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 5
+		IF <SRC.FINDLAYER.25>
+			SRC.FINDLAYER.25.REMOVE
+			SRC.UPDATE
+		ENDIF
+		SRC.ACTION=-1
+		SRC.EVENTS +e_anti_mark_recall
+		IF <SRC.FINDLAYER.40>
+			SRC.FINDLAYER.40.REMOVE
+		ENDIF
+		IF (<SRC.FLAGS>&statf_hidden)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+		ENDIF
+		IF (<SRC.FLAGS>&statf_invisible)
+			SRC.FLAGS=<SRC.FLAGS>&~invisible
+		ENDIF
+		IF (<SRC.FLAGS>&statf_insubstantial)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+		SRC.TAG.anti_mark_recall=1
+		SRC.TAG.INSIDE_D7=1
+		SRC.TAG.ANANKE=2
+		SRC.EMOTE Disparaitre dans un amas de fumee !
+		SRC.GO 5579,632,30
+	ENDIF
+ELSE
+	SRC.EMOTE se faire foudroyer !
+	SRC.KILL
+ENDIF
+RETURN 1
+
+ON=@TIMER
+DISPID = 01095
+UPDATE
+TIMER=-1
+RETURN 1
+
+
+
+//MORE2=1 ==> A ETE OUVERT MORE2=2 ==> NA PAS ETE OUVERT
+//ACTIVE LE PEDESTAL
+[ITEMDEF i_levier_d7]
+NAME=Levier
+ID=01095
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+
+ON=@DCLICK
+IF <LINK.BASEID>==i_pedestal_d7
+	IF <TIMER> == -1
+		IF <DISPID> == 01095
+			IF <MORE1> == 5
+				DISPID=01094
+				UPDATE
+				TIMER=29
+				LINK.TIMER=1
+				MORE2=1
+			ELSE
+				DISPID=01094
+				UPDATE
+				TIMER=3
+				MORE2=2
+			ENDIF
+			MORE1=1
+		ENDIF
+	ELSE
+		EMOTE etre coince
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise config, contactez votre admin!
+ENDIF
+RETURN 1
+
+ON=@TIMER
+IF <DISPID> == 01094
+	DISPID=01095
+	UPDATE
+	IF <MORE2>==1
+		TIMER=12
+	ELSE
+		TIMER=-1
+	ENDIF
+ELSE
+	TIMER=-1
+ENDIF
+RETURN 1
+
+
+//MORE2 ==> 1=NORD 2=EST 3=SUD 4=OUEST ; MORE1=TIMER
+[ITEMDEF i_levier_de_porte]
+NAME=Levier
+ID=01095
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+TIMER=-1
+
+ON=@DCLICK
+IF ((STRCMPI("<LINK>","04fffffff")) && (<MORE2> > 0 ) && (<MORE1> > 0))
+	IF <TIMER> == -1
+		IF <DISPID> == 01095
+			DISPID=01094
+			UPDATE
+			TIMER=<EVAL <MORE1>>
+			IF <MORE2> == 1
+				LINK.P=<EVAL <LINK.P.X>>,<EVAL <LINK.P.Y> - 1>,<EVAL <LINK.P.Z>>
+				LINK.UPDATE
+			ELSEIF <MORE2> == 2
+				LINK.P=<EVAL <LINK.P.X> + 1>,<EVAL <LINK.P.Y>>,<EVAL <LINK.P.Z>>
+				LINK.UPDATE
+			ELSEIF <MORE2> == 3
+				LINK.P=<EVAL <LINK.P.X>>,<EVAL <LINK.P.Y> + 1>,<EVAL <LINK.P.Z>>
+				LINK.UPDATE
+			ELSE
+				LINK.P=<EVAL <LINK.P.X> - 1>,<EVAL <LINK.P.Y>>,<EVAL <LINK.P.Z>>
+				LINK.UPDATE
+			ENDIF
+		ENDIF
+	ELSE
+		EMOTE etre coince
+	ENDIF
+ELSEIF <SRC.ACCOUNT.PLEVEL> > 3
+	IF (!STRCMPI("<LINK>","04fffffff")
+		SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez l'objet a bouger
+		TARGET
+	ELSEIF <MORE1> == 0
+		SRC.SYSMESSAGEUA 0481 1 1 0 temps que restera fermee la porte en seconde (hexadecimal)
+		INPDLG MORE1 3
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Direction que prendra la porte : 1=nord 2=est 3=sud 4=ouest
+		INPDLG MORE2 1
+		IF <MORE2> > 4
+			MORE2=4
+		ENDIF
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise config, contactez votre admin!
+ENDIF
+RETURN 1
+
+ON=@TIMER
+DISPID=01095
+UPDATE
+TIMER=-1
+IF <MORE2> == 1
+	LINK.P=<EVAL <LINK.P.X>>,<EVAL <LINK.P.Y> + 1>,<EVAL <LINK.P.Z>>
+	LINK.UPDATE
+ELSEIF <MORE2> == 2
+	LINK.P=<EVAL <LINK.P.X> - 1>,<EVAL <LINK.P.Y>>,<EVAL <LINK.P.Z>>
+	LINK.UPDATE
+ELSEIF <MORE2> == 3
+	LINK.P=<EVAL <LINK.P.X>>,<EVAL <LINK.P.Y> - 1>,<EVAL <LINK.P.Z>>
+	LINK.UPDATE
+ELSE
+	LINK.P=<EVAL <LINK.P.X> + 1>,<EVAL <LINK.P.Y>>,<EVAL <LINK.P.Z>>
+	LINK.UPDATE
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+LINK=<SRC.TARG.UID>
+RETURN 1
+
+
+//MORE1 = ID DU MONSTRE 1 ; MORE2 = ID DU MONSTRE 2
+//TAG.MONSTRE1, TAG.MONSTRE2
+[ITEMDEF i_levier_monstre_d7]
+NAME=Levier
+ID=01095
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+
+ON=@DCLICK
+IF <EVAL <MOREX>> > 0
+	IF <TIMER> == -1
+		IF <DISPID> == 01095
+			IF <TAG.MONSTRE1> != 0
+				DISPID=01094
+				UPDATE
+				TIMER=5
+				UID.09903F.NEWNPC <TAG.MONSTRE1>
+				UID.09903F.ACT.EVENTS +e_epreuve_monstre_mort_d7
+				UID.09903F.ACT.NEWITEM m_effaceur_monstre_rebour
+				UID.09903F.ACT.ACT.CONT=<UID.09903F.ACT.UID>
+				UID.09903F.ACT.P=<MOREP>
+				UID.09903F.ACT.UPDATE
+				IF <TAG.MONSTRE2> != 0
+					UID.09903F.NEWNPC <TAG.MONSTRE2>
+					UID.09903F.ACT.EVENTS +e_epreuve_monstre_mort_d7
+					UID.09903F.ACT.NEWITEM m_effaceur_monstre_rebour
+					UID.09903F.ACT.ACT.CONT=<UID.09903F.ACT.UID>
+					UID.09903F.ACT.P=<MOREP>
+					UID.09903F.ACT.UPDATE
+				ENDIF
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 levier non configure, contactez votre admin!
+			ENDIF
+		ENDIF
+	ELSE
+		EMOTE etre coince
+	ENDIF
+ELSE
+	IF <SRC.ACCOUNT.PLEVEL> > 6
+		MOREP=<SRC.P>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Coordonnees enregistrees pour la serrure
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 levier non configure, contactez votre admin!
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TIMER
+IF <DISPID> == 01094
+	DISPID=01095
+	UPDATE
+	TIMER=-1
+ELSE
+	TIMER=-1
+ENDIF
+RETURN 1
+
+
+//MORE1 = 0 (ABAISSÉ) = 1 (LEVÉ ET ANIMATION) = 2 (LEVÉ ET DEIMOS APPARU)
+[ITEMDEF i_levier_d7_deimos]
+NAME=Levier
+ID=01095
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+COLOR=0b15
+
+ON=@DCLICK
+IF <TIMER> == -1
+	IF <DISPID> == 01095
+		DISPID=01094
+		UPDATE
+		SRC.NEWITEM i_fx_gate
+		SRC.ACT.COLOR=0b15
+		SRC.ACT.P=5570,787,60
+		LINK=<SRC.ACT.UID>
+		SRC.ACT.UPDATE
+		TIMER=3
+		MORE1=1
+	ENDIF
+ELSE
+	EMOTE etre coince
+ENDIF
+RETURN 1
+
+ON=@TIMER
+IF <DISPID> == 01094
+	IF <EVAL <MORE1>> == 1
+		UID.09903F.NEWNPC c_deimos
+		UID.09903F.ACT.NEWITEM m_effaceur_monstre_rebour
+		UID.09903F.ACT.ACT.CONT=<UID.09903F.ACT.UID>
+		UID.09903F.ACT.ACT.TIMER=240
+		UID.09903F.ACT.P=5570,787,60
+		UID.09903F.ACT.UPDATE
+		LINK.REMOVE
+		LINK=04fffffff
+		MORE1=2
+		TIMER=241
+	ELSE
+		MORE1=0
+		DISPID=01095
+		UPDATE
+		TIMER=-1
+	ENDIF
+ELSE
+	TIMER=-1
+ENDIF
+RETURN 1
+
+//MORE1 = 0 (ABAISSÉ) = 1 (LEVÉ ET ANIMATION) = 2 (LEVÉ ET DEIMOS APPARU)
+[ITEMDEF i_levier_d7_phobos]
+NAME=Levier
+ID=01095
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+COLOR=0593
+
+ON=@DCLICK
+IF <TIMER> == -1
+	IF <DISPID> == 01095
+		DISPID=01094
+		UPDATE
+		SRC.NEWITEM i_fx_gate
+		SRC.ACT.COLOR=0593
+		SRC.ACT.P=5608,880,30
+		LINK=<SRC.ACT.UID>
+		SRC.ACT.UPDATE
+		TIMER=3
+		MORE1=1
+	ENDIF
+ELSE
+	EMOTE etre coince
+ENDIF
+RETURN 1
+
+ON=@TIMER
+IF <DISPID> == 01094
+	IF <EVAL <MORE1>> == 1
+		UID.09903F.NEWNPC c_phobos
+		UID.09903F.ACT.NEWITEM m_effaceur_monstre_rebour
+		UID.09903F.ACT.ACT.CONT=<UID.09903F.ACT.UID>
+		UID.09903F.ACT.ACT.TIMER=240
+		UID.09903F.ACT.P=5608,880,30
+		UID.09903F.ACT.UPDATE
+		LINK.REMOVE
+		LINK=04fffffff
+		MORE1=2
+		TIMER=241
+	ELSE
+		MORE1=0
+		DISPID=01095
+		UPDATE
+		TIMER=-1
+	ENDIF
+ELSE
+	TIMER=-1
+ENDIF
+RETURN 1
+
+
+//LEVIER POUR CHANGER DE TELEPORT A NON TELEPORT UNE DALLE DE TELEPORT TEMP
+[ITEMDEF i_levier_de_dalle_teleport_temp]
+NAME=Levier
+ID=01095
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+TIMER=-1
+
+ON=@DCLICK
+IF ((STRCMPI("<LINK>","04fffffff") && (<EVAL <MORE2>> > 0))
+	IF <TIMER> == -1
+		IF <DISPID> == 01095
+			DISPID=01094
+			UPDATE
+			TIMER=<MORE2>
+			IF <LINK.MORE1> == 0
+				LINK.MORE1 = 1
+				LINK.COLOR = 0136
+			ELSE
+				LINK.MORE1 = 0
+				LINK.COLOR = 053
+			ENDIF
+		ENDIF
+	ELSE
+		EMOTE etre coince
+	ENDIF
+ELSEIF <SRC.ACCOUNT.PLEVEL> > 3
+	IF (!STRCMPI("<LINK>","04fffffff")
+		SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez la dalle teleport temp a lier
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Temps en secondes avant que la case revienne a la normale
+		INPDLG MORE2 3
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Levier mal configure!
+ENDIF
+RETURN 1
+
+ON=@TIMER
+DISPID=01095
+UPDATE
+TIMER=-1
+IF <LINK.BASEID> == i_dalle_teleport_temp
+	IF <LINK.MORE1> == 0
+		LINK.MORE1 = 1
+		LINK.COLOR = 0136
+	ELSE
+		LINK.MORE1 = 0
+		LINK.COLOR = 053
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.BASEID> == i_dalle_teleport_temp
+	LINK=<SRC.TARG.UID>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Dalle liee
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Ceci n'est pas une dalle teleport temp
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Ceci n'est pas une dalle teleport temp
+RETURN 1
+
+//ENGRENAGE POUR L'EPREUVE DE LA TUERIE DE MONSTRES
+[ITEMDEF i_engrenage_sur_table_haute_d7]
+NAME=Engrenage sur table haute
+ID=0ebc
+TYPE=t_normal
+
+ON=@CREATE
+ATTR=08010
+COLOR=084a
+
+ON=@DCLICK
+IF <EVAL 0<SRC.TAG.EPREUVE_MONSTRE_MORT_D7>> < 5
+	VAR.MID1=c_seigneur_des_abysses
+	VAR.MID2=c_gardien_de_prison_baraque
+	VAR.MID3=c_sorcier_squelette
+	VAR.MID4=c_sorcier_heretique
+	VAR.MID5=c_troll_normal
+ELSEIF <EVAL 0<SRC.TAG.EPREUVE_MONSTRE_MORT_D7>> < 10
+	VAR.MID1=c_briseur_de_sorts
+	VAR.MID2=c_hobgobelin
+	VAR.MID3=c_pieuvre_des_marecages
+	VAR.MID4=c_envouteur_heretique
+	VAR.MID5=c_guerrier_troll
+ELSEIF <EVAL 0<SRC.TAG.EPREUVE_MONSTRE_MORT_D7>> < 15
+	VAR.MID1=c_myopotame
+	VAR.MID2=c_liche_demoniaque
+	VAR.MID3=c_Latrodecte
+	VAR.MID4=c_archer_de_l_apocalypse
+	VAR.MID5=c_lieutenant_troll
+ELSEIF <EVAL 0<SRC.TAG.EPREUVE_MONSTRE_MORT_D7>> < 20
+	VAR.MID1=c_hexapode
+	VAR.MID2=c_megachiroptere
+	VAR.MID3=c_tortureur_de_l_esprit
+	VAR.MID4=c_juggernaut_infernal
+	VAR.MID5=c_general_troll
+ELSE
+	SRC.TAG.EPREUVE_MONSTRE_MORT_D7
+	SRC.GO 5407,959,16
+	RETURN 1
+ENDIF
+
+SRC.GO 5394,938,20
+
+UID.09903F.NEWNPC <VAR.MID1>
+UID.09903F.ACT.EVENTS +e_epreuve_monstre_mort_d7
+UID.09903F.ACT.NEWITEM m_effaceur_monstre_rebour
+UID.09903F.ACT.ACT.CONT=<UID.09903F.ACT.UID>
+UID.09903F.ACT.ACT.TIMER=300
+UID.09903F.ACT.P=5395,999,5
+UID.09903F.ACT.UPDATE
+
+UID.09903F.NEWNPC <VAR.MID2>
+UID.09903F.ACT.EVENTS +e_epreuve_monstre_mort_d7
+UID.09903F.ACT.NEWITEM m_effaceur_monstre_rebour
+UID.09903F.ACT.ACT.CONT=<UID.09903F.ACT.UID>
+UID.09903F.ACT.ACT.TIMER=300
+UID.09903F.ACT.P=5403,991,5
+UID.09903F.ACT.UPDATE
+
+UID.09903F.NEWNPC <VAR.MID3>
+UID.09903F.ACT.EVENTS +e_epreuve_monstre_mort_d7
+UID.09903F.ACT.NEWITEM m_effaceur_monstre_rebour
+UID.09903F.ACT.ACT.CONT=<UID.09903F.ACT.UID>
+UID.09903F.ACT.ACT.TIMER=300
+UID.09903F.ACT.P=5397,978,5
+UID.09903F.ACT.UPDATE
+
+UID.09903F.NEWNPC <VAR.MID4>
+UID.09903F.ACT.EVENTS +e_epreuve_monstre_mort_d7
+UID.09903F.ACT.NEWITEM m_effaceur_monstre_rebour
+UID.09903F.ACT.ACT.CONT=<UID.09903F.ACT.UID>
+UID.09903F.ACT.ACT.TIMER=300
+UID.09903F.ACT.P=5390,964,15
+UID.09903F.ACT.UPDATE
+
+UID.09903F.NEWNPC <VAR.MID5>
+UID.09903F.ACT.EVENTS +e_epreuve_monstre_mort_d7
+UID.09903F.ACT.NEWITEM m_effaceur_monstre_rebour
+UID.09903F.ACT.ACT.CONT=<UID.09903F.ACT.UID>
+UID.09903F.ACT.ACT.TIMER=300
+UID.09903F.ACT.P=5387,954,15
+UID.09903F.ACT.UPDATE
+RETURN 1
+
+ON=@TIMER
+TIMER=-1
+ATTR=08010
+RETURN 1
+
+
+//LEVIER QUI DEVERROUILLE UN COFFRE VERROUILLE
+[ITEMDEF i_levier_coffre_d7_final_prison]
+NAME=Levier
+ID=01095
+TYPE=t_normal
+
+ON=@Create
+ATTR=08010
+COLOR=0586
+TIMER=-1
+
+ON=@DCLICK
+IF (STRCMPI("<LINK>","04fffffff"))
+	IF <DISPID> == 01095
+		DISPID=01094
+		UPDATE
+		TIMER=10
+		LINK.TAG.BARRE = 0
+	ELSE
+		EMOTE etre coince
+	ENDIF
+ELSEIF <SRC.ACCOUNT.PLEVEL> > 6
+	IF (!STRCMPI("<LINK>","04fffffff"))
+		SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le coffre a lier
+		TARGET
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Levier mal configure!
+ENDIF
+RETURN 1
+
+ON=@TIMER
+DISPID = 01095
+UPDATE
+TIMER=-1
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TYPE> == t_container_locked
+	LINK=<SRC.TARG.UID>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Coffre lie
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Ceci n'est pas un container verrouille
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Ceci n'est pas un container verrouille
+RETURN 1

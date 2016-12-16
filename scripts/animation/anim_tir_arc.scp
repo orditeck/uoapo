@@ -1,0 +1,239 @@
+[ITEMDEF m_pause_par_coupe]
+NAME=pause par coupe
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=1
+
+ON=@TIMER
+CONT.NEWITEM i_log
+CONT.ACT.AMOUNT=3
+CONT.ACT.BOUNCE
+REMOVE
+RETURN 1
+
+[ITEMDEF i_arbre_dense]
+NAME=arbre dense
+ID=i_tree_4
+TYPE=t_normal
+
+ON=@DCLICK
+IF <SRC.FINDLAYER.1.ITEMID> == i_coupeuse_de_bois_dense
+	IF <SRC.FINDID.m_pause_par_coupe>
+		RETURN 1
+	ELSE
+		SRC.ANIM 20
+		SRC.NEWITEM m_pause_par_coupe
+		SRC.ACT.BOUNCE
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez être équipé d'une coupeuse de bois dense pour tailler l'arbre
+ENDIF
+RETURN 1
+
+
+[CHARDEF C_NPC_ANIM_ARC]
+NAME=Robin
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=job_npc_anim_arc
+
+ON=@GETHIT
+HITS=1000
+RETURN 1
+
+ON=@SPELLCAST
+HITS=1000
+RETURN 1
+
+ON=@Create
+TITLE=le tireur d'elite
+COLOR=colors_skin
+STR=1000
+DEX=1
+INT=1
+INVUL
+ALLSKILLS=1
+
+NPC=BRAIN_VENDOR
+
+ON=@NPCRestock
+ITEMNEWBIE=i_armure_en_cuir
+COLOR=0101
+NAME=Armure d'archer
+ITEMNEWBIE=i_jambieres_en_cuir
+COLOR=0101
+NAME=Jambieres d'archer
+ITEMNEWBIE=i_gants_en_cuir
+COLOR=0101
+NAME=Gants d'archer
+ITEMNEWBIE=i_arc_en_frene
+COLOR=0101
+NAME=Arc de Robin
+ITEMNEWBIE=i_petites_bottes
+COLOR=0101
+NAME=Bottes d'archer
+
+ON=@NPCHearUnknown
+SAY Si vous voulez entrer, dites le moi!
+
+CATEGORY=PNJ
+SUBSECTION=anim_combat
+DESCRIPTION=Healer
+
+[SPEECH job_npc_anim_arc]
+ON=entrer
+SAY Le contenu de votre sac sera supprime a l'entree, si vous desirez entrer, dites moi que vous voulez participer
+
+ON=je veux participer
+IF <TAG.SET> == 1
+	IF ( (<EVAL 0<SRC.TAG.LEVEL>> == 1) && (<EVAL 0<SRC.TAG.RENAISSANCE>> == 0) )
+		IF <SRC.FINDLAYER.25>
+			SRC.FINDLAYER.25.REMOVE
+			SRC.UPDATE
+		ENDIF
+		IF <SRC.FINDID.i_rune_night_sight>
+			SRC.FINDID.i_rune_night_sight.REMOVE
+		ENDIF
+		IF <SRC.NIGHTSIGHT>==0
+			SRC.NIGHTSIGHT
+		ENDIF
+		debogage
+		SRC.TAG.anti_mark_recall=1
+		SRC.FINDLAYER.21.REMOVE
+	
+		SRC.NEWITEM i_epee_courte_rouillee
+		SRC.ACT.BOUNCE
+	
+		SRC.NEWITEM i_dague_rouillee
+		SRC.ACT.BOUNCE
+	
+		SRC.NEWITEM i_arc_en_frene
+		SRC.ACT.BOUNCE
+
+		SRC.NEWITEM i_tunique
+		SRC.ACT.BOUNCE
+
+		SRC.NEWITEM i_grandes_bottes
+		SRC.ACT.BOUNCE
+
+		SRC.P 5390,2357,7
+		SRC.UPDATE
+
+		SRC.TAG.POINTS_TRAINING_ARC
+	ELSE
+		SAY Vous devez etre niveau 1 humain pour participer
+	ENDIF
+ELSE
+	SAY Un GM doit activer l'anim!
+ENDIF
+
+ON=set
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	IF <TAG.SET> == 1
+		TAG.SET = 0
+		SAY Fermeture des portes
+	ELSE
+		TAG.SET = 1
+		SAY Ouverture des portes
+	ENDIF
+ELSE
+	SAY set? set?
+ENDIF
+
+
+[ITEMDEF i_sortie_anim_arc]
+NAME=Sortie de l'anim
+ID=0dda
+
+ON=@CREATE
+COLOR=043
+
+//SEULS LES JOUEURS PEUVENT SORTIR
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.NIGHTSIGHT=0
+	SRC.TAG.anti_mark_recall=0
+	SRC.P minoc
+	SRC.UPDATE
+ELSE
+	RETURN 1
+ENDIF
+
+
+[ITEMDEF i_cible_archer_nord]
+ID=i_archery_butte
+TYPE=t_normal
+NAME=cible archer nord
+WEIGHT=4
+
+ON=@DCLICK
+IF ( <SRC.FINDLAYER.2.TYPE> == t_weapon_bow )
+	IF ( (<CanSeeLOS>) && (<DISTANCE> > 5) )
+		IF <DISTANCE> < 7
+			IF <SRC.FINDID.i_arrow>
+				IF <SRC.DIR>==6
+					IF <SRC.FINDID.m_score_anim_fleches>
+						SRC.SYSMESSAGEUA 0481 1 1 0 Attendez avant de tirer de nouveau
+					ELSE
+						SRC.LANCER_FLECHE_ANIM
+					ENDIF
+				ELSE
+					SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez etre devant la cible
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes trop loin de la cible
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez vous eloigner de la cible
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne portez pas un arme de jet
+ENDIF
+RETURN 1
+
+CATEGORY=Items by Professions
+SUBSECTION=Archers/Bowyers
+DESCRIPTION=cible archer nord
+
+[ITEMDEF m_score_anim_fleches]
+ID=i_memory
+TYPE=t_eq_script
+NAME=score anim fleches
+
+ON=@CREATE
+TIMER=2
+
+ON=@TIMER
+VAR.CIBLE_A = <EVAL 500 - <CONT.TAG.POINTS_TRAINING_ARC>>
+VAR.CIBLE_B = <EVAL 250 + <VAR.CIBLE_A> - (<CONT.TAG.POINTS_TRAINING_ARC> / 2 )>
+VAR.CIBLE_C = <EVAL 250 + <VAR.CIBLE_B>>
+VAR.CIBLE_D = <EVAL 100 + <VAR.CIBLE_C> + <CONT.TAG.POINTS_TRAINING_ARC>>
+VAR.CIBLE_E = <EVAL 5 + <VAR.CIBLE_D> + (2 * <CONT.TAG.POINTS_TRAINING_ARC>)>
+IF (<EVAL rand(<VAR.CIBLE_E>)> < <EVAL <VAR.CIBLE_A>>)
+	CONT.EMOTE rater completement la cible
+ELSEIF (<EVAL rand(<VAR.CIBLE_E>)> < <EVAL <VAR.CIBLE_B>>)
+	CONT.EMOTE toucher le bord de la cible
+ELSEIF (<EVAL rand(<VAR.CIBLE_E>)> < <EVAL <VAR.CIBLE_C>>)
+	CONT.EMOTE toucher la cible pres de l'exterieur
+ELSEIF (<EVAL rand(<VAR.CIBLE_E>)> < <EVAL <VAR.CIBLE_D>>)
+	CONT.EMOTE toucher la cible pres du centre
+ELSE
+	CONT.EMOTE toucher la cible en plein centre!
+ENDIF
+REMOVE
+RETURN 1
+
+[FUNCTION LANCER_FLECHE_ANIM]
+ANIM 18
+CONSUME i_arrow
+IF <EVAL <TAG.POINTS_TRAINING_ARC>> >= 500
+	SYSMESSAGEUA 0481 1 1 0 Vous etes deja entraine au maximum!
+ELSE
+	TAG.POINTS_TRAINING_ARC=<EVAL 0<TAG.POINTS_TRAINING_ARC> + 1>
+ENDIF
+NEWITEM m_score_anim_fleches
+ACT.EQUIP

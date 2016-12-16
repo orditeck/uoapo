@@ -1,0 +1,1339 @@
+[CHARDEF 0401]
+DEFNAME=C_H_VENDOR
+NAME=#NAMES_HUMANMALE Le Vendeur
+ID=C_MAN
+HIREDAYWAGE=50
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_human_prime
+TSPEECH=spk_shopkeep
+TSPEECH=spk_needs
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Vendor
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+FLAGS=028000005
+NEED=i_gold
+
+STR={66 80}
+DEX=90
+INT={66 80}
+
+FENCING={15.0 38.0}
+PARRYING={45.0 68.0}
+SWORDSMANSHIP={15.0 38.0}
+WRESTLING={15.0 38.0}
+MACEFIGHTING={15.0 38.0}
+MAGICRESISTANCE={45.0 68.0}
+TACTICS={45.0 68.0}
+
+ITEMNEWBIE=i_lantern
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ITEMNEWBIE=i_shirt_plain
+COLOR=colors_all
+ITEMNEWBIE=random_pants
+COLOR=colors_all
+ITEMNEWBIE=random_shoes
+COLOR=colors_neutral
+
+[CHARDEF 0402]
+DEFNAME=C_H_BARBER
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+AVERSIONS=t_TRAP,t_eerie_stuff
+DESIRES=i_gold,e_notoriety
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Barber
+
+ON=@Create
+TITLE=Le Barbier
+NPC=brain_vendor
+COLOR=colors_skin
+NEED=i_gold
+
+STR={66 80}
+DEX=90
+INT={66 80}
+
+FENCING={15.0 38.0}
+PARRYING={45.0 68.0}
+SWORDSMANSHIP={15.0 38.0}
+WRESTLING={15.0 38.0}
+MACEFIGHTING={15.0 38.0}
+MAGICRESISTANCE={45.0 68.0}
+TACTICS={45.0 68.0}
+
+ITEMNEWBIE=i_lantern
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_pants
+COLOR=colors_all
+ITEM=random_shoes
+COLOR=colors_neutral
+
+SELL=i_hair_SHORT,10
+ATTR=attr_decay
+SELL=i_hair_LONG,10
+ATTR=attr_decay
+SELL=i_hair_PONYTAIL,10
+ATTR=attr_decay
+SELL=i_hair_MOHAWK,10
+ATTR=attr_decay
+SELL=i_hair_PAGEBOY,10
+ATTR=attr_decay
+SELL=i_hair_BUNS,10
+ATTR=attr_decay
+SELL=i_hair_AFRO,10
+ATTR=attr_decay
+SELL=i_hair_RECEDING,10
+ATTR=attr_decay
+SELL=i_hair_KRISNA,10 //
+ATTR=attr_decay
+SELL=i_beard_SHORT_MED,10 //
+ATTR=attr_decay
+SELL=i_beard_LONG_MED,10 //
+ATTR=attr_decay
+SELL=i_beard_VANDYKE,10 //
+ATTR=attr_decay
+SELL=i_beard_LONG,10 //
+ATTR=attr_decay
+SELL=i_beard_SHORT,10 //
+ATTR=attr_decay
+SELL=i_beard_GOATEE,10 //
+ATTR=attr_decay
+SELL=i_beard_MUSTACHE,10 //
+ATTR=attr_decay
+SELL=i_bottle_hair_dye,10
+
+[CHARDEF C_H_VENDOR_F]
+NAME=#NAMES_HUMANFEMALE La Vendeuse
+ID=C_WOMAN
+CAN=0
+HIREDAYWAGE=50
+FOODTYPE=
+
+TSPEECH=spk_human_prime
+TSPEECH=spk_shopkeep
+TSPEECH=spk_needs
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+FLAGS=028000001
+NEED=i_gold
+
+STR={66 80}
+DEX=90
+INT={66 80}
+FENCING={15.0 38.0}
+PARRYING={45.0 68.0}
+SWORDSMANSHIP={15.0 38.0}
+WRESTLING={15.0 38.0}
+MACEFIGHTING={15.0 38.0}
+MAGICRESISTANCE={45.0 68.0}
+TACTICS={45.0 68.0}
+
+ITEMNEWBIE=i_lantern
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_skirt
+COLOR=colors_all
+ITEM=random_shoes
+COLOR=colors_neutral
+ITEM=random_coin_purse
+
+CATEGORY=Provisions - Deeds
+SUBSECTION=Vendor Deeds
+DESCRIPTION=Player Vendor Female
+
+[CHARDEF 0438]
+//Male GUARD
+DEFNAME=C_H_GUARD
+NAME=#NAMES_HUMANMALE Le Garde
+ID=C_MAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+//AVERSIONS=ANYONE WITH NEGATIVITY (SHOWS AGGRESION)
+
+TSPEECH=spk_human_prime
+TSPEECH=jobGuard
+TSPEECH=spk_needs
+TSPEECH=spk_rehello
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+CATEGORY=Civilized
+SUBSECTION=Guards & Law
+DESCRIPTION=Guard (male)
+
+ON=@Create
+NPC=brain_guard
+//ALIGNMENT=GOOD
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=i_lantern
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_shirt_plain
+COLOR=colors_all
+ITEMNEWBIE=random_pants
+COLOR=colors_all
+ITEMNEWBIE=i_platemail_chest
+ITEMNEWBIE=i_platemail_leggings
+ITEMNEWBIE=i_platemail_arms
+ITEMNEWBIE=random_over_armor
+COLOR=colors_all
+ITEMNEWBIE=i_halberd
+
+ON=@NPCRefuseItem
+    SAY I cannot be bribed. be gone.
+    return 1
+
+[CHARDEF 0439]
+//Female GUARD
+DEFNAME=c_h_guard_f
+NAME=#NAMES_HUMANFEMALE La Garde
+ID=C_WOMAN
+DAM=15,20
+ARMOR=20
+DESIRES=i_gold
+SHELTER=r_civilization,r_GUARDPOST
+//AVERSIONS=ANYONE WITH NEGATIVITY (SHOWS AGGRESION)
+
+TSPEECH=spk_human_prime
+TSPEECH=jobGuard
+TSPEECH=spk_needs
+TSPEECH=spk_rehello
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+CATEGORY=Civilized
+SUBSECTION=Guards & Law
+DESCRIPTION=Guard (female)
+
+ON=@Create
+NPC=brain_guard
+//ALIGNMENT=GOOD
+COLOR=colors_skin
+STR={151 165}
+DEX={151 165}
+INT={151 165}
+
+DETECTINGHIDDEN={90.0 100.0}
+FORENSICS={90.0 100.0}
+FENCING={90.0 100.0}
+PARRYING={90.0 100.0}
+SWORDSMANSHIP={90.0 100.0}
+WRESTLING={90.0 100.0}
+MACEFIGHTING={90.0 100.0}
+MAGICRESISTANCE={90.0 100.0}
+TACTICS={90.0 100.0}
+
+ITEMNEWBIE=i_lantern
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=i_shirt_plain
+COLOR=colors_all
+ITEMNEWBIE=random_pants
+COLOR=colors_all
+ITEMNEWBIE=i_platemail_chest
+ITEMNEWBIE=i_platemail_leggings
+ITEMNEWBIE=i_platemail_arms
+ITEMNEWBIE=random_over_armor
+COLOR=colors_all
+ITEMNEWBIE=i_halberd
+
+ON=@NPCRefuseItem
+SAY I cannot be bribed. be gone.
+return 1
+
+[CHARDEF 0482]
+DEFNAME=C_H_TANNER
+NAME=#NAMES_HUMANMALE Le Tanneur
+ID=C_MAN
+DESIRES=i_gold,e_notoriety,t_leather
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_human_prime
+TSPEECH=jobtanner
+TSPEECH=spk_shopkeep
+TSPEECH=spk_needs
+TSPEECH=spk_rehello
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR={51 65}
+DEX={61 75}
+INT={41 55}
+
+TAILORING={35.0 55.0}
+SWORDSMANSHIP={15.0 38.0}
+WRESTLING={15.0 38.0}
+TACTICS={35.0 58.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_plain
+COLOR=colors_brown
+ITEM=random_pants
+COLOR=colors_brown
+ITEM=random_boots
+ITEM=i_apron_half
+COLOR=colors_brown
+ITEM=random_coin_purse
+
+SELL=VENDOR_S_TANNER
+BUY=VENDOR_B_TANNER
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Tanner (male)
+
+[CHARDEF 0483]
+DEFNAME=C_H_TANNER_F
+NAME=#NAMES_HUMANFEMALE La Tanneuse
+ID=C_WOMAN
+DESIRES=i_gold,e_notoriety,t_leather
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_human_prime
+TSPEECH=jobtanner
+TSPEECH=spk_shopkeep
+TSPEECH=spk_needs
+TSPEECH=spk_rehello
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR={51 65}
+DEX={61 75}
+INT={41 55}
+
+TAILORING={35.0 55.0}
+SWORDSMANSHIP={15.0 38.0}
+WRESTLING={15.0 38.0}
+TACTICS={35.0 58.0}
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_plain
+COLOR=colors_brown
+ITEM=random_skirt
+COLOR=colors_brown
+ITEM=random_boots
+ITEM=i_apron_half
+COLOR=colors_brown
+ITEM=random_coin_purse
+
+SELL=VENDOR_S_TANNER
+BUY=VENDOR_B_TANNER
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Tanner (female)
+
+[CHARDEF 0484]
+DEFNAME=C_H_VEGISELLER
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+TITLE=Le Vendeur de Legumes
+NPC=brain_vendor
+COLOR=colors_skin
+STR=2000
+DEX=0
+INT=0
+INVUL
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=i_pants_short
+COLOR=colors_all
+ITEM=i_hat_wide_brim
+COLOR=colors_neutral
+ITEM=random_boots
+
+SELL=VENDOR_S_VEGSELLER
+BUY=VENDOR_B_VEGSELLER
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Vegetable Seller (male)
+
+[CHARDEF 0485]
+DEFNAME=C_H_VEGISELLER_F
+NAME=#NAMES_HUMANFEMALE La Vendeuse de Legumes
+ID=C_WOMAN
+DESIRES=i_gold,e_notoriety
+
+TSPEECH=spk_human_prime
+TSPEECH=jobveggie
+TSPEECH=spk_shopkeep
+TSPEECH=spk_needs
+TSPEECH=spk_rehello
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=2000
+DEX=0
+INT=0
+INVUL
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_pants
+COLOR=colors_all
+ITEM=i_hat_wide_brim
+COLOR=colors_neutral
+ITEM=random_boots
+ITEM=random_coin_purse
+
+SELL=VENDOR_S_VEGSELLER
+BUY=VENDOR_B_VEGSELLER
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Vegetable Seller (female)
+
+[TEMPLATE 102118]
+DEFNAME=VENDOR_S_VEGSELLER
+CATEGORY=Vendor Templates
+SUBSECTION=Sell Templates
+DESCRIPTION=Vegetable Seller
+SELL=i_EGGS_FRESH,{6 26}
+SELL=i_pitcher_milk,{6 26}
+SELL=i_fruit_lettuce,{6 26}
+SELL=i_fruit_cabbage,{6 26}
+SELL=i_fruit_cantelope,{6 26}
+SELL=i_fruit_carrot,{6 26}
+SELL=i_fruit_honeydewmelon,{6 26}
+SELL=i_fruit_squash,{6 26}
+SELL=i_fruit_onion,{6 26}
+SELL=i_fruit_pumpkin,{6 26}
+SELL=i_fruit_gourd1,{6 26}
+SELL=i_fruit_turnip,{6 26}
+SELL=i_fruit_watermelon,{6 26}
+SELL=i_fruit_corn,{6 26}
+SELL=i_fruit_peach,{6 26}
+SELL=i_fruit_pear,{6 26}
+SELL=i_fruit_lemon,{6 26}
+SELL=i_fruit_lime,{6 26}
+SELL=i_fruit_grapes,{6 26}
+SELL=i_fruit_apple,{6 26}
+SELL=i_hay_sheaf,{6 26}
+
+[CHARDEF 0490]
+DEFNAME=C_H_ALCHEMIST
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+
+DESIRES=i_gold,e_notoriety,t_magic
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_human_prime
+TSPEECH=jobalchemist
+TSPEECH=spk_shopkeep
+TSPEECH=spk_needs
+TSPEECH=spk_rehello
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR={36 50}
+DEX={36 50}
+INT={51 65}
+
+ALCHEMY={55.0 78.0}
+TasteID={55.0 78.0}
+WRESTLING={15.0 38.0}
+MAGICRESISTANCE={25.0 48.0}
+TACTICS={15.0 38.0}
+POISONING={35.0 55.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+ITEMNEWBIE=i_robe
+COLOR=04b6
+ITEMNEWBIE=i_sandals
+
+ON=@NPCRestock
+SELL=VENDOR_S_ALCHEMIST
+BUY=VENDOR_B_ALCHEMIST
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Alchemist (male)
+
+[CHARDEF 0491]
+DEFNAME=C_H_ALCHEMIST_F
+NAME=#NAMES_HUMANFEMALE
+ID=C_WOMAN
+DESIRES=i_gold,e_notoriety,t_magic
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_human_prime
+TSPEECH=jobalchemist
+TSPEECH=spk_shopkeep
+TSPEECH=spk_needs
+TSPEECH=spk_rehello
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR={36 50}
+DEX={36 50}
+INT={51 65}
+
+ALCHEMY={55.0 78.0}
+TasteID={55.0 78.0}
+WRESTLING={15.0 38.0}
+MAGICRESISTANCE={25.0 48.0}
+TACTICS={15.0 38.0}
+POISONING={35.0 55.0}
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_robe
+COLOR=04b6
+ITEMNEWBIE=i_sandals
+
+ON=@NPCRestock
+SELL=VENDOR_S_ALCHEMIST
+BUY=VENDOR_B_ALCHEMIST
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Alchemist (female)
+
+[CHARDEF 0506]
+DEFNAME=C_H_TAILOR
+NAME=#NAMES_HUMANMALE Le Tailleur
+ID=C_MAN
+DESIRES=i_gold,e_notoriety,i_cloth
+
+TSPEECH=spk_human_prime
+TSPEECH=jobTailor
+TSPEECH=spk_shopkeep
+TSPEECH=spk_rehello
+TSPEECH=spk_needs
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_CovInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR={36 50}
+DEX={46 60}
+INT={41 55}
+
+TAILORING={50.0 70.0}
+WRESTLING={15.0 35.0}
+TACTICS={15.0 35.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_pants
+COLOR=colors_all
+ITEM=random_shoes
+COLOR=colors_neutral
+ITEM=random_coin_purse
+
+SELL=VENDOR_S_TAILOR
+BUY=VENDOR_B_TAILOR
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Tailor (male)
+
+[CHARDEF 0507]
+DEFNAME=C_H_TAILOR_F
+NAME=#NAMES_HUMANFEMALE La Tailleuse
+ID=C_WOMAN
+DESIRES=i_gold,e_notoriety,i_cloth
+
+TSPEECH=spk_human_prime
+TSPEECH=jobTailor
+TSPEECH=spk_shopkeep
+TSPEECH=spk_needs
+TSPEECH=spk_rehello
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR={36 50}
+DEX={46 60}
+INT={41 55}
+
+TAILORING={50.0 70.0}
+WRESTLING={15.0 35.0}
+TACTICS={15.0 35.0}
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_skirt
+COLOR=colors_all
+ITEM=random_shoes
+COLOR=colors_neutral
+ITEM=random_coin_purse
+
+SELL=VENDOR_S_TAILOR
+BUY=VENDOR_B_TAILOR
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Tailor (female)
+
+[CHARDEF 0538]
+DEFNAME=C_H_TAVERNKEEPER
+NAME=#NAMES_HUMANMALE Le Tavernier
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR={61 75}
+DEX={66 80}
+INT={51 68}
+
+FENCING={15.0 38.0}
+PARRYING={15.0 38.0}
+SWORDSMANSHIP={15.0 38.0}
+WRESTLING={15.0 38.0}
+MACEFIGHTING={15.0 38.0}
+TACTICS={15.0 38.0}
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_pants
+COLOR=colors_all
+ITEM=random_shoes
+COLOR=colors_neutral
+ITEM=i_apron_half
+
+SELL=VENDOR_S_TAVERNKEEPER
+BUY=VENDOR_B_TAVERNKEEPER
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Tavernkeeper (male)
+
+[CHARDEF 0539]
+DEFNAME=C_H_TAVERNKEEPER_F
+NAME=#NAMES_HUMANFEMALE La Taverniere
+ID=C_WOMAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR={61 75}
+DEX={66 80}
+INT={51 68}
+
+FENCING={15.0 38.0}
+PARRYING={15.0 38.0}
+SWORDSMANSHIP={15.0 38.0}
+WRESTLING={15.0 38.0}
+MACEFIGHTING={15.0 38.0}
+TACTICS={15.0 38.0}
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_skirt
+COLOR=colors_all
+ITEM=random_shoes
+COLOR=colors_neutral
+ITEM=i_apron_half
+
+SELL=VENDOR_S_TAVERNKEEPER
+BUY=VENDOR_B_TAVERNKEEPER
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Tavernkeeper (female)
+
+[CHARDEF 0548]
+DEFNAME=C_H_ANIMALTRAINER
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=VENDEUR_ANIM_COMBAT
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+TITLE=Le Dresseur d'Animaux
+COLOR=colors_skin
+STR=2000
+DEX=0
+INT=0
+INVUL
+NPC=BRAIN_ANIMAL_TRAINER
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_pants
+COLOR=colors_all
+ITEM=random_boots
+ITEM=i_staff_quarter
+
+SELL=VENDOR_S_TRAINER
+BUY=VENDOR_B_TRAINER
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Animal Trainer (male)
+
+[CHARDEF 0549]
+DEFNAME=C_H_ANIMALTRAINER_F
+NAME=#NAMES_HUMANFEMALE La Dresseuse d'Animaux
+ID=C_WOMAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_human_prime
+TSPEECH=jobAnimal
+TSPEECH=spk_shopkeep
+TSPEECH=spk_needs
+TSPEECH=spk_rehello
+TSPEECH=spk_human_default
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+COLOR=colors_skin
+STR=2000
+DEX=0
+INT=0
+INVUL
+NPC=BRAIN_ANIMAL_TRAINER
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEM=RANDOM_LIGHT
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_skirt
+COLOR=colors_all
+ITEM=random_boots
+ITEM=i_staff_quarter
+ITEM=random_coin_purse
+
+SELL=VENDOR_S_TRAINER
+BUY=VENDOR_B_TRAINER
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Animal Trainer (female)
+
+
+[CHARDEF 0538]
+DEFNAME=C_H_FLEURISTE
+NAME=#NAMES_HUMANMALE Le Fleuriste
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_shopkeep
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=1000
+DEX=1
+INT=1
+INVUL
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+ITEM=i_cleaver_meat
+COLOR=0afb
+NAME=Secateur
+ITEM=i_maillot
+COLOR=0abe
+ITEM=i_ringmail_leggings_decoration
+COLOR=0abe
+ITEM=i_grandes_bottes
+
+SELL=VENDOR_S_FLEURISTE
+
+ON=@GETHIT
+HITS=1000
+RETURN 1
+
+ON=@SPELLEFFECT
+HITS=1000
+RETURN 1
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Fleuriste (male)
+
+[CHARDEF 0538]
+DEFNAME=C_H_FLEURISTE_F
+NAME=#NAMES_HUMANFEMALE La Fleuriste
+ID=C_WOMAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_shopkeep
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=1000
+DEX=1
+INT=1
+INVUL
+
+ITEMNEWBIE=random_female_hair
+COLOR=colors_hair
+
+ITEM=i_maillot
+COLOR=0abe
+ITEM=i_armor_female_skirt
+COLOR=0abe
+NAME=jupette
+ITEM=i_sandales
+ITEM=i_cleaver_meat
+COLOR=0afb
+NAME=Secateur
+
+SELL=VENDOR_S_FLEURISTE
+
+ON=@GETHIT
+HITS=1000
+RETURN 1
+
+ON=@SPELLEFFECT
+HITS=1000
+RETURN 1
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=Fleuriste (female)
+
+///////////////////////////////////////////////////Ordi
+[CHARDEF 0540]
+DEFNAME=C_H_TOOLVENDOR
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+AVERSIONS=t_TRAP,t_eerie_stuff
+DESIRES=i_gold,e_notoriety
+
+TSPEECH=kl_vendeur_outils
+
+TEVENTS=e_Human_HearUnk
+TEVENTS=e_Human_ConvInit
+TEVENTS=e_Human_Needs
+TEVENTS=e_Human_Greet
+TEVENTS=e_Human_Space
+TEVENTS=e_Human_Refuse
+TEVENTS=e_Human_Environ
+
+CATEGORY=Civilized
+SUBSECTION=Tradesmen
+DESCRIPTION=toolvendor
+
+ON=@Create
+TITLE=Le Vendeur d'outils
+NPC=brain_vendor
+COLOR=colors_skin
+NEED=i_gold
+TAG.CERCLE=0
+TAG.PRIX=0
+TAG.AUTORISE=0
+
+STR={66 80}
+DEX=90
+INT={66 80}
+
+FENCING={15.0 38.0}
+PARRYING={45.0 68.0}
+SWORDSMANSHIP={15.0 38.0}
+WRESTLING={15.0 38.0}
+MACEFIGHTING={15.0 38.0}
+MAGICRESISTANCE={45.0 68.0}
+TACTICS={45.0 68.0}
+
+ITEMNEWBIE=i_lantern
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEM=i_shirt_plain
+COLOR=colors_all
+ITEM=random_pants
+COLOR=colors_all
+ITEM=random_shoes
+COLOR=colors_neutral
+
+///////////MAGIE
+SELL=i_livre_de_sorts,100
+///////////OUTIL
+SELL=i_kit_de_couture,100
+ATTR=attr_decay
+SELL=i_pilon,100
+ATTR=attr_decay
+SELL=i_outils_de_bricoleur,100
+ATTR=attr_decay
+SELL=i_pioche,100
+ATTR=attr_decay
+SELL=i_rabot_a_replanir,100
+ATTR=attr_decay
+SELL=i_marteau_de_forgeron,100
+ATTR=attr_decay
+
+[SPEECH kl_vendeur_outils]
+
+ON=*sell*
+ON=*vendre*
+SAY L'argent entre dans mes poches, mais n'en sort pas!
+
+ON=*buy*
+ON=*achete*
+DORAND 3
+	SAY Voici ce que j'ai a vous vendre
+	SAY Voila ce dont je possede en stock
+	SAY Voici la marchandise dont je dispose
+ENDDO
+BUY
+
+ON=*bonjour*
+DORAND 2
+	SAY Salutations !
+	SAY Bonjour !
+ENDDO
+
+ON=Bye
+ON=*revoir*
+DORAND 2
+	SAY A bientot !
+	SAY Au revoir !
+ENDDO
+
+ON=*cercle*
+SAY Dites-moi le cercle que vous souhaitez acheter et je verrai si j'ai ca en stock! 
+
+ON=*1*
+TAG.CERCLE=1
+TAG.MOREREQUIS=0ff
+CALCUL_VENDEUR_OUTIL
+
+ON=*2*
+TAG.CERCLE=2
+TAG.MOREREQUIS=0ffff
+CALCUL_VENDEUR_OUTIL
+
+ON=*3*
+TAG.CERCLE=3
+TAG.MOREREQUIS=0ffffff
+CALCUL_VENDEUR_OUTIL
+
+ON=*4*
+TAG.CERCLE=4
+TAG.MOREREQUIS=0fffffff
+CALCUL_VENDEUR_OUTIL
+
+ON=*5*
+TAG.CERCLE=5
+TAG.MOREREQUIS=0ff
+CALCUL_VENDEUR_OUTIL
+
+ON=*6*
+TAG.CERCLE=6
+TAG.MOREREQUIS=0ffff
+CALCUL_VENDEUR_OUTIL
+
+ON=*7*
+TAG.CERCLE=7
+TAG.MOREREQUIS=0ffffff
+CALCUL_VENDEUR_OUTIL
+
+ON=*8*
+TAG.CERCLE=8
+TAG.MOREREQUIS=0fffffff
+CALCUL_VENDEUR_OUTIL
+
+ON=*oui*
+IF (<EVAL <TAG.AUTORISE>> == 1)
+
+	TAG.LECERCLE=<TAG.CERCLE>
+	TAG.LEPRIX=<TAG.PRIX>
+	TAG.CERCLE=0
+	TAG.PRIX=0
+	TAG.AUTORISE=0
+
+	IF ( !<SRC.FINDID.i_livre_de_sorts> )
+		SAY Je suis tente de prendre vos pieces d'or, mais vous n'avez aucun livre de sortilege sur vous... 
+		RETURN 1
+	ELSE
+	    SRC.PAYUP <EVAL <TAG.LEPRIX>>
+	    IF ( !<VAR.ENOUGH> ) 
+	        SAY Vous ne possedez pas <EVAL <TAG.LEPRIX>> pieces d'or ...
+	        RETURN 1
+	    ENDIF
+
+	    IF ( <EVAL <TAG.LECERCLE>> == 1 )
+	    	SRC.FINDID.i_livre_de_sorts.MORE1 = 0ff
+	    ENDIF 
+	    IF ( <EVAL <TAG.LECERCLE>> == 2 )
+	    	SRC.FINDID.i_livre_de_sorts.MORE1 = 0ffff
+	    ENDIF
+	    IF ( <EVAL <TAG.LECERCLE>> == 3 )
+	    	SRC.FINDID.i_livre_de_sorts.MORE1 = 0ffffff
+	    ENDIF
+	    IF ( <EVAL <TAG.LECERCLE>> == 4 )
+	    	SRC.FINDID.i_livre_de_sorts.MORE1 = 0ffffffff
+	    ENDIF
+	    IF ( <EVAL <TAG.LECERCLE>> == 5 )
+	    	SRC.FINDID.i_livre_de_sorts.MORE2 = 0ff
+	    ENDIF
+	    IF ( <EVAL <TAG.LECERCLE>> == 6 )
+	    	SRC.FINDID.i_livre_de_sorts.MORE2 = 0ffff
+	    ENDIF
+	    IF ( <EVAL <TAG.LECERCLE>> == 7 )
+	    	SRC.FINDID.i_livre_de_sorts.MORE2 = 0ffffff
+	    ENDIF
+	    IF ( <EVAL <TAG.LECERCLE>> == 8 )
+	    	SRC.FINDID.i_livre_de_sorts.MORE2 = 0ffffffff
+	    ENDIF
+
+	    SAY Voici pour vous <SRC.NAME>, et merci pour ces <EVAL <TAG.LEPRIX>> pieces d'or
+	ENDIF
+
+ELSE
+	SAY J'ignore quel cercle vous desirez obtenir!
+
+ON=*non*
+SAY Bon... faut dire que j'ai pas toute la journee!
+TAG.CERCLE=0
+TAG.PRIX=0
+TAG.AUTORISE=0
+
+[FUNCTION CALCUL_VENDEUR_OUTIL]
+TAG.PRIX=<EVAL <TAG.CERCLE> * <TAG.CERCLE> * 500>
+IF ( !<SRC.FINDID.i_livre_de_sorts> )
+	SAY Je suis tente de prendre vos pieces d'or, mais vous n'avez aucun livre de sortilege sur vous... 
+	RETURN 1
+ELSE
+	IF ( (<EVAL <TAG.CERCLE>> >= 1) && (<EVAL <TAG.CERCLE>> <= 4) )
+		VAR.MORE=<SRC.FINDID.i_livre_de_sorts.MORE1>
+	ELSE
+		VAR.MORE=<SRC.FINDID.i_livre_de_sorts.MORE2>
+	ENDIF
+	IF ( <EVAL <VAR.MORE>> == -1 )
+		VAR.MORE=0fffffff
+	ENDIF
+	IF ( (<EVAL <VAR.MORE>> >= <EVAL <TAG.MOREREQUIS>>) )
+		SAY Vous possedez deja le cercle <EVAL <TAG.CERCLE>>!
+		RETURN 1
+	ENDIF
+
+	SAY Desirez-vous acheter le cercle <EVAL <TAG.CERCLE>>? Il vous en coutera <EVAL <TAG.PRIX>> pieces d'or! Dite oui pour acheter le cercle <EVAL <TAG.CERCLE>>.
+	TAG.AUTORISE=1
+ENDIF

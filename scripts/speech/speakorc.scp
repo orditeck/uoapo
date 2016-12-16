@@ -1,0 +1,11 @@
+[SPEECH spk_orc]
+// Orc speech
+DEFAULT=Uhhh?
+ON=Bwuzargh
+	SAY=Gruu!
+
+ON=Hi
+ON=Greet
+ON=Hello
+ON=Hail
+	SAY=Uh!

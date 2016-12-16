@@ -1,0 +1,634 @@
+[SKILLMENU sm_tailor_leather]
+Objets de tissus ou de cuir
+
+ON=i_grandes_bottes Vetements de ville
+SKILLMENU=sm_vetement_ville_tailor
+
+ON=013d3 Armures de cuir
+SKILLMENU=sm_armures_de_cuir
+
+ON=i_gants_de_jouteur Gants de lutte
+SKILLMENU=sm_gants_tailor
+
+ON=i_bourse_de_cuir Autres
+SKILLMENU=sm_autres_tailor
+
+[SKILLMENU sm_armures_de_cuir]
+Armures de cuir
+
+ON=013d3 Armure en cuir de rat
+SKILLMENU=sm_armure_en_cuir_de_rat
+
+ON=013d3 Armure en cuir de gobelin
+SKILLMENU=sm_armure_en_cuir_de_gobelin
+
+ON=013d3 Armure en cuir de loup
+SKILLMENU=sm_armure_en_cuir_de_loup
+
+ON=013d3 Armure en cuir d'ophidien
+SKILLMENU=sm_armure_en_cuir_d_ophidien
+
+ON=013d3 Armure en cuir de tetrapode
+SKILLMENU=sm_armure_en_cuir_de_tetrapode
+
+ON=013d3 Armure en cuir d'harpie
+SKILLMENU=sm_armure_en_cuir_d_harpie
+
+ON=013d3 Armure en cuir de troll
+SKILLMENU=sm_armure_en_cuir_de_troll
+
+
+[SKILLMENU sm_tailor_cloth]
+Objets de tissus ou de cuir
+
+ON=i_robe_brodee Vetements de ville
+SKILLMENU=sm_vetement_ville_tailor
+
+ON=i_robe Vetements de combat
+SKILLMENU=sm_vetement_combat_tailor
+
+ON=i_short_du_debutant Shorts de lutte
+SKILLMENU=sm_shorts_lutte
+
+ON=i_robe Autres
+SKILLMENU=sm_autres_tailor
+
+
+//*******************************
+//*********VETEMENTS*************
+//*******************************
+
+
+[SKILLMENU sm_vetement_ville_tailor]
+Vetements de ville
+
+ON=i_capeline Chapeaux
+SKILLMENU=sm_chapeaux_tailor
+
+ON=i_maillot Maillots
+SKILLMENU=sm_maillot_tailor
+
+ON=i_short Pantalons et shorts
+SKILLMENU=sm_short_tailor
+
+ON=i_kilte Robes et jupes 
+SKILLMENU=sm_kilte_tailor
+
+ON=i_capee Cape et tabliers
+SKILLMENU=sm_cape_tailor
+
+ON=i_petites_bottes Chaussures et bottes
+SKILLMENU=sm_chaussures_tailor
+
+[SKILLMENU sm_vetement_combat_tailor]
+Vetements de combat
+
+ON=i_robe Robes magiques
+SKILLMENU=sm_robes_magiques
+
+ON=i_cape Capes magiques
+SKILLMENU=sm_capes_magiques
+
+
+[SKILLMENU sm_chapeaux_tailor]
+Chapeaux
+
+ON=i_capeline <name> (<resmake>)
+MAKEITEM=i_capeline
+
+ON=i_bicorne <name> (<resmake>)
+MAKEITEM=i_bicorne
+
+ON=i_casquette <name> (<resmake>)
+MAKEITEM=i_casquette
+
+ON=i_chapeau_de_pecheur <name> (<resmake>)
+MAKEITEM=i_chapeau_de_pecheur
+
+ON=i_chapeau_de_paille <name> (<resmake>)
+MAKEITEM=i_chapeau_de_paille
+
+ON=i_chapeau_d_enchanteur <name> (<resmake>)
+MAKEITEM=i_chapeau_d_enchanteur
+
+ON=i_beret <name> (<resmake>)
+MAKEITEM=i_beret
+
+ON=i_chapeau_a_plume <name> (<resmake>)
+MAKEITEM=i_chapeau_a_plume
+
+ON=i_tricorne <name> (<resmake>)
+MAKEITEM=i_tricorne
+
+ON=i_chapeau_de_fou <name> (<resmake>)
+MAKEITEM=i_chapeau_de_fou
+
+ON=i_petit_bandana <name> (<resmake>)
+MAKEITEM=i_petit_bandana
+
+ON=i_grand_bandana <name> (<resmake>)
+MAKEITEM=i_grand_bandana
+
+
+[SKILLMENU sm_maillot_tailor]
+Maillots
+
+ON=i_maillot <name> (<resmake>)
+MAKEITEM=i_maillot
+
+ON=i_t_shirt <name> (<resmake>)
+MAKEITEM=i_t_shirt
+
+ON=i_maillot_manches_longues <name> (<resmake>)
+MAKEITEM=i_maillot_manches_longues
+
+ON=i_tunique_de_fou <name> (<resmake>)
+MAKEITEM=i_tunique_de_fou
+
+ON=i_tunique_a_manches_longues <name> (<resmake>)
+MAKEITEM=i_tunique_a_manches_longues
+
+ON=i_tunique <name> (<resmake>)
+MAKEITEM=i_tunique
+
+
+[SKILLMENU sm_short_tailor]
+Pantalons et shorts
+
+ON=i_short <name> (<resmake>)
+MAKEITEM=i_short
+
+ON=i_pantalon <name> (<resmake>)
+MAKEITEM=i_pantalon
+
+
+[SKILLMENU sm_kilte_tailor]
+Robes et jupes
+
+ON=i_kilte <name> (<resmake>)
+MAKEITEM=i_kilte
+
+ON=i_longue_jupe <name> (<resmake>)
+MAKEITEM=i_longue_jupe
+
+ON=i_robe_de_femme <name> (<resmake>)
+MAKEITEM=i_robe_de_femme
+
+ON=i_robe_d_homme <name> (<resmake>)
+MAKEITEM=i_robe_d_homme
+
+ON=i_robe_brodee <name> (<resmake>)
+MAKEITEM=i_robe_brodee
+
+
+[SKILLMENU sm_cape_tailor]
+Cape et tabliers
+
+ON=i_capee <name> (<resmake>)
+MAKEITEM=i_capee
+
+ON=i_tablier <name> (<resmake>)
+MAKEITEM=i_tablier
+
+ON=i_grand_tablier <name> (<resmake>)
+MAKEITEM=i_grand_tablier
+
+
+[SKILLMENU sm_chaussures_tailor]
+Chaussures et bottes
+
+ON=i_petites_bottes <name> (<resmake>)
+MAKEITEM=i_petites_bottes
+
+ON=i_sandales <name> (<resmake>)
+MAKEITEM=i_sandales
+
+ON=i_chaussures <name> (<resmake>)
+MAKEITEM=i_chaussures
+
+ON=i_grandes_bottes <name> (<resmake>)
+MAKEITEM=i_grandes_bottes
+
+
+//*******************************
+//********GANTS BOXEUR***********
+//*******************************
+
+
+[SKILLMENU sm_gants_tailor]
+Gants de lutte
+
+ON=i_gants_de_jouteur <name> (<resmake>)
+MAKEITEM=i_gants_de_jouteur
+
+ON=i_gants_de_boxeur <name> (<resmake>)
+MAKEITEM=i_gants_de_boxeur
+
+ON=i_gants_de_pugiliste <name> (<resmake>)
+MAKEITEM=i_gants_de_pugiliste
+
+ON=i_gants_de_pancratiaste <name> (<resmake>)
+MAKEITEM=i_gants_de_pancratiaste
+
+
+//*******************************
+//********SHORTS BOXEUR**********
+//*******************************
+
+
+[SKILLMENU sm_shorts_lutte]
+Shorts de lutte
+
+ON=i_short_du_debutant <name> (<resmake>)
+MAKEITEM=i_short_du_debutant
+
+ON=i_short_du_boxeur <name> (<resmake>)
+MAKEITEM=i_short_du_boxeur
+
+ON=i_short_du_champion <name> (<resmake>)
+MAKEITEM=i_short_du_champion
+
+ON=i_short_du_legendaire <name> (<resmake>)
+MAKEITEM=i_short_du_legendaire
+
+
+//*******************************
+//********ROBES MAGIQUES*********
+//*******************************
+
+
+[SKILLMENU sm_robes_magiques]
+Robe magiques
+
+ON=i_robe_noire_flottante <name> (<resmake>)
+MAKEITEM=i_robe_noire_flottante
+
+ON=i_robe_blanche_brillante <name> (<resmake>)
+MAKEITEM=i_robe_blanche_brillante
+
+ON=i_robe_des_bois <name> (<resmake>)
+MAKEITEM=i_robe_des_bois
+
+ON=i_robe_de_tromperie <name> (<resmake>)
+MAKEITEM=i_robe_de_tromperie
+
+ON=i_robe_des_elfes_en_soie_d_argent <name> (<resmake>)
+MAKEITEM=i_robe_des_elfes_en_soie_d_argent
+
+ON=i_robe_des_ames_purifiees <name> (<resmake>)
+MAKEITEM=i_robe_des_ames_purifiees
+
+ON=i_manteau_de_shaman <name> (<resmake>)
+MAKEITEM=i_manteau_de_shaman
+
+ON=i_manteau_de_l_archer <name> (<resmake>)
+MAKEITEM=i_manteau_de_l_archer
+
+ON=i_manteau_de_prestidigitateur <name> (<resmake>)
+MAKEITEM=i_manteau_de_prestidigitateur
+
+ON=i_habit_de_feuilles <name> (<resmake>)
+MAKEITEM=i_habit_de_feuilles
+
+ON=i_costume_des_morts <name> (<resmake>)
+MAKEITEM=i_costume_des_morts
+
+ON=i_robe_de_protection_ornee_de_runes <name> (<resmake>)
+MAKEITEM=i_robe_de_protection_ornee_de_runes
+
+ON=i_robe_de_renouveau <name> (<resmake>)
+MAKEITEM=i_robe_de_renouveau
+
+ON=i_robe_de_grand_pretre <name> (<resmake>)
+MAKEITEM=i_robe_de_grand_pretre
+
+ON=i_robe_de_l_archimage <name> (<resmake>)
+MAKEITEM=i_robe_de_l_archimage
+
+ON=i_robe_celeste <name> (<resmake>)
+MAKEITEM=i_robe_celeste
+
+ON=i_robe_des_enfers <name> (<resmake>)
+MAKEITEM=i_robe_des_enfers
+
+ON=i_manteau_du_crane <name> (<resmake>)
+MAKEITEM=i_manteau_du_crane
+
+ON=i_robe_du_druide <name> (<resmake>)
+MAKEITEM=i_robe_du_druide
+
+ON=i_robe_de_legerete <name> (<resmake>)
+MAKEITEM=i_robe_de_legerete
+
+ON=i_robe_de_bateleur <name> (<resmake>)
+MAKEITEM=i_robe_de_bateleur
+
+ON=i_robe_de_praticien <name> (<resmake>)
+MAKEITEM=i_robe_de_praticien
+
+ON=i_robe_du_tireur_d_elite <name> (<resmake>)
+MAKEITEM=i_robe_du_tireur_d_elite
+
+ON=i_robe_de_vision <name> (<resmake>)
+MAKEITEM=i_robe_de_vision
+
+ON=i_robe_de_boxeur <name> (<resmake>)
+MAKEITEM=i_robe_de_boxeur
+
+ON=i_robe_du_soldat <name> (<resmake>)
+MAKEITEM=i_robe_du_soldat
+
+ON=i_robe_du_combattant <name> (<resmake>)
+MAKEITEM=i_robe_du_combattant
+
+
+
+//*******************************
+//*******CAPES MAGIQUES**********
+//*******************************
+
+
+[SKILLMENU sm_capes_magiques]
+Capes magiques
+
+ON=i_cape_incognito <name> (<resmake>)
+MAKEITEM=i_cape_incognito
+
+ON=i_cape_de_resistance_a_la_magie <name> (<resmake>)
+MAKEITEM=i_cape_de_resistance_a_la_magie
+
+ON=i_cape_de_dynamisme <name> (<resmake>)
+MAKEITEM=i_cape_de_dynamisme
+
+ON=i_cape_de_resonance <name> (<resmake>)
+MAKEITEM=i_cape_de_resonance
+
+ON=i_cape_de_sorcellerie <name> (<resmake>)
+MAKEITEM=i_cape_de_sorcellerie
+
+ON=i_cape_de_mobilite <name> (<resmake>)
+MAKEITEM=i_cape_de_mobilite
+
+ON=i_cape_de_myrmidon <name> (<resmake>)
+MAKEITEM=i_cape_de_myrmidon
+
+ON=i_cape_elfique <name> (<resmake>)
+MAKEITEM=i_cape_elfique
+
+ON=i_cape_multispectrale <name> (<resmake>)
+MAKEITEM=i_cape_multispectrale
+
+ON=i_cape_de_praticien <name> (<resmake>)
+MAKEITEM=i_cape_de_praticien
+
+ON=i_cape_de_concentration <name> (<resmake>)
+MAKEITEM=i_cape_de_concentration
+
+ON=i_cape_d_antagoniste <name> (<resmake>)
+MAKEITEM=i_cape_d_antagoniste
+
+ON=i_cape_de_bateleur <name> (<resmake>)
+MAKEITEM=i_cape_de_bateleur
+
+ON=i_cape_de_l_etampeur <name> (<resmake>)
+MAKEITEM=i_cape_de_l_etampeur
+
+ON=i_cape_de_tacticien <name> (<resmake>)
+MAKEITEM=i_cape_de_tacticien
+
+ON=i_cape_d_entrainement <name> (<resmake>)
+MAKEITEM=i_cape_d_entrainement
+
+
+//*******************************
+//*******ARMURES EN CUIR*********
+//*******************************
+
+
+[SKILLMENU sm_armure_en_cuir_de_rat]
+Armure en cuir de rat
+
+ON=i_protege_cou_en_cuir_de_rat <name> (<resmake>)
+MAKEITEM=i_protege_cou_en_cuir_de_rat
+
+ON=i_gants_en_cuir_de_rat <name> (<resmake>)
+MAKEITEM=i_gants_en_cuir_de_rat
+
+ON=i_brassieres_en_cuir_de_rat <name> (<resmake>)
+MAKEITEM=i_brassieres_en_cuir_de_rat
+
+ON=i_jambieres_en_cuir_de_rat <name> (<resmake>)
+MAKEITEM=i_jambieres_en_cuir_de_rat
+
+ON=i_jupette_en_cuir_de_rat <name> (<resmake>)
+MAKEITEM=i_jupette_en_cuir_de_rat
+
+ON=i_armure_en_cuir_de_rat <name> (<resmake>)
+MAKEITEM=i_armure_en_cuir_de_rat
+
+ON=i_armure_de_femme_en_cuir_de_rat <name> (<resmake>)
+MAKEITEM=i_armure_de_femme_en_cuir_de_rat
+
+
+[SKILLMENU sm_armure_en_cuir_de_gobelin]
+Armure en cuir de gobelin
+
+ON=i_protege_cou_en_cuir_de_gobelin <name> (<resmake>)
+MAKEITEM=i_protege_cou_en_cuir_de_gobelin
+
+ON=i_gants_en_cuir_de_gobelin <name> (<resmake>)
+MAKEITEM=i_gants_en_cuir_de_gobelin
+
+ON=i_brassieres_en_cuir_de_gobelin <name> (<resmake>)
+MAKEITEM=i_brassieres_en_cuir_de_gobelin
+
+ON=i_jambieres_en_cuir_de_gobelin <name> (<resmake>)
+MAKEITEM=i_jambieres_en_cuir_de_gobelin
+
+ON=i_jupette_en_cuir_de_gobelin <name> (<resmake>)
+MAKEITEM=i_jupette_en_cuir_de_gobelin
+
+ON=i_armure_en_cuir_de_gobelin <name> (<resmake>)
+MAKEITEM=i_armure_en_cuir_de_gobelin
+
+ON=i_armure_de_femme_en_cuir_de_gobelin <name> (<resmake>)
+MAKEITEM=i_armure_de_femme_en_cuir_de_gobelin
+
+
+[SKILLMENU sm_armure_en_cuir_de_loup]
+Armure en cuir de loup
+
+ON=i_protege_cou_en_cuir_de_loup <name> (<resmake>)
+MAKEITEM=i_protege_cou_en_cuir_de_loup
+
+ON=i_gants_en_cuir_de_loup <name> (<resmake>)
+MAKEITEM=i_gants_en_cuir_de_loup
+
+ON=i_brassieres_en_cuir_de_loup <name> (<resmake>)
+MAKEITEM=i_brassieres_en_cuir_de_loup
+
+ON=i_jambieres_en_cuir_de_loup <name> (<resmake>)
+MAKEITEM=i_jambieres_en_cuir_de_loup
+
+ON=i_jupette_en_cuir_de_loup <name> (<resmake>)
+MAKEITEM=i_jupette_en_cuir_de_loup
+
+ON=i_armure_en_cuir_de_loup <name> (<resmake>)
+MAKEITEM=i_armure_en_cuir_de_loup
+
+ON=i_armure_de_femme_en_cuir_de_loup <name> (<resmake>)
+MAKEITEM=i_armure_de_femme_en_cuir_de_loup
+
+[SKILLMENU sm_armure_en_cuir_d_ophidien]
+Armure en cuir d'ophidien
+
+ON=i_protege_cou_en_cuir_d_ophidien <name> (<resmake>)
+MAKEITEM=i_protege_cou_en_cuir_d_ophidien
+
+ON=i_gants_en_cuir_d_ophidien <name> (<resmake>)
+MAKEITEM=i_gants_en_cuir_d_ophidien
+
+ON=i_brassieres_en_cuir_d_ophidien <name> (<resmake>)
+MAKEITEM=i_brassieres_en_cuir_d_ophidien
+
+ON=i_jambieres_en_cuir_d_ophidien <name> (<resmake>)
+MAKEITEM=i_jambieres_en_cuir_d_ophidien
+
+ON=i_jupette_en_cuir_d_ophidien <name> (<resmake>)
+MAKEITEM=i_jupette_en_cuir_d_ophidien
+
+ON=i_armure_en_cuir_d_ophidien <name> (<resmake>)
+MAKEITEM=i_armure_en_cuir_d_ophidien
+
+ON=i_armure_de_femme_en_cuir_d_ophidien <name> (<resmake>)
+MAKEITEM=i_armure_de_femme_en_cuir_d_ophidien
+
+
+[SKILLMENU sm_armure_en_cuir_de_tetrapode]
+Armure en cuir de tetrapode
+
+ON=i_protege_cou_en_cuir_de_tetrapode <name> (<resmake>)
+MAKEITEM=i_protege_cou_en_cuir_de_tetrapode
+
+ON=i_gants_en_cuir_de_tetrapode <name> (<resmake>)
+MAKEITEM=i_gants_en_cuir_de_tetrapode
+
+ON=i_brassieres_en_cuir_de_tetrapode <name> (<resmake>)
+MAKEITEM=i_brassieres_en_cuir_de_tetrapode
+
+ON=i_jambieres_en_cuir_de_tetrapode <name> (<resmake>)
+MAKEITEM=i_jambieres_en_cuir_de_tetrapode
+
+ON=i_jupette_en_cuir_de_tetrapode <name> (<resmake>)
+MAKEITEM=i_jupette_en_cuir_de_tetrapode
+
+ON=i_armure_en_cuir_de_tetrapode <name> (<resmake>)
+MAKEITEM=i_armure_en_cuir_de_tetrapode
+
+ON=i_armure_de_femme_en_cuir_de_tetrapode <name> (<resmake>)
+MAKEITEM=i_armure_de_femme_en_cuir_de_tetrapode
+
+
+[SKILLMENU sm_armure_en_cuir_d_harpie]
+Armure en cuir d'harpie
+
+ON=i_protege_cou_en_cuir_d_harpie <name> (<resmake>)
+MAKEITEM=i_protege_cou_en_cuir_d_harpie
+
+ON=i_gants_en_cuir_d_harpie <name> (<resmake>)
+MAKEITEM=i_gants_en_cuir_d_harpie
+
+ON=i_brassieres_en_cuir_d_harpie <name> (<resmake>)
+MAKEITEM=i_brassieres_en_cuir_d_harpie
+
+ON=i_jambieres_en_cuir_d_harpie <name> (<resmake>)
+MAKEITEM=i_jambieres_en_cuir_d_harpie
+
+ON=i_jupette_en_cuir_d_harpie <name> (<resmake>)
+MAKEITEM=i_jupette_en_cuir_d_harpie
+
+ON=i_armure_en_cuir_d_harpie <name> (<resmake>)
+MAKEITEM=i_armure_en_cuir_d_harpie
+
+ON=i_armure_de_femme_en_cuir_d_harpie <name> (<resmake>)
+MAKEITEM=i_armure_de_femme_en_cuir_d_harpie
+
+
+
+[SKILLMENU sm_armure_en_cuir_de_troll]
+Armure en cuir de troll
+
+ON=i_protege_cou_en_cuir_de_troll <name> (<resmake>)
+MAKEITEM=i_protege_cou_en_cuir_de_troll
+
+ON=i_gants_en_cuir_de_troll <name> (<resmake>)
+MAKEITEM=i_gants_en_cuir_de_troll
+
+ON=i_brassieres_en_cuir_de_troll <name> (<resmake>)
+MAKEITEM=i_brassieres_en_cuir_de_troll
+
+ON=i_jambieres_en_cuir_de_troll <name> (<resmake>)
+MAKEITEM=i_jambieres_en_cuir_de_troll
+
+ON=i_jupette_en_cuir_de_troll <name> (<resmake>)
+MAKEITEM=i_jupette_en_cuir_de_troll
+
+ON=i_armure_en_cuir_de_troll <name> (<resmake>)
+MAKEITEM=i_armure_en_cuir_de_troll
+
+ON=i_armure_de_femme_en_cuir_de_troll <name> (<resmake>)
+MAKEITEM=i_armure_de_femme_en_cuir_de_troll
+
+
+//*******************************
+//**********AUTRES***************
+//*******************************
+
+
+[SKILLMENU sm_autres_tailor]
+Autres
+
+ON=i_bourse_pour_ceinture <name> (<resmake>)
+MAKEITEM=i_bourse_pour_ceinture
+
+ON=i_bourse_de_cuir <name> (<resmake>)
+MAKEITEM=i_bourse_de_cuir
+
+ON=i_sac_de_cuir <name> (<resmake>)
+MAKEITEM=i_sac_de_cuir
+
+ON=i_deed_peau_ours_sud <name> (<resmake>)
+MAKEITEM=i_deed_peau_ours_sud
+
+ON=i_deed_peau_ours_est <name> (<resmake>)
+MAKEITEM=i_deed_peau_ours_est
+
+ON=i_deed_tapis_bleu_sud <name> (<resmake>)
+MAKEITEM=i_deed_tapis_bleu_sud
+
+ON=i_deed_tapis_bleu_est <name> (<resmake>)
+MAKEITEM=i_deed_tapis_bleu_est
+
+ON=i_deed_tapis_rouge_nord <name> (<resmake>)
+MAKEITEM=i_deed_tapis_rouge_nord
+
+ON=i_deed_tapis_rouge_ouest <name> (<resmake>)
+MAKEITEM=i_deed_tapis_rouge_ouest
+
+ON=i_deed_tapis_bleudore_nord <name> (<resmake>)
+MAKEITEM=i_deed_tapis_bleudore_nord
+
+ON=i_deed_tapis_bleudore_ouest <name> (<resmake>)
+MAKEITEM=i_deed_tapis_bleudore_ouest
+
+ON=i_deed_tapis_marronorange_nord <name> (<resmake>)
+MAKEITEM=i_deed_tapis_marronorange_nord
+
+ON=i_deed_tapis_marronorange_ouest <name> (<resmake>)
+MAKEITEM=i_deed_tapis_marronorange_ouest
+
+ON=i_deed_tapis_bleuorange_nord <name> (<resmake>)
+MAKEITEM=i_deed_tapis_bleuorange_nord
+
+ON=i_deed_tapis_bleuorange_ouest <name> (<resmake>)
+MAKEITEM=i_deed_tapis_bleuorange_ouest

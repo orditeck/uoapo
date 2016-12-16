@@ -1,0 +1,686 @@
+[PLEVEL 1]
+regs
+
+[FUNCTION REGS]
+IF !(STRCMPI("<ARGS>","config"))
+	IF !<FINDID.m_config_regs>
+		NEWITEM m_config_regs
+		ACT.TIMER = -1
+		ACT.CONT = <UID>
+	ENDIF
+	DIALOG D_CONFIG_REGS
+ELSEIF !(STRCMPI("<ARGS>","consult"))
+	IF !<FINDID.m_config_regs>
+		NEWITEM m_config_regs
+		ACT.TIMER=-1
+		ACT.CONT = <UID>
+	ENDIF
+	CONSULT_REGS
+ELSEIF !(STRCMPI("<ARGS>","supprimer"))
+	IF <FINDID.m_config_regs>
+		FINDID.m_config_regs.REMOVE
+		SYSMESSAGEUA 0481 1 1 0 Configuration supprimee avec succes !
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Impossible d'effectuer l'operation demandee, vous n'aviez aucune configuration !
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Pour configurer vos regs, tapez .regs config
+	SYSMESSAGEUA 0481 1 1 0 Pour consulter vos regs, tapez .regs consult
+	SYSMESSAGEUA 0481 1 1 0 Pour supprimer votre configuration actuelle, tapez .regs supprimer
+ENDIF
+RETURN 1
+
+
+[ITEMDEF m_config_regs]
+NAME=config regs
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=-1
+
+ON=@TIMER
+TIMER=-1
+RETURN 1
+
+
+//DEFAULT : JOUEUR
+[FUNCTION CONSULT_REGS]
+IF !<FINDID.m_config_regs>
+	SYSMESSAGEUA 0481 1 1 0 Utilisation incorrecte de CONSULT_REGS !
+	RETURN 0
+ENDIF
+IF <RESCOUNT i_reag_black_pearl> < 0<FINDID.m_config_regs.TAG.BlackPearl>
+	SYSMESSAGEUA 0481 1 1 0 Il vous manque <EVAL <FINDID.m_config_regs.TAG.BlackPearl> - <RESCOUNT i_reag_black_pearl>> black pearls !
+ELSEIF <RESCOUNT i_reag_blood_moss> < 0<FINDID.m_config_regs.TAG.BloodMoss>
+	SYSMESSAGEUA 0481 1 1 0 Il vous manque <EVAL <FINDID.m_config_regs.TAG.BloodMoss> - <RESCOUNT i_reag_blood_moss>> blood moss !
+ELSEIF <RESCOUNT i_reag_garlic> < 0<FINDID.m_config_regs.TAG.Garlics>
+	SYSMESSAGEUA 0481 1 1 0 Il vous manque <EVAL <FINDID.m_config_regs.TAG.Garlics> - <RESCOUNT i_reag_garlic>> garlics !
+ELSEIF <RESCOUNT i_reag_ginseng> < 0<FINDID.m_config_regs.TAG.Ginseng>
+	SYSMESSAGEUA 0481 1 1 0 Il vous manque <EVAL <FINDID.m_config_regs.TAG.Ginseng> - <RESCOUNT i_reag_ginseng>> ginseng !
+ELSEIF <RESCOUNT i_reag_mandrake_root> < 0<FINDID.m_config_regs.TAG.MandrakeRoots>
+	SYSMESSAGEUA 0481 1 1 0 Il vous manque <EVAL <FINDID.m_config_regs.TAG.MandrakeRoots> - <RESCOUNT i_reag_mandrake_root>> mandrake roots !
+ELSEIF <RESCOUNT i_reag_eye_of_newt> < 0<FINDID.m_config_regs.TAG.EyesOfNewt>
+	SYSMESSAGEUA 0481 1 1 0 Il vous manque <EVAL <FINDID.m_config_regs.TAG.EyesOfNewt> - <RESCOUNT i_reag_eye_of_newt>> eyes of newt !
+ELSEIF <RESCOUNT i_reag_nightshade> < 0<FINDID.m_config_regs.TAG.Nightshade>
+	SYSMESSAGEUA 0481 1 1 0 Il vous manque <EVAL <FINDID.m_config_regs.TAG.Nightshade> - <RESCOUNT i_reag_nightshade>> nightshades !
+ELSEIF <RESCOUNT i_reag_sulfur_ash> < 0<FINDID.m_config_regs.TAG.SulfurousAsh>
+	SYSMESSAGEUA 0481 1 1 0 Il vous manque <EVAL <FINDID.m_config_regs.TAG.SulfurousAsh> - <RESCOUNT i_reag_sulfur_ash>> sulfurous ash !
+ELSEIF <RESCOUNT i_reag_spider_silk> < 0<FINDID.m_config_regs.TAG.SpiderSilk>
+	SYSMESSAGEUA 0481 1 1 0 Il vous manque <EVAL <FINDID.m_config_regs.TAG.SpiderSilk> - <RESCOUNT i_reag_spider_silk>> spider silk !
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Il ne vous manque aucun ingredient !
+ENDIF
+RETURN 1
+
+
+
+[DIALOG D_CONFIG_REGS]
+0,0
+PAGE 0
+resizepic 0 0 2620 550 350
+PAGE 1
+text 150 20 1152 1//Configurer vos alertes de regs
+text 50 40 1152 2//Si un des regs tombe sous le montant desire, vous serez alerte
+text 50 60 1152 3//Utilisez la commande .regs consult pour les alertes.
+text 20 100 1152 4//Black pearls
+text 20 120 1152 5//Blood moss
+text 20 140 1152 6//Garlics
+text 20 160 1152 7//Ginseng
+text 20 180 1152 8//Mandrake roots
+text 20 200 1152 9//Eyes of newt
+text 20 220 1152 10//Nightshades
+text 20 240 1152 11//Sulfurous ash
+text 20 260 1152 12//Spider silk
+text 300 80 1152 13//-10
+text 340 80 1152 14//Montant
+text 420 80 1152 15//+10
+text 355 100 1152 16//<MONTANT BLACK PEARLS>
+text 355 120 1152 17//<MONTANT BLOOD MOSS>
+text 355 140 1152 18//<MONTANT GARLICS>
+text 355 160 1152 19//<MONTANT GINSENG>
+text 355 180 1152 20//<MONTANT MANDRAKES>
+text 355 200 1152 21//<MONTANT EYSE OF NEWT>
+text 355 220 1152 22//<MONTANT NIGHTSHADES>
+text 355 240 1152 23//<MONTANT SULFUROUS ASH>
+text 355 260 1152 24//<MONTANT SPIDER SILK>
+button 250 300 249 248 1 0 1//OKAY
+button 300 100 56 56 1 0 101//-10 Black pearls
+button 425 100 55 55 1 0 102//+10 Black pearls
+button 300 120 56 56 1 0 103//-10 Blood moss
+button 425 120 55 55 1 0 104//+10 Blood moss
+button 300 140 56 56 1 0 105//-10 Garlics
+button 425 140 55 55 1 0 106//+10 Garlics
+button 300 160 56 56 1 0 107//-10 Ginseng
+button 425 160 55 55 1 0 108//+10 Ginseng
+button 300 180 56 56 1 0 109//-10 Mandrake roots
+button 425 180 55 55 1 0 110//+10 Mandrake roots
+button 300 200 56 56 1 0 111//-10 Eyes of newt
+button 425 200 55 55 1 0 112//+10 Eyes of newt
+button 300 220 56 56 1 0 113//-10 Nightshades
+button 425 220 55 55 1 0 114//+10 Nightshades
+button 300 240 56 56 1 0 115//-10 Sulfurous ash
+button 425 240 55 55 1 0 116//+10 Sulfurous ash
+button 300 260 56 56 1 0 117//-10 Spider silk
+button 425 260 55 55 1 0 118//+10 Spider silk
+
+
+[DIALOG D_CONFIG_REGS TEXT]
+<VAR.BLANKLINE>
+Configurer vos alertes de regs
+Si un des regs tombe sous le montant desire, vous serez alerte
+Utilisez la commande .regs consult pour les alertes.
+Black pearls
+Blood moss
+Garlics
+Ginseng
+Mandrake roots
+Eyes of newt
+Nightshades
+Sulfurous ash
+Spider silk
+-10
+Montant
++10
+<EVAL 0<FINDID.m_config_regs.TAG.BlackPearl>>
+<EVAL 0<FINDID.m_config_regs.TAG.BloodMoss>>
+<EVAL 0<FINDID.m_config_regs.TAG.Garlics>>
+<EVAL 0<FINDID.m_config_regs.TAG.Ginseng>>
+<EVAL 0<FINDID.m_config_regs.TAG.MandrakeRoots>>
+<EVAL 0<FINDID.m_config_regs.TAG.EyesOfNewt>>
+<EVAL 0<FINDID.m_config_regs.TAG.Nightshade>>
+<EVAL 0<FINDID.m_config_regs.TAG.SulfurousAsh>>
+<EVAL 0<FINDID.m_config_regs.TAG.SpiderSilk>>
+
+
+[DIALOG D_CONFIG_REGS BUTTON]
+//OKAY
+ON=1
+RETURN 1
+
+//-10 Black pearls
+ON=101
+IF 0<FINDID.m_config_regs.TAG.BlackPearl> > 0
+	FINDID.m_config_regs.TAG.BlackPearl = <EVAL <FINDID.m_config_regs.TAG.BlackPearl> - 10>
+ENDIF
+IF 0<FINDID.m_config_regs.TAG.BlackPearl> <= 0
+	FINDID.m_config_regs.TAG.BlackPearl
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//+10 Black pearls
+ON=102
+FINDID.m_config_regs.TAG.BlackPearl = <EVAL 0<FINDID.m_config_regs.TAG.BlackPearl> + 10>
+IF <FINDID.m_config_regs.TAG.BlackPearl> > 5000
+	FINDID.m_config_regs.TAG.BlackPearl = 5000
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//-10 Blood moss
+ON=103
+IF 0<FINDID.m_config_regs.TAG.BloodMoss> > 0
+	FINDID.m_config_regs.TAG.BloodMoss = <EVAL <FINDID.m_config_regs.TAG.BloodMoss> - 10>
+ENDIF
+IF 0<FINDID.m_config_regs.TAG.BloodMoss> <= 0
+	FINDID.m_config_regs.TAG.BloodMoss
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//+10 Blood moss
+ON=104
+FINDID.m_config_regs.TAG.BloodMoss = <EVAL 0<FINDID.m_config_regs.TAG.BloodMoss> + 10>
+IF <FINDID.m_config_regs.TAG.BloodMoss> > 5000
+	FINDID.m_config_regs.TAG.BloodMoss = 5000
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//-10 Garlic
+ON=105
+IF 0<FINDID.m_config_regs.TAG.Garlics> > 0
+	FINDID.m_config_regs.TAG.Garlics = <EVAL <FINDID.m_config_regs.TAG.Garlics> - 10>
+ENDIF
+IF 0<FINDID.m_config_regs.TAG.Garlics> <= 0
+	FINDID.m_config_regs.TAG.Garlics
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//+10 Garlic
+ON=106
+FINDID.m_config_regs.TAG.Garlics = <EVAL 0<FINDID.m_config_regs.TAG.Garlics> + 10>
+IF <FINDID.m_config_regs.TAG.Garlics> > 5000
+	FINDID.m_config_regs.TAG.Garlics = 5000
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//-10 Ginseng
+ON=107
+IF 0<FINDID.m_config_regs.TAG.Ginseng> > 0
+	FINDID.m_config_regs.TAG.Ginseng = <EVAL <FINDID.m_config_regs.TAG.Ginseng> - 10>
+ENDIF
+IF 0<FINDID.m_config_regs.TAG.Ginseng> <= 0
+	FINDID.m_config_regs.TAG.Ginseng
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//+10 Ginseng
+ON=108
+FINDID.m_config_regs.TAG.Ginseng = <EVAL 0<FINDID.m_config_regs.TAG.Ginseng> + 10>
+IF <FINDID.m_config_regs.TAG.Ginseng> > 5000
+	FINDID.m_config_regs.TAG.Ginseng = 5000
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//-10 Mandrakes
+ON=109
+IF 0<FINDID.m_config_regs.TAG.MandrakeRoots> > 0
+	FINDID.m_config_regs.TAG.MandrakeRoots = <EVAL <FINDID.m_config_regs.TAG.MandrakeRoots> - 10>
+ENDIF
+IF 0<FINDID.m_config_regs.TAG.MandrakeRoots> <= 0
+	FINDID.m_config_regs.TAG.MandrakeRoots
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//+10 Mandrakes
+ON=110
+FINDID.m_config_regs.TAG.MandrakeRoots = <EVAL 0<FINDID.m_config_regs.TAG.MandrakeRoots> + 10>
+IF <FINDID.m_config_regs.TAG.MandrakeRoots> > 5000
+	FINDID.m_config_regs.TAG.MandrakeRoots = 5000
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//-10 Eyes of newt
+ON=111
+IF 0<FINDID.m_config_regs.TAG.EyesOfNewt> > 0
+	FINDID.m_config_regs.TAG.EyesOfNewt = <EVAL <FINDID.m_config_regs.TAG.EyesOfNewt> - 10>
+ENDIF
+IF 0<FINDID.m_config_regs.TAG.EyesOfNewt> <= 0
+	FINDID.m_config_regs.TAG.EyesOfNewt
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//+10 Eyes of newt
+ON=112
+FINDID.m_config_regs.TAG.EyesOfNewt = <EVAL 0<FINDID.m_config_regs.TAG.EyesOfNewt> + 10>
+IF <FINDID.m_config_regs.TAG.EyesOfNewt> > 5000
+	FINDID.m_config_regs.TAG.EyesOfNewt = 5000
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//-10 Nightshade
+ON=113
+IF 0<FINDID.m_config_regs.TAG.Nightshade> > 0
+	FINDID.m_config_regs.TAG.Nightshade = <EVAL <FINDID.m_config_regs.TAG.Nightshade> - 10>
+ENDIF
+IF 0<FINDID.m_config_regs.TAG.Nightshade> <= 0
+	FINDID.m_config_regs.TAG.Nightshade
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//+10 Nightshade
+ON=114
+FINDID.m_config_regs.TAG.Nightshade = <EVAL 0<FINDID.m_config_regs.TAG.Nightshade> + 10>
+IF <FINDID.m_config_regs.TAG.Nightshade> > 5000
+	FINDID.m_config_regs.TAG.Nightshade = 5000
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//-10 Sulfurous ash
+ON=115
+IF 0<FINDID.m_config_regs.TAG.SulfurousAsh> > 0
+	FINDID.m_config_regs.TAG.SulfurousAsh = <EVAL <FINDID.m_config_regs.TAG.SulfurousAsh> - 10>
+ENDIF
+IF 0<FINDID.m_config_regs.TAG.SulfurousAsh> <= 0
+	FINDID.m_config_regs.TAG.SulfurousAsh
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//+10 Sulfurous ash
+ON=116
+FINDID.m_config_regs.TAG.SulfurousAsh = <EVAL 0<FINDID.m_config_regs.TAG.SulfurousAsh> + 10>
+IF <FINDID.m_config_regs.TAG.SulfurousAsh> > 5000
+	FINDID.m_config_regs.TAG.SulfurousAsh = 5000
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//-10 Spider silk
+ON=117
+IF 0<FINDID.m_config_regs.TAG.SpiderSilk> > 0
+	FINDID.m_config_regs.TAG.SpiderSilk = <EVAL <FINDID.m_config_regs.TAG.SpiderSilk> - 10>
+ENDIF
+IF 0<FINDID.m_config_regs.TAG.SpiderSilk> <= 0
+	FINDID.m_config_regs.TAG.SpiderSilk
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+//+10 Spide silk
+ON=118
+FINDID.m_config_regs.TAG.SpiderSilk = <EVAL 0<FINDID.m_config_regs.TAG.SpiderSilk> + 10>
+IF <FINDID.m_config_regs.TAG.SpiderSilk> > 5000
+	FINDID.m_config_regs.TAG.SpiderSilk = 5000
+ENDIF
+DIALOG D_CONFIG_REGS
+RETURN 1
+
+
+//***************************************************************
+//*************************GRAINES*******************************
+//***************************************************************
+
+[ITEMDEF i_graine_garlic]
+NAME=Terre
+ID=031f5
+TYPE=t_eq_script
+WEIGHT=1
+
+ON=@Create
+ATTR=08010
+TAG.ACCUMULE=0
+TIMER=1
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <MOREX>==0
+	DISPID=031f5
+	TIMER=1200
+	NAME=Terre
+	MOREX=1
+	UPDATE
+ELSEIF <MOREX>==1
+	DISPID=01aa2
+	TIMER=1200
+	NAME=Pousse de garlic
+	MOREX=2
+	UPDATE
+ELSEIF <MOREX>==2
+	DISPID=018e2
+	TIMER=1200
+	NAME=Garlic
+	MOREX=3
+	UPDATE
+ELSE
+	TAG.ACCUMULE=<EVAL <TAG.ACCUMULE> + 1>
+	TIMER=1200
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <MOREX> > 2
+	IF <SRC.FINDLAYER.1.TYPE> == T_WEAPON_FENCE
+		IF (0.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 30.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(2))>
+		ELSEIF (30.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 40.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(3))>
+		ELSEIF (40.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 50.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(4))>
+		ELSEIF (50.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 60.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(5))>
+		ELSEIF (60.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 70.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(6))>
+		ELSEIF (70.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 80.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(7))>
+		ELSEIF (80.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 90.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(8))>
+		ELSEIF (90.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 95.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(9))>
+		ELSE
+			TAG.NBREREACTIFS=<EVAL(RAND(10))>
+		ENDIF
+		TAG.TOTALREACTIF=<EVAL <TAG.NBREREACTIFS> + <TAG.ACCUMULE>>
+		SRC.NEWITEM i_reag_garlic
+		SRC.ACT.AMOUNT=<EVAL 0<TAG.TOTALREACTIF> + 1>
+		SRC.ACT.EQUIP
+		IF <EVAL <TAG.TOTALREACTIF>> >1
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous recoltez <EVAL <TAG.TOTALREACTIF> + 1> garlics !
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous recoltez 1 garlic !
+		ENDIF
+		SRC.ANIM 19
+		MOREX=0
+		TAG.ACCUMULE=0
+		TIMER=1
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez utiliser une dague pour couper ceci !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 La plante n'est pas assez mure pour être cueillie !
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Graines reactifs
+DESCRIPTION=Garlic
+
+[ITEMDEF i_graine_nightshade]
+NAME=Terre
+ID=031f5
+TYPE=t_eq_script
+WEIGHT=1
+
+ON=@Create
+ATTR=08010
+TAG.ACCUMULE=0
+TIMER=1
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <MOREX>==0
+	DISPID=031f5
+	TIMER=1200
+	NAME=Terre
+	MOREX=1
+	UPDATE
+ELSEIF <MOREX>==1
+	DISPID=01aa2
+	TIMER=1200
+	NAME=Pousse de nightshade
+	MOREX=2
+	UPDATE
+ELSEIF <MOREX>==2
+	DISPID=018e6
+	TIMER=1200
+	NAME=Nightshade
+	MOREX=3
+	UPDATE
+ELSE
+	TAG.ACCUMULE=<EVAL <TAG.ACCUMULE> + 1>
+	TIMER=1200
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <MOREX> > 2
+	IF <SRC.FINDLAYER.1.TYPE> == T_WEAPON_FENCE
+		IF (0.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 30.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(2))>
+		ELSEIF (30.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 40.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(3))>
+		ELSEIF (40.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 50.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(4))>
+		ELSEIF (50.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 60.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(5))>
+		ELSEIF (60.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 70.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(6))>
+		ELSEIF (70.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 80.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(7))>
+		ELSEIF (80.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 90.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(8))>
+		ELSEIF (90.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 95.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(9))>
+		ELSE
+			TAG.NBREREACTIFS=<EVAL(RAND(10))>
+		ENDIF
+		TAG.TOTALREACTIF=<EVAL <TAG.NBREREACTIFS> + <TAG.ACCUMULE>>
+		SRC.NEWITEM i_reag_nightshade
+		SRC.ACT.AMOUNT=<EVAL 0<TAG.TOTALREACTIF> + 1>
+		SRC.ACT.EQUIP
+		IF <EVAL <TAG.TOTALREACTIF>> >1
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous recoltez <EVAL <TAG.TOTALREACTIF> + 1> nightshades !
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous recoltez 1 nightshade !
+		ENDIF
+		SRC.ANIM 19
+		MOREX=0
+		TAG.ACCUMULE=0
+		TIMER=1
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez utiliser une dague pour couper ceci !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 La plante n'est pas assez mure pour être cueillie !
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Graines reactifs
+DESCRIPTION=Nightshade
+
+[ITEMDEF i_graine_mandrake]
+DEFNAME=i_graine_mandrake
+NAME=Terre
+ID=031f5
+TYPE=t_eq_script
+WEIGHT=1
+
+ON=@Create
+ATTR=08010
+TAG.ACCUMULE=0
+TIMER=1
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <MOREX>==0
+	DISPID=031f5
+	TIMER=1200
+	NAME=Terre
+	MOREX=1
+	UPDATE
+ELSEIF <MOREX>==1
+	DISPID=01aa2
+	TIMER=1200
+	NAME=Pousse de mandrake
+	MOREX=2
+	UPDATE
+ELSEIF <MOREX>==2
+	DISPID=018e0
+	TIMER=1200
+	NAME=Mandrake
+	MOREX=3
+	UPDATE
+ELSE
+	TAG.ACCUMULE=<EVAL <TAG.ACCUMULE> + 1>
+	TIMER=1200
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <MOREX> > 2
+	IF <SRC.FINDLAYER.1.TYPE> == T_WEAPON_FENCE
+		IF (0.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 30.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(2))>
+		ELSEIF (30.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 40.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(3))>
+		ELSEIF (40.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 50.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(4))>
+		ELSEIF (50.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 60.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(5))>
+		ELSEIF (60.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 70.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(6))>
+		ELSEIF (70.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 80.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(7))>
+		ELSEIF (80.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 90.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(8))>
+		ELSEIF (90.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 95.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(9))>
+		ELSE
+			TAG.NBREREACTIFS=<EVAL(RAND(10))>
+		ENDIF
+		TAG.TOTALREACTIF=<EVAL <TAG.NBREREACTIFS> + <TAG.ACCUMULE>>
+		SRC.NEWITEM i_reag_mandrake_root
+		SRC.ACT.AMOUNT=<EVAL 0<TAG.TOTALREACTIF> + 1>
+		SRC.ACT.EQUIP
+		IF <EVAL <TAG.TOTALREACTIF> +1 > > 1
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous recoltez <EVAL <TAG.TOTALREACTIF> + 1> mandrakes !
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous recoltez 1 mandrake !
+		ENDIF
+		SRC.ANIM 19
+		MOREX=0
+		TAG.ACCUMULE=0
+		TIMER=1
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez utiliser une dague pour couper ceci !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 La plante n'est pas assez mure pour être cueillie !
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Graines reactifs
+DESCRIPTION=Mandrake
+
+[ITEMDEF i_graine_ginseng]
+DEFNAME=i_graine_ginseng
+NAME=Terre
+ID=031f5
+TYPE=t_eq_script
+WEIGHT=1
+
+ON=@Create
+ATTR=08010
+TAG.ACCUMULE=0
+TIMER=1
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <MOREX>==0
+	DISPID=031f5
+	TIMER=1200
+	NAME=Terre
+	MOREX=1
+	UPDATE
+ELSEIF <MOREX>==1
+	DISPID=01aa2
+	TIMER=1200
+	NAME=Pousse de ginseng
+	MOREX=2
+	UPDATE
+ELSEIF <MOREX>==2
+	DISPID=018ea
+	TIMER=1200
+	NAME=Ginseng
+	MOREX=3
+	UPDATE
+ELSE
+	TAG.ACCUMULE=<EVAL <TAG.ACCUMULE> + 1>
+	TIMER=1200
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <MOREX> > 2
+	IF <SRC.FINDLAYER.1.TYPE> == T_WEAPON_FENCE
+		IF (0.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 30.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(2))>
+		ELSEIF (30.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 40.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(3))>
+		ELSEIF (40.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 50.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(4))>
+		ELSEIF (50.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 60.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(5))>
+		ELSEIF (60.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 70.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(6))>
+		ELSEIF (70.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 80.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(7))>
+		ELSEIF (80.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 90.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(8))>
+		ELSEIF (90.0 < <SRC.ALCHEMY>)&&(<SRC.MINING> < 95.1)
+			TAG.NBREREACTIFS=<EVAL(RAND(9))>
+		ELSE
+			TAG.NBREREACTIFS=<EVAL(RAND(10))>
+		ENDIF
+		TAG.TOTALREACTIF=<EVAL <TAG.NBREREACTIFS> + <TAG.ACCUMULE>>
+		SRC.NEWITEM i_reag_ginseng
+		SRC.ACT.AMOUNT=<EVAL 0<TAG.TOTALREACTIF> + 1>
+		SRC.ACT.EQUIP
+		IF <EVAL <SRC.ACT.AMOUNT>> > 1
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous recoltez <EVAL <TAG.TOTALREACTIF> + 1> ginsengs !
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous recoltez 1 ginseng !
+		ENDIF
+		SRC.ANIM 19
+		MOREX=0
+		TAG.ACCUMULE=0
+		TIMER=1
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez utiliser une dague pour couper ceci !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 La plante n'est pas assez mure pour être cueillie !
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Graines reactifs
+DESCRIPTION=Ginseng

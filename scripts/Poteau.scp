@@ -1,0 +1,98 @@
+[ITEMDEF i_poteau_d_attache] 
+NAME=Poteau d'attache
+ID=014e7
+TYPE=t_eq_script
+WEIGHT=9999
+
+ON=@CREATE
+ATTR=08010
+TAG.ATTACHER=0
+COLOR=0b64
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle creature desirez vous attacher au poteau ?
+TARGET 
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 Seules les montures et animaux porteurs peuvent etre attaches !
+RETURN 1 
+
+ON=@TARGON_CHAR
+IF (<SRC.TARG.BODY>==c_bear_grizzly) || (<SRC.TARG.BODY>==c_bear_brown) || (<SRC.TARG.BODY>==c_llama) || (<SRC.TARG.BODY>==c_horse_brown_lt) || (<SRC.TARG.BODY>==c_horse_tan) || (<SRC.TARG.BODY>==c_horse_gray) || (<SRC.TARG.BODY>==c_dragon_small_black)  || (<SRC.TARG.BODY>==c_llama_pack) || (<SRC.TARG.BODY>==c_horse_pack)
+	IF (<SRC.TARG.FLAGS>&040000) && <SRC.TARG.ISMYPET>
+		IF <LINK>==<SRC.TARG.UID>
+			SRC.TARG.TAG.ATTACHE=0
+			COLOR=0b64
+			NAME=Poteau d'attache
+			SRC.TARG.FLAGS=<SRC.TARG.FLAGS>&~040000
+			SRC.TARG.EVENTS -e_attache
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez libere <SRC.TARG.NAME> du poteau d'attache !
+			SRC.NEWITEM i_poteau_d_attache
+			SRC.ACT.P=<P>
+			REMOVE
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas detacher <SRC.TARG.NAME> avec ce poteau !
+		ENDIF
+	ELSE
+		IF <TAG.ATTACHER>=0
+			IF 0<SRC.TARG.TAG.ATTACHE>==0
+				SRC.TARG.TAG.ATTACHE=1
+				TIMER=86400
+				COLOR=0ab8
+				NAME=<NAME> utilise par <SRC.NAME>
+				LINK=<SRC.TARG.UID>
+				TAG.PX=<P.X> + 2
+				TAG.PY=<P.Y>
+				TAG.PZ=<P.Z> + 2
+				TAG.POSITION=<EVAL <TAG.PX>>,<EVAL <TAG.PY>>,<EVAL <TAG.PZ>>
+				SRC.TARG.GO <TAG.POSITION>
+				SRC.TARG.FLAGS=<SRC.TARG.FLAGS>|040000
+				SRC.TARG.EVENTS +e_attache
+				SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> est attache !
+				TAG.ATTACHER=1
+				SRC.TAG.MAPOSITION=<SRC.P>
+				SRC.P=<P>
+				SRC.TARG.FACE
+				SRC.P=<SRC.TAG.MAPOSITION>
+				SRC.FIX
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> est deja attache !
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Une monture est deja attachee au poteau d'attache !
+		ENDIF
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Seules les montures et animaux porteurs peuvent etre attaches !
+ENDIF
+RETURN 1
+
+ON=@TIMER
+IF <TAG.ATTACHER>==1
+LINK.NEWITEM i_poteau_d_attache
+LINK.ACT.P=<P>
+LINK.FLAGS=<LINK.FLAGS>&~040000
+LINK.EMOTE mourrir de faim
+LINK.HITS=0
+REMOVE
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Autres
+DESCRIPTION=Poteau d'attache
+
+[EVENTS e_attache]
+
+ON=@DCLICK
+RETURN 1
+
+ON=@HIT
+RETURN 1
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SPELLEFFECT
+RETURN 1
+

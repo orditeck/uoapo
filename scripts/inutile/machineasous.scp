@@ -1,0 +1,231 @@
+//Flint's Slot Machine! 
+//http://flint.runover.net 
+//ICQ: 14220010 
+//Email: brentvatne@home.com 
+//note to user: 
+//Feel free to play around with the rand #'s or add your own items! just add another: 
+//----------------------------------<code> 
+//elseif (rand(xx))==1 //in place of xx you would put the # that you want there to be a 1 in xx chance of getting it 
+//src.newitem idhere 
+//src.act.bounce 
+//---------------------------------</code> 
+//This was built using Belgar's Consume Gold from bank function, it is necessary to have it. 
+//Please leave these lines intact 
+
+// Changes by Woolmar - if it's broke it's probably his fault 
+//Prizes changed, payouts adjusted, each machine has its own jackpot fund. 
+//Changed to emote symbols. 
+// 0 = Jackpot 
+// 1 = Plum 
+// 2 = Book 
+// 3 = Skull 
+// 4 = Sword 
+// 5 = Bell 
+// 6 = Cherry 
+
+
+[function slot_emote] 
+// By Woolmar - set up for 7 different symbols 
+// you can change the symbol names without affecting the payouts 
+// NOTE - payouts don't check the symbols - they check the number (0-6) 
+// which was assigned. 
+doswitch ( <eval <args>> ) 
+say *Jackpot* //0 
+say *Bouclier* //1 
+say *Arme* //2 
+say *Arc* //3 - Would be good for a necrobook 
+say *Fiole* //4 
+say *Armure* //5 
+say *$* //6 
+enddo 
+
+[itemdef i_slot_machine] 
+id=01166
+name=Machine a sous 
+type=t_script
+
+category=Genese
+subsection=Gambling 
+description=Slot Machine 
+
+on=@create 
+color=0480
+attr=00054 
+tag.pot = 5000 
+
+on=@click 
+
+src.sysmessage Le Jackpot est actuellement de <eval <tag.pot>>, 500 gp pour jouer. 
+
+on=@dclick 
+
+if !(<src.restest 1 i_gambled> ) 
+src.consumegold_everywhere 500 
+if ( <VAR.CONSUMEGOLD> > 0 ) 
+src.sysmessage Il vous manque <eval <VAR.CONSUMEGOLD>>gp . 
+return 1 
+endif 
+
+// create the result and emote the symbols. 
+var.result1 = <eval rand(7)> 
+var.result2 = <eval rand(7)> 
+var.result3 = <eval rand(7)> 
+
+var.result = (( <var.result1> * 100 ) + ( <var.result2> * 10 ) + ( <var.result3> )) 
+// gives 343 results 
+slot_emote <var.result1> 
+slot_emote <var.result2> 
+slot_emote <var.result3> 
+
+if (0<eval <var.result>>==0) // three jackpots 
+src.message Jackpot !!!!
+serv.b <src.name> a gagne <eval <tag.pot>> gp a la machine de  <src.region.name> ! 
+src.givegold <eval <tag.pot>>
+tag.pot=5000 
+src.resync 
+
+elseif (<var.result>==111) // three plums 
+src.message Vous gagnez un bouclier magique ! 
+src.newitem { random_shield_defense 500 random_shield_guarding 10  random_shield_hardening 1 }
+src.act.bounce 
+
+elseif (<var.result>==222) // three books 
+src.message Vous gagnez une arme magique !
+src.newitem { random_weapon_ruin 500 random_weapon_might 10 random_weapon_force 1 }
+src.act.bounce 
+
+elseif (<var.result>==333) // three skulls 
+src.message Vous gagnez un arc magique ! 
+src.newitem { random_bowtype_ruin 500 random_bowtype_might 10 random_bowtype_force 1 }
+src.act.bounce 
+
+elseif (<var.result>==444) // three swords 
+src.message Vous gagnez une fiole de quete !
+src.newitem i_fiole_de_quete
+src.act.bounce
+
+elseif (<var.result>==555) // three bells 
+src.message Vous gagnez une armure magique! 
+src.newitem { random_platemail_defense 500 random_platemail_guarding 10 random_platemail_hardening 1 } 
+src.act.bounce 
+
+elseif ((<var.result> )==666)) // three cherries 
+src.newitem i_gold
+src.act.amount 5000
+src.act.bounce
+tag.pot=<eval <eval <tag.pot>> + {15 25} > 
+src.message You gagnez 5000 pieces d'or le jackpot grimpe a : <eval <tag.pot>> 
+src.resync 
+
+elseif ((<var.result1> )==6) && (<var.result2> )==6)) // two cherries 
+src.givegold 500 
+tag.pot=<eval <eval <tag.pot>> + {15 25} > 
+src.message Vous gagnez 500 pieces d'or le jackpot grimpe a : <eval <tag.pot>> 
+src.resync 
+
+elseif ((<var.result1> )==6) // one cherry 
+src.givegold 200 
+tag.pot=<eval <eval <tag.pot>> + {15 25} > 
+src.message Vous gagnez 200 pieces d'or le jackpot grimpe a : <eval <tag.pot>> 
+src.resync 
+
+else // LOSER!! 
+tag.pot=<eval <eval <tag.pot>> + {15 25} > 
+src.message Vous perdez , le jackpot grimpe a <eval <tag.pot>> 
+endif 
+src.newitem=i_gambled 
+src.act.link=<src.uid> 
+src.act.equip 
+src.act.timer 3 
+else 
+src.emote etre tres exiter a l'idee de rejouer 
+endif 
+return 1 
+
+[ITEMDEF i_gambled] 
+NAME=Memory of Gambling 
+id=i_handr_1 
+weight=0 
+layer=layer_special 
+type=t_eq_script 
+
+category=Memory Items 
+subsection=Server Memory 
+description=Memory of Gambling 
+
+on=@create 
+attr=attr_decay || attr_newbie 
+
+on=@timer 
+remove 
+return 1 
+
+[FUNCTION consumegold_everywhere] 
+var.consumegold_rest = <args> 
+var.consumegold = <args> 
+src.findlayer(layer_bankbox).consumegold_rec 0 
+if ( <var.consumegold> > 0 ) // not enough in bank, search player pack for the rest 
+var.consumegold_rest = <eval( <var.consumegold_rest> - <var.consumegold> )> 
+src.findlayer(layer_pack).consumegold_rec 0 
+if ( <var.consumegold> = 0 ) // yes, we had enough 
+var.consumegold = <var.consumegold_rest> 
+src.findlayer(layer_bankbox).consumegold_rec 0 
+endif 
+endif 
+src.update // update the status 
+return 0 
+
+[FUNCTION consumegold] 
+var.consumegold = <args> 
+consumegold_rec 0 
+if ( <var.consumegold> = 0 ) 
+return 0 
+endif 
+return 1 
+
+[FUNCTION consumegold_rec] 
+if ( <findcont(<args> ).uid> = 0 ) 
+return 0 
+endif 
+
+if ( <findcont(<args> ).baseid> != i_gold ) // skip stuff other than gold 
+consumegold_rec <eval (1+<args> )> 
+return 0 
+endif 
+
+var.consumegold = <eval (<var.consumegold> - <findcont(<args> ).amount> )> 
+if ( <var.consumegold> < 0 ) // more than enough, reduce amount 
+SRC.ACT = <findcont(<args> ).uid> 
+src.act.amount = <eval (0 - <var.consumegold> )> 
+var.consumegold = 0 
+return 0 
+endif 
+
+if ( <var.consumegold> > 0 ) // still need more gold 
+consumegold_rec <eval (1+<args> )> 
+endif 
+
+if ( <var.consumegold> > 0 ) // we tried, but no more money around 
+return 0 
+endif 
+
+src.act = <findcont(<args> ).uid> 
+src.act.remove 
+return 0 
+
+[FUNCTION givegold] 
+if ( <args> <= 0 ) 
+return 0 
+endif 
+if ( <args> > 60000 ) 
+VAR.LEFT = <eval (<args> - 60000)> 
+VAR.HAND = 60000 
+else 
+VAR.LEFT = 0 
+VAR.HAND = <args> 
+endif 
+NEWITEM i_gold 
+ACT.AMOUNT = <VAR.HAND> 
+ACT.CONT = <findlayer(layer_pack).uid> // option: on the backpack instead 
+//ACT.CONT = <findlayer(layer_bankbox).uid> 
+givegold <VAR.LEFT>

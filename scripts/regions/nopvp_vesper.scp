@@ -1,0 +1,269 @@
+// *** DÉBUT DE VESPER SUD OUEST ***
+
+[AREA MAISON_VESPER1]
+CLASS=11
+RECT=2736,991,2752,976
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER2]
+CLASS=11
+RECT=2768,976,2776,960
+RECT=2776,983,2791,952
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER3]
+CLASS=11
+RECT=2855,1004,2863,988
+RECT=2863,1004,2870,997
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER4]
+CLASS=11
+RECT=2912,991,2935,968
+RECT=2912,968,2920,963
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER5]
+CLASS=11
+RECT=2936,943,2952,928
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER6]
+CLASS=11
+RECT=2892,919,2908,901
+RECT=2908,911,2916,904
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER7]
+CLASS=11
+RECT=2840,959,2847,951
+RECT=2832,951,2855,936
+RECT=2840,936,2848,928
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER8]
+CLASS=11
+RECT=2832,919,2847,896
+RECT=2847,911,2856,904
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER9]
+CLASS=11
+RECT=2832,887,2847,880
+RECT=2832,881,2840,871
+RECT=2832,872,2847,864
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER10]
+CLASS=11
+RECT=2856,856,2871,848
+RECT=2864,863,2871,856
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER11]
+CLASS=11
+RECT=2912,863,2928,848
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER12]
+CLASS=11
+RECT=2952,895,2968,864
+RECT=2968,887,2976,872
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER13]
+CLASS=11
+RECT=2992,847,3000,832
+RECT=2984,839,2992,832
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER14]
+CLASS=11
+RECT=2992,824,3000,808
+RECT=3000,815,3007,808
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER15]
+CLASS=11
+RECT=2952,823,2968,808
+RECT=2966,823,2976,816
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER16]
+CLASS=11
+RECT=3012,786,3015,783
+RECT=3008,783,3024,776
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER17]
+CLASS=11
+RECT=3016,768,3031,760
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER18]
+CLASS=11
+RECT=2984,783,3000,776
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER19]
+CLASS=11
+RECT=2992,768,3007,760
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER20]
+CLASS=11
+RECT=2952,712,2967,704
+RECT=2952,704,2959,696
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+// ***2 MAISONS AU NORD-EST***
+
+
+[AREA MAISON_VESPER21]
+CLASS=11
+RECT=2976,640,2985,632
+RECT=2984,647,2999,632
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER22]
+CLASS=11
+RECT=2952,631,2968,616
+RECT=2967,624,2975,616
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+// ***RETOUR VERS LE SUD COTÉ OUEST***
+
+
+[AREA MAISON_VESPER23]
+CLASS=11
+RECT=2880,656,2895,648
+RECT=2888,663,2895,656
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER24]
+//MAISON A 3 ÉTAGES
+CLASS=11
+RECT=2912,680,2927,664
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER25]
+CLASS=11
+RECT=2872,695,2888,672
+RECT=2888,679,2896,672
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER26]
+CLASS=11
+RECT=2904,720,2911,704
+RECT=2896,711,2904,704
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER27]
+CLASS=11
+RECT=2872,720,2879,712
+RECT=2872,727,2888,720
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER28]
+CLASS=11
+RECT=2848,743,2864,728
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER29]
+CLASS=11
+RECT=2880,751,2896,736
+RECT=2895,743,2904,736
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER30]
+CLASS=11
+RECT=2912,808,2920,792
+RECT=2920,799,2927,792
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER31]
+CLASS=11
+RECT=2888,791,2896,784
+RECT=2896,799,2904,784
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER32]
+CLASS=11
+RECT=2855,815,2868,808
+RECT=2855,808,2860,800
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_VESPER33]
+CLASS=11
+RECT=2832,815,2847,808
+RECT=2832,808,2840,799
+RECT=2832,799,2847,792
+DEFNAME=maison_minoc
+GROUP=Vesper
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out

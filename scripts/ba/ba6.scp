@@ -1,0 +1,164 @@
+[PLEVEL 1]
+ba6
+
+[FUNCTION ba6]
+IF <EVAL 0<SRC.TAG.JEU_ba6>>==0
+	SRC.SYSMESSAGEUA 0481 1 1 0 Visitez ce sponsor plus tard
+ELSE
+	IF !(STRCMPI("<ARGS>",""))
+		SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez taper .ba6 suivi de votre reponse
+	ELSEIF !(STRCMPI("<ARGS>","reflexion"))
+		IF <EVAL <SRC.TAG.JEU_ba6>>==1
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 2 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_ba6
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","charme"))
+		IF <EVAL <SRC.TAG.JEU_ba6>>==2
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 2 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_ba6
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","lots"))
+		IF <EVAL <SRC.TAG.JEU_ba6>>==3
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 2 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_ba6
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","10"))
+		IF <EVAL <SRC.TAG.JEU_ba6>>==4
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 2 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_ba6
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","5"))
+		IF <EVAL <SRC.TAG.JEU_ba6>>==5
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 2 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_ba6
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","044"))
+		IF <EVAL <SRC.TAG.JEU_ba6>>==6
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 2 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_ba6
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","15"))
+		IF <EVAL <SRC.TAG.JEU_ba6>>==7
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 2 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_ba6
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","20"))
+		IF <EVAL <SRC.TAG.JEU_ba6>>==8
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 2 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_ba6
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSE
+		SRC.TAG.JEU_ba6
+		SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+	ENDIF
+ENDIF
+
+[ITEMDEF m_jeu_ba6]
+ID=i_memory
+NAME=jeu_ba6
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=1
+MORE1=1
+
+ON=@TIMER
+IF <MORE1>==1
+	CONT.SYSMESSAGEUA 025 1 1 0 Pour gagner 2 BA grace a distrigame suivez les instructions qui vont suivre :
+	MORE1=2
+	TIMER=4
+ELSEIF <MORE1>==2
+	CONT.SYSMESSAGEUA 0481 1 1 0 Une page de votre navigateur va s'ouvrir dans quelques instants, minimisez la, mais ne la fermez pas puis retournez en jeu
+	MORE1=3
+	TIMER=5
+ELSEIF <MORE1>==3
+	CONT.WEBLINK http:\\www.cibleclick.com/cibles/clicks/symp.cfm?site_id=1007641815&friend_id=815624825&banniere_id=34249
+	CONT.WEBLINK http:\\ad.cibleclick.com/cibles/banniere/symp.cfm?site_id=1007641815&friend_id=815624825&banniere_id=34249
+	MORE1=4
+	TIMER=15
+ELSEIF <MORE1>==4
+	CONT.SYSMESSAGEUA 0481 1 1 0 Cliquez sur le lien pour vous inscrire au site
+	MORE1=5
+	TIMER=8
+ELSEIF <MORE1>==5
+	CONT.SYSMESSAGEUA 0481 1 1 0 Remplissez le formulaire. Si vous ne mettez pas le bon pays, vous ne pourrez juste pas gagner de prix.
+	MORE1=6
+	TIMER=60
+ELSEIF <MORE1>==6
+	CONT.TAG.JEU_ba6=<EVAL(RAND(7))+1>
+	IF <EVAL <CONT.TAG.JEU_ba6>>==1
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Une fois inscrit, allez dans les jeux, et affichez les tous"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==2
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Une fois inscrit, allez dans les jeux, et affichez les tous"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==3
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Une fois inscrit, allez dans les jeux, et affichez les tous"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==4
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Une fois inscrit, cliquez sur le lien Distribonus a votre gauche"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==5
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Une fois inscrit, cliquez sur le lien Distribonus a votre gauche"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==6
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Une fois inscrit, cliquez sur le lien Distribonus a votre gauche"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==7
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Une fois inscrit, cliquez sur le lien Distribonus a votre gauche"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==8
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Une fois inscrit, cliquez sur le lien Distribonus a votre gauche"
+	ENDIF
+	MORE1=7
+	TIMER=10
+ELSEIF <MORE1>==7
+	IF <EVAL <CONT.TAG.JEU_ba6>>==1
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Le Mahjong fait parti de la categorie des jeux de xxx"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==2
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Sexypoker fait parti de la categorie des jeux de xxx"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==3
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Distribingo fait parti de la categorie des gros xxx"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==4
+		CONT.SYSMESSAGEUA 0481 1 1 0 "L'achat de 8000 DP coute xxx euros (le prix est en dessous)"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==5
+		CONT.SYSMESSAGEUA 0481 1 1 0 "L'achat de 2500 DP coute xxx euros (le prix est en dessous)"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==6
+		CONT.SYSMESSAGEUA 0481 1 1 0 "le numero de telephone pour les rejoindre en france est 08 99 700 xxx"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==7
+		CONT.SYSMESSAGEUA 0481 1 1 0 "L'achat de 10000 DP coute xxx euros (le prix est en dessous)"
+	ELSEIF <EVAL <CONT.TAG.JEU_ba6>>==8
+		CONT.SYSMESSAGEUA 0481 1 1 0 "L'achat de 20000 DP coute xxx euros (le prix est en dessous)"
+	ENDIF
+	MORE1=8
+	TIMER=20
+ELSE
+	CONT.SYSMESSAGEUA 0481 1 1 0 Une fois que vous savez par quoi remplacer xxx, tapez .ba6 suivi de votre reponse. Exemple : .ba6 expressos
+	REMOVE
+ENDIF
+RETURN 1

@@ -1,0 +1,144 @@
+[SKILLMENU sm_alchemy]
+Alchimie
+
+ON=i_bottle_white Potions d'endurance
+SKILLMENU=sm_potions_endurance
+
+ON=i_bottle_red Potions de guerison
+SKILLMENU=sm_potions_guerison
+
+ON=i_bottle_green Potions de mana
+SKILLMENU=sm_potions_mana
+
+ON=i_bottle_orange Potions de rajeunissement
+SKILLMENU=sm_potions_rajeunissement
+
+ON=i_bottle_white Potions benefiques
+SKILLMENU=sm_potions_benefiques
+
+ON=i_bottle_purple Potions malefiques
+SKILLMENU=sm_potions_malefiques
+
+ON=i_dyes Autres
+SKILLMENU=sm_potions_autres
+
+
+[SKILLMENU sm_potions_endurance]
+Potions d'endurance
+
+ON=i_potion_de_vitamines <name> (<resmake>)
+MAKEITEM=i_potion_de_vitamines
+
+
+[SKILLMENU sm_potions_guerison]
+Potions de guerison
+
+ON=i_potion_de_guerison_legere <name> (<resmake>)
+MAKEITEM=i_potion_de_guerison_legere
+
+ON=i_potion_de_guerison <name> (<resmake>)
+MAKEITEM=i_potion_de_guerison
+
+ON=i_elixir_de_vie <name> (<resmake>)
+MAKEITEM=i_elixir_de_vie
+
+ON=i_potion_de_guerison_divine <name> (<resmake>)
+MAKEITEM=i_potion_de_guerison_divine
+
+
+[SKILLMENU sm_potions_mana]
+Potions de mana
+
+ON=i_potion_de_mana_legere <name> (<resmake>)
+MAKEITEM=i_potion_de_mana_legere
+
+ON=i_potion_de_mana <name> (<resmake>)
+MAKEITEM=i_potion_de_mana
+
+ON=i_elixir_de_mana <name> (<resmake>)
+MAKEITEM=i_elixir_de_mana
+
+ON=i_potion_de_mana_divine <name> (<resmake>)
+MAKEITEM=i_potion_de_mana_divine
+
+
+[SKILLMENU sm_potions_rajeunissement]
+Potions de rajeunissement
+
+ON=i_potion_de_rajeunissement_legere <name> (<resmake>)
+MAKEITEM=i_potion_de_rajeunissement_legere
+
+ON=i_potion_de_rajeunissement <name> (<resmake>)
+MAKEITEM=i_potion_de_rajeunissement
+
+ON=i_elixir_de_rajeunissement <name> (<resmake>)
+MAKEITEM=i_elixir_de_rajeunissement
+
+ON=i_potion_de_rajeunissement_divine <name> (<resmake>)
+MAKEITEM=i_potion_de_rajeunissement_divine
+
+
+[SKILLMENU sm_potions_benefiques]
+Potions benefiques
+
+ON=i_potion_de_clairvoyance_legere <name> (<resmake>)
+MAKEITEM=i_potion_de_clairvoyance_legere
+
+ON=i_potion_de_clairvoyance <name> (<resmake>)
+MAKEITEM=i_potion_de_clairvoyance
+
+ON=i_potion_de_dexterite_legere <name> (<resmake>)
+MAKEITEM=i_potion_de_dexterite_legere
+
+ON=i_potion_de_dexterite <name> (<resmake>)
+MAKEITEM=i_potion_de_dexterite
+
+ON=i_potion_de_force_legere <name> (<resmake>)
+MAKEITEM=i_potion_de_force_legere
+
+ON=i_potion_de_force <name> (<resmake>)
+MAKEITEM=i_potion_de_force
+
+ON=i_potion_de_bouclier_de_mana <name> (<resmake>)
+MAKEITEM=i_potion_de_bouclier_de_mana
+
+ON=i_potion_d_accroissement_magique <name> (<resmake>)
+MAKEITEM=i_potion_d_accroissement_magique
+
+ON=i_potion_d_instinct_de_combat_mineur <name> (<resmake>)
+MAKEITEM=i_potion_d_instinct_de_combat_mineur
+
+ON=i_potion_d_instinct_de_combat_majeur <name> (<resmake>)
+MAKEITEM=i_potion_d_instinct_de_combat_majeur
+
+ON=i_potion_de_peau_de_pierre <name> (<resmake>)
+MAKEITEM=i_potion_de_peau_de_pierre
+
+ON=i_potion_de_peau_de_fer <name> (<resmake>)
+MAKEITEM=i_potion_de_peau_de_fer
+
+
+[SKILLMENU sm_potions_malefiques]
+Potions malefiques
+
+ON=i_potion_d_empoisonnement_legere <name> (<resmake>)
+MAKEITEM=i_potion_d_empoisonnement_legere
+
+ON=i_potion_d_empoisonnement <name> (<resmake>)
+MAKEITEM=i_potion_d_empoisonnement
+
+ON=i_potion_d_empoisonnement_grave <name> (<resmake>)
+MAKEITEM=i_potion_d_empoisonnement_grave
+
+
+[SKILLMENU sm_potions_autres]
+Autres
+
+ON=i_potion_de_reduction <name> (<resmake>)
+MAKEITEM=i_potion_de_reduction
+
+ON=i_dyes <name> (<resmake>)
+MAKEITEM=i_dyes
+
+ON=i_sac_d_epices <name> (<resmake>)
+MAKEITEM=i_sac_d_epices

@@ -1,0 +1,544 @@
+[ITEMDEF i_rune_lumiere]
+NAME=Rune Lumiere
+ID=i_rune_night_sight
+TYPE=t_spell
+LAYER=34
+
+ON=@Create
+MORE2=01
+MOREX=6
+MOREY={300.0 400.0}
+ATTR=026
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[CHARDEF c_aide_debutants]
+NAME=Xmelix
+ID=03c
+
+TSPEECH=spk_aide_debutants
+
+ON=@create
+COLOR=0ac3
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Aide debutant
+INVUL
+
+ON=@NPCSEENEWPLAYER
+SAY Bienvenue <SRC.NAME>, posez moi vos questions.
+
+ON=@NPCHearUnknown
+SAY Donnez moi les mots cles sur ce que vous cherchez, je pourrai peut-etre vous aider!
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-debutant
+DESCRIPTION=Xmelix
+
+[SPEECH spk_aide_debutants]
+
+ON=*bene*
+ON=*bless*
+IF ((<EVAL 0<SRC.TAG.LEVEL>> < 20) && (<EVAL 0<SRC.TAG.RENAISSANCE>> == 0))
+	SAY Voulez-vous que je vous donne une benediction?
+	SRC.TAG.CHOIX_DRAGON=1
+ELSE
+	SAY Malheureusement, je ne benis que les debutants !
+ENDIF
+
+ON=*proto*
+ON=*protect*
+IF ((<EVAL 0<SRC.TAG.LEVEL>> < 20) && (<EVAL 0<SRC.TAG.RENAISSANCE>> == 0))
+	SAY Voulez-vous que je vous donne une protection?
+	SRC.TAG.CHOIX_DRAGON=2
+ELSE
+	SAY Malheureusement, je ne protege que les debutants !
+ENDIF
+
+ON=*lumiere*
+ON=*in lor*
+IF ((<EVAL 0<SRC.TAG.LEVEL>> < 20) && (<EVAL 0<SRC.TAG.RENAISSANCE>> == 0))
+	SAY Voulez-vous que je vous donne un peu de lumiere?
+	SRC.TAG.CHOIX_DRAGON=3
+ELSE
+	SAY Malheureusement, je n'eclaire que les debutants !
+ENDIF
+
+ON=*heal*
+ON=*gueri*
+IF ((<EVAL 0<SRC.TAG.LEVEL>> < 20) && (<EVAL 0<SRC.TAG.RENAISSANCE>> == 0))
+	SAY Voulez-vous que je vous soigne?
+	SRC.TAG.CHOIX_DRAGON=4
+ELSE
+	SAY Malheureusement, je ne soigne que les debutants !
+ENDIF
+
+ON=*exp*
+SAY Voulez-vous en connaitre plus sur les points d'experience?
+SRC.TAG.CHOIX_DRAGON=5
+
+ON=*monstre*
+SAY Voulez-vous en connaitre plus sur les monstres?
+SRC.TAG.CHOIX_DRAGON=6
+
+ON=*stats*
+ON=*statis*
+SAY Voulez-vous en connaitre plus sur les points de statistique?
+SRC.TAG.CHOIX_DRAGON=7
+
+ON=*competence*
+SAY Voulez-vous en connaitre plus sur les points de competence?
+SRC.TAG.CHOIX_DRAGON=8
+
+ON=*quete*
+SAY Voulez-vous en savoir plus sur les quetes?
+SRC.TAG.CHOIX_DRAGON=9
+
+ON=*niveau*
+ON=*level*
+SAY Voulez-vous en savoir plus sur les niveaux?
+SRC.TAG.CHOIX_DRAGON=10
+
+ON=*force*
+ON=str
+SAY Voulez-vous en savoir plus sur la force?
+SRC.TAG.CHOIX_DRAGON=11
+
+ON=*dexterite*
+ON=dex
+SAY Voulez-vous en savoir plus sur la dexterite?
+SRC.TAG.CHOIX_DRAGON=12
+
+ON=*intel*
+ON=int
+SAY Voulez-vous en savoir plus sur l'intelligence?
+SRC.TAG.CHOIX_DRAGON=13
+
+ON=*alchi*
+ON=popo
+ON=potion
+SAY Voulez-vous en savoir plus sur l'alchimie?
+SRC.TAG.CHOIX_DRAGON=14
+
+ON=*anatomie*
+SAY Voulez-vous en savoir plus sur l'anatomie?
+SRC.TAG.CHOIX_DRAGON=15
+
+ON=*bricolage*
+ON=brico
+SAY Voulez-vous en savoir plus sur le bricolage?
+SRC.TAG.CHOIX_DRAGON=16
+
+ON=*bucheron*
+SAY Voulez-vous en savoir plus sur le bucheronnage?
+SRC.TAG.CHOIX_DRAGON=17
+
+ON=*couture*
+ON=*vetement*
+SAY Voulez-vous en savoir plus sur la couture?
+SRC.TAG.CHOIX_DRAGON=18
+
+ON=*dissimul*
+ON=*stealth*
+SAY Voulez-vous en savoir plus sur la dissimulation?
+SRC.TAG.CHOIX_DRAGON=19
+
+ON=*dressage*
+ON=*animaux*
+ON=*animal*
+SAY Voulez-vous en savoir plus sur le dressage?
+SRC.TAG.CHOIX_DRAGON=20
+
+ON=*extraction*
+SAY Voulez-vous en savoir plus sur l'extraction?
+SRC.TAG.CHOIX_DRAGON=21
+
+ON=*fabri*arc*
+SAY Voulez-vous en savoir plus sur la fabrication d'arc?
+SRC.TAG.CHOIX_DRAGON=22
+
+ON=*feronnerie*
+SAY Voulez-vous en savoir plus sur la feronnerie?
+SRC.TAG.CHOIX_DRAGON=23
+
+ON=*guerison*
+SAY Voulez-vous en savoir plus sur la guerison?
+SRC.TAG.CHOIX_DRAGON=24
+
+ON=*magie*
+SAY Voulez-vous en savoir plus sur la magie?
+SRC.TAG.CHOIX_DRAGON=25
+
+ON=*medit*
+SAY Voulez-vous en savoir plus sur la meditation?
+SRC.TAG.CHOIX_DRAGON=26
+
+ON=*menui*
+SAY Voulez-vous en savoir plus sur la menuiserie?
+SRC.TAG.CHOIX_DRAGON=27
+
+ON=*resist*sort*
+SAY Voulez-vous en savoir plus sur la resistance aux sortileges?
+SRC.TAG.CHOIX_DRAGON=28
+
+ON=*esquive*
+ON=*parry*
+SAY Voulez-vous en savoir plus sur l'esquive?
+SRC.TAG.CHOIX_DRAGON=29
+
+ON=*lutte*
+ON=*wrestl*
+SAY Voulez-vous en savoir plus sur la lutte?
+SRC.TAG.CHOIX_DRAGON=30
+
+ON=*tactic*
+ON=*tactique*
+SAY Voulez-vous en savoir plus sur la tactique?
+SRC.TAG.CHOIX_DRAGON=31
+
+ON=*transcript*
+SAY Voulez-vous en savoir plus sur la transcription?
+SRC.TAG.CHOIX_DRAGON=32
+
+ON=*travail*
+ON=*job*
+ON=*emploi*
+IF <SRC.FINDID.i_timer_travail_xmelix>
+	SAY Avez-vous termine le travail que je vous avais demande?
+	SRC.TAG.CHOIX_DRAGON=34
+ELSE
+	SAY Je pourrais vous trouver un petit quelque chose, voulez-vous vraiment un travail?
+	SRC.TAG.CHOIX_DRAGON=33
+ENDIF
+
+ON=beau
+SAY Vous etes egalement tres <SRC.SEX beau/belle> !
+
+ON=merci
+SAY De rien, je vous en pris !
+
+ON=magnifique
+ON=mignon
+ON=superbe
+SAY Vous etes egalement tres <SRC.SEX mignon/mignonne> !
+
+ON=*au revoir*
+ON=*bye*
+DORAND 3
+	SAY A bientot <SRC.NAME>
+	SAY A la prochaine <SRC.NAME>
+	SAY Au revoir <SRC.NAME>
+ENDDO
+BYE
+
+ON=adieu
+SAY Inutile d'en arriver jusque la, la vie est si belle!
+BYE
+
+ON=*picot*
+SAY Picot est le meilleur admin qui soit !
+
+ON=*tresor*
+SAY Quand vous avez de grands tresors sous les yeux, vous ne vous en apercevez jamais. Pourquoi? Car les hommes ne croient pas aux tresors.
+
+ON=*inconnu*
+ON=*conquerir*
+SAY Personne ne doit avoir peur de l'inconnu car tout homme est capable de conquerir ce qu'il veut et ce qui lui est necessaire
+
+ON=*reve*
+DORAND 2
+	SAY C'est justement la possibilite de realiser un reve qui rend la vie interessante.
+	SAY Vous avez peur de realiser vos plus grands reves car vous croyez ne pas les meriter, ou ne pas pouvoir y parvenir
+ENDDO
+
+ON=*mort*
+SAY En general, la mort fait que l'on devient plus attentif a la vie
+
+
+ON=oui
+ON=ouais
+IF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 0
+	SAY Oui? Vous voulez savoir quoi?
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 1
+	IF ((<EVAL 0<SRC.TAG.RENAISSANCE>> == 0) && (<EVAL 0<SRC.TAG.LEVEL>> < 20 ))
+		IF !<FINDID.m_temps_avant_guerison_combat>
+			SAY Vous voila maintenant beni!
+			SRC.NEWITEM i_rune_bless_combat
+			SRC.ACT.LINK=<SRC.UID>
+			SRC.ACT.EQUIP
+			SRC.ACT.TIMER=480
+			NEWITEM m_temps_avant_guerison_combat
+			ACT.CONT = <UID>
+		ELSE
+			SAY Attendez un moment !
+		ENDIF
+	ELSE
+		SAY Je ne benis que les debutants
+	ENDIF
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 2
+	IF ((<EVAL 0<SRC.TAG.RENAISSANCE>> == 0) && (<EVAL 0<SRC.TAG.LEVEL>> < 20 ))
+		IF !<FINDID.m_temps_avant_guerison_combat>
+			SAY Vous voila maintenant protege !
+			SRC.NEWITEM i_rune_protection_combat
+			SRC.ACT.LINK=<SRC.UID>
+			SRC.ACT.EQUIP
+			SRC.ACT.TIMER=480
+			NEWITEM m_temps_avant_guerison_combat
+			ACT.CONT = <UID>
+		ELSE
+			SAY Attendez un moment !
+		ENDIF
+	ELSE
+		SAY Je ne protege que les debutants
+	ENDIF
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 3
+	IF ((<EVAL 0<SRC.TAG.RENAISSANCE>> == 0) && (<EVAL 0<SRC.TAG.LEVEL>> < 20 ))
+		IF !<FINDID.m_temps_avant_guerison_combat>
+			SAY Que la lumiere soit !
+			SRC.NEWITEM i_rune_lumiere
+			SRC.ACT.LINK=<SRC.UID>
+			SRC.ACT.EQUIP
+			SRC.ACT.TIMER=600
+			NEWITEM m_temps_avant_guerison_combat
+			ACT.CONT = <UID>
+		ELSE
+			SAY Attendez un moment !
+		ENDIF
+	ELSE
+		SAY Je n'eclaire que les debutants
+	ENDIF
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 4
+	IF ((<EVAL 0<SRC.TAG.RENAISSANCE>> == 0) && (<EVAL 0<SRC.TAG.LEVEL>> < 20 ))
+		IF !<FINDID.m_temps_avant_guerison_combat>
+			SAY Vous voila en tres bonne sante desormais !
+			SRC.HITS = <SRC.STR>
+			NEWITEM m_temps_avant_guerison_combat
+			ACT.CONT = <UID>
+		ELSE
+			SAY Attendez un moment !
+		ENDIF
+	ELSE
+		SAY Je ne gueris que les debutants !
+	ENDIF
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 5
+	SAY Chaque monstre tue vous apportera des points d'experience, puis des niveaux.
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 6
+	SAY Les monstres se trouvent un peu partout sur Britannia. Plus ils sont puissants, plus ils vous apporteront en points d'experience
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 7
+	SAY Il y'a 3 sortes de points de statistiques, la force, la dexterite, et l'intelligence. Ils sont la base de la puissance des personnages.
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 8
+	SAY Il y'a beaucoup de points de competence ameliorant considerablement votre personnage sous certains aspects, voulez-vous la liste complete?
+	SRC.TAG.CHOIX_DRAGON = 200
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 9
+	SAY Britannia offre de nombreuses quetes variant enormement en difficulte, certaines sont uniques, d'autres peuvent se refaire plusieurs fois. Voulez-vous que je vous ouvre la page des quetes?
+	SRC.TAG.CHOIX_DRAGON=202
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 10
+	SAY Chaque niveau vous rapportera 5 points de statistique et competence que vous pourrez placer a l'endroit de votre choix. Voulez-vous en savoir plus?
+	SRC.TAG.CHOIX_DRAGON = 201
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 11
+	SAY La force monte vos points de vie maximum, vous fait frapper plus fort et augmente vos chances de porter des coups puissants.
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 12
+	SAY La dexterite monte votre endurance maximale, vous fait frapper plus vite et augmente vos chances de transpercer l'armure et d'assomer votre adversaire.
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 13
+	SAY L'intelligence monte votre mana maximal, et augmente les degats des brulures de mana
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 14
+	SAY L'alchimie est la connaissance des plantes et leurs vertues servant a la fabrication de potions. Voulez-vous que je vous ouvre la page des potions?
+	SRC.TAG.CHOIX_DRAGON=203
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 15
+	SAY L'anatomie est ce qui vous permet de connaitre les points faibles de votre adversaire. Plus vous la maitriserez, plus vous augmenterez vos chances de transpercer l'armure et d'assomer vos adversaires.
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 16
+	SAY Le bricolage est la competence vous permettant de realiser des outils simples a tres complexes, allant jusqu'aux bijoux magiques. Voulez-vous que je vous ouvre la page des objets pouvant etre fabriques?
+	SRC.TAG.CHOIX_DRAGON=204
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 17
+	SAY Le bucheronnage est un metier utile a l'economie. Plus votre competence augmentera, plus vous pourrez rapidement couper du bois.
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 18
+	SAY La couture est un metier permettant de confectionner de simples vetements, comme des robes et capes magiques puissantes. Voulez-vous que je vous ouvre la page des vetements pouvant etre cousus?
+	SRC.TAG.CHOIX_DRAGON=205
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 19
+	SAY La dissimulation est l'art de se camoufler dans le paysage pour devenir completement invisible pour les autres.
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 20
+	SAY Le dressage est l'art de convaincre les animaux que le mieux qui puisse leur arriver, c'est vous!
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 21
+	SAY L'extraction est l'art de sortir des mineraux precieux du sol. Voulez vous que je vous ouvre la page avec la liste des mineraux?
+	SRC.TAG.CHOIX_DRAGON=206
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 22
+	SAY La fabrication d'arc? Simple, c'est pour fabriquer des arcs. Voulez vous que je vous ouvre la page avec la liste des arcs pouvant etre construits?
+	SRC.TAG.CHOIX_DRAGON=207
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 23
+	SAY La feronnerie est probablement le metier le plus populaire de Britannia car il permet de fabriquer armes et armures puissantes. Voulez-vous que je vous ouvre la page qui contient la liste d'objets forgeables?
+	SRC.TAG.CHOIX_DRAGON=208
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 24
+	SAY La guerison vous permettra de vous guerir a l'aide de bandages.
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 25
+	SAY La magie c'est utiliser les elements en votre faveur pour vous proteger et/ou detruire votre adversaire. Voulez vous que je vous ouvre la page avec la liste des sorts?
+	SRC.TAG.CHOIX_DRAGON=209
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 26
+	SAY La meditation est utilisee lorsque vous voulez vous concentrer pour gagner du mana plus rapidement.
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 27
+	SAY La menuiserie c'est utiliser le bois pour en faire des oeuvres d'art. Voulez vous que je vous ouvre la page avec la liste des objets fabricables avec la menuiserie?
+	SRC.TAG.CHOIX_DRAGON=210
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 28
+	SAY La résistance aux sortileges vous permettra de contrer les sorts malicieux de vos ennemis
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 29
+	SAY L'esquive vous permettra de monter votre classe d'armure en utilisant un bouclier
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 30
+	SAY La lutte c'est l'art de combattre a mains nues. Plus vous serez un lutteur competent, plus les dommages de vos coups portes avec des gants de boxe augmenteront. Voulez vous que je vous ouvre la page des gants de boxe?
+	SRC.TAG.CHOIX_DRAGON=211
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 31
+	SAY La tactique augmentera vos chances de faire les trois coups speciaux, soient le coup puissant, transpercer l'armure et assomer.
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 32
+	SAY La transcription vous permet de fabriquer des livres, ainsi que des parchemins de sort, si vous avez la magie et les ingredients pour les lancer. Voulez vous que je vous ouvre la page avec la liste des objets transcriptibles?
+	SRC.TAG.CHOIX_DRAGON=212
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 33
+	DIALOG D_SELECTION_XMELIX_MISSION
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 34
+	IF <SRC.FINDID.i_boite_a_cranes_de_monstres>
+		IF <SRC.FINDID.i_boite_a_cranes_de_monstres.TAG.PROPRIO_UID> == <SRC.UID>
+			IF <SRC.FINDID.i_boite_a_cranes_de_monstres.MORE1> == <SRC.FINDID.i_boite_a_cranes_de_monstres.MORE2>
+				SAY Britannia et moi-meme te remercions pour cet aide, voici vos <EVAL 0<SRC.FINDID.i_boite_a_cranes_de_monstres.TAG.SALAIRE>> pieces, vous les avez grandement meritees!
+				SRC.DEPOSER_CASH <SRC.FINDID.i_boite_a_cranes_de_monstres.TAG.SALAIRE>
+				SRC.FINDID.i_boite_a_cranes_de_monstres.REMOVE
+				SRC.FINDID.i_timer_travail_xmelix.REMOVE
+			ELSE
+				SAY Remplissez votre boite de tetes de <SRC.FINDID.i_boite_a_cranes_de_monstres.TAG.NOM_TETE_MONSTRE> et vous aurez votre recompense.
+			ENDIF
+		ELSE
+			SAY Ne me prenez pas pour un imbecile, ce n'est meme pas votre boite!
+		ENDIF
+	ELSE
+		SAY Vous mentez, vous n'avez meme pas de boite de crane sur vous !
+	ENDIF
+	SRC.TAG.CHOIX_DRAGON
+
+
+
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 200
+	SAY il y'a dans l'ordre : anatomie, armes d'estoc, armes de choc, armes de taille, esquive, eval de l'intellect, guerison, lutte, magie, meditation, resist aux sorts, tactique et tir a l'arc !
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 201
+	SAY Pour placer vos points, vous n'avez qu'a utiliser la commande .gestion. Il est a noter que plus vous aurez de renaissances et de niveaux, plus cela vous coutera cher !
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 202
+	SRC.WEBLINK http:\\www.uoapo.com/quetes.asp.html
+	SAY Ouverture de la page de quetes...
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 203
+	SRC.WEBLINK http:\\www.uoapo.com/alchimie.asp.html
+	SAY Ouverture de la page d'alchimie...
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 204
+	SRC.WEBLINK http:\\www.uoapo.com/bricolage.asp.html
+	SAY Ouverture de la page de bricolage...
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 205
+	SRC.WEBLINK http:\\www.uoapo.com/couture.asp.html
+	SAY Ouverture de la page de couture...
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 206
+	SRC.WEBLINK http:\\www.uoapo.com/extraction.asp.html
+	SAY Ouverture de la page d'extraction...
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 207
+	SRC.WEBLINK http:\\www.uoapo.com/fabrication_arcs.asp.html
+	SAY Ouverture de la page de fabrication d'arcs...
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 208
+	SRC.WEBLINK http:\\www.uoapo.com/feronnerie.asp.html
+	SAY Ouverture de la page de feronnerie...
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 209
+	SRC.WEBLINK http:\\www.uoapo.com/magie.asp.html
+	SAY Ouverture de la page de magie...
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 210
+	SRC.WEBLINK http:\\www.uoapo.com/menuiserie.asp.html
+	SAY Ouverture de la page de menuiserie...
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 211
+	SRC.WEBLINK http:\\www.uoapo.com/robes.asp.html
+	SAY Ouverture de la page de gants de boxe...
+	SRC.TAG.CHOIX_DRAGON
+ELSEIF <EVAL 0<SRC.TAG.CHOIX_DRAGON>> == 212
+	SRC.WEBLINK http:\\www.uoapo.com/transcription.asp.html
+	SAY Ouverture de la page de transcription...
+	SRC.TAG.CHOIX_DRAGON
+ENDIF
+
+ON=non
+IF 0<SRC.TAG.CHOIX_DRAGON> > 0
+	SAY D'accord !
+ELSE
+	SAY Un non pour un non, je dis non!
+ENDIF
+SRC.TAG.CHOIX_DRAGON
+
+
+//***********************************
+//*************DIALOGS***************
+//***********************************
+
+//SRC = JOUEUR ; DEFAULT = XMELIX
+[DIALOG D_SELECTION_XMELIX_MISSION]
+0,0
+
+page 0
+resizepic 0 0 2620 400 260
+
+page 1
+text 100 20 1152 1//Faite votre choix de mission
+text 20 40 1152 2//Chasseur de monstres
+text 20 60 1152 3//N.D.
+button 200 45 2103 2104 1 0 1//Chasseur de monstres
+button 200 65 2103 2104 1 0 2//N.D.
+
+
+[DIALOG D_SELECTION_XMELIX_MISSION TEXT]
+<VAR.BLANKLINE>
+Faite votre choix de mission
+Chasseur de monstres
+N.D.
+
+[DIALOG D_SELECTION_XMELIX_MISSION BUTTON]
+//CHASSEUR DE MONSTRE
+ON=0
+RETURN 1
+
+ON=1
+DIALOG D_SELECTION_XMELIX_CHASSEUR
+RETURN 1
+
+ON=2
+RETURN 1

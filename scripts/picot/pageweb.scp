@@ -1,0 +1,12 @@
+//TAG.FIREFOX = 1 ==> (http:// + args) SINON (http:\\ + args)
+//ARGS : page web a afficher sans le http://
+//DEFAULT : JOUEUR
+[FUNCTION PAGEWEB]
+VAR.TEMP = "/"
+IF 0<TAG.FIREFOX> > 0
+	ARGS = http:<VAR.TEMP><VAR.TEMP><ARGS>
+ELSE
+	ARGS = http:\\<ARGS>
+ENDIF
+WEBLINK <ARGS>
+RETURN 1

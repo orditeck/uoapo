@@ -1,0 +1,200 @@
+//DEFAULT : Minerai a echanger
+//ARGS : Classe de minerai
+[FUNCTION ECHANGE_MINERAI_CLASSE_SUPERIEURE]
+IF <AMOUNT> >= 10
+	IF ( (<TYPE> == T_INGOT) && (<ARGS> > 0) && (<ARGS> < 8) )
+		VAR.TEMP_CREATION = <EVAL <AMOUNT> / 10>
+		AMOUNT = <EVAL <AMOUNT> - (<VAR.TEMP_CREATION> * 10)>
+		IF <ARGS> == 1
+			DORAND 4
+				TOPOBJ.NEWITEM i_ingot_rose
+				TOPOBJ.NEWITEM i_ingot_shadow
+				TOPOBJ.NEWITEM i_ingot_gold
+				TOPOBJ.NEWITEM i_ingot_agapite
+			ENDDO
+		ELSEIF <ARGS> == 2
+			DORAND 4
+				TOPOBJ.NEWITEM i_ingot_mytheril
+				TOPOBJ.NEWITEM i_ingot_bloodrock
+				TOPOBJ.NEWITEM i_ingot_valorite
+				TOPOBJ.NEWITEM i_ingot_verite
+			ENDDO
+		ELSEIF <ARGS> == 3
+			DORAND 4
+				TOPOBJ.NEWITEM i_ingot_adulaire
+				TOPOBJ.NEWITEM i_ingot_calcite
+				TOPOBJ.NEWITEM i_ingot_epidote
+				TOPOBJ.NEWITEM i_ingot_blackrock
+			ENDDO
+		ELSEIF <ARGS> == 4
+			DORAND 4
+				TOPOBJ.NEWITEM i_ingot_barytine
+				TOPOBJ.NEWITEM i_ingot_crocoite
+				TOPOBJ.NEWITEM i_ingot_morganite
+				TOPOBJ.NEWITEM i_ingot_pyromorphite
+			ENDDO
+		ELSEIF <ARGS> == 5
+			DORAND 4
+				TOPOBJ.NEWITEM i_ingot_autunite
+				TOPOBJ.NEWITEM i_ingot_chrysoprase
+				TOPOBJ.NEWITEM i_ingot_fluorite
+				TOPOBJ.NEWITEM i_ingot_vanadinite
+			ENDDO
+		ELSEIF <ARGS> == 6
+			DORAND 4
+				TOPOBJ.NEWITEM i_ingot_aqua
+				TOPOBJ.NEWITEM i_ingot_silver
+				TOPOBJ.NEWITEM i_ingot_goshenite
+				TOPOBJ.NEWITEM i_ingot_heliodor
+			ENDDO
+		ELSEIF <ARGS> == 7
+			DORAND 4
+				TOPOBJ.NEWITEM i_ingot_aventurine
+				TOPOBJ.NEWITEM i_ingot_azurite
+				TOPOBJ.NEWITEM i_ingot_citrine
+				TOPOBJ.NEWITEM i_ingot_grenat
+			ENDDO
+		ENDIF
+		TOPOBJ.ACT.AMOUNT = <VAR.TEMP_CREATION>
+		TOPOBJ.ACT.CONT = <TOPOBJ.UID>
+		VAR.TEMP_CREATION
+	ENDIF
+ELSE
+	TOPOBJ.SYSMESSAGEUA 025 1 1 0 Il vous faut un lot de plus de 10 lingots pour faire l'échange !
+ENDIF
+//DOIT ETRE A LA FIN POUR EVITER QUE LE SCRIPT NE COUPE QUAND SON DEFAULT EST SUPPRIME
+IF <AMOUNT> == 0
+	REMOVE
+ENDIF
+RETURN 1
+
+
+//LINK : NPC echangeur
+//MORE2 : Réservé pour classe de lingot
+[ITEMDEF m_selectionneur_echange_minerai]
+NAME=Selection minerai a echanger
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TYPE> == T_INGOT
+	IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+		MORE2 = 0
+		IF ( (<SRC.TARG.BASEID> == i_ingot_bronze) || (<SRC.TARG.BASEID> == i_ingot_copper) || (<SRC.TARG.BASEID> == i_ingot_rusty) )
+			MORE2 = 1
+		ELSEIF ( (<SRC.TARG.BASEID> == i_ingot_rose) || (<SRC.TARG.BASEID> == i_ingot_shadow) || (<SRC.TARG.BASEID> == i_ingot_gold) || (<SRC.TARG.BASEID> == i_ingot_agapite) )
+			MORE2 = 2
+		ELSEIF ( (<SRC.TARG.BASEID> == i_ingot_mytheril) || (<SRC.TARG.BASEID> == i_ingot_bloodrock) || (<SRC.TARG.BASEID> == i_ingot_valorite) || (<SRC.TARG.BASEID> == i_ingot_verite) )
+			MORE2 = 3
+		ELSEIF ( (<SRC.TARG.BASEID> == i_ingot_adulaire) || (<SRC.TARG.BASEID> == i_ingot_calcite) || (<SRC.TARG.BASEID> == i_ingot_epidote) || (<SRC.TARG.BASEID> == i_ingot_blackrock) )
+			MORE2 = 4
+		ELSEIF ( (<SRC.TARG.BASEID> == i_ingot_barytine) || (<SRC.TARG.BASEID> == i_ingot_crocoite) || (<SRC.TARG.BASEID> == i_ingot_morganite) || (<SRC.TARG.BASEID> == i_ingot_pyromorphite) )
+			MORE2 = 5
+		ELSEIF ( (<SRC.TARG.BASEID> == i_ingot_autunite) || (<SRC.TARG.BASEID> == i_ingot_chrysoprase) || (<SRC.TARG.BASEID> == i_ingot_fluorite) || (<SRC.TARG.BASEID> == i_ingot_vanadinite) )
+			MORE2 = 6
+		ELSEIF ( (<SRC.TARG.BASEID> == i_ingot_aqua) || (<SRC.TARG.BASEID> == i_ingot_silver) || (<SRC.TARG.BASEID> == i_ingot_goshenite) || (<SRC.TARG.BASEID> == i_ingot_heliodor) )
+			MORE2 = 7
+		ENDIF
+		IF <MORE2> > 0
+			IF <SRC.TARG.AMOUNT> >= 10
+				SRC.TARG.ECHANGE_MINERAI_CLASSE_SUPERIEURE <MORE2>
+				LINK.SAY Merci <SRC.NAME> !
+			ELSE
+				LINK.SAY <SRC.NAME>, Il vous faut au moins 10 lingots pour faire l'echange !
+				TARGET
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> n'est pas un lingot echangeable !
+			TARGET
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas echanger des lingots n'etant pas dans votre inventaire !
+		TARGET
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> n'est pas un lingot !
+	TARGET
+ENDIF
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 025 1 1 0 Vous devez selectionner un lingot !
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 025 1 1 0 <SRC.TARG.NAME> n'est pas un lingot !
+TARGET
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+
+[CHARDEF C_ECHANGEUR_MINERAI]
+NAME=Echangeur de minerai
+ID=C_MAN
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=SPEECH_ECHANGEUR_MINERAI
+
+ON=@GETHIT
+HITS=9999
+RETURN 1
+
+ON=@SPELLCAST
+RETURN 1
+
+ON=@Create
+TITLE=Le mineraliste
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=1
+INT=1
+INVUL
+TACTICS=3000
+
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+
+ON=@NPCRestock
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+ITEMNEWBIE=i_shirt_plain
+COLOR=colors_all
+ITEMNEWBIE=random_pants
+COLOR=colors_all
+ITEMNEWBIE=random_shoes
+COLOR=colors_neutral
+
+ON=@NPCHearUnknown
+SAY Vous auriez quelques lingots a echanger?
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Acheteur
+DESCRIPTION=Échangeur de minerai
+
+[SPEECH SPEECH_ECHANGEUR_MINERAI]
+
+ON=oui
+ON=*echange*
+SAY Montrez moi les lingots que vous aimeriez m'echanger. Je vous donnerai un lingot de classe superieure par lot de 10 lingots.
+SRC.NEWITEM m_selectionneur_echange_minerai
+SRC.ACT.LINK = <UID>
+SRC.ACT.CONT = <SRC.UID>
+SRC.ACT.USE
+RETURN 1

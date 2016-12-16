@@ -1,0 +1,302 @@
+//****************************************
+//***************MONSTRES*****************
+//****************************************
+
+[CHARDEF c_potato_diablo]
+NAME=El Potato Diablo
+ID=c_daemon_w_sword
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=099c
+STR=5
+DEX=5
+INT=5
+
+EVENTS +e_xpmonstre
+TAG.XPMORT=0
+TAG.XPCOUP=0
+TAG.PIECES_OR=0
+TAG.TAPER=30
+TAG.NIVEAU=100
+
+FAME=1000
+KARMA=-9999
+
+TACTICS=3000.0
+WRESTLING=3000.0
+DetectingHidden=3000.0
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1 }
+
+CATEGORY=Monstres
+SUBSECTION=Animations
+DESCRIPTION=El Potato Diablo
+
+[CHARDEF c_griroesh]
+NAME=Griroesh
+ID=c_orc_lord
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0b7b
+STR=9000
+DEX=9000
+INT=0
+
+EVENTS +e_xpmonstre
+TAG.XPMORT=750000
+TAG.XPCOUP={12500 25000}
+TAG.PIECES_OR={12500 25000}
+TAG.TAPER=30
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS={3000.0 3000.0}
+WRESTLING={3000.0 3000.0}
+DetectingHidden={3000.0 3000.0}
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1 i_fiole_de_sang_brulant 1}
+
+CATEGORY=Monstres
+SUBSECTION=Animations
+DESCRIPTION=Griroesh
+
+
+[CHARDEF c_gluriurl]
+NAME=Gluriurl
+ID=c_orc_lord
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0996
+STR=9000
+DEX=9000
+INT=0
+
+EVENTS +e_xpmonstre
+TAG.XPMORT=750000
+TAG.XPCOUP={12500 25000}
+TAG.PIECES_OR={12500 25000}
+TAG.TAPER=30
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS={3000.0 3000.0}
+WRESTLING={3000.0 3000.0}
+DetectingHidden={3000.0 3000.0}
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1 i_fiole_de_sang_rougeatre 1}
+
+CATEGORY=Monstres
+SUBSECTION=Animations
+DESCRIPTION=Gluriurl
+
+
+[CHARDEF c_greyleaf]
+NAME=Greyleaf
+ID=c_orc_lord
+CAN=MT_WALK|MT_RUN|MT_EQUIP
+
+ON=@Create
+COLOR=0abe
+STR=9000
+DEX=9000
+INT=0
+
+EVENTS +e_xpmonstre
+TAG.XPMORT=750000
+TAG.XPCOUP={12500 25000}
+TAG.PIECES_OR={12500 25000}
+TAG.TAPER=30
+TAG.NIVEAU=100
+
+KARMA=-9999
+
+TACTICS={3000.0 3000.0}
+WRESTLING={3000.0 3000.0}
+DetectingHidden={3000.0 3000.0}
+
+NPC=BRAIN_MONSTER
+
+ON=@NPCRestock
+ITEM={ i_stats_dropp 1 i_fiole_de_sang_brunatre 1}
+
+CATEGORY=Monstres
+SUBSECTION=Animations
+DESCRIPTION=Greyleaf
+
+
+//*******************************************
+//*****************OBJETS********************
+//*******************************************
+
+
+[ITEMDEF i_fiole_de_sang_brulant]
+NAME=Fiole de sang brulant
+ID=i_jar_half_full
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b7b
+
+CATEGORY=Anims
+SUBSECTION=hobgobelin
+DESCRIPTION=Fiole de sang brulant
+
+[ITEMDEF i_fiole_de_sang_rougeatre]
+NAME=Fiole de sang rougeatre
+ID=i_jar_half_full
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0996
+
+CATEGORY=Anims
+SUBSECTION=hobgobelin
+DESCRIPTION=Fiole de sang rougeatre
+
+[ITEMDEF i_fiole_de_sang_brunatre]
+NAME=Fiole de sang brunatre
+ID=i_jar_half_full
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0abe
+
+CATEGORY=Anims
+SUBSECTION=hobgobelin
+DESCRIPTION=Fiole de sang brunatre
+
+[ITEMDEF i_tete_de_mort_hobgobelin]
+NAME=Mort aux Humains ! Gloire aux Hobgobelins !
+ID=01f18
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b7b
+ATTR=08010
+
+ON=@DCLICK
+IF <SRC.FINDID.m_anim_hobgobelin>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja obtenu le talisman
+ELSE
+	IF ((<SRC.FINDID.i_fiole_de_sang_brulant>) && (<SRC.FINDID.i_fiole_de_sang_rougeatre>) && (<SRC.FINDID.i_fiole_de_sang_brunatre>))
+		SRC.EMOTE verser les 3 fioles dans la bouche de la statue et y sortir un talisman
+		SRC.CONSUME 1 i_fiole_de_sang_brulant
+		SRC.CONSUME 1 i_fiole_de_sang_rougeatre
+		SRC.CONSUME 1 i_fiole_de_sang_brunatre
+		SRC.NEWITEM m_anim_hobgobelin
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.NEWITEM i_talisman_de_hobgobelin
+		SRC.ACT.BOUNCE
+		SRC.FINDID.m_anim_hobgobelin.TAG.UID_TALISMAN = <SRC.ACT.UID>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous remarquez une fente dans la bouche de la statue
+	ENDIF
+ENDIF
+RETURN 1
+
+CATEGORY=Anims
+SUBSECTION=hobgobelin
+DESCRIPTION=Tete de mort hobgobelin
+
+[ITEMDEF i_talisman_de_hobgobelin]
+NAME=Talisman de hobgobelin
+ID=01085
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b7b
+
+ON=@DCLICK
+MESSAGE Vous remarquez que le talisman peut servir de cle
+RETURN 1
+
+ON=@EQUIP
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas porter ce talisman!
+UNEQUIP
+RETURN 1
+
+CATEGORY=Anims
+SUBSECTION=hobgobelin
+DESCRIPTION=Talisman de hobgobelin
+
+[ITEMDEF i_coffre_hobgobelin]
+NAME=Coffre Hobgobelin
+ID=0e40
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0b7b
+
+ON=@DCLICK
+IF ((<SRC.FINDID.m_anim_hobgobelin>) && (0<SRC.FINDID.m_anim_hobgobelin.TAG.TRESOR_TROUVE> > 0))
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja obtenu le tresor!
+ELSE
+	IF <SRC.FINDID.i_talisman_de_hobgobelin>
+		SRC.EMOTE enfoncer le talisman dans l'emplacement et sortir un tresor
+		SRC.CONSUME 1 i_talisman_de_hobgobelin
+		IF !<SRC.FINDID.m_anim_hobgobelin>
+			SRC.NEWITEM m_anim_hobgobelin
+			SRC.ACT.CONT=<SRC.UID>
+		ENDIF
+		SRC.FINDID.m_anim_hobgobelin.TAG.TRESOR_TROUVE=1
+		SRC.NEWITEM i_piece_diamant
+		SRC.ACT.AMOUNT=300
+		SRC.ACT.BOUNCE
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous remarquez une serrure, une cle pourrait ouvrir ce coffre !
+	ENDIF
+ENDIF
+RETURN 1
+
+CATEGORY=Anims
+SUBSECTION=hobgobelin
+DESCRIPTION=Coffre de hobgobelin
+
+
+//*******************************************
+//***************MEMORY**********************
+//*******************************************
+
+[ITEMDEF m_anim_hobgobelin]
+ID=i_memory
+NAME=Memory anim hobgobelin
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=86400
+
+ON=@TIMER
+IF 0<TAG.UID_TALISMAN> > 0
+	UID.09903F.ACT = <TAG.UID_TALISMAN>
+	IF <UID.09903F.ACT.BASEID> == i_talisman_de_hobgobelin
+		UID.09903F.ACT.REMOVE
+	ENDIF
+ENDIF
+REMOVE
+RETURN 1
+
+[PLEVEL 4]
+RESETANIMHOB
+
+[FUNCTION RESETANIMHOB]
+IF <FINDID.m_anim_hobgobelin>
+	FINDID.m_anim_hobgobelin.TIMER=1
+	SYSMESSAGEUA 0481 1 1 0 Anim hobgobelin remis a 0
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous n'avez rien a remettre a 0
+ENDIF
+RETURN 1

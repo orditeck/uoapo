@@ -1,0 +1,317 @@
+[DIALOG D_QUETE_METIER_INSCRIPTION]
+0,0
+
+page 0
+resizepic 0 0 2620 300 260
+
+page 1
+text 100 20 1152 1//REGISTRE
+text 40 70 1152 2//ALCHIMIE
+text 40 90 1152 3//BRICOLAGE
+text 40 110 1152 4//BUCHERONNAGE
+text 40 130 1152 5//COUTURE
+text 40 150 1152 6//EXTRACTION
+text 40 170 1152 7//FABRICATION D'ARC
+text 40 190 1152 8//FERONNERIE
+text 40 210 1152 9//MENUISERIE
+text 40 230 1152 10//TRANSCRIPTION
+button 10 70 2103 2104 1 0 1//SIGNER ALCHIMIE
+button 10 90 2103 2104 1 0 2//SIGNER BRICOLAGE
+button 10 110 2103 2104 1 0 3//SIGNER BUCHERONNAGE
+button 10 130 2103 2104 1 0 4//SIGNER COUTURE
+button 10 150 2103 2104 1 0 5//SIGNER EXTRACTION
+button 10 170 2103 2104 1 0 6//SIGNER FABRICATION D'ARC
+button 10 190 2103 2104 1 0 7//SIGNER FERONNERIE
+button 10 210 2103 2104 1 0 8//SIGNER MENUISERIE
+button 10 230 2103 2104 1 0 9//SIGNER TRANSCRIPTION
+
+[DIALOG D_QUETE_METIER_INSCRIPTION text]
+<VAR.BLANKLINE>
+Registre
+Je desire obtenir un travail en alchimie
+Je desire obtenir un travail en bricolage
+Je desire obtenir un travail en bucheronnage
+Je desire obtenir un travail en couture
+Je desire obtenir un travail en extraction
+Je desire obtenir un travail en fabrication d'arc
+Je desire obtenir un travail en feronnerie
+Je desire obtenir un travail en menuiserie
+Je desire obtenir un travail en transcription
+
+[DIALOG D_QUETE_METIER_INSCRIPTION button]
+ON=1
+IF <SRC.FINDID.m_quete_metier>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja un metier !
+ELSE
+	SRC.NEWITEM m_quete_metier
+	SRC.ACT.TAG.NUMERO_JOB=1//ALCHIMIE
+	SRC.ARC.TAG.DIVISEUR=110
+	SRC.ARC.TAG.MULTIPLICATEUR=<EVAL 300 * ( <SRC.ALCHEMY> / 10 )>
+	SRC.ACT.TAG.AVANCEMENT=1
+	RANDOM_UID_CIBLE_METIER
+	SRC.ACT.TAG.UIDCIBLE=<VAR.UIDCIBLE>
+	SAY Vous etes engage! Allez voir <UID.<VAR.UIDCIBLE>.NAME> pour plus de detail.
+ENDIF
+
+ON=2
+IF <SRC.FINDID.m_quete_metier>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja un metier !
+ELSE
+	SRC.NEWITEM m_quete_metier
+	SRC.ACT.TAG.NUMERO_JOB=2//BRICOLAGE
+	SRC.ARC.TAG.DIVISEUR=90
+	SRC.ARC.TAG.MULTIPLICATEUR=<EVAL 300 * ( <SRC.TINKERING> / 10 )>
+	SRC.ACT.TAG.AVANCEMENT=1
+	RANDOM_UID_CIBLE_METIER
+	SRC.ACT.TAG.UIDCIBLE=<VAR.UIDCIBLE>
+	SAY Vous etes engage! Allez voir <UID.<VAR.UIDCIBLE>.NAME> pour plus de detail.
+ENDIF
+
+ON=3
+IF <SRC.FINDID.m_quete_metier>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja un metier !
+ELSE
+	SRC.NEWITEM m_quete_metier
+	SRC.ACT.TAG.NUMERO_JOB=3//BUCHERONNAGE
+	SRC.ARC.TAG.DIVISEUR=75
+	SRC.ARC.TAG.MULTIPLICATEUR=<EVAL 300 * ( <SRC.LUMBERJACKING> / 10 )>
+	SRC.ACT.TAG.AVANCEMENT=1
+	RANDOM_UID_CIBLE_METIER
+	SRC.ACT.TAG.UIDCIBLE=<VAR.UIDCIBLE>
+	SAY Vous etes engage! Allez voir <UID.<VAR.UIDCIBLE>.NAME> pour plus de detail.
+ENDIF
+
+ON=4
+IF <SRC.FINDID.m_quete_metier>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja un metier !
+ELSE
+	SRC.NEWITEM m_quete_metier
+	SRC.ACT.TAG.NUMERO_JOB=4//COUTURE
+	SRC.ARC.TAG.DIVISEUR=85
+	SRC.ARC.TAG.MULTIPLICATEUR=<EVAL 300 * ( <SRC.TAILORING> / 10 )>
+	SRC.ACT.TAG.AVANCEMENT=1
+	RANDOM_UID_CIBLE_METIER
+	SRC.ACT.TAG.UIDCIBLE=<VAR.UIDCIBLE>
+	SAY Vous etes engage! Allez voir <UID.<VAR.UIDCIBLE>.NAME> pour plus de detail.
+ENDIF
+
+ON=5
+IF <SRC.FINDID.m_quete_metier>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja un metier !
+ELSE
+	SRC.NEWITEM m_quete_metier
+	SRC.ACT.TAG.NUMERO_JOB=5//EXTRACTION
+	SRC.ARC.TAG.DIVISEUR=130
+	SRC.ARC.TAG.MULTIPLICATEUR=<EVAL 300 * ( <SRC.MINING> / 10 )>
+	SRC.ACT.TAG.AVANCEMENT=1
+	RANDOM_UID_CIBLE_METIER
+	SRC.ACT.TAG.UIDCIBLE=<VAR.UIDCIBLE>
+	SAY Vous etes engage! Allez voir <UID.<VAR.UIDCIBLE>.NAME> pour plus de detail.
+ENDIF
+
+ON=6
+IF <SRC.FINDID.m_quete_metier>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja un metier !
+ELSE
+	SRC.NEWITEM m_quete_metier
+	SRC.ACT.TAG.NUMERO_JOB=6//FABRICATION D'ARC
+	SRC.ARC.TAG.DIVISEUR=60
+	SRC.ARC.TAG.MULTIPLICATEUR=<EVAL 300 * ( <SRC.BOWCRAFTING> / 10 )>
+	SRC.ACT.TAG.AVANCEMENT=1
+	RANDOM_UID_CIBLE_METIER
+	SRC.ACT.TAG.UIDCIBLE=<VAR.UIDCIBLE>
+	SAY Vous etes engage! Allez voir <UID.<VAR.UIDCIBLE>.NAME> pour plus de detail.
+ENDIF
+
+ON=7
+IF <SRC.FINDID.m_quete_metier>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja un metier !
+ELSE
+	SRC.NEWITEM m_quete_metier
+	SRC.ACT.TAG.NUMERO_JOB=7//FERONNERIE
+	SRC.ARC.TAG.DIVISEUR=70
+	SRC.ARC.TAG.MULTIPLICATEUR=<EVAL 300 * ( <SRC.BLACKSMITHING> / 10 )>
+	SRC.ACT.TAG.AVANCEMENT=1
+	RANDOM_UID_CIBLE_METIER
+	SRC.ACT.TAG.UIDCIBLE=<VAR.UIDCIBLE>
+	SAY Vous etes engage! Allez voir <UID.<VAR.UIDCIBLE>.NAME> pour plus de detail.
+ENDIF
+
+ON=8
+IF <SRC.FINDID.m_quete_metier>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja un metier !
+ELSE
+	SRC.NEWITEM m_quete_metier
+	SRC.ACT.TAG.NUMERO_JOB=8//MENUISERIE
+	SRC.ARC.TAG.DIVISEUR=70
+	SRC.ARC.TAG.MULTIPLICATEUR=<EVAL 300 * ( <SRC.CARPENTRY> / 10 )>
+	SRC.ACT.TAG.AVANCEMENT=1
+	RANDOM_UID_CIBLE_METIER
+	SRC.ACT.TAG.UIDCIBLE=<VAR.UIDCIBLE>
+	SAY Vous etes engage! Allez voir <UID.<VAR.UIDCIBLE>.NAME> pour plus de detail.
+ENDIF
+
+ON=9
+IF <SRC.FINDID.m_quete_metier>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja un metier !
+ELSE
+	SRC.NEWITEM m_quete_metier
+	SRC.ACT.TAG.NUMERO_JOB=9//TRANSCRIPTION
+	SRC.ARC.TAG.DIVISEUR=70
+	SRC.ARC.TAG.MULTIPLICATEUR=<EVAL 300 * ( <SRC.INSCRIPTION> / 10 )>
+	SRC.ACT.TAG.AVANCEMENT=1
+	RANDOM_UID_CIBLE_METIER
+	SRC.ACT.TAG.UIDCIBLE=<VAR.UIDCIBLE>
+	SAY Vous etes engage! Allez voir <UID.<VAR.UIDCIBLE>.NAME> pour plus de detail.
+ENDIF
+
+
+[DIALOG D_QUETE_METIER_OPTION]
+0,0
+
+page 0
+resizepic 0 0 2620 300 260
+
+page 1
+text 100 20 1152 1//REGISTRE
+text 40 70 1152 2//J'ai termine
+text 40 90 1152 3//Je demissionne
+button 10 70 2103 2104 1 0 1//TERMINE
+button 10 90 2103 2104 1 0 2//DEMISIONNER
+
+[DIALOG D_QUETE_METIER_OPTION text]
+<VAR.BLANKLINE>
+Registre
+J'ai termine mon travail
+Je demissionne!
+
+[DIALOG D_QUETE_METIER_OPTION button]
+ON=1
+IF <SRC.FINDID.m_quete_metier>
+	IF <EVAL 0<SRC.FINDID.m_quete_metier.TAG.TERMINE>> == 1
+		VAR.SALAIRE = <EVAL (120 * (<SRC.FINDID.m_quete_metier.TAG.MULTIPLICATEUR> / <SRC.FINDID.m_quete_metier.TAG.DIVISEUR>)) / 1000 >
+		SAY Avec la qualite de ce travail accompli, voici vos <EVAL <VAR.SALAIRE>> pieces de diamant bien meritees !
+		SRC.NEWITEM i_piece_diamant
+		SRC.ACT.AMOUNT=<EVAL <VAR.SALAIRE>>
+		SRC.ACT.BOUNCE
+		SRC.FINDID.m_quete_metier.VIDE_OBJETS_METIERS
+		SRC.FINDID.m_quete_metier.REMOVE
+	ELSE
+		SAY Desole, vous n'avez pas termine votre travail !
+	ENDIF
+ELSE
+	SAY Vous ne pouvez pas avoir termine un travail puisque vous n'en avez pas !
+ENDIF
+
+ON=2
+IF <SRC.FINDID.m_quete_metier>
+	SRC.FINDID.m_quete_metier.VIDE_OBJETS_METIERS
+	SRC.FINDID.m_quete_metier.REMOVE
+	SAY C'est malheureux de vous voir partir si pres du but!
+ELSE
+	SAY Vous ne pouvez pas avoir termine un travail puisque vous n'en avez pas !
+ENDIF
+
+//DEFAULT = m_quete_metier (VIDE LES OBJETS DE METIER)
+[FUNCTION VIDE_OBJETS_METIERS]
+VAR.ACTSAVE=<SRC.ACT.UID>
+IF 0<TAG.POTION_1_UID> != 0
+	IF <UID.<TAG.POTION_1_UID>.BASEID> == i_quete_potion_1
+		SRC.ACT=<TAG.POTION_1_UID>
+		SRC.ACT.REMOVE
+	ENDIF
+	TAG.POTION_1_UID
+ENDIF
+IF 0<TAG.FLEUR_1_UID> != 0
+	IF <UID.<TAG.FLEUR_1_UID>.BASEID> == i_fleur_pharmaceutique
+		SRC.ACT=<TAG.FLEUR_1_UID>
+		SRC.ACT.REMOVE
+	ENDIF
+	TAG.FLEUR_1_UID
+ENDIF
+
+
+
+//*************************************
+//************ALCHIMIE*****************
+//*************************************
+
+
+
+[ITEMDEF i_fleur_pharmaceutique]
+NAME=Fleur pharmaceutique
+ID=i_flower_redpoppies
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0af7
+
+
+[ITEMDEF i_fioles_quete_alchimie]
+NAME=Fioles
+ID=0185e
+TYPE=t_normal
+
+ON=@DCLICK
+IF <SRC.FINDID.m_quete_metier>
+	IF <EVAL 0<SRC.FINDID.m_quete_metier.TAG.NUMERO_JOB>> == 1
+		IF <SRC.FINDID.m_quete_metier.TAG.AVANCEMENT> == 2
+			IF <SRC.FINDID.m_fioles_quete_alchimie>
+				SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja en train de preparer la potion !
+			ELSE
+				IF ((<SRC.FINDID.i_fleur_pharmaceutique>) && (<SRC.FINDID.i_fleur_pharmaceutique.UID> == <SRC.FINDID.m_quete_metier.TAG.FLEUR_1_UID>))
+					SRC.ANIM 10
+					SRC.EMOTE ecraser la fleur dans les fioles
+					SRC.FINDID.i_fleur_pharmaceutique.REMOVE
+					SRC.FINDID.m_quete_metier.TAG.FLEUR_1_UID
+					SRC.NEWITEM m_fiole_quete_metier
+					SRC.ACT.TIMER=2
+					SRC.ACT.EQUIP
+				ELSE
+					SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas la bonne fleur pharmaceutique !
+				ENDIF
+			ENDIF
+			RETURN 1
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 0
+
+[ITEMDEF m_fiole_quete_metier]
+NAME=mem fiole metier
+TYPE=t_eq_script
+
+ON=@TIMER
+CONT.FINDID.m_quete_metier.TAG.AVANCEMENT = 3
+CONT.NEWITEM i_quete_potion_1
+CONT.ACT.CONT = <CONT.UID>
+CONT.FINDID.m_quete_metier.TAG.POTION_1_UID = <CONT.ACT.UID>
+REMOVE
+RETURN 1
+
+
+[ITEMDEF i_quete_potion_1]
+NAME=Potion energisante
+ID=i_flask1_orange
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0af7
+
+
+//*****************************************
+//**************MINING*********************
+//*****************************************
+
+
+
+[ITEMDEF i_pioche_de_quete_metier]
+NAME=Pioche endommagee
+ID=i_pickaxe
+TYPE=t_normal
+
+ON=@CREATE
+HITS=-1
+
+ON=@DCLICK
+RETURN 1

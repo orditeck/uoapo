@@ -1,0 +1,108 @@
+[CHARDEF c_titus_le_mineur] 
+DEFNAME=c_titus_le_mineur
+NAME=Titus le mineur
+ID=C_MAN
+ 
+TSPEECH=spk_titus_le_mineur
+
+ON=@create
+COLOR=083f1
+FOOD=9999 
+SPEECHCOLOR=00906
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=i_lantern 
+ITEMNEWBIE=0203f
+COLOR=003fe
+ITEMNEWBIE=0203b
+COLOR=003fe
+ITEMNEWBIE=i_shirt_fancy 
+COLOR=00906
+ITEMNEWBIE=01539
+COLOR=00906
+ITEMNEWBIE=0170f
+COLOR=00906
+
+ON=@NPCSEENEWPLAYER
+IF 0<SRC.TAG.QUETETITUS> <1
+SAY S'il vous plait <SRC.SEX sir/madame> pouvez vous me rendre service ?
+ENDIF
+
+ON=@NPCHearUnknown
+SAY Je ne comprends pas ce que vous dites !
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes
+DESCRIPTION=Titus le mineur
+
+[SPEECH spk_titus_le_mineur]
+
+ON=oui
+IF 0<SRC.TAG.QUETETITUS> <1
+NEWITEM m_dialogue_titus_le_mineur
+ACT.CONT=<UID>
+ENDIF
+
+ON=non
+SAY Tant pis pour vous !
+
+ON=*pioche*
+IF 0<SRC.TAG.QUETETITUS> <1
+IF <SRC.RESTEST 1 i_pioche_de_titus>
+SRC.FINDID.i_pioche_de_titus.REMOVE
+SRC.TAG.QUETETITUS=1
+SAY Merci infiniment pour votre aide !
+SRC.TAG.XP=<EVAL <SRC.TAG.XP>+3000>
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous gagnez 3000 points d'experience !
+ELSE
+SAY Trouvez ma pioche et je vous recompenserai !
+ENDIF
+ELSE
+SAY Merci encore pour ma pioche !
+ENDIF
+
+ON=*bonjour*
+ON=*salutation*
+SAY Bonjour <SRC.SEX sir/madame> !
+
+[ITEMDEF m_dialogue_titus_le_mineur]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=0
+TAG.DIALOGUE=0
+
+ON=@TIMER
+IF 0<TAG.DIALOGUE> <1
+TIMER=3
+TAG.DIALOGUE=<TAG.DIALOGUE>+1
+CONT.SAY Les rats ont encore envahis notre bonne vieille mine !
+ELSEIF <TAG.DIALOGUE>==1
+TIMER=3
+TAG.DIALOGUE=<TAG.DIALOGUE>+1
+CONT.SAY Et l'un d'eux, plus corriace que les autres m'a arrache la pioche des mains et l'a sauvagement avalee !!
+ELSE
+CONT.SAY Rapportez la moi et je vous recompenserai.
+REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_pioche_de_titus]
+DEFNAME=i_pioche_de_titus
+NAME=Pioche de Titus
+ID=i_pickaxe
+REQSTR=0
+WEIGHT=0
+
+ON=@CREATE
+COLOR=00906

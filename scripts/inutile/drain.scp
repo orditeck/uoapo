@@ -1,0 +1,97 @@
+[ITEMDEF i_scroll_drain2]
+//Scroll de Drain Mineur
+//Designed by Turanar
+ID=01f6c
+WEIGHT=1
+LAYER=30
+
+ON=@CREATE
+NAME=Drain de vie
+COLOR=0455
+ATTR=020
+TYPE=t_script
+
+CATEGORY=Vivre
+SUBSECTION=Necromancer scrolls
+DESCRIPTION=Drain de vie majeur
+
+ON=@DCLICK
+IF !(<SRC.RESTEST 2 i_reag_daemon_bone>) || !(<SRC.RESTEST 2 i_reag_dragon_blood>)
+SRC.MESSAGE Il vous manque deux dragon's blood et deux daemon bone
+IF ( <MORE2> == 1 )
+REMOVE
+RETURN 1
+ENDIF
+RETURN 1
+ENDIF
+IF ( <SRC.MANA> < 30 )
+SRC.MESSAGE Vous n'avez pas assez de mana pour lancer ce sort
+IF ( <MORE2> == 1 )
+REMOVE
+RETURN 1
+ENDIF
+RETURN 1
+ENDIF
+IF ( <TIMER> > 1 )
+IF !( <MORE2> == 1 )
+SRC.MESSAGE Veuillez attendre avant de relancer le sort
+RETURN 1
+ENDIF
+ENDIF
+SRC.MANA=<SRC.MANA>+(-30)
+SRC.CONSUME=1 i_reag_daemon_bone
+SRC.CONSUME=1 i_reag_dragon_blood
+LINK=<SRC.UID>
+TIMER=5
+MOREY={ 0 3 }
+IF ( ( <MOREY> == 0 ) && ( <SRC.MAGERY> < 100.1 ) )
+MOREY=RAND(3)
+SRC.MAGERY=<SRC.MAGERY>+<MOREY>
+SRC.SYSMESSAGE Votre skill de magie augmente :
+SRC.SYSMESSAGE Votre skill en magie est maintenant de <SRC.MAGERY>.
+ENDIF
+MOREY={ 0 1050 }
+IF (<MOREY>>=<SRC.MAGERY>)
+SRC.ANIM 17
+SRC.NEWITEM=03735
+SRC.ACT.TIMER 4
+SRC.SOUND 011c
+SRC.SYSMESSAGE Votre incantation echoue
+SRC.SAY Zan Des Nox
+REMOVE
+RETURN 1
+ELSE
+SRC.ANIM 17
+SRC.NEWITEM=03735
+SRC.ACT.TIMER 4
+SRC.SOUND 011c
+SRC.SAY An Mani Vas Corp
+TARGET Select Target
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGE Cible invalide
+REMOVE
+
+ON=@TARGON_CHAR
+VAR.TEMP=<EVAL 20+((<SRC.MAGERY>/100)*2)>
+IF <SRC.TARG.CANSEELOS>
+	IF !(<SRC.TARG.NPC>==12) //est ce un mort vivant ?
+		SRC.TARG.DAMAGE <VAR.TEMP>
+		SRC.HITS=<SRC.HITS>+<VAR.TEMP>+(-1)
+		SRC.TARG.EFFECT=3,i_fx_curse,6,15,1
+		SRC.SOUND 01ed
+	ELSEIF <SRC.TARG.UID>==<SRC.UID>
+		SRC.SYSMESSAGE Cible invalide.
+	ELSE
+		SRC.DAMAGE <VAR.TEMP>
+		SRC.EFFECT=3,i_fx_curse,6,15,1
+		SRC.SOUND 01ed
+	ENDIF
+ELSE
+	SRC.SYSMESSAGE Vous ne pouvez pas lancer le sort car vous en voyez pas la cible ...
+ENDIF
+REMOVE
+RETURN 1
+

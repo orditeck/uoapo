@@ -1,0 +1,467 @@
+//*************************************
+//**********DESSUS DES EPAULES*********
+//*************************************
+
+[ITEMDEF i_beret]
+NAME=Beret
+ID=01719
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 30.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Beret
+
+[ITEMDEF i_tricorne]
+NAME=Tricorne
+ID=0171b
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 30.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Tricorne
+
+[ITEMDEF i_casquette]
+NAME=Casquette
+ID=01715
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 32.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Casquette
+
+[ITEMDEF i_bicorne]
+NAME=Bicorne
+ID=01714
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 34.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Bicorne
+
+[ITEMDEF i_chapeau_de_pecheur]
+NAME=Chapeau de pecheur
+ID=01716
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 36.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Chapeau de pecheur
+
+[ITEMDEF i_capeline]
+NAME=Capeline
+ID=01713
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 38.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Capeline
+
+[ITEMDEF i_chapeau_de_paille]
+NAME=Chapeau de paille
+ID=01717
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 40.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Chapeau de paille
+
+[ITEMDEF i_petit_bandana]
+NAME=Petit bandana
+ID=0153f
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 42.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Petit bandana
+
+[ITEMDEF i_grand_bandana]
+NAME=Grand bandana
+ID=01543
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 44.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Grand bandana
+
+[ITEMDEF i_chapeau_a_plume]
+NAME=Borsalino a plume
+ID=0171a
+RESOURCES=1 i_cloth, 1 i_feather
+SKILLMAKE=TAILORING 46.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Borsalino a plume
+
+[ITEMDEF i_chapeau_de_fou]
+NAME=Chapeau de fou
+ID=0171c
+RESOURCES=1 i_cloth, 1 i_ingot_iron
+SKILLMAKE=TAILORING 48.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Chapeau de fou
+
+[ITEMDEF i_chapeau_d_enchanteur]
+NAME=Chapeau d'enchanteur
+ID=01718
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 50.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Chapeau d'enchanteur
+
+
+//*************************************
+//*******ENTRE EPAULE ET CEINTURE******
+//*************************************
+
+
+[ITEMDEF i_t_shirt]
+NAME=T-shirt
+ID=01f7b
+RESOURCES=2 i_cloth
+SKILLMAKE=TAILORING 52.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=T-shirt
+
+[ITEMDEF i_maillot]
+NAME=Maillot
+ID=01517
+RESOURCES=2 i_cloth
+SKILLMAKE=TAILORING 54.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Maillot
+
+[ITEMDEF i_tablier]
+NAME=Tablier
+ID=0153b
+RESOURCES=3 i_cloth
+SKILLMAKE=TAILORING 54.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Tablier
+
+[ITEMDEF i_grand_tablier]
+NAME=Grand tablier
+ID=0153d
+RESOURCES=4 i_cloth
+SKILLMAKE=TAILORING 56.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Grand tablier
+
+[ITEMDEF i_maillot_manches_longues]
+NAME=Maillot a manches longues
+ID=01efd
+RESOURCES=3 i_cloth
+SKILLMAKE=TAILORING 58.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Maillot a manches longues
+
+[ITEMDEF i_tunique]
+NAME=Tunique
+ID=01ffd
+RESOURCES=2 i_cloth
+SKILLMAKE=TAILORING 60.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Tunique
+
+[ITEMDEF i_tunique_a_manches_longues]
+NAME=Tunique a manche longue
+ID=01fa1
+RESOURCES=3 i_cloth
+SKILLMAKE=TAILORING 62.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Tunique a manche longue
+
+[ITEMDEF i_tunique_de_fou]
+NAME=Tunique de fou
+ID=01f9f
+RESOURCES=3 i_cloth
+SKILLMAKE=TAILORING 64.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Tunique de fou
+
+[ITEMDEF i_capee]
+NAME=Cape
+ID=01515
+RESOURCES=4 i_cloth
+SKILLMAKE=TAILORING 65.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Cape
+
+[ITEMDEF i_robe_de_femme]
+NAME=Robe pour femme
+ID=01f01
+RESOURCES=5 i_cloth
+SKILLMAKE=TAILORING 70.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Robe pour femme
+
+[ITEMDEF i_robe_d_homme]
+NAME=Robe pour homme
+ID=01f03
+RESOURCES=5 i_cloth
+SKILLMAKE=TAILORING 75.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Robe pour homme
+
+[ITEMDEF i_robe_brodee]
+NAME=Robe brodee
+ID=01eff
+RESOURCES=5 i_cloth
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Robe brodee
+
+
+//*************************************
+//***********SOUS LA CEINTURE**********
+//*************************************
+
+
+[ITEMDEF i_short]
+NAME=Short
+ID=0152e
+RESOURCES=2 i_cloth
+SKILLMAKE=TAILORING 50.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Short
+
+[ITEMDEF i_kilte]
+NAME=Kilt
+ID=01537
+RESOURCES=2 i_cloth
+SKILLMAKE=TAILORING 52.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Kilt
+
+[ITEMDEF i_pantalon]
+NAME=Pantalon
+ID=0153a
+RESOURCES=2 i_cloth
+SKILLMAKE=TAILORING 58.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Pantalon
+
+[ITEMDEF i_longue_jupe]
+NAME=Longue jupe
+ID=01516
+RESOURCES=2 i_cloth
+SKILLMAKE=TAILORING 60.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Longue jupe
+
+[ITEMDEF i_sandales]
+NAME=Sandales
+ID=0170d
+RESOURCES=1 i_hide
+SKILLMAKE=TAILORING 70.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Sandales
+
+[ITEMDEF i_chaussures]
+NAME=Chaussures
+ID=0170f
+RESOURCES=1 i_cloth
+SKILLMAKE=TAILORING 75.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Chaussures
+
+[ITEMDEF i_petites_bottes]
+NAME=Petites bottes
+ID=0170b
+RESOURCES=1 i_hide
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Petites bottes
+
+[ITEMDEF i_grandes_bottes]
+NAME=Grandes bottes
+ID=01711
+RESOURCES=2 i_hide
+SKILLMAKE=TAILORING 85.0, t_sewing_kit
+
+ON=@CREATE
+HITPOINTS=100
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Grandes bottes
+
+
+//*************************************
+//****************AUTRE****************
+//*************************************
+
+
+[ITEMDEF i_bourse_pour_ceinture]
+NAME=Bourse pour ceinture
+ID=09b0
+RESOURCES=1 i_hide
+SKILLMAKE=TAILORING 40.0, t_sewing_kit
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Bourse pour ceinture
+
+[ITEMDEF i_bourse_de_cuir]
+NAME=Bourse de cuir
+ID=0e76
+RESOURCES=2 i_hide
+SKILLMAKE=TAILORING 60.0, t_sewing_kit
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Bourse de cuir
+
+[ITEMDEF i_sac_de_cuir]
+NAME=Sac de cuir
+ID=0e75
+RESOURCES=3 i_hide
+SKILLMAKE=TAILORING 80.0, t_sewing_kit
+
+CATEGORY=Genese
+SUBSECTION=Tailors
+DESCRIPTION=Sac de cuir

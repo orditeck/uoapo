@@ -1,0 +1,113 @@
+//*** Script réalisé par Picot ***
+
+[AREA Arene_Pvp]
+//Toute la zone de l'arene
+CLASS=11
+RECT=5268,2045,5363,1954
+DEFNAME=Arene_Pvp
+GROUP=ALLMAP
+RESSOURCES=r_default_rock
+RAINCHANCE=0
+EVENTS=r_default
+FLAGS=region_flag_no_pvp|region_flag_globalname|region_flag_nobuilding|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA Arene_Pvp_1]
+CLASS=11
+RECT=5289,2019,5302,1999
+DEFNAME=Arene_Pvp
+GROUP=ALLMAP
+RESSOURCES=r_default_rock
+RAINCHANCE=0
+EVENTS=r_default
+FLAGS=region_flag_globalname|region_flag_nobuilding|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA Arene_Pvp_2]
+CLASS=11
+RECT=5302,1978,5319,1967
+DEFNAME=Arene_Pvp
+GROUP=ALLMAP
+RESSOURCES=r_default_rock
+RAINCHANCE=0
+EVENTS=r_default
+FLAGS=region_flag_globalname|region_flag_nobuilding|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA Arene_Pvp_3]
+CLASS=11
+RECT=5333,2024,5364,1993
+DEFNAME=Arene_Pvp
+GROUP=ALLMAP
+RESSOURCES=r_default_rock
+RAINCHANCE=0
+EVENTS=r_default
+FLAGS=region_flag_globalname|region_flag_nobuilding|region_antimagic_gate|region_antimagic_recall_out
+
+[ITEMDEF i_entree_arene_pvp]
+DEFNAME=i_entree_arene_pvp
+NAME=Entree de l'arene PvP
+ID=0dda
+
+ON=@CREATE
+COLOR=043
+
+//SEULS LES JOUEURS PEUVENT ENTRER ET PORTER LE TAG
+ON=@STEP
+IF !<SRC.BRAIN>
+	IF !<SRC.FINDLAYER.25>
+		SRC.ACTION=-1
+		IF (<SRC.FLAGS>&statf_hidden)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+		ENDIF
+		IF (<SRC.FLAGS>&statf_invisible)
+			SRC.FLAGS=<SRC.FLAGS>&~invisible
+		ENDIF
+		IF (<SRC.FLAGS>&statf_insubstantial)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+		IF <SRC.FINDID.m_anti_rez_kill>
+			SRC.FINDID.m_anti_rez_kill.REMOVE
+		ENDIF
+		SRC.TAG.ENTREE_ARENE=1
+		SRC.EVENTS +e_anti_mark_recall
+		SRC.TAG.anti_mark_recall=1
+		SRC.P 5318 2017
+		SRC.UPDATE
+	ELSE
+		SRC.SYSMESSAGE Vous ne pouvez pas entrer avec une monture
+	ENDIF
+ELSE
+RETURN 1
+ENDIF
+
+CATEGORY=Genese
+SUBSECTION=gates
+DESCRIPTION=Arene
+
+[ITEMDEF i_sortie_arene_pvp]
+DEFNAME=i_sortie_arene_pvp
+NAME=Sortie de l'arene PvP
+ID=0dda
+
+ON=@CREATE
+COLOR=043
+
+//SEULS LES JOUEURS PEUVENT SORTIR
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.TAG.ENTREE_ARENE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.P minoc
+	SRC.UPDATE
+ELSE
+RETURN 1
+ENDIF
+
+CATEGORY=Genese
+SUBSECTION=gates
+DESCRIPTION=Arene

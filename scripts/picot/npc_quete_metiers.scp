@@ -1,0 +1,175 @@
+[CHARDEF c_contremaitre] 
+NAME=Georges
+ID=c_man
+ 
+TSPEECH=spk_contremaitre
+
+ON=@create
+COLOR=083b
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le contremaitre
+INVUL
+
+ITEMNEWBIE=i_chapeau_a_plume
+COLOR=036
+ITEMNEWBIE=i_beard_long
+COLOR=03a4
+ITEMNEWBIE=i_hair_long
+COLOR=03a4
+
+ON=@NPCSEENEWPLAYER
+SAY Bienvenue <SRC.NAME>, je vous presente le travail en personne !
+
+ON=@NPCHearUnknown
+IF <SRC.FINDID.m_quete_metier>
+	SAY Vous avez termine?
+ELSE
+	DORAND 3
+		SAY Vous etes ici pour un emploi?
+		SAY Vous voulez travailler pour moi?
+		SAY Etes vous <SRC.SEX interresse/interressee> a trouver un emploi?
+	ENDDO
+ENDIF
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-metier
+DESCRIPTION=Georges le contremaitre
+
+[SPEECH spk_contremaitre]
+
+ON=*oui*
+SAY Ce sera pour quoi?
+IF <SRC.FINDID.m_quete_metier>
+	DIALOG D_QUETE_METIER_OPTION
+ELSE
+	DIALOG D_QUETE_METIER_INSCRIPTION
+ENDIF
+
+
+
+[CHARDEF c_mineur_m] 
+NAME=Peter
+ID=c_man
+ 
+TSPEECH=spk_mineur
+
+ON=@create
+COLOR=083b
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le mineur
+INVUL
+
+ITEMNEWBIE=i_chapeau_a_plume
+COLOR=036
+ITEMNEWBIE=i_beard_long
+COLOR=03a4
+ITEMNEWBIE=i_hair_long
+COLOR=03a4
+
+ON=@CLICK
+RETURN 1
+
+ON=@NPCSEENEWPLAYER
+RETURN 1
+
+ON=@NPCHearUnknown
+IF <SRC.FINDID.m_quete_metier>
+	SAY Vous avez termine?
+ELSE
+	DORAND 3
+		SAY Vous etes ici pour un emploi?
+		SAY Le contremaitre est a l'autre bout de la mine?
+		SAY Le responsable de ces lieux, est notre contremaitre Georges
+	ENDDO
+ENDIF
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-metier
+DESCRIPTION=Peter le mineur
+
+[SPEECH spk_mineur]
+
+ON=*bonjour*
+ON=*allo*
+SAY Bonjour, vous etes venu pour un travail?
+
+ON=*oui*
+IF <SRC.FINDID.m_quete_metier>
+	IF ((<UID.<SRC.FINDID.m_quete_metier.TAG.UIDCIBLE>.BASEID> == c_mineur_m) || (<UID.<SRC.FINDID.TAG.UIDCIBLE>.BASEID> == c_mineur_f))
+		IF <SRC.FINDID.m_quete_metier.TAG.UIDCIBLE> == <UID>
+			VAR.AVANCEMENT = <SRC.FINDID.m_quete_metier.TAG.AVANCEMENT>
+			IF <SRC.FINDID.m_quete_metier.TAG.NUMERO_JOB> == 1//ALCHIMIE
+				IF <VAR.AVANCEMENT> < 4//DEBUT
+					SAY J'ai effectivement besoin d'aide. Je me sens terriblement fatigue, il me faudrait une boisson energetique. S'il vous plait, parlez en a un alchimiste pour moi!
+				ELSEIF <VAR.AVANCEMENT> == 4//A TERMINE LA POTION
+					IF <SRC.FINDID.m_quete_metier.TAG.POTION_1_UID> > 0
+						UID.09903F.ACT=<SRC.FINDID.m_quete_metier.TAG.POTION_1_UID>
+						IF <SRC.FINDID.i_quete_potion_1.UID> == <UID.09903F.ACT.UID>
+							UID.09903F.ACT.REMOVE
+							EMOTE boire la potion
+							SAY Merci, je me sens beaucoup mieux. Excelent travail!
+							SRC.FINDID.m_quete_metier.TAG.POTION_1_UID
+							SRC.FINDID.m_quete_metier.TAG.TERMINE=1
+							SRC.FINDID.m_quete_metier.TAG.AVANCEMENT=5
+						ELSE
+							SAY Cette potion n'est pas de vous!
+						ENDIF
+					ENDIF
+				ELSE
+					SAY Je vous remercie encore une fois, vous devriez dire au contremaitre que vous avez termine!
+				ENDIF
+			ELSEIF <SRC.FINDID.m_quete_metier.TAG.NUMERO_JOB> == 2//BRICOLAGE
+				IF <VAR.AVANCEMENT> == 1
+					SAY J'ai effectivement besoin d'aide. Le manche d'une de mes pioches pres de casser. Ce serait gentil à vous de me le réparer !
+					SRC.FINDID.m_quete_metier.TAG.AVANCEMENT=2
+				IF <VAR.AVANCEMENT> < 4//DEBUT
+					SAY 
+			ELSEIF <SRC.FINDID.m_quete_metier.TAG.NUMERO_JOB> == 3//BUCHERONNAGE
+
+			ELSEIF <SRC.FINDID.m_quete_metier.TAG.NUMERO_JOB> == 4//COUTURE
+
+			ELSEIF <SRC.FINDID.m_quete_metier.TAG.NUMERO_JOB> == 5//EXTRACTION
+
+			ELSEIF <SRC.FINDID.m_quete_metier.TAG.NUMERO_JOB> == 6//FABRICATION D'ARC
+
+			ELSEIF <SRC.FINDID.m_quete_metier.TAG.NUMERO_JOB> == 7//FERONNERIE
+
+			ELSEIF <SRC.FINDID.m_quete_metier.TAG.NUMERO_JOB> == 8//MENUISERIE
+
+			ELSEIF <SRC.FINDID.m_quete_metier.TAG.NUMERO_JOB> == 9//TRANSCRIPTION
+
+			ENDIF
+		ELSE
+			SAY Vous cherchez probablement <UID.<SRC.FINDID.m_quete_metier.TAG.UIDCIBLE>.NAME>, il a besoin d'aide !
+		ENDIF
+	ELSE
+		SAY Vous devriez chercher le contremaitre, il a probablement quelque chose a vous proposer.
+		SRC.FINDID.m_quete_metier.REMOVE
+	ENDIF
+ELSE
+	SAY Vous devriez chercher le contremaitre, il a probablement quelque chose a vous proposer.
+ENDIF

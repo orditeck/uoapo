@@ -1,0 +1,31 @@
+[PLEVEL 1]
+charte
+
+[Function charte]
+NEWITEM m_charte
+ACT.EQUIP
+
+[ITEMDEF m_charte]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=1
+MORE1=1
+
+ON=@TIMER
+IF <MORE1>==1
+	CONT.SYSMESSAGEUA 025 1 1 0 La charte du serveur Uo-Apocalypse s'ouvrira sous peu:
+	MORE1=2
+	TIMER=3
+	RETURN 1
+ELSEIF <MORE1>==2
+	CONT.WEBLINK http:\\forum.uoapo2.com/showthread.php?tid=6
+	MORE1=3
+	TIMER=10
+	RETURN 1
+ELSE
+	CONT.SYSMESSAGEUA 025 1 1 0 A partir de cet instant la chartre est consideree comme lue et acceptee, toute infraction a cette derniere entrainera des sanctions pouvant aller jusqu'au bannissement du serveur.
+	REMOVE
+	RETURN 1
+ENDIF

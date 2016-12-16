@@ -1,0 +1,18 @@
+\\ Sphere UO-ApoSources accounts file
+\\ NOTE: This file cannot be edited while the server is running.
+\\ Any file changes must be made to sphereaccu.scp. This is read in at save time.
+
+[admin]
+PLEVEL=Owner
+PRIV=0122a
+PASSWORD=opensource
+TOTALCONNECTTIME=13102
+LASTCONNECTTIME=1
+LASTCHARUID=0583e8
+CHARUID=0583e8
+CHARUID=09903f
+FIRSTCONNECTDATE=2015/03/02 08:49:59
+FIRSTIP=127.0.0.1
+LASTCONNECTDATE=2016/12/16 16:03:08
+LASTIP=127.0.0.1
+LANG=FRC

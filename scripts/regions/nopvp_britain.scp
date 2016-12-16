@@ -1,0 +1,643 @@
+//***DÉBUT DES MAISONS AUX FERMES A L'OUEST DE BRITAIN***
+
+[AREA MAISON_BRITAIN1]
+CLASS=11
+RECT=1144,1551,1160,1544
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN2]
+CLASS=11
+RECT=1224,1584,1231,1568
+RECT=1231,1575,1239,1568
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN3]
+CLASS=11
+RECT=1144,1624,1159,1616
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN4]
+CLASS=11
+RECT=1184,1719,1200,1704
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN5]
+CLASS=11
+RECT=1248,1712,1255,1696
+RECT=1240,1703,1248,1696
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN6]
+CLASS=11
+RECT=1128,1823,1144,1816
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN7]
+CLASS=11
+RECT=1192,1856,1207,1848
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN8]
+CLASS=11
+RECT=1256,1895,1264,1880
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN9]
+CLASS=11
+RECT=1288,1784,1304,1752
+RECT=1303,1783,1307,1766
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN10]
+CLASS=11
+RECT=1332,1747,1339,1724
+RECT=1339,1744,1351,1728
+RECT=1348,1747,1355,1740
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN11]
+CLASS=11
+RECT=1344,1789,1360,1768
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN12]
+CLASS=11
+RECT=1384,1808,1391,1800
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN13]
+CLASS=11
+RECT=1384,1823,1392,1816
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN14]
+CLASS=11
+RECT=1400,1823,1408,1816
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN15]
+CLASS=11
+RECT=1400,1808,1407,1800
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+//***DÉBUT DES MAISONS A L'INTÉRIEUR OUEST DE BRITAIN***
+
+[AREA MAISON_BRITAIN16]
+CLASS=11
+RECT=1412,1759,1424,1744
+RECT=1424,1759,1431,1752
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN17]
+CLASS=11
+RECT=1408,1719,1416,1712
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN18]
+CLASS=11
+RECT=1424,1735,1432,1712
+RECT=1432,1723,1439,1712
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN19]
+CLASS=11
+RECT=1448,1728,1463,1720
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN20]
+CLASS=11
+RECT=1472,1751,1480,1736
+RECT=1480,1743,1483,1736
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN21]
+CLASS=11
+RECT=1472,1728,1483,1720
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN22]
+CLASS=11
+RECT=1492,1724,1499,1713
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN23]
+//4 MAISONS COLLÉES A L'OUEST
+CLASS=11
+RECT=1448,1712,1471,1704
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN24]
+CLASS=11
+RECT=1494,1699,1502,1676
+RECT=1486,1691,1494,1684
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN25]
+CLASS=11
+RECT=1466,1696,1473,1684
+RECT=1473,1691,1477,1684
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN26]
+CLASS=11
+RECT=1450,1693,1458,1678
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN27]
+//BANQUE DE BRITAIN
+CLASS=11
+RECT=1424,1693,1441,1683
+RECT=1424,1682,1431,1675
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN28]
+CLASS=11
+RECT=1440,1670,1454,1660
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN29]
+CLASS=11
+RECT=1422,1665,1432,1647
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN30]
+CLASS=11
+RECT=1436,1654,1451,1646
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN31]
+CLASS=11
+RECT=1464,1675,1471,1664
+RECT=1471,1670,1487,1664
+RECT=1480,1675,1487,1670
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN32]
+CLASS=11
+RECT=1496,1667,1503,1656
+RECT=1503,1663,1508,1656
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+//*** DÉBUT OUEST DE BRITAIN APRÈS LA GATE AU NORD ***
+
+[AREA MAISON_BRITAIN33]
+CLASS=11
+RECT=1428,1615,1440,1608
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN34]
+CLASS=11
+RECT=1448,1619,1455,1608
+RECT=1455,1615,1460,1608
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN35]
+CLASS=11
+RECT=1468,1615,1480,1608
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN36]
+CLASS=11
+RECT=1492,1621,1499,1602
+RECT=1500,1625,1507,1610
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN37]
+CLASS=11
+RECT=1510,1618,1517,1610
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN38]
+CLASS=11
+RECT=1507,1601,1514,1592
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN39]
+CLASS=11
+RECT=1504,1576,1515,1563
+RECT=1508,1563,1515,1560
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN40]
+//ÉCURIE
+CLASS=11
+RECT=1508,1552,1527,1540
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN41]
+//MAGE TOWER
+CLASS=11
+RECT=1484,1560,1499,1544
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN42]
+CLASS=11
+RECT=1468,1600,1483,1592
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN43]
+CLASS=11
+RECT=1480,1590,1488,1580
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN44]
+CLASS=11
+RECT=1468,1584,1478,1576
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN45]
+CLASS=11
+RECT=1448,1600,1459,1576
+RECT=1440,1584,1448,1576
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN46]
+CLASS=11
+RECT=1428,1600,1439,1592
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN47]
+CLASS=11
+RECT=1416,1584,1431,1576
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN48]
+CLASS=11
+RECT=1408,1611,1420,1588
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN49]
+//BUNKER
+CLASS=11
+RECT=1408,1637,1415,1630
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN50]
+//BUNKER
+CLASS=11
+RECT=1408,1621,1415,1614
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN51]
+CLASS=11
+RECT=1436,1567,1447,1548
+RECT=1447,1560,1475,1548
+RECT=1464,1567,1475,1559
+RECT=1454,1561,1457,1559
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN52]
+CLASS=11
+RECT=1416,1559,1422,1544
+RECT=1421,1552,1428,1544
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN53]
+CLASS=11
+RECT=1456,1527,1472,1512
+RECT=1472,1520,1479,1512
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN54]
+CLASS=11
+RECT=1496,1528,1511,1512
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+//*** COTÉ EST DE BRITAIN, ET SUD DU PARC ***
+
+
+[AREA MAISON_BRITAIN55]
+CLASS=11
+RECT=1544,1776,1559,1760
+RECT=1559,1767,1567,1760
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN56]
+CLASS=11
+RECT=1537,1752,1551,1736
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN57]
+//3 MAISONS COLLÉES
+CLASS=11
+RECT=1560,1752,1583,1736
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN58]
+//WATCHTOWER
+CLASS=11
+RECT=1616,1768,1623,1760
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN59]
+CLASS=11
+RECT=1632,1711,1640,1688
+RECT=1640,1703,1647,1696
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN60]
+CLASS=11
+RECT=1600,1720,1607,1704
+RECT=1607,1711,1615,1704
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN61]
+CLASS=11
+RECT=1568,1720,1575,1711
+RECT=1568,1712,1583,1696
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN62]
+CLASS=11
+RECT=1538,1720,1551,1704
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN63]
+CLASS=11
+RECT=1538,1695,1551,1680
+RECT=1551,1688,1559,1680
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN64]
+CLASS=11
+RECT=1544,1656,1551,1648
+RECT=1544,1664,1567,1656
+RECT=1560,1656,1567,1648
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN65]
+CLASS=11
+RECT=1584,1664,1599,1648
+RECT=1600,1655,1607,1648
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN66]
+CLASS=11
+RECT=1624,1672,1639,1656
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN67]
+CLASS=11
+RECT=1648,1655,1656,1648
+RECT=1648,1648,1663,1632
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+
+//*** COTÉ EST DE BRITAIN, NORD DU PARC ***
+
+
+[AREA MAISON_BRITAIN68]
+CLASS=11
+RECT=1648,1615,1656,1600
+RECT=1656,1607,1663,1600
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN69]
+CLASS=11
+RECT=1672,1600,1679,1584
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN70]
+CLASS=11
+RECT=1704,1568,1711,1552
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN71]
+CLASS=11
+RECT=1672,1576,1695,1568
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN72]
+CLASS=11
+RECT=1688,1552,1695,1544
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN73]
+CLASS=11
+RECT=1664,1552,1679,1544
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN74]
+CLASS=11
+RECT=1648,1552,1655,1544
+DEFNAME=maison_britain
+GROUP=Britain
+
+
+
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN75]
+CLASS=11
+RECT=1656,1583,1664,1576
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN76]
+CLASS=11
+RECT=1648,1568,1655,1560
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN77]
+CLASS=11
+RECT=1640,1583,1648,1576
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN78]
+CLASS=11
+RECT=1608,1592,1632,1583
+RECT=1616,1584,1623,1576
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN79]
+CLASS=11
+RECT=1616,1568,1623,1560
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN80]
+CLASS=11
+RECT=1576,1599,1600,1584
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN81]
+CLASS=11
+RECT=1576,1567,1592,1552
+RECT=1591,1559,1599,1552
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN82]
+CLASS=11
+RECT=1600,1527,1608,1519
+RECT=1592,1519,1615,1512
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
+
+[AREA MAISON_BRITAIN83]
+CLASS=11
+RECT=1632,1520,1639,1504
+DEFNAME=maison_britain
+GROUP=Britain
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out

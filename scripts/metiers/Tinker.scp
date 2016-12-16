@@ -1,0 +1,1597 @@
+[ITEMDEF i_roule_filer_ouest]
+DEFNAME=i_roule_filer_ouest
+NAME=Roue a filer
+ID=i_spinning_wheel
+RESOURCES=50 i_log, 1 i_wool
+SKILLMAKE=TAILORING 100.0, TINKERING 100.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Roue a filer (ouest)
+
+[ITEMDEF i_deed_metier_a_tisser2] 
+NAME=Metier a tisser
+ID=i_deed
+TYPE=T_DEED
+RESOURCES=50 i_log, 2 i_wool
+SKILLMAKE=TAILORING 100.0, TINKERING 100.0, t_tinker_tools
+WEIGHT=1
+
+CATEGORY=Genese
+SUBSECTION=Deed
+DESCRIPTION=Metier a tisser
+
+ON=@CREATE 
+MORE=i_metier_a_tisser2
+
+[itemdef i_metier_a_tisser2]
+NAME=Metier a tisser
+TYPE=T_multi 
+CATEGORY=Genese
+SUBSECTION=multi 
+DESCRIPTION=Metier a tisser
+MULTIREGION=0,0,0,0
+COMPONENT=4191 1 2 0 0
+COMPONENT=4192 1 1 0 0
+
+on=@create 
+attr=0010
+
+[ITEMDEF i_deed_forge_ouest] 
+NAME=Grande forge est
+ID=i_deed
+TYPE=T_DEED
+RESOURCES=50 i_pierre_solide, 10 i_log
+SKILLMAKE=BLACKSMITHING 100.0, TINKERING 100.0, t_tinker_tools
+WEIGHT=1
+
+CATEGORY=Genese
+SUBSECTION=Deed
+DESCRIPTION=Grande forge ouest
+
+ON=@CREATE 
+MORE=i_forge_ouest
+
+[itemdef i_forge_ouest]
+NAME=Grande forge ouest
+TYPE=T_multi 
+CATEGORY=Genese
+SUBSECTION=multi 
+DESCRIPTION=Grande forge ouest
+MULTIREGION=0,0,0,0
+COMPONENT=6530 2 1 0 0
+COMPONENT=6522 0 1 0 0
+COMPONENT=6526 1 1 0 0
+
+on=@create 
+attr=0010
+
+[ITEMDEF i_deed_forge_sud] 
+NAME=Grande forge nord
+ID=i_deed
+TYPE=T_DEED
+RESOURCES=50 i_pierre_solide, 10 i_log
+SKILLMAKE=BLACKSMITHING 100.0, TINKERING 100.0, t_tinker_tools
+WEIGHT=1
+
+CATEGORY=Genese
+SUBSECTION=Deed
+DESCRIPTION=Grande forge sud
+
+ON=@CREATE 
+MORE=i_forge_sud
+
+[itemdef i_forge_sud]
+NAME=Grande forge sud
+TYPE=T_multi 
+CATEGORY=Genese
+SUBSECTION=multi 
+DESCRIPTION=Grande forge sud
+MULTIREGION=-1,0,0,0
+COMPONENT=6546 1 1 0 0
+COMPONENT=6550 1 0 0 0
+COMPONENT=6554 1 -1 0 0
+
+on=@create 
+attr=0010
+
+[ITEMDEF i_grand_brazier]
+DEFNAME=i_grand_brazier
+NAME=Grand brazier
+ID=019aa
+RESOURCES=20 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 52.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=01d
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Grand brazier
+
+[ITEMDEF i_brazier_sur_pieds]
+DEFNAME=i_brazier_sur_pieds
+NAME=Brazier sur pieds
+ID=0e31
+RESOURCES=10 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 49.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=1
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Brazier sur pieds
+
+[ITEMDEF i_brazier_normal]
+DEFNAME=i_brazier_normal
+NAME=Brazier
+ID=019bb
+RESOURCES=5 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 46.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=2
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Brazier
+
+[ITEMDEF i_petit_brazier]
+DEFNAME=i_petit_brazier
+NAME=A detruire
+ID=i_gold
+RESOURCES=5 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 46.0, t_tinker_tools
+
+ON=@SPELLEFFECT
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Petit Brazier [HS]
+
+[ITEMDEF i_petite_bougie]
+DEFNAME=i_petite_bougie
+NAME=Petite bougie
+ID=0142f
+RESOURCES=1 i_beeswax
+SKILLMAKE=TINKERING 30.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=2
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Petite bougie
+
+[ITEMDEF i_grande_bougie]
+DEFNAME=i_grande_bougie
+NAME=Grande bougie
+ID=01433
+RESOURCES=2 i_beeswax
+SKILLMAKE=TINKERING 32.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=1
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Grande bougie
+
+[ITEMDEF i_bougie_pied_cuivre]
+DEFNAME=i_bougie_pied_cuivre
+NAME=Bougie sur pied de cuivre
+ID=0a26
+RESOURCES=2 i_beeswax, 2 i_ingot_copper
+SKILLMAKE=TINKERING 36.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=1
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Bougie sur pied de cuivre
+
+[ITEMDEF i_bougie_sur_crane]
+DEFNAME=i_bougie_sur_crane
+NAME=Bougie sur crane
+ID=01854
+RESOURCES=2 i_beeswax, 1 i_flesh_head
+SKILLMAKE=TINKERING 38.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=1
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Bougie sur crane
+
+[ITEMDEF i_chandelier]
+DEFNAME=i_chandelier
+NAME=Chandelier
+ID=0a27
+RESOURCES=10 i_beeswax, 3 i_ingot_copper
+SKILLMAKE=TINKERING 56.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=01d
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Chandelier
+
+[ITEMDEF i_grand_chandelier]
+DEFNAME=i_grand_chandelier
+NAME=Chandelier
+ID=0a29
+RESOURCES=10 i_beeswax, 10 i_ingot_copper
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=01d
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Grand chandelier
+
+[ITEMDEF i_petit_lampadaire]
+DEFNAME=i_petit_lampadaire
+NAME=Lampadaire
+ID=0b23
+RESOURCES=50 i_ingot_iron, 1 i_lanterne
+SKILLMAKE=TINKERING 65.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=01d
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Lampadaire 1
+
+[ITEMDEF i_moyen_lampadaire]
+DEFNAME=i_moyen_lampadaire
+NAME=Lampadaire
+ID=0b21
+RESOURCES=100 i_ingot_iron, 1 i_lanterne
+SKILLMAKE=TINKERING 70.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=01d
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Lampadaire 2
+
+[ITEMDEF i_grand_lampadaire]
+DEFNAME=i_grand_lampadaire
+NAME=Lampadaire
+ID=0b25
+RESOURCES=150 i_ingot_iron, 1 i_lanterne
+SKILLMAKE=TINKERING 75.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=01d
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Lampadaire 3
+
+[ITEMDEF i_lanterne]
+DEFNAME=i_lanterne
+NAME=Lanterne
+ID=0a18
+RESOURCES=5 i_ingot_iron, 5 i_beeswax
+SKILLMAKE=TINKERING 34.0, t_tinker_tools
+
+ON=@CREATE
+MOREZ=1
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Lanterne
+
+[ITEMDEF i_porte_bougie_ouest_vide]
+DEFNAME=i_porte_bougie_ouest_vide
+NAME=Porte bougie vide
+ID=09fc
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Porte bougie vide ouest
+
+[ITEMDEF i_porte_bougie_nord_vide]
+DEFNAME=i_porte_bougie_nord_vide
+NAME=Porte bougie vide
+ID=0a01
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Porte bougie vide nord
+
+[ITEMDEF i_porte_bougie_nord]
+DEFNAME=i_porte_bougie_nord
+NAME=Porte bougie
+ID=0a02
+RESOURCES=1 i_porte_bougie_nord_vide, 1 i_grande_bougie
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Porte bougie nord
+
+[ITEMDEF i_porte_bougie_ouest]
+DEFNAME=i_porte_bougie_ouest
+NAME=Porte bougie
+ID=09fd
+RESOURCES=1 i_porte_bougie_ouest_vide, 1 i_grande_bougie
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Porte bougie ouest
+
+[ITEMDEF i_porte_torche_ouest_vide]
+DEFNAME=i_porte_torche_ouest_vide
+NAME=Porte torche vide
+ID=0a06
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Porte torche vide ouest
+
+[ITEMDEF i_porte_torche_nord_vide]
+DEFNAME=i_porte_torche_nord_vide
+NAME=Porte torche vide
+ID=0a0b
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Porte torche vide nord
+
+[ITEMDEF i_porte_torche_ouest]
+DEFNAME=i_porte_torche_ouest
+NAME=Porte torche
+ID=0a07
+RESOURCES=1 i_porte_torche_ouest_vide, 1 i_torche
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Porte torche ouest
+
+[ITEMDEF i_porte_torche_nord]
+DEFNAME=i_porte_torche_nord
+NAME=Porte torche
+ID=0a0c
+RESOURCES=1 i_porte_torche_nord_vide, 1 i_torche
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Porte torche nord
+
+[ITEMDEF i_fil_de_fer]
+DEFNAME=i_fil_de_fer
+NAME=Fil de fer
+ID=01876
+RESOURCES=1 i_ingot_iron
+SKILLMAKE=TINKERING 30.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Fil de fer
+
+[ITEMDEF i_tambour]
+DEFNAME=i_tambour
+NAME=Tambour
+ID=0e9c
+RESOURCES=5 i_log, 1 i_fil_de_fer, 1 i_paper
+SKILLMAKE=TINKERING 50.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Tambour
+
+[ITEMDEF i_harpe]
+DEFNAME=i_harpe
+NAME=Harpe
+ID=0eb1
+RESOURCES=15 i_log, 5 i_fil_de_fer
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Harpe
+
+[ITEMDEF i_petite_harpe]
+DEFNAME=i_petite_harpe
+NAME=Petite harpe
+ID=0eb2
+RESOURCES=10 i_log, 3 i_fil_de_fer
+SKILLMAKE=TINKERING 50.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Petite harpe
+
+[ITEMDEF i_lutte]
+DEFNAME=i_lutte
+NAME=Lutte
+ID=0eb3
+RESOURCES=5 i_log, 3 i_fil_de_fer
+SKILLMAKE=TINKERING 50.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Lutte
+
+[ITEMDEF i_tambourin]
+DEFNAME=i_tambourin
+NAME=Tambourin
+ID=0e9d
+RESOURCES=2 i_log, 2 i_ingot_iron, 1 i_paper
+SKILLMAKE=TINKERING 50.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Tambourin
+
+[ITEMDEF i_enclume]
+DEFNAME=i_enclume
+NAME=Enclume
+ID=i_anvil
+RESOURCES=30 i_ingot_iron, 15 i_log
+SKILLMAKE=BLACKSMITHING 90.0, TINKERING 90.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Enclume
+
+[ITEMDEF i_pioche_de_carriere]
+DEFNAME=i_pioche_de_carriere
+NAME=Pioche de carriere
+ID=i_pickaxe
+RESOURCES=1 i_log, 1 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+ON=@Create
+HITPOINTS={100 200}
+COLOR=0386
+
+ON=@DClick
+TARGET Ou voulez vous piocher ?
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.TYPE>==t_arock
+    IF <SRC.FINDID.m_limitateur_carriere>
+        SRC.SYSMESSAGE Vous retroussez vos manches , essuyez la sueur de votre front et etes pret a repiocher
+    ELSE
+        SRC.NEWITEM=m_limitateur_carriere
+        SRC.ACT.EQUIP
+        IF (50.0 < <SRC.MINING>)&&(<SRC.MINING> < 60.0)
+            IF (<EVAL(RAND(25))>=0) 
+                SRC.GAGNERPIERRE 
+            ELSE 
+                SRC.PASDEPIERRE 
+            ENDIF
+        ELSEIF (60.0 < <SRC.MINING>)&&(<SRC.MINING> < 70.0)
+            IF (<EVAL(RAND(20))>=0) 
+                SRC.GAGNERPIERRE 
+            ELSE 
+                SRC.PASDEPIERRE 
+            ENDIF
+        ELSEIF (70.0 < <SRC.MINING>)&&(<SRC.MINING> < 80.0)
+            IF (<EVAL(RAND(15))>=0) 
+                SRC.GAGNERPIERRE 
+            ELSE 
+                SRC.PASDEPIERRE 
+            ENDIF
+        ELSEIF (80.0 < <SRC.MINING>)&&(<SRC.MINING> < 100.0)
+            IF (<EVAL(RAND(10))>=0) 
+                SRC.GAGNERPIERRE 
+            ELSE 
+                SRC.PASDEPIERRE 
+            ENDIF
+        ELSEIF <SRC.MINING> > 99.9
+            IF (<EVAL(RAND(5))>=0) 
+                SRC.GAGNERPIERRE 
+            ELSE 
+                SRC.PASDEPIERRE 
+            ENDIF
+        ELSE
+            SRC.PASDEPIERRE
+        ENDIF
+    ENDIF
+ELSE
+    IF <SRC.TARG.TYPE>==t_rock
+        RETURN 0
+    ELSE
+        SRC.SYSMESSAGE Vous ne pouvez pas extraire de pierre de <SRC.TARG.NAME> !
+    ENDIF
+ENDIF
+
+CATEGORY=Genese
+SUBSECTION=Tailleur
+DESCRIPTION=Pioche de carriere
+
+[ITEMDEF m_limitateur_carriere]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=2
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[Function GAGNERPIERRE]
+IF <SRC.STAMINA>>10
+SRC.TAG.TempStam=<SRC.STAMINA>-10 
+SRC.STAMINA=<SRC.TAG.TempStam> 
+SRC.ANIM 11
+IF (<EVAL(RAND(10))>=0) 
+SRC.NEWITEM i_pierre_solide
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE Malgre la fatigue vous reussissez a extraire une pierre de cette roche
+ELSE 
+SRC.NEWITEM i_poussiere_de_roche
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE Vous n'arrivez a extraire que de la poussiere de cette roche
+ENDIF
+ELSE
+SRC.SYSMESSAGE Vous etes trop fatigue pour continuer de piocher
+ENDIF
+
+[Function PASDEPIERRE]
+IF <SRC.STAMINA>>10
+SRC.TAG.TempStam=<SRC.STAMINA>-10
+SRC.STAMINA=<SRC.TAG.TempStam> 
+SRC.ANIM 11
+SRC.SYSMESSAGE Malgre vos efforts soutenus, vous n'arrivez pas a extraire de la pierre de cette roche
+ELSE
+SRC.SYSMESSAGE Vous etes trop fatigue pour continuer de piocher
+ENDIF
+
+[ITEMDEF i_pierre_solide]
+DEFNAME=i_pierre_solide
+NAME=Pierre
+ID=01bf8
+TYPE=T_NORMAL
+
+ON=@Create
+COLOR=0386
+
+CATEGORY=Genese
+SUBSECTION=Tailleur
+DESCRIPTION=Pierre
+
+[ITEMDEF i_poussiere_de_roche]
+DEFNAME=i_poussiere_de_roche
+NAME=Poussiere de roche
+ID=0eef
+TYPE=t_normal
+
+ON=@Create
+COLOR=0386
+
+CATEGORY=Genese
+SUBSECTION=Tailleur
+DESCRIPTION=Poussiere de roche
+
+[ITEMDEF i_petite_forge]
+DEFNAME=i_petite_forge
+NAME=Petite forge
+ID=0fb1
+RESOURCES=40 i_pierre_solide
+SKILLMAKE=BLACKSMITHING 90.0, TINKERING 90.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Petite forge
+
+[ITEMDEF i_porte_clef]
+DEFNAME=i_porte_clef
+NAME=Porte clef
+ID=01011
+RESOURCES=1 i_ingot_iron
+SKILLMAKE=TINKERING 50.0, t_tinker_tools
+
+ON=@CREATE
+ATTR=00004
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Porte clef
+
+[ITEMDEF i_clef_de_cuivre]
+DEFNAME=i_clef_de_cuivre
+NAME=Clef de cuivre
+ID=0100e
+RESOURCES=1 i_ingot_copper
+SKILLMAKE=TINKERING 43.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Clef de cuivre
+
+[ITEMDEF i_clef_de_fer]
+DEFNAME=i_clef_de_fer
+NAME=Clef de fer
+ID=01010
+RESOURCES=1 i_ingot_iron
+SKILLMAKE=TINKERING 43.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Clef de fer
+
+[ITEMDEF i_clef_en_or]
+DEFNAME=i_clef_en_or
+NAME=Clef en or
+ID=0100f
+RESOURCES=1 i_ingot_gold
+SKILLMAKE=TINKERING 43.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Clef en or
+
+[ITEMDEF i_marteau_de_forgeron]
+DEFNAME=i_marteau_de_forgeron
+NAME=Marteau de forgeron
+ID=0fb4
+RESOURCES=2 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+VALUE=100
+
+on=@create 
+HITPOINTS=500
+
+ON=@EQUIP
+BONUS_ARME_GEMME_EQUIP
+
+ON=@UNEQUIP
+BONUS_ARME_GEMME_UNEQUIP
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Marteau de forgeron
+
+[ITEMDEF i_outils_a_bois]
+DEFNAME=i_outils_a_bois
+NAME=Outils a bois
+ID=01026
+RESOURCES=1 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Outils a bois
+
+[ITEMDEF i_lime_a_bois]
+DEFNAME=i_lime_a_bois
+NAME=Lime a bois
+ID=01028
+RESOURCES=1 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Lime a bois
+
+[ITEMDEF i_scie]
+DEFNAME=i_scie
+NAME=Scie
+ID=01034
+RESOURCES=1 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Scie
+
+[ITEMDEF i_rabot_a_replanir]
+DEFNAME=i_rabot_a_replanir
+NAME=Rabot a replanir
+ID=01030
+RESOURCES=2 i_log
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+VALUE=100
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Rabot a replanir
+
+[ITEMDEF i_canne_a_peche]
+NAME=Canne a peche
+ID=0dbf
+RESOURCES=2 i_log, 1 i_fil_de_fer
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+ON=@DCLICK
+IF <SRC.FINDID.m_timer_peche>
+    SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez attendre avant de pecher de nouveau !
+    RETURN 1
+ENDIF
+RETURN 0
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Canne a peche
+
+[ITEMDEF i_pelle]
+DEFNAME=i_pelle
+NAME=Pelle
+ID=0f39
+RESOURCES=2 i_log, 1 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+on=@create 
+HITPOINTS=500
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Pelle
+
+[ITEMDEF i_kit_de_couture]
+DEFNAME=i_kit_de_couture
+NAME=Kit de couture
+ID=0f9d
+RESOURCES=1 i_cloth, 1 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+VALUE=100
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Kit de couture
+
+[ITEMDEF i_ciseaux]
+DEFNAME=i_ciseaux
+NAME=Ciseaux
+ID=0f9e
+RESOURCES=1 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Ciseaux
+
+[ITEMDEF i_croche_serrure]
+DEFNAME=i_croche_serrure
+NAME=Croche serrure
+ID=014fb
+RESOURCES=1 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Croche serrure
+
+[ITEMDEF i_horloge]
+DEFNAME=i_horloge
+NAME=Horloge
+ID=i_clock
+RESOURCES=1 i_ingot_iron, 1 i_log, 1 i_fil_de_fer
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Horloge
+
+[ITEMDEF i_sextante]
+DEFNAME=i_sextante
+NAME=Sextant
+ID=i_sextant
+RESOURCES=1 i_ingot_iron, 1 i_log
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Sextant
+
+[ITEMDEF i_outils_de_bricoleur]
+DEFNAME=i_outils_de_bricoleur
+NAME=Outils de bricoleur
+ID=01ebc
+RESOURCES=2 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+VALUE=100
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Outils de bricoleur
+
+[ITEMDEF i_tableau]
+DEFNAME=i_tableau
+NAME=Tableau
+ID=i_bulletin_board
+RESOURCES=50 i_paper, 5 i_log
+SKILLMAKE=TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Tableau
+
+[ITEMDEF i_pilon]
+DEFNAME=i_pilon
+NAME=Pilon
+ID=0e9b
+RESOURCES=2 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+VALUE=100
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Pilon
+
+[ITEMDEF i_collier]
+DEFNAME=i_collier
+NAME=Collier
+ID=01085
+RESOURCES=1 i_ingot_iron
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Collier
+
+[ITEMDEF i_bracelet_en_or]
+DEFNAME=i_bracelet_en_or
+NAME=Bracelet en or
+ID=01086
+RESOURCES=1 i_ingot_gold
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Bracelet en or
+
+[ITEMDEF i_boucle_oreille_en_or]
+DEFNAME=i_boucle_oreille_en_or
+NAME=Boucles d'oreilles en or
+ID=01087
+RESOURCES=1 i_ingot_gold
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Boucles d'oreilles en or
+
+[ITEMDEF i_collier_en_or]
+DEFNAME=i_collier_en_or
+NAME=Collier en or
+ID=01089
+RESOURCES=1 i_ingot_gold
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Collier en or
+
+[ITEMDEF i_bague_en_or]
+DEFNAME=i_bague_en_or
+NAME=Bague en or
+ID=0108a
+RESOURCES=1 i_ingot_gold
+SKILLMAKE=TINKERING 60.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Bague en or
+
+[ITEMDEF i_petit_coffre_en_or]
+DEFNAME=i_petit_coffre_en_or
+NAME=Petit coffre en or
+ID=i_box_brass
+RESOURCES=5 i_ingot_gold
+SKILLMAKE=TINKERING 70.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Petit coffre en or
+
+[ITEMDEF i_grand_coffre_en_fer]
+DEFNAME=i_grand_coffre_en_fer
+NAME=Grand coffre en fer
+ID=i_chest_metal
+RESOURCES=15 i_ingot_iron
+SKILLMAKE=TINKERING 75.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Grand coffre en fer
+
+[ITEMDEF i_grand_coffre_en_fer_orne]
+DEFNAME=i_grand_coffre_en_fer_orne
+NAME=Grand coffre en fer orne d'or
+ID=i_chest_metal_brass
+RESOURCES=15 i_ingot_iron, 2 i_ingot_gold
+SKILLMAKE=TINKERING 90.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Grand coffre en fer orne d'or
+
+[ITEMDEF i_grand_coffre_en_bois_orne]
+DEFNAME=i_grand_coffre_en_bois_orne
+NAME=Grand coffre en bois orne d'or
+ID=i_chest_wooden_brass
+RESOURCES=15 i_log, 2 i_ingot_gold
+SKILLMAKE=TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Grand coffre en bois orne d'or
+
+[ITEMDEF i_barril_vide]
+DEFNAME=i_barril_vide
+NAME=Barril
+ID=0fae
+RESOURCES=5 i_log, 2 i_ingot_iron
+SKILLMAKE=TINKERING 70.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Barril vide
+
+[ITEMDEF i_pioche]
+DEFNAME=i_pioche
+NAME=Pioche
+ID=i_pickaxe
+RESOURCES=1 i_log, 1 i_ingot_iron
+SKILLMAKE=TINKERING 40.0, t_tinker_tools
+VALUE = 100
+
+ON=@CREATE
+HITPOINTS=500
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Pioche
+
+[ITEMDEF i_banniere_1_sud]
+DEFNAME=i_banniere_1_sud
+NAME=Banniere
+ID=015ae
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 1 sud
+
+[ITEMDEF i_banniere_1_ouest]
+DEFNAME=i_banniere_1_ouest
+NAME=Banniere
+ID=015af
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 1 ouest
+
+[ITEMDEF i_banniere_2_sud]
+DEFNAME=i_banniere_2_sud
+NAME=Banniere
+ID=015b2
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 2 sud
+
+[ITEMDEF i_banniere_2_ouest]
+DEFNAME=i_banniere_2_ouest
+NAME=Banniere
+ID=015b3
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 2 ouest
+
+[ITEMDEF i_banniere_3_sud]
+DEFNAME=i_banniere_3_sud
+NAME=Banniere
+ID=015b6
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 3 sud
+
+[ITEMDEF i_banniere_3_ouest]
+DEFNAME=i_banniere_3_ouest
+NAME=Banniere
+ID=015b7
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 3 ouest
+
+[ITEMDEF i_banniere_4_sud]
+DEFNAME=i_banniere_4_sud
+NAME=Banniere
+ID=015ba
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 4 sud
+
+[ITEMDEF i_banniere_4_ouest]
+DEFNAME=i_banniere_4_ouest
+NAME=Banniere
+ID=015bb
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 4 ouest
+
+[ITEMDEF i_banniere_5_sud]
+DEFNAME=i_banniere_5_sud
+NAME=Banniere
+ID=015be
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 5 sud
+
+[ITEMDEF i_banniere_5_ouest]
+DEFNAME=i_banniere_5_ouest
+NAME=Banniere
+ID=015bf
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 5 ouest
+
+[ITEMDEF i_banniere_6_sud]
+DEFNAME=i_banniere_6_sud
+NAME=Banniere
+ID=015c2
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 6 sud
+
+[ITEMDEF i_banniere_6_ouest]
+DEFNAME=i_banniere_6_ouest
+NAME=Banniere
+ID=015c3
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 6 ouest
+
+[ITEMDEF i_banniere_7_sud]
+DEFNAME=i_banniere_7_sud
+NAME=Banniere
+ID=015c6
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 7 sud
+
+[ITEMDEF i_banniere_7_ouest]
+DEFNAME=i_banniere_7_ouest
+NAME=Banniere
+ID=015c7
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 7 ouest
+
+[ITEMDEF i_banniere_8_sud]
+DEFNAME=i_banniere_8_sud
+NAME=Banniere
+ID=015ca
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 8 sud
+
+[ITEMDEF i_banniere_8_ouest]
+DEFNAME=i_banniere_8_ouest
+NAME=Banniere
+ID=015cb
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 8 ouest
+
+[ITEMDEF i_banniere_9_sud]
+DEFNAME=i_banniere_9_sud
+NAME=Banniere
+ID=015ce
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 9 sud
+
+[ITEMDEF i_banniere_9_ouest]
+DEFNAME=i_banniere_9_ouest
+NAME=Banniere
+ID=015cf
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 9 ouest
+
+[ITEMDEF i_banniere_10_sud]
+DEFNAME=i_banniere_10_sud
+NAME=Banniere
+ID=015d2
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 10 sud
+
+[ITEMDEF i_banniere_10_ouest]
+DEFNAME=i_banniere_10_ouest
+NAME=Banniere
+ID=015d3
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 10 ouest
+
+[ITEMDEF i_banniere_11_sud]
+DEFNAME=i_banniere_11_sud
+NAME=Banniere
+ID=015d6
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 11 sud
+
+[ITEMDEF i_banniere_11_ouest]
+DEFNAME=i_banniere_11_ouest
+NAME=Banniere
+ID=015d7
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 11 ouest
+
+[ITEMDEF i_banniere_12_sud]
+DEFNAME=i_banniere_12_sud
+NAME=Banniere
+ID=015da
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 12 sud
+
+[ITEMDEF i_banniere_12_ouest]
+DEFNAME=i_banniere_12_ouest
+NAME=Banniere
+ID=015db
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 12 ouest
+
+[ITEMDEF i_banniere_13_sud]
+DEFNAME=i_banniere_13_sud
+NAME=Banniere
+ID=015de
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 13 sud
+
+[ITEMDEF i_banniere_13_ouest]
+DEFNAME=i_banniere_13_ouest
+NAME=Banniere
+ID=015df
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 13 ouest
+
+[ITEMDEF i_banniere_14_sud]
+DEFNAME=i_banniere_14_sud
+NAME=Banniere
+ID=015e2
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 14 sud
+
+[ITEMDEF i_banniere_14_ouest]
+DEFNAME=i_banniere_14_ouest
+NAME=Banniere
+ID=015e3
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 14 ouest
+
+[ITEMDEF i_banniere_15_sud]
+DEFNAME=i_banniere_15_sud
+NAME=Banniere
+ID=015e6
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 15 sud
+
+[ITEMDEF i_banniere_15_ouest]
+DEFNAME=i_banniere_15_ouest
+NAME=Banniere
+ID=015e7
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 15 ouest
+
+[ITEMDEF i_banniere_16_sud]
+DEFNAME=i_banniere_16_sud
+NAME=Banniere
+ID=015ea
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 16 sud
+
+[ITEMDEF i_banniere_16_ouest]
+DEFNAME=i_banniere_16_ouest
+NAME=Banniere
+ID=015eb
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 16 ouest
+
+[ITEMDEF i_banniere_17_sud]
+DEFNAME=i_banniere_17_sud
+NAME=Banniere
+ID=015ee
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 17 sud
+
+[ITEMDEF i_banniere_17_ouest]
+DEFNAME=i_banniere_17_ouest
+NAME=Banniere
+ID=015ef
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 17 ouest
+
+[ITEMDEF i_banniere_18_sud]
+DEFNAME=i_banniere_18_sud
+NAME=Banniere
+ID=015f2
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 18 sud
+
+[ITEMDEF i_banniere_18_ouest]
+DEFNAME=i_banniere_18_ouest
+NAME=Banniere
+ID=015f3
+RESOURCES=2 i_ingot_gold, 2 i_cloth
+SKILLMAKE=TAILORING 100.0, TINKERING 80.0, t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Banniere 18 ouest
+
+[ITEMDEF i_serrure_pour_container]
+DEFNAME=i_serrure_pour_container
+NAME=Serrure pour container
+ID=i_oil_flask
+TYPE=T_SCRIPT
+RESOURCES=1 i_ingot_iron
+SKILLMAKE=TINKERING 100.0, t_tinker_tools
+
+ON=@DCLICK
+IF <MORE1>==0
+    SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez selectionner le container sur lequel vous desirez inserer une serrure
+    MORE1=1
+    TARGET
+ELSE
+    SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez selectionner la clef que vous desirez faire correspondre au container precedemment choisi
+    MORE1=2
+    TARGET
+ENDIF
+RETURN 1
+
+ON=@TARGON_ITEM
+IF (<SRC.TARG.TOPOBJ.UID>==<SRC.UID>)
+    IF !(<SRC.TARG.UID>==<UID>)
+        IF <MORE1>==1
+            IF !(<SRC.TARG.BASEID>==i_backpack)
+                IF <SRC.TARG.TYPE>==T_CONTAINER
+                    IF <SRC.TARG.MORE1>==0
+                        SRC.TARG.MORE1=<SRC.TARG.UID>
+                        TAG.CONTAINERUID=<SRC.TARG.UID>
+                        TAG.CONTAINERNOM=<SRC.TARG.NAME>
+                        MORE1=2
+                        USE
+                    ELSE
+                        SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> possede deja une serrure !
+                        MORE1=0
+                    ENDIF
+                ELSEIF (<SRC.TARG.BASEID> == i_portiere_en_frene_est) || (<SRC.TARG.BASEID> == i_portiere_en_frene_ouest) || (<SRC.TARG.BASEID> == i_portiere_en_frene_nord) || (<SRC.TARG.BASEID> == i_portiere_en_frene_sud)
+                    IF <SRC.TARG.MORE1>==0
+                        SRC.TARG.MORE1=<SRC.TARG.UID>
+                        TAG.CONTAINERUID=<SRC.TARG.UID>
+                        TAG.CONTAINERNOM=<SRC.TARG.NAME>
+                        MORE1=2
+                        USE
+                    ELSE
+                        SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> possede deja une serrure !
+                        MORE1=0
+                    ENDIF
+                ELSE
+                    SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un container !
+                    MORE1=0
+                ENDIF
+            ELSE
+                SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas inserer une serrure sur un sac a dos !
+                MORE1=0
+            ENDIF
+        ELSE
+            IF <SRC.TARG.TYPE>==T_KEY
+                IF <SRC.TARG.MORE1>==0
+                    SRC.TARG.MORE1=<TAG.CONTAINERUID>
+                    SRC.TARG.NAME Cle pour <TAG.CONTAINERNOM>
+                    //REMOVE
+                    IF <SRC.FINDID.i_serrure_pour_container.amount> >1
+                        SRC.FINDID.i_serrure_pour_container.amount=<EVAL <SRC.FINDID.i_serrure_pour_container.amount>-1>
+                        FIX
+                    ELSE
+                        REMOVE
+                    ENDIF
+                ELSE
+                    SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas vierge !
+                    MORE1=0
+                    TRY UID.<TAG.CONTAINERUID>.MORE1=0
+                ENDIF
+            ELSE
+                SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas une clef !
+                TRY UID.<TAG.CONTAINERUID>.MORE1=0
+                MORE1=0
+            ENDIF
+        ENDIF
+    ELSE
+        SRC.SYSMESSAGEUA 0481 1 1 0 Reinitialisation de la serrure
+        MORE1=0
+    ENDIF
+ELSE
+    SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez placer <SRC.TARG.NAME> dans votre sac pour realiser cette operation !
+    MORE1=0
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Serrure pour container
+
+[ITEMDEF i_outils_de_bricoleur_en_diamant]
+NAME=Outils de bricoleur en diamant
+ID=01ebc
+TYPE=t_normal
+SKILLMAKE=TINKERING 50.0,t_tinker_tools
+RESOURCES=4 i_ingot_iron, 1 i_gemme_diamant
+VALUE=100000
+
+ON=@CREATE
+COLOR=0b10
+
+ON=@DCLICK
+IF <SRC.TINKERING> >= 300
+    IF <SRC.FINDID.i_ingot_gold>
+        IF !<SRC.IS_DEJA_TRAVAIL>
+            SRC.NEWITEM m_prod_poussiere_or
+            SRC.ACT.CONT = <SRC.UID>
+
+        ELSE
+            SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja occupe !
+        ENDIF
+    ELSE
+        SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucun lingot d'or !
+    ENDIF
+ELSE
+    SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'etes pas suffisamment bricoleur pour utiliser cet outil !
+ENDIF
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Outils de bricoleur en diamant
+
+[ITEMDEF i_poussiere_d_or]
+NAME=Poussiere d'or
+ID=0eef
+TYPE=t_normal
+VALUE=1
+
+ON=@Create
+COLOR=color_o_gold
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Poussiere d'or
+
+//AU TIMER, DONNE LA POUSSIERE
+[ITEMDEF m_prod_poussiere_or]
+NAME=prod pouss or
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER={2 3}
+
+ON=@TIMER
+IF <CONT.FINDID.i_ingot_gold>
+    VAR.FACTEUR = <EVAL (<CONT.TINKERING>/15) + 20> //30.0 => 40 ; 150.0 => 120
+    IF <CONT.FINDID.i_ingot_gold.AMOUNT> > 10
+        CONT.FINDID.i_ingot_gold.AMOUNT = <EVAL <CONT.FINDID.i_ingot_gold.AMOUNT> - 10>
+        CONT.NEWITEM i_poussiere_d_or
+        CONT.ACT.AMOUNT = <EVAL <VAR.FACTEUR>>
+        CONT.ACT.CONT = <CONT.UID>
+    ELSE
+        CONT.NEWITEM i_poussiere_d_or
+        CONT.ACT.AMOUNT = <EVAL (<CONT.FINDID.i_ingot_gold.AMOUNT> * <VAR.FACTEUR>)/10>
+        CONT.ACT.CONT = <CONT.UID>
+        CONT.FINDID.i_ingot_gold.REMOVE
+    ENDIF
+    VAR.FACTEUR
+ENDIF
+REMOVE
+RETURN 1
+
+[ITEMDEF i_marteau_en_diamant]
+NAME=Marteau en diamant
+ID=0fb4
+RESOURCES=2 i_ingot_iron, 1 i_gemme_diamant
+SKILLMAKE=TINKERING 50.0, t_tinker_tools
+VALUE=100000
+
+ON=@CREATE 
+HITPOINTS=500
+COLOR=0b10
+
+ON=@DCLICK
+IF <SRC.BLACKSMITHING> >= 300
+    IF <SRC.FINDID.i_poussiere_d_or>
+        IF !<SRC.IS_DEJA_TRAVAIL>
+            SRC.NEWITEM m_prod_piece
+            SRC.ACT.CONT = <SRC.UID>
+        ELSE
+            SRC.SYSMESSAGEUA 0481 1 1 0 Vous etes deja occupe !
+        ENDIF
+    ELSE
+        SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez aucune poussiere d'or !
+    ENDIF
+ELSE
+    SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'etes pas suffisamment doue en feronnerie pour utiliser ce marteau !
+ENDIF
+RETURN 1
+
+ON=@EQUIP
+BONUS_ARME_GEMME_EQUIP
+
+ON=@UNEQUIP
+BONUS_ARME_GEMME_UNEQUIP
+
+CATEGORY=Genese
+SUBSECTION=Tinker
+DESCRIPTION=Marteau en diamant
+
+[ITEMDEF m_prod_piece]
+NAME=prod piece
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER={2 3}
+
+ON=@TIMER
+IF <CONT.FINDID.i_poussiere_d_or>
+    VAR.FACTEUR = <EVAL (<CONT.BLACKSMITHING>/15) + 20> //30.0 => 40 ; 150.0 => 120
+    IF <CONT.FINDID.i_poussiere_d_or.AMOUNT> > 20
+        CONT.FINDID.i_poussiere_d_or.AMOUNT = <EVAL <CONT.FINDID.i_poussiere_d_or.AMOUNT> - 20>
+        CONT.NEWITEM i_gold
+        CONT.ACT.AMOUNT = <EVAL 10 * <VAR.FACTEUR>>
+        CONT.ACT.CONT = <CONT.UID>
+    ELSE
+        CONT.NEWITEM i_gold
+        CONT.ACT.AMOUNT = <EVAL (<CONT.FINDID.i_poussiere_d_or.AMOUNT> * <VAR.FACTEUR>)/2>
+        CONT.ACT.CONT = <CONT.UID>
+        CONT.FINDID.i_poussiere_d_or.REMOVE
+    ENDIF
+    VAR.FACTEUR
+ENDIF
+REMOVE
+RETURN 1

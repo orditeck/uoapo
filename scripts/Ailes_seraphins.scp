@@ -1,0 +1,50 @@
+[ITEMDEF 03f0c]
+DEFNAME=i_wings
+NAME=Ailes
+TYPE=T_NORMAL
+FLIP=0
+ARMOR=0
+REQSTR=10
+WEIGHT=3
+LAYER=20
+
+ON=@Create
+ATTR=00004
+
+ON=@CLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !(<LINK> == <SRC.UID>)
+		CONT=<LINK.UID>
+	ENDIF
+ENDIF
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !(<LINK> == <SRC.UID>)
+		CONT=<LINK.UID>
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@EQUIP
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF !(<LINK> == <SRC.UID>)
+		CONT=<LINK.UID>
+	ENDIF
+ENDIF
+
+[ITEMDEF i_ailes_seraphin]
+NAME=Ailes de seraphin
+ID=03f0c
+TYPE=T_ARMOR
+
+ON=@Create
+COLOR=0afe
+
+[ITEMDEF i_ailes_nephilim]
+NAME=Ailes de nephilim
+ID=03f0c
+TYPE=T_ARMOR
+
+ON=@Create
+COLOR=0ab8

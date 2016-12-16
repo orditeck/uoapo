@@ -1,0 +1,95 @@
+[EVENTS e_resistance_magie]
+ON=@SPELLEFFECT
+//[] = SRC.ACT = CELUI QUI RECOIT LE SPELL
+//SRC = CELUI QUI CAST LE SORT
+IF ((!<SRC.BRAIN> || 0<SRC.TAG.PROPRIO_UID>) && !<BRAIN>)
+	IF <IS_SORT_AGRESSIF <ARGN>>
+		IF ((<REGION.FLAGS>&08000) || (<SRC.REGION.FLAGS>&08000))
+			IF !<SRC.BRAIN>
+				SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas effectuer cette action en ces lieux !
+			ENDIF
+			EFFECT 3,i_fx_glow,0,15
+			RETURN 1
+		ELSEIF (<FINDID.m_anti_rez_kill> || <SRC.FINDID.m_anti_rez_kill>)
+			EFFECT 3,i_fx_glow,0,15
+			RETURN 1
+		ENDIF
+	ENDIF
+ENDIF
+IF (<FINDID.i_rune_reactive_armor>) && (<SRC.FINDID.i_rune_reactive_armor>)
+	FINDID.i_rune_reactive_armor.TIMER=0
+	SRC.FINDID.i_rune_reactive_armor.TIMER=0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <NAME> annule le champ de reactivite de votre armure !
+	SYSMESSAGEUA 0481 1 1 0 <SRC.NAME> annule le champ de reactivite de votre armure !
+ENDIF
+IF <IS_SORT_HEALING_PROTECTION <ARGN>>
+	IF <EVAL <HEALING>/10> > 1000
+		VAR.BLOCK=1
+	ELSEIF <EVAL <HEALING>/10> < 100
+		VAR.BLOCK=0
+	ELSE
+		IF (<EVAL RAND(<HEALING>/10)> > <EVAL RAND(250)>)
+			VAR.BLOCK=1
+		ELSE
+			VAR.BLOCK=0
+		ENDIF
+	ENDIF
+	IF <VAR.BLOCK>
+		VAR.BLOCK
+		SRC.SYSMESSAGEUA 0481 1 1 0 <NAME> resiste a votre sort !
+		SYSMESSAGEUA 0481 1 1 0 Vous resistez au sort de <SRC.NAME> !
+		RETURN 1
+	ENDIF
+ENDIF
+VAR.BLOCK
+IF <IS_SORT_AGRESSIF <ARGN>> == 1
+	IF <EVAL <SRC.MAGERY>> > <EVAL 2 * <MAGICRESISTANCE>>
+		VAR.CHANCE_TOUCHER_MAGIE = 100
+	ELSEIF <EVAL <MAGICRESISTANCE>> > <EVAL 2 * <SRC.MAGERY>>
+		VAR.CHANCE_TOUCHER_MAGIE = 0
+	ELSEIF <MAGICRESISTANCE> > <SRC.MAGERY>
+		VAR.CHANCE_TOUCHER_MAGIE = <EVAL 20 - ((<MAGICRESISTANCE> - <SRC.MAGERY>) / ((<SRC.MAGERY> / 20) + 1))>
+	ELSE
+		VAR.CHANCE_TOUCHER_MAGIE = <EVAL 20 + ((<SRC.MAGERY> - <MAGICRESISTANCE>) / ((<MAGICRESISTANCE> / 80) + 1))>
+	ENDIF
+	IF <EVAL (rand(100)) + 1> > <EVAL <VAR.CHANCE_TOUCHER_MAGIE>>
+		SYSMESSAGEUA 0481 1 1 0 Vous contrez le sort de <SRC.NAME>
+		EFFECT 3,i_fx_glow,0,15
+		RETURN 1
+	ELSE
+		VAR.DECHAINEMENT=<EVAL 100 - (<SRC.EvaluatingIntel> / 50)>
+		IF <EVAL (RAND(<EVAL <VAR.DECHAINEMENT>>))> <= 0
+			IF !<BRAIN>
+				SYSMESSAGEUA 0481 1 1 0 <SRC.NAME> vous inflige des brulures de mana !
+			ENDIF
+			IF !<SRC.BRAIN>
+				SRC.SYSMESSAGEUA 0481 1 1 0 Vous infligez des brulures de mana a <NAME> !
+			ENDIF
+			HITS=<EVAL <HITS> - (<SRC.INT>/10)>
+			EFFECT 3,i_fx_vortex_full,0,25
+		ENDIF
+		RETURN 0
+	ENDIF
+ENDIF
+
+//ARGN = NUMERO DU SORT
+[FUNCTION IS_SORT_AGRESSIF]
+IF ( <ARGS> == 1 ) || ( <ARGS> == 3 ) || ( <ARGS> == 5 ) || ( <ARGS> == 8 ) || ( <ARGS> == 12 ) || ( <ARGS> == 18 ) || ( <ARGS> == 20 ) || ( <ARGS> == 27 ) || ( <ARGS> == 30 ) || ( <ARGS> == 31 ) || ( <ARGS> == 34 ) || ( <ARGS> == 35 ) || ( <ARGS> == 37 ) || ( <ARGS> == 38 ) || ( <ARGS> == 41 ) || ( <ARGS> == 42 ) || ( <ARGS> == 43 ) || ( <ARGS> == 46 ) || ( <ARGS> == 49 ) || ( <ARGS> == 51 ) || ( <ARGS> == 53 ) || ( <ARGS> == 54 ) || ( <ARGS> == 55 ) || ( <ARGS> == 57 )
+	RETURN 1
+ELSE
+	RETURN 0
+ENDIF
+
+[FUNCTION IS_SORT_HEALING_PROTECTION]
+IF ( <ARGS> == 1 ) || ( <ARGS> == 3 ) || ( <ARGS> == 8 ) || ( <ARGS> == 20 ) || ( <ARGS> == 27 ) || ( <ARGS> == 38 )
+	RETURN 1
+ELSE
+	RETURN 0
+ENDIF
+
+[FUNCTION IS_SORT_BLESSURES]
+IF ( <ARGS> == 5 ) || ( <ARGS> == 12 ) || ( <ARGS> == 18 ) || ( <ARGS> == 20 ) || ( <ARGS> == 30 ) || ( <ARGS> == 37 ) || ( <ARGS> == 42 ) || ( <ARGS> == 43 ) || ( <ARGS> == 49 ) || ( <ARGS> == 51 ) || ( <ARGS> == 55 ) || ( <ARGS> == 57 )
+	RETURN 1
+ELSE
+	RETURN 0
+ENDIF

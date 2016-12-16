@@ -1,0 +1,79 @@
+[ITEMDEF i_dalle_animcourse]
+ID=0519
+NAME="Ligne d'arrivee"
+WEIGHT=1
+CATEGORY=Item Orditeck
+SUBSECTION=Item Orditeck
+DESCRIPTION=Dalle anim course
+TYPE=t_script
+
+ON=@Create
+COLOR=0bb0
+
+ON=@STEP
+SERV.ALLCLIENTS SYSMESSAGEUA 0afb,0,0,fra <SRC.NAME> traverse la ligne d'arrivee !
+SRC.GO 5995,298
+RETURN 1
+
+
+//MORE1 ==> 1/MORE1 chance d'avancer
+//MOREX ==> 1 a MOREX cases a avancer
+//MOREY ==> 1 a MOREY cases a reculer
+[ITEMDEF i_de_de_jeu]
+NAME=De de jeu
+ID=0fa7
+WEIGHT=1
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=0afb
+MORE1=2
+MOREX=5
+MOREY=3
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+ON=@DCLICK
+IF <EVAL RAND(1,<EVAL <MORE1>+1>)> == 1
+	SRC.EMOTE reculer de <EVAL RAND(1,<EVAL <MOREY>+1>)>
+ELSE
+	SRC.EMOTE avancer de <EVAL RAND(1,<EVAL <MOREX>+1>)>
+ENDIF
+RETURN 1
+
+CATEGORY=Animation
+SUBSECTION=Jeu
+DESCRIPTION=De de jeu
+
+[ITEMDEF i_dalle_teleportatrice_qui_assomme]
+NAME=Dalle teleportatrice qui assome
+ID=049b
+
+ON=@CREATE
+COLOR=0ab8
+ATTR=08090
+
+ON=@STEP
+IF (<SRC.OBODY> == c_man) || (<SRC.OBODY> == c_woman)
+	IF !<SRC.FINDLAYER.25>
+		SRC.P=<MOREP>
+		SRC.UPDATE
+		SRC.EMOTE tomber <SRC.SEX evanoui/evanouie> un instant!
+		SRC.ANIM 22
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 3
+	MOREP=<SRC.P>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Coordonnee enregistree pour teleportation
+	RETURN 1
+ENDIF
+RETURN 0
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-1
+DESCRIPTION=Dalle teleportatrice

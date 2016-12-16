@@ -1,0 +1,183 @@
+[ITEMDEF 04100]
+//Comm. Crystal (500) RED
+DEFNAME=i_crystal_of_com_t1
+NAME=Communications Crystal
+ID=I_CRYSTAL_RED
+TYPE=T_COMM_CRYSTAL
+VALUE=81
+WEIGHT=1
+
+CATEGORY=Provisions - Miscellaneous
+SUBSECTION=Communication Crystals
+DESCRIPTION=Communication Crystal (red)
+
+ON=@Create
+MORE=500
+
+[ITEMDEF 04101]
+// Comm. Crystal (1000) GREEN
+DEFNAME=i_CRYSTAL_OF_COM_T2
+ID=I_CRYSTAL_GREEN
+NAME=Communications Crystal
+TYPE=T_COMM_CRYSTAL
+VALUE=158
+WEIGHT=1
+CATEGORY=Provisions - Miscellaneous
+SUBSECTION=Communication Crystals
+DESCRIPTION=Communication Crystal (green)
+
+ON=@Create
+MORE=1000
+
+[ITEMDEF 04102]
+// Comm. Crystal (2000) GREEN
+DEFNAME=i_CRYSTAL_OF_COM_T3
+ID=I_CRYSTAL_GREEN
+TYPE=T_COMM_CRYSTAL
+NAME=Communications Crystal
+VALUE=310
+WEIGHT=1
+
+CATEGORY=Provisions - Miscellaneous
+SUBSECTION=Communication Crystals
+DESCRIPTION=Communication Crystal (green)
+
+ON=@Create
+MORE=2000
+
+[ITEMDEF 04103]
+DEFNAME=i_beard_NONE
+ID=I_EQ_MARKER
+NAME=No Beard
+TYPE=T_BEARD
+LAYER=layer_beard
+VALUE=10
+
+ON=@Create
+	ATTR=attr_newbie
+	TIMER=550000
+
+ON=@TIMER
+	if !<cont>	// on ground?
+		return 0
+	endif
+	if <cont.brain>	// players only
+		return 1
+	endif
+	cont.newitem=i_beard_mustache
+	cont.act.color=<cont.findlayer(layer_beard).color>
+	cont.equip <cont.act.uid>
+	return 1
+
+[ITEMDEF 04104]
+DEFNAME=i_hair_NONE
+ID=I_EQ_MARKER
+NAME=No Hair
+TYPE=T_HAIR
+LAYER=layer_hair
+VALUE=10
+
+ON=@Create
+ATTR=attr_newbie
+TIMER=550000
+
+ON=@TIMER
+	if !<cont>	// on ground?
+		return 0
+	endif
+	if <cont.brain>	// players only
+		return 1
+	endif
+	cont.newitem=i_hair_krisna
+	cont.act.color=<cont.findlayer(layer_hair).color>
+	cont.equip <cont.act.uid>
+	return 1
+
+[ITEMDEF 04501]
+NAME=GM Robe
+ID=i_robe_gm
+ARMOR=500
+
+CATEGORY=Provisions - GM Items
+SUBSECTION=GM Robes
+DESCRIPTION=GM Robe
+
+ON=@Create
+COLOR=021
+
+[ITEMDEF 04502]
+NAME=Seer Robe
+ID=i_robe_gm
+ARMOR=500
+
+CATEGORY=Provisions - GM Items
+SUBSECTION=GM Robes
+DESCRIPTION=Seer Robe
+
+ON=@Create
+COLOR=01D3
+
+[ITEMDEF 04503]
+NAME=Counselor Robe
+ID=i_robe_gm
+ARMOR=500
+
+CATEGORY=Provisions - GM Items
+SUBSECTION=GM Robes
+DESCRIPTION=Counselor Robe
+
+ON=@Create
+COLOR=003
+
+[ITEMDEF 04506]
+DEFNAME=i_CHECKERBOARD
+//DEFNAME=CHECKERBOARD
+ID=i_game_board
+NAME=Checkerboard
+TYPE=T_GAME_BOARD
+SKILLMAKE=tinkering 40.0, carpentry 40.0
+RESOURCES=3 i_board, 3 i_log
+
+CATEGORY=Items by Professions
+SUBSECTION=BarKeep
+DESCRIPTION=Checkerboard
+
+ON=@Create
+MORE=1	// make this checkers.
+
+[ITEMDEF 04507]
+DEFNAME=i_CHESSBOARD
+ID=i_game_board
+NAME=Chessboard
+TYPE=T_GAME_BOARD
+SKILLMAKE=tinkering 60.0, carpentry 60.0
+RESOURCES=3 i_board, 4 i_log
+
+CATEGORY=Items by Professions
+SUBSECTION=BarKeep
+DESCRIPTION=Chessboard
+
+[ITEMDEF 04520]
+// Guild Stone
+DEFNAME=i_guild_stone
+ID=i_guildstone
+NAME=Guildstone
+TYPE=T_STONE_GUILD
+
+CATEGORY=Provisions - Deeds
+SUBSECTION=Guild and Town Stones
+DESCRIPTION=Guild Stone
+
+[ITEMDEF 04521]
+// Town Stone
+DEFNAME=i_town_stone
+ID=i_guildstone
+NAME=Townstone
+TYPE=T_STONE_TOWN
+
+CATEGORY=Provisions - Deeds
+SUBSECTION=Guild and Town Stones
+DESCRIPTION=Town Stone
+
+
+[EOF]

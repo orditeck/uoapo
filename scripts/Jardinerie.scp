@@ -1,0 +1,3757 @@
+[ITEMDEF i_extracteur]
+DEFNAME=i_extracteur
+NAME=Extracteur
+ID=014fb
+VALUE=500
+WEIGHT=1
+
+ON=@CREATE
+COLOR=0b7d
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+TARGETG Sur quelle plante desirez vous utiliser l'extracteur ?
+ELSE
+SRC.SYSMESSAGE Veuillez mettre l'exctracteur dans votre sac a dos avant de l'utiliser
+ENDIF
+RETURN 1
+
+ON=@Targon_Item
+IF (<SRC.TARG.DISPID>=i_plant_fern) || (<SRC.TARG.DISPID>=i_flower_campion) || (<SRC.TARG.DISPID>=i_plant_cactus_3) || (<SRC.TARG.DISPID>=i_flower_white)
+	IF (<SRC.TARG.MOREY>) >0
+		SRC.ANIM 19
+		SRC.EMOTE Extraire une graine d'un <SRC.TARG.NAME>
+		SRC.TARG.MOREY=<SRC.TARG.MOREY>-1
+		SRC.NEWITEM i_graine_campion
+		SRC.ACT.NAME Graine de <SRC.TARG.NAME> [extraite par <SRC.NAME>]
+		SRC.ACT.COLOR=<SRC.TARG.COLOR>
+		SRC.ACT.MORE1=<SRC.TARG.MORE1>
+		SRC.ACT.MORE2=<SRC.TARG.MORE2>
+		SRC.ACT.BOUNCE
+	ELSE
+		SRC.SYSMESSAGE Cette plante ne contient plus de graines
+	ENDIF
+ELSE
+	SRC.SYSMESSAGE Vous ne pouvez pas extraire de graine de <SRC.TARG.NAME>
+ENDIF
+RETURN 1
+
+[ITEMDEF i_sac_de_terre]
+DEFNAME=i_sac_de_terre
+NAME=Sac de terre
+ID=01045
+VALUE=5000
+WEIGHT=1
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	TARGETG Ou voulez vous deposer la terre ?
+ELSE
+	SRC.SYSMESSAGE Veuillez mettre le sac terre dans votre sac a dos avant de l'utiliser
+ENDIF
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.BOW
+SRC.EMOTE repandre de la terre sur le sol
+SRC.NEWITEM i_terre
+SRC.ACT.P=<SRC.TARGP>
+SRC.ACT.ATTR=08010
+REMOVE
+
+[ITEMDEF i_terre]
+DEFNAME=i_terre
+NAME=Terre
+ID=031f5
+WEIGHT=1
+
+[ITEMDEF i_graine_morte]
+DEFNAME=i_graine_morte
+NAME=Graine hybride
+ID=0dcf
+TYPE=t_eq_script
+WEIGHT=1
+
+ON=@Create
+TIMER=604800
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_graine_campion]
+DEFNAME=i_graine_campion
+NAME=Graine de campion
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+MORE1=000000000
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+	RETURN 0
+ELSE
+	IF <MOREX>==0
+		DISPID=01aa2
+		TIMER=86400
+		NAME=Pousse de campion
+		MOREX=2
+		UPDATE
+	ELSEIF <MOREX>==2
+		DISPID=0c61
+		TIMER=86400
+		NAME=Pousse de campion
+		MOREX=3
+		UPDATE
+	ELSEIF <MOREX>==3
+		DISPID=0c83
+		TIMER=86400
+		NAME=Campion
+		MOREX=4
+		UPDATE
+	ELSE
+		TIMER=86400
+		IF <MOREY>==0
+			MOREY=1
+		ELSE
+			MOREY=<MOREY>+1
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_bleue_campion]
+DEFNAME=i_graine_bleue_campion
+NAME=Graine de campion bleue
+ID=0dcf
+TYPE=t_graine
+VALUE=1000
+WEIGHT=1
+
+ON=@Create
+COLOR=02b5
+MORE1=000000001
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+	RETURN 0
+ELSE
+	IF <MOREX>==0
+		COLOR=02b5
+		DISPID=01aa2
+		TIMER=86400
+		NAME=Pousse de campion bleu
+		MOREX=2
+		UPDATE
+	ELSEIF <MOREX>==2
+		DISPID=0c61
+		TIMER=86400
+		NAME=Pousse de campion bleu
+		MOREX=3
+		UPDATE
+	ELSEIF <MOREX>==3
+		DISPID=0c83
+		TIMER=86400
+		NAME=Campion bleu
+		MOREX=4
+		UPDATE
+	ELSE
+		TIMER=86400
+		IF <MOREY>==0
+			MOREY=1
+		ELSE
+			MOREY=<MOREY>+1
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_rouge_campion]
+DEFNAME=i_graine_rouge_campion
+NAME=Graine de campion rouge
+ID=0dcf
+TYPE=t_graine
+VALUE=1000
+WEIGHT=1
+
+ON=@Create
+COLOR=0151
+MORE1=000000010
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0151
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion rouge
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion rouge
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion rouge
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_jaune_campion]
+DEFNAME=i_graine_jaune_campion
+NAME=Graine de campion jaune
+ID=0dcf
+TYPE=t_graine
+VALUE=1000
+WEIGHT=1
+
+ON=@Create
+COLOR=01c5
+MORE1=000000011
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01c5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion jaune
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion jaune
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion jaune
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_marron_campion]
+DEFNAME=i_graine_marron_campion
+NAME=Graine de campion marron
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=021e
+MORE1=000000100
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=021e
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion marron
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion marron
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion marron
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_violette_campion]
+DEFNAME=i_graine_violette_campion
+NAME=Graine de campion violette
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01a1
+MORE1=000000101
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01a1
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion violette
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion violette
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion violet
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_verte_campion]
+DEFNAME=i_graine_verte_campion
+NAME=Graine de campion verte
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0304
+MORE1=000000110
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0304
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion verte
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion verte
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion vert
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_rouge_pale_campion]
+DEFNAME=i_graine_rouge_pale_campion
+NAME=Graine de campion rouge pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01b6
+MORE1=000000111
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01b6
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion rouge pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion rouge pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion rouge pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_bleue_pale_campion]
+DEFNAME=i_graine_bleue_pale_campion
+NAME=Graine de campion bleue pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=012b
+MORE1=000001000
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=012b
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion bleue pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion bleue pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion bleu pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_jaune_pale_campion]
+DEFNAME=i_graine_jaune_pale_campion
+NAME=Graine de campion jaune pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=028e
+MORE1=000001001
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=028e
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion jaune pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion jaune pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion jaune pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_marron_pale_campion]
+DEFNAME=i_graine_marron_pale_campion
+NAME=Graine de campion marron pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=021f
+MORE1=000001010
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=021f
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion marron pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion marron pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion marron pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_violette_pale_campion]
+DEFNAME=i_graine_violette_pale_campion
+NAME=Graine de campion violette pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=026b
+MORE1=000001011
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=026b
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion violette pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion violette pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion violet pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_verte_pale_campion]
+DEFNAME=i_graine_verte_pale_campion
+NAME=Graine de campion verte pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01d5
+MORE1=000001100
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01d5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion verte pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion verte pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion vert pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_blanche_campion]
+DEFNAME=i_graine_blanche_campion
+NAME=Graine de campion blanche
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0481
+MORE1=000010000
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+DISPID=01aa2
+COLOR=0481
+TIMER=86400
+NAME=Pousse de campion blanche
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion blanche
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion blanc
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_noire_campion]
+DEFNAME=i_graine_noire_campion
+NAME=Graine de campion noire
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0aa7
+MORE1=000100000
+MORE2=000000001
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0aa7
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de campion noire
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de campion noire
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c83
+TIMER=86400
+NAME=Campion noir
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_cactus]
+DEFNAME=i_graine_cactus
+NAME=Graine de cactus
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+MORE1=000000000
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_bleue_cactus]
+DEFNAME=i_graine_bleue_cactus
+NAME=Graine de cactus bleue
+ID=0dcf
+TYPE=t_graine
+VALUE=1000
+WEIGHT=1
+
+ON=@Create
+COLOR=02b5
+MORE1=000000001
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=02b5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus bleu
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus bleu
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus bleu
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_rouge_cactus]
+DEFNAME=i_graine_rouge_cactus
+NAME=Graine de cactus rouge
+ID=0dcf
+TYPE=t_graine
+VALUE=1000
+WEIGHT=1
+
+ON=@Create
+COLOR=0151
+MORE1=000000010
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0151
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus rouge
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus rouge
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus rouge
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_jaune_cactus]
+DEFNAME=i_graine_jaune_cactus
+NAME=Graine de cactus jaune
+ID=0dcf
+TYPE=t_graine
+VALUE=1000
+WEIGHT=1
+
+ON=@Create
+COLOR=01c5
+MORE1=000000011
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01c5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus jaune
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus jaune
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus jaune
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_marron_cactus]
+DEFNAME=i_graine_marron_cactus
+NAME=Graine de cactus marron
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=021e
+MORE1=000000100
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=021e
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus marron
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus marron
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus marron
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_violette_cactus]
+DEFNAME=i_graine_violette_cactus
+NAME=Graine de cactus violette
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01a1
+MORE1=000000101
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01a1
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus violette
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus violette
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus violet
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_verte_cactus]
+DEFNAME=i_graine_verte_cactus
+NAME=Graine de cactus verte
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0304
+MORE1=000000110
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0304
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus verte
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus verte
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus vert
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_rouge_pale_cactus]
+DEFNAME=i_graine_rouge_pale_cactus
+NAME=Graine de cactus rouge pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01b6
+MORE1=000000111
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01b6
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus rouge pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus rouge pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus rouge pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_bleue_pale_cactus]
+DEFNAME=i_graine_bleue_pale_cactus
+NAME=Graine de cactus bleue pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=012b
+MORE1=000001000
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=012b
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus bleue pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus bleue pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus bleu pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_jaune_pale_cactus]
+DEFNAME=i_graine_jaune_pale_cactus
+NAME=Graine de cactus jaune pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=028e
+MORE1=000001001
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=028e
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus jaune pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus jaune pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus jaune pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_marron_pale_cactus]
+DEFNAME=i_graine_marron_pale_cactus
+NAME=Graine de cactus marron pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=021f
+MORE1=000001010
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=028e
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus marron pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus marron pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus marron pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_violette_pale_cactus]
+DEFNAME=i_graine_violette_pale_cactus
+NAME=Graine de cactus violette pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=026b
+MORE1=000001011
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=026b
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus violette pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus violette pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus violet pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_verte_pale_cactus]
+DEFNAME=i_graine_verte_pale_cactus
+NAME=Graine de cactus verte pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01d5
+MORE1=000001100
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01d5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus verte pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus verte pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus vert pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_blanche_cactus]
+DEFNAME=i_graine_blanche_cactus
+NAME=Graine de cactus blanche
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0481
+MORE1=000010000
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0481
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus blanche
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus blanche
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus blanc
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_noire_cactus]
+DEFNAME=i_graine_noire_cactus
+NAME=Graine de cactus noire
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0aa7
+MORE1=000100000
+MORE2=000000010
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0aa7
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de cactus noire
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de cactus noire
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0d27
+TIMER=86400
+NAME=Cactus noir
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_fern]
+DEFNAME=i_graine_fern
+NAME=Graine de fern
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+MORE1=000000000
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_bleue_fern]
+DEFNAME=i_graine_bleue_fern
+NAME=Graine de fern bleue
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=02b5
+MORE1=000000001
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=02b5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern bleu
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern bleu
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern bleu
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_rouge_fern]
+DEFNAME=i_graine_rouge_fern
+NAME=Graine de fern rouge
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0151
+MORE1=000000010
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0151
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern rouge
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern rouge
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern rouge
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_jaune_fern]
+DEFNAME=i_graine_jaune_fern
+NAME=Graine de fern jaune
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01c5
+MORE1=000000011
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01c5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern jaune
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern jaune
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern jaune
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_marron_fern]
+DEFNAME=i_graine_marron_fern
+NAME=Graine de fern marron
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=021e
+MORE1=000000100
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=021e
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern marron
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern marron
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern marron
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_violette_fern]
+DEFNAME=i_graine_violette_fern
+NAME=Graine de fern violette
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01a1
+MORE1=000000101
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+DISPID=01aa2
+COLOR=01a1
+TIMER=86400
+NAME=Pousse de fern violette
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern violette
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern violet
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_verte_fern]
+DEFNAME=i_graine_verte_fern
+NAME=Graine de fern verte
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0304
+MORE1=000000110
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0304
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern verte
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern verte
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern vert
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_rouge_pale_fern]
+DEFNAME=i_graine_rouge_pale_fern
+NAME=Graine de fern rouge pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01b6
+MORE1=000000111
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01b6
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern rouge pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern rouge pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern rouge pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_bleue_pale_fern]
+DEFNAME=i_graine_bleue_pale_fern
+NAME=Graine de fern bleue pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=012b
+MORE1=000001000
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=012b
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern bleue pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern bleue pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern bleu pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_jaune_pale_fern]
+DEFNAME=i_graine_jaune_pale_fern
+NAME=Graine de fern jaune pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=028e
+MORE1=000001001
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=028e
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern jaune pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern jaune pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern jaune pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_marron_pale_fern]
+DEFNAME=i_graine_marron_pale_fern
+NAME=Graine de fern marron pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=021f
+MORE1=000001010
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=021f
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern marron pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern marron pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern marron pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_violette_pale_fern]
+DEFNAME=i_graine_violette_pale_fern
+NAME=Graine de fern violette pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=026b
+MORE1=000001011
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=026b
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern violette pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern violette pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern violet pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_verte_pale_fern]
+DEFNAME=i_graine_verte_pale_fern
+NAME=Graine de fern verte pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01d5
+MORE1=000001100
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01d5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern verte pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern verte pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern vert pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_blanche_fern]
+DEFNAME=i_graine_blanche_fern
+NAME=Graine de fern blanche
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0481
+MORE1=000010000
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0481
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern blanche
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern blanche
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern blanc
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_noire_fern]
+DEFNAME=i_graine_noire_fern
+NAME=Graine de fern noire
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0aa7
+MORE1=000100000
+MORE2=000000011
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0aa7
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de fern noire
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de fern noire
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c9f
+TIMER=86400
+NAME=Fern noir
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_lilies]
+DEFNAME=i_graine_lilies
+NAME=Graine de lilies
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+MORE1=000000000
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_bleue_lilies]
+DEFNAME=i_graine_bleue_lilies
+NAME=Graine de lilies bleue
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=02b5
+MORE1=000000001
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=02b5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies bleu
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies bleu
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies bleu
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_rouge_lilies]
+DEFNAME=i_graine_rouge_lilies
+NAME=Graine de lilies rouge
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0151
+MORE1=000000010
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0151
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies rouge
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies rouge
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies rouge
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_jaune_lilies]
+DEFNAME=i_graine_jaune_lilies
+NAME=Graine de lilies jaune
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01c5
+MORE1=000000011
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01c5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies jaune
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies jaune
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies jaune
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_marron_lilies]
+DEFNAME=i_graine_marron_lilies
+NAME=Graine de lilies marron
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=021e
+MORE1=000000100
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=021e
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies marron
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies marron
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies marron
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_violette_lilies]
+DEFNAME=i_graine_violette_lilies
+NAME=Graine de lilies violette
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01a1
+MORE1=000000101
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01a1
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies violette
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies violette
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies violet
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_verte_lilies]
+DEFNAME=i_graine_verte_lilies
+NAME=Graine de lilies verte
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0304
+MORE1=000000110
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0304
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies verte
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies verte
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies vert
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_rouge_pale_lilies]
+DEFNAME=i_graine_rouge_pale_lilies
+NAME=Graine de lilies rouge pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01b6
+MORE1=000000111
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01b6
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies rouge pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies rouge pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies rouge pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_bleue_pale_lilies]
+DEFNAME=i_graine_bleue_pale_lilies
+NAME=Graine de lilies bleue pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=012b
+MORE1=000001000
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=012b
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies bleue pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies bleue pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies bleu pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_jaune_pale_lilies]
+DEFNAME=i_graine_jaune_pale_lilies
+NAME=Graine de lilies jaune pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=028e
+MORE1=000001001
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=028e
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies jaune pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies jaune pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies jaune pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_marron_pale_lilies]
+DEFNAME=i_graine_marron_pale_lilies
+NAME=Graine de lilies marron pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=021f
+MORE1=000001010
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=021f
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies marron pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies marron pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies marron pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_violette_pale_lilies]
+DEFNAME=i_graine_violette_pale_lilies
+NAME=Graine de lilies violette pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=026b
+MORE1=000001011
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=026b
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies violette pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies violette pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies violet pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_verte_pale_lilies]
+DEFNAME=i_graine_verte_pale_lilies
+NAME=Graine de lilies verte pale
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=01d5
+MORE1=000001100
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=01d5
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies verte pale
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies verte pale
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies vert pale
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_blanche_lilies]
+DEFNAME=i_graine_blanche_lilies
+NAME=Graine de lilies blanche
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0481
+MORE1=000010000
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0481
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies blanche
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies blanche
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies blanc
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[ITEMDEF i_graine_noire_lilies]
+DEFNAME=i_graine_noire_lilies
+NAME=Graine de lilies noire
+ID=0dcf
+TYPE=t_graine
+WEIGHT=1
+
+ON=@Create
+COLOR=0aa7
+MORE1=000100000
+MORE2=000000100
+MOREX=0
+MOREY=0
+
+ON=@TIMER
+IF <TYPE>=t_graine
+RETURN 0
+ELSE
+IF <MOREX>==0
+COLOR=0aa7
+DISPID=01aa2
+TIMER=86400
+NAME=Pousse de lilies noire
+MOREX=2
+UPDATE
+ELSEIF <MOREX>==2
+DISPID=0c61
+TIMER=86400
+NAME=Pousse de lilies noire
+MOREX=3
+UPDATE
+ELSEIF <MOREX>==3
+DISPID=0c8b
+TIMER=86400
+NAME=Lilies noir
+MOREX=4
+UPDATE
+ELSE
+TIMER=86400
+IF <MOREY>==0
+MOREY=1
+ELSE
+MOREY=<MOREY>+1
+ENDIF
+ENDIF
+ENDIF
+RETURN 1
+
+[TYPEDEF t_graine]
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+TARGET
+ELSE
+SRC.SYSMESSAGE Veuillez mettre la graine dans votre sac avant de l'utiliser
+ENDIF
+RETURN 1
+
+ON=@Targon_Item
+IF <SRC.TARG.BASEID>==i_terre
+SRC.BOW
+SRC.EMOTE planter une <NAME> dans la terre
+IF (<MORE2>=000000001) || (<MORE2>=000000002)
+IF (<MORE1>=000000001) || (<MORE1>=000001012) || (<MORE1>=000000102) || (<MORE1>=000002010) || (<MORE1>=000002011) || (<MORE1>=000002100) || (<MORE1>=000002111) || (<MORE1>=000001201)
+SRC.NEWITEM i_graine_bleue_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000010) || (<MORE1>=000001020) || (<MORE1>=000001021) || (<MORE1>=000001110) || (<MORE1>=000000120) || (<MORE1>=000001121) || (<MORE1>=000000211) || (<MORE1>=000001122) || (<MORE1>=000000212) || (<MORE1>=000001211) || (<MORE1>=000000221) || (<MORE1>=000000201) || (<MORE1>=000002021)
+SRC.NEWITEM i_graine_rouge_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000011) || (<MORE1>=000001021) || (<MORE1>=000001022) || (<MORE1>=000000112) || (<MORE1>=000002011) || (<MORE1>=000001101) || (<MORE1>=000002012) || (<MORE1>=000001102) || (<MORE1>=000002101) || (<MORE1>=000001120) || (<MORE1>=000000210) || (<MORE1>=000002110) || (<MORE1>=000001200)
+SRC.NEWITEM i_graine_jaune_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000001010) || (<MORE1>=000002020) || (<MORE1>=000001110) || (<MORE1>=000000200)
+SRC.NEWITEM i_graine_marron_pale_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000001011) || (<MORE1>=000001112) || (<MORE1>=000000202) || (<MORE1>=000002022)
+SRC.NEWITEM i_graine_violette_pale_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000001100) || (<MORE1>=000002200) || (<MORE1>=000001210) || (<MORE1>=000000220)
+SRC.NEWITEM i_graine_verte_pale_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000001001) || (<MORE1>=000002002) || (<MORE1>=000001012) || (<MORE1>=000000022) 
+SRC.NEWITEM i_graine_jaune_pale_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000110) || (<MORE1>=000000012) || (<MORE1>=000001002) || (<MORE1>=000002001)
+SRC.NEWITEM i_graine_verte_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000100) || (<MORE1>=000000021) || (<MORE1>=000001112) || (<MORE1>=000000122)
+SRC.NEWITEM i_graine_marron_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000001000) || (<MORE1>=000002000) || (<MORE1>=000000002)
+SRC.NEWITEM i_graine_bleue_pale_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000101) || (<MORE1>=000001111) || (<MORE1>=000000112)
+SRC.NEWITEM i_graine_violette_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000111) || (<MORE1>=000000222) || (<MORE1>=000000121) || (<MORE1>=000000020)
+SRC.NEWITEM i_graine_rouge_pale_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000010000)
+SRC.NEWITEM i_graine_blanche_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000100000)
+SRC.NEWITEM i_graine_noire_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000000)
+SRC.NEWITEM i_graine_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSE
+IF (<EVAL(RAND(100))>=0)
+SRC.NEWITEM i_graine_blanche_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSE
+SRC.NEWITEM i_graine_campion
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ENDIF
+ENDIF
+ELSEIF (<MORE2>=000000010) || (<MORE2>=000000020)
+IF (<MORE1>=000000001) || (<MORE1>=000001012) || (<MORE1>=000000102) || (<MORE1>=000002010) || (<MORE1>=000002011) || (<MORE1>=000002100) || (<MORE1>=000002111) || (<MORE1>=000001201)
+SRC.NEWITEM i_graine_bleue_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000010) || (<MORE1>=000001020) || (<MORE1>=000001021) || (<MORE1>=000001110) || (<MORE1>=000000120) || (<MORE1>=000001121) || (<MORE1>=000000211) || (<MORE1>=000001122) || (<MORE1>=000000212) || (<MORE1>=000001211) || (<MORE1>=000000221) || (<MORE1>=000000201) || (<MORE1>=000002021)
+SRC.NEWITEM i_graine_rouge_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000011) || (<MORE1>=000001021) || (<MORE1>=000001022) || (<MORE1>=000000112) || (<MORE1>=000002011) || (<MORE1>=000001101) || (<MORE1>=000002012) || (<MORE1>=000001102) || (<MORE1>=000002101) || (<MORE1>=000001120) || (<MORE1>=000000210) || (<MORE1>=000002110) || (<MORE1>=000001200)
+SRC.NEWITEM i_graine_jaune_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000001010) || (<MORE1>=000002020) || (<MORE1>=000001110) || (<MORE1>=000000200)
+SRC.NEWITEM i_graine_marron_pale_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000001011) || (<MORE1>=000001112) || (<MORE1>=000000202) || (<MORE1>=000002022)
+SRC.NEWITEM i_graine_violette_pale_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000001100) || (<MORE1>=000002200) || (<MORE1>=000001210) || (<MORE1>=000000220)
+SRC.NEWITEM i_graine_verte_pale_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000001001) || (<MORE1>=000002002) || (<MORE1>=000001012) || (<MORE1>=000000022) 
+SRC.NEWITEM i_graine_jaune_pale_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000110) || (<MORE1>=000000012) || (<MORE1>=000001002) || (<MORE1>=000002001)
+SRC.NEWITEM i_graine_verte_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000100) || (<MORE1>=000000021) || (<MORE1>=000001112) || (<MORE1>=000000122)
+SRC.NEWITEM i_graine_marron_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000001000) || (<MORE1>=000002000) || (<MORE1>=000000002)
+SRC.NEWITEM i_graine_bleue_pale_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000101) || (<MORE1>=000001111) || (<MORE1>=000000112)
+SRC.NEWITEM i_graine_violette_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.ATTR=08010
+SRC.ACT.NUDGEUP 1
+REMOVE
+ELSEIF (<MORE1>=000000111) || (<MORE1>=000000222) || (<MORE1>=000000121) || (<MORE1>=000000020)
+SRC.NEWITEM i_graine_rouge_pale_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000010000)
+SRC.NEWITEM i_graine_blanche_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000100000)
+SRC.NEWITEM i_graine_noire_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000000)
+SRC.NEWITEM i_graine_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSE
+IF (<EVAL(RAND(100))>=0)
+SRC.NEWITEM i_graine_blanche_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSE
+SRC.NEWITEM i_graine_cactus
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ENDIF
+ENDIF
+ELSEIF (<MORE2>=000000011) || (<MORE2>=000000022)
+IF (<MORE1>=000000001) || (<MORE1>=000001012) || (<MORE1>=000000102) || (<MORE1>=000002010) || (<MORE1>=000002011) || (<MORE1>=000002100) || (<MORE1>=000002111) || (<MORE1>=000001201)
+SRC.NEWITEM i_graine_bleue_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000010) || (<MORE1>=000001020) || (<MORE1>=000001021) || (<MORE1>=000001110) || (<MORE1>=000000120) || (<MORE1>=000001121) || (<MORE1>=000000211) || (<MORE1>=000001122) || (<MORE1>=000000212) || (<MORE1>=000001211) || (<MORE1>=000000221) || (<MORE1>=000000201) || (<MORE1>=000002021)
+SRC.NEWITEM i_graine_rouge_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000011) || (<MORE1>=000001021) || (<MORE1>=000001022) || (<MORE1>=000000112) || (<MORE1>=000002011) || (<MORE1>=000001101) || (<MORE1>=000002012) || (<MORE1>=000001102) || (<MORE1>=000002101) || (<MORE1>=000001120) || (<MORE1>=000000210) || (<MORE1>=000002110) || (<MORE1>=000001200)
+SRC.NEWITEM i_graine_jaune_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000001010) || (<MORE1>=000002020) || (<MORE1>=000001110) || (<MORE1>=000000200)
+SRC.NEWITEM i_graine_marron_pale_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000001011) || (<MORE1>=000001112) || (<MORE1>=000000202) || (<MORE1>=000002022)
+SRC.NEWITEM i_graine_violette_pale_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000001100) || (<MORE1>=000002200) || (<MORE1>=000001210) || (<MORE1>=000000220)
+SRC.NEWITEM i_graine_verte_pale_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000001001) || (<MORE1>=000002002) || (<MORE1>=000001012) || (<MORE1>=000000022) 
+SRC.NEWITEM i_graine_jaune_pale_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000110) || (<MORE1>=000000012) || (<MORE1>=000001002) || (<MORE1>=000002001)
+SRC.NEWITEM i_graine_verte_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000100) || (<MORE1>=000000021) || (<MORE1>=000001112) || (<MORE1>=000000122)
+SRC.NEWITEM i_graine_marron_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000001000) || (<MORE1>=000002000) || (<MORE1>=000000002)
+SRC.NEWITEM i_graine_bleue_pale_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000101) || (<MORE1>=000001111) || (<MORE1>=000000112)
+SRC.NEWITEM i_graine_violette_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000111) || (<MORE1>=000000222) || (<MORE1>=000000121) || (<MORE1>=000000020)
+SRC.NEWITEM i_graine_rouge_pale_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000010000)
+SRC.NEWITEM i_graine_blanche_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000100000)
+SRC.NEWITEM i_graine_noire_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000000)
+SRC.NEWITEM i_graine_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSE
+IF (<EVAL(RAND(100))>=0)
+SRC.NEWITEM i_graine_blanche_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSE
+SRC.NEWITEM i_graine_fern
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ENDIF
+ENDIF
+ELSEIF (<MORE2>=000000100) || (<MORE2>=000000200) || (<MORE2>=000000012) || (<MORE2>=000000021)
+IF (<MORE1>=000000001) || (<MORE1>=000001012) || (<MORE1>=000000102) || (<MORE1>=000002010) || (<MORE1>=000002011) || (<MORE1>=000002100) || (<MORE1>=000002111) || (<MORE1>=000001201)
+SRC.NEWITEM i_graine_bleue_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000010) || (<MORE1>=000001020) || (<MORE1>=000001021) || (<MORE1>=000001110) || (<MORE1>=000000120) || (<MORE1>=000001121) || (<MORE1>=000000211) || (<MORE1>=000001122) || (<MORE1>=000000212) || (<MORE1>=000001211) || (<MORE1>=000000221) || (<MORE1>=000000201) || (<MORE1>=000002021)
+SRC.NEWITEM i_graine_rouge_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000011) || (<MORE1>=000001021) || (<MORE1>=000001022) || (<MORE1>=000000112) || (<MORE1>=000002011) || (<MORE1>=000001101) || (<MORE1>=000002012) || (<MORE1>=000001102) || (<MORE1>=000002101) || (<MORE1>=000001120) || (<MORE1>=000000210) || (<MORE1>=000002110) || (<MORE1>=000001200)
+SRC.NEWITEM i_graine_jaune_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000001010) || (<MORE1>=000002020) || (<MORE1>=000001110) || (<MORE1>=000000200)
+SRC.NEWITEM i_graine_marron_pale_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000001011) || (<MORE1>=000001112) || (<MORE1>=000000202) || (<MORE1>=000002022)
+SRC.NEWITEM i_graine_violette_pale_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000001100) || (<MORE1>=000002200) || (<MORE1>=000001210) || (<MORE1>=000000220)
+SRC.NEWITEM i_graine_verte_pale_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000001001) || (<MORE1>=000002002) || (<MORE1>=000001012) || (<MORE1>=000000022) 
+SRC.NEWITEM i_graine_jaune_pale_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000110) || (<MORE1>=000000012) || (<MORE1>=000001002) || (<MORE1>=000002001)
+SRC.NEWITEM i_graine_verte_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000100) || (<MORE1>=000000021) || (<MORE1>=000001112) || (<MORE1>=000000122)
+SRC.NEWITEM i_graine_marron_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000001000) || (<MORE1>=000002000) || (<MORE1>=000000002)
+SRC.NEWITEM i_graine_bleue_pale_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000101) || (<MORE1>=000001111) || (<MORE1>=000000112)
+SRC.NEWITEM i_graine_violette_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000111) || (<MORE1>=000000222) || (<MORE1>=000000121) || (<MORE1>=000000020)
+SRC.NEWITEM i_graine_rouge_pale_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000010000)
+SRC.NEWITEM i_graine_blanche_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000100000)
+SRC.NEWITEM i_graine_noire_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSEIF (<MORE1>=000000000)
+SRC.NEWITEM i_graine_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSE
+IF (<EVAL(RAND(100))>=0)
+SRC.NEWITEM i_graine_blanche_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSE
+SRC.NEWITEM i_graine_lilies
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ENDIF
+ENDIF
+ELSE
+IF (<EVAL(RAND(100))>=0)
+DORAND 4
+SRC.NEWITEM i_graine_noire_campion
+SRC.NEWITEM i_graine_noire_cactus
+SRC.NEWITEM i_graine_noire_fern
+SRC.NEWITEM i_graine_noire_lilies
+ENDDO
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.TYPE=T_EQ_SCRIPT
+SRC.ACT.TIMER=86400
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ELSE
+SRC.NEWITEM i_graine_morte
+SRC.ACT.COLOR=<COLOR>
+SRC.ACT.NAME=<NAME>
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP 1
+SRC.ACT.ATTR=08010
+REMOVE
+ENDIF
+ENDIF
+ELSEIF <SRC.TARG.TYPE>==t_graine
+SRC.EMOTE creer une graine hybride a partir d'une <NAME> et d'une <SRC.TARG.NAME>
+SRC.TARG.MORE1=<SRC.TARG.MORE1>+<MORE1>
+SRC.TARG.MORE2=<SRC.TARG.MORE2>+<MORE2>
+REMOVE
+SRC.TARG.NAME=Graine hybride
+SRC.TARG.COLOR=0
+ELSE
+SRC.SYSMESSAGE Vous ne pouvez pas planter la graine ici !
+ENDIF
+RETURN 1
+
+[TEMPLATE VENDOR_S_JARDINERIE]
+DEFNAME=VENDOR_S_JARDINERIE
+
+SELL=i_graine_jaune_cactus,{100 300}
+SELL=i_graine_jaune_campion,{100 300}
+SELL=i_graine_rouge_cactus,{100 300}
+SELL=i_graine_rouge_campion,{100 300}
+SELL=i_graine_bleue_cactus,{100 300}
+SELL=i_graine_bleue_campion,{100 300}
+SELL=i_sac_de_terre,{300 800}
+SELL=i_extracteur,(1 10}
+
+[CHARDEF c_vendeur_jardinerie]
+DEFNAME=c_vendeur_jardinerie
+NAME=#NAMES_HUMANMALE
+ID=C_MAN
+DESIRES=i_gold,e_notoriety,t_log,t_board
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+TSPEECH=spk_human_prime
+TSPEECH=spk_shopkeep
+TSPEECH=spk_needs
+TSPEECH=spk_human_default
+
+ON=@Create
+NPC=brain_vendor
+COLOR=colors_skin
+STR=9999
+DEX=9999
+INT=9999
+FOOD=9999
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+
+ON=@NPCRestock
+ITEM=i_robe
+COLOR=colors_all
+ITEM=i_sandals
+COLOR=colors_neutral
+SELL=VENDOR_S_JARDINERIE
+
+ON=@GETHIT
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=Genese
+SUBSECTION=Jardinerie
+DESCRIPTION=Jardinier

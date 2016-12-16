@@ -1,0 +1,108 @@
+[PLEVEL 1]
+garde
+
+[CHARDEF c_chien_de_garde]
+DEFNAME=c_chien_de_garde
+NAME=Chien de garde
+ID=0e1
+
+ON=@Create
+COLOR=0abf
+STR=800
+DEX=800
+INT=800
+
+TACTICS={300.0 500.0}
+WRESTLING={300.0 500.0}
+
+NPC=BRAIN_ANIMAL
+
+[ITEMDEF i_memory_garde] 
+DEFNAME=i_memory_garde 
+ID=i_memory 
+LAYER=30 
+
+ON=@CREATE 
+COLOR=042
+
+[ITEMDEF m_tue_chien]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=300
+
+ON=@TIMER
+CONT.EMOTE mourrir d'epuisement
+CONT.HITS=0
+RETURN 1
+
+[ITEMDEF m_limitateur_garde]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=3600
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[FUNCTION GARDE]
+
+IF <TAG.GARDE>==1
+
+IF !<SRC.FINDID.m_limitateur_garde>
+
+SRC.NEWITEM=m_limitateur_garde
+SRC.ACT.EQUIP
+
+NEWNPC=c_chien_de_garde
+ACT.P.X=<P.X>-1
+ACT.P.Y=<P.Y>
+ACT.P.Z=<P.Z>
+ACT.NAME=Chien de garde [ <NAME> ]
+ACT.NEWITEM i_memory_garde
+ACT.ACT.NAME=<NAME>
+ACT.ACT.LINK=<UID> 
+ACT.ACT.MORE2=<TIME>
+ACT.ACT.MOREP=<ACT.P> 
+ACT.ACT.CONT=<ACT.UID>
+ACT.NEWITEM m_tue_chien
+ACT.ACT.CONT=<ACT.UID>
+
+NEWNPC=c_chien_de_garde
+ACT.P.X=<P.X>+1
+ACT.P.Y=<P.Y>
+ACT.P.Z=<P.Z>
+ACT.NAME=Chien de garde [ <NAME> ]
+ACT.NEWITEM i_memory_garde
+ACT.ACT.NAME=<NAME>
+ACT.ACT.LINK=<UID> 
+ACT.ACT.MORE2=<TIME>
+ACT.ACT.MOREP=<ACT.P> 
+ACT.ACT.CONT=<ACT.UID>
+ACT.NEWITEM m_tue_chien
+ACT.ACT.CONT=<ACT.UID>
+
+NEWNPC=c_chien_de_garde
+ACT.P.X=<P.X>
+ACT.P.Y=<P.Y>+1
+ACT.P.Z=<P.Z>
+ACT.NAME=Chien de garde [ <NAME> ]
+ACT.NEWITEM i_memory_garde
+ACT.ACT.NAME=<NAME>
+ACT.ACT.LINK=<UID> 
+ACT.ACT.MORE2=<TIME>
+ACT.ACT.MOREP=<ACT.P> 
+ACT.ACT.CONT=<ACT.UID>
+ACT.NEWITEM m_tue_chien
+ACT.ACT.CONT=<ACT.UID>
+
+ELSE
+SYSMESSAGEUA 0481 1 1 0 Vous ne pourrez reinvoquer les chiens de garde que dans <EVAL <FINDID.m_limitateur_garde.timer>/60> minutes
+ENDIF
+
+ELSE
+SYSMESSAGE Not a valid command or format
+ENDIF

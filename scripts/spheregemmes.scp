@@ -1,0 +1,1268 @@
+[PLEVEL 1]
+autorisation
+
+[FUNCTION AUTORISATION]
+IF !(STRCMPI("<ARGS>","sertir"))
+	SYSMESSAGEUA 0481 1 1 0 Les autres joueurs sont autorises a sertir vos objets dans la boite de trade pour les 30 prochaines secondes !
+	IF <FINDID.m_autorisation_sertir>
+		FINDID.m_autorisation_sertir.REMOVE
+	ENDIF
+	NEWITEM m_autorisation_sertir
+	ACT.CONT = <UID>
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Vous voulez autoriser les autres joueurs a...
+	SYSMESSAGEUA 025 1 1 0 sertir?
+ENDIF
+
+// *** GEMMES ARMES ***
+
+[ITEMDEF i_gemme_arietis]
+ID=i_gem_amethyst_4
+NAME=Arietis
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=200000
+
+ON=@Create
+COLOR=0afb
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		IF <SRC.TARG.TAG.ARME>==1
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.ANIM 6
+				SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme d'Arietis
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Arietis]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Arietis]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Arietis]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Arietis]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Arietis]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.ARIETIS=<EVAL 0<SRC.TARG.TAG.ARIETIS>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armes
+DESCRIPTION=Arietis
+
+[ITEMDEF i_gemme_tauri]
+ID=i_gem_tourmaline_4
+NAME=Tauri
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=50000
+
+ON=@Create
+COLOR=0ab8
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		IF <SRC.TARG.TAG.ARME>==1
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.ANIM 6
+				SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Tauri
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Tauri]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Tauri]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Tauri]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Tauri]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Tauri]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.TAURI=<EVAL 0<SRC.TARG.TAG.TAURI>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armes
+DESCRIPTION=Tauri
+
+[ITEMDEF i_gemme_geminorum]
+ID=i_gem_diamond_5
+NAME=Geminorum
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=10000
+
+ON=@Create
+COLOR=0af2
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		SRC.ANIM 6
+		SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Geminorum
+		IF <SRC.TARG.TAG.ARME>==1
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Geminorum]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Geminorum]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Geminorum]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Geminorum]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Geminorum]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.GEMINORUM=<EVAL 0<SRC.TARG.TAG.GEMINORUM>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armes
+DESCRIPTION=Geminorum
+
+[ITEMDEF i_gemme_cancri]
+ID=i_gem_emerald_2
+NAME=Cancri
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=70000
+
+ON=@Create
+COLOR=0ab4
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		IF <SRC.TARG.TAG.ARME>==1
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.ANIM 6
+				SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Cancri
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Cancri]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Cancri]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Cancri]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Cancri]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Cancri]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.CANCRI=<EVAL 0<SRC.TARG.TAG.CANCRI>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armes
+DESCRIPTION=Cancri
+
+[ITEMDEF i_gemme_leoni]
+ID=i_gem_diamond
+NAME=Leoni
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=40000
+
+ON=@Create
+COLOR=0b7d
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		IF <SRC.TARG.TAG.ARME>==1
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.ANIM 6
+				SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Leoni
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Leoni]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Leoni]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Leoni]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Leoni]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Leoni]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.LEONI=<EVAL 0<SRC.TARG.TAG.LEONI>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armes
+DESCRIPTION=Leoni
+
+[ITEMDEF i_gemme_virginis]
+ID=i_gem_citrine_4
+NAME=Virginis
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=10000
+
+ON=@Create
+COLOR=0ad6
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		IF <SRC.TARG.TAG.ARME>==1
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.ANIM 6
+				SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Virginis
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Virginis]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Virginis]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Virginis]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Virginis]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Virginis]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.VIRGINIS=<EVAL 0<SRC.TARG.TAG.VIRGINIS>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armes
+DESCRIPTION=Virginis
+
+[ITEMDEF i_gemme_librae]
+ID=i_gem_diamond_2
+NAME=Librae
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=70000
+
+ON=@Create
+COLOR=084f
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		IF <SRC.TARG.TAG.ARME>==1
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.ANIM 6
+				SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Librae
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Librae]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Librae]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Librae]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Librae]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Librae]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.LIBRAE=<EVAL 0<SRC.TARG.TAG.LIBRAE>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armes
+DESCRIPTION=Librae
+
+[ITEMDEF i_gemme_scorpii]
+ID=i_gem_ruby_7
+NAME=Scorpii
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=300000
+
+ON=@Create
+COLOR=08aa
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+			IF <SRC.TARG.TAG.ARME>==1
+				IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+					SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+				ELSE
+					SRC.ANIM 6
+					SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Scorpii
+					SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+					IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+						SRC.TARG.TAG.SUFFIXE1=[Scorpii]
+					ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+						SRC.TARG.TAG.SUFFIXE2=[Scorpii]
+					ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+						SRC.TARG.TAG.SUFFIXE3=[Scorpii]
+					ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+						SRC.TARG.TAG.SUFFIXE4=[Scorpii]
+					ELSE
+						SRC.TARG.TAG.SUFFIXE5=[Scorpii]
+					ENDIF
+					SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+					SRC.TARG.TAG.SCORPII=<EVAL 0<SRC.TARG.TAG.SCORPII>+1>
+					IF <AMOUNT> >1
+						AMOUNT=<EVAL <AMOUNT>-1>
+						UPDATE
+					ELSE
+						REMOVE
+					ENDIF
+				ENDIF
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+			ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armes
+DESCRIPTION=Scorpii
+
+
+
+// *** GEMMES ARMURES ***
+
+
+
+[ITEMDEF i_gemme_sagittae]
+ID=i_gem_amethyst_3
+NAME=Sagittae
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=50000
+
+ON=@Create
+COLOR=0bae
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		IF <SRC.TARG.TAG.ARME>==2
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.ANIM 6
+				SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Sagittae
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Sagittae]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Sagittae]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Sagittae]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Sagittae]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Sagittae]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.SAGITTAE=<EVAL 0<SRC.TARG.TAG.SAGITTAE>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armures
+DESCRIPTION=Sagittae
+
+[ITEMDEF i_gemme_capricorni]
+ID=i_gem_amber
+NAME=Capricorni
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=350000
+
+ON=@Create
+COLOR=0b7b
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		IF <SRC.TARG.TAG.ARME>==2
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.ANIM 6
+				SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Capricorni
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Capricorni]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Capricorni]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Capricorni]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Capricorni]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Capricorni]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.CAPRICORNI=<EVAL 0<SRC.TARG.TAG.CAPRICORNI>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armures
+DESCRIPTION=Capricorni
+
+[ITEMDEF i_gemme_aquarii]
+ID=i_gem_citrine_2
+NAME=Aquarii
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=70000
+
+ON=@Create
+COLOR=0ac3
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		IF <SRC.TARG.TAG.ARME>==2
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.ANIM 6
+				SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Aquarii
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Aquarii]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Aquarii]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Aquarii]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Aquarii]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Aquarii]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.AQUARII=<EVAL 0<SRC.TARG.TAG.AQUARII>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armures
+DESCRIPTION=Aquarii
+
+[ITEMDEF i_gemme_piscium]
+ID=i_gem_star_sapphire_3
+NAME=Piscium
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=30000
+
+ON=@Create
+COLOR=0483
+
+ON=@DCLICK
+IF <TOPOBJ.UID>==<SRC.UID>
+	IF <SRC.FINDID.i_outils_de_sertissage>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Quelle arme souhaitez vous sertir de cette gemme ?
+		TARGET
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas manipuler la gemme sans outils de sertissage
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez equiper la gemme avant de l'utiliser !
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.TOPOBJ.UID> == <SRC.UID>
+	IF <EVAL <SRC.TARG.MOREZ>>==1
+		IF <SRC.TARG.TAG.ARME>==2
+			IF (<EVAL <SRC.TARG.TAG.NBREG>+1> > <SRC.TARG.TAG.NBREGMAX>) || (<EVAL <SRC.TARG.TAG.NBREG>+1> >5)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Cet objet ne contient plus d'emplacements libres
+			ELSE
+				SRC.ANIM 6
+				SRC.EMOTE sertir <SRC.TARG.NAME> d'une gemme de Piscium
+				SRC.TARG.TAG.NBREG=<EVAL 0<SRC.TARG.TAG.NBREG>+1>
+				IF <EVAL <SRC.TARG.TAG.NBREG>>==1
+					SRC.TARG.TAG.SUFFIXE1=[Piscium]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==2
+					SRC.TARG.TAG.SUFFIXE2=[Piscium]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==3
+					SRC.TARG.TAG.SUFFIXE3=[Piscium]
+				ELSEIF <EVAL <SRC.TARG.TAG.NBREG>>==4
+					SRC.TARG.TAG.SUFFIXE4=[Piscium]
+				ELSE
+					SRC.TARG.TAG.SUFFIXE5=[Piscium]
+				ENDIF
+				SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+				SRC.TARG.TAG.PISCIUM=<EVAL 0<SRC.TARG.TAG.PISCIUM>+1>
+				IF <AMOUNT> >1
+					AMOUNT=<EVAL <AMOUNT>-1>
+					UPDATE
+				ELSE
+					REMOVE
+				ENDIF
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide : Cet objet ne peut etre serti !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas perce : Il ne peut donc etre serti !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous pour sertir !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Armures
+DESCRIPTION=Piscium
+
+[ITEMDEF i_gemme_diamant]
+ID=i_gem_star_sapphire
+NAME=Diamant
+WEIGHT=1
+TYPE=t_gem
+SKILLMAKE=MINING 100.0
+VALUE=25000
+
+ON=@Create
+COLOR=0482
+
+//**********************************************
+//****************OUTILS************************
+//**********************************************
+
+[ITEMDEF i_outils_de_sertissage]
+NAME=Outils de sertissage
+ID=i_mallet_and_chisel
+TYPE=T_SCRIPT
+RESOURCES=1 i_ingot_iron, 1 i_gemme_diamant
+SKILLMAKE=TINKERING 100.0, t_tinker_tools
+
+ON=@Create
+COLOR=0ab4
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quel objet souhaitez vous percer ?
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.IS_AUTORISATION_SERTIR>
+	IF (<SRC.TARG.TYPE>==t_weapon_fence)
+		KIT_SERTISSAGE_TROUER_ARME 2
+	ELSEIF (<SRC.TARG.TYPE>==t_weapon_sword)
+		IF <SRC.TARG.TWOHANDS>
+			KIT_SERTISSAGE_TROUER_ARME 5
+		ELSE
+			KIT_SERTISSAGE_TROUER_ARME 4
+		ENDIF
+	ELSEIF (<SRC.TARG.TYPE>==t_weapon_mace_smith)
+		KIT_SERTISSAGE_TROUER_ARME 5
+	ELSEIF (<SRC.TARG.TYPE>==t_weapon_bow)
+		IF <SRC.TARG.DISPID>==i_bow
+			KIT_SERTISSAGE_TROUER_ARME 3
+		ELSEIF <SRC.TARG.DISPID>==i_crossbow
+			KIT_SERTISSAGE_TROUER_ARME 4
+		ELSE
+			KIT_SERTISSAGE_TROUER_ARME 5
+		ENDIF
+	ELSEIF (<SRC.TARG.BASEID> == i_gants_de_boxeur) || (<SRC.TARG.BASEID> == i_gants_de_pugiliste)
+		KIT_SERTISSAGE_TROUER_ARME 2
+	ELSEIF <SRC.TARG.BASEID> == i_gants_de_pancratiaste
+		KIT_SERTISSAGE_TROUER_ARME 3
+	ELSEIF (<SRC.TARG.TYPE>==t_armor) || (<SRC.TARG.TYPE>==t_shield) || (<SRC.TARG.TYPE>==t_armor_leather)
+		IF (<SRC.TARG.DISPID>==i_platemail_chest) || (<SRC.TARG.DISPID>==i_bone_chest) || (<SRC.TARG.DISPID>==i_armor_female_plate) || (<SRC.TARG.DISPID>==i_chainmail_tunic) || (<SRC.TARG.DISPID>==i_ringmail_tunic)
+			KIT_SERTISSAGE_TROUER_ARMURE 5
+		ELSEIF (<SRC.TARG.DISPID>==i_platemail_arms) || (<SRC.TARG.DISPID>==i_bone_arms) || (<SRC.TARG.DISPID>==i_ringmail_sleeves)
+			KIT_SERTISSAGE_TROUER_ARMURE 3
+		ELSEIF (<SRC.TARG.DISPID>==i_platemail_leggings) || (<SRC.TARG.DISPID>==i_bone_leggings) || (<SRC.TARG.DISPID>==i_ringmail_leggings) || (<SRC.TARG.DISPID>==i_chainmail_leggings)
+			KIT_SERTISSAGE_TROUER_ARMURE 4
+		ELSEIF (<SRC.TARG.DISPID>==i_platemail_helm) || (<SRC.TARG.DISPID>==i_bone_helmet) || (<SRC.TARG.DISPID>==i_helm_open) || (<SRC.TARG.DISPID>==i_bascinet) || (<SRC.TARG.DISPID>==i_helm_nose) || (<SRC.TARG.DISPID>==i_helm_closed) || (<SRC.TARG.DISPID>==i_chainmail_coif)
+			KIT_SERTISSAGE_TROUER_ARMURE 2
+		ELSEIF (<SRC.TARG.DISPID>==i_platemail_gorget)
+			KIT_SERTISSAGE_TROUER_ARMURE 1
+		ELSEIF (<SRC.TARG.DISPID>==i_platemail_gloves) || (<SRC.TARG.DISPID>==i_bone_gloves) || (<SRC.TARG.DISPID>==i_ringmail_gloves) || (<SRC.TARG.BASEID>==i_gants_de_jouteur) || (<SRC.TARG.BASEID>==i_gants_de_boxeur) || (<SRC.TARG.BASEID>==i_gants_de_pugiliste) || (<SRC.TARG.BASEID>==i_gants_de_pancratiaste)
+			KIT_SERTISSAGE_TROUER_ARMURE 2
+		ELSEIF (<SRC.TARG.TYPE>==t_shield)
+			KIT_SERTISSAGE_TROUER_ARMURE 5
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> ne peut etre perce !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour percer !
+ENDIF
+RETURN 1
+
+CATEGORY=Gemmes
+SUBSECTION=Outils
+DESCRIPTION=Outils de sertissage
+
+
+[ITEMDEF i_outils_de_desertissage]
+NAME=Outils de desertissage
+ID=i_mallet_and_chisel
+TYPE=T_SCRIPT
+RESOURCES=1 i_ingot_iron, 1 i_gemme_diamant
+SKILLMAKE=TINKERING 100.0, t_tinker_tools
+
+ON=@CREATE
+COLOR=0540
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quel objet souhaitez vous dessertir (Vous pouvez briser la gemme) ?
+TARGET
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGEUA 0481 1 1 0 Selection invalide !
+RETURN 1
+
+ON=@TARGON_ITEM
+IF ((<SRC.TARG.CONT.UID> != <SRC.UID>) && (<SRC.TARG.TOPOBJ.UID> == <SRC.UID>))
+	IF (<EVAL 0<SRC.TARG.TAG.NBREG>> > 0) && (<EVAL 0<SRC.TARG.TAG.NBREG>> <= 5)
+		SORTIR_GEMME <EVAL <SRC.TARG.TAG.NBREG>>
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas dessertir cet objet
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez avoir l'objet sur vous ou avoir l'autorisation pour dessertir !
+ENDIF
+RETURN 1
+
+//<ARGS> = # de gemme a enlever
+[FUNCTION SORTIR_GEMME]
+TRYP 0 SRC.TARG.TAG.GEMME_SORTIE=<SRC.TARG.TAG.SUFFIXE<ARGS>>
+TRYP 0 SRC.TARG.TAG.SUFFIXE<ARGS>=[x]
+IF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Arietis]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_arietis
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme arietis de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme arietis de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.ARIETIS>> <= 1
+		SRC.TARG.TAG.ARIETIS
+	ELSE
+		SRC.TARG.TAG.ARIETIS=<SRC.TARG.TAG.ARIETIS> - 1
+	ENDIF
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Tauri]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_tauri
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme tauri de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme tauri de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.TAURI>> <= 1
+		SRC.TARG.TAG.TAURI
+	ELSE
+		SRC.TARG.TAG.TAURI=<SRC.TARG.TAG.TAURI> - 1
+	ENDIF
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Geminorum]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_geminorum
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme geminorum de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme geminorum de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.GEMINORUM>> <= 1
+		SRC.TARG.TAG.GEMINORUM
+	ELSE
+		SRC.TARG.TAG.GEMINORUM=<SRC.TARG.TAG.GEMINORUM> - 1
+	ENDIF
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Cancri]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_cancri
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme cancri de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme cancri de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.CANCRI>> <= 1
+		SRC.TARG.TAG.CANCRI
+	ELSE
+		SRC.TARG.TAG.CANCRI=<SRC.TARG.TAG.CANCRI> - 1
+	ENDIF
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Leoni]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_leoni
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme leoni de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme leoni de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.LEONI>> <= 1
+		SRC.TARG.TAG.LEONI
+	ELSE
+		SRC.TARG.TAG.LEONI=<SRC.TARG.TAG.LEONI> - 1
+	ENDIF
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Virginis]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_virginis
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme virginis de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme virginis de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.VIRGINIS>> <= 1
+		SRC.TARG.TAG.VIRGINIS
+	ELSE
+		SRC.TARG.TAG.VIRGINIS=<SRC.TARG.TAG.VIRGINIS> - 1
+	ENDIF
+
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Librae]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_librae
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme librae de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme librae de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.LIBRAE>> <= 1
+		SRC.TARG.TAG.LIBRAE
+	ELSE
+		SRC.TARG.TAG.LIBRAE=<SRC.TARG.TAG.LIBRAE> - 1
+	ENDIF
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Scorpii]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_scorpii
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme scorpii de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme scorpii de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.SCORPII>> <= 1
+		SRC.TARG.TAG.SCORPII
+	ELSE
+		SRC.TARG.TAG.SCORPII=<SRC.TARG.TAG.SCORPII> - 1
+	ENDIF
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Sagittae]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_sagittae
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme sagittae de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme sagittae de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.SAGITTAE>> <= 1
+		SRC.TARG.TAG.SAGITTAE
+	ELSE
+		SRC.TARG.TAG.SAGITTAE=<SRC.TARG.TAG.SAGITTAE> - 1
+	ENDIF
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Capricorni]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_capricorni
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme capricorni de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme capricorni de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.CAPRICORNI>> <= 1
+		SRC.TARG.TAG.CAPRICORNI
+	ELSE
+		SRC.TARG.TAG.CAPRICORNI=<SRC.TARG.TAG.CAPRICORNI> - 1
+	ENDIF
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Aquarii]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_aquarii
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme aquarii de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme aquarii de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.AQUARII>> <= 1
+		SRC.TARG.TAG.AQUARII
+	ELSE
+		SRC.TARG.TAG.AQUARII=<SRC.TARG.TAG.AQUARII> - 1
+	ENDIF
+ELSEIF (!STRCMPI("<SRC.TARG.TAG.GEMME_SORTIE>","[Piscium]"))
+	IF <EVAL(RAND(2))> == 1
+		SRC.NEWITEM i_gemme_piscium
+		SRC.ACT.CONT=<SRC.UID>
+		SRC.EMOTE sortir une gemme piscium de <SRC.TARG.NAME>
+	ELSE
+		SRC.EMOTE reduire en poussiere une gemme piscium de <SRC.TARG.NAME>
+	ENDIF
+	IF <EVAL <SRC.TARG.TAG.PISCIUM>> <= 1
+		SRC.TARG.TAG.PISCIUM
+	ELSE
+		SRC.TARG.TAG.PISCIUM=<SRC.TARG.TAG.PISCIUM> - 1
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Erreur lors du desertissage, contactez un maitre de jeu
+	RETURN 1
+ENDIF
+SRC.TARG.TAG.GEMME_SORTIE
+SRC.TARG.TAG.NBREG = <SRC.TARG.TAG.NBREG> - 1
+SRC.TARG.NAME=<SRC.TARG.TAG.NOM> <SRC.TARG.TAG.SUFFIXE1><SRC.TARG.TAG.SUFFIXE2><SRC.TARG.TAG.SUFFIXE3><SRC.TARG.TAG.SUFFIXE4><SRC.TARG.TAG.SUFFIXE5>
+RETURN 1
+
+//DEFAULT = objet a sertir
+[FUNCTION IS_AUTORISATION_SERTIR]
+IF <CONT.UID> == <SRC.UID>
+	RETURN 0
+ELSEIF <TOPOBJ.UID> == <SRC.UID>
+	RETURN 1
+ELSEIF (<TOPOBJ.FINDID.m_autorisation_sertir> && (<CONT.BASEID> == i_bulletin_board))
+	RETURN 1
+ELSE
+	RETURN 0
+ENDIF
+
+[ITEMDEF m_autorisation_sertir]
+NAME=Autorisation a sertir
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@TIMER
+REMOVE
+RETURN 1

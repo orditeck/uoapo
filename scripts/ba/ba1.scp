@@ -1,0 +1,152 @@
+[PLEVEL 1]
+ba1
+
+[FUNCTION ba1]
+IF <EVAL 0<SRC.TAG.JEU_BA1>>==0
+	SRC.SYSMESSAGEUA 0481 1 1 0 Visitez ce sponsor plus tard
+ELSE
+	IF !(STRCMPI("<ARGS>",""))
+		SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez taper .ba1 suivi de votre reponse
+	ELSEIF !(STRCMPI("<ARGS>","0"))
+		IF <EVAL <SRC.TAG.JEU_BA1>>==1
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 1 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_BA1
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","844"))
+		IF <EVAL <SRC.TAG.JEU_BA1>>==2
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 1 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_BA1
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","10"))
+		IF <EVAL <SRC.TAG.JEU_BA1>>==3
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 1 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_BA1
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","800"))
+		IF <EVAL <SRC.TAG.JEU_BA1>>==4
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 1 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_BA1
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","66"))
+		IF <EVAL <SRC.TAG.JEU_BA1>>==5
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 1 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_BA1
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","86"))
+		IF <EVAL <SRC.TAG.JEU_BA1>>==6
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 1 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_BA1
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","33"))
+		IF <EVAL <SRC.TAG.JEU_BA1>>==7
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 1 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_BA1
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSEIF !(STRCMPI("<ARGS>","40"))
+		IF <EVAL <SRC.TAG.JEU_BA1>>==8
+			SYSMESSAGEUA 0481 1 1 0 Felicitations, vous avez donne la bonne reponse et remportez 1 point de BA
+			SRC.DONNER_POINT_BA
+			SRC.TAG.JEU_BA1
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+		ENDIF
+	ELSE
+		SRC.TAG.JEU_BA1
+		SRC.SYSMESSAGEUA 0481 1 1 0 Mauvaise reponse retentez votre chance demain
+	ENDIF
+ENDIF
+
+[ITEMDEF m_jeu_ba1]
+ID=i_memory
+NAME=jeu_ba1
+TYPE=t_eq_script
+
+ON=@CREATE
+TIMER=1
+MORE1=1
+
+ON=@TIMER
+IF <MORE1>==1
+	CONT.SYSMESSAGEUA 025 1 1 0 Pour gagner 1 BA grace a Best Offres suivez les instructions qui vont suivre :
+	MORE1=2
+	TIMER=4
+ELSEIF <MORE1>==2
+	CONT.SYSMESSAGEUA 0481 1 1 0 Une page de votre navigateur va s'ouvrir dans quelques instants, minimisez la, mais ne la fermez pas puis retournez en jeu
+	MORE1=3
+	TIMER=5
+ELSEIF <MORE1>==3
+	CONT.WEBLINK http:\\www.cibleclick.com/cibles/clicks/symp.cfm?site_id=913296962&friend_id=815624825&banniere_id=27655
+	CONT.WEBLINK http:\\ad.cibleclick.com/cibles/banniere/symp.cfm?site_id=913296962&friend_id=815624825&banniere_id=27655
+	MORE1=4
+	TIMER=15
+ELSEIF <MORE1>==4
+	CONT.SYSMESSAGEUA 0481 1 1 0 Divers sites d'assurance sante vous seront proposes, cliquez sur le lien propose et lisez la question :
+	MORE1=5
+	TIMER=8
+ELSEIF <MORE1>==5
+	CONT.TAG.JEU_BA1=<EVAL(RAND(7))+1>
+	IF <EVAL <CONT.TAG.JEU_BA1>>==1
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Allez sur la page de aviva direct"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==2
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Allez sur la page de aviva direct"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==3
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Allez sur la page de santexia"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==4
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Allez sur la page de santexia"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==5
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Allez sur la page de swisslife"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==6
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Allez sur la page de swisslife"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==7
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Allez sur la page de assurland"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==8
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Allez sur la page de assurland"
+	ENDIF
+	MORE1=6
+	TIMER=10
+ELSEIF <MORE1>==6
+	IF <EVAL <CONT.TAG.JEU_BA1>>==1
+		CONT.SYSMESSAGEUA 0481 1 1 0 "En haut de la page, il y'a un numero a appeler, quel est le premier chiffre?"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==2
+		CONT.SYSMESSAGEUA 0481 1 1 0 "En haut de la page, il y'a un numero a appeler, quels sont les 3 derniers chiffres?"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==3
+		CONT.SYSMESSAGEUA 0481 1 1 0 "En bas de la page, il y'a un numero a appeler, quels sont les 2 derniers chiffres?"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==4
+		CONT.SYSMESSAGEUA 0481 1 1 0 "En bas de la page, il y'a un numero a appeler, quel est le seul nombre avec 3 chiffres?"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==5
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Au centre de la page, a partir de quel age faut-il passer un questionnaire de sante??"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==6
+		CONT.SYSMESSAGEUA 0481 1 1 0 "En haut de la page, dans contacts, vous pouvez voir apparaitre l'adresse du boulevard Haussmann, quelle est elle?"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==7
+		CONT.SYSMESSAGEUA 0481 1 1 0 "Arrivé sur la page, quel est le % de l'avancement du questionnaire?"
+	ELSEIF <EVAL <CONT.TAG.JEU_BA1>>==8
+		CONT.SYSMESSAGEUA 0481 1 1 0 "En cliquant sur accueil, quelle est la moyenne d'economie en %?"
+	ENDIF
+	MORE1=7
+	TIMER=20
+ELSE
+	CONT.SYSMESSAGEUA 0481 1 1 0 Une fois que vous avez la reponse tapez .ba1 suivi de votre reponse. Exemple : .ba1 10
+	REMOVE
+ENDIF
+RETURN 1

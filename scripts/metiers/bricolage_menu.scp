@@ -1,0 +1,626 @@
+[SKILLMENU sm_tinker]
+Bricoleur
+
+ON=i_shovel Outils
+SKILLMENU=sm_outils_proff
+
+ON=i_enclume Plans de travail
+SKILLMENU=sm_plantravail
+
+ON=i_brazier_sur_pieds Decorations
+SKILLMENU=sm_decotinker
+
+ON=015ae Bannieres
+SKILLMENU=sm_bannieres_tinker
+
+ON=i_grand_coffre_en_fer Coffres & containers
+SKILLMENU=sm_coffrecont
+
+ON=i_tambour Instruments de musique
+SKILLMENU=sm_instrumusique
+
+ON=i_collier Bijoux
+SKILLMENU=sm_bijouxtinker
+
+ON=0108b Bijoux magiques
+SKILLMENU=sm_bijouxmagiquestinker
+
+ON=i_tableau Autres
+SKILLMENU=sm_autrestinker
+
+[SKILLMENU sm_outils_proff]
+Outils
+
+ON=i_pelle <name> (<resmake>)
+MAKEITEM=i_pelle
+
+ON=i_pioche <name> (<resmake>)
+MAKEITEM=i_pioche
+
+ON=i_pioche_de_carriere <name> (<resmake>)
+MAKEITEM=i_pioche_de_carriere
+
+ON=i_marteau_de_forgeron <name> (<resmake>)
+MAKEITEM=i_marteau_de_forgeron
+
+ON=i_outils_de_sertissage <name> (<resmake>)
+MAKEITEM=i_outils_de_sertissage
+
+ON=i_outils_de_desertissage <name> (<resmake>)
+MAKEITEM=i_outils_de_desertissage
+
+ON=i_scie <name> (<resmake>)
+MAKEITEM=i_scie
+
+ON=i_outils_a_bois <name> (<resmake>)
+MAKEITEM=i_outils_a_bois
+
+ON=i_lime_a_bois <name> (<resmake>)
+MAKEITEM=i_lime_a_bois
+
+ON=i_rabot_a_replanir <name> (<resmake>)
+MAKEITEM=i_rabot_a_replanir
+
+ON=i_ciseaux <name> (<resmake>)
+MAKEITEM=i_ciseaux
+
+ON=i_kit_de_couture <name> (<resmake>)
+MAKEITEM=i_kit_de_couture
+
+ON=i_kit_d_empailleur <name> (<resmake>)
+MAKEITEM=i_kit_d_empailleur
+
+ON=i_outils_de_bricoleur <name> (<resmake>)
+MAKEITEM=i_outils_de_bricoleur
+
+ON=i_pilon <name> (<resmake>)
+MAKEITEM=i_pilon
+
+ON=i_canne_a_peche <name> (<resmake>)
+MAKEITEM=i_canne_a_peche
+
+ON=i_sextante <name> (<resmake>)
+MAKEITEM=i_sextante
+
+ON=i_outils_de_bricoleur_en_diamant <name> (<resmake>)
+MAKEITEM=i_outils_de_bricoleur_en_diamant
+
+ON=i_marteau_en_diamant <name> (<resmake>)
+MAKEITEM=i_marteau_en_diamant
+
+[SKILLMENU sm_plantravail]
+Plans de travail
+
+ON=i_roule_filer_ouest <name> (<resmake>)
+MAKEITEM=i_roule_filer_ouest
+
+ON=i_deed_metier_a_tisser2 <name> (<resmake>)
+MAKEITEM=i_deed_metier_a_tisser2
+
+ON=i_enclume <name> (<resmake>)
+MAKEITEM=i_enclume
+
+ON=i_petite_forge <name> (<resmake>)
+MAKEITEM=i_petite_forge
+
+ON=i_deed_forge_sud <name> (<resmake>)
+MAKEITEM=i_deed_forge_sud
+
+ON=i_deed_forge_ouest <name> (<resmake>)
+MAKEITEM=i_deed_forge_ouest
+
+[SKILLMENU sm_decotinker]
+Decorations
+
+ON=i_lanterne <name> (<resmake>)
+MAKEITEM=i_lanterne
+
+ON=i_brazier_normal <name> (<resmake>)
+MAKEITEM=i_brazier_normal
+
+ON=i_brazier_sur_pieds <name> (<resmake>)
+MAKEITEM=i_brazier_sur_pieds
+
+ON=i_grand_brazier <name> (<resmake>)
+MAKEITEM=i_grand_brazier
+
+ON=i_petite_bougie <name> (<resmake>)
+MAKEITEM=i_petite_bougie
+
+ON=i_grande_bougie <name> (<resmake>)
+MAKEITEM=i_grande_bougie
+
+ON=i_bougie_pied_cuivre <name> (<resmake>)
+MAKEITEM=i_bougie_pied_cuivre
+
+ON=i_bougie_sur_crane <name> (<resmake>)
+MAKEITEM=i_bougie_sur_crane
+
+ON=i_chandelier <name> (<resmake>)
+MAKEITEM=i_chandelier
+
+ON=i_grand_chandelier <name> (<resmake>)
+MAKEITEM=i_grand_chandelier
+
+ON=i_porte_bougie_ouest_vide <name> (<resmake>)
+MAKEITEM=i_porte_bougie_ouest_vide
+
+ON=i_porte_bougie_nord_vide <name> (<resmake>)
+MAKEITEM=i_porte_bougie_nord_vide
+
+ON=i_porte_bougie_nord <name> (<resmake>)
+MAKEITEM=i_porte_bougie_nord
+
+ON=i_porte_bougie_ouest <name> (<resmake>)
+MAKEITEM=i_porte_bougie_ouest
+
+ON=i_porte_torche_ouest_vide <name> (<resmake>)
+MAKEITEM=i_porte_torche_ouest_vide
+
+ON=i_porte_torche_nord_vide <name> (<resmake>)
+MAKEITEM=i_porte_torche_nord_vide
+
+ON=i_porte_torche_ouest <name> (<resmake>)
+MAKEITEM=i_porte_torche_ouest
+
+ON=i_porte_torche_nord <name> (<resmake>)
+MAKEITEM=i_porte_torche_nord
+
+ON=i_petit_lampadaire <name> (<resmake>)
+MAKEITEM=i_petit_lampadaire
+
+ON=i_moyen_lampadaire <name> (<resmake>)
+MAKEITEM=i_moyen_lampadaire
+
+ON=i_grand_lampadaire <name> (<resmake>)
+MAKEITEM=i_grand_lampadaire
+
+ON=i_horloge <name> (<resmake>)
+MAKEITEM=i_horloge
+
+[SKILLMENU sm_bannieres_tinker]
+Bannieres
+
+ON=i_banniere_1_sud <name> (<resmake>)
+MAKEITEM=i_banniere_1_sud
+
+ON=i_banniere_1_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_1_ouest
+
+ON=i_banniere_2_sud <name> (<resmake>)
+MAKEITEM=i_banniere_2_sud
+
+ON=i_banniere_2_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_2_ouest
+
+ON=i_banniere_3_sud <name> (<resmake>)
+MAKEITEM=i_banniere_3_sud
+
+ON=i_banniere_3_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_3_ouest
+
+ON=i_banniere_4_sud <name> (<resmake>)
+MAKEITEM=i_banniere_4_sud
+
+ON=i_banniere_4_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_4_ouest
+
+ON=i_banniere_5_sud <name> (<resmake>)
+MAKEITEM=i_banniere_5_sud
+
+ON=i_banniere_5_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_5_ouest
+
+ON=i_banniere_6_sud <name> (<resmake>)
+MAKEITEM=i_banniere_6_sud
+
+ON=i_banniere_6_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_6_ouest
+
+ON=i_banniere_7_sud <name> (<resmake>)
+MAKEITEM=i_banniere_7_sud
+
+ON=i_banniere_7_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_7_ouest
+
+ON=i_banniere_8_sud <name> (<resmake>)
+MAKEITEM=i_banniere_8_sud
+
+ON=i_banniere_8_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_8_ouest
+
+ON=i_banniere_9_sud <name> (<resmake>)
+MAKEITEM=i_banniere_9_sud
+
+ON=i_banniere_9_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_9_ouest
+
+ON=i_banniere_10_sud <name> (<resmake>)
+MAKEITEM=i_banniere_10_sud
+
+ON=i_banniere_10_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_10_ouest
+
+ON=i_banniere_11_sud <name> (<resmake>)
+MAKEITEM=i_banniere_11_sud
+
+ON=i_banniere_11_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_11_ouest
+
+ON=i_banniere_12_sud <name> (<resmake>)
+MAKEITEM=i_banniere_12_sud
+
+ON=i_banniere_12_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_12_ouest
+
+ON=i_banniere_13_sud <name> (<resmake>)
+MAKEITEM=i_banniere_13_sud
+
+ON=i_banniere_13_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_13_ouest
+
+ON=i_banniere_14_sud <name> (<resmake>)
+MAKEITEM=i_banniere_14_sud
+
+ON=i_banniere_14_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_14_ouest
+
+ON=i_banniere_15_sud <name> (<resmake>)
+MAKEITEM=i_banniere_15_sud
+
+ON=i_banniere_15_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_15_ouest
+
+ON=i_banniere_16_sud <name> (<resmake>)
+MAKEITEM=i_banniere_16_sud
+
+ON=i_banniere_16_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_16_ouest
+
+ON=i_banniere_17_sud <name> (<resmake>)
+MAKEITEM=i_banniere_17_sud
+
+ON=i_banniere_17_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_17_ouest
+
+ON=i_banniere_18_sud <name> (<resmake>)
+MAKEITEM=i_banniere_18_sud
+
+ON=i_banniere_18_ouest <name> (<resmake>)
+MAKEITEM=i_banniere_18_ouest
+
+[SKILLMENU sm_coffrecont]
+Coffres & containers
+
+ON=i_fil_de_fer <name> (<resmake>)
+MAKEITEM=i_fil_de_fer
+
+ON=i_porte_clef <name> (<resmake>)
+MAKEITEM=i_porte_clef
+
+ON=i_serrure_pour_container <name> (<resmake>)
+MAKEITEM=i_serrure_pour_container
+
+ON=i_clef_de_fer <name> (<resmake>)
+MAKEITEM=i_clef_de_fer
+
+ON=i_clef_de_cuivre <name> (<resmake>)
+MAKEITEM=i_clef_de_cuivre
+
+ON=i_clef_en_or <name> (<resmake>)
+MAKEITEM=i_clef_en_or
+
+ON=i_petit_coffre_en_or <name> (<resmake>)
+MAKEITEM=i_petit_coffre_en_or
+
+ON=i_grand_coffre_en_fer <name> (<resmake>)
+MAKEITEM=i_grand_coffre_en_fer
+
+ON=i_grand_coffre_en_fer_orne <name> (<resmake>)
+MAKEITEM=i_grand_coffre_en_fer_orne
+
+ON=i_barril_vide <name> (<resmake>)
+MAKEITEM=i_barril_vide
+
+ON=i_poubelle <name> (<resmake>)
+MAKEITEM=i_poubelle
+
+ON=0f0e <name> (<resmake>)
+MAKEITEM=0f0e
+
+[SKILLMENU sm_instrumusique]
+Instruments de musique
+
+ON=i_tambour <name> (<resmake>)
+MAKEITEM=i_tambour
+
+ON=i_petite_harpe <name> (<resmake>)
+MAKEITEM=i_petite_harpe
+
+ON=i_harpe <name> (<resmake>)
+MAKEITEM=i_harpe
+
+ON=i_lutte <name> (<resmake>)
+MAKEITEM=i_lutte
+
+ON=i_tambourin <name> (<resmake>)
+MAKEITEM=i_tambourin
+
+[SKILLMENU sm_bijouxtinker]
+Bijoux
+
+ON=i_collier <name> (<resmake>)
+MAKEITEM=i_collier
+
+ON=i_collier_en_or <name> (<resmake>)
+MAKEITEM=i_collier_en_or
+
+ON=i_bracelet_en_or <name> (<resmake>)
+MAKEITEM=i_bracelet_en_or
+
+ON=i_boucle_oreille_en_or <name> (<resmake>)
+MAKEITEM=i_boucle_oreille_en_or
+
+ON=i_bague_en_or <name> (<resmake>)
+MAKEITEM=i_bague_en_or
+
+[SKILLMENU sm_bijouxmagiquestinker]
+Bijoux magiques
+
+ON=01088 Amulettes magiques
+SKILLMENU=sm_amulettes_magiques
+
+ON=0108a Anneaux magiques
+SKILLMENU=sm_anneaux_magiques
+
+ON=01086 Bracelets magiques
+SKILLMENU=sm_bracelets_magiques
+
+[SKILLMENU sm_amulettes_magiques]
+Amulettes magiques
+
+ON=i_amulette_d_esquive <name> (<resmake>)
+MAKEITEM=i_amulette_d_esquive
+
+ON=i_symbole_d_espoir <name> (<resmake>)
+MAKEITEM=i_symbole_d_espoir
+
+ON=i_amulette_de_precision <name> (<resmake>)
+MAKEITEM=i_amulette_de_precision
+
+ON=i_collier_d_instincts_de_combat <name> (<resmake>)
+MAKEITEM=i_collier_d_instincts_de_combat
+
+ON=i_collier_arcanique <name> (<resmake>)
+MAKEITEM=i_collier_arcanique
+
+ON=i_amulette_du_heros <name> (<resmake>)
+MAKEITEM=i_amulette_du_heros
+
+ON=i_talisman_de_protection_contre_le_mal <name> (<resmake>)
+MAKEITEM=i_talisman_de_protection_contre_le_mal
+
+ON=i_collier_en_pierres_de_sang <name> (<resmake>)
+MAKEITEM=i_collier_en_pierres_de_sang
+
+ON=i_amulette_etheree <name> (<resmake>)
+MAKEITEM=i_amulette_etheree
+
+ON=i_relique_en_vanadinite <name> (<resmake>)
+MAKEITEM=i_relique_en_vanadinite
+
+ON=i_amulette_de_vision <name> (<resmake>)
+MAKEITEM=i_amulette_de_vision
+
+ON=i_amulette_de_redemption <name> (<resmake>)
+MAKEITEM=i_amulette_de_redemption
+
+ON=i_amulette_de_regeneration <name> (<resmake>)
+MAKEITEM=i_amulette_de_regeneration
+
+ON=i_talisman_de_pierre_de_lune <name> (<resmake>)
+MAKEITEM=i_talisman_de_pierre_de_lune
+
+ON=i_talisman_de_la_bete <name> (<resmake>)
+MAKEITEM=i_talisman_de_la_bete
+
+ON=i_collier_tribal <name> (<resmake>)
+MAKEITEM=i_collier_tribal
+
+ON=i_collier_de_la_sirene <name> (<resmake>)
+MAKEITEM=i_collier_de_la_sirene
+
+ON=i_amulette_du_titan <name> (<resmake>)
+MAKEITEM=i_amulette_du_titan
+
+ON=i_collier_de_bouillonnement <name> (<resmake>)
+MAKEITEM=i_collier_de_bouillonnement
+
+ON=i_amulette_de_tacticien <name> (<resmake>)
+MAKEITEM=i_amulette_de_tacticien
+
+[SKILLMENU sm_anneaux_magiques]
+Anneaux magiques
+
+ON=i_anneau_de_l_assassin <name> (<resmake>)
+MAKEITEM=i_anneau_de_l_assassin
+
+ON=i_anneau_du_soigneur <name> (<resmake>)
+MAKEITEM=i_anneau_du_soigneur
+
+ON=i_anneau_du_pretre <name> (<resmake>)
+MAKEITEM=i_anneau_du_pretre
+
+ON=i_anneau_du_templier <name> (<resmake>)
+MAKEITEM=i_anneau_du_templier
+
+ON=i_anneau_de_foi <name> (<resmake>)
+MAKEITEM=i_anneau_de_foi
+
+ON=i_anneau_de_vraie_foi <name> (<resmake>)
+MAKEITEM=i_anneau_de_vraie_foi
+
+ON=i_anneau_du_duelliste <name> (<resmake>)
+MAKEITEM=i_anneau_du_duelliste
+
+ON=i_anneau_de_confiance <name> (<resmake>)
+MAKEITEM=i_anneau_de_confiance
+
+ON=i_anneau_du_ranger <name> (<resmake>)
+MAKEITEM=i_anneau_du_ranger
+
+ON=i_anneau_de_pierre_de_morganite <name> (<resmake>)
+MAKEITEM=i_anneau_de_pierre_de_morganite
+
+ON=i_anneau_du_gladiateur <name> (<resmake>)
+MAKEITEM=i_anneau_du_gladiateur
+
+ON=i_anneau_de_l_ours <name> (<resmake>)
+MAKEITEM=i_anneau_de_l_ours
+
+ON=i_anneau_du_lion <name> (<resmake>)
+MAKEITEM=i_anneau_du_lion
+
+ON=i_anneau_du_clan_des_minotaures <name> (<resmake>)
+MAKEITEM=i_anneau_du_clan_des_minotaures
+
+ON=i_anneau_de_precision <name> (<resmake>)
+MAKEITEM=i_anneau_de_precision
+
+ON=i_anneau_de_pierre_de_sang <name> (<resmake>)
+MAKEITEM=i_anneau_de_pierre_de_sang
+
+ON=i_anneau_d_agilite_de_jander <name> (<resmake>)
+MAKEITEM=i_anneau_d_agilite_de_jander
+
+ON=i_anneau_du_sorcier <name> (<resmake>)
+MAKEITEM=i_anneau_du_sorcier
+
+ON=i_anneau_de_sorcellerie_en_vanadinite <name> (<resmake>)
+MAKEITEM=i_anneau_de_sorcellerie_en_vanadinite
+
+ON=i_bague_araignee <name> (<resmake>)
+MAKEITEM=i_bague_araignee
+
+ON=i_anneau_de_protection <name> (<resmake>)
+MAKEITEM=i_anneau_de_protection
+
+ON=i_anneau_de_bouclier_divin <name> (<resmake>)
+MAKEITEM=i_anneau_de_bouclier_divin
+
+ON=i_anneau_du_dissecteur <name> (<resmake>)
+MAKEITEM=i_anneau_du_dissecteur
+
+ON=i_anneau_d_illusionniste <name> (<resmake>)
+MAKEITEM=i_anneau_d_illusionniste
+
+ON=i_anneau_du_cogneur <name> (<resmake>)
+MAKEITEM=i_anneau_du_cogneur
+
+ON=i_bague_d_achille <name> (<resmake>)
+MAKEITEM=i_bague_d_achille
+
+ON=i_anneau_du_penseur <name> (<resmake>)
+MAKEITEM=i_anneau_du_penseur
+
+ON=i_anneau_du_sage <name> (<resmake>)
+MAKEITEM=i_anneau_du_sage
+
+ON=i_bague_psychotique <name> (<resmake>)
+MAKEITEM=i_bague_psychotique
+
+ON=i_anneau_de_convergence <name> (<resmake>)
+MAKEITEM=i_anneau_de_convergence
+
+ON=i_anneau_d_effervescence <name> (<resmake>)
+MAKEITEM=i_anneau_d_effervescence
+
+ON=i_anneau_de_tacticien <name> (<resmake>)
+MAKEITEM=i_anneau_de_tacticien
+
+ON=i_anneau_de_tacticien_supreme <name> (<resmake>)
+MAKEITEM=i_anneau_de_tacticien_supreme
+
+ON=i_bague_d_ali <name> (<resmake>)
+MAKEITEM=i_bague_d_ali
+
+[SKILLMENU sm_bracelets_magiques]
+Bracelets magiques
+
+ON=i_bracelet_de_chrysoprase <name> (<resmake>)
+MAKEITEM=i_bracelet_de_chrysoprase
+
+ON=i_bracelet_de_fluorite <name> (<resmake>)
+MAKEITEM=i_bracelet_de_fluorite
+
+ON=i_bracelet_d_autunite <name> (<resmake>)
+MAKEITEM=i_bracelet_d_autunite
+
+ON=i_bracelet_d_or <name> (<resmake>)
+MAKEITEM=i_bracelet_d_or
+
+ON=i_bracelet_de_la_manticore <name> (<resmake>)
+MAKEITEM=i_bracelet_de_la_manticore
+
+ON=i_bracelet_morbide <name> (<resmake>)
+MAKEITEM=i_bracelet_morbide
+
+ON=i_bracelet_d_adulaire <name> (<resmake>)
+MAKEITEM=i_bracelet_d_adulaire
+
+ON=i_bracelet_de_guerre <name> (<resmake>)
+MAKEITEM=i_bracelet_de_guerre
+
+ON=i_bracelet_de_vitesse <name> (<resmake>)
+MAKEITEM=i_bracelet_de_vitesse
+
+ON=i_bracelet_d_intello <name> (<resmake>)
+MAKEITEM=i_bracelet_d_intello
+
+ON=i_bracelet_du_tacticien <name> (<resmake>)
+MAKEITEM=i_bracelet_du_tacticien
+
+ON=i_bracelet_du_philosophe <name> (<resmake>)
+MAKEITEM=i_bracelet_du_philosophe
+
+ON=i_bracelet_du_gourou <name> (<resmake>)
+MAKEITEM=i_bracelet_du_gourou
+
+ON=i_bracelet_d_illumination <name> (<resmake>)
+MAKEITEM=i_bracelet_d_illumination
+
+ON=i_bracelet_d_hercule <name> (<resmake>)
+MAKEITEM=i_bracelet_d_hercule
+
+ON=i_bracelet_de_combine <name> (<resmake>)
+MAKEITEM=i_bracelet_de_combine
+
+[SKILLMENU sm_autrestinker]
+Autres
+
+ON=i_baguette_magique <name> (<resmake>)
+MAKEITEM=i_baguette_magique
+
+ON=i_baguette_magique_2 <name> (<resmake>)
+MAKEITEM=i_baguette_magique_2
+
+ON=i_baguette_magique_3 <name> (<resmake>)
+MAKEITEM=i_baguette_magique_3
+
+ON=i_baguette_magique_4 <name> (<resmake>)
+MAKEITEM=i_baguette_magique_4
+
+ON=i_tableau <name> (<resmake>)
+MAKEITEM=i_tableau
+
+ON=i_deed_cannon_north <name> (<resmake>)
+MAKEITEM=i_deed_cannon_north
+
+vi_deed_cannon_south <name> (<resmake>)
+MAKEITEM=i_deed_cannon_south
+
+ON=i_deed_cannon_east <name> (<resmake>)
+MAKEITEM=i_deed_cannon_east
+
+ON=i_deed_cannon_west <name> (<resmake>)
+MAKEITEM=i_deed_cannon_west

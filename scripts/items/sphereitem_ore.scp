@@ -1,0 +1,1785 @@
+[DEFNAME COLOR_ORE]
+color_o_iron		0    //option: 0763
+color_o_bronze		06d6
+color_o_gold		045e //option: 084d
+color_o_copper		0641 //option: 060c
+color_o_oldcopper	0590
+color_o_dullcopper	060a
+color_o_silver		0231 //option: 0
+color_o_shadow		0770
+color_o_bloodrock	04c2
+color_o_blackrock	0455
+color_o_mytheril	052d //or 0528
+color_o_rose		0665
+color_o_verite		07d1
+color_o_agapite		0400
+color_o_rusty		0750
+color_o_valorite	0515
+
+
+//************** Ores ***************
+
+[ITEMDEF 019b7]
+// DEFNAME2=METAL_ORE_1
+DEFNAME=i_ore_iron
+NAME=Minerai de fer
+TYPE=t_ore
+SKILLMAKE=MINING 45.0
+TDATA1=i_ingot_iron
+WEIGHT=5
+VALUE=400
+DUPELIST=019b8,019b9,019ba
+
+CATEGORY=Items by Professions
+SUBSECTION=Blacksmiths
+DESCRIPTION=Ore (Small Pile)
+
+[ITEMDEF i_ore_bronze]
+ID=i_ore_iron
+NAME=Minerai de bronze
+SKILLMAKE=MINING 30.0
+TDATA1=i_ingot_bronze
+VALUE=50
+WEIGHT=1
+
+ON=@Create
+COLOR=color_o_bronze
+
+[ITEMDEF i_ore_copper]
+ID=i_ore_iron
+NAME=Minerai de cuivre
+SKILLMAKE=MINING 30.0
+TDATA1=i_ingot_copper
+VALUE=50
+WEIGHT=1
+
+ON=@Create
+COLOR=color_o_copper
+
+[ITEMDEF i_ore_rusty]
+ID=i_ore_iron
+NAME=Rouille
+SKILLMAKE=MINING 30.0
+TDATA1=i_ingot_rusty
+VALUE=50
+WEIGHT=1
+
+ON=@Create
+COLOR=color_o_rusty
+
+[ITEMDEF i_ore_rose]
+ID=i_ore_iron
+NAME=Minerai de cobalt
+SKILLMAKE=MINING 30.0
+TDATA1=i_ingot_rose
+VALUE=125
+WEIGHT=3
+
+ON=@Create
+COLOR=color_o_rose
+
+[ITEMDEF i_ore_shadow]
+ID=i_ore_iron
+NAME=Minerai des ombres
+SKILLMAKE=MINING 30.0
+TDATA1=i_ingot_shadow
+VALUE=125
+WEIGHT=2
+
+ON=@Create
+COLOR=color_o_shadow
+
+[ITEMDEF i_ore_gold]
+ID=i_ore_iron
+NAME=Minerai d'or
+SKILLMAKE=MINING 30.0
+TDATA1=i_ingot_gold
+VALUE=125
+WEIGHT=2
+
+ON=@Create
+COLOR=color_o_gold
+
+[ITEMDEF i_ore_agapite]
+ID=i_ore_iron
+NAME=Minerai de realgar
+SKILLMAKE=MINING 30.0
+TDATA1=i_ingot_agapite
+VALUE=125
+WEIGHT=2
+
+ON=@Create
+COLOR=color_o_agapite
+
+[ITEMDEF i_ore_mytheril]
+ID=i_ore_iron
+NAME=Minerai de mytheril
+SKILLMAKE=MINING 40.0
+TDATA1=i_ingot_mytheril
+VALUE=300
+WEIGHT=3
+
+ON=@Create
+COLOR=color_o_mytheril
+
+[ITEMDEF i_ore_bloodrock]
+ID=i_ore_iron
+NAME=Minerai de sang
+SKILLMAKE=MINING 40.0
+TDATA1=i_ingot_bloodrock
+VALUE=300
+WEIGHT=3
+
+ON=@Create
+COLOR=color_o_bloodrock
+
+[ITEMDEF i_ore_valorite]
+ID=i_ore_iron
+NAME=Minerai de valorite
+SKILLMAKE=MINING 40.0
+TDATA1=i_ingot_valorite
+VALUE=300
+WEIGHT=3
+
+ON=@Create
+COLOR=color_o_valorite
+
+[ITEMDEF i_ore_verite]
+ID=i_ore_iron
+NAME=Minerai de verite
+SKILLMAKE=MINING 40.0
+TDATA1=i_ingot_verite
+VALUE=300
+WEIGHT=3
+
+ON=@Create
+COLOR=color_o_verite
+
+[ITEMDEF i_ore_adulaire]
+ID=i_ore_iron
+NAME=Minerai d'adulaire
+SKILLMAKE=MINING 50.0
+TDATA1=i_ingot_adulaire
+VALUE=600
+WEIGHT=4
+
+ON=@Create
+COLOR=0c1
+
+[ITEMDEF i_ore_calcite]
+ID=i_ore_iron
+NAME=Minerai de calcite
+SKILLMAKE=MINING 50.0
+TDATA1=i_ingot_calcite
+VALUE=600
+WEIGHT=4
+
+ON=@Create
+COLOR=030
+
+[ITEMDEF i_ore_epidote]
+ID=i_ore_iron
+NAME=Minerai d'epidote
+SKILLMAKE=MINING 50.0
+TDATA1=i_ingot_epidote
+VALUE=600
+WEIGHT=4
+
+ON=@Create
+COLOR=034
+
+[ITEMDEF i_ore_blackrock]
+ID=i_ore_iron
+NAME=Minerai des tenebres
+SKILLMAKE=MINING 50.0
+TDATA1=i_ingot_blackrock
+VALUE=600
+WEIGHT=4
+
+ON=@Create
+COLOR=color_o_blackrock
+
+[ITEMDEF i_ore_barytine]
+ID=i_ore_iron
+NAME=Minerai de barytine
+SKILLMAKE=MINING 60.0
+TDATA1=i_ingot_barytine
+VALUE=1000
+WEIGHT=5
+
+ON=@Create
+COLOR=015c
+
+[ITEMDEF i_ore_crocoite]
+ID=i_ore_iron
+NAME=Minerai de crocoite
+SKILLMAKE=MINING 60.0
+TDATA1=i_ingot_crocoite
+VALUE=1000
+WEIGHT=5
+
+ON=@Create
+COLOR=026
+
+[ITEMDEF i_ore_morganite]
+ID=i_ore_iron
+NAME=Minerai de morganite
+SKILLMAKE=MINING 60.0
+TDATA1=i_ingot_morganite
+VALUE=1000
+WEIGHT=5
+
+ON=@Create
+COLOR=016
+
+[ITEMDEF i_ore_pyromorphite]
+ID=i_ore_iron
+NAME=Minerai de pyromorphite
+SKILLMAKE=MINING 60.0
+TDATA1=i_ingot_pyromorphite
+VALUE=1000
+WEIGHT=5
+
+ON=@Create
+COLOR=029b
+
+[ITEMDEF i_ore_autunite]
+ID=i_ore_iron
+NAME=Minerai d'autunite
+SKILLMAKE=MINING 70.0
+TDATA1=i_ingot_autunite
+VALUE=3000
+WEIGHT=6
+
+ON=@Create
+COLOR=0101
+
+[ITEMDEF i_ore_chrysoprase]
+ID=i_ore_iron
+NAME=Minerai de chrysoprase
+SKILLMAKE=MINING 70.0
+TDATA1=i_ingot_chrysoprase
+VALUE=3000
+WEIGHT=6
+
+ON=@Create
+COLOR=047
+
+[ITEMDEF i_ore_fluorite]
+ID=i_ore_iron
+NAME=Minerai de fluorite
+SKILLMAKE=MINING 70.0
+TDATA1=i_ingot_fluorite
+VALUE=3000
+WEIGHT=6
+
+ON=@Create
+COLOR=038
+
+[ITEMDEF i_ore_vanadinite]
+ID=i_ore_iron
+NAME=Minerai de vanadinite
+SKILLMAKE=MINING 70.0
+TDATA1=i_ingot_vanadinite
+VALUE=3000
+WEIGHT=6
+
+ON=@Create
+COLOR=01b5
+
+[ITEMDEF i_ore_aqua]
+ID=i_ore_iron
+NAME=Minerai d'aqua
+SKILLMAKE=MINING 80.0
+TDATA1=i_ingot_aqua
+VALUE=10000
+WEIGHT=7
+
+ON=@Create
+COLOR=0482
+
+[ITEMDEF i_ore_silver]
+ID=i_ore_iron
+NAME=Minerai d'argent
+SKILLMAKE=MINING 80.0
+TDATA1=i_ingot_silver
+VALUE=10000
+WEIGHT=7
+
+ON=@Create
+COLOR=color_o_silver
+
+[ITEMDEF i_ore_goshenite]
+ID=i_ore_iron
+NAME=Minerai de goshenite
+SKILLMAKE=MINING 80.0
+TDATA1=i_ingot_goshenite
+VALUE=10000
+WEIGHT=7
+
+ON=@Create
+COLOR=0835
+
+[ITEMDEF i_ore_heliodor]
+ID=i_ore_iron
+NAME=Minerai d'heliodor
+SKILLMAKE=MINING 80.0
+TDATA1=i_ingot_heliodor
+VALUE=10000
+WEIGHT=7
+
+ON=@Create
+COLOR=0709
+
+[ITEMDEF i_ore_aventurine]
+ID=i_ore_iron
+NAME=Minerai d'aventurine
+SKILLMAKE=MINING 90.0
+TDATA1=i_ingot_aventurine
+VALUE=25000
+WEIGHT=8
+
+ON=@Create
+COLOR=0b64
+
+[ITEMDEF i_ore_azurite]
+ID=i_ore_iron
+NAME=Minerai d'azurite
+SKILLMAKE=MINING 90.0
+TDATA1=i_ingot_azurite
+VALUE=25000
+WEIGHT=8
+
+ON=@Create
+COLOR=0abc
+
+[ITEMDEF i_ore_citrine]
+ID=i_ore_iron
+NAME=Minerai de citrine
+SKILLMAKE=MINING 90.0
+TDATA1=i_ingot_citrine
+VALUE=25000
+WEIGHT=8
+
+ON=@Create
+COLOR=0bb6
+
+[ITEMDEF i_ore_grenat]
+ID=i_ore_iron
+NAME=Minerai de grenat
+SKILLMAKE=MINING 90.0
+TDATA1=i_ingot_grenat
+VALUE=25000
+WEIGHT=8
+
+ON=@Create
+COLOR=0996
+
+[ITEMDEF i_ore_titane]
+ID=i_ore_iron
+NAME=Minerai de titane
+SKILLMAKE=MINING 100.0
+TDATA1=i_ingot_titane
+VALUE=350000
+WEIGHT=10
+
+ON=@Create
+COLOR=0736
+
+
+//************** Ingots ***************
+
+[ITEMDEF 01bef]
+//DEFNAME2=INGOTS
+//DEFNAME2=IRON_INGOT
+DEFNAME=i_ingot_iron
+NAME=Lingot de fer
+TYPE=T_INGOT
+RESOURCES=i_ore_iron
+SKILLMAKE=70.0 MINING
+TDATA1=70.0
+TDATA2=80.0
+WEIGHT=5
+DUPELIST=01bf0,01bf1,01bf2,01bf3,01bf4
+
+CATEGORY=Items by Professions
+SUBSECTION=Blacksmiths
+DESCRIPTION=Iron Ingot
+
+[ITEMDEF 0454c]
+DEFNAME=i_ingot_bronze
+NAME=Lingot de bronze
+ID=i_ingot_iron
+RESOURCES=i_ore_bronze
+SKILLMAKE=MINING 40.0
+TDATA1=40.0
+TDATA2=50.0
+WEIGHT=1
+
+ON=@Create
+COLOR=color_o_bronze
+
+[ITEMDEF 01be3]
+DEFNAME=i_ingot_copper
+NAME=Lingot de cuivre
+TYPE=T_INGOT
+RESOURCES=i_ore_copper
+SKILLMAKE=MINING 40.0
+TDATA1=40.0
+TDATA2=50.0
+WEIGHT=1
+DUPELIST=01be4,01be5,01be6,01be7,01be8
+
+[ITEMDEF 04548]
+DEFNAME=i_ingot_rusty
+NAME=Lingot de rouille
+ID=i_ingot_iron
+RESOURCES=i_ore_rusty
+SKILLMAKE=MINING 40.0
+TDATA1=40.0
+TDATA2=50.0
+WEIGHT=1
+
+ON=@Create
+COLOR=color_o_rusty
+
+[ITEMDEF 04544]
+DEFNAME=i_ingot_rose
+NAME=Lingot de cobalt
+ID=i_ingot_iron
+RESOURCES=i_ore_rose
+SKILLMAKE=MINING 50.0
+TDATA1=50.0
+TDATA2=60.0
+WEIGHT=2
+
+ON=@Create
+COLOR=color_o_rose
+
+[ITEMDEF 04541]
+DEFNAME=i_ingot_shadow
+NAME=Lingot des ombres
+ID=i_ingot_iron
+SKILLMAKE=MINING 50.0
+TDATA1=50.0
+TDATA2=60.0
+RESOURCES=i_ore_shadow
+WEIGHT=2
+
+ON=@Create
+COLOR=color_o_shadow
+
+[ITEMDEF 01be9]
+DEFNAME=i_ingot_gold
+NAME=Lingot d'or
+TYPE=T_INGOT
+RESOURCES=i_ore_gold
+SKILLMAKE=MINING 50.0
+TDATA1=50.0
+TDATA2=60.0
+WEIGHT=2
+DUPELIST=01bea,01beb,01bec,01bed,01bee
+
+[ITEMDEF 04542]
+DEFNAME=i_ingot_agapite
+NAME=Lingot de realgar
+ID=i_ingot_iron
+SKILLMAKE=MINING 50.0
+TDATA1=50.0
+TDATA2=60.0
+RESOURCES=i_ore_agapite
+WEIGHT=2
+
+ON=@Create
+COLOR=color_o_agapite
+
+[ITEMDEF 04545]
+DEFNAME=i_ingot_mytheril
+ID=i_ingot_iron
+NAME=Lingot de mytheril
+RESOURCES=i_ore_mytheril
+SKILLMAKE=MINING 60.0
+TDATA1=60.0
+TDATA2=70.0
+WEIGHT=3
+
+ON=@Create
+COLOR=color_o_mytheril
+
+[ITEMDEF 04547]
+DEFNAME=i_ingot_bloodrock
+ID=i_ingot_iron
+NAME=Lingot de sang
+RESOURCES=i_ore_bloodrock
+SKILLMAKE=MINING 60.0
+TDATA1=60.0
+TDATA2=70.0
+WEIGHT=3
+
+ON=@Create
+COLOR=color_o_bloodrock
+
+[ITEMDEF 0454a]
+DEFNAME=i_ingot_valorite
+NAME=Lingot de valorite
+ID=i_ingot_iron
+RESOURCES=i_ore_valorite
+SKILLMAKE=MINING 60.0
+TDATA1=60.0
+TDATA2=70.0
+WEIGHT=3
+
+ON=@Create
+COLOR=color_o_valorite
+
+[ITEMDEF 04543]
+DEFNAME=i_ingot_verite
+NAME=Lingot de verite
+ID=i_ingot_iron
+RESOURCES=i_ore_verite
+SKILLMAKE=MINING 60.0
+TDATA1=60.0
+TDATA2=70.0
+WEIGHT=3
+
+ON=@Create
+COLOR=color_o_verite
+
+[ITEMDEF i_ingot_adulaire]
+DEFNAME=i_ingot_adulaire
+ID=i_ingot_iron
+NAME=Lingot d'adulaire
+TYPE=T_INGOT
+RESOURCES=i_ore_adulaire
+SKILLMAKE=MINING 70.0
+TDATA1=70.0
+TDATA2=80.0
+WEIGHT=4
+
+ON=@Create
+COLOR=0c1
+
+[ITEMDEF i_ingot_calcite]
+DEFNAME=i_ingot_calcite
+ID=i_ingot_iron
+NAME=Lingot de calcite
+TYPE=T_INGOT
+RESOURCES=i_ore_calcite
+SKILLMAKE=MINING 70.0
+TDATA1=70.0
+TDATA2=80.0
+WEIGHT=4
+
+ON=@Create
+COLOR=030
+
+[ITEMDEF i_ingot_epidote]
+DEFNAME=i_ingot_epidote
+ID=i_ingot_iron
+NAME=Lingot d'epidote
+TYPE=T_INGOT
+RESOURCES=i_ore_epidote
+SKILLMAKE=MINING 70.0
+TDATA1=70.0
+TDATA2=80.0
+WEIGHT=4
+
+ON=@Create
+COLOR=034
+
+[ITEMDEF 04546]
+DEFNAME=i_ingot_blackrock
+NAME=Lingot des tenebres
+ID=i_ingot_iron
+RESOURCES=i_ore_blackrock
+SKILLMAKE=MINING 70.0
+TDATA1=70.0
+TDATA2=80.0
+WEIGHT=4
+
+ON=@Create
+COLOR=color_o_blackrock
+
+[ITEMDEF i_ingot_barytine]
+DEFNAME=i_ingot_barytine
+ID=i_ingot_iron
+NAME=Lingot de barytine
+TYPE=T_INGOT
+RESOURCES=i_ore_barytine
+SKILLMAKE=MINING 80.0
+TDATA1=80.0
+TDATA2=90.0
+WEIGHT=5
+
+ON=@Create
+COLOR=015c
+
+[ITEMDEF i_ingot_crocoite]
+DEFNAME=i_ingot_crocoite
+ID=i_ingot_iron
+NAME=Lingot de crocoite
+TYPE=T_INGOT
+RESOURCES=i_ore_crocoite
+SKILLMAKE=MINING 80.0
+TDATA1=80.0
+TDATA2=90.0
+WEIGHT=5
+
+ON=@Create
+COLOR=026
+
+[ITEMDEF i_ingot_morganite]
+DEFNAME=i_ingot_morganite
+ID=i_ingot_iron
+NAME=Lingot de morganite
+TYPE=T_INGOT
+RESOURCES=i_ore_morganite
+SKILLMAKE=MINING 80.0
+TDATA1=80.0
+TDATA2=90.0
+WEIGHT=5
+
+ON=@Create
+COLOR=016
+
+[ITEMDEF i_ingot_pyromorphite]
+DEFNAME=i_ingot_pyromorphite
+ID=i_ingot_iron
+NAME=Lingot de pyromorphite
+TYPE=T_INGOT
+RESOURCES=i_ore_pyromorphite
+SKILLMAKE=MINING 80.0
+TDATA1=80.0
+TDATA2=90.0
+WEIGHT=5
+
+ON=@Create
+COLOR=029b
+
+[ITEMDEF i_ingot_autunite]
+DEFNAME=i_ingot_autunite
+ID=i_ingot_iron
+NAME=Lingot d'autunite
+TYPE=T_INGOT
+RESOURCES=i_ore_autunite
+SKILLMAKE=MINING 90.0
+TDATA1=90.0
+TDATA2=100.0
+WEIGHT=6
+
+ON=@Create
+COLOR=0101
+
+[ITEMDEF i_ingot_chrysoprase]
+DEFNAME=i_ingot_chrysoprase
+ID=i_ingot_iron
+NAME=Lingot de chrysoprase
+TYPE=T_INGOT
+RESOURCES=i_ore_chrysoprase
+SKILLMAKE=MINING 90.0
+TDATA1=90.0
+TDATA2=100.0
+WEIGHT=6
+
+ON=@Create
+COLOR=047
+
+[ITEMDEF i_ingot_fluorite]
+DEFNAME=i_ingot_fluorite
+ID=i_ingot_iron
+NAME=Lingot de fluorite
+TYPE=T_INGOT
+RESOURCES=i_ore_fluorite
+SKILLMAKE=MINING 90.0
+TDATA1=90.0
+TDATA2=100.0
+WEIGHT=6
+
+ON=@Create
+COLOR=038
+
+[ITEMDEF i_ingot_vanadinite]
+DEFNAME=i_ingot_vanadinite
+ID=i_ingot_iron
+NAME=Lingot de vanadinite
+TYPE=T_INGOT
+RESOURCES=i_ore_vanadinite
+SKILLMAKE=MINING 90.0
+TDATA1=90.0
+TDATA2=100.0
+WEIGHT=6
+
+ON=@Create
+COLOR=01b5
+
+[ITEMDEF i_ingot_aqua]
+DEFNAME=i_ingot_aqua
+ID=i_ingot_iron
+NAME=Lingot d'aqua
+TYPE=T_INGOT
+RESOURCES=i_ore_aqua
+SKILLMAKE=MINING 100.0
+TDATA1=100.0
+TDATA2=110.0
+WEIGHT=7
+
+ON=@Create
+COLOR=0482
+
+[ITEMDEF 01bf5]
+DEFNAME=i_ingot_silver
+NAME=Lingot d'argent
+TYPE=T_INGOT
+SKILLMAKE=MINING 100.0
+TDATA1=100.0
+TDATA2=110.0
+RESOURCES=i_ore_silver
+WEIGHT=7
+DUPELIST=01bf6,01bf7,01bf8,01bf9,01bfa
+
+[ITEMDEF i_ingot_goshenite]
+DEFNAME=i_ingot_goshenite
+ID=i_ingot_iron
+NAME=Lingot de goshenite
+TYPE=T_INGOT
+RESOURCES=i_ore_goshenite
+SKILLMAKE=MINING 100.0
+TDATA1=100.0
+TDATA2=110.0
+WEIGHT=7
+
+ON=@Create
+COLOR=0835
+
+[ITEMDEF i_ingot_heliodor]
+DEFNAME=i_ingot_heliodor
+ID=i_ingot_iron
+NAME=Lingot d'heliodor
+TYPE=T_INGOT
+RESOURCES=i_ore_heliodor
+SKILLMAKE=MINING 100.0
+TDATA1=100.0
+TDATA2=110.0
+WEIGHT=7
+
+ON=@Create
+COLOR=0709
+
+[ITEMDEF i_ingot_aventurine]
+DEFNAME=i_ingot_aventurine
+ID=i_ingot_iron
+NAME=Lingot d'aventurine
+TYPE=T_INGOT
+RESOURCES=i_ore_aventurine
+SKILLMAKE=MINING 110.0
+TDATA1=110.0
+TDATA2=120.0
+WEIGHT=8
+
+ON=@Create
+COLOR=0b64
+
+[ITEMDEF i_ingot_azurite]
+DEFNAME=i_ingot_azurite
+ID=i_ingot_iron
+NAME=Lingot d'azurite
+TYPE=T_INGOT
+RESOURCES=i_ore_azurite
+SKILLMAKE=MINING 110.0
+TDATA1=110.0
+TDATA2=120.0
+WEIGHT=8
+
+ON=@Create
+COLOR=0abc
+
+[ITEMDEF i_ingot_citrine]
+DEFNAME=i_ingot_citrine
+ID=i_ingot_iron
+NAME=Lingot de citrine
+TYPE=T_INGOT
+RESOURCES=i_ore_citrine
+SKILLMAKE=MINING 110.0
+TDATA1=110.0
+TDATA2=120.0
+WEIGHT=8
+
+ON=@Create
+COLOR=0bb6
+
+[ITEMDEF i_ingot_grenat]
+DEFNAME=i_ingot_grenat
+ID=i_ingot_iron
+NAME=Lingot de grenat
+TYPE=T_INGOT
+RESOURCES=i_ore_grenat
+SKILLMAKE=MINING 110.0
+TDATA1=110.0
+TDATA2=120.0
+WEIGHT=8
+
+ON=@Create
+COLOR=0996
+
+[ITEMDEF i_ingot_titane]
+DEFNAME=i_ingot_titane
+ID=i_ingot_iron
+NAME=Lingot de titane
+TYPE=T_INGOT
+RESOURCES=i_ore_titane
+SKILLMAKE=MINING 130.0
+TDATA1=130.0
+TDATA2=140.0
+WEIGHT=10
+
+ON=@Create
+COLOR=0736
+
+//***** default distributions of ores/resources ******
+
+
+[REGIONRESOURCE mr_rusty]
+SKILL=30.0,50.0
+AMOUNT=20,20
+REAP=i_ore_rusty
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C1 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_bronze]
+SKILL=30.0,50.0
+AMOUNT=20,20
+REAP=i_ore_bronze
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C1 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_copper]
+SKILL=30.0,50.0
+AMOUNT=20,20
+REAP=i_ore_copper
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C1 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_shadow]
+SKILL=40.0,60.0
+AMOUNT=10,10
+REAP=i_ore_shadow
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C2 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_gold]
+SKILL=40.0,60.0
+AMOUNT=10,10
+REAP=i_ore_gold
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C2 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_rose]
+SKILL=40.0,60.0
+AMOUNT=10,10
+REAP=i_ore_rose
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C2 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_agapite]
+SKILL=40.0,60.0
+AMOUNT=10,10
+REAP=i_ore_agapite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C2 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_bloodrock]
+SKILL=50.0,70.0
+AMOUNT=4,4
+REAP=i_ore_bloodrock
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C3 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_verite]
+SKILL=50.0,70.0
+AMOUNT=4,4
+REAP=i_ore_verite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C3 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_Valorite]
+SKILL=50.0,70.0
+AMOUNT=4,4
+REAP=i_ore_Valorite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C3 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_mytheril]
+SKILL=50.0,70.0
+AMOUNT=4,4
+REAP=i_ore_mytheril
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C3 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_iron]
+SKILL=45.0,65.0
+AMOUNT=4,12
+REAP=i_ore_iron
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_FER <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_blackrock]
+SKILL=60.0,80.0
+AMOUNT=2,2
+REAP=i_ore_blackrock
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C4 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_calcite]
+SKILL=60.0,80.0
+AMOUNT=2,2
+REAP=i_ore_calcite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C4 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_epidote]
+SKILL=60.0,80.0
+AMOUNT=2,2
+REAP=i_ore_epidote
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C4 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_adulaire]
+SKILL=60.0,80.0
+AMOUNT=2,2
+REAP=i_ore_adulaire
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C4 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_crocoite]
+SKILL=70.0,90.0
+AMOUNT=1,4
+REAP=i_ore_crocoite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C5 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_barytine]
+SKILL=70.0,90.0
+AMOUNT=1,4
+REAP=i_ore_barytine
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C5 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_pyromorphite]
+SKILL=70.0,90.0
+AMOUNT=1,4
+REAP=i_ore_pyromorphite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C5 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_morganite]
+SKILL=70.0,90.0
+AMOUNT=1,4
+REAP=i_ore_morganite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C5 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_chrysoprase]
+SKILL=80.0,100.0
+AMOUNT=1,3
+REAP=i_ore_chrysoprase
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C6 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_fluorite]
+SKILL=80.0,100.0
+AMOUNT=1,3
+REAP=i_ore_fluorite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C6 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_vanadinite]
+SKILL=80.0,100.0
+AMOUNT=1,3
+REAP=i_ore_vanadinite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C6 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_autunite]
+SKILL=80.0,100.0
+AMOUNT=1,3
+REAP=i_ore_autunite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C6 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_silver]
+SKILL=90.0,110.0
+AMOUNT=1,1
+REAP=i_ore_silver
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C7 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_aqua]
+SKILL=90.0,110.0
+AMOUNT=1,1
+REAP=i_ore_aqua
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C7 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_heliodor]
+SKILL=90.0,110.0
+AMOUNT=1,1
+REAP=i_ore_heliodor
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C7 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_goshenite]
+SKILL=90.0,110.0
+AMOUNT=1,1
+REAP=i_ore_goshenite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C7 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_aventurine]
+SKILL=100.0,120.0
+AMOUNT=1,1
+REAP=i_ore_aventurine
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C8 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_grenat]
+SKILL=100.0,120.0
+AMOUNT=1,1
+REAP=i_ore_grenat
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C8 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_azurite]
+SKILL=100.0,120.0
+AMOUNT=1,1
+REAP=i_ore_azurite
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C8 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_citrine]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_ore_citrine
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_C8 <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_arietis]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_arietis
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_tauri]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_tauri
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_geminorum]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_geminorum
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_cancri]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_cancri
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_leoni]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_leoni
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_virginis]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_virginis
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_librae]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_librae
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_scorpii]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_scorpii
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_sagittae]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_sagittae
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_capricorni]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_capricorni
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_aquarii]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_aquarii
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_piscium]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_piscium
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_diamant]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_gemme_diamant
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[REGIONRESOURCE mr_titane]
+SKILL=120.0,140.0
+AMOUNT=1,1
+REAP=i_ore_titane
+REGEN=60*60*2
+
+ON=@ResourceFound
+VAR.ACTSAVE=<SRC.ACT.UID>
+SRC.ACT=<ARGO.UID>
+SRC.ACT.RESSOURCEAMOUNT_GEMME <SRC.MINING>
+SRC.ACT=<VAR.ACTSAVE>
+
+
+[TYPEDEF t_ore]
+ON=@DCLICK
+IF <SRC.FINDID.i_timer_antifonte>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez reprendre votre souffle avant de fondre un autre minerai !
+	RETURN 1
+ELSE
+	SRC.NEWITEM i_timer_antifonte
+	SRC.ACT.CONT = <SRC.UID>
+	SRC.ACT.EQUIP
+	RETURN 0
+ENDIF
+
+[ITEMDEF i_timer_antifonte]
+ID=i_memory
+NAME=timer antifonte
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+TIMERD=5
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//****************************************
+//**************AMOUNT MINERAI************
+//****************************************
+//<ARGS> = MINING ; DEFAULT = WORLDGEM
+//****************************************
+[FUNCTION RESSOURCEAMOUNT_C1]
+IF <ARGS> < 50.0
+	AMOUNT=RAND(20,30)
+ELSEIF <ARGS> < 70.0
+	AMOUNT=RAND(20,35)
+ELSEIF <ARGS> < 90.0
+	AMOUNT=RAND(25,35)
+ELSEIF <ARGS> < 110.0
+	AMOUNT=RAND(25,40)
+ELSEIF <ARGS> < 130.0
+	AMOUNT=RAND(30,40)
+ELSE
+	AMOUNT=RAND(35,40)
+ENDIF
+
+[FUNCTION RESSOURCEAMOUNT_C2]
+IF <ARGS> < 60.0
+	AMOUNT=RAND(10,15)
+ELSEIF <ARGS> < 80.0
+	AMOUNT=RAND(10,18)
+ELSEIF <ARGS> < 100.0
+	AMOUNT=RAND(13,18)
+ELSEIF <ARGS> < 120.0
+	AMOUNT=RAND(13,20)
+ELSEIF <ARGS> < 140.0
+	AMOUNT=RAND(15,20)
+ELSE
+	AMOUNT=RAND(18,20)
+ENDIF
+
+[FUNCTION RESSOURCEAMOUNT_C3]
+IF <ARGS> < 70.0
+	AMOUNT=RAND(4,8)
+ELSEIF <ARGS> < 95.0
+	AMOUNT=RAND(5,8)
+ELSEIF <ARGS> < 110.0
+	AMOUNT=RAND(6,8)
+ELSEIF <ARGS> < 120.0
+	AMOUNT=RAND(6,9)
+ELSEIF <ARGS> < 135.0
+	AMOUNT=RAND(7,9)
+ELSEIF <ARGS> < 150.0
+	AMOUNT=RAND(7,10)
+ELSE
+	AMOUNT=RAND(8,10)
+ENDIF
+
+[FUNCTION RESSOURCEAMOUNT_FER]
+IF <ARGS> < 75.0
+	AMOUNT=RAND(6,10)
+ELSEIF <ARGS> < 100.0
+	AMOUNT=RAND(8,10)
+ELSEIF <ARGS> < 120.0
+	AMOUNT=RAND(8,12)
+ELSEIF <ARGS> < 140.0
+	AMOUNT=RAND(8,14)
+ELSEIF <ARGS> < 160.0
+	AMOUNT=RAND(10,14)
+ELSEIF <ARGS> < 180.0
+	AMOUNT=RAND(12,14)
+ELSEIF <ARGS> < 200.0
+	AMOUNT=RAND(12,16)
+ELSEIF <ARGS> < 220.0
+	AMOUNT=RAND(14,16)
+ELSE
+	AMOUNT=RAND(15,18)
+ENDIF
+
+[FUNCTION RESSOURCEAMOUNT_C4]
+IF <ARGS> < 80.0
+	AMOUNT=RAND(2,4)
+ELSEIF <ARGS> < 95.0
+	AMOUNT=RAND(3,4)
+ELSEIF <ARGS> < 110.0
+	AMOUNT=RAND(3,5)
+ELSEIF <ARGS> < 120.0
+	AMOUNT=RAND(3,6)
+ELSEIF <ARGS> < 130.0
+	AMOUNT=RAND(4,6)
+ELSEIF <ARGS> < 140.0
+	AMOUNT=RAND(4,7)
+ELSEIF <ARGS> < 150.0
+	AMOUNT=RAND(4,8)
+ELSEIF <ARGS> < 160.0
+	AMOUNT=RAND(5,8)
+ELSE
+	AMOUNT=RAND(6,8)
+ENDIF
+
+[FUNCTION RESSOURCEAMOUNT_C5]
+IF <ARGS> < 90.0
+	AMOUNT=RAND(1,2)
+ELSEIF <ARGS> < 105.0
+	IF RAND(1,4) == 1
+		AMOUNT=1
+	ELSE
+		AMOUNT=2
+	ENDIF
+ELSEIF <ARGS> < 120.0
+	AMOUNT=RAND(1,3)
+ELSEIF <ARGS> < 130.0
+	IF RAND(1,2) == 1
+		AMOUNT=RAND(1,3)
+	ELSE
+		AMOUNT=RAND(2,3)
+	ENDIF
+ELSEIF <ARGS> < 140.0
+	AMOUNT=RAND(2,4)
+ELSEIF <ARGS> < 150.0
+	IF RAND(1,2) == 1
+		AMOUNT=RAND(2,4)
+	ELSE
+		AMOUNT=RAND(3,4)
+	ENDIF
+ELSEIF <ARGS> < 160.0
+	AMOUNT=RAND(3,4)
+ELSEIF <ARGS> < 170.0
+	IF RAND(1,2) == 1
+		AMOUNT=RAND(3,4)
+	ELSE
+		AMOUNT=RAND(3,5)
+	ENDIF
+ELSE
+	AMOUNT=RAND(3,5)
+ENDIF
+
+[FUNCTION RESSOURCEAMOUNT_C6]
+IF <ARGS> < 100.0
+	AMOUNT=1
+ELSEIF <ARGS> < 120.0
+	IF RAND(1,4) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 135.0
+	AMOUNT=RAND(1,2)
+ELSEIF <ARGS> < 150.0
+	AMOUNT=RAND(1,3)
+ELSEIF <ARGS> < 160.0
+	IF RAND(1,2) == 1
+		AMOUNT=RAND(1,3)
+	ELSE
+		AMOUNT=RAND(2,3)
+	ENDIF
+ELSEIF <ARGS> < 170.0
+	IF RAND(1,4) == 1
+		AMOUNT=RAND(1,3)
+	ELSE
+		AMOUNT=RAND(2,3)
+	ENDIF
+ELSEIF <ARGS> < 180.0
+	AMOUNT=RAND(2,3)
+ELSE
+	IF RAND(1,4) == 1
+		AMOUNT=RAND(2,4)
+	ELSE
+		AMOUNT=RAND(2,3)
+	ENDIF
+ENDIF
+
+[FUNCTION RESSOURCEAMOUNT_C7]
+IF <ARGS> < 110.0
+	AMOUNT=1
+ELSEIF <ARGS> < 125.0
+	IF RAND(1,8) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 140.0
+	IF RAND(1,7) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 153.0
+	IF RAND(1,6) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 165.0
+	IF RAND(1,5) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 180.0
+	IF RAND(1,4) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 200.0
+	IF RAND(1,3) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSE
+	AMOUNT=RAND(1,2)
+ENDIF
+
+[FUNCTION RESSOURCEAMOUNT_C8]
+IF <ARGS> < 140.0
+	AMOUNT=1
+ELSEIF <ARGS> < 158.0
+	IF RAND(1,16) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 168.0
+	IF RAND(1,14) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 180.0
+	IF RAND(1,12) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 192.0
+	IF RAND(1,10) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 208.0
+	IF RAND(1,8) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 220.0
+	IF RAND(1,6) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 300.0
+	IF RAND(1,4) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSE
+	AMOUNT=RAND(1,2)
+ENDIF
+
+[FUNCTION RESSOURCEAMOUNT_GEMME]
+IF <ARGS> < 160.0
+	AMOUNT=1
+ELSEIF <ARGS> < 175.0
+	IF RAND(1,32) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 190.0
+	IF RAND(1,28) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 205.0
+	IF RAND(1,24) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 220.0
+	IF RAND(1,20) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 235.0
+	IF RAND(1,16) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 250.0
+	IF RAND(1,13) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 280.0
+	IF RAND(1,9) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 320.0
+	IF RAND(1,8) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSEIF <ARGS> < 360.0
+	IF RAND(1,6) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ELSE
+	IF RAND(1,5) == 1
+		AMOUNT=2
+	ELSE
+		AMOUNT=1
+	ENDIF
+ENDIF

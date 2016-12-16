@@ -1,0 +1,514 @@
+[ITEMDEF i_deed_entree_maison_nord]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de plaque exterieure [Nord]
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_plaque_entree_maison
+	SRC.ACT.ATTR=08010
+	SRC.ACT.LINK=<SRC.UID>
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_deed_entree_maison_ouest]
+ID=i_deed
+TYPE=t_script
+NAME=Deed de plaque exterieure [Ouest]
+
+ON=@DCLICK
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	SRC.NEWITEM=i_plaque_entree_maison
+	SRC.ACT.DISPID 0bcf
+	SRC.ACT.UPDATE
+	SRC.ACT.ATTR=08010
+	SRC.ACT.LINK=<SRC.UID>
+	SRC.ACT.BOUNCE
+ELSE
+	REMOVE
+ENDIF
+RETURN 1
+
+
+[ITEMDEF m_modifieur_coproprietaire] 
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+NAME=Modif Coproprio
+
+ON=@CREATE 
+TIMER=30 
+
+ON=@TIMER 
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK 
+TARGET Quelle plaque doit changer de coproprietaire ?
+RETURN 1 
+
+ON=@TARGON_ITEM
+IF !<TAG.UID_PLAQUE_SELECTION>
+	IF <SRC.TARG.BASEID>==i_plaque_de_proprietaire
+		IF 0<SRC.TARG.TAG.UID_PLAQUE_PROPRIO> == <LINK.UID>
+			TAG.UID_PLAQUE_SELECTION = <SRC.TARG.UID>
+			SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez maintenant choisir le proprietaire de cette plaque...
+			TARGET
+			RETURN 1
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'etes pas le proprietaire de cette plaque !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas une plaque de coproprietaire !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+IF <TAG.UID_PLAQUE_SELECTION>
+	IF !<SRC.TARG.BRAIN>
+		UID.09903F.ACT = <TAG.UID_PLAQUE_SELECTION>
+		UID.09903F.ACT.LINK = <SRC.TARG.UID>
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> controle maintenant la plaque de coproprietaire !
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner la plaque de coproprietaire d'abord !
+ENDIF
+REMOVE
+RETURN 1
+
+[ITEMDEF m_associeur_plaque_coproprietaire] 
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+NAME=Associeur Coproprio
+
+ON=@CREATE 
+TIMER=30 
+
+ON=@TIMER 
+REMOVE 
+RETURN 1 
+
+ON=@DCLICK 
+TARGET Quelle plaque de coproprietaire doit être associee a celle-ci ?
+RETURN 1 
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.BASEID>==i_plaque_de_proprietaire
+	IF <LINK>
+		SRC.TARG.TAG.UID_PLAQUE_PROPRIO = <LINK.UID>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Association faite !
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Erreur avec le script d'entree de maison(1) !
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas une plaque de coproprietaire !
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez selectionner une plaque de coproprietaire !
+REMOVE
+RETURN 1
+
+
+[ITEMDEF i_plaque_entree_maison] 
+NAME=Plaque
+ID=0bd0
+TYPE=t_eq_script
+
+ON=@CLICK
+IF ((<TIMER> == -1) && (0<TAG.A_VENDRE> == 0))
+	TIMER=86400
+ENDIF
+MESSAGE_PLAQUE_ENTREE
+RETURN 1
+
+ON=@DCLICK
+IF ((<TIMER> == -1) && (0<TAG.A_VENDRE> == 0))
+	TIMER=86400
+ENDIF
+IF <SRC.ACCOUNT.PLEVEL> > 2
+	DIALOG MENU_GM_ENTREE_MAISON
+ELSE
+	IF (<LINK.UID> == <SRC.UID>) && (0<TAG.A_VENDRE> == 0)
+		RESET_PLAQUE_ENTREE
+		DIALOG MENU_ENTREE_MAISON
+	ELSE
+		IF <EVAL 0<TAG.VALEUR_VENTE_JOUEUR>> > 0
+			DIALOG MENU_VENTE_MAISON
+		ELSE
+			MESSAGE_PLAQUE_ENTREE
+		ENDIF
+	ENDIF
+ENDIF
+RETURN 1
+
+ON=@TIMER
+IF <EVAL 0<TAG.A_VENDRE>> == 0
+	TIMER=86400
+	TAG.JOURS_INACTIFS = <EVAL 0<TAG.JOURS_INACTIFS> + 1>
+	IF !<TAG.UID_PARCHO_SAISI>
+		IF <EVAL <TAG.JOURS_INACTIFS>> > 29
+			LINK.NEWITEM i_scroll_blank
+			LINK.ACT.NAME <SERV.RTIME> : Maison saisie, veuillez utiliser votre plaque !
+			LINK.ACT.COLOR=0996
+			LINK.ACT.ATTR=08010
+			LINK.ACT.P=<P>
+			LINK.ACT.UPDATE
+			TAG.UID_PARCHO_SAISI=<LINK.ACT.UID>
+		ENDIF
+	ELSE
+		IF <EVAL <TAG.JOURS_INACTIFS>> == 60
+			LINK.NEWITEM i_scroll_blank
+			LINK.ACT.NAME La maison de <LINK.NAME> situee a <P> doit etre revendue
+			LINK.ACT.COLOR=025
+			LINK.ACT.ATTR=08010
+			LINK.ACT.P=5451,1107
+			LINK.ACT.UPDATE
+			TIMER=-1
+		ENDIF
+	ENDIF
+	UPDATE_PAYER_PLAQUE 86400
+ELSE
+	TIMER=-1
+ENDIF
+RETURN 1
+
+
+//CHOISIR NOM VILLE
+[DIALOG MENU_GM_ENTREE_MAISON]
+0,0
+
+page 0
+resizepic 0 0 2620 400 450
+
+page 1
+text 40 20 1152 1//Ville ou est situee la plaque
+text 270 20 1152 2//<Ville>
+text 50 60 1152 3//Changer pour Britain
+text 50 80 1152 4//Changer pour Cove
+text 50 100 1152 5//Changer pour Minoc
+text 50 120 1152 6//Changer pour Nujel'm
+text 50 140 1152 7//Changer pour Skara Brae
+text 50 160 1152 8//Changer pour Vesper
+text 50 180 1152 9//Changer pour Yew
+text 20 240 1152 10//Maison a vendre?
+text 150 240 1152 11//Oui
+text 210 240 1152 12//Non
+text 20 260 1152 13//Valeur a rembourser :
+text 50 280 1152 14//Nouvelle valeur
+text 50 320 1152 15////Associer plaque de coproprio
+resizepic 165 280 2620 150 30
+textentry 170 286 140 14 1152 1 0//VALEUR DE LA MAISON
+button 20 65 2103 2104 1 0 1//Britain
+button 20 85 2103 2104 1 0 2//Cove
+button 20 105 2103 2104 1 0 3//Minoc
+button 20 125 2103 2104 1 0 4//Nujel'm
+button 20 145 2103 2104 1 0 5//Skara Brae
+button 20 165 2103 2104 1 0 6//Vesper
+button 20 185 2103 2104 1 0 7//Yew
+button 180 245 2103 2104 1 0 8//OUI A VENDRE
+button 240 245 2103 2104 1 0 9//NON PAS A VENDRE
+button 320 280 249 248 1 0 10//OKAY (PRIX DE LA MAISON)
+button 180 420 1150 1151 1 0 11// X SORTIE
+button 20 320 2103 2104 1 0 12//CNFIGURER UNE PLAQUE INTERIEURE
+
+[DIALOG MENU_GM_ENTREE_MAISON TEXT]
+<VAR.BLANKLINE>
+Ville ou est situee la plaque :
+<TAG.VILLE>
+Changer pour Britain
+Changer pour Cove
+Changer pour Minoc
+Changer pour Nujel'm
+Changer pour Skara Brae
+Changer pour Vesper
+Changer pour Yew
+Maison a vendre?
+Oui
+Non
+Valeur a rembourser : <EVAL 0<TAG.DETTE>>
+Nouvelle valeur:
+Configurer une plaque interieure
+
+[DIALOG MENU_GM_ENTREE_MAISON BUTTON]
+//MINOC
+ON=1
+TAG.VILLE=Britain
+SRC.SYSMESSAGEUA 0481 1 1 0 Plaque configuree pour la ville de <TAG.VILLE>
+
+ON=2
+TAG.VILLE=Cove
+SRC.SYSMESSAGEUA 0481 1 1 0 Plaque configuree pour la ville de <TAG.VILLE>
+
+ON=3
+TAG.VILLE=Minoc
+SRC.SYSMESSAGEUA 0481 1 1 0 Plaque configuree pour la ville de <TAG.VILLE>
+
+ON=4
+TAG.VILLE=Nujel'm
+SRC.SYSMESSAGEUA 0481 1 1 0 Plaque configuree pour la ville de <TAG.VILLE>
+
+ON=5
+TAG.VILLE=Skara Brae
+SRC.SYSMESSAGEUA 0481 1 1 0 Plaque configuree pour la ville de <TAG.VILLE>
+
+ON=6
+TAG.VILLE=Vesper
+SRC.SYSMESSAGEUA 0481 1 1 0 Plaque configuree pour la ville de <TAG.VILLE>
+
+ON=7
+TAG.VILLE=Yew
+SRC.SYSMESSAGEUA 0481 1 1 0 Plaque configuree pour la ville de <TAG.VILLE>
+
+ON=8
+RESET_PLAQUE_ENTREE
+TAG.A_VENDRE = 1
+TAG.JOURS_NP
+TAG.SECONDES_NP
+SUPPRIMER_PARCHO_NP
+TIMER=-1
+SRC.SYSMESSAGEUA 0481 1 1 0 La maison est desormais en vente !
+
+ON=9
+TAG.A_VENDRE
+TIMER=86400
+TAG.JOURS_INACTIFS
+SRC.SYSMESSAGEUA 0481 1 1 0 La maison n'est plus en vente !
+
+ON=10
+IF !(STRCMPI("<ARGTXT[1]>",""))
+	SRC.SYSMESSAGEUA 0481 1 1 0 Entrez une valeur !
+ELSE
+	TAG.DETTE=<EVAL <ARGTXT[1]>>
+	TAG.DETTE=<EVAL 0<TAG.DETTE>>//AU CAS UNE FAUSSE VALEUR AIT ETE ENTREE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Valeur de la maison initialisee a : <EVAL <TAG.DETTE>>
+ENDIF
+
+ON=11
+RETURN 1
+
+//ASSOCIER PLAQUE DE COPROPRIO
+ON=12
+SRC.NEWITEM m_associeur_plaque_coproprietaire
+SRC.ACT.CONT = <SRC.UID> 
+SRC.ACT.LINK = <UID>
+SRC.ACT.USE
+RETURN 1
+
+
+[DIALOG MENU_ENTREE_MAISON]
+0,0
+
+page 0
+resizepic 0 0 2620 400 300
+
+page 1
+text 80 20 1152 1//Plaque d'entree de <Ville> (Taxes : <VAR.TAXES_TEMP> %)
+text 20 60 1152 2//Obtenir un bulletin de vote
+text 20 85 1152 3//Rembourser :
+text 100 110 37 4//Pieces d'or a payer : <EVAL 0<TAG.DETTE>>
+text 20 135 1152 5//Don a la mairie :
+text 20 165 1152 6//Vendre :
+text 100 220 37 7//A vendre pour : <EVAL <TAG.VALEUR_VENTE_JOUEUR>> pieces d'or
+text 20 195 1152 8//Modifier un coproprietaire
+resizepic 165 80 2620 150 30
+textentry 170 86 140 14 1152 1 0//VALEUR A REMBOURSER
+resizepic 165 130 2620 150 30
+textentry 170 136 140 14 1152 2 0//DON A LA MAIRIE
+resizepic 165 160 2620 150 30
+textentry 170 166 140 14 1152 3 0//VENDRE
+button 220 65 2103 2104 1 0 1//OBTENIR UN BULLETIN DE VOTE
+button 320 85 249 248 1 0 2//OKAY (REMBOURSER)
+button 320 135 249 248 1 0 3//OKAY (DON A LA MAIRIE)
+button 320 165 249 248 1 0 4//OKAY (VENDRE)
+button 320 195 249 248 1 0 5//MODIFIER UN COPROPRIO
+button 180 260 1150 1151 1 0 20// X SORTIE
+
+[DIALOG MENU_ENTREE_MAISON TEXT]
+<VAR.BLANKLINE>
+Plaque d'entree de <TAG.VILLE> (Taxes : <EVAL 0<UID.<GET_UID_PLAQUE_MAIRIE>.TAG.TAXES>>%)
+Obtenir un bulletin de vote
+Rembourser :
+Pieces d'or a payer : <EVAL 0<TAG.DETTE>>
+Don a la mairie :
+Vendre :
+A vendre pour : <EVAL <TAG.VALEUR_VENTE_JOUEUR>> pieces d'or
+Modifier un coproprietaire
+
+[DIALOG MENU_ENTREE_MAISON BUTTON]
+
+//OBTENIR UN BULLETIN DE VOTE
+ON=1
+VAR.UID_PLAQUE_MAIRE = <GET_UID_PLAQUE_MAIRIE>
+IF <UID.<VAR.UID_PLAQUE_MAIRE>.BASEID> == i_plaque_mairie
+	IF <EVAL 0<UID.<VAR.UID_PLAQUE_MAIRE>.TAG.ELECTION>> == 1
+		IF <EVAL 0<TAG.POLL_NUMBER>> != <EVAL 0<UID.<VAR.UID_PLAQUE_MAIRE>.TAG.POLL_NUMBER>>
+			TAG.POLL_NUMBER=<EVAL 0<UID.<VAR.UID_PLAQUE_MAIRE>.TAG.POLL_NUMBER>>
+			SRC.NEWITEM i_vote_mairie
+			SRC.ACT.MORE1=<TAG.POLL_NUMBER>
+			SRC.ACT.TAG.VILLE=<TAG.VILLE>
+			SRC.ACT.LINK=<SRC.UID>
+			SRC.ACT.BOUNCE
+			SRC.ACT.SET_MAIRE_BULLETIN
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez deja recu votre bulletin de vote !
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 Il n'y a aucune election pour le moment !
+	ENDIF	
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Il n'y a pas de mairie pour le moment!
+ENDIF
+VAR.UID_PLAQUE_MAIRE
+RESET_PLAQUE_ENTREE
+
+//REMBOURSER
+ON=2
+VAR.UID_PLAQUE_MAIRE = <GET_UID_PLAQUE_MAIRIE>
+IF !(STRCMPI("<ARGTXT[1]>",""))
+	SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez entrer un nombre dans le champs !
+ELSE
+	VAR.REMBOURSE_VALEUR = <EVAL <ARGTXT[1]>>
+	IF <EVAL 0<VAR.REMBOURSE_VALEUR>> <= 0
+		SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez entrer un nombre positif dans le champs !
+	ELSEIF <EVAL <VAR.REMBOURSE_VALEUR>> > <EVAL 0<TAG.DETTE>>
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous voulez rembourser <EVAL <VAR.REMBOURSE_VALEUR>> pieces d'or, or il vous en reste que <EVAL 0<TAG.DETTE>> a payer
+	ELSE
+		IF <EVAL 0<UID.<VAR.UID_PLAQUE_MAIRE>.TAG.TAXES>> > 0
+			VAR.REMBOURSE_TAXES = <EVAL ((<VAR.REMBOURSE_VALEUR>*<EVAL 0<UID.<VAR.UID_PLAQUE_MAIRE>.TAG.TAXES>>) / 100) + 1>
+		ELSE
+			VAR.REMBOURSE_TAXES = 0
+		ENDIF
+		SRC.PAYUP <EVAL <VAR.REMBOURSE_VALEUR> + <VAR.REMBOURSE_TAXES>>
+		IF (!<VAR.ENOUGH>)
+			SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas <EVAL <VAR.REMBOURSE_VALEUR> + <VAR.REMBOURSE_TAXES>> pieces d'or !
+		ELSE
+			TAG.DETTE = <EVAL <TAG.DETTE> - <VAR.REMBOURSE_VALEUR>>
+			TRY UID.<VAR.UID_PLAQUE_MAIRE>.TAG.CAISSE = <EVAL 0<UID.<VAR.UID_PLAQUE_MAIRE>.TAG.CAISSE> + <VAR.REMBOURSE_TAXES>>
+			SRC.SYSMESSAGEUA 0481 1 1 0 <EVAL 0<VAR.REMBOURSE_VALEUR>+<VAR.REMBOURSE_TAXES>> pieces d'or ont ete remboursees dont <EVAL 0<VAR.REMBOURSE_TAXES>> en taxes a la mairie !
+			IF <EVAL <TAG.DETTE>> == 0
+				TAG.DETTE
+				TAG.JOURS_NP
+				TAG.SECONDES_NP
+				SUPPRIMER_PARCHO_NP
+			ENDIF
+		ENDIF
+		VAR.REMBOURSE_TAXES
+	ENDIF
+	VAR.REMBOURSE_VALEUR
+ENDIF
+
+//DON A LA MAIRIE
+ON=3
+VAR.UID_PLAQUE_MAIRE = <GET_UID_PLAQUE_MAIRIE>
+IF <UID.<VAR.UID_PLAQUE_MAIRE>.BASEID> == i_plaque_mairie
+	IF !(STRCMPI("<ARGTXT[2]>",""))
+		SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez entrer un nombre dans le champs !
+	ELSE
+		VAR.REMBOURSE_VALEUR = <EVAL <ARGTXT[2]>>
+		IF <EVAL 0<VAR.REMBOURSE_VALEUR>> <= 0
+			SRC.SYSMESSAGEUA 0481 1 1 0 Veuillez entrer un nombre positif dans le champs !
+		ELSE
+			SRC.PAYUP <VAR.REMBOURSE_VALEUR>
+			IF (!<VAR.ENOUGH>)
+				SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas <EVAL <VAR.REMBOURSE_VALEUR>> pieces d'or !
+			ELSE
+				UID.09903F.ACT = <VAR.UID_PLAQUE_MAIRE>
+				UID.09903F.ACT.TAG.CAISSE = <EVAL 0<UID.09903F.ACT.TAG.CAISSE> + <VAR.REMBOURSE_VALEUR>>
+				SRC.SYSMESSAGEUA 0481 1 1 0 Votre don de <EVAL <VAR.REMBOURSE_VALEUR>> a bien ete transfere dans les caisses de <UID.<VAR.UID_PLAQUE_MAIRE>.TAG.VILLE>
+			ENDIF
+		ENDIF
+		VAR.REMBOURSE_VALEUR
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Il n'y a pas de mairie pour le moment!
+ENDIF
+VAR.UID_PLAQUE_MAIRE
+
+//VENDRE
+ON=4
+IF 0<TAG.DETTE> == 0
+	IF <EVAL <ARGTXT[3]>> >= 0
+		TAG.VALEUR_VENTE_JOUEUR = <ARGTXT[3]>
+		IF <TAG.VALEUR_VENTE_JOUEUR> > 0
+			IF <EVAL <TAG.VALEUR_VENTE_JOUEUR>> <= 20000000
+				SRC.SYSMESSAGEUA 0481 1 1 0 La maison est desormais en vente a un prix de <EVAL <TAG.VALEUR_VENTE_JOUEUR>> pieces d'or
+			ELSE
+				SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pouvez pas vendre une maison a plus de 20 millions de pieces
+			ENDIF
+		ELSE
+			SRC.SYSMESSAGEUA 0481 1 1 0 La maison n'est plus en vente
+		ENDIF
+	ELSE
+		SRC.SYSMESSAGEUA 0481 1 1 0 <VAR.TEMP> n'est pas un chiffre plus grand ou egal a zero
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez payer vos dettes pour vendre cette maison !
+ENDIF
+
+//Modifier un coproprietaire
+ON=5
+SRC.NEWITEM m_modifieur_coproprietaire
+SRC.ACT.CONT = <SRC.UID> 
+SRC.ACT.LINK = <UID>
+SRC.ACT.USE
+
+//SORTIE
+ON=20
+RETURN 1
+
+[DIALOG MENU_VENTE_MAISON]
+0,0
+
+page 0
+resizepic 0 0 2620 460 200
+
+page 1
+text 20 20 1152 1//Voulez-vous acheter cette maison pour <TAG.VALEUR_VENTE_JOUEUR> pieces d'or?
+text 150 40 1152 2//Accepter
+text 250 40 1152 3//Canceller
+button 130 70 <eval g_btn_gray_apply> <eval g_btn_gray_apply_press> 1 0 1//OUI
+button 230 70 5200 5201 1 0 2//NON
+button 210 160 1150 1151 1 0 20// X SORTIE
+
+[DIALOG MENU_VENTE_MAISON TEXT]
+<VAR.BLANKLINE>
+Voulez-vous acheter cette maison pour <EVAL <TAG.VALEUR_VENTE_JOUEUR>> pieces d'or?
+Oui
+Non
+
+[DIALOG MENU_VENTE_MAISON BUTTON]
+//OUI
+ON=1
+SRC.PAYUP <TAG.VALEUR_VENTE_JOUEUR>
+IF (!<VAR.ENOUGH>)
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas <EVAL <TAG.VALEUR_VENTE_JOUEUR>> pieces d'or !
+ELSE
+	LINK.DEPOSER_CASH <TAG.VALEUR_VENTE_JOUEUR>
+	LINK = <SRC.UID>
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous avez achete la maison au prix de <EVAL <TAG.VALEUR_VENTE_JOUEUR>> pieces d'or !
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous pouvez pager un maitre de jeu pour changer vos serrures
+	TAG.VALEUR_VENTE_JOUEUR
+	RESET_PLAQUE_ENTREE
+ENDIF
+
+
+//NON
+ON=2
+RETURN 1
+
+//SORTIE
+ON=20
+RETURN 1

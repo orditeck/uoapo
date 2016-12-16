@@ -1,0 +1,301 @@
+[ITEMDEF i_divers_forgeron]
+DEFNAME=i_divers_forgeron
+NAME=Divers
+ID=0e73
+
+[ITEMDEF i_divers_bricoleur]
+DEFNAME=i_divers_bricoleur
+NAME=Divers
+ID=i_deed
+
+[ITEMDEF i_boulet_canon]
+DEFNAME=i_boulet_canon
+NAME=Boulet de canon
+ID=0e73
+
+RESOURCES=5 i_ingot_iron
+SKILLMAKE=50.0 BLACKSMITHING, t_weapon_mace_smith
+
+[ITEMDEF i_poudre_canon] 
+DEFNAME=i_poudre_canon
+NAME=Poudre a canon
+ID=0eef
+TYPE=t_reagent
+
+RESOURCES=10 i_reag_sulfur_ash, 5 i_reag_dead_wood
+SKILLMAKE=50.0 ALCHEMY, t_mortar
+
+ON=@CREATE
+COLOR=0455
+
+[itemdef i_cannon_n_1] 
+ID=3723 
+Name=Canon (est) 
+TYPE=t_script 
+
+On=@Create 
+ATTR=08010 
+
+On=@Dclick 
+IF (<SRC.RESTEST 1 i_boulet_canon> && <SRC.RESTEST 1 i_poudre_canon> ) 
+SRC.EMOTE Choisir sa cible 
+TARGET Sur qui voulez vous tirer ? 
+ELSE 
+SRC.EMOTE ne pas avoir de quoi charger le canon
+ENDIF 
+
+On=@Targon_Char 
+IF (<TIMER>==-1) 
+SRC.CONSUME=1 i_boulet_canon
+SRC.CONSUME=1 i_poudre_canon 
+SRC.TARG.DAMAGE={70 95} 
+SRC.SOUND=011e 
+TIMER=25 
+ELSE 
+SRC.EMOTE attendre avant de retirer 
+ENDIF 
+
+On=@Timer 
+TIMER=-1 
+
+[itemdef i_cannon_s_1] 
+ID=0e93 
+Name=Canon (ouest) 
+TYPE=t_script 
+
+On=@Create 
+ATTR=08010 
+
+On=@Dclick 
+IF (<SRC.RESTEST 1 i_boulet_canon> && <SRC.RESTEST 1 i_poudre_canon> ) 
+SRC.EMOTE Choisir sa cible
+TARGET Sur qui voulez vous tirer ? 
+ELSE 
+SRC.EMOTE ne pas avoir de quoi charger le canon
+ENDIF 
+
+On=@Targon_Char 
+IF (<TIMER>==-1) 
+SRC.CONSUME=1 i_boulet_canon 
+SRC.CONSUME=1 i_poudre_canon
+SRC.TARG.DAMAGE={70 95} 
+SRC.SOUND=011e 
+TIMER=25 
+ELSE 
+SRC.EMOTE attendre avant de retirer 
+ENDIF 
+
+On=@Timer 
+TIMER=-1 
+
+[itemdef i_cannon_w_1] 
+ID=0e90 
+Name=Canon (nord) 
+TYPE=t_script 
+
+On=@Create 
+ATTR=08010 
+
+On=@Dclick 
+IF (<SRC.RESTEST i_boulet_canon> && <SRC.RESTEST 1 i_poudre_canon> ) 
+SRC.EMOTE Choisir sa cible
+TARGET Sur qui voulez vous tirer ?
+ELSE 
+SRC.EMOTE attendre avant de retirer 
+ENDIF 
+
+On=@Targon_Char 
+IF (<TIMER>==-1) 
+SRC.CONSUME=i_boulet_canon 
+SRC.CONSUME=1 i_poudre_canon
+SRC.TARG.DAMAGE={70 95} 
+SRC.SOUND=011e 
+TIMER=25 
+ELSE 
+SRC.EMOTE attendre avant de retirer
+ENDIF 
+
+On=@Timer 
+TIMER=-1 
+
+[itemdef i_cannon_e_1] 
+ID=0e94 
+Name=Canon (sud) 
+TYPE=t_script 
+
+On=@Create 
+ATTR=08010 
+
+On=@Dclick 
+IF (<SRC.RESTEST i_boulet_canon> && <SRC.RESTEST 1 i_poudre_canon> ) 
+SRC.EMOTE Choisir sa cible
+TARGET Sur qui voulez vous tirer ?
+ELSE 
+SRC.EMOTE ne pas avoir de quoi charger le canon 
+ENDIF 
+
+On=@Targon_Char 
+IF (<TIMER>==-1) 
+SRC.CONSUME=i_boulet_canon
+SRC.CONSUME=1 i_poudre_canon
+SRC.TARG.EFFECT 0,0e73,15,0,0
+SRC.TARG.DAMAGE={70 95} 
+SRC.SOUND=011e 
+TIMER=25 
+ELSE 
+SRC.EMOTE attendre avant de retirer 
+ENDIF
+
+
+On=@Timer 
+TIMER=-1 
+
+[itemdef i_deed_cannon_north] 
+NAME=Deed de canon (nord) 
+ID=014ef 
+TYPE=t_cannon_n
+
+RESOURCES=50 i_ingot_iron,50 i_log
+SKILLMAKE=100.0 TINKERING ,t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Cannon Deeds 
+DESCRIPTION=Cannon Deed (North) 
+
+[itemdef i_deed_cannon_south] 
+NAME=Deed de canon (sud) 
+ID=014ef 
+TYPE=t_cannon_s 
+
+RESOURCES=50 i_ingot_iron,50 i_log
+SKILLMAKE=100.0 TINKERING ,t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Cannon Deeds 
+DESCRIPTION=Cannon Deed (South) 
+
+[itemdef i_deed_cannon_west] 
+NAME=Deed canon (ouest) 
+ID=014ef 
+TYPE=t_cannon_w
+
+RESOURCES=50 i_ingot_iron,50 i_log
+SKILLMAKE=100.0 TINKERING ,t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Cannon Deeds 
+DESCRIPTION=Cannon Deed (West) 
+
+[itemdef i_deed_cannon_east] 
+NAME=Deed de canon (est) 
+ID=014ef 
+TYPE=t_cannon_e
+
+RESOURCES=50 i_ingot_iron,50 i_log
+SKILLMAKE=100.0 TINKERING ,t_tinker_tools
+
+CATEGORY=Genese
+SUBSECTION=Cannon Deeds 
+DESCRIPTION=Cannon Deed (East) 
+
+[typedef t_cannon_s] 
+ON=@DCLICK 
+MOREP=<SRC.P> 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=i_cannon_s_1 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+SOUND f7 
+
+MOREP=<SRC.P> 
+MOREY=<MOREY> + 1 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=0e92 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+
+MOREP=<SRC.P> 
+MOREY=<MOREY> + 2 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=0e91 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+REMOVE 
+RETURN 1 
+
+[typedef t_cannon_n] 
+ON=@DCLICK 
+MOREP=<SRC.P> 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=i_cannon_n_1 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+SOUND f7 
+
+MOREP=<SRC.P> 
+MOREY=<MOREY> - 1 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=0e8c 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+
+MOREP=<SRC.P> 
+MOREY=<MOREY> - 2 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=0e8d 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+REMOVE 
+RETURN 1 
+
+[typedef t_cannon_w] 
+ON=@DCLICK 
+MOREP=<SRC.P> 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=i_cannon_w_1 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+SOUND f7 
+
+MOREP=<SRC.P> 
+MOREX=<MOREX> - 1 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=0e8f 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+
+MOREP=<SRC.P> 
+MOREX=<MOREX> - 2 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=0e8e 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+REMOVE 
+RETURN 1 
+
+[typedef t_cannon_e] 
+ON=@DCLICK 
+MOREP=<SRC.P> 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=0e96 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+SOUND f7 
+
+MOREP=<SRC.P> 
+MOREX=<MOREX> - 1 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=0e95 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+
+MOREP=<SRC.P> 
+MOREX=<MOREX> - 2 
+SRC.HOME=<MOREP> 
+SRC.NEWITEM=i_cannon_e_1 
+SRC.ACT.ATTR=08010 
+SRC.ACT.P=<SRC.HOME> 
+REMOVE 
+RETURN 1 
+
+[EOF]

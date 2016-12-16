@@ -1,0 +1,100 @@
+[CHARDEF c_punching_ball]
+DEFNAME=c_punching_ball
+NAME=Cerdan
+ID=c_man
+
+TSPEECH=spk_cerdan
+
+ON=@Create
+STR=1
+DEX=1
+INT=1
+TITLE=Boxeur
+COLOR=03ea
+SPEECHCOLOR=0aaa
+TAG.COUPS=0
+
+ITEMNEWBIE=0152e
+COLOR=0aaa
+ITEMNEWBIE=i_leather_gloves
+COLOR=0aaa
+ITEMNEWBIE=i_hair_short
+COLOR=0908
+
+ON=@GETHIT
+TAG.DEGATS=<EVAL <ARGN1>>
+IF <EVAL <TAG.DEGATS>> > <EVAL 0<UID.04003aaf0.TAG.DEGATS>>
+	UID.04003aaf0.TAG.DEGATS=<EVAL <TAG.DEGATS>>
+	UID.04003aaf0.TAG.CHAMPION=<SRC.NAME>
+ENDIF
+SRC.SYSMESSAGEUA 025 1 1 0 Vous infligez <EVAL <TAG.DEGATS>> points de degats a Cerdan
+IF 0<TAG.COUPS> <5
+	TAG.COUPS=<EVAL 0<TAG.COUPS>+1>
+	HITS 9999
+ELSE
+	EMOTE s'ecrouler au sol
+	SUICIDE
+ENDIF
+
+ON=@NPCSEENEWPLAYER
+EMOTE s'echauffer
+ANIM 10
+
+ON=@NPCHearUnknown
+ANIM 19
+SAY Sois plus clair ou je cogne !
+
+CATEGORY=Monstres
+SUBSECTION=Quetes
+DESCRIPTION=Cerdan
+
+[SPEECH spk_cerdan]
+
+ON=oui
+SAY Enfin quelqu'un digne de m'affronter ! Allez frappes <SRC.SEX le/la> <SRC.SEX premier/premiere> !
+
+ON=non
+SAY Alors ne reste pas la !
+
+ON=*bonjour*
+ON=*salut*
+SAY Salut a toi <SRC.SEX fiston/fillette> ! Viens tu pour me defier ?
+
+[CHARDEF c_punching_ball2]
+DEFNAME=c_punching_ball2
+NAME=Cerdan GM
+ID=c_man
+
+TSPEECH=spk_cerdan
+
+ON=@Create
+STR=1
+DEX=1
+INT=1
+TITLE=Boxeur
+COLOR=03ea
+SPEECHCOLOR=0aaa
+
+ITEMNEWBIE=0152e
+COLOR=0aaa
+ITEMNEWBIE=i_leather_gloves
+COLOR=0aaa
+ITEMNEWBIE=i_hair_short
+COLOR=0908
+
+ON=@GETHIT
+TAG.DEGATS=<EVAL <ARGN1>>
+SRC.SYSMESSAGEUA 025 1 1 0 Vous infligez <EVAL <TAG.DEGATS>> points de degats a Cerdan
+HITS 9999
+
+ON=@NPCSEENEWPLAYER
+EMOTE s'echauffer
+ANIM 10
+
+ON=@NPCHearUnknown
+ANIM 19
+SAY Sois plus clair ou je cogne !
+
+CATEGORY=Monstres
+SUBSECTION=Quetes
+DESCRIPTION=Cerdan GM

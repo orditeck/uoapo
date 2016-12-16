@@ -1,0 +1,376 @@
+//*********************************************
+//**************CANAL PRINCIPAL****************
+//*********************************************
+
+[PLEVEL 1]
+cprincipal
+dire
+ecouter
+
+[FUNCTION cprincipal] //function to change chan color
+IF !(<FINDID.i_hear_player> )
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas active le canal Principal !
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez l'ouvrir pour en changer la couleur.
+	RETURN 1
+ENDIF
+SRC.NEWITEM i_dyes
+SRC.ACT.LAYER=30
+SRC.ACT.TYPE=t_eq_script
+SRC.ACT.CONT=<UID>
+SRC.ACT.TYPE=t_dye
+VAR.DYES=<SRC.ACT.UID>
+SRC.ACT.USE
+SRC.ACT=<FINDID.i_hear_player.UID>
+VAR.TYPE=<SRC.ACT.TYPE>
+SRC.ACT.TYPE=t_dye_vat
+SRC.LAST
+SRC.ACT.TYPE=<VAR.TYPE>
+SRC.ACT=<VAR.DYES>
+SRC.ACT.REMOVE
+
+[FUNCTION dire] //function to speak on the chat
+IF !(0<TAG.BANNICHAT>==1)
+	IF !(<FINDID.i_hear_player>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas active le canal Principal
+		RETURN 1
+	ENDIF
+	SERV.ALLCLIENTS mainmsg <ARGS>
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous avez les cris coupes pour une duree de <EVAL 0<FINDID.i_cris_coupes.TAG.TEMPSCOUPE>> minutes
+ENDIF
+
+[FUNCTION mainmsg] //sub function
+IF <FINDID.i_hear_player.COLOR>
+	FINDID.i_hear_player.CONT.SYSMESSAGEUA <FINDID.i_hear_player.COLOR> 1 1 0 [Canal Principal] <SRC.NAME>: <ARGS>
+ELSE
+	FINDID.i_hear_player.CONT.SYSMESSAGEUA 00040 1 1 0 [Canal Principal] <SRC.NAME>: <ARGS>
+ENDIF
+
+[FUNCTION ecouter] //function to toggle chat on/off
+IF !(<SRC.FINDID.i_hear_player.UID> )
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous activez le canal Principal
+	SRC.NEWITEM i_hear_player
+	IF 0<SRC.TAG.cprincipal>
+		SRC.ACT.COLOR=<SRC.TAG.cprincipal>
+		SRC.TAG.cprincipal
+	ENDIF
+	SRC.ACT.CONT <SRC.UID>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous desactivez le canal Principal
+	IF <SRC.FINDID.i_hear_player.COLOR>
+		SRC.TAG.cprincipal=<SRC.FINDID.i_hear_player.COLOR>
+	ENDIF
+	SRC.FINDID.i_hear_player.REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_hear_player]
+DEFNAME=i_hear_player
+NAME=Canal Principal
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+LAYER=30
+
+
+//********************************************
+//****************CANAL RP********************
+//********************************************
+
+
+[PLEVEL 1]
+crp
+rp
+erp
+
+[FUNCTION crp]
+IF !(<FINDID.i_hear_player2> )
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas active le canal RP !
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez l'ouvrir pour en changer la couleur.
+	RETURN 1
+ENDIF
+SRC.NEWITEM i_dyes
+SRC.ACT.LAYER=30
+SRC.ACT.TYPE=t_eq_script
+SRC.ACT.CONT=<UID>
+SRC.ACT.TYPE=t_dye
+VAR.DYES=<SRC.ACT.UID>
+SRC.ACT.USE
+SRC.ACT=<FINDID.i_hear_player2.UID>
+VAR.TYPE=<SRC.ACT.TYPE>
+SRC.ACT.TYPE=t_dye_vat
+SRC.LAST
+SRC.ACT.TYPE=<VAR.TYPE>
+SRC.ACT=<VAR.DYES>
+SRC.ACT.REMOVE
+
+[FUNCTION rp]
+IF !(0<TAG.BANNICHAT>==1)
+	IF !(<FINDID.i_hear_player2>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas active le canal RP !
+		RETURN 1
+	ENDIF
+	SERV.ALLCLIENTS mainmsg2 <ARGS>
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous avez les cris coupes pour une duree de <EVAL 0<FINDID.i_cris_coupes.TAG.TEMPSCOUPE>> minutes
+ENDIF
+
+[FUNCTION mainmsg2] //sub function
+IF <FINDID.i_hear_player2.COLOR>
+	FINDID.i_hear_player2.CONT.SYSMESSAGEUA <FINDID.i_hear_player2.COLOR> 1 1 0 [Canal RP] <SRC.NAME>: <ARGS>
+ELSE
+	FINDID.i_hear_player2.CONT.SYSMESSAGEUA 05d 1 1 0 [Canal RP] <SRC.NAME>: <ARGS>
+ENDIF
+
+[FUNCTION erp] //function to toggle chat on/off
+IF !(<SRC.FINDID.i_hear_player2.UID> )
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous activez le canal RP
+	SRC.NEWITEM i_hear_player2
+	IF 0<SRC.TAG.crp>
+		SRC.ACT.COLOR=<SRC.TAG.crp>
+		SRC.TAG.crp
+	ENDIF
+	SRC.ACT.CONT <SRC.UID>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous desactivez le canal RP
+	IF <SRC.FINDID.i_hear_player2.COLOR>
+		SRC.TAG.crp=<SRC.FINDID.i_hear_player2.COLOR>
+	ENDIF
+	SRC.FINDID.i_hear_player2.REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_hear_player2]
+DEFNAME=i_hear_player2
+NAME=Canal RP
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+LAYER=30
+
+
+//*******************************************
+//**************CANAL STAFF******************
+//*******************************************
+
+[PLEVEL 2]
+cstaff
+staff
+estaff
+
+[FUNCTION cstaff]
+IF !(<FINDID.i_hear_player4> )
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas active le canal staff !
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez l'ouvrir pour en changer la couleur.
+	RETURN 1
+ENDIF
+SRC.NEWITEM i_dyes
+SRC.ACT.LAYER=30
+SRC.ACT.TYPE=t_eq_script
+SRC.ACT.CONT=<UID>
+SRC.ACT.TYPE=t_dye
+VAR.DYES=<SRC.ACT.UID>
+SRC.ACT.USE
+SRC.ACT=<FINDID.i_hear_player4.UID>
+VAR.TYPE=<SRC.ACT.TYPE>
+SRC.ACT.TYPE=t_dye_vat
+SRC.LAST
+SRC.ACT.TYPE=<VAR.TYPE>
+SRC.ACT=<VAR.DYES>
+SRC.ACT.REMOVE
+
+[FUNCTION staff]
+IF !(0<TAG.BANNICHAT>==1)
+	IF !(<FINDID.i_hear_player4>)
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous n'avez pas active le canal staff !
+		RETURN 1
+	ENDIF
+	SERV.ALLCLIENTS mainmsg4 <ARGS>
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous avez les cris coupes pour une duree de <EVAL <FINDID.i_cris_coupes.TIMER>/60> minutes
+ENDIF
+
+[FUNCTION mainmsg4]
+IF <ACCOUNT.PLEVEL> < 2
+	FINDID.i_hear_player4.REMOVE
+	RETURN 1
+ENDIF
+IF <FINDID.i_hear_player4.COLOR>
+	FINDID.i_hear_player4.CONT.SYSMESSAGEUA <FINDID.i_hear_player4.COLOR> 1 1 0 [Canal staff] <SRC.NAME>: <ARGS>
+ELSE
+	FINDID.i_hear_player4.CONT.SYSMESSAGEUA 076 1 1 0 [Canal staff] <SRC.NAME>: <ARGS>
+ENDIF
+
+[FUNCTION estaff]
+IF !(<SRC.FINDID.i_hear_player4.UID> )
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous activez le canal staff
+	SRC.NEWITEM i_hear_player4
+	IF 0<SRC.TAG.cstaff4>
+		SRC.ACT.COLOR=<SRC.TAG.cstaff4>
+		SRC.TAG.cstaff4
+	ENDIF
+	SRC.ACT.CONT <SRC.UID>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous desactivez le canal staff
+	IF <SRC.FINDID.i_hear_player4.COLOR>
+		SRC.TAG.cstaff4=<SRC.FINDID.i_hear_player4.COLOR>
+	ENDIF
+	SRC.FINDID.i_hear_player4.REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_hear_player4]
+DEFNAME=i_hear_player4
+NAME=Canal staff
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+LAYER=30
+
+
+
+//*******************************************
+//****************CANAL VENTE****************
+//*******************************************
+
+
+[PLEVEL 1]
+cvente
+vente
+evente
+
+[FUNCTION cvente] //function to change chan color
+IF !(<FINDID.i_hear_player3> )
+	SRC.SYSMESSAGE Vous n'avez pas active le canal vente !
+	SRC.SYSMESSAGE Vous devez l'ouvrir pour en changer la couleur.
+	RETURN 1
+ENDIF
+SRC.NEWITEM i_dyes
+SRC.ACT.LAYER=30
+SRC.ACT.TYPE=t_eq_script
+SRC.ACT.CONT=<UID>
+SRC.ACT.TYPE=t_dye
+VAR.DYES=<SRC.ACT.UID>
+SRC.ACT.USE
+SRC.ACT=<FINDID.i_hear_player3.UID>
+VAR.TYPE=<SRC.ACT.TYPE>
+SRC.ACT.TYPE=t_dye_vat
+SRC.LAST
+SRC.ACT.TYPE=<VAR.TYPE>
+SRC.ACT=<VAR.DYES>
+SRC.ACT.REMOVE
+
+[FUNCTION vente] //function to speak on the chat
+IF !(0<TAG.BANNICHAT>==1)
+	IF !(<FINDID.i_hear_player3> )
+		SRC.SYSMESSAGE Vous n'avez pas active le canal vente !
+		RETURN 1
+	ENDIF
+	SERV.ALLCLIENTS mainmsg3 <ARGS>
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous avez les cris coupes pour une duree de <EVAL 0<FINDID.i_cris_coupes.TAG.TEMPSCOUPE>> minutes
+ENDIF
+
+[FUNCTION mainmsg3]
+IF <FINDID.i_hear_player3.COLOR>
+	FINDID.i_hear_player3.CONT.SYSMESSAGEUA <FINDID.i_hear_player3.COLOR> 1 1 0 [Canal Vente] <SRC.NAME>: <ARGS>
+ELSE
+	FINDID.i_hear_player3.CONT.SYSMESSAGEUA 035 1 1 0 [Canal Vente] <SRC.NAME>: <ARGS>
+ENDIF
+
+[FUNCTION evente] //function to toggle chat on/off
+IF !(<SRC.FINDID.i_hear_player3.UID> )
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous activez le canal vente
+	SRC.NEWITEM i_hear_player3
+	IF 0<SRC.TAG.cvente3>
+		SRC.ACT.COLOR=<SRC.TAG.cvente3>
+		SRC.TAG.cvente3
+	ENDIF
+	SRC.ACT.CONT <SRC.UID>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous desactivez le canal vente
+	IF <SRC.FINDID.i_hear_player3.COLOR>
+		SRC.TAG.cvente3=<SRC.FINDID.i_hear_player3.COLOR>
+	ENDIF
+	SRC.FINDID.i_hear_player3.REMOVE
+ENDIF
+RETURN 1
+
+[ITEMDEF i_hear_player3]
+DEFNAME=i_hear_player3
+NAME=Canal Vente
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+LAYER=30
+
+
+//**************************************************
+//********************WHISP*************************
+//**************************************************
+
+
+[FUNCTION COMPTECONNECTES]
+VAR.NOMBRECONNECTES=<EVAL <VAR.NOMBRECONNECTES> +1>
+
+[FUNCTION TESTWHISP]
+VAR.COMPTETEST2=<EVAL <VAR.COMPTETEST2> +1>
+IF (STRMATCH(<NAME>,<VAR.NOMDESTINATAIRE>))
+	VAR.COMPTETEST=<EVAL <VAR.COMPTETEST> + 1>
+	IF (0<TAG.WHISPACTIVE> == 0) || (<EVAL <UID.<VAR.UIDENVOYEUR>.ACCOUNT.PLEVEL>> > 1)
+		VAR.WHISPACTIF=1
+		SYSMESSAGEUA 062 1 1 0 De <VAR.EXPEDITEUR> : <VAR.CONTENUMESSAGE>
+	ENDIF
+ENDIF
+IF <VAR.COMPTETEST2> == <SERV.STATCLIENTS>
+	IF <VAR.COMPTETEST> > 0
+		IF (0<VAR.WHISPACTIF> == 1) || (<EVAL <UID.<VAR.UIDENVOYEUR>.ACCOUNT.PLEVEL>> > 1)
+			UID.09903F.ACT = <VAR.UIDENVOYEUR>
+			UID.09903F.ACT.SYSMESSAGEUA 062 1 1 0 A <VAR.NOMDESTINATAIRE> : <VAR.CONTENUMESSAGE>
+		ELSE
+			UID.09903F.ACT = <VAR.UIDENVOYEUR>
+			UID.09903F.ACT.SYSMESSAGEUA 025 1 1 0 <VAR.NOMDESTINATAIRE> a coupe ses whisps et n'a donc pas recu votre message !
+		ENDIF
+	ELSE
+		UID.09903F.ACT = <VAR.UIDENVOYEUR>
+		UID.09903F.ACT.SYSMESSAGEUA 025 1 1 0 Utilisateur invalide !
+	ENDIF
+ENDIF
+
+[FUNCTION WHISP]
+IF !(STRCMPI("<ARGS>",""))
+	SYSMESSAGEUA 0481 1 1 0 Pour couper vos whisps tapez .whisp off
+	SYSMESSAGEUA 0481 1 1 0 Pour les reactiver tapez .whisp on
+	SYSMESSAGEUA 0481 1 1 0 Pour choisir une personne a whisper tapez .whisp suivi du nom de cette personne
+ELSEIF !(STRCMPI("<ARGS>","on"))
+	TAG.WHISPACTIVE=0
+	SYSMESSAGEUA 0481 1 1 0 Whisps actifs
+ELSEIF !(STRCMPI("<ARGS>","off"))
+	TAG.WHISPACTIVE=1
+	SYSMESSAGEUA 0481 1 1 0 Whisps inactifs
+ELSE
+	IF 0<TAG.WHISPACTIVE>==0
+		TAG.NOMDESTINATAIRE=<ARGS>
+		SYSMESSAGEUA 0481 1 1 0 Veuillez maintenant taper .envoi suivi du message a envoyer a <TAG.NOMDESTINATAIRE>
+	ELSE
+		SYSMESSAGEUA 0481 1 1 0 Veuillez taper .whisp on pour activer vos whisps
+	ENDIF
+ENDIF
+
+[FUNCTION ENVOI]
+VAR.NOMBRECONNECTES
+IF !(STRCMPI("<ARGS>",""))
+	SYSMESSAGEUA 0481 1 1 0 Tapez .envoi suivi du message que vous voulez envoyer a <TAG.NOMDESTINATAIRE>
+ELSE
+	VAR.EXPEDITEUR=<NAME>
+	VAR.NOMDESTINATAIRE=<TAG.NOMDESTINATAIRE> //Pour eviter un conflit si deux personnes utilisent le whisp en meme temps
+	VAR.CONTENUMESSAGE=<ARGS>
+	VAR.UIDENVOYEUR=<UID>
+	VAR.WHISPACTIF=0
+	VAR.COMPTETEST=0
+	VAR.COMPTETEST2=0
+	SERV.ALLCLIENTS TESTWHISP
+	VAR.EXPEDITEUR
+	VAR.NOMDESTINATAIRE
+	VAR.CONTENUMESSAGE
+	VAR.UIDENVOYEUR
+	VAR.WHISPACTIF
+	VAR.COMPTETEST
+	VAR.COMPTETEST2
+ENDIF

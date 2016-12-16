@@ -1,0 +1,926 @@
+[CHARDEF c_sengir] 
+DEFNAME=c_sengir
+NAME=Sengir
+ID=c_man
+ 
+TSPEECH=spk_sengir
+
+ON=@create
+COLOR=0ae2
+FOOD=9999
+SPEECHCOLOR=025
+STR=9999
+DEX=9999
+INT=9999
+TITLE=Specialiste des armes d'estoc
+
+ITEMNEWBIE=i_dagger
+NAME=Dague de meurtrier
+COLOR=0ab8
+ITEMNEWBIE=i_hair_short
+COLOR=0ab2
+ITEMNEWBIE=i_shirt_fancy
+NAME=Maillot a manches longues
+COLOR=0ab8
+ITEMNEWBIE=i_pants_long
+NAME=Pantalon
+COLOR=01
+ITEMNEWBIE=i_boots_calf
+NAME=Bottes
+COLOR=01
+
+ON=@NPCSEENEWPLAYER
+IF (<EVAL 0<SRC.TAG.SENGIR>> < 1) && (<EVAL 0<SRC.TAG.RENAISSANCE>> < 5)
+	SAY Un pas de plus et vos visceres verront la lumiere du jour
+ELSE
+	EMOTE rire
+	SAY Encore en vie <SRC.NAME> !
+ENDIF
+
+ON=@NPCHearUnknown
+IF (<EVAL 0<SRC.TAG.SENGIR>> < 1) && (<EVAL 0<SRC.TAG.RENAISSANCE>> < 5)
+	IF (<EVAL(RAND(15))>=0)
+		SAY Pas meme une dague de l'assassin ne me fera changer d'avis
+	ELSE
+		DORAND 2
+		ANIM 13
+		ANIM 14
+		ENDDO
+		SAY Continuez ainsi et vos tripes vous chatouilleront les pieds !
+	ENDIF
+ELSE
+	SAY Vos tripes sont bien là où elles sont, arrangez vous pour que ca reste ainsi !
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Sengir
+
+[SPEECH spk_sengir]
+
+ON=*assassin*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 3
+	IF (<EVAL 0<SRC.TAG.SENGIR>> < 1) && (<EVAL 0<SRC.TAG.RENAISSANCE>> == 4)
+		IF <SRC.RESTEST 1 i_dague_de_l_assassin>
+			SRC.FINDID.i_dague_de_l_assassin.REMOVE
+			SRC.TAG.SENGIR=1
+			SAY Oh c'est tres aimable de votre part ... Et que me vaut ce present ?
+		ELSE
+			SAY Rapide, solide, tranchante, la dague de l'assassin est parfaite pour un meurtr... homme d'action comme moi
+		ENDIF
+	ELSE
+		SAY Merci encore <SRC.NAME>, avec une telle arme peu oseront se mettre au travers de mon chemin
+	ENDIF
+ELSE
+	SAY Vous n'avez rien a faire ici et je vous conseille fort de deguerpir avant que ma lame ne vous perfore l'oesophage !
+ENDIF
+
+ON=*entre*
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 4
+	IF !<SRC.FINDLAYER.25>
+		SAY A force de jouer avec la vie vous finirez par la perdre !
+		SRC.EVENTS +e_anti_mark_recall
+		IF <SRC.FINDLAYER.40>
+			SRC.FINDLAYER.40.REMOVE
+		ENDIF
+		IF (<SRC.FLAGS>&statf_hidden)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+		ENDIF
+		IF (<SRC.FLAGS>&statf_invisible)
+			SRC.FLAGS=<SRC.FLAGS>&~invisible
+		ENDIF
+		IF (<SRC.FLAGS>&statf_insubstantial)
+			SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+		SRC.TAG.anti_mark_recall=1
+		SRC.TAG.INSIDE_D5=1
+		SRC.P=4722,3816
+		SRC.UPDATE
+	ELSE
+		SAY Les creatures de ce donjon rafollent de ce genre de montures ... En l'emmenant avec vous, vous courreriez a votre perte !
+	ENDIF
+ELSE
+	IF <EVAL 0<SRC.TAG.RENAISSANCE>> > 3
+		IF <EVAL 0<SRC.TAG.SENGIR>> == 1
+			IF <EVAL 0<SRC.TAG.LEVEL>> >99
+				IF !<SRC.FINDLAYER.25>
+					SAY A force de jouer avec la vie vous finirez par la perdre !
+					SRC.EVENTS +e_anti_mark_recall
+					IF <SRC.FINDLAYER.40>
+						SRC.FINDLAYER.40.REMOVE
+					ENDIF
+					IF (<SRC.FLAGS>&statf_hidden)
+						SRC.FLAGS=<SRC.FLAGS>&~statf_hidden
+					ENDIF
+					IF (<SRC.FLAGS>&statf_invisible)
+						SRC.FLAGS=<SRC.FLAGS>&~invisible
+					ENDIF
+					IF (<SRC.FLAGS>&statf_insubstantial)
+						SRC.FLAGS=<SRC.FLAGS>&~statf_insubstantial
+					ENDIF
+					IF <SRC.FINDID.i_rune_delay_g>
+						SRC.FINDID.i_rune_delay_g.REMOVE
+						SRC.EFFECT 3,i_fx_smoke_small,0,60
+						SRC.SFX 01ed
+						SRC.EVENTS -e_casse_gate
+					ENDIF
+					SRC.TAG.anti_mark_recall=1
+					SRC.TAG.INSIDE_D5=1
+					SRC.P=4722,3816
+					SRC.UPDATE
+				ELSE
+					SAY Les creatures de ce donjon rafollent de ce genre de montures ... En l'emmenant avec vous, vous courreriez a votre perte !
+				ENDIF
+			ELSE
+				SAY Ne me faites pas perdre mon temps <SRC.SEX monsieur/madame> vous etes frele comme un pipeau ... Allez donc voir la bas si j'y suis !
+			ENDIF
+		ELSE
+			DORAND 2
+				ANIM 13
+				ANIM 14
+			ENDDO
+			SAY Continuez ainsi et vos tripes vous chatouilleront les pieds !
+		ENDIF
+	ELSE
+		SAY Vous n'avez rien a faire ici et je vous conseille fort de deguerpir avant que ma lame ne vous perfore l'oesophage !
+	ENDIF
+ENDIF
+
+ON=*sortir*
+IF (<EVAL <SRC.TAG.SENGIR>> < 1) && (<EVAL 0<SRC.TAG.RENAISSANCE>> < 5)
+	SAY C'est ca, va t'en et ne reviens pas de si tot !
+ELSE
+	SAY J'ai bien cru ne jamais vous revoir !
+	IF <SRC.FINDID.i_rune_delay_g>
+		SRC.FINDID.i_rune_delay_g.REMOVE
+		SRC.EFFECT 3,i_fx_smoke_small,0,60
+		SRC.SFX 01ed
+		SRC.EVENTS -e_casse_gate
+	ENDIF
+	SRC.P=4722,3823,1
+	SRC.UPDATE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D5
+ENDIF
+
+[ITEMDEF i_dalle_summon_d5_1]
+DEFNAME=i_dalle_summon_d5_1
+NAME=Dalle summon [Terre]
+ID=049b
+
+ON=@CREATE
+COLOR=0ab7
+ATTR=08090
+TIMER=60
+
+ON=@STEP
+IF (!<SRC.BRAIN>) && (<TAG.STREUM>==1)
+	TIMER=60
+	TAG.STREUM=0
+	SRC.NEWNPC c_damne_de_terre
+	SRC.ACT.P=<P>
+	TAG.UIDMONSTRE=<SRC.ACT.UID>
+	SRC.NEWITEM=i_vire_creature
+	SRC.ACT.CONT=<TAG.UIDMONSTRE>
+ENDIF
+
+ON=@TIMER
+TAG.STREUM=1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle summon [Terre]
+
+[ITEMDEF i_dalle_summon_d5_2]
+DEFNAME=i_dalle_summon_d5_2
+NAME=Dalle summon [Air]
+ID=049b
+
+ON=@CREATE
+COLOR=0afb
+ATTR=08090
+TIMER=60
+
+ON=@STEP
+IF (!<SRC.BRAIN>) && (<TAG.STREUM>==1)
+	TIMER=60
+	TAG.STREUM=0
+	SRC.NEWNPC c_damne_d_air
+	SRC.ACT.P=<P>
+	TAG.UIDMONSTRE=<SRC.ACT.UID>
+	SRC.NEWITEM=i_vire_creature
+	SRC.ACT.CONT=<TAG.UIDMONSTRE>
+ENDIF
+
+ON=@TIMER
+TAG.STREUM=1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle summon [Air]
+
+[ITEMDEF i_dalle_summon_d5_3]
+DEFNAME=i_dalle_summon_d5_3
+NAME=Dalle summon [Eau]
+ID=049b
+
+ON=@CREATE
+COLOR=0ba8
+ATTR=08090
+TIMER=60
+
+ON=@STEP
+IF (!<SRC.BRAIN>) && (<TAG.STREUM>==1)
+	TIMER=60
+	TAG.STREUM=0
+	SRC.NEWNPC c_damne_d_eau
+	SRC.ACT.P=<P>
+	TAG.UIDMONSTRE=<SRC.ACT.UID>
+	SRC.NEWITEM=i_vire_creature
+	SRC.ACT.CONT=<TAG.UIDMONSTRE>
+ENDIF
+
+ON=@TIMER
+TAG.STREUM=1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle summon [Eau]
+
+[ITEMDEF i_dalle_summon_d5_4]
+DEFNAME=i_dalle_summon_d5_4
+NAME=Dalle summon [Feu]
+ID=049b
+
+ON=@CREATE
+COLOR=0b7f
+ATTR=08090
+TIMER=60
+
+ON=@STEP
+IF (!<SRC.BRAIN>) && (<TAG.STREUM>==1)
+	TIMER=60
+	TAG.STREUM=0
+	SRC.NEWNPC c_damne_de_feu
+	SRC.ACT.P=<P>
+	TAG.UIDMONSTRE=<SRC.ACT.UID>
+	SRC.NEWITEM=i_vire_creature
+	SRC.ACT.CONT=<TAG.UIDMONSTRE>
+ENDIF
+
+ON=@TIMER
+TAG.STREUM=1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle summon [Feu]
+
+[ITEMDEF i_flamme_dalle_piegee_d5_1]
+ID=i_fire_column
+NAME=Flamme
+TYPE=t_script
+
+ON=@CREATE
+TIMER=2
+COLOR=0ab7
+ATTR=08010
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_dalle_piegee_d5_1]
+DEFNAME=i_dalle_piegee_d5_1
+NAME=Dalle piegee [Terre]
+ID=049b
+
+ON=@CREATE
+COLOR=0b7e
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.NEWITEM i_flamme_dalle_piegee_d5_1
+	SRC.ACT.P=<SRC.P>
+	SRC.DAMAGE {200 300} 0008
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle piegee [Terre]
+
+[ITEMDEF i_dalle_piegee_d5_2]
+DEFNAME=i_dalle_piegee_d5_2
+NAME=Dalle piegee [Air]
+ID=049b
+
+ON=@CREATE
+COLOR=0b7e
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.NEWITEM i_flamme_dalle_piegee_d5_1
+	SRC.ACT.COLOR=0afb
+	SRC.ACT.P=<SRC.P>
+	SRC.DAMAGE {300 400} 0008
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle piegee [Air]
+
+[ITEMDEF i_dalle_piegee_d5_3]
+DEFNAME=i_dalle_piegee_d5_3
+NAME=Dalle piegee [Eau]
+ID=049b
+
+ON=@CREATE
+COLOR=0b7e
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.NEWITEM i_flamme_dalle_piegee_d5_1
+	SRC.ACT.COLOR=0ba8
+	SRC.ACT.P=<SRC.P>
+	SRC.DAMAGE {400 500} 0008
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle piegee [Eau]
+
+[ITEMDEF i_dalle_piegee_d5_4]
+DEFNAME=i_dalle_piegee_d5_4
+NAME=Dalle piegee [Feu]
+ID=049b
+
+ON=@CREATE
+COLOR=0b7e
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.NEWITEM i_flamme_dalle_piegee_d5_1
+	SRC.ACT.COLOR=0b7e
+	SRC.ACT.P=<SRC.P>
+	SRC.DAMAGE {500 600} 0008
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle piegee [Feu]
+
+[ITEMDEF i_dalle_telemonstre_d5_1]
+DEFNAME=i_dalle_telemonstre_d5_1
+NAME=Dalle telemonstre [Terre]
+ID=049b
+
+ON=@CREATE
+COLOR=0ab8
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.NEWITEM i_sort_telemonstre_d5_1
+	SRC.ACT.TIMER={15 60}
+	SRC.ACT.EQUIP
+	DORAND 3
+		SRC.GO 5978,26,22
+		SRC.GO 5982,26,22
+		SRC.GO 5988,26,22
+	ENDDO
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle telemonstre [Terre]
+
+[ITEMDEF i_sort_telemonstre_d5_1]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Sort Telemonstre [Terre]
+
+ON=@TIMER
+IF <CONT.TAG.anti_mark_recall>==1
+	DORAND 3
+		CONT.GO 5963,65,1
+		CONT.GO 5941,51,23
+		CONT.GO 5914,26,45
+	ENDDO
+ENDIF
+REMOVE
+RETURN 1
+
+[ITEMDEF i_dalle_telemonstre_d5_2]
+DEFNAME=i_dalle_telemonstre_d5_2
+NAME=Dalle telemonstre [Air]
+ID=049b
+
+ON=@CREATE
+COLOR=0ab8
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.NEWITEM i_sort_telemonstre_d5_2
+	SRC.ACT.TIMER={15 60}
+	SRC.ACT.EQUIP
+	SRC.GO 5918,230,44
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle telemonstre [Air]
+
+[ITEMDEF i_sort_telemonstre_d5_2]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Sort Telemonstre [Air]
+
+ON=@TIMER
+IF <CONT.TAG.anti_mark_recall>==1
+	DORAND 3
+		CONT.GO 5914,204,22
+		CONT.GO 5914,185,23
+		CONT.GO 5962,184,3
+	ENDDO
+ENDIF
+REMOVE
+RETURN 1
+
+[ITEMDEF i_dalle_telemonstre_d5_3]
+DEFNAME=i_dalle_telemonstre_d5_3
+NAME=Dalle telemonstre [Eau]
+ID=049b
+
+ON=@CREATE
+COLOR=0ab8
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.NEWITEM i_sort_telemonstre_d5_3
+	SRC.ACT.TIMER={15 60}
+	SRC.ACT.EQUIP
+	DORAND 3
+		SRC.GO 6104,179
+		SRC.GO 6125,179
+		SRC.GO 6123,163
+	ENDDO
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle telemonstre [Eau]
+
+[ITEMDEF i_sort_telemonstre_d5_3]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Sort Telemonstre [Eau]
+
+ON=@TIMER
+IF <CONT.TAG.anti_mark_recall>==1
+	DORAND 3
+		CONT.GO 6056,187,22
+		CONT.GO 6059,175,3
+		CONT.GO 6071,171
+	ENDDO
+ENDIF
+REMOVE
+RETURN 1
+
+[ITEMDEF i_dalle_telemonstre_d5_4]
+DEFNAME=i_dalle_telemonstre_d5_4
+NAME=Dalle telemonstre [Feu]
+ID=049b
+
+ON=@CREATE
+COLOR=0ab8
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	SRC.NEWITEM i_sort_telemonstre_d5_4
+	SRC.ACT.TIMER={15 60}
+	SRC.ACT.EQUIP
+	SRC.GO 6054,47
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle telemonstre [Feu]
+
+[ITEMDEF i_sort_telemonstre_d5_4]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Sort Telemonstre [Feu]
+
+ON=@TIMER
+IF <CONT.TAG.anti_mark_recall>==1
+	DORAND 3
+		CONT.GO 6083,58,9
+		CONT.GO 6084,73,3
+		CONT.GO 6094,51,22
+	ENDDO
+ENDIF
+REMOVE
+RETURN 1
+
+//Envoye dans n'importe quel etage du donjon n'importe ou
+[ITEMDEF i_dalle_teleporte_d5]
+DEFNAME=i_dalle_teleporte_d5
+NAME=Dalle teleporte
+ID=049b
+
+ON=@CREATE
+COLOR=0481
+ATTR=08090
+
+ON=@STEP
+IF !<SRC.BRAIN>
+	DORAND 12
+		SRC.GO 5963,65,1
+		SRC.GO 5941,51,23
+		SRC.GO 5914,26,45
+		SRC.GO 5914,204,22
+		SRC.GO 5914,185,23
+		SRC.GO 5962,184,3
+		SRC.GO 6056,187,22
+		SRC.GO 6059,175,3
+		SRC.GO 6071,171
+		SRC.GO 6083,58,9
+		SRC.GO 6084,73,3
+		SRC.GO 6094,51,22
+	ENDDO
+ENDIF
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Dalle teleporte
+
+[ITEMDEF i_teleporteur_d5_1]
+DEFNAME=i_teleporteur_d5_1
+NAME=Prisme de terre
+ID=01f1c
+TYPE=T_NORMAL
+
+ON=@CREATE
+COLOR=0ab6
+
+[ITEMDEF i_teleporteur_d5_2]
+DEFNAME=i_teleporteur_d5_2
+NAME=Prisme d'air
+ID=01f1c
+TYPE=T_NORMAL
+
+ON=@CREATE
+COLOR=0afb
+
+[ITEMDEF i_teleporteur_d5_3]
+DEFNAME=i_teleporteur_d5_3
+NAME=Prisme d'eau
+ID=01f1c
+TYPE=T_NORMAL
+
+ON=@CREATE
+COLOR=0ba8
+
+[ITEMDEF i_teleporteur_d5_4]
+DEFNAME=i_teleporteur_d5_4
+NAME=Prisme de feu
+ID=01f1c
+TYPE=T_NORMAL
+
+ON=@CREATE
+COLOR=0b7e
+
+[ITEMDEF i_trou_d5_1]
+DEFNAME=i_trou_d5_1
+NAME=trou
+ID=011c5
+TYPE=T_NORMAL
+
+ON=@CLICK
+RETURN 1
+
+ON=@DCLICK
+IF (<EVAL 0<SRC.TAG.DEMON1>>==0) && (<EVAL 0<SRC.TAG.RENAISSANCE>> <5 )
+	IF <SRC.FINDID.i_teleporteur_d5_1>
+		SRC.FINDID.i_teleporteur_d5_1.REMOVE
+		SRC.EMOTE jetter le prisme de terre dans le trou
+		SRC.ANIM 9
+		SRC.NEWITEM i_demon_d5_1
+		SRC.ACT.EQUIP
+	ENDIF
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Trou [Terre]
+
+[ITEMDEF i_demon_d5_1]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Demon [Terre]
+
+ON=@CREATE
+TIMER=2
+
+ON=@TIMER
+CONT.GO=5950,98,22
+REMOVE
+RETURN 1
+
+[ITEMDEF i_trou_d5_2]
+DEFNAME=i_trou_d5_2
+NAME=trou
+ID=011c5
+TYPE=T_NORMAL
+
+ON=@CLICK
+RETURN 1
+
+ON=@DCLICK
+IF (<EVAL 0<SRC.TAG.DEMON2>>==0) && (<EVAL 0<SRC.TAG.RENAISSANCE>> <5 )
+	IF <SRC.FINDID.i_teleporteur_d5_2>
+		SRC.FINDID.i_teleporteur_d5_2.REMOVE
+		SRC.EMOTE jetter le prisme d'air dans le trou
+		SRC.ANIM 9
+		SRC.NEWITEM i_demon_d5_2
+		SRC.ACT.EQUIP
+	ENDIF
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Trou [Air]
+
+[ITEMDEF i_demon_d5_2]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Demon [Air]
+
+ON=@CREATE
+TIMER=2
+
+ON=@TIMER
+CONT.GO=5955,217,22
+REMOVE
+RETURN 1
+
+[ITEMDEF i_trou_d5_3]
+DEFNAME=i_trou_d5_3
+NAME=trou
+ID=011c5
+TYPE=T_NORMAL
+
+ON=@CLICK
+RETURN 1
+
+ON=@DCLICK
+IF (<EVAL 0<SRC.TAG.DEMON3>>==0) && (<EVAL 0<SRC.TAG.RENAISSANCE>> <5 )
+	IF <SRC.FINDID.i_teleporteur_d5_3>
+		SRC.FINDID.i_teleporteur_d5_3.REMOVE
+		SRC.EMOTE jetter le prisme d'eau dans le trou
+		SRC.ANIM 9
+		SRC.NEWITEM i_demon_d5_3
+		SRC.ACT.EQUIP
+	ENDIF
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Trou [Eau]
+
+[ITEMDEF i_demon_d5_3]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Demon [Eau]
+
+ON=@CREATE
+TIMER=2
+
+ON=@TIMER
+CONT.GO=6081,171
+REMOVE
+RETURN 1
+
+[ITEMDEF i_trou_d5_4]
+DEFNAME=i_trou_d5_4
+NAME=trou
+ID=011c5
+TYPE=T_NORMAL
+
+ON=@CLICK
+RETURN 1
+
+ON=@DCLICK
+IF (<EVAL 0<SRC.TAG.DEMON4>>==0) && (<EVAL 0<SRC.TAG.RENAISSANCE>> <5 )
+	IF <SRC.FINDID.i_teleporteur_d5_4>
+		SRC.FINDID.i_teleporteur_d5_4.REMOVE
+		SRC.EMOTE jetter le prisme de feu dans le trou
+		SRC.ANIM 9
+		SRC.NEWITEM i_demon_d5_4
+		SRC.ACT.EQUIP
+	ENDIF
+ENDIF
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Trou [Feu]
+
+[ITEMDEF i_demon_d5_4]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Demon [Feu]
+
+ON=@CREATE
+TIMER=2
+
+ON=@TIMER
+CONT.GO=6099,45,22
+REMOVE
+RETURN 1
+
+[CHARDEF c_venerable_d_hythloth] 
+DEFNAME=c_venerable_d_hythloth
+NAME=Venerable d'Hythloth
+ID=c_man
+ 
+TSPEECH=spk_venerable_d_hythloth
+
+ON=@create
+COLOR=03f1
+FOOD=9999
+SPEECHCOLOR=0bb1
+STR=9999
+DEX=9999
+INT=9999
+TITLE=é
+
+ITEMNEWBIE=01f03
+COLOR=0bb1
+ITEMNEWBIE=0170d
+COLOR=0bb1
+ITEMNEWBIE=013f8
+COLOR=0bb1
+
+ON=@NPCSEENEWPLAYER
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 4
+	SAY Je n'attendais que vous <SRC.NAME>
+ENDIF
+
+ON=@NPCHearUnknown
+IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 4
+	IF <EVAL 0<SRC.TAG.VDEHYTH>> == 0
+		SRC.TAG.VDEHYTH=1
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			SAY Votre parcours vers la vertu est en bonne voie mais est loin d'etre termine
+		ELSE
+			SAY Votre parcours vers les tenebres est en bonne voie mais est loin d'etre termine
+		ENDIF
+	ELSEIF <EVAL 0<SRC.TAG.VDEHYTH>> == 1
+		SRC.TAG.VDEHYTH=2
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			SAY Seule une ame d'une purete sans egal est en mesure de poursuivre ce periple
+		ELSE
+			SAY Seule une ame d'une obscurite sans egal est en mesure de poursuivre ce periple
+		ENDIF
+	ELSE
+		IF <EVAL 0<SRC.TAG.COTE>> == 1
+			SAY Dites moi maintenant si vous vous sentez en mesure de poursuivre votre quete vers la clarte
+		ELSE
+			SAY Dites moi maintenant si vous vous sentez en mesure de poursuivre votre quete vers les enfers
+		ENDIF
+	ENDIF
+ENDIF
+
+ON=@GetHit
+RETURN 1
+
+ON=@SpellEffect
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Venerable de Hythloth
+
+[SPEECH spk_venerable_d_hythloth]
+
+ON=*clarte*
+IF (<EVAL <SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D5>>==1)
+	IF <EVAL 0<SRC.TAG.COTE>> == 1
+		IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 4
+			IF <SRC.FINDID.03f0c>
+				IF (<EVAL 0<SRC.TAG.DEMON1>+0<SRC.TAG.DEMON2>+0<SRC.TAG.DEMON3>+0<SRC.TAG.DEMON4>> < 4)
+					SRC.TAG.TRICHEUR_D5=1
+				ENDIF
+				SRC.TAG.RENAISSANCE=5
+				SRC.FINDID.03f0c.COLOR=0B10
+				SRC.COLOR=0B15
+				SRC.OSKIN=0B15
+				SRC.RENAITRE
+				SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie d'elu avec sa cinquieme renaissance !
+			ELSE
+				SAY Un elu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+			ENDIF
+		ENDIF
+	ELSE
+		SAY Vous avez deja prete serment pour servir le mal
+	ENDIF
+ELSE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D5
+	SRC.P=4722,3823,1
+	SRC.UPDATE
+ENDIF
+
+ON=*enfer*
+IF (<EVAL <SRC.TAG.anti_mark_recall>>==1) && (<EVAL 0<SRC.TAG.INSIDE_D5>>==1)
+	IF <EVAL 0<SRC.TAG.COTE>> == 2
+		IF <EVAL 0<SRC.TAG.RENAISSANCE>> == 4
+			IF <SRC.FINDID.03f0c>
+				IF (<EVAL 0<SRC.TAG.DEMON1>+0<SRC.TAG.DEMON2>+0<SRC.TAG.DEMON3>+0<SRC.TAG.DEMON4>> < 4)
+					SRC.TAG.TRICHEUR_D5=1
+				ENDIF
+				SRC.TAG.RENAISSANCE=5
+				SRC.FINDID.03f0c.COLOR=0B30
+				SRC.COLOR=0B30
+				SRC.OSKIN=0B30
+				SRC.RENAITRE
+				SERV.B Felicitation a <SRC.NAME> qui poursuit sa voie de dechu avec sa cinquieme renaissance !
+			ELSE
+				SAY Un dechu digne de votre nom doit deployer ses ailes avant d'effectuer un tel acte !
+		ENDIF
+	ELSE
+		SAY Vous avez deja prete serment pour servir le bien
+	ENDIF
+ELSE
+	SRC.EVENTS -e_anti_mark_recall
+	SRC.TAG.anti_mark_recall=0
+	SRC.TAG.INSIDE_D5
+	SRC.P=4722,3823,1
+	SRC.UPDATE
+ENDIF
+
+ON=*colise*
+ON=*colyse*
+SAY Seul le venerable de Wrong pourra vous y emmener ...
+
+[ITEMDEF i_coffre_hythloth]
+DEFNAME=i_coffre_hythloth
+NAME=Coffre hytloth
+ID=0e42
+TYPE=T_SCRIPT
+
+ON=@CREATE
+TIMER=43200
+TAG.REMPLI=0
+
+ON=@DCLICK
+IF (<EVAL 0<TAG.REMPLI>> == 1)
+	TAG.REMPLI=0
+	TAG.PX=<P.X> + 1
+	TAG.PY=<P.Y>
+	TAG.PZ=<P.Z>
+	TAG.POSITION=<EVAL <TAG.PX>>,<EVAL <TAG.PY>>,<EVAL <TAG.PZ>>
+	TAG.TEMPSRESPAWN={43200 172800}
+	TIMER=<TAG.TEMPSRESPAWN>
+	SRC.NEWITEM { i_stats_dropp 15 i_hache_a_deux_tranchants_damnee 1 i_kryss_damnee 1 i_arbalete_damnee 1 }
+	SRC.ACT.P <TAG.POSITION>
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Le coffre est vide !
+ENDIF
+RETURN 1
+
+ON=@TIMER
+TAG.REMPLI=1
+RETURN 1
+
+CATEGORY=Quetes
+SUBSECTION=Quetes-seraph-5
+DESCRIPTION=Coffre d'Hythloth

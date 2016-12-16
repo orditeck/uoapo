@@ -1,0 +1,49 @@
+on=9
+SRC.DIALOG panneau_ba
+VAR.SUA_COLOR 0481
+SRC.SYSMESSAGEUA annuaire thematique qui vous propose de nombreux visuels
+on=10
+IF !<SRC.FINDID.m_limitateur_entrepub>
+	IF <SRC.FINDID.m_limitateur_publicite5>
+		SRC.DIALOG panneau_ba
+		VAR.SUA_COLOR 0481
+		SRC.SYSMESSAGEUA Vous ne pourrez revisiter ce sponsor que dans <EVAL <SRC.FINDID.m_limitateur_publicite5.TIMER>/60> minutes
+	ELSE
+		SRC.NEWITEM=m_limitateur_entrepub
+		SRC.ACT.EQUIP
+		SRC.NEWITEM=m_limitateur_publicite5
+		SRC.ACT.EQUIP
+		SRC.WEBLINK http:\\www.cibleclick.com/cibles/clicks/symp.cfm?site_id=881849394&friend_id=815624825&banniere_id=27495
+		SRC.WEBLINK http:\\ad.cibleclick.com/cibles/banniere/symp.cfm?site_id=881849394&friend_id=815624825&banniere_id=27495
+		SRC.DONNER_POINT_BA
+		VAR.SUA_COLOR 0481
+		SRC.SYSMESSAGEUA Merci de cliquer sur un lien du site!
+	ENDIF
+ELSE
+	VAR.SUA_COLOR 0481
+	SRC.SYSMESSAGEUA Vous devez attendre <EVAL <SRC.FINDID.m_limitateur_entrepub.TIMER>> secondes avant de pouvoir re-visiter un sponsor !
+ENDIF
+
+
+
+
+
+on=1
+SRC.DIALOG panneau_ba
+SRC.SYSMESSAGEUA 0481 1 1 0 Les meilleures assurances sante du web.
+on=2
+IF !<SRC.FINDID.m_limitateur_entrepub>
+	IF <SRC.FINDID.m_limitateur_publicite1>
+		SRC.DIALOG panneau_ba
+		SRC.SYSMESSAGEUA 0481 1 1 0 Vous ne pourrez revisiter ce sponsor que dans <EVAL <SRC.FINDID.m_limitateur_publicite1.TIMER>/60> minutes
+	ELSE
+		SRC.NEWITEM=m_limitateur_entrepub
+		SRC.ACT.EQUIP
+		SRC.NEWITEM=m_limitateur_publicite1
+		SRC.ACT.EQUIP
+		SRC.NEWITEM m_jeu_ba1
+		SRC.ACT.EQUIP
+	ENDIF
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 Vous devez attendre <EVAL <SRC.FINDID.m_limitateur_entrepub.TIMER>> secondes avant de pouvoir re-visiter un sponsor !
+ENDIF

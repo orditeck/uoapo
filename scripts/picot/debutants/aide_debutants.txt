@@ -1,0 +1,53 @@
+1-bene
+2-proto
+3-lumiere
+4-heal
+5-exp
+6-monstre
+7-stats
+8-competence
+9-quete
+10-niveaux
+11-force
+12-dex
+13-int
+14-alchimie
+15-anatomie
+16-brico
+17-bucheron
+18-couture
+19-dissimulation
+20-dressage
+21-extraction
+22-fabrication d'arc
+23-ferronnerie
+24-guerison
+25-magie
+26-meditation
+27-menuiserie
+28-resist aux sortileges
+29-esquive
+30-lutte
+31-tactique
+32-transcription
+33-travail/job/emploi
+34-travail/job/emploi (fin)
+
+
+
+
+
+200-competence +
+201-niveaux +
+202-quetes +
+203-alchimie +
+204-bricolage +
+205-couture +
+206-extraction +
+207-fabrication d'arc +
+208-ferronnerie +
+209-magie +
+210-menuiserie +
+211-gants boxe +
+212-transcription +
+213-travail/job/emploi +

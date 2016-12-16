@@ -1,0 +1,104 @@
+//
+// This script associates terrain tiles with item types. You MUST have a script like this in
+// your server as of SphereServer 55R3rc2. Failure to do so will result in, for instance, not
+// being able to mine.
+// Be warned that if you redefine one of the TYPEDEFs placed here, you will
+// clear all TERRAINs associated with it. This was done specifically to make sure
+// TYPEDEFs don't remain associated with TERRAIN ids after you remove them from a
+// script in a resync.
+//
+// Kell, kell_pt@users.sourceforge.net
+
+[TYPEDEF t_water]
+TERRAIN	= 00a8	00ac
+TERRAIN	= 0136	0137
+
+[TYPEDEF t_rock]
+TERRAIN	= 00dc	00e7
+TERRAIN	= 00ec	00f7
+TERRAIN	= 00fc	0107
+TERRAIN	= 010c	0117
+TERRAIN	= 011e	0129
+TERRAIN	= 0141	0144
+TERRAIN	= 021f	0243
+TERRAIN	= 024a	0257
+TERRAIN	= 0259	026d
+
+[TYPEDEF t_dirt]
+TERRAIN	= 09	015		
+TERRAIN	= 0150	015c
+
+[TYPEDEF t_grass]
+TERRAIN	= 0003	0006
+TERRAIN	= 007d	008c
+TERRAIN	= 00c0	00db
+TERRAIN	= 00f8	00fb
+TERRAIN	= 015d	0164
+TERRAIN	= 01a4	01a7
+TERRAIN	= 0231	0234
+TERRAIN	= 0239	0243
+TERRAIN	= 0324	032b
+TERRAIN	= 036f	0376
+TERRAIN	= 037b	037e
+TERRAIN	= 03bf	03c6
+TERRAIN	= 03cb	03ce
+TERRAIN	= 0579	0580
+TERRAIN	= 058b	058c
+TERRAIN	= 05e3	0604
+TERRAIN	= 066b	066e
+TERRAIN	= 067d	0684
+TERRAIN	= 0695	069c
+TERRAIN	= 06a1	06c2
+TERRAIN	= 06d2	06d9
+TERRAIN	= 06de	06e1
+
+[TYPEDEF t_lava]
+TERRAIN	= 01f4	01f7
+
+[TYPEDEF t_forge]
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Quelle piece d'equipement voulez-vous recycler pour 20% de ses materiaux?
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+IF ( (<SRC.TARG.TYPE> == t_armor) || (<SRC.TARG.TYPE> == t_shield) )
+	SRC.TARG.RECYCLER_ITEM
+ELSE
+	SRC.SYSMESSAGEUA 025 1 1 0 Vous ne pouvez pas fondre <SRC.TARG.NAME>
+ENDIF
+RETURN 1
+
+[TYPEDEF t_ship]
+ON=@CLICK
+VAR.TEMPACT = <SRC.ACT.UID>
+SRC.ACT = <MORE1>
+IF <SRC.ACT.ISPLAYER>
+	MESSAGE <NAME> de <SRC.ACT.NAME>
+ELSE
+	MESSAGE <NAME>
+ENDIF
+SRC.ACT = <VAR.TEMPACT>
+VAR.TEMPACT
+RETURN 1
+
+[TYPEDEF t_eq_vendor_box] 
+ON=@DROPON_SELF
+VAR.TEMP = 0
+OBJ <ARGO.UID>
+IF <OBJ.TYPE>==T_CONTAINER 
+	SRC.SYSMESSAGE @026 Vous ne pouvez pas vendre des contenants sur des vendeurs.
+	VAR.TEMP = 1
+ELSEIF <OBJ.VALUE> == 0
+	SRC.SYSMESSAGE @026 Vous ne pouvez pas vendre un objet sans valeur sur des vendeurs.
+	VAR.TEMP = 1
+ELSE
+	OBJ.TAG.TEMP_TYPE_ANTITEOT = <OBJ.TYPE>
+	OBJ.TYPE = t_antiteot
+ENDIF
+//UID.0b6a09.SYSMESSAGEUA 025 0 0 1 DEFAULT : <NAME> SRC : <SRC.NAME> ITEM : <ARGO.NAME> AMOUNT : <ARGO.AMOUNT>
+RETURN <VAR.TEMP>
+
+[TYPEDEF t_antiteot]
+
+[eof]

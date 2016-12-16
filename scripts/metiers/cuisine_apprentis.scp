@@ -1,0 +1,247 @@
+//*************************************************
+//**************RECETTES APPRENTIS*****************
+//*************************************************
+
+[ITEMDEF i_brique_de_fromage]
+NAME=Brique de fromage
+ID=i_cheese_wheel
+TYPE=t_nourriture
+RESOURCES=1 m_cruche_de_creme, 1 m_sac_de_sel
+SKILLMAKE=TINKERING 30.0, COOKING 51.0, i_livre_de_recettes_2
+
+ON=@CREATE
+MORE1=2
+MORE2=2
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Brique de fromage
+
+[ITEMDEF i_gateau_blanc_cru]
+NAME=Gateau blanc cru
+ID=i_cake
+TYPE=t_nourriture_crue
+RESOURCES=2 i_eggs_fresh, 1 m_cruche_de_lait, 1 m_sac_de_farine, 1 m_sac_de_sucre, 1 i_levure
+SKILLMAKE=TINKERING 30.0, COOKING 52.0, i_livre_de_recettes_2
+
+ON=@CREATE
+MORE1=i_gateau_blanc
+MORE2=52.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Gateau blanc cru
+
+[ITEMDEF i_gateau_blanc]
+NAME=Gateau blanc
+ID=i_cake
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=1
+MORE2=1
+
+ON=@DropOn_Item
+//VAR.TEMP_BASEID = <BASEID>
+//VAR.TEMP_NAME = <NAME>
+//VAR.UID_TROUVE
+//SERV.B test
+//FORCONT <CONT.UID> 0
+//	IF <VAR.TEMP_BASEID> == <BASEID>
+//		IF (!STRCMPI("<NAME>","<VAR.TEMP_NAME>"))
+//			SRC.SYSMESSAGEUA 0481 1 1 0 <UID>
+//		ENDIF
+//	ENDIF
+//ENDFOR
+VAR.TEMP_BASEID
+VAR.TEMP_NAME
+RETURN 0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Gateau blanc
+
+[ITEMDEF i_pizza_au_fromage_crue]
+NAME=Pizza au fromage crue
+ID=i_pizza_uncooked
+TYPE=t_nourriture_crue
+RESOURCES=1 i_brique_de_fromage, 1 i_preparation_a_pain
+SKILLMAKE=TINKERING 30.0, COOKING 52.0, i_livre_de_recettes_2
+
+ON=@CREATE
+MORE1=i_pizza_au_fromage
+MORE2=52.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Pizza au fromage crue
+
+[ITEMDEF i_pizza_au_fromage]
+NAME=Pizza au fromage
+ID=i_pizza
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=3
+MORE2=3
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Pizza au fromage
+
+[ITEMDEF i_petit_gateau_a_la_banane_cru]
+NAME=Petit gateau a la banane cru
+ID=i_muffin
+TYPE=t_nourriture_crue
+RESOURCES=1 i_preparation_a_pain, 1 i_fruit_banana, 1 m_sac_de_sucre
+SKILLMAKE=TINKERING 30.0, COOKING 55.0, i_livre_de_recettes_2
+
+ON=@CREATE
+MORE1=i_petit_gateau_a_la_banane
+MORE2=55.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Petit gateau a la banane crue
+
+[ITEMDEF i_petit_gateau_a_la_banane]
+NAME=Petit gateau a la banane
+ID=i_muffin
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=2
+MORE2=2
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Petit gateau a la banane
+
+[ITEMDEF i_pizza_a_la_viande_crue]
+NAME=Pizza a la viande crue
+ID=i_pizza_uncooked
+TYPE=t_nourriture_crue
+RESOURCES=1 i_brique_de_fromage, 1 i_preparation_a_pain, 1 i_ribs_raw
+SKILLMAKE=TINKERING 30.0, COOKING 58.0, i_livre_de_recettes_2
+
+ON=@CREATE
+MORE1=i_pizza_a_la_viande
+MORE2=58.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Pizza a la viande crue
+
+[ITEMDEF i_pizza_a_la_viande]
+NAME=Pizza a la viande
+ID=i_pizza
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=3
+MORE2=4
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Pizza a la viande
+
+[ITEMDEF i_tarte_au_citron_crue]
+NAME=Tarte au citron crue
+ID=i_pie_unbaked
+TYPE=t_nourriture_crue
+RESOURCES=1 i_preparation_a_pain, 3 i_lemon_halved, 2 m_sac_de_sucre, 1 m_cruche_de_creme
+SKILLMAKE=TINKERING 30.0, COOKING 60.0, i_livre_de_recettes_2
+
+ON=@CREATE
+MORE1=i_tarte_au_citron
+MORE2=60.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Tarte au citron crue
+
+[ITEMDEF i_tarte_au_citron]
+NAME=Tarte au citron
+ID=i_pie_baked
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=3
+MORE2=4
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Tarte au citron
+
+[ITEMDEF i_salade_a_l_oignon_doux]
+NAME=Salade a l'oignon doux
+ID=i_bowl_wood_lettuce
+TYPE=t_nourriture
+RESOURCES=1 i_fruit_lettuce, 1 i_fruit_onion, 1 m_sac_de_sucre
+SKILLMAKE=TINKERING 30.0, COOKING 65.0, i_livre_de_recettes_2
+
+ON=@CREATE
+MORE1=2
+MORE2=3
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Salade a l'oignon doux
+
+[ITEMDEF i_assiette_de_fruits_au_miel]
+NAME=Assiette de fruits au miel
+ID=i_plate_food
+TYPE=t_nourriture
+RESOURCES=1 i_fruit_peach, 1 i_fruit_pear, 1 i_fruit_apple, 1 i_fruit_honeydewmelon, 1 i_fruit_banana, 1 i_fruit_grapes, 1 i_jar_honey, 1 i_fruit_lime
+SKILLMAKE=TINKERING 30.0, COOKING 65.0, i_livre_de_recettes_2
+
+ON=@CREATE
+MORE1=1
+MORE2=4
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Assiette de fruits au miel
+
+[ITEMDEF i_salade_au_poulet]
+NAME=Salade au poulet
+ID=i_bowl_wood_lettuce
+TYPE=t_nourriture
+RESOURCES=1 i_bird_cooked, 1 m_sac_de_sel, 1 i_fruit_lettuce, 1 i_piment_doux
+SKILLMAKE=TINKERING 30.0, COOKING 67.0, i_livre_de_recettes_2
+
+ON=@CREATE
+MORE1=4
+MORE2=4
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Salade au poulet
+
+[ITEMDEF i_assiette_de_lasagne_crue]
+NAME=Assiette de lasagne crue
+ID=i_plate_food
+TYPE=t_nourriture_crue
+RESOURCES=1 i_piment_jalapeno, 1 i_ribs_raw, 1 i_bol_de_pates_fraiches, 1 i_brique_de_fromage, 1 m_sac_de_sel, 1 i_bol_de_sauce_tomate
+SKILLMAKE=TINKERING 30.0, COOKING 69.0, i_livre_de_recettes_2
+
+ON=@CREATE
+MORE1=i_assiette_de_lasagne
+MORE2=69.0
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Assiette de lasagne crue
+
+[ITEMDEF i_assiette_de_lasagne]
+NAME=Assiette de lasagne
+ID=i_plate_food
+TYPE=t_nourriture
+
+ON=@CREATE
+MORE1=6
+MORE2=6
+
+CATEGORY=Genese
+SUBSECTION=Cuisine
+DESCRIPTION=Assiette de lasagne

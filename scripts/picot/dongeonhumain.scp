@@ -1,0 +1,337 @@
+//TAG.UID_POSEUR_D_ENIGME
+[ITEMDEF m_enigme_dongeon_humain_1]
+ID=i_memory
+NAME=enigme dongeon humain 1
+TYPE=t_enigme
+LAYER=30
+
+ON=@CREATE
+TIMER=86400
+DOSWITCH <EVAL RAND(3)>
+	ENIGME_2
+	ENIGME_5
+	ENIGME_7
+ENDDO
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_enigme_dongeon_humain_2]
+ID=i_memory
+NAME=enigme dongeon humain 2
+TYPE=t_enigme
+LAYER=30
+
+ON=@CREATE
+TIMER=86400
+DOSWITCH <EVAL RAND(4)>
+	ENIGME_3
+	ENIGME_4
+	ENIGME_9
+	ENIGME_10
+ENDDO
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF m_enigme_dongeon_humain_3]
+ID=i_memory
+NAME=enigme dongeon humain 3
+TYPE=t_enigme
+LAYER=30
+
+ON=@CREATE
+TIMER=86400
+DOSWITCH <EVAL RAND(4)>
+	ENIGME_1
+	ENIGME_6
+	ENIGME_8
+	ENIGME_11
+ENDDO
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+
+[CHARDEF c_dongeon_humain_enigme_1] 
+NAME=Filemos
+ID=c_man
+ 
+TSPEECH=spk_dongeon_humain_enigme_1
+
+ON=@CREATE
+COLOR=0FFF
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le poseur d'enigmes
+INVUL
+
+ITEMNEWBIE=i_baton
+COLOR=0bb1
+ITEMNEWBIE=i_doublet
+ITEMNEWBIE=i_chaussures
+ITEMNEWBIE=i_cape
+ITEMNEWBIE=i_hat_wizards
+ITEMNEWBIE=i_pants_short
+
+
+ON=@NPCSEENEWPLAYER
+SAY Bienvenue voyageur!
+
+ON=@NPCHearUnknown
+SAY Peut-etre desirez-vous que je vous pose l'enigme?
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Dongeon humain
+DESCRIPTION=Enigme niveau 1
+
+[SPEECH spk_dongeon_humain_enigme_1]
+ON=oui
+IF !<SRC.FINDID.m_enigme_dongeon_humain_1>
+	IF ((<SRC.FINDID.i_passe_dongeon_humain_1_1>) && (<SRC.FINDID.i_passe_dongeon_humain_1_2>) && (<SRC.FINDID.i_passe_dongeon_humain_1_1>))
+		SRC.CONSUME 1 i_passe_dongeon_humain_1_1
+		SRC.CONSUME 1 i_passe_dongeon_humain_1_2
+		SRC.CONSUME 1 i_passe_dongeon_humain_1_3
+		SRC.NEWITEM m_enigme_dongeon_humain_1
+		SRC.ACT.CONT = <SRC.UID>
+		SRC.ACT.EQUIP
+		SRC.ACT.TAG.UID_POSEUR_D_ENIGME = <UID>
+	ELSE
+		SAY Vous devez me rapporter les 3 passes, et ensuite vous pourrez tenter votre chance !
+	ENDIF
+ENDIF
+IF <SRC.FINDID.m_enigme_dongeon_humain_1>
+	SRC.FINDID.m_enigme_dongeon_humain_1.OPEN_ENIGME_DIALOG
+ENDIF
+RETURN 1
+
+//ARGS=1 ==> BONNE REPONSE ; ARGS=0 ==> MAUVAISE REPONSE
+//DEFAULT : ITEM QUESTIONNEUR m_enigme_dongeon_humain_1
+[FUNCTION CONSEQUENCE_ENIGME_DONGEON_HUMAIN_1]
+IF <ARGS> == 0
+	TRYP 0 UID.<TAG.UID_POSEUR_D_ENIGME>.SAY Meme pas capable de repondre a une si simple question !
+	TRYP 0 UID.<TAG.UID_POSEUR_D_ENIGME>.SAY Hors de ma vue ignoble cloporte !
+	CONT.P = 
+	CONT.UPDATE
+ELSE
+	TRYP 0 UID.<TAG.UID_POSEUR_D_ENIGME>.SAY Oui, vous avez la bonne reponse! Vous venez de signer votre laisser passer vers les profondeurs !
+	CONT.P = 
+	CONT.UPDATE
+ENDIF
+REMOVE
+RETURN 1
+
+
+[CHARDEF c_dongeon_humain_enigme_2] 
+NAME=Albert
+ID=c_man
+ 
+TSPEECH=spk_dongeon_humain_enigme_2
+
+ON=@CREATE
+COLOR=0FFF
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le poseur d'enigmes
+INVUL
+
+ITEMNEWBIE=i_baton
+COLOR=0bb1
+ITEMNEWBIE=i_casquette
+COLOR=0bb1
+ITEMNEWBIE=i_chaussures
+COLOR=0bb1
+
+ON=@NPCSEENEWPLAYER
+SAY Bienvenue voyageur!
+
+ON=@NPCHearUnknown
+SAY Peut-etre desirez-vous que je vous pose l'enigme?
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Dongeon humain
+DESCRIPTION=Enigme niveau 2
+
+[SPEECH spk_dongeon_humain_enigme_2]
+ON=oui
+IF !<SRC.FINDID.m_enigme_dongeon_humain_2>
+	SRC.NEWITEM m_enigme_dongeon_humain_2
+	SRC.ACT.CONT = <SRC.UID>
+ENDIF
+SRC.FINDID.m_enigme_dongeon_humain_2.OPEN_ENIGME_DIALOG
+RETURN 1
+
+
+[CHARDEF c_dongeon_humain_enigme_3] 
+NAME=Albert
+ID=c_man
+ 
+TSPEECH=spk_dongeon_humain_enigme_3
+
+ON=@CREATE
+COLOR=0FFF
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le poseur d'enigmes
+INVUL
+
+ITEMNEWBIE=i_baton
+COLOR=0bb1
+ITEMNEWBIE=i_casquette
+COLOR=0bb1
+ITEMNEWBIE=i_chaussures
+COLOR=0bb1
+
+ON=@NPCSEENEWPLAYER
+SAY Bienvenue voyageur!
+
+ON=@NPCHearUnknown
+SAY Peut-etre desirez-vous que je vous pose l'enigme?
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Dongeon humain
+DESCRIPTION=Enigme niveau 3
+
+[SPEECH spk_dongeon_humain_enigme_3]
+ON=oui
+IF !<SRC.FINDID.m_enigme_dongeon_humain_3>
+	SRC.NEWITEM m_enigme_dongeon_humain_3
+	SRC.ACT.CONT = <SRC.UID>
+ENDIF
+SRC.FINDID.m_enigme_dongeon_humain_3.OPEN_ENIGME_DIALOG
+RETURN 1
+
+
+
+[CHARDEF c_dongeon_humain_entree] 
+NAME=Albert
+ID=c_man
+ 
+TSPEECH=spk_dongeon_humain_entree
+
+ON=@CREATE
+COLOR=0FFF
+FOOD=9999
+SPEECHCOLOR=0ab2
+STR=2000
+DEX=1
+INT=1
+TITLE=Le gardien
+INVUL
+
+ITEMNEWBIE=i_baton
+COLOR=0bb1
+ITEMNEWBIE=i_casquette
+COLOR=0bb1
+ITEMNEWBIE=i_chaussures
+COLOR=0bb1
+
+ON=@NPCSEENEWPLAYER
+IF 0<SRC.TAG.RENAISSANCE> > 0
+	IF 0<SRC.TAG.COTE> == 0
+		SAY Votre impurete m'etouffe <SRC.NAME> ! Vous n'etes pas le bienvenu ici.
+	ELSE
+		SAY Votre purete vous honore, mais votre place n'est pas en ces lieux <SRC.NAME> !
+	ENDIF
+ELSE
+	SAY Bienvenue honorable voyageur!
+ENDIF
+
+ON=@NPCHearUnknown
+IF 0<SRC.TAG.RENAISSANCE> > 0
+	SAY Peu importe ce que vous direz, vous n'entrerez pas ici !
+ELSE
+	DORAND 3
+		SAY Vous avez un visage d'une personne qui veut entrer ici...
+		SAY Si je me fis a votre regard, vous desirez entrer
+		SAY Meme si je vous dis que c'est dangereux d'y entrer, je suis certain que vous n'y ferez qu'a votre tete !
+	ENDDO
+ENDIF
+
+ON=@GetHit
+HITS=2000
+RETURN 1
+
+ON=@SpellEffect
+HITS=2000
+RETURN 1
+
+CATEGORY=PNJ
+SUBSECTION=Dongeon humain
+DESCRIPTION=PNJ Entree
+
+[SPEECH spk_dongeon_humain_entree]
+ON=oui
+ON=*entrer*
+IF 0<SRC.TAG.LEVEL> > 99
+	IF !<SRC.FINDLAYER.25>
+		DORAND 3
+			SAY Ainsi soit-il !
+			SAY Ne venez pas vous plaindre a votre maman, si toutefois vous ressortez vivant !
+			SAY Bonne chance, et vous en aurez besoin !
+		ENDDO
+		SRC.EVENTS +e_anti_mark_recall
+		IF <SRC.FINDLAYER.40>
+			SRC.FINDLAYER.40.REMOVE
+		ENDIF
+		IF <SRC.FINDID.i_rune_delay_g>
+			SRC.FINDID.i_rune_delay_g.REMOVE
+			SRC.EFFECT 3,i_fx_smoke_small,0,60
+			SRC.SFX 01ed
+			SRC.EVENTS -e_casse_gate
+		ENDIF
+		SRC.TAG.anti_mark_recall=1
+		SRC.TAG.INSIDE_DH=1
+		SRC.P=
+		SRC.UPDATE
+	ELSE
+		DORAND 3
+			SAY Votre monture n'est pas permise en ces lieux !
+			SAY Je vous pris de descendre de votre monture, vous pourriez vous assomer sur des stalagmites !
+			SAY Je vous prierais de descendre de la, ensuite vous pourrez entrer !
+		ENDDO
+	ENDIF
+ELSE
+	DORAND 3
+		SAY Je m'en voudrais de vous laisser entrer un etre si fragile !
+		SAY Un etre aussi frele que vous ne pourrait survivre en ces lieux !
+		SAY Hey freluquet, ici c'est pour les grandes personnes !
+	ENDDO
+ENDIF

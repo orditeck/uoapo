@@ -1,0 +1,91 @@
+[PLEVEL 3]
+nbclients
+
+[FUNCTION nbclients]
+IF <ARGS> >= 0
+	IF !(STRCMPI("<ARGS>",""))
+		SYSMESSAGEUA 0481 1 1 0 Tapez .nbclients suivi du nombre de comptes autorises a se connecter simultanement depuis le meme IP
+	ELSEIF !(STRCMPI("<ARGS>","0"))
+		NEWITEM i_combien_clients
+		ACT.EQUIP
+		ACT.USE
+	ELSE
+		NEWITEM i_setnbclients
+		ACT.TAG.NBCLIENTS=<ARGS>
+		ACT.EQUIP
+		ACT.USE
+	ENDIF
+ELSE
+	SYSMESSAGEUA 0481 1 1 0 Veuillez saisir un nombre positif
+ENDIF
+
+[ITEMDEF i_setnbclients] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur a appliquer le nombre de comptes autorises a se connecter simultanement
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+SRC.TARG.TAG.NBCLIENTPERMIS <TAG.NBCLIENTS>
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a maintenant droit a <EVAL <TAG.NBCLIENTS>> comptes connecter simultanement
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_combien_clients] 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+
+ON=@CREATE
+TIMER=30
+
+ON=@DCLICK
+SRC.SYSMESSAGEUA 0481 1 1 0 Selectionnez le joueur a qui vous souhaitez consulter le nombre de compte simultanes autorises
+TARGET
+RETURN 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> n'est pas un joueur !
+REMOVE
+RETURN 1
+
+ON=@TARGON_CHAR
+IF 0<SRC.TARG.TAG.NBCLIENTPERMIS> > 0
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a droit a <EVAL <SRC.TARG.TAG.NBCLIENTPERMIS>> comptes connectes en meme temps.
+ELSE
+	SRC.SYSMESSAGEUA 0481 1 1 0 <SRC.TARG.NAME> a droit a 2 comptes connectes en meme temps. Ce nombre n'a jamais ete modifie auparavant pour ce joueur.
+ENDIF
+REMOVE
+RETURN 1
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[ITEMDEF i_logoutmultiacc]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=Timer pour logout multicompte
+
+ON=@Create
+TIMER=5
+
+ON=@timer
+CONT.DISCONNECT
+REMOVE
+RETURN 1

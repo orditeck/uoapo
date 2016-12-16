@@ -1,0 +1,7 @@
+//SALLE_DE_DETENTE
+[AREA SALLE_DE_DETENTE]
+CLASS=11
+RECT=1436,1194,1467,1252
+DEFNAME=salle_de_detente
+GROUP=MONDE
+FLAGS=region_flag_no_pvp|region_antimagic_gate|region_antimagic_recall_out
